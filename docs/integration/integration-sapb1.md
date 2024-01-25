@@ -37,7 +37,7 @@ You can locate the database script to create these records in the following path
 | Application        | Key                                     | Value | Description                                             | 
 |--------------------|-----------------------------------------|-------|---------------------------------------------------------|
 | IntegrationSAPB1   | Server                                  |       | Integration provider SAP|
-| IntegrationSAPB1   | LicenseServer                           |       | SAP License server address|
+| IntegrationSAPB1   | LicenseServer                           |       | SAP License server address `*see note*`|
 | IntegrationSAPB1   | DbUserName                              |       | Database user name|
 | IntegrationSAPB1   | DbPassword                              |       | Database password|
 | IntegrationSAPB1   | CompanyDB                               |       | SAP company database name|
@@ -47,6 +47,8 @@ You can locate the database script to create these records in the following path
 | IntegrationSAPB1   | InventoryAccountCode                    |       | TAKEON AccountCode |
 | IntegrationSAPB1   | BinEntry                                |       | 0 false, 1 true. The BinEntry will be used by TAKEON, SCRAP and ADJUSTMENT |
 
+**`Take Note`** LicenseServer address found in
+`C:\Program Files (x86)\SAP\SAP Business One DI API\Conf\B1_Local_machine.xml`
 
 **`Take Note`** Once the settings is capture please test the SAP connection by execute the `/config` operation on the integration service.
 
@@ -197,7 +199,7 @@ Or, in case of issue for production, select Production > Issue for Production (s
 - 118 	Exceeded the number of max concurrent users.
 - 125 	SAP connection issue, SQL version incorrect. Appsetting DbServerType, version might not be supported in release.
 - 132   Cannot connect to SAP, SAP Database names are case-sensitive.
-- 111   Similar issue to 125, DbServerType incorrect.
+- 111   Similar issue to 125, DbServerType incorrect. Verify DbServerType setting, must be correct 2012, 2014 ect.
 - 1001	The field is to small to accept the data.
 - 1002	Invalid row.
 - 1103	Object not supported.
@@ -274,3 +276,6 @@ If the IIS (app pool) user does not have permissions it can cause issues.
 
 - Complete list of DI API (SDK) Document objects (https://biuan.com/Documents/).
 - SAP Tables https://sap.erpref.com/
+- https://www.sap-business-one-tips.com/
+- https://support.boyum-it.com/hc/en-us/articles/360021794234-SAP-Object-Types
+- http://www.saptables.net/?schema=BusinessOne9.3
