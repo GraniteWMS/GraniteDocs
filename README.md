@@ -18,3 +18,18 @@ When you save changes to the markdown files mkdocs will automatically refresh yo
 When you are ready to publish the new build, ensure your files are checked into GitHub's main branch then run `mkdocs gh-deploy` from the terminal
 
 For more info see [https://www.mkdocs.org/getting-started/](https://www.mkdocs.org/getting-started/)
+
+## Setting up Git
+
+To commit the final step `mkdocs gh-deploy` you need to have git running locally. 
+
+Download and install git from [https://git-scm.com/download/win](https://git-scm.com/download/win)
+
+In git bash add your username and email that is connected to your github account using
+```
+    git config --global user.name "Your Name"
+
+    git config --global user.email "youremail@gmail.com"
+```
+
+You will be redirected to github login the first time you run. After that it should be good to go.
