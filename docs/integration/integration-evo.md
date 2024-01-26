@@ -1,6 +1,6 @@
-# Pastel Evo SDK Provider
+# Evolution
 
-## Setup SDK provider 
+## Setup
 
 1. Check the version of the Evolution SDK that is currently installed on the server. The SDK is usually found at `C:\Program Files (x86)\Sage Evolution`. Take note of the first two numbers of `Pastel.Evolution.dll` file version.
 
@@ -49,7 +49,9 @@
 7. Configure your connection string and endpoint in the `Granite.Integration.Web.exe.config` file
 
 ___
-## Application Settings
+## Settings
+
+### Config File
 
 The settings for Sage 200 (Evo) are configured in the SystemSettings table. The IntegrationService will pick up the settings using the Application name specified in it's `.config` file:
 ```
@@ -66,7 +68,7 @@ The script to insert the default settings is also located in the GraniteDatabase
 
 **NOTE: To pick up any changes to the SystemSettings table, the IntegrationService will need to be restarted.** 
 
-### Example SystemSettings in database
+### Database SystemSettings
 
 | Application        | Key                                     | Value      | Description                                           | 
 |--------------------|-----------------------------------------|------------|-------------------------------------------------------|
@@ -97,84 +99,82 @@ The script to insert the default settings is also located in the GraniteDatabase
 `Take note: in most cases the Data and Common Pastel EVO database is on the same SQL instance and
 settings will be the same.`
 
-### EvoSqlServer
+#### EvoSqlServer
 - SQL server instance name
 
-### EvoDatabase
+#### EvoDatabase
 - Pastel EVO database name
 
-### EvoSqlUserName
+#### EvoSqlUserName
 - SQL server username
 
-### EvoSqlPassword
+#### EvoSqlPassword
 - SQL server password
 
-### EvoCommonSqlServer
+#### EvoCommonSqlServer
 - SQL server instance name for common database
 
-### EvoCommonDatabase
+#### EvoCommonDatabase
 - Pastel EVO common database name
 
-### EvoCommonSqlUserName
+#### EvoCommonSqlUserName
 - SQL server username for common database
 
-### EvoCommonSqlPassword
+#### EvoCommonSqlPassword
 - SQL server password for common database
 
-### EvoSDKSerialNumber
+#### EvoSDKSerialNumber
 - SDK serial number
 
-### EvoSDKAuthKey
+#### EvoSDKAuthKey
 - SDK Auth key
-___
-## Settings for integration
 
-### EvoBreakApartActive
+#### EvoBreakApartActive
 - Options: true / false
 - Used by: SCRAP
 - When active validate the Batch against the EvoManufactureCodes (appsetting)
 
-### EvoManufactureActive
+#### EvoManufactureActive
 - Options: true / false
 - Used by: TAKEON
 - Workings: When active verify against EvoManufactureCodes (app setting) if valid perform custom Manufacture (MANUFACTURE post).
 
-### EvoManufactureCodes
+#### EvoManufactureCodes
 - Options: comma separated codes. Example : 3214, 3431, 9876
 - Used by: EvoManufactureActive (TAKEON, SCRAP)
 
-### EvoBranchContextActive	
+#### EvoBranchContextActive	
 - Options: true / false
 - Used by: Application level
 - When active set branch. Branch based on Pastel item OR EvoBranchUseLocation setting.
 - EvoBranchUseLocation: see setting.
 
-### EvoBranchUseLocation
+#### EvoBranchUseLocation
 - Options: true / false
 - Used by: EvoBranchContextActive
 - When active use Granite site on transaction as branch ID.
 
-### EvoTransactionCodeGoodsReceiveVoucher
+#### EvoTransactionCodeGoodsReceiveVoucher
 - Options: string value representing GoodsReceive Voucher code
 - Used by: TAKEON Inventory transaction code 
 
-### EvoTransactionCodeAdjustments
+#### EvoTransactionCodeAdjustments
 - Options: string value representing transaction inventory code
 - Used by: ADJUSTMENT Inventory transaction code 
 
-### EvoTransactionCodeReclassifyAdjustments
+#### EvoTransactionCodeReclassifyAdjustments
 - Options: string value representing transaction inventory code
 - Used by: RECLASSIFY Inventory transaction code 
 
-### EvoTransactionCodeMove
+#### EvoTransactionCodeMove
 - Options: string value representing transaction inventory code
 - Used by: MOVE Inventory transaction code 
 
-### EvoTransactionCodeTransfer
+#### EvoTransactionCodeTransfer
 - Options: string value representing transaction inventory code
 - Used by: TRANSFER Inventory transaction code 
 
-### EvoTransactionCodeIssue
+#### EvoTransactionCodeIssue
 - Options: string value representing transaction inventory code
 - Used by: ISSUE Inventory transaction code 
 ___
@@ -675,7 +675,7 @@ Transactions are grouped by Code, Batch, ExpiryDate, Serial, FromLocation, ToLoc
 ___
 
 
-## External Resource
+## External Resources
 
 ### Document Profiles/Agents
 Video on Document profiles for agents.
