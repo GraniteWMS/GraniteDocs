@@ -1,8 +1,11 @@
 ﻿# Repository API
+![Local Image](./crud.png)
 
-The primary responsibility of the Granite Repository API is to execute all persistence operations for Granite. 
-These operations primarily involve tasks without specific business logic. 
-In addition to serving our applications, third parties can utilize this API to retrieve and persist data.
+The primary objective of the Repository API is to offer a unified interface for **persisting data** into Granite. These operations encompass tasks for creating, reading, updating, and deleting data (CRUD).
+
+In addition to serving our applications, third parties can utilize this API to retrieve data for **integration** purposes.
+
+The **WebDesktop** is the sole Granite application using the Repository API by default.
 
 ---
 ## Setup
@@ -32,9 +35,12 @@ Open the web.config file and change the following section.
 
 ## Application Settings
 
+The settings below are configured in the `appsettings.json`.
+
 ##### ConnectionStrings [CONNECTION]
 
-Granite database connection
+Granite database connection string.
+
 ``` json
  "ConnectionStrings": {
     "CONNECTION": "Data Source=.;Initial Catalog=Granite;Persist Security Info=True;User ID=Granite"
@@ -47,12 +53,12 @@ The 'allowed origins' is a list of addresses for applications requiring access t
 This may also include third parties utilizing the API. 
 By default, the only address that requires configuration is the Granite **WebDesktop** address.
 
-Example of a single address
+Example single address
 ```json
 
 "AllowedOrigins": [ "https://192.168.1.10:8081" ]
 ```
-Example of multiple (client/site have two allowed origins, maybe 3dr party access)
+Example multiple
 ```json
 
 "AllowedOrigins": [ "https://192.168.1.10:8081", "https://192.168.1.20:3009" ],
@@ -73,11 +79,14 @@ Example of multiple (client/site have two allowed origins, maybe 3dr party acces
 
 ##### UseSameSiteCookies
 
-Default set to true. (not string but boolean)
+Same Site Cookies are a good default to use in your Apps which restricts cookies from being sent cross-site in order to prevent against cross-site request forgery (CSRF) attacks.
+Cookies are typically sent to third parties in cross origin requests. This can be abused to do CSRF attacks.
+
+Default set to true. (value type Boolean)
 ```json
   "UseSameSiteCookies": true,
 ```
-Set to false if third party outside from host server communicate to API.
+Disable if 3rd parties need access to the API. 
 ```json
   "UseSameSiteCookies": false,
 ```
@@ -86,7 +95,10 @@ Set to false if third party outside from host server communicate to API.
 
 ## Getting Started
 
+The API is fully documented through the swagger and metadata pages.
+
 - Swagger UI (https://Your_Address:port/**swagger-ui**/)
+- MetaData (https://Your_Address:port/**json/metadata**/)
 
 To communicate with the API you first need to 'sign in' authorize.
 
@@ -95,7 +107,6 @@ To communicate with the API you first need to 'sign in' authorize.
 ```
 auth => POST = auth/{provider} 
 ```
-
 Enter the username and password in the **Body** and click [Try it out].
 
 ```json
@@ -106,4 +117,3 @@ Enter the username and password in the **Body** and click [Try it out].
 ```
 
 If the Username and Password was valid you should receive a **200 OK** response.
-Now you are able to use the API via the **Swagger-UI** interface.
