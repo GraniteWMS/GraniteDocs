@@ -1,22 +1,26 @@
 # Manual
 
+The Granite Scheduler is an IIS application that can be used to schedule execution of SQL stored procedures, sending emails using the Utility API, and special integration jobs for fetching documents from ERP systems.
+
 ## Setup
 
+### Prerequisites
+
+- IIS
+- [.NET 6 Web Hosting bundle](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- Database tables:
+	- `ScheduledJobs`
+	- `ScheduledJobsHistory`
+	- `ScheduledJobInput`
+	- `SystemSettings`
+
 ### Installation
-- Ensure that you have the [.NET 6 Web Hosting bundle](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) installed
-- Ensure that your Granite database contains the `ScheduledJobs`, `ScheduledJobsHistory`, `ScheduledJobInput`, and `SystemSettings` tables (get these from the latest GraniteDatabase release)
 
 - Ensure that your SystemSettings table contains the default settings that GraniteScheduler uses:	
     
         INSERT [dbo].[SystemSettings] ([Application], [Key], [Value], [Description], [ValueDataType], [isEncrypted], [isActive], [AuditDate], [AuditUser])
-        VALUES	('GraniteScheduler', 'Host', '', 'The SMTP server used to send mail', 'string', 0, 1, GETDATE(), 'AUTOMATION'),
-                ('GraniteScheduler', 'Port', '', 'The port that will be used to connect to the SMTP server', 'int', 0, 1, GETDATE(), 'AUTOMATION'),
-                ('GraniteScheduler', 'EnableSsl', '', 'Use SSL to connect to SMTP server', 'bool', 0, 1, GETDATE(), 'AUTOMATION'),
-                ('GraniteScheduler', 'EmailAddress', '', 'The address that will be used to send mail', 'string', 0, 1, GETDATE(), 'AUTOMATION'),
-                ('GraniteScheduler', 'Username', '', 'The username that will be used to connect to the SMTP server (usually the same as the EmailAddress)', 'string', 0, 1, GETDATE(), 'AUTOMATION'),
-                ('GraniteScheduler', 'Password', '', 'The password for the account used to send mail', 'string', 0, 1, GETDATE(), 'AUTOMATION'),
-                ('GraniteScheduler', 'DisplayName', '', 'The display name for the address sending mail', 'string', 0, 1, GETDATE(), 'AUTOMATION'),
-                ('GraniteScheduler', 'TimeZone', '', 'The time zone that will be used when scheduling CRON jobs', 'string', 0, 1, GETDATE(), 'AUTOMATION')
+        VALUES	('GraniteScheduler', 'TimeZone', '', 'The time zone that will be used when scheduling CRON jobs', 'string', 0, 1, GETDATE(), 'AUTOMATION'),
+				('GraniteScheduler', 'UtilityApiUrl', '', 'The UtilityAPI URL', 'string', 0, 1, GETDATE(), 'AUTOMATION')
 		
 - Ensure that the folder that you have installed GraniteScheduler to has full access enabled for all users. This will ensure that the application log files can be created
 
@@ -106,38 +110,33 @@ Here is an example of a config page after some jobs have been added to the Sched
 
 ![image info](img\config.png)
 
-## Using GraniteScheduler
+## How it works
 
+Granite Scheduler picks up jobs from the `ScheduledJobs` table and executes them based on the configured schedule. 
+When a job executes, the Scheduler will check for any inputs in the `ScheduledJobInputs` table. 
+After the job has executed, an entry is logged in the `ScheduledJobsHistory` table. Here you can see the result of the execution, as well as what inputs were used when executing the job.
 
-### Stored Procedure Jobs
+For more information on what you can do with job inputs, see the [job types](#job-types) section for the details of what each job type can do.
 
-To schedule a Stored Procedure to run, simply add a row to the ScheduledJobs table. For example:
+## Configuring Schedules
 
-| ID | isActive | JobName |	JobDescription | Type |	StoredProcedure | InjectJob | Interval | IntervalFormat | Status | LastExecutionTime | LastExecutionResult | AuditDate | AuditUser |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | True | IntegratePurchaseOrders | Job to run in Purchase Orders | STOREDPROCEDURE | IntegrationProcessPurchaseOrder | NULL | 5 | MINUTES | NULL | NULL | NULL | 2022-05-23 08:35:50.427 | 0 |
+In this section we'll take a look at the various ways you can configure recurring jobs, as well as how to configure once off jobs.
 
-Keep reading for some more details on the settings that you can change for scheduled jobs
-### Email Jobs
+### Interval
 
-TODO: new email documentation
+The simplest way to set up your schedule is using a timed interval. To do this, set your `IntervalFormat` to one of the following:
 
-### The ScheduledJobInput table & @input
-You might have noticed that in the EmailExample procedure we are fetching a Value from the @input table. To set this value we need to create an entry in the ScheduledJobInput table, as  seen here:
+- Seconds
+- Minutes
+- Hours
 
-| ID | JobName | Name | Value |
-|---|---|---|---|
-| 1 | SendHourlyReport | Attachment | C:\GraniteExports\MyReport.xlsx |
+Then set the `Interval` column to the number of seconds, minutes, or hours you want the job to recur on.
 
-The attachment path does not need to be set using a job input, you might want it hardcoded in your Email stored procedure. I have done it this way here to illustrate how to use the ScheduledJobInput table.
+This is how we would set a procedure to execute every ten minutes:
 
-The @input table can be used with jobs of type STOREDPROCEDURE too, it is not limited to Email jobs. If you need to use inputs with a STOREDPROCEDURE job, just add the parameter right below the CREATE OR ALTER PROCEDURE statement:
-
-```sql
-CREATE OR ALTER PROCEDURE [MyProcedureWithInputs]
-	@input dbo.ScriptInputParameters READONLY
-```
-This will make the @input table variable available for use in your procedure. Don't forget to populate it by entering data into the ScheduledJobInput table!
+| ID | isActive | JobName |	JobDescription | Type |	StoredProcedure | Interval | IntervalFormat | Status | LastExecutionTime | LastExecutionResult | AuditDate | AuditUser |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | True | SyncDocuments | Fetch documents from ERP | STOREDPROCEDURE | SyncProcedure | 10 | MINUTES | NULL | NULL | NULL | 2022-05-23 08:35:50.427 | 0 |
 
 ### CRON Expressions
 
@@ -162,20 +161,15 @@ You can also specify ranges. So to run a job every 2nd hour of every weekday bet
 0 08-17/2 * * 1-5
 ```
 
-To use a CRON expression on your job, set your IntervalFormat to CRON and put your expression (with spaces) in the Interval field. For example:
+To use a CRON expression on your job, set your `IntervalFormat` to CRON and put your expression (with spaces) in the `Interval` field. For example:
 
 | ID | isActive | JobName |	JobDescription | Type |	StoredProcedure | Interval | IntervalFormat | Status | LastExecutionTime | LastExecutionResult | AuditDate | AuditUser |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | True | SendMondayReport | Job to send reports | EMAIL | EmailExample | 30 09 * * 1 | CRON | NULL | NULL | NULL | 2022-05-23 08:35:50.427 | 0 |
 
 
-There are lots of different implementations of CRON expressions, as every piece of software has slightly different needs. That said, the basics will work fine with the implementation we are using
-
-If you've found something on Google there is no guarantee it is going to work, especially if it is using non standard tags.
-
-I've had success using [https://crontab.guru/](https://crontab.guru/) to work out the CRON expression that I want to use. 
-
-Your best bet is to use crontab.guru to work out an expression that works for you while avoiding any tags marked as non-standard
+**`Take Note`** There are different implementations of CRON syntax, some have special tags that are not usable outside of that specific software.
+Your best bet is to use [https://crontab.guru/](https://crontab.guru/) to work out an expression that works for you while avoiding any tags marked as non-standard
 
 Be sure to test your CRON expression before deploying! 
 
@@ -185,20 +179,110 @@ If your CRON expression is not triggering your job as you'd expect it to, try ex
 
 See the full list of [time zone names](#timezone-list) at the end of this document.
 
-### Running a job once only
+### Run once
 
-You can use the ONCE IntervalFormat to schedule a job to run one time only. This is useful for running ad hoc tasks that might take too long to execute within a prescript, or sending once off mails like a picking complete notification.
+You can use the ONCE `IntervalFormat` to schedule a job to run one time only. This is useful for running ad hoc tasks that might take too long to execute within a prescript, or sending once off mails like a picking complete notification.
 
-When the IntervalFormat is set to ONCE, the IntervalValue is not taken into account - it can be left empty.
+When the `IntervalFormat` is set to ONCE, the `Interval` field is not taken into account - it can be left empty.
 
-On completion of a ONCE job, the job will be removed from the ScheduledJobs table. It's inputs will also be removed from the ScheduledJobInput table. These are removed after execution regardless of whether the job was successful. 
+On completion of a ONCE job, the job will be removed from the `ScheduledJobs` table. It's inputs will also be removed from the `ScheduledJobInput` table. **These are removed after execution regardless of whether the job was successful**. 
 
-The job's execution can still be viewed in the ScheduledJobsHistory table, and you will be able to see it's inputs in JSON format in the Inputs column.
+The job's execution can still be viewed in the `ScheduledJobsHistory` table, and you will be able to see it's inputs in JSON format in the Inputs column.
+
+
+## Job types
+
+This section shows you the basics of configuring each job type in the `ScheduledJobs` and `ScheduledJobInputs` tables.
+The currenlty supported job types are:
+
+- [Stored Procedure Jobs](#stored-procedure-jobs)
+- [Email Jobs](#email-jobs)
+- [Injected Jobs](#injected-jobs-integration-jobs)
+
+### Stored Procedure Jobs
+
+To schedule a Stored Procedure to run, simply add a row to the `ScheduledJobs` table. For example:
+
+| ID | isActive | JobName |	JobDescription | Type |	StoredProcedure | InjectJob | Interval | IntervalFormat | Status | LastExecutionTime | LastExecutionResult | AuditDate | AuditUser |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | True | MyJob | Test job that executes a stored procedure | STOREDPROCEDURE | MyProcedure | NULL | 5 | MINUTES | NULL | NULL | NULL | 2022-05-23 08:35:50.427 | 0 |
+
+If you need to pass values from the `ScheduledJobInput` table into your stored procedure, you can do so by adding the @input table parameter to your stored procedure like this:
+
+```sql
+CREATE OR ALTER PROCEDURE [MyProcedure]
+	@input dbo.ScriptInputParameters READONLY
+```
+
+The `@input` table will contain all of the entries from the `ScheduledJobInput` table that are configured for your job. 
+
+If your `ScheduledJobInput` contains the following:
+
+| ID | JobName | Name | Value |
+|---|---|---|---|
+| 1 | MyJob | Category | PACK |
+| 2 | MyJob | Location | REC |
+
+Inside `[MyProcedure]` we can fetch the values from `@input` like this:
+
+``` sql
+CREATE OR ALTER PROCEDURE [MyProcedure]
+	@input dbo.ScriptInputParameters READONLY
+
+	DECLARE @Category varchar(50)
+	DECLARE @Location varchar(50)
+
+	SELECT @Category = [Value] FROM @input WHERE [Name] = 'Category'
+	SELECT @Location = [Value] FROM @input WHERE [Name] = 'Location'
+```
+### Email Jobs
+
+Email jobs make use of the Utility API to send emails. Ensure that the `UtilityApiUrl` entry in `SystemSettings` is configured correctly before you try to schedule any emails.
+
+To schedule an email to be sent, we add a record to the `ScheduledJobs` table
+
+| ID | isActive | JobName |	JobDescription | Type |	StoredProcedure | InjectJob | Interval | IntervalFormat | Status | LastExecutionTime | LastExecutionResult | AuditDate | AuditUser |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | True | EmailMorningReports | Send daily reports to management | EMAIL | NULL | NULL | 0 8 * * 1-5 | CRON | NULL | NULL | NULL | 2022-05-23 08:35:50.427 | 0 |
+
+We also need to add some entries to the `ScheduledJobInput` table to specify recipients, email content, and any attachments we want to send.
+
+The parameters available to Email jobs are as follows:
+
+| Name | Required | Description |
+|---|---|---|
+| Subject 			| Y | The subject line of the email |
+| EmailTemplate 	| N | The name of the email template you want to use. If EmailTempalte is used, the content of the mail will be the rendered template |
+| EmailBody 		| N | The content of the email you want to send. Use instead of EmailTempalte to send a simple mail using just the text in EmailBody as the body of the email |
+| ToEmailAddresses 	| N | Semicolon delimited list of email addresses to send the mail to |
+| CcEmailAddresses 	| N | Semicolon delimited list of email addresses to CC the mail to |
+| BccEmailAddresses | N | Semicolon delimited list of email addresses to BCC the mail to |
+| ReportAttachment 	| N | SSRS Report path of the report you want to attach |
+| ExcelAttachment 	| N | Table or view name that you want to attach as an excel sheet |
+| FileAttachment 	| N | File path of the file you want to attach. NB this path is relative to wherever the Utility API is installed. |
+
+Let's add the details we need to send our email to the `ScheduledJobInput` table:
+
+| ID | JobName | Name | Value |
+|---|---|---|---|
+| 1 | EmailMorningReports | Subject | Morning reports |
+| 2 | EmailMorningReports | EmailBody | Please see attached your daily reports |
+| 3 | EmailMorningReports | ToEmailAddresses | manager@warehouse.com;finance@warehouse.com |
+| 4 | EmailMorningReports | ReportAttachment | /PickingReport |
+| 5 | EmailMorningReports | ReportAttachment | /ReceivingReport |
+
+As you can see, all of the inputs reference job using `JobName`. For each of the attachment types you can add multiple entries to attach multiple reports of the same type, as we have done here. 
+
+**`Take Note`** There is no way to pass parameters to SSRS reports that are to be attached to an email. 
+You may need to edit your report so that it can be executed without the need to pass parameters.
+Likewise for Excel attachments, it would be best to create a view that returns only the results you want to attach to your email. 
 
 ### Injected Jobs (Integration Jobs)
 Injected jobs allow us to run code from an external DLL. At the moment the main reason to use this is for integration jobs. More Injectable jobs may be released in the future as required.
 
-For this to work, the DLL and an XML provider file must be copied into the root path of the GraniteScheduler.
+For this to work, the DLL and an XML provider file must be copied into the root path of the GraniteScheduler:
+
+![image info](img\TestInjectable.png)
 
 The provider file needs to bind the GraniteScheduler IInjectableJob interface to a specific class within your DLL. See the below example of a provider file:
 
@@ -210,9 +294,7 @@ The provider file needs to bind the GraniteScheduler IInjectableJob interface to
 </module>
 ```
 
-When you configure an InjectedJob the InjectJob field on the ScheduledJobs table must contain the name of the XML provider file (without the file extension) that you wish to use:
-
-![image info](img\TestInjectable.png)
+When you configure an InjectedJob the `InjectJob` field on the `ScheduledJobs` table must contain the name of the XML provider file (without the file extension) that you wish to use:
 
 | ID | isActive | JobName |	JobDescription | Type |	StoredProcedure | InjectJob | Interval | IntervalFormat | Status | LastExecutionTime | LastExecutionResult | AuditDate | AuditUser |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -222,7 +304,8 @@ GraniteScheduler will use the XML file to find the DLL file and execute the requ
 
 ## Troubleshooting
 
-If you get an error message relating to ASP.Net when browsing GraniteScheduler, ensure that you have the correct hosting bundle installed. The Webdesktop uses version 5, which will not work with GraniteScheduler. You can safely install version 6 alongside version 5
+If you get an error message relating to ASP.Net when browsing GraniteScheduler, ensure that you have the correct hosting bundle installed. 
+The Webdesktop uses version 5, which will not work with GraniteScheduler. You can safely install version 6 alongside version 5
 
 Always be sure to check your GraniteScheduler log file for more info. If your job is failing, the log will most likely tell you why
 
@@ -234,19 +317,6 @@ Always be sure to check your GraniteScheduler log file for more info. If your jo
 - Status, LastExecutionTime and LastExecutionResult will be updated automatically by GraniteScheduler
 - The ScheduledJobsHistory table will contain an entry for each execution of a job. Think of it as the Transactions table for jobs
 
-The current supported values for Type are
-
-- StoredProcedure
-- Email
-- Injected
-
-The current suported IntervalFormats are
-
-- Once
-- Seconds
-- Minutes
-- Hours
-- CRON 
 
 ## TimeZone List
 <details> 
