@@ -2,7 +2,7 @@
 
 ## Currently supported operations
 
-##### Inventory
+### Inventory
 - TAKEON
 - SCRAP
 - ADJUST
@@ -10,24 +10,24 @@
 - PALLETIZE
 - REPLENISH
 - RECLASSIFY
-##### Inbound
+### Inbound
 - RECEIVE
-##### Outbound
+### Outbound
 - PICK
 - PACK
-##### Stocktake
+### Stocktake
 - STOCKTAKECOUNT
 - STOCKTAKEHOLD
 - STOCKTAKERELEASE
-##### Label Printing
+### Label Printing
 - TRACKINGENTITY
 - MASTERITEM
 - LOCATION
-##### Integration
+### Integration
 - POST
 - POST TO ENDPOINT
 - UPDATE
-##### Utility API
+### Utility API
 - REPORT PRINT 
 - REPORT EXPORT
 - SQL TABLE EXPORT
@@ -54,8 +54,8 @@
     Application in Systemsettings table from GraniteSQLCLR to SQLCLR
 ```
 
-##### In the Granite database...
-##### SystemSettings table
+### In the Granite database...
+### SystemSettings table
 
 
 | Application	| Key					| Value						| Description					| ValueDataType	| isEncrypted	| isActive	|
@@ -65,7 +65,7 @@
 | SQLCLR		| IntegrationService	| http://10.0.0.1:50003	| Integration Service Address	| string		| False			| True		|
 | SQLCLR		| UtilityAPI    	| https://10.0.0.1:50001	| UtilityAPI Address	    | string		| False			| True		|
 
-##### Create Assemblies and Stored Procedures
+### Create Assemblies and Stored Procedures
 
 This script does not have to be run on the server. You will need a SQL auth user with the sysadmin role to run the script.
 
@@ -76,7 +76,7 @@ This script does not have to be run on the server. You will need a SQL auth user
 
 ## Using the CLR Procedures
 
-##### How to execute
+### How to execute
 The suggested way to start working with your CLR procedures, is to right click the procedure in SSMS and select Script Stored Procedure as -> Execute To
 
 This will ensure that you have all of the necessary variables declared with correct datatypes, and that all parameters are specified for the EXECUTE statement
@@ -84,7 +84,7 @@ This will ensure that you have all of the necessary variables declared with corr
 If you are not specifying a particular value, just set the variable to NULL. The variable must still be specified as a parameter when executing the CLR procedure.
 
 
-##### CLR_IntegrationPostToEndpoint
+### CLR_IntegrationPostToEndpoint
 If you have multiple integration services that you need to interact with using the CLR_IntegrationPostToEndpoint procedure, 
 you will need to add them with a unique name in the Key column:
 
@@ -94,16 +94,16 @@ you will need to add them with a unique name in the Key column:
 
 The Key "MySecondIntegrationService" can now be used when executing the CLR_IntegrationPostToEndpoint procedure  
 
+## UtilityAPI
 
-
-## UtilityAPI SSRS Report Procedures
+### UtilityAPI SSRS Report Procedures
 
 The two operations supported are:
 
 - [Print Report](#clr_PrintReport)
 - [Export Report](#clr_ReportExportToFile)
 
-##### dbo.clr_PrintReport
+#### dbo.clr_PrintReport
 
 Use this procedure to print a SSRS report.
 
@@ -115,7 +115,7 @@ Use this procedure to print a SSRS report.
 
 
 
-##### dbo.clr_ReportExportToFile
+#### dbo.clr_ReportExportToFile
 
 Use this procedure to save a SSRS report to the server where the UtilityAPI is running.
 
@@ -126,7 +126,7 @@ Use this procedure to save a SSRS report to the server where the UtilityAPI is r
 | filetype | Yes | File type that you want to save as (PDF, EXCELOPENXML (.xlsx), EXCEL (.xls)) |
 | parameters | No | List of all parameters required by the report |
 
-##### dbo.report_AddReportParameters
+#### dbo.report_AddReportParameters
 
 Use this Function to create a report parameter to use with dbo.clr_ReportExport and dbo.clr_PrintReport.
 
@@ -184,10 +184,10 @@ SELECT @ResponseCode, @ResponseJson
 
 ```
 
-## UtilityAPI SQL Table Export
+### UtilityAPI SQL Table Export
 
 
-##### dbo.clr_TableExport
+#### dbo.clr_TableExport
 
 Use this procedure to export data from a SQL Table or View to either a CSV or Excel file. 
 
@@ -202,7 +202,7 @@ Use this procedure to export data from a SQL Table or View to either a CSV or Ex
 | filetype | Yes | File type that you want to save as (CSV (.csv),  EXCEL (.xlsx)) |
 
 
-##### dbo.export_AddFilter
+#### dbo.export_AddFilter
 
 This function allows you to build the filters parameter string.
 
@@ -215,7 +215,7 @@ This function allows you to build the filters parameter string.
 
 
 
-##### dbo.export_AddOrderBy
+#### dbo.export_AddOrderBy
 
 This function allows you to build the OrderBy parameter string.
 
@@ -260,7 +260,7 @@ SELECT @responseCode, @responseJson
 
 
 
-## UtilityAPI Email Procedures
+### UtilityAPI Email Procedures
 
 Two types of emails can be sent using SQLCLR:
 
@@ -278,7 +278,7 @@ Both types of emails have support for the following types of attachments:
 - Excel exports of SQL tables
 - File attachments
 
-##### dbo.clr_TemplateEmail
+#### dbo.clr_TemplateEmail
 
 Use this procedure to send an email that uses an Email template to generate the body of the email.
 
@@ -295,7 +295,7 @@ Use this procedure to send an email that uses an Email template to generate the 
 | fileAttachments		| No		| List of files to attach to this email													|
 
 
-##### dbo.email_AddTemplateParameter
+#### dbo.email_AddTemplateParameter
 
 Use this function to add parameters to the list that will be used to render the email template
 
@@ -344,7 +344,7 @@ EXECUTE [dbo].[clr_TemplateEmail]
 ```
 
 
-##### dbo.clr_SimpleEmail
+#### dbo.clr_SimpleEmail
 
 | Parameter Name		| Required	| Description																			|
 |-----------------------|-----------|---------------------------------------------------------------------------------------|
@@ -393,12 +393,12 @@ EXECUTE [dbo].[clr_SimpleEmail]
 
 ```
 
-##### Attachments
+#### Attachments
 
 Attachments can have lots of different parameters that need to be sent along with the request to generate the files that end up being attached.
 To assist with this we have a set of sql functions that help to build up the request JSON in the correct format.
 
-##### Report Attachments
+#### Report Attachments
 
 - dbo.email_CreateReportAttachment
 
@@ -459,7 +459,7 @@ EXECUTE [dbo].[clr_SimpleEmail]
 
 ```
 
-##### Excel Attachments
+#### Excel Attachments
 
 - dbo.email_CreateExcelAttachment
 
@@ -535,7 +535,7 @@ EXECUTE [dbo].[clr_SimpleEmail]
 
 ```
 
-##### File Attachments
+#### File Attachments
 
 - dbo.email_AddFileAttachment
 
@@ -581,14 +581,14 @@ EXECUTE [dbo].[clr_SimpleEmail]
 
 ```
 
-# Troubleshooting
+## Troubleshooting
 
 To run the create scripts you will need sysadmin permissions on the SQL instance that you are installing on
 
 Be sure that you are executing the procedure using ALL of the parameters. Set them to null if they are not being used
 
-# Examples
+## Examples
 
-##### Integration 
+### Integration 
 [https://stackoverflowteams.com/c/granitewms/questions/349](https://stackoverflowteams.com/c/granitewms/questions/349)
 
