@@ -1,7 +1,20 @@
 # Accpac
+
+This document contains all of the information needed to set up and configure integration with Accpac.
+There are two parts to the complete integration solution:
+
+The [SDK Provider](#sdk-provider) is used by the Integration Service to map transactions performed in Granite to the relevant format for Accpac.
+
+The [integration jobs](#integration-jobs) are used by the [Scheduler](../scheduler/manual.md) to pull Accpac's documents, item codes, and trading partners into Granite.
+
 ## SDK Provider
+
+The Accpac SDK provider is responsible for mapping Granite transactions to the relevant format for posting to Accpac. It makes use of the Accpac Advantage SDK to post to Accpac.
+
 ### Setup
 1. Check the version of the Accpac SDK that is currently installed on the server. The SDK is usually found at `C:\Program Files (x86)\Common Files\Sage\Sage 300 ERP`. Take note of the first two numbers of `Accpac.Advantage.dll` file version.
+
+    **`Take Note`** If the SDK is not yet installed, please engage with the client's Accpac consultant - the SDK is required for Granite integration.
 
 2. In the `Providers\Accpac` folder, find the `AccpacX.Y` folder matching the installed SDK version. `X.Y` must match the first two numbers of the installed SDK version.
 For example, if the installed SDK version is 6.5.0.30, you will take the files from the Accpac6.5 folder
@@ -722,6 +735,26 @@ The result will be both a Issuances and Receipt in one where only the Manufactur
 
 ## Integration Jobs
 
+Integration jobs are a special type of [Scheduler](../scheduler/manual.md) job called [injected jobs](../scheduler/manual.md#injected-jobs-integration-jobs). 
+See below for information for specifics on how document and master data jobs work
+
+### How Document jobs work
+Triggers on the ERP document tables insert a record into the Granite IntegrationDocumentQueue table whenever a change is applied to a document. 
+
+GraniteScheduler runs injected jobs that monitor the IntegrationDocumentQueue table for records that need to be processed.
+
+When a record with Status 'ENTERED' is found, the job uses views on the Granite database to fetch the 
+information related to that document from the ERP database and apply the changes to the Granite document. 
+
+All valid changes to data in the Granite tables are logged to the Audit table, showing the previous value and the new value.
+
+If a change is made in the ERP system that would put Granite into an invalid state, no changes are applied. Instead, the ERPSyncFailed field is set to true and the ERPSyncFailedReason field shows the reason for the failure. The IntegrationLog table will contain futher details on the failure if applicable.
+
+### How master data jobs work
+MasterItems and TradingPartners have their own jobs. These jobs compare the results of their respective views to the data in the Granite tables and insert new records / update records as needed.
+
+The document jobs themselves also sync changes to the TradingPartners & MasterItems that are on the document. This means that on sites that do not process a lot of changes to master data you can limit the MasterItem/TradingPartner jobs to running once a day or even less frequently. The only thing they are really still needed for is setting isActive to false when something is deactivated in the ERP system.
+
 ### Install
 
 **`Take Note`** If you are upgrading from the old StoredProcedure/Trigger integration, ensure that ERPIdentification (Document, DocumentDetail, MasterItem, TradingPartner) column is populated with correct values before attempting to start the new jobs
@@ -772,25 +805,6 @@ It is highly advised that you check the validity of yor job on the GraniteSchedu
 #### Inserting lines between existing lines in Accpac
 If enough lines are added in between existing lines on an Accpac document, existing line numbers can change. This will break the document in Granite as we lose the reference to the specific line in Accpac. 
 Luckily, this can be easily avoided by ensuring that the Accpac user modifying documents is trained to only ever add new lines at the bottom.
-
-### How it works
-
-#### Document jobs
-Triggers on the ERP document tables insert a record into the Granite IntegrationDocumentQueue table whenever a change is applied to a document. 
-
-GraniteScheduler runs injected jobs that monitor the IntegrationDocumentQueue table for records that need to be processed.
-
-When a record with Status 'ENTERED' is found, the job uses views on the Granite database to fetch the 
-information related to that document from the ERP database and apply the changes to the Granite document. 
-
-All valid changes to data in the Granite tables are logged to the Audit table, showing the previous value and the new value.
-
-If a change is made in the ERP system that would put Granite into an invalid state, no changes are applied. Instead, the ERPSyncFailed field is set to true and the ERPSyncFailedReason field shows the reason for the failure. The IntegrationLog table will contain futher details on the failure if applicable.
-
-#### Master data jobs
-MasterItems and TradingPartners have their own jobs. These jobs compare the results of their respective views to the data in the Granite tables and insert new records / update records as needed.
-
-The document jobs themselves also sync changes to the TradingPartners & MasterItems that are on the document. This means that on sites that do not process a lot of changes to master data you can limit the MasterItem/TradingPartner jobs to running once a day or even less frequently. The only thing they are really still needed for is setting isActive to false when something is deactivated in the ERP system.
 
 ### Things to look out for
 
