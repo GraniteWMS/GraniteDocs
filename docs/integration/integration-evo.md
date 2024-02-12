@@ -1,8 +1,21 @@
 # Evolution
+
+This document contains all of the information needed to set up and configure integration with Evolution.
+There are two parts to the complete integration solution:
+
+The [SDK Provider](#sdk-provider) is used by the Integration Service to map transactions performed in Granite to the relevant format for Evolution.
+
+The [integration jobs](#integration-jobs) are used by the [Scheduler](../scheduler/manual.md) to pull Evolution's documents, item codes, and trading partners into Granite.
+
 ## SDK Provider
+
+The Evolution SDK provider is responsible for mapping Granite transactions to the relevant format for posting to Evolution. It makes use of the Evolution SDK in order to post.
+
 ### Setup
 
 1. Check the version of the Evolution SDK that is currently installed on the server. The SDK is usually found at `C:\Program Files (x86)\Sage Evolution`. Take note of the first two numbers of `Pastel.Evolution.dll` file version.
+
+    **`Take Note`** If the SDK is not yet installed, please engage with the client's Evolution consultant - the SDK is required for Granite integration.
 
 2. In the `Providers\Evo` folder, find the `EvoX.Y` folder matching the installed SDK version. `X.Y` must match the first two numbers of the installed SDK version. For example, if the installed SDK version is 7.20.0.14, you will take the files from the Evo7.20 folder
 
@@ -661,6 +674,27 @@ https://www.youtube.com/watch?v=Y-RUXaGBg9A
 
 ## Integration Jobs
 
+Integration jobs are a special type of [Scheduler](../scheduler/manual.md) job called [injected jobs](../scheduler/manual.md#injected-jobs-integration-jobs). 
+See below for information for specifics on how document and master data jobs work
+
+### How Document jobs work
+Triggers on the ERP document tables insert a record into the Granite IntegrationDocumentQueue table whenever a change is applied to a document. 
+
+Scheduler runs injected jobs that monitor the IntegrationDocumentQueue table for records that need to be processed.
+
+When a record with Status 'ENTERED' is found, the job uses views on the Granite database to fetch the 
+information related to that document from the ERP database and apply the changes to the Granite document. 
+
+All valid changes to data in the Granite tables are logged to the Audit table, showing the previous value and the new value.
+
+If a change is made in the ERP system that would put Granite into an invalid state, no changes are applied. Instead, the ERPSyncFailed field is set to true and the ERPSyncFailedReason field shows the reason for the failure. The IntegrationLog table will contain futher details on the failure if applicable.
+
+### How master data jobs work
+MasterItems and TradingPartners have their own jobs. These jobs compare the results of their respective views to the data in the Granite tables and insert new records / update records as needed.
+
+The document jobs themselves also sync changes to the TradingPartners & MasterItems that are on the document. This means that on sites that do not process a lot of changes to master data you can limit the MasterItem/TradingPartner jobs to running once a day or even less frequently. 
+The only thing they are really still needed for is setting isActive to false when something is deactivated in the ERP system.
+
 ### Install
 
 **`Take Note`** If you are upgrading from the old StoredProcedure/Trigger integration, ensure that ERPIdentification (Document, DocumentDetail, MasterItem, TradingPartner) column is populated with correct values before attempting to start the new jobs
@@ -720,26 +754,6 @@ These views must not modify the values in ERPIdentification or iOrigLineID for a
 If Rename Item Code is used in Evolution to change an Item Code, we will update the MasterItem in Granite to match, thereby updating all of the TrackingEntities and Transactions to the new Code as well. 
 
 We will not update the MasterItem in Granite if a new Item Code is created in Evolution and Global Item Change is used to change Evolution stock over to the new Item Code. In this case the new Item Code will be added to Granite, but all TrackingEntities will need to be reclassified to the new MasterItem.
-
-### How it works
-
-#### Document jobs
-Triggers on the ERP document tables insert a record into the Granite IntegrationDocumentQueue table whenever a change is applied to a document. 
-
-GraniteScheduler runs injected jobs that monitor the IntegrationDocumentQueue table for records that need to be processed.
-
-When a record with Status 'ENTERED' is found, the job uses views on the Granite database to fetch the 
-information related to that document from the ERP database and apply the changes to the Granite document. 
-
-All valid changes to data in the Granite tables are logged to the Audit table, showing the previous value and the new value.
-
-If a change is made in the ERP system that would put Granite into an invalid state, no changes are applied. Instead, the ERPSyncFailed field is set to true and the ERPSyncFailedReason field shows the reason for the failure. The IntegrationLog table will contain futher details on the failure if applicable.
-
-#### Master data jobs
-MasterItems and TradingPartners have their own jobs. These jobs compare the results of their respective views to the data in the Granite tables and insert new records / update records as needed.
-
-The document jobs themselves also sync changes to the TradingPartners & MasterItems that are on the document. This means that on sites that do not process a lot of changes to master data you can limit the MasterItem/TradingPartner jobs to running once a day or even less frequently. 
-The only thing they are really still needed for is setting isActive to false when something is deactivated in the ERP system.
 
 ### Things to look out for
 
