@@ -3,12 +3,10 @@
 ## Setup
 
 ### Installation
-- Ensure that you have the .NET Core 6 Web Hosting bundle installed
-    ```
-    ...\Dropbox\Software Installs\Granite\Granite V3.4.4\Granite V4 IIS Installs\dotnet-hosting-6.0.5-win.exe
-    ```
 
-- **Take note, you might need to perform an IISRESET after install.**
+- Ensure you have installed [.NET 6 Web Hosting bundle](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+
+- **Take note, you might need to perform an IISRESET after installing the hosting bundle.**
 
         C:\Windows\system32> IISRESET
 
@@ -126,9 +124,9 @@ Logging can be configured in the nlog.config file
 			fileName="GraniteLabelPrintingZPL.log"
 			layout="${longdate}|${event-properties:item=EventId:whenEmpty=0}|${level:uppercase=true}|${mdlc:userName}|${logger}|${message} ${exception:format=tostring}" 
 			archiveFileName="GraniteLabelPrintingZPL.{#}.log"
-			archiveNumbering="Date"
+			archiveNumbering="DateAndSequence"
 			archiveEvery="Day"
-			archiveAboveSize="10240"
+			archiveAboveSize="10485760"
 			archiveDateFormat="yyyy-MM-dd"
 			maxArchiveFiles="7" />
 
