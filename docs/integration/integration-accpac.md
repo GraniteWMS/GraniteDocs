@@ -777,17 +777,23 @@ Example:
 See the GraniteScheduler manual for how to configure scheduled jobs - ERP document integration jobs are of type INJECTED
 
 #### Email on Error
-To enable mail notifications for failures you will need to add the Email_IntegrationError mail template stored procedure to your database and configure it. This is the template procedure that is used for all error notifications in these injected jobs. 
 
-When there is a failure while syncing a document, a ONCE only email job is added to GraniteScheduler that will detail the error messages. The job input for the email job will contain the document number and the messages that were logged surrounding the failure.
+**`Take Note`** Emailing functionality is now handled by the [Utility API](../utility-api/manual.md), set up has changed from previous versions.
 
-See the GraniteScheduler documentation for more information on email jobs.
+Ensure that you have configured the UtilityApi for the Accpac injected jobs in the `SystemSettings` table:
 
-Then for each job that needs to send failure notifications, add a job input for MailOnError:
+| Application | Key | Value |
+|---|---|---|
+|Granite.Integration.Accpac.Job | UtilityApi | https://localhost:5001/ |
+
+Ensure you have the `IntegrationError` email template in your database. This is the email template that is used for all error notifications in these injected jobs. 
+
+Then for each job that needs to send failure notifications, add a job input for `MailOnError` and `MailOnErrorToAddresses`:
 
 | JobName | Name | Value |
 | --- | --- | --- |
-| < JobName goes here >| MailOnError | true |
+| < JobName goes here > | MailOnError | true |
+| < JobName goes here > | MailOnErrorToAddresses | name@client.co.za;name2@client.co.za |
 
 #### View customisation
 Each view can be customised to include custom logic or map extra fields to fields on the corresponding Granite table. 
