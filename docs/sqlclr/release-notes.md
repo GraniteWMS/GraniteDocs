@@ -1,6 +1,6 @@
 # Release Notes
 
-## Granite.SQLCLR (TBA) 4.5.0.3
+## Granite.SQLCLR (TBA) 5.0.0.0
 ##### New
 - UtilityAPI
 	- Report Print
@@ -10,6 +10,7 @@
 	- Simple Email
 ##### Changes
 - Update error handling to show more detailed messages when SystemSettings is incorrect
+- Add manufactureDate to TakeOn procedure
 
 ## Granite.SQLCLR (15 August 2023) 4.5.0.2
 ##### New
