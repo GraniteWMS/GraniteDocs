@@ -202,6 +202,9 @@ Browse the API's documentation page (`/metadata`) for details on the properties 
 The details can be found on the TemplateEmail or SimpleEmail requests.
 
 ## Reporting Service
+
+`todo` explain that this is a SSRS API, etc.
+`todo` document ssrs installation and setup 
 ### Configuration
 
 Settings for the Reporting Service element of the UtilityAPI are configured in the `SystemSettings` table. You can find the insert script for the settings in the GraniteDatabase install folder:
