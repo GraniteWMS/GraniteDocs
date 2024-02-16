@@ -1,29 +1,55 @@
 # Custodian API
+![Local Image](./custodian.jpg)
 
-Custodian is responsible for the Business Process catalogue.
 
+The primary responsibility of the Custodian API is to manage **Process Templates**, which encapsulate Granite Processes along with Process Steps, web templates, and pre-scripts. Each template consists of both **metadata** and **artifact** files. Metadata serves to document the process and provide additional information, while artifacts encompass all the data, scripts, views, lookups, and static data necessary for deploying the process. Ultimately, each deployment is self-contained, facilitating seamless sharing and deployment processes through the WebDesktop.
 
-## Settings
+---
+## Setup
 
-##### Repo_id
+##### Requirements
 
-```
-{
-  "Repo_id": ******
-}
-```
-##### Token
-**`Take Note`** token expiration is 90 days. New token shared internally.
+- .Net Core 6
+- IIS 8 onwards
+- Sufficient permissions for folder and file access and IIS application creation
 
-```
-{
-  "Token": ******
-}
-```
+## Application Settings
+
+The settings below are configured in the `appsettings.json`.
+
 ##### ConnectionStrings
-```
+Configuring multiple connection strings allow you to deploy to any instance of Granite.
+The name of the connection string will be used in the Webdesktop to identify the connection.
+Example CONNECTION and TEST.
+
+``` json
 "ConnectionStrings": {
     "CONNECTION": "Data Source=.;Initial Catalog=GraniteLive;Persist Security Info=True;User ID=;TrustServerCertificate=True;",
     "TEST": "Data Source=.;Initial Catalog=GraniteTest;Persist Security Info=True;User ID=;TrustServerCertificate=True;"
   }
 ```
+
+##### AllowedOrigins
+
+The 'allowed origins' is a list of addresses for applications requiring access to the API. 
+By default, the only address that requires configuration is the Granite **WebDesktop** address.
+
+```json
+
+"AllowedOrigins": [ "https://192.168.1.10:8081" ]
+```
+#### Database SystemSettings
+
+**`Take Note`** **token** shared internally. Expiration is 90 days. 
+
+```sql
+INSERT INTO SystemSettings ([Application], [Key], [Value], [Description], [isEncrypted], [isActive], AuditDate, AuditUser)
+VALUES 
+('GRANITECUSTODIAN', 'Repo_id', '676912773', '', 0, 1, GETDATE(), 'AUTOMATION'),
+('GRANITECUSTODIAN', 'Token', '******', '', 0, 1, GETDATE(), 'AUTOMATION'),
+('GRANITECUSTODIAN', 'Stores', 'Approved,Draft', '', 0, 1, GETDATE(), 'AUTOMATION')
+```
+
+## Troubleshoot
+
+Run `config` operation to verify connections and setup.
