@@ -204,7 +204,9 @@ The details can be found on the TemplateEmail or SimpleEmail requests.
 ## Reporting Service
 
 `todo` explain that this is a SSRS API, etc.
-`todo` document ssrs installation and setup 
+`todo` document ssrs installation and setup, take dropbox word docs on installation
+How To - SSRS Installing and configuring.docx
+ 
 ### Configuration
 
 Settings for the Reporting Service element of the UtilityAPI are configured in the `SystemSettings` table. You can find the insert script for the settings in the GraniteDatabase install folder:
