@@ -13,7 +13,9 @@ The central functionality of the system revolves around data **maintenance** and
 - IIS 8 onwards
 - Sufficient permissions for folder and file access and IIS application creation
 
-## Grids
+## Customization
 
+
+##### Grids
 **`Take Note`** Several of the grids do require a minimum set of columns in order to work.
 These are typical the primary key (Document.Number MasterItem.Code etc.)
