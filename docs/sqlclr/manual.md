@@ -1,5 +1,10 @@
 # Manual
 
+todo
+Our SQL CLR (Common Language Runtime) integration offers a unique approach by `abstracting HTTP` technology away from direct SQL manipulation. 
+This encourages users to interact with our `API` instead of directly manipulating data within SQL Server.
+By promoting interaction with the API, this integration enhances security, maintains `data integrity`, and streamlines data processing workflows, empowering users to leverage our API's full capabilities within the SQL environment.
+
 ## Currently supported operations
 
 ### Inventory
@@ -83,6 +88,7 @@ This will ensure that you have all of the necessary variables declared with corr
 
 If you are not specifying a particular value, just set the variable to NULL. The variable must still be specified as a parameter when executing the CLR procedure.
 
+todo, explain the role of clr functions. in other words it is purely to help you with the more complex use cases etc. the message that is important is function to one thing and one thing only in context to SQL clr.
 
 ### CLR_IntegrationPostToEndpoint
 If you have multiple integration services that you need to interact with using the CLR_IntegrationPostToEndpoint procedure, 
