@@ -197,18 +197,18 @@ You can preview a label by browsing to https://[hostname]:[port number]/preview/
 
 For example browsing to https://my-pcname:5001/preview/DefaultTrackingEntityLabel will render the TrackingEntity.zpl label using the dimensions specified in appsettings.json:
 
-![image info](img\trackingentitypreview.png)
+![image info](zpl-img\trackingentitypreview.png)
 
 ### Previewing with data
 By making a LabelDataPreviewRequest (see API metadata), you can view a label template populated with actual data from your database
 
 Sample request:
 
-![image info](img\previewwithdatasamplecall.png)
+![image info](zpl-img\previewwithdatasamplecall.png)
 
 Response:
 
-![image info](img\trackingentitypreviewwithdata.png)
+![image info](zpl-img\trackingentitypreviewwithdata.png)
 
 ## Troubleshooting
 If you get an error message relating to ASP.Net when browsing GraniteLabelPrintingZPL, ensure that you have the correct hosting bundle installed. The Webdesktop uses version 5, which will not work with GraniteLabelPrintingZPL. You can safely install version 6 alongside version 5
