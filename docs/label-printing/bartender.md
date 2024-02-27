@@ -6,20 +6,15 @@ Each type of label that can be printed has a corresponding SQL view that returns
 The application will query this view with a key (Barcode, Item Code, etc) to fetch the relevant information.
 After that, the application will map the data returned by the SQL view to the matching Named Data Source in the Bartender label format. 
 
-We currently have support the following versions of Bartender:
+**Supported Bartender Versions:**
 
-- x86
-    - 10.1 R1
-    - 10.1 R4
-    - 2016
-    - 2016 R1
-    - 2016 R4
-- x64
+- x86:
+    - 10.1 R1, R4
+    - 2016, R1, R4
+- x64:
     - 2016 R9
     - 2019 R6
-    - 2020
-    - 2021
-    - 2021 R7
+    - 2020, 2021, R7
 
 ## Setup
 
@@ -119,83 +114,32 @@ Path to the default labels location
 <add key="DefaultLabelPath" value="C:\Program Files\Common Files\Cradle Technology Services\Granite\Labels\"/>
 ```
 
-#### DefaultTrackingEntityLabel
-Default TrackingEntity Label (.btw or .zpl). Information for label based on setting: ViewTrackingEntityLabel
-``` xml
-<add key="DefaultTrackingEntityLabel" value="TrackingEntity.btw"/>
-```
+### Settings Label configuration
+The tables below documents all the appsettings related to changing the label format and data. 
+Each Default label is linked to a setting that below that configures the SQL view.
 
-#### DefaultMasterItemLabel
-Default MasterItem Label (.btw or .zpl). Information for label based on setting: ViewMasterItemLabel
-``` xml
-<add key="DefaultMasterItemLabel" value="MasterItem.btw"/>
-```
+`Settings for label path (.btw or .zpl)`
 
-#### DefaultLocationLabel
-Default Location Label (.btw or .zpl). Information for label based on setting: ViewLocationLabel
-``` xml
-<add key="DefaultLocationLabel" value="Location.btw"/>
-```
+| Key | Value | Setting name for SQL View
+| --- | --- |--- |
+| DefaultTrackingEntityLabel | TrackingEntity.btw | ViewTrackingEntityLabel
+| DefaultMasterItemLabel | MasterItem.btw | ViewMasterItemLabel
+| DefaultLocationLabel | Location.btw | ViewLocationLabel
+| DefaultUserLabel | User.btw | ViewUserLabel
+| DefaultPalletLabel | Pallet.btw | PalletLabel
+| DefaultBoxLabel | Box.btw | ViewBoxLabel
 
-#### DefaultUserLabel
-Default User Label (.btw or .zpl). Information for label based on setting: ViewUserLabel
-``` xml
-<add key="DefaultUserLabel" value="User.btw"/>
-```
+`Settings for label data (SQL view)`
 
-#### DefaultPalletLabel
-Default Pallet Label (.btw or .zpl). Information for label based on setting: PalletLabel
-``` xml
-<add key="DefaultPalletLabel" value="Pallet.btw"/>
-```
+| Key | Value (SQl View Name) 
+| --- | --- |
+| ViewTrackingEntityLabel | Label_TrackingEntity |
+| ViewMasterItemLabel | Label_MasterItem |
+| ViewLocationLabel | Label_Location |
+| ViewUserLabel | Label_Users |
+| PalletLabel | Label_Pallet |
+| ViewBoxLabel | Label_Box |
 
-#### DefaultBoxLabel
-Default Box Label (.btw or .zpl). Information for label based on setting: ViewBoxLabel
-``` xml
-<add key="DefaultBoxLabel" value="Box.btw"/>
-```
-
-#### DefaultErrorLabel
-Default Error Label. If setting *PrinterNameErrorLabel* is set this will be the label to use.
-``` xml
-<add key="DefaultErrorLabel" value="ErrorLabel.btw"/>
-```
-
-#### ViewTrackingEntityLabel
-SQL View for TrackingEntityLabel
-``` xml
-<add key="ViewTrackingEntityLabel" value="Label_TrackingEntity"/>
-```
-
-#### ViewMasterItemLabel
-SQL View for MasterItemLabel
-``` xml
-<add key="ViewMasterItemLabel" value="Label_MasterItem"/>
-```
-
-#### ViewLocationLabel
-SQL View for LocationLabel
-``` xml
-<add key="ViewLocationLabel" value="Label_Location"/>
-```
-
-#### ViewUserLabel
-SQL View for UserLabel
-``` xml
-<add key="ViewUserLabel" value="Label_Users"/>
-```
-
-#### PalletLabel
-SQL View for PalletLabel
-``` xml
-<add key="PalletLabel" value="Label_Pallet"/>
-```
-
-#### ViewBoxLabel
-SQL View for BoxLabel
-``` xml
-<add key="ViewBoxLabel" value="Label_Box"/>
-```
 
 ### Logging
 
