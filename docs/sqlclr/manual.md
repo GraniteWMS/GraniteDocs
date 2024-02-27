@@ -1,43 +1,33 @@
 # Manual
 
-todo
-Our SQL CLR (Common Language Runtime) integration offers a unique approach by `abstracting HTTP` technology away from direct SQL manipulation. 
+<!-- ![alt text](image.jpg) -->
+
+The SQL CLR (Common Language Runtime) integration offers a unique approach by `abstracting HTTP` technology away from direct SQL manipulation. 
 This encourages users to interact with our `API` instead of directly manipulating data within SQL Server.
 By promoting interaction with the API, this integration enhances security, maintains `data integrity`, and streamlines data processing workflows, empowering users to leverage our API's full capabilities within the SQL environment.
 
 ## Currently supported operations
 
 ### Inventory
-- TAKEON
-- SCRAP
-- ADJUST
-- MOVE
-- PALLETIZE
-- REPLENISH
-- RECLASSIFY
+- TAKEON, SCRAP, ADJUST, MOVE, PALLETIZE, REPLENISH, RECLASSIFY
+
 ### Inbound
 - RECEIVE
+
 ### Outbound
-- PICK
-- PACK
+- PICK, PACK
+
 ### Stocktake
-- STOCKTAKECOUNT
-- STOCKTAKEHOLD
-- STOCKTAKERELEASE
+- STOCKTAKECOUNT, STOCKTAKEHOLD, STOCKTAKERELEASE
+
 ### Label Printing
-- TRACKINGENTITY
-- MASTERITEM
-- LOCATION
+- TRACKINGENTITY, MASTERITEM, LOCATION
+
 ### Integration
-- POST
-- POST TO ENDPOINT
-- UPDATE
+- POST, POST TO ENDPOINT, UPDATE
+
 ### Utility API
-- REPORT PRINT 
-- REPORT EXPORT
-- SQL TABLE EXPORT
-- SIMPLE EMAIL
-- TEMPLATE EMAIL
+- REPORT PRINT, REPORT EXPORT, SQL TABLE EXPORT, SIMPLE EMAIL, TEMPLATE EMAIL
 
 
 ## Setup
