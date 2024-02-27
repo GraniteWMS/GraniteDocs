@@ -9,7 +9,7 @@ The primary responsibility of the Custodian API is to manage **Process Templates
 
 ##### Requirements
 
-- .Net Core 6
+- .Net Core 8
 - IIS 8 onwards
 - Sufficient permissions for folder and file access and IIS application creation
 
@@ -38,9 +38,7 @@ By default, the only address that requires configuration is the Granite **WebDes
 
 "AllowedOrigins": [ "https://192.168.1.10:8081" ]
 ```
-#### Database SystemSettings
-
-**`Take Note`** **token** shared internally. Expiration is 90 days. 
+#### SystemSettings
 
 ```sql
 INSERT INTO SystemSettings ([Application], [Key], [Value], [Description], [isEncrypted], [isActive], AuditDate, AuditUser)
@@ -50,6 +48,11 @@ VALUES
 ('GRANITECUSTODIAN', 'Stores', 'Approved,Draft', '', 0, 1, GETDATE(), 'AUTOMATION')
 ```
 
+- **`Take Note`** Ensure that the Token is Encrypted. After 90 days reset the token. We will issue a new token prior to expiry.
+- New stores could be introduced and added to this setting. The stores available will be communicated to the team; you cannot add names that do not exist.
+
+
 ## Troubleshoot
 
-Run `config` operation to verify connections and setup.
+The most common issues will arise with the connection to the cloud store, ensuring that the token is correct and not expired.
+Run `\config` operation to verify connections, authentication and setup.
