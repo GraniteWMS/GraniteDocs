@@ -9,7 +9,7 @@ The primary responsibility of the Custodian API is to manage **Process Templates
 
 ##### Requirements
 
-- .Net Core 8
+- [ASP.NET Core 8 Hosting Bundle](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 - IIS 8 onwards
 - Sufficient permissions for folder and file access and IIS application creation
 
