@@ -5,7 +5,10 @@ nav:
   - Manuals:
     - Custodian API: custodian-api/custodian-api-manual.md
     - Integration:
-      - Accpac: integration/integration-accpac.md
+      - Accpac: 
+        - integration/accpac/index.md
+        - SDK Provider: integration/accpac/sdk-provider.md
+        - Integration Jobs: integration/accpac/integration-jobs.md
       - Evolution: integration/integration-evo.md
       - Omni: integration/integration-omni.md
       - QuickBooks: integration/integration-quickbooks.md
@@ -16,7 +19,10 @@ nav:
       - ZPL: label-printing/zpl.md
     - Repository API: repository-api/repository-api-manual.md
     - Scheduler: scheduler/manual.md
-    - SQLCLR: sqlclr/manual.md
+    - SQLCLR: 
+      - sqlclr/index.md
+      - Getting Started: sqlclr/getting-started.md
+      - Reference: sqlclr/reference.md
     - Utility API:
       - utility-api/index.md
       - Getting Started: utility-api/getting-started.md
@@ -52,3 +58,5 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  - attr_list
+  - md_in_html
