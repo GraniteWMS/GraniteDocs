@@ -1,3 +1,9 @@
+---
+hide:
+  - navigation
+  - toc
+---
+
 # Welcome
 
 This library of documentation is dedicated to technical topics related to Granite WMS. We cover setups, configurations, and various other technical aspects.
