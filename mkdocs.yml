@@ -1,3 +1,54 @@
 site_name: Granite WMS
 site_url: https://granitewms.github.io/granitedocs/
-theme: readthedocs
+nav: 
+  - Home: index.md
+  - Manuals:
+    - Custodian API: custodian-api/custodian-api-manual.md
+    - Integration:
+      - Accpac: integration/integration-accpac.md
+      - Evolution: integration/integration-evo.md
+      - Omni: integration/integration-omni.md
+      - QuickBooks: integration/integration-quickbooks.md
+      - SAPB1: integration/integration-sapb1.md
+      - Syspro: integration/integration-syspro.md
+    - Label Printing: 
+      - Bartender: label-printing/bartender.md
+      - ZPL: label-printing/zpl.md
+    - Repository API: repository-api/repository-api-manual.md
+    - Scheduler: scheduler/manual.md
+    - SQLCLR: sqlclr/manual.md
+    - Utility API:
+      - utility-api/index.md
+      - Getting Started: utility-api/getting-started.md
+      - Email Service: utility-api/email-service.md
+      - Reporting Service: utility-api/reporting-service.md
+      - SQL Export Service: utility-api/sql-export-service.md
+    - Web Desktop: webdesktop/webdesktop.md
+  - Release Notes: 
+    - Scheduler: scheduler/release-notes.md
+    - SQLCLR: sqlclr/release-notes.md
+  - How To:
+    - Custodian API: custodian-api/custodian-api-howto.md
+theme: 
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.indexes
+    - toc.follow
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to light mode
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
