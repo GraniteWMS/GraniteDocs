@@ -1,86 +1,7 @@
-# Manual
+## Integration 
 
-<!-- ![alt text](image.jpg) -->
+<h4>CLR_IntegrationPostToEndpoint</h4>
 
-The SQL CLR (Common Language Runtime) integration offers a unique approach by `abstracting HTTP` technology away from direct SQL manipulation. 
-This encourages users to interact with our `API` instead of directly manipulating data within SQL Server.
-By promoting interaction with the API, this integration enhances security, maintains `data integrity`, and streamlines data processing workflows, empowering users to leverage our API's full capabilities within the SQL environment.
-
-## Currently supported operations
-
-### Inventory
-- TAKEON, SCRAP, ADJUST, MOVE, PALLETIZE, REPLENISH, RECLASSIFY
-
-### Inbound
-- RECEIVE
-
-### Outbound
-- PICK, PACK
-
-### Stocktake
-- STOCKTAKECOUNT, STOCKTAKEHOLD, STOCKTAKERELEASE
-
-### Label Printing
-- TRACKINGENTITY, MASTERITEM, LOCATION
-
-### Integration
-- POST, POST TO ENDPOINT, UPDATE
-
-### Utility API
-- REPORT PRINT, REPORT EXPORT, SQL TABLE EXPORT, SIMPLE EMAIL, TEMPLATE EMAIL
-
-
-## Setup
-```txt
-	NOTE:
-
-	The previous scripts and dlls have been replaced with: SQLCLR_Install.sql
-
-	When opening the SQLCLR_Install.sql it will ask if you want to normalise the endings; select NO.
-	
-	Be sure to replace [GraniteDatabase] with the database in which you wish to create the 
-    procedures. 
-```
-```txt
-	You will need a SQL auth user with the sysadmin role to run the script
-```
-```txt
-	If you are upgrading from an older version of CLR ensure that you change 
-    Application in Systemsettings table from GraniteSQLCLR to SQLCLR
-```
-
-### In the Granite database...
-### SystemSettings table
-
-
-| Application	| Key					| Value						| Description					| ValueDataType	| isEncrypted	| isActive	|
-|---------------|-----------------------|---------------------------|-------------------------------|---------------|---------------|-----------|
-| SQLCLR		| Webservice			| http://10.0.0.1:50002	| Granite Webservice Address	| string		| False			| True		|
-| SQLCLR		| LabelPrintService		| http://10.0.0.1:50004	| Label Print Service Address	| string		| False			| True		|
-| SQLCLR		| IntegrationService	| http://10.0.0.1:50003	| Integration Service Address	| string		| False			| True		|
-| SQLCLR		| UtilityAPI    	| https://10.0.0.1:50001	| UtilityAPI Address	    | string		| False			| True		|
-
-### Create Assemblies and Stored Procedures
-
-This script does not have to be run on the server. You will need a SQL auth user with the sysadmin role to run the script.
-
-```
-	Execute the SQLCLR_Install.sql file
-```
-
-
-## Using the CLR Procedures
-
-### How to execute
-The suggested way to start working with your CLR procedures, is to right click the procedure in SSMS and select Script Stored Procedure as -> Execute To
-
-This will ensure that you have all of the necessary variables declared with correct datatypes, and that all parameters are specified for the EXECUTE statement
-
-If you are not specifying a particular value, just set the variable to NULL. The variable must still be specified as a parameter when executing the CLR procedure.
-
-todo, explain the role of clr functions. in other words it is purely to help you with the more complex use cases etc. the message that is important is function to one thing and one thing only in context to SQL clr.
-
-### CLR_IntegrationPostToEndpoint
 If you have multiple integration services that you need to interact with using the CLR_IntegrationPostToEndpoint procedure, 
 you will need to add them with a unique name in the Key column:
 
@@ -92,14 +13,14 @@ The Key "MySecondIntegrationService" can now be used when executing the CLR_Inte
 
 ## UtilityAPI
 
-### UtilityAPI SSRS Report Procedures
+### Report Service
 
 The two operations supported are:
 
 - [Print Report](#clr_PrintReport)
 - [Export Report](#clr_ReportExportToFile)
 
-#### dbo.clr_PrintReport
+<h4>dbo.clr_PrintReport</h4>
 
 Use this procedure to print a SSRS report.
 
@@ -111,7 +32,7 @@ Use this procedure to print a SSRS report.
 
 
 
-#### dbo.clr_ReportExportToFile
+<h4>dbo.clr_ReportExportToFile</h4>
 
 Use this procedure to save a SSRS report to the server where the UtilityAPI is running.
 
@@ -122,7 +43,7 @@ Use this procedure to save a SSRS report to the server where the UtilityAPI is r
 | filetype | Yes | File type that you want to save as (PDF, EXCELOPENXML (.xlsx), EXCEL (.xls)) |
 | parameters | No | List of all parameters required by the report |
 
-#### dbo.report_AddReportParameters
+<h4>dbo.report_AddReportParameters</h4>
 
 Use this Function to create a report parameter to use with dbo.clr_ReportExport and dbo.clr_PrintReport.
 
@@ -180,10 +101,10 @@ SELECT @ResponseCode, @ResponseJson
 
 ```
 
-### UtilityAPI SQL Table Export
+### SQL Export Service
 
 
-#### dbo.clr_TableExport
+<h4>dbo.clr_TableExport</h4>
 
 Use this procedure to export data from a SQL Table or View to either a CSV or Excel file. 
 
@@ -198,7 +119,7 @@ Use this procedure to export data from a SQL Table or View to either a CSV or Ex
 | filetype | Yes | File type that you want to save as (CSV (.csv),  EXCEL (.xlsx)) |
 
 
-#### dbo.export_AddFilter
+<h4>dbo.export_AddFilter</h4>
 
 This function allows you to build the filters parameter string.
 
@@ -211,7 +132,7 @@ This function allows you to build the filters parameter string.
 
 
 
-#### dbo.export_AddOrderBy
+<h4>dbo.export_AddOrderBy</h4>
 
 This function allows you to build the OrderBy parameter string.
 
@@ -256,12 +177,12 @@ SELECT @responseCode, @responseJson
 
 
 
-### UtilityAPI Email Procedures
+### Email Service
 
 Two types of emails can be sent using SQLCLR:
 
-- [Template Emails](#clr_templateemail)
-- [Simple Emails](#clr_simpleemail)
+- [Template Emails](#dbo.clr_templateemail)
+- [Simple Emails](#dbo.clr_simpleemail)
 
 The difference between these two types of emails is where the content of the email body comes from. 
 Templated emails require an email template that will be used to generate the body of the email. 
@@ -274,7 +195,7 @@ Both types of emails have support for the following types of attachments:
 - Excel exports of SQL tables
 - File attachments
 
-#### dbo.clr_TemplateEmail
+<h4>dbo.clr_TemplateEmail</h4>
 
 Use this procedure to send an email that uses an Email template to generate the body of the email.
 
@@ -291,7 +212,7 @@ Use this procedure to send an email that uses an Email template to generate the 
 | fileAttachments		| No		| List of files to attach to this email													|
 
 
-#### dbo.email_AddTemplateParameter
+<h4>dbo.email_AddTemplateParameter</h4>
 
 Use this function to add parameters to the list that will be used to render the email template
 
@@ -340,7 +261,7 @@ EXECUTE [dbo].[clr_TemplateEmail]
 ```
 
 
-#### dbo.clr_SimpleEmail
+<h4>dbo.clr_SimpleEmail</h4>
 
 | Parameter Name		| Required	| Description																			|
 |-----------------------|-----------|---------------------------------------------------------------------------------------|
@@ -587,4 +508,3 @@ Be sure that you are executing the procedure using ALL of the parameters. Set th
 
 ### Integration 
 [https://stackoverflowteams.com/c/granitewms/questions/349](https://stackoverflowteams.com/c/granitewms/questions/349)
-
