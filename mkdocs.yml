@@ -9,11 +9,14 @@ nav:
         - integration/accpac/index.md
         - SDK Provider: integration/accpac/sdk-provider.md
         - Integration Jobs: integration/accpac/integration-jobs.md
-      - Evolution: integration/integration-evo.md
-      - Omni: integration/integration-omni.md
-      - QuickBooks: integration/integration-quickbooks.md
-      - SAPB1: integration/integration-sapb1.md
-      - Syspro: integration/integration-syspro.md
+      - Evolution: 
+        - integration/evo/index.md
+        - SDK Provider: integration/evo/sdk-provider.md
+        - Integration Jobs: integration/evo/integration-jobs.md
+      - Omni: integration/omni/sdk-provider.md
+      - QuickBooks: integration/quickbooks/native-app.md
+      - SAPB1: integration/sapb1/sdk-provider.md
+      - Syspro: integration/syspro/sdk-provider.md
     - Label Printing: 
       - Bartender: label-printing/bartender.md
       - ZPL: label-printing/zpl.md
@@ -22,7 +25,7 @@ nav:
     - SQLCLR: 
       - sqlclr/index.md
       - Getting Started: sqlclr/getting-started.md
-      - Reference: sqlclr/reference.md
+      - CLR Procedure Reference: sqlclr/reference.md
     - Utility API:
       - utility-api/index.md
       - Getting Started: utility-api/getting-started.md
@@ -41,6 +44,7 @@ theme:
     - navigation.tabs
     - navigation.indexes
     - toc.follow
+    - content.code.copy
   palette:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"

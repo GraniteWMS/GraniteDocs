@@ -3,7 +3,8 @@ This document contains all of the information needed to install and configure Qu
 
 QuickBooks integration works a bit differently from integration with other ERP systems. Because of the limitations imposed by the QuickBooks Desktop SDK, we cannot use the standard integration service and scheduler as we normally would. Instead, QuickBooks integration is implemented using a native Windows Forms application.
 
-**`Take Note`** At the moment only downward integration is supported in the QuickBooks integration application.
+!!! note 
+    At the moment only downward integration is supported in the QuickBooks integration application.
 
 Currently there are jobs for fetching the following from QuickBooks into Granite:
 
@@ -17,8 +18,9 @@ Currently there are jobs for fetching the following from QuickBooks into Granite
 
 QuickBooks integration must be installed on the same machine as the QuickBooks SDK. It is best to put the integration application on the same machine as the QuickBooks company file, but if this is not possible the company file MUST at least be accessible from the machine you install on.
 
-**`Take Note`** You will need the QuickBooks Admin user credentials to allow the integration application to connect to QuickBooks. 
-You will also need a dedicated QuickBooks user that the integration application can use.
+!!! note 
+    You will need the QuickBooks Admin user credentials to allow the integration application to connect to QuickBooks. 
+    You will also need a dedicated QuickBooks user that the integration application can use.
 
 1. Check if the client's version of QuickBooks is 32bit or 64bit. You can check by opening QuickBooks Desktop and pressing F2:
     ![](quickbooks-img/bitness.png)
@@ -28,10 +30,11 @@ You will also need a dedicated QuickBooks user that the integration application 
 3. Paste the folder containing the application into the standard install directory `C:\Program Files (x86)\Granite WMS\`
 
 4. In the `Granite.Integration.QuickBooks.Native.exe.config` file, configure your connection string to the Granite database:
-
-        <connectionStrings>
-		    <add name="CONNECTION" connectionString="Data Source=.\SQL2019;Initial Catalog=Granite;Persist Security Info=True;User ID=******;Password=*******" providerName="System.Data.SqlClient" />
-	    </connectionStrings>
+```xml
+<connectionStrings>
+    <add name="CONNECTION" connectionString="Data Source=.\SQL2019;Initial Catalog=Granite;Persist Security Info=True;User ID=******;Password=*******" providerName="System.Data.SqlClient" />
+</connectionStrings>
+```
 
 5. Configure the `QuickBooksCompanyFile` in the SystemSettings table, and enable the scheduled jobs that you want to run.
 
@@ -178,8 +181,9 @@ The TradingPartner job syncs two types of trading partners from QuickBooks:
 If you click the `Tools` button near the top of the integration application interface, you will see an option to execute a manual sync of each job type.
 For document jobs, the calendar allows you to select a range of dates to fetch the modified documents from. 
 
-**`Take Note`** It can be a slow process to fetch multiple days worth of documents. On a moderately busy site it would be advisable to manually sync jobs in batches of 3 to 4 days at a time.
+!!! note 
+    It can be a slow process to fetch multiple days worth of documents. On a moderately busy site it would be advisable to manually sync jobs in batches of 3 to 4 days at a time.
 
-The MasterItem and TradingPartner jobs do not make use of the calendar - they will always fetch the full list from QuickBooks for comparison to Granite.
+    The MasterItem and TradingPartner jobs do not make use of the calendar - they will always fetch the full list from QuickBooks for comparison to Granite.
 
 

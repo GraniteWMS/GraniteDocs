@@ -2,7 +2,6 @@
 
 This document contains all the information needed to setup and configure SAP B1 integration.
 The Data Interface API (DI API) is part of the SAP Business One Software Development Kit (SDK). 
-
 ---
 ## Setup 
 
@@ -33,6 +32,9 @@ You can locate the database script to create these records in the following path
 ```
 ~\GraniteDatabase\Data\SystemSettings\SystemSettingsSAPB1.sql
 ```
+
+
+
 ##### Settings
 | Application        | Key                                     | Value | Description                                             | 
 |--------------------|-----------------------------------------|-------|---------------------------------------------------------|
@@ -47,12 +49,13 @@ You can locate the database script to create these records in the following path
 | IntegrationSAPB1   | InventoryAccountCode                    |       | TAKEON AccountCode |
 | IntegrationSAPB1   | BinEntry                                |       | 0 false, 1 true. The BinEntry will be used by TAKEON, SCRAP and ADJUSTMENT |
 
-**`Take Note`** LicenseServer address found in
-`C:\Program Files (x86)\SAP\SAP Business One DI API\Conf\B1_Local_machine.xml`
 
-**`Take Note`** Once the settings is capture please test the SAP connection by execute the `/config` operation on the integration service.
+!!! note
+    LicenseServer address found in `C:\Program Files (x86)\SAP\SAP Business One DI API\Conf\B1_Local_machine.xml`
 
----
+!!! note
+    Once the settings are captured please test the SAP connection by browsing to the `/config` page on the integration service.
+
 ## Integration Methods
 
 Integration Methods refer to the specific functionalities supported for the given provider. This documentation serves as a crucial resource when engaging with a client, providing insights into our supported operations and the manner in which we support them.
@@ -76,83 +79,83 @@ Integration Methods are predefined values, each corresponding to an operation wi
 ##### TAKEON
 - Post :SAPbobsCOM.BoObjectTypes.oInventoryGenEntry
 - Documents object for entering general items to inventory
-- Table: OIGN (https://biuan.com/OIGN/)
+- Table: [OIGN](https://biuan.com/OIGN/)
 
 ##### ADJUSTMENT
 - Post : SAPbobsCOM.InventoryPostingsServiceDataInterfaces.ipsInventoryPosting
 - The InventoryPostingsService service enables you to add, look up, and update inventory posting transactions.
-- Table: OIQR (https://biuan.com/OIQR/)
+- Table: [OIQR](https://biuan.com/OIQR/)
 
 ##### SCRAP
 - Post :SAPbobsCOM.InventoryPostingsServiceDataInterfaces.ipsInventoryPosting
 - The InventoryPostingsService service enables you to add, look up, and update inventory posting transactions.
-- Table: OIQR (https://biuan.com/OIQR/)
+- Table: [OIQR](https://biuan.com/OIQR/)
 
 ##### REPLENISH
 - Post :SAPbobsCOM.BoObjectTypes.oStockTransfer
 - StockTransfer is a business object that represents items to transfer from one warehouse to another. This object is part of the Inventory and Production module.
-- Table:  OWTR (https://biuan.com/OWTR/)
+- Table: [OWTR](https://biuan.com/OWTR/)
 
 ##### MOVE
 - Post :SAPbobsCOM.BoObjectTypes.oStockTransfer
 - StockTransfer is a business object that represents items to transfer from one warehouse to another. This object is part of the Inventory and Production module.
-- Table:  OWTR (https://biuan.com/OWTR/)
+- Table: [OWTR](https://biuan.com/OWTR/)
 
 ##### TRANSFER
 - Post :SAPbobsCOM.BoObjectTypes.oStockTransfer
 - StockTransfer is a business object that represents items to transfer from one warehouse to another. This object is part of the Inventory and Production module.
-- Table:  OWTR (https://biuan.com/OWTR/)
+- Table: [OWTR](https://biuan.com/OWTR/)
 
 ##### TRANSFERDRAFT
 - Post :SAPbobsCOM.BoObjectTypes.oStockTransferDraft
 -  Documents object that represents a draft document
-- Table:  OWTR (https://biuan.com/ODRF/)
+- Table: [ODRF](https://biuan.com/ODRF/)
 
 ##### RECEIVE
 - Post :oPurchaseOrders -> SAPbobsCOM.BoObjectTypes.oPurchaseDeliveryNotes
 - Documents object that represents a purchase delivery note document
-- Table: OPDN (https://biuan.com/OPDN/)
+- Table: [OPDN](https://biuan.com/OPDN/)
 
 ##### RECEIVINGPOSTMULTIPLE
 - Post :oPurchaseOrders -> SAPbobsCOM.BoObjectTypes.oPurchaseDeliveryNotes
 - Documents object that represents a purchase delivery note document
-- Table: OPDN (https://biuan.com/OPDN/)
+- Table: [OPDN](https://biuan.com/OPDN/)
 - Note: same as RECEIVING but instead of using Document Number we use all the IntegrationReference as PO Numbers.
 
 ##### PURCHASEORDERDRAFT
 - Post :oPurchaseOrders -> SAPbobsCOM.BoObjectTypes.oDrafts
 - Documents object that represents a draft document
-- Table: ODRF (https://biuan.com/ODRF/)
+- Table: [ODRF](https://biuan.com/ODRF/)
 
 ##### PURCHASECREDITNOTES
 - Post :oGoodsReturnRequest -> oPurchaseCreditNotes
 - Documents object that represents a draft of purchase credit note document
-- Table: ORPC (https://biuan.com/ORPC/)
+- Table: [ORPC](https://biuan.com/ORPC/)
 
 ##### PICK
 - Post :oOrders -> SAPbobsCOM.BoObjectTypes.oDeliveryNotes
 - Documents object that represents a sales delivery note document
-- Table: ODLN (https://biuan.com/ODLN/)
+- Table: [ODLN](https://biuan.com/ODLN/)
 
 ##### SALESORDERRETURNREQUEST
 - Post :SAPbobsCOM.BoObjectTypes.oReturns -> SAPbobsCOM.BoObjectTypes.oReturnRequest
 - Documents object that represents a sales return document
-- Table: ORDN 
+- Table: [ORDN](https://biuan.com/ORDN/)
 
 ##### SALESORDERINVOICE
 - Post :oOrders -> SAPbobsCOM.BoObjectTypes.oInvoices
 - Documents object that represents a sales invoice document
-- Table: OINV (https://biuan.com/OINV/)
+- Table: [OINV](https://biuan.com/OINV/)
 
 ##### SALESORDERCREDITMEMO
 - Post : SAPbobsCOM.BoObjectTypes.oInvoices -> SAPbobsCOM.BoObjectTypes.oCreditNotes
 - Documents object that represents a sales Credit Memo
-- Table: OINV (https://biuan.com/OINV/)
+- Table: [OINV](https://biuan.com/OINV/)
 - 
 ##### SALESORDERDRAFT 
 - Post :SAPbobsCOM.BoObjectTypes.oOrders -> SAPbobsCOM.BoObjectTypes.oDrafts
 - Documents object that represents a draft document
-- Table: ODRF (https://biuan.com/ODRF/)
+- Table: [ODRF](https://biuan.com/ODRF/)
 
 ---
 
@@ -275,7 +278,9 @@ If the IIS (app pool) user does not have permissions it can cause issues.
 ## Further Reading
 
 - Complete list of DI API (SDK) Document objects (https://biuan.com/Documents/).
-- SAP Tables https://sap.erpref.com/
-- https://www.sap-business-one-tips.com/
-- https://support.boyum-it.com/hc/en-us/articles/360021794234-SAP-Object-Types
-- http://www.saptables.net/?schema=BusinessOne9.3
+- SAP Tables [https://sap.erpref.com/](https://sap.erpref.com/)
+- [https://www.sap-business-one-tips.com/](https://www.sap-business-one-tips.com/)
+- [https://support.boyum-it.com/hc/en-us/articles/360021794234-SAP-Object-Types](https://support.boyum-it.com/hc/en-us/articles/360021794234-SAP-Object-Types)
+
+
+<!-- todo dead link - [http://www.saptables.net/?schema=BusinessOne9.3](http://www.saptables.net/?schema=BusinessOne9.3) -->

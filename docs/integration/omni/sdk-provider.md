@@ -1,7 +1,8 @@
 # Omni
 
-**`Take Note`** Requirements for Omni integration need to be assessed carefully before it is offered to any potential clients.
-The Omni API is limited in the functionality that it offers, and it usually does not behave in the same way that the Omni Desktop application does.
+!!! note 
+    Requirements for Omni integration need to be assessed carefully before it is offered to any potential clients.
+    The Omni API is limited in the functionality that it offers, and it usually does not behave in the same way that the Omni Desktop application does.
 
 ## Setup
 
@@ -10,7 +11,7 @@ todo
 ## Settings
 
 The settings for Omni are configured in the SystemSettings table. The IntegrationService will pick up the settings using the Application name specified in it's `.config` file:
-```
+```xml
 <add key ="SystemSettingsApplicationName" value="IntegrationOmni"/>
 ```
 If this setting is missing from the config file or left empty, the IntegrationService will default to using `IntegrationOmni` as the SystemSettingsApplicationName
@@ -22,7 +23,8 @@ The script to insert the default settings is also located in the GraniteDatabase
 ~\GraniteDatabase\Data\SystemSettings\SystemSettingsOmni.sql
 ```
 
-**`Take Note`** To pick up any changes to the SystemSettings table, the IntegrationService will need to be restarted.
+!!! note 
+    To pick up any changes to the SystemSettings table, the IntegrationService will need to be restarted.
 
 ### Example SystemSettings in database
 
@@ -40,8 +42,9 @@ The script to insert the default settings is also located in the GraniteDatabase
 
 ## Integration Methods
 
-**`Take Note`** This is the complete list of supported integration methods at present. 
-There is no support for manufacturing or receiving at this time.
+!!! note 
+    This is the complete list of supported integration methods at present. 
+    There is no support for manufacturing or receiving at this time.
 
 todo
 

@@ -6,7 +6,7 @@ See below for information for specifics on how document and master data jobs wor
 ## How Document jobs work
 Triggers on the ERP document tables insert a record into the Granite IntegrationDocumentQueue table whenever a change is applied to a document. 
 
-GraniteScheduler runs injected jobs that monitor the IntegrationDocumentQueue table for records that need to be processed.
+Scheduler runs injected jobs that monitor the IntegrationDocumentQueue table for records that need to be processed.
 
 When a record with Status 'ENTERED' is found, the job uses views on the Granite database to fetch the 
 information related to that document from the ERP database and apply the changes to the Granite document. 
@@ -18,7 +18,8 @@ If a change is made in the ERP system that would put Granite into an invalid sta
 ## How master data jobs work
 MasterItems and TradingPartners have their own jobs. These jobs compare the results of their respective views to the data in the Granite tables and insert new records / update records as needed.
 
-The document jobs themselves also sync changes to the TradingPartners & MasterItems that are on the document. This means that on sites that do not process a lot of changes to master data you can limit the MasterItem/TradingPartner jobs to running once a day or even less frequently. The only thing they are really still needed for is setting isActive to false when something is deactivated in the ERP system.
+The document jobs themselves also sync changes to the TradingPartners & MasterItems that are on the document. This means that on sites that do not process a lot of changes to master data you can limit the MasterItem/TradingPartner jobs to running once a day or even less frequently. 
+The only thing they are really still needed for is setting isActive to false when something is deactivated in the ERP system.
 
 ## Install
 
@@ -36,7 +37,7 @@ To add the injected job files to the GraniteScheduler, simply copy the dlls and 
 
 Example:
 
-![Injectedjobfiles](accpac-img\injectedjobfiles.png)
+![Injectedjobfiles](evo-img\injectedjobfiles.png)
 
 ## Configure
 ### Schedule configuration
@@ -44,14 +45,14 @@ See the GraniteScheduler manual for how to configure scheduled jobs - ERP docume
 
 ### Email on Error
 
-!!! note 
+!!! note
     Emailing functionality is now handled by the [Utility API](../../utility-api/index.md), set up has changed from previous versions.
 
-Ensure that you have configured the UtilityApi for the Accpac injected jobs in the `SystemSettings` table:
+Ensure that you have configured the UtilityApi for the Evo injected jobs in the `SystemSettings` table:
 
 | Application | Key | Value |
 |---|---|---|
-|Granite.Integration.Accpac.Job | UtilityApi | https://localhost:5001/ |
+|Granite.Integration.Evo.Job | UtilityApi | https://localhost:5001/ |
 
 Ensure you have the `IntegrationError` email template in your database. This is the email template that is used for all error notifications in these injected jobs. 
 
@@ -61,6 +62,7 @@ Then for each job that needs to send failure notifications, add a job input for 
 | --- | --- | --- |
 | < JobName goes here > | MailOnError | true |
 | < JobName goes here > | MailOnErrorToAddresses | name@client.co.za;name2@client.co.za |
+
 
 ### View customisation
 Each view can be customised to include custom logic or map extra fields to fields on the corresponding Granite table. 
@@ -73,11 +75,20 @@ For fields like Document.Status where you may have custom rules / statuses, use 
 
 It is highly advised that you check the validity of yor job on the GraniteScheduler /config page after making a change to your view! Especially after changing filter criteria/joins, your view may be returning duplicate rows - the job validation will bring this to your attention.
 
-## What's different about Accpac jobs
+## What's different about Evolution jobs
 
-### Inserting lines between existing lines in Accpac
-If enough lines are added in between existing lines on an Accpac document, existing line numbers can change. This will break the document in Granite as we lose the reference to the specific line in Accpac. 
-Luckily, this can be easily avoided by ensuring that the Accpac user modifying documents is trained to only ever add new lines at the bottom.
+### Single line per MasterItem for INTRANSIT, RECEIPT, and TRANSFER
+Because of the way that these documents are stored and managed on the Evolution database, we can only handle a single line per MasterItem on transfer documents. If a document of one of these types contains multiple lines for a MasterItem, the document insert/update will fail setting the ERPSyncFailedReason accordingly. 
+
+### SalesOrders and PurchaseOrders line mapping
+Because Evolution stores multiple copies of SalesOrders and PurchaseOrders when changes are made or the document changes status, there is special logic implemented to find the correct versions of lines on the Evolution database.
+It is calculated using the idInvoiceLines (DocumentDetail ERPIdentification) and the iOrigLineID field. For that reason, the SalesOrderDetail and PurchaseOrderDetail views MUST include all rows from the _btblInvoiceLines table for any given document.
+These views must not modify the values in ERPIdentification or iOrigLineID for any reason.
+
+### Changing MasterItem codes
+If Rename Item Code is used in Evolution to change an Item Code, we will update the MasterItem in Granite to match, thereby updating all of the TrackingEntities and Transactions to the new Code as well. 
+
+We will not update the MasterItem in Granite if a new Item Code is created in Evolution and Global Item Change is used to change Evolution stock over to the new Item Code. In this case the new Item Code will be added to Granite, but all TrackingEntities will need to be reclassified to the new MasterItem.
 
 ## Things to look out for
 
@@ -89,13 +100,13 @@ Each job type has it's own validation criteria that must be passed before the jo
 
 Here is an example of some failed validation:
 
-![Injectedjobsvalidation](accpac-img\injectedjobsvalidation.png)
+![Injectedjobsvalidation](evo-img\injectedjobsvalidation.png)
 
 ## Supported Document types
 
 - ORDER (SalesOrder)
 - RECEIVING (PurchaseOrder)
-- INTRANSIT (Transit Transfer)
-- RECEIPT (Transit Receipt)
-- TRANSFER (Transfer)
-- WORKORDER (Assemblies)
+- INTRANSIT (InterBranchTransfer)
+- RECEIPT (InterBranchReceipt)
+- TRANSFER (WarehouseTransfer)
+- WORKORDER (ManufactureProcess)

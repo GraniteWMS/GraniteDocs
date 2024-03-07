@@ -3,7 +3,7 @@
 ## Settings
 
 The settings for Syspro are configured in the SystemSettings table. The IntegrationService will pick up the settings using the Application name specified in it's `.config` file:
-```
+```xml
 <add key ="SystemSettingsApplicationName" value="IntegrationSyspro"/>
 ```
 If this setting is missing from the config file or left empty, the IntegrationService will default to using `IntegrationSyspro` as the SystemSettingsApplicationName
@@ -15,7 +15,8 @@ The script to insert the default settings is also located in the GraniteDatabase
 ~\GraniteDatabase\Data\SystemSettings\SystemSettingSyspro.sql
 ```
 
-**`Take Note`** To pick up any changes to the SystemSettings table, the IntegrationService will need to be restarted.
+!!! note 
+    To pick up any changes to the SystemSettings table, the IntegrationService will need to be restarted.
 
 ### Example SystemSettings in database
 
