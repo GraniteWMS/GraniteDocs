@@ -6,20 +6,24 @@
 
 - Ensure you have installed [.NET 6 Web Hosting bundle](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 
-- **Take note, you might need to perform an IISRESET after installing the hosting bundle.**
+    !!! note
+        You might need to perform an IISRESET after installing the hosting bundle.
 
+        ```cmd
         C:\Windows\system32> IISRESET
 
         Attempting stop...
         Internet services successfully stopped
         Attempting start...
         Internet services successfully restarted
+        ```
 
 - Ensure that the folder that you have installed GraniteLabelPrintingZPL to has full access enabled for all users. This will ensure that the application log files can be created
 
 - Add GraniteLabelPrintingZPL to IIS
 
-**Take note of the new IsPublic setting in the appsettings.json file below.** This is used to configure security settings for the site. If set to false you can run GraniteLabelPrintingZPL as http instead of https
+!!! note 
+    Take note of the new `IsPublic` setting in the `appsettings.json` file below. This is used to configure security settings for the site. If set to false you can run GraniteLabelPrintingZPL as http instead of https
 
 If you are running GraniteLabelPrintingZPL as https, you can use the same certificate as the WebDesktop
 
@@ -221,49 +225,3 @@ If you are running GraniteLabelPrintingZPL as http, be sure that you have allowe
 
 Always be sure to check your GraniteLabelPrintingZPL log file
 
-## ZPL Release Notes
-
-### September 2023 (4.5.2.0)
-#### New
-- (RFC-78) Add validation of printer name
-
-### August 2023 (4.5.1.0)
-#### Change
-- Variables in ZPL file must be prefixed with @
-
-### 2 June 2023 (4.5.0.0) 
-
-#### New
-- Print multiple Pallet labels
-- Print multiple Box labels
-#### Changes
-- Switch from Log4Net to NLog
-- Each class uses own logger instead of logger inherited from BaseService
-- Updated to ServiceStack 6.8.0
-- Switch from ImageSharp to ImageMagick
-
-
-
-### 06 Jan 2023 (4.2.0.1)
-#### New
-- LabelDataPreview allows populating a preview with actual data
-#### Changes
-- Default labels in appsettings.json settings changed. Take note **LabelName replaces Name**. ViewName setting added.
-    ```json
-      "DefaultTrackingEntityLabel": {
-        "ViewName": "Label_TrackingEntity",
-        "LabelName": "TrackingEntity.zpl",
-        "Width": "100",
-        "Height": "30"
-      }
-    ```
-- Reworked inline SQL to limit injection risk
-- Minor cleaning up
-
-### 24 May 2022
-- New appsettings.json setting
-    ```json
-    "IsPublic":  false
-    ```
-### 28 Feb 2022
-- New Label preview functionality

@@ -88,7 +88,7 @@ The endpoint address of the printing service. Hosted via windows service.
 #### Provider
 Provider options ZPL OR Bartender. 
 
-**`Take Note`** while this service is still capable of printing ZPL labels, it is highly advised to use the new [IIS ZPL Label Print Service](zpl.md) instead. 
+**`Take Note`** while this service is still capable of printing ZPL labels, it is highly advised to use the new [IIS ZPL Label Print Service](../zpl/manual.md) instead. 
 ZPL printing via this service will not receive any further support, and will eventually be removed.
  **If you do choose to use this service to print ZPL labels, nsure that the default labels below is relevant to your provider. The extension and file needs to be setup correctly .zpl or .btw** 
 

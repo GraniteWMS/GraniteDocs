@@ -3,7 +3,7 @@ site_url: https://granitewms.github.io/granitedocs/
 nav: 
   - Home: index.md
   - Manuals:
-    - Custodian API: custodian-api/custodian-api-manual.md
+    - Custodian API: custodian-api/manual.md
     - Integration:
       - Accpac: 
         - integration/accpac/index.md
@@ -18,9 +18,9 @@ nav:
       - SAPB1: integration/sapb1/sdk-provider.md
       - Syspro: integration/syspro/sdk-provider.md
     - Label Printing: 
-      - Bartender: label-printing/bartender.md
-      - ZPL: label-printing/zpl.md
-    - Repository API: repository-api/repository-api-manual.md
+      - Bartender: label-printing/bartender/manual.md
+      - ZPL: label-printing/zpl/manual.md
+    - Repository API: repository-api/manual.md
     - Scheduler: scheduler/manual.md
     - SQLCLR: 
       - sqlclr/index.md
@@ -32,12 +32,12 @@ nav:
       - Email Service: utility-api/email-service.md
       - Reporting Service: utility-api/reporting-service.md
       - SQL Export Service: utility-api/sql-export-service.md
-    - Web Desktop: webdesktop/webdesktop.md
+    - Web Desktop: webdesktop/manual.md
   - Release Notes: 
     - Scheduler: scheduler/release-notes.md
     - SQLCLR: sqlclr/release-notes.md
-  - How To:
-    - Custodian API: custodian-api/custodian-api-howto.md
+    - Label Printing:
+      - ZPL: label-printing/zpl/release-notes.md
 theme: 
   name: material
   features:
