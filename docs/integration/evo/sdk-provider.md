@@ -11,16 +11,9 @@ The Evolution SDK provider is responsible for mapping Granite transactions to th
 
 2. In the `Providers\Evo` folder, find the `EvoX.Y` folder matching the installed SDK version. `X.Y` must match the first two numbers of the installed SDK version. For example, if the installed SDK version is 7.20.0.14, you will take the files from the Evo7.20 folder
 
-3. **Copy** the dll's from the `Providers\Evo\EvoX.Y` folder into Integration Service folder (root folder).
-    - Pastel.Evolution.dll
-    - Pastel.Evolution.Common.dll (if present in the folder)
+3. **Copy** everything in the `Providers\Evo\EvoX.Y` folder into Integration Service folder (root folder).
 
-4. **Copy** the following from the `Providers\Evo` folder into Integration Service folder (root folder)
-    - docs folder
-    - Granite.Integration.PastelEvo.dll
-    - SDKProvider.xml
-
-5. Ensure `SDKProvider.xml` setup or copied correctly
+4. Ensure `SDKProvider.xml` setup or copied correctly
     ```xml
     <module name="Provider">
     <bind
@@ -29,30 +22,7 @@ The Evolution SDK provider is responsible for mapping Granite transactions to th
     </module>
     ```
 
-6. Open the `DependentAssembly.xml` file in your `EvoX.Y` folder and copy it's contents. Paste the contents into the `<assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">` node near the bottom of the `Granite.Integration.Web.exe.config` file. It should look like this:
-
-    ```xml
-    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
-    <dependentAssembly>
-        <assemblyIdentity name="Iesi.Collections" publicKeyToken="aa95f207798dfdb4" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-4.0.0.0" newVersion="4.0.0.0" />
-    </dependentAssembly>
-    <dependentAssembly>
-        <assemblyIdentity name="Ninject" publicKeyToken="c7192dc5380945e7" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-3.3.4.0" newVersion="3.3.4.0" />
-    </dependentAssembly>
-    <dependentAssembly>
-        <assemblyIdentity name="System.Threading.Tasks.Extensions" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-4.2.0.1" newVersion="4.2.0.1" />
-    </dependentAssembly>
-    <dependentAssembly>
-        <assemblyIdentity name="Pastel.Evolution" publicKeyToken="1a4bc88fe3044688" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-11.0.0.0" newVersion="11.0.0.0" />
-    </dependentAssembly>
-    </assemblyBinding>
-    ```
-
-7. Configure your connection string and endpoint in the `Granite.Integration.Web.exe.config` file
+5. Configure your connection string and endpoint in the `Granite.Integration.Web.exe.config` file
 
 ___
 ## Settings
