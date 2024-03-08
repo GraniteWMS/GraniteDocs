@@ -11,6 +11,7 @@
 ##### Changes
 - Update error handling to show more detailed messages when SystemSettings is incorrect
 - Add manufactureDate to TakeOn procedure
+- The SQLCLR_Install.sql has now been included in the standard GraniteDatabase_Create.sql script. 
 
 ## Granite.SQLCLR (15 August 2023) 4.5.0.2
 ##### New
