@@ -1,5 +1,21 @@
 # Syspro
 
+## Setup
+
+1. **Copy** everything in the `Providers\Syspro` folder into Integration Service folder (root folder).
+
+2. Ensure `SDKProvider.xml` setup or copied correctly
+    ```xml
+    <module name="Provider">
+    <bind
+        service="Granite.Integration.Contract.IProvider, Granite.Integration.Contract"
+        to="Granite.Integration.Syspro.Provider, Granite.Integration.Syspro"/>
+    </module>
+    ```
+
+3. Configure your connection string and endpoint in the `Granite.Integration.Web.exe.config` file
+
+
 ## Settings
 
 The settings for Syspro are configured in the SystemSettings table. The IntegrationService will pick up the settings using the Application name specified in it's `.config` file:
@@ -77,14 +93,80 @@ The script to insert the default settings is also located in the GraniteDatabase
 ### TAKEON
 - INVTMR. Inventory Receipts
 
+INVTMR Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| TransactionDate               | DateTime.Now  |
+| IgnoreWarnings                | N             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+| ManualSerialTransfersAllowed  | N             |
+| ReturnDetailedReceipt         | N             |
+| IgnoreAnalysis                | Y             |
+
+INVTMRDOC Items mapping:
+
+| Granite       | Syspro        | 
+|---------------|---------------|
+| ToLocation    | Warehouse     |
+| Code          | StockCode     |
+| ActionQty     | Quantity      |
+| Batch         | Lot           |
+| UOM           | UnitOfMeasure |
+
 ### ADJUSTMENT
 - INVTMA. Inventory Adjustments
+
+INVMA Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| TransactionDate               | DateTime.Now  |
+| PhysicalCount                 | N             |
+| PostingPeriod                 | C             |
+| IgnoreAnalysis                | Y             |
+| IgnoreWarnings                | N             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+INVTMADOC Items mapping:
+
+| Granite       | Syspro        | 
+|---------------|---------------|
+| ToLocation    | Warehouse     |
+| Code          | StockCode     |
+| ActionQty     | Quantity      |
+| Batch         | Lot           |
+| UOM           | UnitOfMeasure |
 
 ### RECLASSIFY
 - Not implemented/supported
 
 ### REPLENISH
 - INVTMO. Inventory Warehouse Transfer
+
+INVTMO Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| IgnoreWarnings                | Y             |
+| CreateDestinationWarehouse    | N             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+INVTMODOC Items mapping:
+
+| Granite       | Syspro        | Behaviour |
+|---------------|---------------|-----------|
+|               | Immediate     | Set to Y  |
+|               | NoDestination | Set to N  |
+| FromLocation  | FromWarehouse |           |
+| ToLocation    | ToWarehouse   |           |
+| Code          | StockCode     |           |
+| ActionQty     | Quantity      |           |
+| Batch         | Lot           |           |
+| UOM           | UnitOfMeasure |           |
 
 ### TRANSFER
 Based on setting TransferPosting (INVT or GIT)
@@ -96,11 +178,140 @@ Based on setting TransferPosting (INVT or GIT)
     - TRANSFER/INTRANSIT: SORTBO
     - RECEIPT: INVTMN
 
+INVTMO Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| IgnoreWarnings                | Y             |
+| CreateDestinationWarehouse    | N             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+INVTMODOC Items mapping:
+
+| Granite               | Syspro        | Behaviour |
+|-----------------------|---------------|-----------|
+|                       | Immediate     | Set to Y  |
+|                       | NoDestination | Set to N  |
+| DocumentDescription   | Reference     |           |
+| FromLocation          | FromWarehouse |           |
+| ToLocation            | ToWarehouse   |           |
+| Code                  | StockCode     |           |
+| ActionQty             | Quantity      |           |
+| Batch                 | Lot           |           |
+| UOM                   | UnitOfMeasure |           |
+
+SORTBO Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| IgnoreWarnings                | Y             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+SORTBODOC Item mapping:
+
+| Granite       | Syspro                | 
+|---------------|-----------------------|
+| N             | ZeroShipQuantity      |
+| Item8         | OrderStatus           |
+| Document      | SalesOrder            |
+| LineNumber    | SalesOrderLine        |
+| Code          | StockCode             |
+| ToLocation    | Warehouse             |
+| ActionQty     | Quantity              |
+| Batch         | Lot                   |
+| UOM           | UnitOfMeasure         |
+
+INVTMI Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| IgnoreWarnings                | Y             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+
+INVTMIDOC Item mapping
+
+| Granite               | Syspro        | 
+|-----------------------|---------------|
+| DocumentDescription   | Reference     |
+| ToLocation            | Warehouse     |
+| Code                  | StockCode     |
+| ActionQty             | Quantity      |
+| Batch                 | Lot           |
+| UOM                   | UnitOfMeasure |
+
+
+INVTMN Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| IgnoreWarnings                | Y             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+INVTMNDOC Item mapping:
+
+| Granite               | Syspro                | 
+|-----------------------|-----------------------|
+| LineNumber            | Key.LineNumber        |
+| ToLocation            | Key.TargetWarehouse   |
+| FromLocation          | Key.SourceWarehouse   |
+| DocumentDescription   | Key.GtrReference      |
+| ActionQty             | Quantity              |
+
+
 ### MOVE
 - INVTMO. Inventory Warehouse Transfer
 
+INVTMO Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| IgnoreWarnings                | Y             |
+| CreateDestinationWarehouse    | N             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+INVTMODOC Items mapping:
+
+| Granite       | Syspro                | Behaviour |
+|---------------|-----------------------|-----------| 
+|               | Immediate             | Set to Y  |
+|               | NoDestination         | Set to N  |
+| FromLocation  | FromWarehouse         |           |
+| ToLocation    | ToWarehouse           |           |
+| Code          | StockCode             |           |
+| ActionQty     | Quantity              |           |
+| Batch         | Lot                   |           |
+| UOM           | UnitOfMeasure         |           |
+
 ### SCRAP
 - INVTMA. Inventory Adjustments
+
+INVMA Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| TransactionDate               | DateTime.Now  |
+| PhysicalCount                 | N             |
+| PostingPeriod                 | C             |
+| IgnoreAnalysis                | Y             |
+| IgnoreWarnings                | N             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+INVTMADOC Items mapping:
+
+| Granite       | Syspro                | 
+|---------------|-----------------------|
+| Code          | StockCode             |
+| ActionQty     | Quantity              |
+| Batch         | Lot                   |
+| UOM           | UnitOfMeasure         |
+| ToLocation    | Warehouse             |
 
 ### PICK
 Based on setting SalesOrderPosting (SORTBO/SORTOS/ALL)
@@ -115,8 +326,183 @@ Based on setting SalesOrderPosting (SORTBO/SORTOS/ALL)
     - SORTOS PostSorOrderStatus
     - SORTIC PostSalesOrderInvoice
 
+#### SORTBO Setting
+SORTBO Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| IgnoreWarnings                | Y             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+SORTBODOC Item mapping:
+
+| Granite       | Syspro                | Behaviour     |
+|---------------|-----------------------|---------------|
+|               | ZeroShipQuantity      | Set to N      |
+|               | ReleaseFromShip       | Set to N      |
+|               | OrderStatus           | Set to Item8  |
+| Document      | SalesOrder            |               |
+| LineNumber    | SalesOrderLine        |               |
+| Code          | StockCode             |               |
+| ToLocation    | Warehouse             |               |
+| ActionQty     | Quantity              |               |
+| Batch         | Lot                   |               |
+| UOM           | UnitOfMeasure         |               |
+
+#### SORTOS Setting
+SORTOS Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| IgnoreWarnings                | Y             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+SORTOSDOC Item mapping:
+
+| Granite       | Syspro                | Behaviour     |
+|---------------|-----------------------|---------------|
+|               | OrderStatus           | Set to Item   |
+|               | NewOrderStatus        | Set to Item8  |
+| Document      | SalesOrder            |               |
+
+#### ALL Setting
+
+Clear SORTBO Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| IgnoreWarnings                | Y             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+Clear SORTBODOC Item mapping:
+
+| Granite       | Syspro                    | Behaviour     |
+|---------------|---------------------------|---------------|
+|               | CompleteLine              | Set to N      |
+|               | ReleaseFromMultipleLines  | Set to N      |
+|               | AdjustOrderQuantity       | Set to N      |
+|               | ZeroShipQuantity          | Set to Y      |
+|               | ReleaseFromShip           | Set to Y      |
+|               | OrderStatus               | Set to N      |
+| Document      | SalesOrder                |               |
+| LineNumber    | SalesOrderLine            |               |
+| Code          | StockCode                 |               |
+| ToLocation    | Warehouse                 |               |
+|               | Quantity                  | Set to 0      |
+| Batch         | Lot                       |               |
+| UOM           | UnitOfMeasure             |               |
+
+document.Item.Add(new SORTBODOC.Item
+{
+    SalesOrder = transactions[0].Document,
+    SalesOrderLine = item.Key,
+    StockCode = item.Value,
+    Quantity = "0",
+    CompleteLine = SORTBODOC.CompleteLine.N,
+    ReleaseFromMultipleLines = SORTBODOC.ReleaseFromMultipleLines.N,
+    AdjustOrderQuantity = SORTBODOC.AdjustOrderQuantity.N,
+    ZeroShipQuantity = SORTBODOC.ZeroShipQuantity.Y,
+    ReleaseFromShip = SORTBODOC.ReleaseFromShip.Y,
+    OrderStatus = SORTBODOC.OrderStatus.N
+});
+
+SORTBO Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| IgnoreWarnings                | Y             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+SORTBODOC Item mapping:
+
+| Granite       | Syspro                    | Behaviour     |
+|---------------|---------------------------|---------------|
+|               | ZeroShipQuantity          | Set to N      |
+|               | ReleaseFromMultipleLines  | Set to N      |
+|               | AdjustOrderQuantity       | Set to N      |
+|               | OrderStatus               | Set to N      |
+|               | ReleaseFromShip           | Set to N      |
+|               | AllocateSerialNumbers     | Set to N      |
+| Document      | SalesOrder                |               |
+| LineNumber    | SalesOrderLine            |               |
+| Code          | StockCode                 |               |
+| ToLocation    | Warehouse                 |               |
+| ActionQty     | Quantity                  |               |
+| Batch         | Lot                       |               |
+| UOM           | UnitOfMeasure             |               |
+
+SORTOS Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| IgnoreWarnings                | Y             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+SORTOSDOC Item mapping:
+
+| Granite       | Syspro                    | Behaviour     |
+|---------------|---------------------------|---------------|
+|               | OrderStatus               | Set to Item   |
+|               | OrderStatus               | Set to Item8  |
+| Document      | SalesOrder                |               |
+
+
+SORTIC Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| IgnoreWarnings                | Y             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+SORTICDOC Item mapping:
+
+| Granite       | Syspro                    | Behaviour                             |
+|---------------|---------------------------|---------------------------------------|
+| Document      | SalesOrder                |                                       |
+| LineNumber    | SalesOrderLineList        | Comma separated list of line numbers  |
+
+
 ### RECEIVE
 - PORTOR. Purchase Order Receipts
+
+PORTOR Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| TransactionDate               | Empty string  |
+| IgnoreWarnings                | Y             |
+| GRNMatchingAction             | A             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+| ManualSerialTransfersAllowed  | N             |
+| IgnoreAnalysis                | Y             |
+
+PORTORDOC Item mapping:
+
+| Granite       | Syspro                        | Behaviour             |
+|---------------|-------------------------------|-----------------------|
+|               | ReceiptFromInspection         | Set to null           |
+|               | ReceiptIntoInspection         | Set to null           |
+|               | Receipt.SwitchOnGRNMatching   | Set to N              |
+|               | Receipt.Units                 | Set to empty string   |
+|               | Receipt.Cost                  | Set to empty string   |
+|               | Receipt.CostBasis             | Set to P              |
+|               | Receipt.DeliveryNote          | Set to empty string   |
+| Document      | Receipt.PurchaseOrder         |                       |
+| LineNumber    | Receipt.PurchaseOrderLine     |                       |
+| Code          | Receipt.StockCode             |                       |
+| ActionQty     | Receipt.Quantity              |                       |
+| UOM           | Receipt.UnitOfMeasure         |                       |
+| Comment       | Receipt.Reference             |                       |
+| ToLocation    | Receipt.Warehouse             |                       |
+| Batch         | Receipt.Lot                   |                       |
+| ExpiryDate    | Receipt.LotExpiryDate         |                       |
 
 ### DYNAMICPICK
 - Not Implemented/supported
