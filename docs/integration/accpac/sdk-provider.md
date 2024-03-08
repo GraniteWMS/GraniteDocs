@@ -61,7 +61,7 @@ The script to insert the default settings is located in the GraniteDatabase rele
 | IntegrationSage300 | RoundSummarizedActionQty                | true  | Round summed ActionQty when posting transfers and moves |
 | IntegrationSage300 | RoundSummarizedActionQtyToDecimalPlaces | 2     | Number of decimal places to round ActionQty to          |
 
-#### POExhangeRate
+#### POExchangeRate
   - Options: true or false
   - Used by: RECEIVE and RECEIVINGPOSTMULTIPLE
   - Override the Receipt rate with the Purchase Order rate
