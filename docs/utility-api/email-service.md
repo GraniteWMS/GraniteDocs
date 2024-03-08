@@ -13,7 +13,7 @@ You should have the following settings after running the script:
 | Application		| Key					| Value						| Description																								| ValueDataType | isEncrypted	| isActive	|
 |-------------------|-----------------------|---------------------------|-----------------------------------------------------------------------------------------------------------|---------------|---------------|-----------|
 | Granite.Utility	| UserName				|                   		| Username for the SMTP server																				| string		| False			| True		|
-| Granite.Utility	| Password				|                       	| Password for the SMTP server																				| string		| False			| True		|
+| Granite.Utility	| Password				|  | Password for the SMTP server |string		| True			| True		|
 | Granite.Utility	| Host					| smtp.gmail.com			| The address of the SMTP server																			| string		| False			| True		|
 | Granite.Utility	| Port					| 587						| Port number to be used when accessing the SMTP server														| int			| False			| True		|
 | Granite.Utility	| EnableSsl				| true						| Use SSL when accessing the SMTP server. True or False														| bool			| False			| True		|
@@ -23,6 +23,7 @@ You should have the following settings after running the script:
 | Granite.Utility	| MaxNumberOfRetries	| 3							| Maximum number of times to retry processing an email.             										| int			| False			| True		|
 | Granite.Utility	| EmailAttachmentFolder |							| Full filepath to folder to export email attachments to. Leave empty to use the Utility API install folder | string		| False			| True		|
 
+**`Take Note that Password isEncrypted is True.`** This means that you will only be able to set this from within the Webdesktop > Admin > System Settings  
 
 ## Email Templates
 
