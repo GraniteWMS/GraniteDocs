@@ -77,9 +77,9 @@ Logging can be configured in the nlog.config file
 		fileName="Granite.Scheduler.log"
 		layout="${longdate}|${event-properties:item=EventId:whenEmpty=0}|${level:uppercase=true}|${mdlc:userName}|${logger}|${message} ${exception:format=tostring}"
 		archiveFileName="Granite.Scheduler.{#}.log"
-		archiveNumbering="Date"
+		archiveNumbering="DateAndSequence"
 		archiveEvery="Day"
-		archiveAboveSize="10240"
+		archiveAboveSize="10485760"
 		archiveDateFormat="yyyy-MM-dd"
 		maxArchiveFiles="7" />
 		<!-- File Target for own log messages with extra web details using some ASP.NET core renderers -->
@@ -98,8 +98,6 @@ Logging can be configured in the nlog.config file
 		<logger name="*" minlevel="Error" writeTo="applicationLogs" />
 	</rules>
 </nlog>
-
-
 ```
 
 To configure the level of logging, set the minlevel value for logger name="*" in the rules section.
