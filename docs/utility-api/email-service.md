@@ -23,7 +23,8 @@ You should have the following settings after running the script:
 | Granite.Utility	| MaxNumberOfRetries	| 3							| Maximum number of times to retry processing an email.             										| int			| False			| True		|
 | Granite.Utility	| EmailAttachmentFolder |							| Full filepath to folder to export email attachments to. Leave empty to use the Utility API install folder | string		| False			| True		|
 
-**`Take Note that Password isEncrypted is True.`** This means that you will only be able to set this from within the Webdesktop > Admin > System Settings  
+!!! note "Password isEncrypted is True"
+    You will only be able to change the value of this setting from the Webdesktop System Settings page
 
 ## Email Templates
 
