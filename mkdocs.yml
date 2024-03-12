@@ -33,6 +33,7 @@ nav:
       - Reporting Service: utility-api/reporting-service.md
       - SQL Export Service: utility-api/sql-export-service.md
     - Web Desktop: webdesktop/manual.md
+    - SSRS: SSRS/getting-started.md
   - Release Notes:
     - Database: database/release-notes.md 
     - Label Printing:

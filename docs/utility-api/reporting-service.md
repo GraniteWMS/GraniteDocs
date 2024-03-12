@@ -1,8 +1,10 @@
 # Reporting Service
 
-`todo` explain that this is a SSRS API, etc.
-`todo` document ssrs installation and setup, take dropbox word docs on installation
-How To - SSRS Installing and configuring.docx
+The reporting service accesses the reports by directly calling SQL Server Reporting Service's API. Once it has received the report back from the API it either prints or exports the report depending on the call.
+
+## Prerequisites
+
+- [SQL Server Reporting Service](../../SSRS/getting-started/)
  
 ## Configuration
 
