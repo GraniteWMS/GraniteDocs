@@ -162,48 +162,55 @@ Use this Function to create a report parameter to use with dbo.clr_ReportExport 
 - Example use (printing)
 
 ```sql
-DECLARE @ResponseCode int
-DECLARE @ResponseJson varchar(max)
-DECLARE @reportPath varchar(50) = N'/Pick Slip - Per Cage'
-DECLARE @printerName varchar(50) = 'TestPrinter'
-DECLARE @Parameters varchar(200) = ''
+DECLARE @reportPath varchar(50)
+DECLARE @printerName varchar(50) 
+DECLARE @parameters varchar(200)
+DECLARE @responseCode int
+DECLARE @responseJson varchar(max)
 
-SELECT @Parameters = dbo.report_AddReportParameter(@Parameters, 'DocumentNumber', 'STV-AVO-000001')
-SELECT @Parameters = dbo.report_AddReportParameter(@Parameters, 'Cage', 'CAGE D')
+SELECT @reportPath = '/Pick Slip - Per Cage'
+SELECT @printerName = 'TestPrinter'
+
+SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'DocumentNumber', 'STV-AVO-000001')
+SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'Cage', 'CAGE D')
 
 EXEC [dbo].[clr_ReportPrint]
-		@reportPath
-		,@printerName
-		,@parameters
-		,@responseCode OUTPUT
-		,@responseJSON OUTPUT
+	@reportPath
+	,@printerName
+	,@parameters
+	,@responseCode OUTPUT
+	,@responseJSON OUTPUT
 
-SELECT @ResponseCode, @ResponseJson
+SELECT @responseCode, @responseJson
 
 ```
 
 - Example use (export)
 
 ```sql
-DECLARE @ResponseCode int
-DECLARE @ResponseJson varchar(max)
-DECLARE @reportPath varchar(50) = N'/Pick Slip - Per Cage'
-DECLARE @fileDestinationPath varchar(50) = 'D:\\Granite WMS\\V5 Demo\\PickSlip.pdf'
-DECLARE @fileType varchar(50) = 'PDF'
-DECLARE @Parameters varchar(200) = ''
+DECLARE @reportPath varchar(50)
+DECLARE @fileDestinationPath varchar(50)
+DECLARE @fileType varchar(50) 
+DECLARE @parameters varchar(200)
+DECLARE @responseCode int
+DECLARE @responseJson varchar(max)
 
-SELECT @Parameters = dbo.report_AddReportParameter(@Parameters, 'DocumentNumber', 'STV-AVO-000001')
-SELECT @Parameters = dbo.report_AddReportParameter(@Parameters, 'Cage', 'CAGE D')
+SELECT @reportPath = N'/Pick Slip - Per Cage'
+SELECT @fileDestinationPath = 'D:\\Granite WMS\\V5 Demo\\PickSlip.pdf'
+SELECT @fileType = 'PDF'
+
+SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'DocumentNumber', 'STV-AVO-000001')
+SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'Cage', 'CAGE D')
 
 EXEC [dbo].[clr_ReportExportToFile]
-		@reportPath
-		,@fileDestinationPath
-		,@fileType
-		,@parameters
-		,@responseCode OUTPUT
-		,@responseJSON OUTPUT
+	@reportPath
+	,@fileDestinationPath
+	,@fileType
+	,@parameters
+	,@responseCode OUTPUT
+	,@responseJson OUTPUT
 
-SELECT @ResponseCode, @ResponseJson
+SELECT @responseCode, @responseJson
 
 ```
 
@@ -250,32 +257,38 @@ This function allows you to build the OrderBy parameter string.
 
 - Example usage
 ```sql
-DECLARE @ResponseCode int
-DECLARE @ResponseJson varchar(max)
-DECLARE @tableName varchar(50) = 'API_QueryStockTotals'
-DECLARE @offset int = 0
-DECLARE @limit int = 500
-DECLARE @fileDestinationPath varchar(100) = 'D:\\Granite WMS\\V5 Demo\\StockInFreezer.csv'
-DECLARE @filetype varchar(20) = 'CSV'
-DECLARE @OrderByList varchar(200)= '';
-DECLARE @Filters varchar(200) = '';
+DECLARE @tableName varchar(50) 
+DECLARE @offset int
+DECLARE @limit int
+DECLARE @fileDestinationPath varchar(100)
+DECLARE @filetype varchar(20)
+DECLARE @orderByList varchar(200)
+DECLARE @filters varchar(200)
+DECLARE @responseCode int
+DECLARE @responseJson varchar(max)
 
-SET @OrderByList = dbo.export_AddOrderBy(@OrderByList, 'Type', 'DESC')
-SET @OrderByList = dbo.export_AddOrderBy(@OrderByList, 'Code', 'ASC')
-SET @Filters = dbo.export_AddFilter(@Filters, 'Category', 'Equal', 'Freezer')
-SET @Filters = dbo.export_AddFilter(@Filters, 'Qty', 'GreaterThan', '0')
+SELECT @tableName = 'API_QueryStockTotals'
+SELECT @fileDestinationPath = 'D:\\Granite WMS\\V5 Demo\\StockInFreezer.csv'
+SELECT @filetype = 'CSV'
 
+SET @orderByList = dbo.export_AddOrderBy(@OrderByList, 'Type', 'DESC')
+SET @orderByList = dbo.export_AddOrderBy(@OrderByList, 'Code', 'ASC')
+SET @filters = dbo.export_AddFilter(@Filters, 'Category', 'Equal', 'Freezer')
+SET @filters = dbo.export_AddFilter(@Filters, 'Qty', 'GreaterThan', '0')
+
+SET @offset = 0
+SET @limit = 500
 
 EXEC clr_TableExport 
-        @tableName
-        ,@filters
-		,@offset
-		,@limit
-		,@orderByList
-		,@fileDestinationPath 
-		,@fileType
-		,@responseCode OUTPUT
-		,@responseJson OUTPUT
+	@tableName
+	,@filters
+	,@offset
+	,@limit
+	,@orderByList
+	,@fileDestinationPath 
+	,@fileType
+	,@responseCode OUTPUT
+	,@responseJson OUTPUT
 
 SELECT @responseCode, @responseJson
 
