@@ -4,7 +4,7 @@ The reporting service accesses the reports by directly calling SQL Server Report
 
 ## Prerequisites
 
-- [SQL Server Reporting Service](../../SSRS/getting-started.md)
+- [SQL Server Reporting Service](../../SSRS/getting-started/)
  
 ## Configuration
 
