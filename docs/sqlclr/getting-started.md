@@ -22,7 +22,7 @@ todo: final dropbox path.
 !!! note
 	The create script requires the SQL `sysadmin` role to execute successfully. If you do not have the necessary permissions, ask the client's IT to run the script.
 
-### SystemSettings table
+<h3>SystemSettings table</h3>
 
 Once the necessary assemblies and procedures have been created, you will need to ensure that your `SystemSettings` table includes the necessary entries:
 
@@ -41,7 +41,15 @@ This will ensure that you have all of the necessary variables declared with corr
 
 If you are not specifying a particular value, just set the variable to NULL. The variable must still be supplied as a parameter when executing the CLR procedure.
 
-todo, explain the role of clr functions. in other words it is purely to help you with the more complex use cases etc. the message that is important is function to one thing and one thing only in context to SQL clr.
+<h3>Using the CLR Functions</h3>
+
+CLR Functions are used to make calling the more complicated CLR Procedures simpler by handling the formatting the input parameters. They only work in conjunction with the relevant CLR procedure. 
+
+The prefix indicates which CLR Procedures it is related to: 
+
+- **"dbo.report_"** for Reporting Service 
+- **"dbo.email_"** for Email Service
+- **"dbo.export"** for SQL Export Service
 
 
 

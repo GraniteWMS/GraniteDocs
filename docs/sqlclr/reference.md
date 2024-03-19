@@ -1,3 +1,76 @@
+## Webservice 
+
+For details of the calls that the CLR procedures make to the WebService visit the metadata page of the WebService that you are going to be calling 
+(WebServiceUrl)/metadata
+
+The following procedures directly map to the WebService request, for details browse to the associated details on the WebService (WebserviceURL + below path)
+
+![PasteURL](img/PasteUrl.gif)
+
+- dbo.clr_Adjustment 
+```
+/json/metadata?op=InventoryAdjustmentRequest
+```
+- dbo.clr_Move
+```
+/json/metadata?op=InventoryMoveRequest
+```
+- dbo.clr_Pack
+```
+/json/metadata?op=OutboundPackingRequest
+```
+- dbo.clr_Pick
+```
+/json/metadata?op=OutboundPickingRequest
+```
+- dbo.clr_Receive
+```
+/json/metadata?op=InboundReceivingRequest
+```
+- dbo.clr_Replenish
+```
+/json/metadata?op=InventoryReplenishRequest
+```
+- dbo.clr_Reclassify
+```
+/json/metadata?op=InventoryReclassifyRequest
+```
+- dbo.clr_Scrap
+```
+/json/metadata?op=InventoryScrapRequest
+```
+- dbo.clr_StockTakeCount
+```
+/json/metadata?op=StockTakeCountRequest
+```
+- dbo.clr_StockTakeHold
+```
+/json/metadata?op=StockTakeHoldRequest
+```
+- dbo.clr_StockTakeRelease
+```
+/json/metadata?op=StockTakeReleaseRequest
+```
+<h4>dbo.clr_TakeOn</h4>
+
+This procedure differs from the WebService call in that it combines the parameters **"AssignTrackingEntityBarcode"** and **"TrackingEntityBarcode"** into **@assignTrackingEntityBarcode**. This parameter is not required, so leave as a null if not used for the standard TakeOn behavior.
+
+The procedure will check if tracking entity exists. If it does exist, then the qty will be assigned to that tracking entity. If not a new tracking entity will be created with the supplied barcode. 
+
+## Label Printing
+
+<h4>dbo.clr_PrintLabel</h4>
+
+Barcode	query	string	No	
+Barcodes	query	IEnumerable<string>	No	
+Document	query	string	No	
+LabelName	query	string	No	
+NumberOfLabels	query	int	No	
+PrinterName	query	string	No	
+Reference	query	string	No	
+Type	query	string	No	
+UserID	query	long	No
+
 ## Integration 
 
 <h4>CLR_IntegrationPostToEndpoint</h4>
@@ -13,7 +86,8 @@ The Key "MySecondIntegrationService" can now be used when executing the CLR_Inte
 
 ## UtilityAPI
 
-### Report Service
+
+<h3>Report Service</h3>
 
 The two operations supported are:
 
@@ -101,7 +175,7 @@ SELECT @ResponseCode, @ResponseJson
 
 ```
 
-### SQL Export Service
+<h3>SQL Export Service</h3>
 
 
 <h4>dbo.clr_TableExport</h4>
@@ -177,7 +251,7 @@ SELECT @responseCode, @responseJson
 
 
 
-### Email Service
+<h3>Email Service</h3>
 
 Two types of emails can be sent using SQLCLR:
 
@@ -310,12 +384,13 @@ EXECUTE [dbo].[clr_SimpleEmail]
 
 ```
 
-#### Attachments
+<h3>Attachments</h3>
 
 Attachments can have lots of different parameters that need to be sent along with the request to generate the files that end up being attached.
 To assist with this we have a set of sql functions that help to build up the request JSON in the correct format.
 
-#### Report Attachments
+<h3>Report Attachments</h3>
+
 
 - dbo.email_CreateReportAttachment
 
@@ -376,7 +451,8 @@ EXECUTE [dbo].[clr_SimpleEmail]
 
 ```
 
-#### Excel Attachments
+<h3>Excel Attachments</h3>
+
 
 - dbo.email_CreateExcelAttachment
 
@@ -452,7 +528,7 @@ EXECUTE [dbo].[clr_SimpleEmail]
 
 ```
 
-#### File Attachments
+<h3>File Attachments</h3>
 
 - dbo.email_AddFileAttachment
 
