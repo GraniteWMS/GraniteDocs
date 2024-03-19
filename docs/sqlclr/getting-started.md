@@ -28,10 +28,10 @@ Once the necessary assemblies and procedures have been created, you will need to
 
 | Application	| Key					| Value						| Description					| ValueDataType	| isEncrypted	| isActive	|
 |---------------|-----------------------|---------------------------|-------------------------------|---------------|---------------|-----------|
-| SQLCLR		| Webservice			| http://10.0.0.1:50002	| Granite Webservice Address	| string		| False			| True		|
-| SQLCLR		| LabelPrintService		| http://10.0.0.1:50004	| Label Print Service Address	| string		| False			| True		|
-| SQLCLR		| IntegrationService	| http://10.0.0.1:50003	| Integration Service Address	| string		| False			| True		|
-| SQLCLR		| UtilityAPI    	| https://10.0.0.1:50001	| UtilityAPI Address	    | string		| False			| True		|
+| SQLCLR		| Webservice			| http://10.0.0.1:50002		| Granite Webservice Address	| string		| False			| True		|
+| SQLCLR		| LabelPrintService		| http://10.0.0.1:50004		| Label Print Service Address	| string		| False			| True		|
+| SQLCLR		| IntegrationService	| http://10.0.0.1:50003		| Integration Service Address	| string		| False			| True		|
+| SQLCLR		| UtilityAPI    		| https://10.0.0.1:50001	| UtilityAPI Address	    | string		| False			| True		|
 
 ## Using the CLR Procedures
 
@@ -41,15 +41,19 @@ This will ensure that you have all of the necessary variables declared with corr
 
 If you are not specifying a particular value, just set the variable to NULL. The variable must still be supplied as a parameter when executing the CLR procedure.
 
-<h3>Using the CLR Functions</h3>
+<h2>Using the CLR Functions</h2>
 
-CLR Functions are used to make calling the more complicated CLR Procedures simpler by handling the formatting the input parameters. They only work in conjunction with the relevant CLR procedure. 
+CLR Functions are used to assist with formatting parameters with a more complex structure - typically a json input.
+Each function is related to a specific CLR procedure parameter. 
 
-The prefix indicates which CLR Procedures it is related to: 
+Doing it this way ensures that the complex parameter is properly formatted, without the need to manually manipulate json.
+This is especially helpful on versions of SQL Server that don't support the newer json related functions.
 
-- **"dbo.report_"** for Reporting Service 
-- **"dbo.email_"** for Email Service
-- **"dbo.export"** for SQL Export Service
+The prefix indicates which of the CLR Procedures it is related to: 
+
+- **"dbo.report_"** for Reporting Service procedures
+- **"dbo.email_"** for Email Service procedures
+- **"dbo.export"** for SQL Export Service procedures
 
 
 

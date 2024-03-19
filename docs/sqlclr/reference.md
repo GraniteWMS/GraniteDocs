@@ -61,19 +61,30 @@ The procedure will check if tracking entity exists. If it does exist, then the q
 
 <h4>dbo.clr_PrintLabel</h4>
 
-Barcode	query	string	No	
-Barcodes	query	IEnumerable<string>	No	
-Document	query	string	No	
-LabelName	query	string	No	
-NumberOfLabels	query	int	No	
-PrinterName	query	string	No	
-Reference	query	string	No	
-Type	query	string	No	
-UserID	query	long	No
+| Parameter name  | Required  | Description |
+|-----------------|-----------|-------------|
+| Barcode         |	No        | The barcode that you want to print. If not specified, you must set the Barcodes parameter |
+| Barcodes        |	No        | A comma separated list of barcodes you want to print. If not specified, you must set the Barcode parameter |
+| LabelName       | No	      | Full name of the label you want to print, including the file extension (.zpl or .btw). If not set, will use the default format configured for the label type. |
+| NumberOfLabels  | No        | Number of copies of the label to print. Defaults to 1 if not set |
+| PrinterName     | No        | Name of the printer that you are printing to |
+| Type            | Yes        | The type of label that you want to print. Valid values are TRACKINGENTITY, MASTERITEM, LOCATION, USER, PALLET or BOX |	
+| UserID	        | Yes        | ID of the user that is printing the label |
 
 ## Integration 
 
-<h4>CLR_IntegrationPostToEndpoint</h4>
+<h4>dbo.clr_IntegrationPost</h4>
+
+| Parameter name  | Required  | Description |
+|-----------------|-----------|-------------|
+| transactionID   | No        | Comma separated list of transaction IDs to post |
+| document        | No        | Document number to post |
+| documents       | No        | Comma separated list of documents to post |
+| reference       | No        | Integration reference of the transactions you want to post |
+| transactionType | No        | Transaction type of the transactions being posted |
+| processName     | No        | Process name of the transactions being posted |
+
+<h4>dbo.clr_IntegrationPostToEndpoint</h4>
 
 If you have multiple integration services that you need to interact with using the CLR_IntegrationPostToEndpoint procedure, 
 you will need to add them with a unique name in the Key column:
@@ -83,6 +94,27 @@ you will need to add them with a unique name in the Key column:
 | SQLCLR		| MySecondIntegrationService	| http://10.0.0.1:50006	| ERP Company 2 Integration Service	| string		| False			| True		|
 
 The Key "MySecondIntegrationService" can now be used when executing the CLR_IntegrationPostToEndpoint procedure  
+
+| Parameter name        | Required  | Description |
+|-----------------------|-----------|-------------|
+| transactionID         | No        | Comma separated list of transaction IDs to post |
+| document              | No        | Document number to post |
+| documents             | No        | Comma separated list of documents to post |
+| reference             | No        | Integration reference of the transactions you want to post |
+| transactionType       | No        | Transaction type of the transactions being posted |
+| processName           | No        | Process name of the transactions being posted |
+| systemSettingsURLKey  | Yes       | Key from the SystemSettings table for the url you want to post to |
+
+<h4>dbo.clr_IntegrationUpdate</h4>
+
+| Parameter name  | Required  | Description |
+|-----------------|-----------|-------------|
+| transactionID   | No        | Comma separated list of transaction IDs to post |
+| document        | No        | Document number to post |
+| documents       | No        | Comma separated list of documents to post |
+| reference       | No        | Integration reference of the transactions you want to post |
+| transactionType | No        | Transaction type of the transactions being posted |
+| processName     | No        | Process name of the transactions being posted |
 
 ## UtilityAPI
 
