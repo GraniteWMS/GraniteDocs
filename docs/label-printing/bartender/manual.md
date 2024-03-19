@@ -8,13 +8,25 @@ After that, the application will map the data returned by the SQL view to the ma
 
 **Supported Bartender Versions:**
 
-- x86:
+<div class="grid cards" markdown>
+
+-   32 bit versions
+
+    ---
+
     - 10.1 R1, R4
     - 2016, R1, R4
-- x64:
+
+
+-   64 bit versions
+
+    ---
+
     - 2016 R9
-    - 2019 R6
-    - 2020, 2021, R7
+    - 2019 R6, R10
+    - 2020
+    - 2021, R7 
+</div>
 
 ## Setup
 
@@ -30,52 +42,30 @@ After that, the application will map the data returned by the SQL view to the ma
 
 2. Copy the version of GraniteLabelPrinting that matches the bitness of Bartender that you have installed.
 
-3. Inside the x86 or x68 GraniteLabelPrinting folder, find the assemblies for the different versions of Bartender that are supported:
 
-    ![](bartender-img\providers.png)
+3. In the `Granite.LabelPrinting.exe.config` file, configure your connection string to the Granite database
+    ```xml
+    <connectionStrings>
+        <add name="CONNECTION" connectionString="Data Source=.\;Initial Catalog=Granite;Persist Security Info=True;User ID=******;Password=****" providerName="System.Data.SqlClient" />
+    </connectionStrings>
+    ```
 
-4. Copy the files from the folder that best matches the installed version of Bartender out into the root folder (in this example it would be BT2021R7):
+4. In the `Granite.LabelPrinting.exe.config` file, configure your `EndPoint` setting. This is the address that the LabelPrintService will run on.
+    ```xml
+    <add key="EndPoint" value="http://localhost:2077/"/>
+    ```
 
-    ![](bartender-img\setup.png)
+5. In the `Granite.LabelPrinting.exe.config` file, ensure that the `Provider` setting is set to `Bartender`
+    ```xml
+    <add key="Provider" value="Bartender"/> 
+    ```
 
-5. Copy the contents of the `DependentAssembly.xml` file just copied into the root folder, and paste it into the `Granite.LabelPrinting.exe.config` file near the end under the `assemlyBinding` node.
-It should look like this when you are done:
+6. Run `Granite.LabelPrinting.exe` and follow the instructions to complete the install. 
 
-        <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
-        <dependentAssembly>
-            <assemblyIdentity name="Iesi.Collections" publicKeyToken="aa95f207798dfdb4" culture="neutral" />
-            <bindingRedirect oldVersion="0.0.0.0-4.0.0.0" newVersion="4.0.0.0" />
-        </dependentAssembly>
-        <dependentAssembly>
-            <assemblyIdentity name="Seagull.BarTender.Print" publicKeyToken="109ff779a1b4cbc7" culture="neutral" />
-            <bindingRedirect oldVersion="0.0.0.0-12.0.0.0" newVersion="11.2.7.1" />
-        </dependentAssembly>
-        <dependentAssembly>
-            <assemblyIdentity name="Seagull.Services.PrintScheduler" publicKeyToken="109ff779a1b4cbc7" culture="neutral" />
-            <bindingRedirect oldVersion="0.0.0.0-12.0.0.0" newVersion="11.2.7.1" />
-        </dependentAssembly>
-        <dependentAssembly>
-            <assemblyIdentity name="Seagull.Services.PrintScheduler.Server" publicKeyToken="109ff779a1b4cbc7" culture="neutral" />
-            <bindingRedirect oldVersion="0.0.0.0-12.0.0.0" newVersion="11.0.9.1" />
-        </dependentAssembly>
-        </assemblyBinding>
+!!! note 
+    It is advisable to run the service from the console and test print before installing as a service.
 
-6. In the `Granite.LabelPrinting.exe.config` file, configure your connetion string to the Granite database
-
-        <connectionStrings>
-            <add name="CONNECTION" connectionString="Data Source=.\;Initial Catalog=Granite;Persist Security Info=True;User ID=******;Password=****" providerName="System.Data.SqlClient" />
-        </connectionStrings>
-
-7. In the `Granite.LabelPrinting.exe.config` file, configure your `EndPoint` setting. This is the address that the LabelPrintService will run on.
-
-        <add key="EndPoint" value="http://localhost:2077/"/>
-
-8. In the `Granite.LabelPrinting.exe.config` file, ensure that the `Provder` setting is set to `Bartender`
-
-        <add key="Provider" value="Bartender"/> 
-
-9. Run `Granite.LabelPrinting.exe` and follow the instructions to complete the install. 
-**`Take Note`** it is advisable to run the service from the console and test print before installing as a service.
+    You may need to run the the Granite Label Printing service as administrator, depending on the permissions yor user account has.
 
 ### App Settings
 
