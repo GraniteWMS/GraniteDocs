@@ -3,7 +3,51 @@
 Integration jobs are a special type of [Scheduler](../../scheduler/manual.md) job called [injected jobs](../../scheduler/manual.md#injected-jobs-integration-jobs). 
 See below for information for specifics on how document and master data jobs work
 
-## How Document jobs work
+## Supported document types
+<div class="grid cards" markdown>
+
+ -   ORDER 
+
+	---
+
+	Evolution type: Sales Order
+
+- 	RECEIVING
+
+	---
+	
+	Evolution type: Purchase Order
+
+- 	INTRANSIT 
+
+	---
+
+	Evolution type: Inter Branch Transfer
+
+-   RECEIPT
+
+    ---
+
+    Evolution type: Inter Branch Receipt
+
+-   TRANSFER
+
+    ---
+
+    Evolution type: Warehouse Transfer
+
+-   WORKORDER
+
+    ---
+
+    Evolution type: Manufacture Process
+
+</div>
+
+
+## How it works
+
+### Document Jobs
 Triggers on the ERP document tables insert a record into the Granite IntegrationDocumentQueue table whenever a change is applied to a document. 
 
 Scheduler runs injected jobs that monitor the IntegrationDocumentQueue table for records that need to be processed.
@@ -15,7 +59,7 @@ All valid changes to data in the Granite tables are logged to the Audit table, s
 
 If a change is made in the ERP system that would put Granite into an invalid state, no changes are applied. Instead, the ERPSyncFailed field is set to true and the ERPSyncFailedReason field shows the reason for the failure. The IntegrationLog table will contain futher details on the failure if applicable.
 
-## How master data jobs work
+### Master data jobs
 MasterItems and TradingPartners have their own jobs. These jobs compare the results of their respective views to the data in the Granite tables and insert new records / update records as needed.
 
 The document jobs themselves also sync changes to the TradingPartners & MasterItems that are on the document. This means that on sites that do not process a lot of changes to master data you can limit the MasterItem/TradingPartner jobs to running once a day or even less frequently. 
@@ -102,11 +146,3 @@ Here is an example of some failed validation:
 
 ![Injectedjobsvalidation](evo-img\injectedjobsvalidation.png)
 
-## Supported Document types
-
-- ORDER (SalesOrder)
-- RECEIVING (PurchaseOrder)
-- INTRANSIT (InterBranchTransfer)
-- RECEIPT (InterBranchReceipt)
-- TRANSFER (WarehouseTransfer)
-- WORKORDER (ManufactureProcess)
