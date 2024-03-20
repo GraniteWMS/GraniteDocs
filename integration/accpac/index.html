@@ -8,26 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://granitewms.github.io/granitedocs/">
+        <link rel="canonical" href="https://granitewms.github.io/granitedocs/integration/accpac/">
       
       
+        <link rel="prev" href="../../custodian-api/manual/">
       
-        <link rel="next" href="custodian-api/manual/">
+      
+        <link rel="next" href="sdk-provider/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
-        <title>Granite WMS</title>
+        <title>Accpac - Granite WMS</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.50c56a3b.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome" class="md-skip">
+        <a href="#accpac" class="md-skip">
           Skip to content
         </a>
       
@@ -86,7 +88,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Granite WMS" class="md-header__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+    <a href="../.." title="Granite WMS" class="md-header__button md-logo" aria-label="Granite WMS" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -106,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Accpac
             
           </span>
         </div>
@@ -199,11 +201,9 @@
         
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
         
   
     
@@ -218,11 +218,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="custodian-api/manual/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../custodian-api/manual/" class="md-tabs__link">
           
   
     
@@ -246,9 +248,7 @@
           
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -259,7 +259,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Granite WMS" class="md-nav__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+    <a href="../.." title="Granite WMS" class="md-nav__button md-logo" aria-label="Granite WMS" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -274,19 +274,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -295,7 +286,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -304,8 +294,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -334,12 +326,12 @@
       
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -353,7 +345,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Manuals
@@ -367,7 +359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="custodian-api/manual/" class="md-nav__link">
+      <a href="../../custodian-api/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -385,8 +377,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -406,12 +400,12 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
@@ -425,7 +419,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             Integration
@@ -436,6 +430,8 @@
                 
   
   
+    
+  
   
   
     
@@ -453,17 +449,17 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="integration/accpac/" class="md-nav__link ">
+            <a href="./" class="md-nav__link md-nav__link--active">
               
   
   <span class="md-ellipsis">
@@ -474,13 +470,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+              <label class="md-nav__link md-nav__link--active" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_2_1">
             <span class="md-nav__icon md-icon"></span>
             Accpac
@@ -496,7 +492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/accpac/sdk-provider/" class="md-nav__link">
+      <a href="sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -517,7 +513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/accpac/integration-jobs/" class="md-nav__link">
+      <a href="integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -570,7 +566,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="integration/evo/" class="md-nav__link ">
+            <a href="../evo/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -603,7 +599,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/evo/sdk-provider/" class="md-nav__link">
+      <a href="../evo/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -624,7 +620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/evo/integration-jobs/" class="md-nav__link">
+      <a href="../evo/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -653,7 +649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/omni/sdk-provider/" class="md-nav__link">
+      <a href="../omni/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -674,7 +670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/quickbooks/native-app/" class="md-nav__link">
+      <a href="../quickbooks/native-app/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -695,7 +691,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/sapb1/sdk-provider/" class="md-nav__link">
+      <a href="../sapb1/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -716,7 +712,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/syspro/sdk-provider/" class="md-nav__link">
+      <a href="../syspro/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -788,7 +784,7 @@
   
   
     <li class="md-nav__item">
-      <a href="label-printing/bartender/manual/" class="md-nav__link">
+      <a href="../../label-printing/bartender/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -809,7 +805,7 @@
   
   
     <li class="md-nav__item">
-      <a href="label-printing/zpl/manual/" class="md-nav__link">
+      <a href="../../label-printing/zpl/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -838,7 +834,7 @@
   
   
     <li class="md-nav__item">
-      <a href="repository-api/manual/" class="md-nav__link">
+      <a href="../../repository-api/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -859,7 +855,7 @@
   
   
     <li class="md-nav__item">
-      <a href="scheduler/manual/" class="md-nav__link">
+      <a href="../../scheduler/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -904,7 +900,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="sqlclr/" class="md-nav__link ">
+            <a href="../../sqlclr/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -937,7 +933,7 @@
   
   
     <li class="md-nav__item">
-      <a href="sqlclr/getting-started/" class="md-nav__link">
+      <a href="../../sqlclr/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -958,7 +954,7 @@
   
   
     <li class="md-nav__item">
-      <a href="sqlclr/reference/" class="md-nav__link">
+      <a href="../../sqlclr/reference/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1015,7 +1011,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="utility-api/" class="md-nav__link ">
+            <a href="../../utility-api/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1048,7 +1044,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/getting-started/" class="md-nav__link">
+      <a href="../../utility-api/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1069,7 +1065,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/email-service/" class="md-nav__link">
+      <a href="../../utility-api/email-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1090,7 +1086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/reporting-service/" class="md-nav__link">
+      <a href="../../utility-api/reporting-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1111,7 +1107,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/sql-export-service/" class="md-nav__link">
+      <a href="../../utility-api/sql-export-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1140,7 +1136,7 @@
   
   
     <li class="md-nav__item">
-      <a href="webdesktop/manual/" class="md-nav__link">
+      <a href="../../webdesktop/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1161,7 +1157,7 @@
   
   
     <li class="md-nav__item">
-      <a href="SSRS/getting-started/" class="md-nav__link">
+      <a href="../../SSRS/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1190,9 +1186,7 @@
             
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -1217,10 +1211,11 @@
                   
 
 
-<h1 id="welcome">Welcome</h1>
-<p>This library of documentation is dedicated to technical topics related to Granite WMS. We cover setups, configurations, and various other technical aspects.</p>
-<p>To continue enhancing the value of this resource, we kindly ask the community for their support and feedback.
-Please be aware that the documentation reflects the latest version of the software. Keep this in mind as you refer to the content.</p>
+<h1 id="accpac">Accpac</h1>
+<p>This document contains all of the information needed to set up and configure integration with Accpac.
+There are two parts to the complete integration solution:</p>
+<p>The <a href="sdk-provider/">SDK Provider</a> is used by the Integration Service to map transactions performed in Granite to the relevant format for Accpac.</p>
+<p>The <a href="integration-jobs/">integration jobs</a> are used by the <a href="../../scheduler/manual/">Scheduler</a> to pull Accpac's documents, item codes, and trading partners into Granite.</p>
 
 
 
@@ -1228,13 +1223,8 @@ Please be aware that the documentation reflects the latest version of the softwa
 
 
 
-  
-  
 
 
-
-
-  
 
 
 
@@ -1278,10 +1268,10 @@ Please be aware that the documentation reflects the latest version of the softwa
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.c18c5fb9.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
     
   </body>

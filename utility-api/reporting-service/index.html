@@ -8,26 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://granitewms.github.io/granitedocs/">
+        <link rel="canonical" href="https://granitewms.github.io/granitedocs/utility-api/reporting-service/">
       
       
+        <link rel="prev" href="../email-service/">
       
-        <link rel="next" href="custodian-api/manual/">
+      
+        <link rel="next" href="../sql-export-service/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
-        <title>Granite WMS</title>
+        <title>Reporting Service - Granite WMS</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.50c56a3b.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome" class="md-skip">
+        <a href="#reporting-service" class="md-skip">
           Skip to content
         </a>
       
@@ -86,7 +88,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Granite WMS" class="md-header__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+    <a href="../.." title="Granite WMS" class="md-header__button md-logo" aria-label="Granite WMS" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -106,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Reporting Service
             
           </span>
         </div>
@@ -199,11 +201,9 @@
         
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
         
   
     
@@ -218,11 +218,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="custodian-api/manual/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../custodian-api/manual/" class="md-tabs__link">
           
   
     
@@ -246,9 +248,7 @@
           
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -259,7 +259,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Granite WMS" class="md-nav__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+    <a href="../.." title="Granite WMS" class="md-nav__button md-logo" aria-label="Granite WMS" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -274,19 +274,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -295,7 +286,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -304,8 +294,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -334,12 +326,12 @@
       
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -353,7 +345,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Manuals
@@ -367,7 +359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="custodian-api/manual/" class="md-nav__link">
+      <a href="../../custodian-api/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -463,7 +455,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="integration/accpac/" class="md-nav__link ">
+            <a href="../../integration/accpac/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -496,7 +488,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/accpac/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/accpac/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -517,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/accpac/integration-jobs/" class="md-nav__link">
+      <a href="../../integration/accpac/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -570,7 +562,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="integration/evo/" class="md-nav__link ">
+            <a href="../../integration/evo/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -603,7 +595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/evo/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/evo/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -624,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/evo/integration-jobs/" class="md-nav__link">
+      <a href="../../integration/evo/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -653,7 +645,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/omni/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/omni/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -674,7 +666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/quickbooks/native-app/" class="md-nav__link">
+      <a href="../../integration/quickbooks/native-app/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -695,7 +687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/sapb1/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/sapb1/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -716,7 +708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/syspro/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/syspro/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -788,7 +780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="label-printing/bartender/manual/" class="md-nav__link">
+      <a href="../../label-printing/bartender/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -809,7 +801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="label-printing/zpl/manual/" class="md-nav__link">
+      <a href="../../label-printing/zpl/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -838,7 +830,7 @@
   
   
     <li class="md-nav__item">
-      <a href="repository-api/manual/" class="md-nav__link">
+      <a href="../../repository-api/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -859,7 +851,7 @@
   
   
     <li class="md-nav__item">
-      <a href="scheduler/manual/" class="md-nav__link">
+      <a href="../../scheduler/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -904,7 +896,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="sqlclr/" class="md-nav__link ">
+            <a href="../../sqlclr/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -937,7 +929,7 @@
   
   
     <li class="md-nav__item">
-      <a href="sqlclr/getting-started/" class="md-nav__link">
+      <a href="../../sqlclr/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -958,7 +950,7 @@
   
   
     <li class="md-nav__item">
-      <a href="sqlclr/reference/" class="md-nav__link">
+      <a href="../../sqlclr/reference/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -984,6 +976,8 @@
                 
   
   
+    
+  
   
   
     
@@ -1005,17 +999,17 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="utility-api/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1032,7 +1026,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_7">
             <span class="md-nav__icon md-icon"></span>
             Utility API
@@ -1048,7 +1042,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/getting-started/" class="md-nav__link">
+      <a href="../getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1069,7 +1063,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/email-service/" class="md-nav__link">
+      <a href="../email-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1087,10 +1081,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="utility-api/reporting-service/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Reporting Service
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1099,6 +1113,95 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iis-application-pool" class="md-nav__link">
+    <span class="md-ellipsis">
+      IIS Application Pool
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#report-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Report Properties
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#printer-statuses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Printer Statuses
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reportfileexport" class="md-nav__link">
+    <span class="md-ellipsis">
+      ReportFileExport
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reportprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      ReportPrint
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1111,7 +1214,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/sql-export-service/" class="md-nav__link">
+      <a href="../sql-export-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1140,7 +1243,7 @@
   
   
     <li class="md-nav__item">
-      <a href="webdesktop/manual/" class="md-nav__link">
+      <a href="../../webdesktop/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1161,7 +1264,7 @@
   
   
     <li class="md-nav__item">
-      <a href="SSRS/getting-started/" class="md-nav__link">
+      <a href="../../SSRS/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1190,9 +1293,7 @@
             
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -1203,6 +1304,83 @@
   
     
   
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iis-application-pool" class="md-nav__link">
+    <span class="md-ellipsis">
+      IIS Application Pool
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#report-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Report Properties
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#printer-statuses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Printer Statuses
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reportfileexport" class="md-nav__link">
+    <span class="md-ellipsis">
+      ReportFileExport
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reportprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      ReportPrint
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1217,10 +1395,59 @@
                   
 
 
-<h1 id="welcome">Welcome</h1>
-<p>This library of documentation is dedicated to technical topics related to Granite WMS. We cover setups, configurations, and various other technical aspects.</p>
-<p>To continue enhancing the value of this resource, we kindly ask the community for their support and feedback.
-Please be aware that the documentation reflects the latest version of the software. Keep this in mind as you refer to the content.</p>
+<h1 id="reporting-service">Reporting Service</h1>
+<p>The reporting service accesses the reports by directly calling SQL Server Reporting Service's API. Once it has received the report back from the API it either prints or exports the report depending on the call.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li><a href="../../SSRS/getting-started/">SQL Server Reporting Service</a></li>
+</ul>
+<h2 id="configuration">Configuration</h2>
+<p>Settings for the Reporting Service element of the UtilityAPI are configured in the <code>SystemSettings</code> table. You can find the insert script for the settings in the GraniteDatabase install folder:</p>
+<div class="highlight"><pre><span></span><code>&quot;...\GraniteDatabase\Data\SystemSettings\SystemSettingsUtilityAPI.sql&quot;
+</code></pre></div>
+<p>You should have the following settings after running the script:</p>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Key</th>
+<th>Value</th>
+<th>Description</th>
+<th>ValueDataType</th>
+<th>isEncrypted</th>
+<th>isActive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Granite.Utility</td>
+<td>SSRSWebServiceUrl</td>
+<td></td>
+<td>Url of the reporting service</td>
+<td>string</td>
+<td>False</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+<p>The SSRS Web Service Url should look something like this: http://10.0.01/ReportServer</p>
+<p>You can find it on the Report Server Configuration Manager under the web service url tab. Check the configuration page (<code>/config</code>) and ensure that <code>Report Service URL Valid</code> and <code>Report Execution Service URL Valid</code> are both <code>true</code>.</p>
+<h3 id="iis-application-pool">IIS Application Pool</h3>
+<p>In order for the UtilityAPI to access SSRS, the Identity of the Application pool needs to be changed to LocalSystem. </p>
+<p>To do this, go to the advanced settings of the application pool associated with the UtilityAPI and change from ApplicationPoolIdentity to LocalSystem as you can see below.</p>
+<p><img alt="image info" src="../img/AdvancedSettings.JPG" /></p>
+<h2 id="report-properties">Report Properties</h2>
+<p>Report Properties on the UtilityAPI homepage allows you to see all of the report paths and parameters. </p>
+<p>If the parameter Name is ERROR you will need to check that the report is working in SSRS. The most common errors are a missing stored procedure or the report being pointed to a data source that does not exist.</p>
+<h2 id="printer-statuses">Printer Statuses</h2>
+<p>Printer Statuses on the UtilityAPI homepage allows you to see all of the Printers visible to the UtilityAPI and their statuses. The report service does not check the status of the printer before sending a print job. The status is purely useful to diagnose issues printing.</p>
+<h2 id="reportfileexport">ReportFileExport</h2>
+<p>This process calls SSRS and saves the report to the specified file path. The file path has to be on the server where the UtilityAPI is running. To get the file from the server, the easiest option is to send it as an email attachment.</p>
+<p>Supported file types are PDF and EXCEL, both the new .xlsx and the old .xls. If you are unsure which to use, go for .xlsx</p>
+<p>See the API Documentation for more details on how to export a report using the API. See the SQLCLR documentation for how to export a report using SQLCLR.</p>
+<h2 id="reportprint">ReportPrint</h2>
+<p>This process calls SSRS and sends the report to a print queue. Check Printer Statues on the UtilityAPI homepage to see the list of available printers.</p>
+<p>See the API Documentation for more details on how to print a report using the API. See the SQLCLR documentation for how to print a report using SQLCLR.</p>
 
 
 
@@ -1228,13 +1455,8 @@ Please be aware that the documentation reflects the latest version of the softwa
 
 
 
-  
-  
 
 
-
-
-  
 
 
 
@@ -1278,10 +1500,10 @@ Please be aware that the documentation reflects the latest version of the softwa
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.c18c5fb9.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
     
   </body>

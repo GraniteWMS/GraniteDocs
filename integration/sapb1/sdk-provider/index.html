@@ -1,0 +1,2274 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://granitewms.github.io/granitedocs/integration/sapb1/sdk-provider/">
+      
+      
+        <link rel="prev" href="../../quickbooks/native-app/">
+      
+      
+        <link rel="next" href="../../syspro/sdk-provider/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
+    
+    
+      
+        <title>SAPB1 - Granite WMS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sap-b1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Granite WMS" class="md-header__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Granite WMS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SAPB1
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../custodian-api/manual/" class="md-tabs__link">
+          
+  
+    
+  
+  Manuals
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Granite WMS" class="md-nav__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Granite WMS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Manuals
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Manuals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../custodian-api/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Custodian API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Integration
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Integration
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../accpac/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Accpac
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Accpac
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../accpac/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../accpac/integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../evo/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Evolution
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Evolution
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evo/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evo/integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../omni/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Omni
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quickbooks/native-app/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QuickBooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    SAPB1
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    SAPB1
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sdk-provider" class="md-nav__link">
+    <span class="md-ellipsis">
+      SDK provider
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Settings
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goodissue" class="md-nav__link">
+    <span class="md-ellipsis">
+      GOODISSUE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#goodreceipt" class="md-nav__link">
+    <span class="md-ellipsis">
+      GOODRECEIPT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reclassify" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECLASSIFY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamicpick" class="md-nav__link">
+    <span class="md-ellipsis">
+      DYNAMICPICK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeon" class="md-nav__link">
+    <span class="md-ellipsis">
+      TAKEON
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment" class="md-nav__link">
+    <span class="md-ellipsis">
+      ADJUSTMENT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCRAP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replenish" class="md-nav__link">
+    <span class="md-ellipsis">
+      REPLENISH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move" class="md-nav__link">
+    <span class="md-ellipsis">
+      MOVE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      TRANSFER
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transferdraft" class="md-nav__link">
+    <span class="md-ellipsis">
+      TRANSFERDRAFT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receive" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECEIVE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receivingpostmultiple" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECEIVINGPOSTMULTIPLE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#purchaseorderdraft" class="md-nav__link">
+    <span class="md-ellipsis">
+      PURCHASEORDERDRAFT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#purchasecreditnotes" class="md-nav__link">
+    <span class="md-ellipsis">
+      PURCHASECREDITNOTES
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pick" class="md-nav__link">
+    <span class="md-ellipsis">
+      PICK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#salesorderreturnrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      SALESORDERRETURNREQUEST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#salesorderinvoice" class="md-nav__link">
+    <span class="md-ellipsis">
+      SALESORDERINVOICE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#salesordercreditmemo" class="md-nav__link">
+    <span class="md-ellipsis">
+      SALESORDERCREDITMEMO
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#salesorderdraft" class="md-nav__link">
+    <span class="md-ellipsis">
+      SALESORDERDRAFT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sap-table-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      SAP Table Names
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sap-error-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      SAP Error Codes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Known issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integration-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Slow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further Reading
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../syspro/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syspro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Label Printing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Label Printing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../label-printing/bartender/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bartender
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../label-printing/zpl/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ZPL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../repository-api/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repository API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../scheduler/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scheduler
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../sqlclr/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    SQLCLR
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            SQLCLR
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sqlclr/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sqlclr/reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CLR Procedure Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../utility-api/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Utility API
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            Utility API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../utility-api/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../utility-api/email-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Email Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../utility-api/reporting-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reporting Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../utility-api/sql-export-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQL Export Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webdesktop/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web Desktop
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../SSRS/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SSRS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sdk-provider" class="md-nav__link">
+    <span class="md-ellipsis">
+      SDK provider
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Settings
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goodissue" class="md-nav__link">
+    <span class="md-ellipsis">
+      GOODISSUE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#goodreceipt" class="md-nav__link">
+    <span class="md-ellipsis">
+      GOODRECEIPT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reclassify" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECLASSIFY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamicpick" class="md-nav__link">
+    <span class="md-ellipsis">
+      DYNAMICPICK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeon" class="md-nav__link">
+    <span class="md-ellipsis">
+      TAKEON
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment" class="md-nav__link">
+    <span class="md-ellipsis">
+      ADJUSTMENT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCRAP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replenish" class="md-nav__link">
+    <span class="md-ellipsis">
+      REPLENISH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move" class="md-nav__link">
+    <span class="md-ellipsis">
+      MOVE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      TRANSFER
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transferdraft" class="md-nav__link">
+    <span class="md-ellipsis">
+      TRANSFERDRAFT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receive" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECEIVE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receivingpostmultiple" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECEIVINGPOSTMULTIPLE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#purchaseorderdraft" class="md-nav__link">
+    <span class="md-ellipsis">
+      PURCHASEORDERDRAFT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#purchasecreditnotes" class="md-nav__link">
+    <span class="md-ellipsis">
+      PURCHASECREDITNOTES
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pick" class="md-nav__link">
+    <span class="md-ellipsis">
+      PICK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#salesorderreturnrequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      SALESORDERRETURNREQUEST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#salesorderinvoice" class="md-nav__link">
+    <span class="md-ellipsis">
+      SALESORDERINVOICE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#salesordercreditmemo" class="md-nav__link">
+    <span class="md-ellipsis">
+      SALESORDERCREDITMEMO
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#salesorderdraft" class="md-nav__link">
+    <span class="md-ellipsis">
+      SALESORDERDRAFT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sap-table-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      SAP Table Names
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sap-error-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      SAP Error Codes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Known issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Known issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integration-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Slow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further Reading
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="sap-b1">SAP B1</h1>
+<p>This document contains all the information needed to setup and configure SAP B1 integration.
+The Data Interface API (DI API) is part of the SAP Business One Software Development Kit (SDK). </p>
+<hr />
+<h2 id="setup">Setup</h2>
+<h5 id="prerequisites">Prerequisites</h5>
+<ul>
+<li>The server running the Granite WMS service require the DI API to be locally installed and permissions setup in order for Granite to work. 
+This should be done by the client or SAP consultant.</li>
+<li>Granite WMS Integration service should be installed and all settings in regard to database and endpoints setup.</li>
+</ul>
+<h5 id="sdk-provider">SDK provider</h5>
+<ol>
+<li>Copy <code>Granite.Integration.SAPB1.dll</code> into the root folder of the Integration Service</li>
+<li>Copy <code>SDKProvider.xml</code> into the root folder of the Integration Service</li>
+</ol>
+<p>Preview of the  <code>SDKProvider.xml</code> file
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;module</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Provider&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;bind</span>
+<span class="w">    </span><span class="na">service=</span><span class="s">&quot;Granite.Integration.Contract.IProvider, Granite.Integration.Contract&quot;</span>
+<span class="w">    </span><span class="na">to=</span><span class="s">&quot;Granite.Integration.SAPB1.Provider, Granite.Integration.SAPB1&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/module&gt;</span>
+</code></pre></div></p>
+<hr />
+<h2 id="application-settings">Application Settings</h2>
+<p>The following is a list of settings that must be configured in the SystemSettings table. It is advisable to schedule time to obtain these settings from the client or SAP consultant beforehand.</p>
+<p>You can locate the database script to create these records in the following path:
+<div class="highlight"><pre><span></span><code>~\GraniteDatabase\Data\SystemSettings\SystemSettingsSAPB1.sql
+</code></pre></div></p>
+<h5 id="settings">Settings</h5>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Key</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IntegrationSAPB1</td>
+<td>Server</td>
+<td></td>
+<td>Integration provider SAP</td>
+</tr>
+<tr>
+<td>IntegrationSAPB1</td>
+<td>LicenseServer</td>
+<td></td>
+<td>SAP License server address <code>*see note*</code></td>
+</tr>
+<tr>
+<td>IntegrationSAPB1</td>
+<td>DbUserName</td>
+<td></td>
+<td>Database user name</td>
+</tr>
+<tr>
+<td>IntegrationSAPB1</td>
+<td>DbPassword</td>
+<td></td>
+<td>Database password</td>
+</tr>
+<tr>
+<td>IntegrationSAPB1</td>
+<td>CompanyDB</td>
+<td></td>
+<td>SAP company database name</td>
+</tr>
+<tr>
+<td>IntegrationSAPB1</td>
+<td>DbServerType</td>
+<td></td>
+<td>SQL dialect. dst_MSSQL2012 dst_MSSQL2014 dst_MSSQL2016 dst_MSSQL2017 dst_MSSQL2019</td>
+</tr>
+<tr>
+<td>IntegrationSAPB1</td>
+<td>UserName</td>
+<td></td>
+<td>SAP application user name</td>
+</tr>
+<tr>
+<td>IntegrationSAPB1</td>
+<td>Password</td>
+<td></td>
+<td>SAP application user password</td>
+</tr>
+<tr>
+<td>IntegrationSAPB1</td>
+<td>InventoryAccountCode</td>
+<td></td>
+<td>TAKEON AccountCode</td>
+</tr>
+<tr>
+<td>IntegrationSAPB1</td>
+<td>BinEntry</td>
+<td></td>
+<td>0 false, 1 true. The BinEntry will be used by TAKEON, SCRAP and ADJUSTMENT</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>LicenseServer address found in <code>C:\Program Files (x86)\SAP\SAP Business One DI API\Conf\B1_Local_machine.xml</code></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once the settings are captured please test the SAP connection by browsing to the <code>/config</code> page on the integration service.</p>
+</div>
+<h2 id="integration-methods">Integration Methods</h2>
+<p>Integration Methods refer to the specific functionalities supported for the given provider. This documentation serves as a crucial resource when engaging with a client, providing insights into our supported operations and the manner in which we support them.</p>
+<p>Integration Methods are predefined values, each corresponding to an operation within SAP B1. These methods are configured at a process level in the database table <code>Process.IntegrationMethod</code>. In cases where the IntegrationMethod in the database is left empty, Granite will automatically use <code>Transaction.Type</code> as the default Integration Method.</p>
+<p><strong><code>See Also</code></strong> The <code>Integration_Transactions</code> SQL view is responsible for determining the information sent to each operation.</p>
+<h5 id="goodissue">GOODISSUE</h5>
+<ul>
+<li>Not supported (future development)</li>
+</ul>
+<h5 id="goodreceipt">GOODRECEIPT</h5>
+<ul>
+<li>Not supported (future development)</li>
+</ul>
+<h5 id="reclassify">RECLASSIFY</h5>
+<ul>
+<li>Not supported (future development)</li>
+</ul>
+<h5 id="dynamicpick">DYNAMICPICK</h5>
+<ul>
+<li>Not supported (future development)</li>
+</ul>
+<h5 id="takeon">TAKEON</h5>
+<ul>
+<li>Post :SAPbobsCOM.BoObjectTypes.oInventoryGenEntry</li>
+<li>Documents object for entering general items to inventory</li>
+<li>Table: <a href="https://biuan.com/OIGN/">OIGN</a></li>
+</ul>
+<h5 id="adjustment">ADJUSTMENT</h5>
+<ul>
+<li>Post : SAPbobsCOM.InventoryPostingsServiceDataInterfaces.ipsInventoryPosting</li>
+<li>The InventoryPostingsService service enables you to add, look up, and update inventory posting transactions.</li>
+<li>Table: <a href="https://biuan.com/OIQR/">OIQR</a></li>
+</ul>
+<h5 id="scrap">SCRAP</h5>
+<ul>
+<li>Post :SAPbobsCOM.InventoryPostingsServiceDataInterfaces.ipsInventoryPosting</li>
+<li>The InventoryPostingsService service enables you to add, look up, and update inventory posting transactions.</li>
+<li>Table: <a href="https://biuan.com/OIQR/">OIQR</a></li>
+</ul>
+<h5 id="replenish">REPLENISH</h5>
+<ul>
+<li>Post :SAPbobsCOM.BoObjectTypes.oStockTransfer</li>
+<li>StockTransfer is a business object that represents items to transfer from one warehouse to another. This object is part of the Inventory and Production module.</li>
+<li>Table: <a href="https://biuan.com/OWTR/">OWTR</a></li>
+</ul>
+<h5 id="move">MOVE</h5>
+<ul>
+<li>Post :SAPbobsCOM.BoObjectTypes.oStockTransfer</li>
+<li>StockTransfer is a business object that represents items to transfer from one warehouse to another. This object is part of the Inventory and Production module.</li>
+<li>Table: <a href="https://biuan.com/OWTR/">OWTR</a></li>
+</ul>
+<h5 id="transfer">TRANSFER</h5>
+<ul>
+<li>Post :SAPbobsCOM.BoObjectTypes.oStockTransfer</li>
+<li>StockTransfer is a business object that represents items to transfer from one warehouse to another. This object is part of the Inventory and Production module.</li>
+<li>Table: <a href="https://biuan.com/OWTR/">OWTR</a></li>
+</ul>
+<h5 id="transferdraft">TRANSFERDRAFT</h5>
+<ul>
+<li>Post :SAPbobsCOM.BoObjectTypes.oStockTransferDraft</li>
+<li>Documents object that represents a draft document</li>
+<li>Table: <a href="https://biuan.com/ODRF/">ODRF</a></li>
+</ul>
+<h5 id="receive">RECEIVE</h5>
+<ul>
+<li>Post :oPurchaseOrders -&gt; SAPbobsCOM.BoObjectTypes.oPurchaseDeliveryNotes</li>
+<li>Documents object that represents a purchase delivery note document</li>
+<li>Table: <a href="https://biuan.com/OPDN/">OPDN</a></li>
+</ul>
+<h5 id="receivingpostmultiple">RECEIVINGPOSTMULTIPLE</h5>
+<ul>
+<li>Post :oPurchaseOrders -&gt; SAPbobsCOM.BoObjectTypes.oPurchaseDeliveryNotes</li>
+<li>Documents object that represents a purchase delivery note document</li>
+<li>Table: <a href="https://biuan.com/OPDN/">OPDN</a></li>
+<li>Note: same as RECEIVING but instead of using Document Number we use all the IntegrationReference as PO Numbers.</li>
+</ul>
+<h5 id="purchaseorderdraft">PURCHASEORDERDRAFT</h5>
+<ul>
+<li>Post :oPurchaseOrders -&gt; SAPbobsCOM.BoObjectTypes.oDrafts</li>
+<li>Documents object that represents a draft document</li>
+<li>Table: <a href="https://biuan.com/ODRF/">ODRF</a></li>
+</ul>
+<h5 id="purchasecreditnotes">PURCHASECREDITNOTES</h5>
+<ul>
+<li>Post :oGoodsReturnRequest -&gt; oPurchaseCreditNotes</li>
+<li>Documents object that represents a draft of purchase credit note document</li>
+<li>Table: <a href="https://biuan.com/ORPC/">ORPC</a></li>
+</ul>
+<h5 id="pick">PICK</h5>
+<ul>
+<li>Post :oOrders -&gt; SAPbobsCOM.BoObjectTypes.oDeliveryNotes</li>
+<li>Documents object that represents a sales delivery note document</li>
+<li>Table: <a href="https://biuan.com/ODLN/">ODLN</a></li>
+</ul>
+<h5 id="salesorderreturnrequest">SALESORDERRETURNREQUEST</h5>
+<ul>
+<li>Post :SAPbobsCOM.BoObjectTypes.oReturns -&gt; SAPbobsCOM.BoObjectTypes.oReturnRequest</li>
+<li>Documents object that represents a sales return document</li>
+<li>Table: <a href="https://biuan.com/ORDN/">ORDN</a></li>
+</ul>
+<h5 id="salesorderinvoice">SALESORDERINVOICE</h5>
+<ul>
+<li>Post :oOrders -&gt; SAPbobsCOM.BoObjectTypes.oInvoices</li>
+<li>Documents object that represents a sales invoice document</li>
+<li>Table: <a href="https://biuan.com/OINV/">OINV</a></li>
+</ul>
+<h5 id="salesordercreditmemo">SALESORDERCREDITMEMO</h5>
+<ul>
+<li>Post : SAPbobsCOM.BoObjectTypes.oInvoices -&gt; SAPbobsCOM.BoObjectTypes.oCreditNotes</li>
+<li>Documents object that represents a sales Credit Memo</li>
+<li>Table: <a href="https://biuan.com/OINV/">OINV</a></li>
+<li></li>
+</ul>
+<h5 id="salesorderdraft">SALESORDERDRAFT</h5>
+<ul>
+<li>Post :SAPbobsCOM.BoObjectTypes.oOrders -&gt; SAPbobsCOM.BoObjectTypes.oDrafts</li>
+<li>Documents object that represents a draft document</li>
+<li>Table: <a href="https://biuan.com/ODRF/">ODRF</a></li>
+</ul>
+<hr />
+<h2 id="sap-table-names">SAP Table Names</h2>
+<ul>
+<li>OINV table = Sales A/R &gt; A/R Invoice.</li>
+<li>ORIN table = Sales A/R &gt; A/R Credit Memo.</li>
+<li>ODLN table = Sales A/R &gt; Delivery.</li>
+<li>ORDN table = Sales A/R &gt; Returns.</li>
+<li>ORDR table = Sales A/R &gt; Order.</li>
+<li>OQUT table = Sales A/R &gt; Quotation.</li>
+<li>OPCH table = Purchasing A/P &gt; A/P Invoice.</li>
+<li>ORPC table = Purchasing A/P &gt; A/P Credit Memo.</li>
+<li>OPDN table = Purchasing A/P &gt; Goods Receipt PO.</li>
+<li>ORPD table = Purchasing A/P &gt; Goods Returns.</li>
+<li>OPOR table = Purchasing A/P &gt; A/R Invoice.</li>
+<li>OPQT table = Purchasing A/P &gt; Purchase Quotation.</li>
+<li>OIGN table = Inventory &gt; Inventory Transactions &gt; Goods Receipt.
+Or, in case of receipt from production, select Production &gt; Receipt from Production (see ProductionOrders).</li>
+<li>OIGE table = Inventory &gt; Inventory Transactions &gt; Goods Issue.
+Or, in case of issue for production, select Production &gt; Issue for Production (see ProductionOrders).</li>
+<li>ODRF table = Sales A/R (or Purchasing - A/P) &gt; Document Draft. Set your selection criteria, and click OK.</li>
+</ul>
+<hr />
+<h2 id="sap-error-codes">SAP Error Codes</h2>
+<ul>
+<li>0     Success.</li>
+<li>10    Seems to be a generic code. Need to troubleshoot issue to determine exact reason.</li>
+<li>103   Connection to the company database has failed.</li>
+<li>104   Connection to the license database has failed.</li>
+<li>105   The observer.dll init has failed.</li>
+<li>106   You are not connected to a company.</li>
+<li>107   Wrong username and/or password.</li>
+<li>108   Error reading company definitions.</li>
+<li>109   Error copying dll to temp directory.</li>
+<li>110   Error opening observer.dll.</li>
+<li>111   Connection to SBO-Common has failed.</li>
+<li>112   Error extracting dll from cab.</li>
+<li>113   Error creating temporary dll folder.</li>
+<li>114   No server defined.</li>
+<li>115   No database defined.</li>
+<li>116   Already connected to a company database.</li>
+<li>117   Language is not supported.</li>
+<li>118   Exceeded the number of max concurrent users.</li>
+<li>125   SAP connection issue, SQL version incorrect. Appsetting DbServerType, version might not be supported in release.</li>
+<li>132   Cannot connect to SAP, SAP Database names are case-sensitive.</li>
+<li>111   Similar issue to 125, DbServerType incorrect. Verify DbServerType setting, must be correct 2012, 2014 ect.</li>
+<li>1001  The field is to small to accept the data.</li>
+<li>1002  Invalid row.</li>
+<li>1103  Object not supported.</li>
+<li>1104  Invalid XML file.</li>
+<li>1105  Invalid index.</li>
+<li>1106  Invalid field name.</li>
+<li>1107  Wrong object state.</li>
+<li>1108  The transaction is already active.</li>
+<li>1109  There is no active transaction in progress.</li>
+<li>1110  Invalid user entered.</li>
+<li>1111  Invalid file name.</li>
+<li>1112  Could not save the XML file.</li>
+<li>1113  Function not implemented.</li>
+<li>1114  XML validation failed.</li>
+<li>1115  No XML schema was found to support this object.</li>
+<li>1120  Ref count for this object is higher then 0.</li>
+<li>1130  Invalid edit state.</li>
+<li>2000  SQL native error.</li>
+<li>2050  No query string entered.</li>
+<li>2051  No value found.</li>
+<li>2052  No records found.</li>
+<li>2053  Invalid object.</li>
+<li>2054  Either BOF or EOF have been reached.</li>
+<li>2055  The value entered is invalid.</li>
+<li>3000  The logged-on user does not have permission to use this object.</li>
+<li>3001  You do not have a permission to view this fields data.</li>
+<li>8004  Company connection is dead.</li>
+<li>8005  Server connection is dead.</li>
+<li>8006  Error opening language resource.</li>
+<li>8007  License failure.</li>
+<li>8008  Error initializing the DB layer.</li>
+<li>8009  Too many users connected.</li>
+<li>8010  No valid license is present.</li>
+<li>8011  Error initializing Business objects layer.</li>
+<li>8012  Company version mismatch.</li>
+<li>8013  Error initializing the application environment.</li>
+<li>8014  Invalid command.</li>
+<li>8015  Missing parameter.</li>
+<li>8016  Unsupported object.</li>
+<li>8017  Invalid command for this object.</li>
+<li>8018  Internal permission error.</li>
+<li>8019  DLL is not initialized.</li>
+<li>8020  Language init error.</li>
+<li>8021  Timeout encountered.</li>
+<li>8022  Init error.</li>
+<li>8023  Wrong user or password.</li>
+</ul>
+<hr />
+<h2 id="known-issues">Known issues</h2>
+<h5 id="integration-slow">Integration Slow</h5>
+<p>The DI API could slow down due to the number of SAP log files (~b1logger.~.csv).
+The default path for log files:</p>
+<blockquote>
+<p>C:\ProgramData\SAP\SAP Business One\Log\SAP Business One</p>
+</blockquote>
+<p>The number of files will impact the connection speed to the DI API, and can ultimately cause timeouts.
+Deleting these files should resolve the issue, but the path will often grew again within a few days.
+You can schedule a task to clear the path or switch logging off the logging.</p>
+<blockquote>
+<p>C:\Program Files (x86)\SAP\SAP Business One DI API\Conf\b1LogConfig.xml</p>
+</blockquote>
+<p><code>Set Activate = "0"</code>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;</span>
+<span class="nt">&lt;log</span><span class="w"> </span><span class="na">FolderSize=</span><span class="s">&quot;50&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;b1logger</span><span class="w"> </span><span class="na">Mode=</span><span class="s">&quot;A&quot;</span><span class="w"> </span><span class="na">MaxFileSize=</span><span class="s">&quot;5&quot;</span><span class="w"> </span><span class="na">MaxNumOfMsg=</span><span class="s">&quot;500&quot;</span><span class="w"> </span><span class="na">LogStack=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">Activate =</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+</code></pre></div></p>
+<p><strong><code>See Also</code></strong>  https://www.youtube.com/watch?v=kGueS8LdF-w</p>
+<p>If the IIS (app pool) user does not have permissions it can cause issues.</p>
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li>Complete list of DI API (SDK) Document objects (https://biuan.com/Documents/).</li>
+<li>SAP Tables <a href="https://sap.erpref.com/">https://sap.erpref.com/</a></li>
+<li><a href="https://www.sap-business-one-tips.com/">https://www.sap-business-one-tips.com/</a></li>
+<li><a href="https://support.boyum-it.com/hc/en-us/articles/360021794234-SAP-Object-Types">https://support.boyum-it.com/hc/en-us/articles/360021794234-SAP-Object-Types</a></li>
+</ul>
+<!-- todo dead link - [http://www.saptables.net/?schema=BusinessOne9.3](http://www.saptables.net/?schema=BusinessOne9.3) -->
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
+      
+    
+  </body>
+</html>

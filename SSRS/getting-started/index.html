@@ -8,26 +8,26 @@
       
       
       
-        <link rel="canonical" href="https://granitewms.github.io/granitedocs/">
+        <link rel="canonical" href="https://granitewms.github.io/granitedocs/SSRS/getting-started/">
+      
+      
+        <link rel="prev" href="../../webdesktop/manual/">
       
       
       
-        <link rel="next" href="custodian-api/manual/">
-      
-      
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
-        <title>Granite WMS</title>
+        <title>SSRS - Granite WMS</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.50c56a3b.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,7 +46,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome" class="md-skip">
+        <a href="#prerequisites" class="md-skip">
           Skip to content
         </a>
       
@@ -86,7 +86,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Granite WMS" class="md-header__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+    <a href="../.." title="Granite WMS" class="md-header__button md-logo" aria-label="Granite WMS" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              SSRS
             
           </span>
         </div>
@@ -199,11 +199,9 @@
         
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
         
   
     
@@ -218,11 +216,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="custodian-api/manual/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../custodian-api/manual/" class="md-tabs__link">
           
   
     
@@ -246,9 +246,7 @@
           
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -259,7 +257,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Granite WMS" class="md-nav__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+    <a href="../.." title="Granite WMS" class="md-nav__button md-logo" aria-label="Granite WMS" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -274,19 +272,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -295,7 +284,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -304,8 +292,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -334,12 +324,12 @@
       
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -353,7 +343,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Manuals
@@ -367,7 +357,7 @@
   
   
     <li class="md-nav__item">
-      <a href="custodian-api/manual/" class="md-nav__link">
+      <a href="../../custodian-api/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -463,7 +453,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="integration/accpac/" class="md-nav__link ">
+            <a href="../../integration/accpac/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -496,7 +486,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/accpac/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/accpac/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -517,7 +507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/accpac/integration-jobs/" class="md-nav__link">
+      <a href="../../integration/accpac/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -570,7 +560,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="integration/evo/" class="md-nav__link ">
+            <a href="../../integration/evo/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -603,7 +593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/evo/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/evo/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -624,7 +614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/evo/integration-jobs/" class="md-nav__link">
+      <a href="../../integration/evo/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -653,7 +643,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/omni/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/omni/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -674,7 +664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/quickbooks/native-app/" class="md-nav__link">
+      <a href="../../integration/quickbooks/native-app/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -695,7 +685,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/sapb1/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/sapb1/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -716,7 +706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/syspro/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/syspro/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -788,7 +778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="label-printing/bartender/manual/" class="md-nav__link">
+      <a href="../../label-printing/bartender/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -809,7 +799,7 @@
   
   
     <li class="md-nav__item">
-      <a href="label-printing/zpl/manual/" class="md-nav__link">
+      <a href="../../label-printing/zpl/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -838,7 +828,7 @@
   
   
     <li class="md-nav__item">
-      <a href="repository-api/manual/" class="md-nav__link">
+      <a href="../../repository-api/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -859,7 +849,7 @@
   
   
     <li class="md-nav__item">
-      <a href="scheduler/manual/" class="md-nav__link">
+      <a href="../../scheduler/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -904,7 +894,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="sqlclr/" class="md-nav__link ">
+            <a href="../../sqlclr/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -937,7 +927,7 @@
   
   
     <li class="md-nav__item">
-      <a href="sqlclr/getting-started/" class="md-nav__link">
+      <a href="../../sqlclr/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -958,7 +948,7 @@
   
   
     <li class="md-nav__item">
-      <a href="sqlclr/reference/" class="md-nav__link">
+      <a href="../../sqlclr/reference/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1015,7 +1005,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="utility-api/" class="md-nav__link ">
+            <a href="../../utility-api/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1048,7 +1038,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/getting-started/" class="md-nav__link">
+      <a href="../../utility-api/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1069,7 +1059,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/email-service/" class="md-nav__link">
+      <a href="../../utility-api/email-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1090,7 +1080,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/reporting-service/" class="md-nav__link">
+      <a href="../../utility-api/reporting-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1111,7 +1101,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/sql-export-service/" class="md-nav__link">
+      <a href="../../utility-api/sql-export-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1140,7 +1130,7 @@
   
   
     <li class="md-nav__item">
-      <a href="webdesktop/manual/" class="md-nav__link">
+      <a href="../../webdesktop/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1158,10 +1148,28 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="SSRS/getting-started/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    SSRS
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1170,6 +1178,69 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#granite-branding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Granite Branding
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-barcodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Barcodes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1190,9 +1261,7 @@
             
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -1201,8 +1270,59 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#granite-branding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Granite Branding
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-barcodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Barcodes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1217,10 +1337,159 @@
                   
 
 
-<h1 id="welcome">Welcome</h1>
-<p>This library of documentation is dedicated to technical topics related to Granite WMS. We cover setups, configurations, and various other technical aspects.</p>
-<p>To continue enhancing the value of this resource, we kindly ask the community for their support and feedback.
-Please be aware that the documentation reflects the latest version of the software. Keep this in mind as you refer to the content.</p>
+  <h1>SSRS</h1>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>SQL Server needs to be installed and accessible from server where you are installing SSRS</li>
+</ul>
+<h2 id="install">Install</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If your customer is using the server as a Domain Controller, SSRS will NOT install.  To get around this, try the following: </p>
+<ul>
+<li>With customer’s permission, remove DC rule, install SSRS, and reapply DC rule.</li>
+<li>Customer to provide and alternative server / PC to run SSRS (must be within same network and be accessible from user’s PCs, i.e. can browse to the SSRS report url).</li>
+</ul>
+</div>
+<p>To install:</p>
+<ul>
+<li>Run SQLServerReportingServices(2019) from the dropbox folder "/Software Installs/Granite/Granite Reports/SQL Server Reporting Services"</li>
+</ul>
+<p>OR </p>
+<ul>
+<li>Download the installer from <a href="https://www.microsoft.com/en-us/download/details.aspx?id=100122">SSRS 2019</a></li>
+</ul>
+<p>Follow the install prompts, selecting <strong>Developer</strong> as the edition to install. </p>
+<p>Once the install completes, select the option to <strong>"Configure report server"</strong>. </p>
+<h2 id="configuration">Configuration</h2>
+<h4>Web Service URL</h4>
+
+<p>Once Report Server Configuration Manager has launched, in the left panel, select <strong>"Web Service URL"</strong>. </p>
+<p>Edit only the TCP Port. In this example 40071 was used but you can use any unreserved port. Select apply and you should see the following:</p>
+<p><img alt="WebServiceURL" src="../img/WebServiceURL.PNG" /></p>
+<h4>Database</h4>
+
+<p>Next select the <strong>"Database"</strong> in the left panel.</p>
+<p>Here select <strong>"Change Database"</strong> and in the new window do the following:</p>
+<ol>
+<li>
+<p>Create a new report server database <strong>"Next"</strong></p>
+</li>
+<li>
+<p>Connect to SQL Server Instance with SQL Server Account Authentication Type <strong>"Next"</strong></p>
+</li>
+<li>
+<p>Specify Database Name (the default was used for this install) <strong>"Next"</strong></p>
+</li>
+<li>
+<p>Change Authentication Type to SQL Server Credentials and specify Sql Username and Password <strong>"Next"</strong></p>
+</li>
+<li>
+<p>On Summary <strong>"Next"</strong></p>
+</li>
+<li>
+<p><strong>"Finish"</strong></p>
+</li>
+</ol>
+<p><img alt="Database" src="../img/Database.gif" /></p>
+<h4>Web Portal URL</h4>
+
+<p>Next select the <strong>"Web Portal URL"</strong> in the left panel.</p>
+<p>Select <strong>"Apply"</strong> and you should see the following:</p>
+<p><img alt="WebServiceURL" src="../img/WebPortalURL.PNG" /></p>
+<p>Click the link to go to the Web Portal</p>
+<p>If your are prompted to sign in, the login details are the windows credentials (domain\username or Administrator depending on what server login details have been provided) like below:</p>
+<p><img alt="Login" src="../img/Login.PNG" /></p>
+<h2 id="granite-branding">Granite Branding</h2>
+<p>To apply the Granite Branding go to site setting &gt; branding and upload the zipped file located in dropbox at <strong>"\Software Installs\Granite\Granite Reports\SQL Server Reporting Services\Granite Branding"</strong></p>
+<p><img alt="Branding" src="../img/Branding.PNG" /></p>
+<h2 id="adding-barcodes">Adding Barcodes</h2>
+<p>Barcodes are rendered as images within SSRS, so to be able to produce a barcode on a report, the value to be printed must be passed through an image generator and displayed on the report as an image.</p>
+<p>To set this up on the SSRS running server, the following needs to be in setup and configured:</p>
+<h4>BarcodeLib.ddl</h4>
+
+<p>Copy the <strong>"BarcodeLib.dll"</strong> from dropbox <strong>"\Software Installs\Granite\Granite Reports\SQL Server Reporting Services\Barcodes on SSRS reports"</strong> to the following locations:</p>
+<ul>
+<li>For Standalone version of SSRS: <strong>"C:\Program Files\Microsoft SQL Server Reporting Services\SSRS\ReportServer\bin"</strong></li>
+<li>For full SQL version installation: <strong>"C:\Program Files\Microsoft SQL Server\MSRS10_50.MSSQLSERVER\Reporting Services\ReportServer\bin\"</strong>
+-⦁  For development / report builder:
+<strong>"C:\Program Files (x86)\Microsoft Report Builder"</strong></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ensure that <strong>"BarcodeLib.dll"</strong> is not blocked. Go to the properties of the file and select Unblock if necessary.</p>
+</div>
+<p><img alt="Unblock" src="../img/Unblock.PNG" /></p>
+<h4>Microsoft Report Builder</h4>
+
+<p>In report properties:</p>
+<ol>
+<li>
+<p>Add References to “BarcodeLib.dll” and “System.Drawing.dll” from the following:</p>
+<ul>
+<li>BarcodeLib.dll (use server folder from above, i.e. standalone / full server)</li>
+<li>System.Drawing.dll (C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll)</li>
+</ul>
+</li>
+<li>
+<p>Insert the code: </p>
+<ul>
+<li>
+<p>For Code 3of9 barcode:
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">Public</span><span class="w"> </span><span class="k">Function</span><span class="w"> </span><span class="nf">Convert</span><span class="p">(</span><span class="n">Text</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="kt">Byte</span><span class="p">()</span>
+<span class="w">        </span><span class="k">Dim</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="n">Drawing</span><span class="p">.</span><span class="n">Bitmap</span>
+<span class="w">        </span><span class="n">bar</span><span class="p">.</span><span class="n">Alignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BarcodeLib</span><span class="p">.</span><span class="n">AlignmentPositions</span><span class="p">.</span><span class="n">LEFT</span>
+<span class="w">        </span><span class="n">bar</span><span class="p">.</span><span class="n">IncludeLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">False</span>
+<span class="w">        </span><span class="n">bar</span><span class="p">.</span><span class="n">RotateFlipType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Drawing</span><span class="p">.</span><span class="n">RotateFlipType</span><span class="p">.</span><span class="n">RotateNoneFlipNone</span>
+<span class="w">        </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bar</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">BarcodeLib</span><span class="p">.</span><span class="n">TYPE</span><span class="p">.</span><span class="n">CODE39Extended</span><span class="p">,</span><span class="w"> </span><span class="n">Text</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span>
+<span class="w">        </span><span class="k">Dim</span><span class="w"> </span><span class="n">bitmapData</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="kt">Byte</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">Nothing</span>
+<span class="w">        </span><span class="k">Using</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="k">New</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">MemoryStream</span><span class="p">()</span>
+<span class="w">            </span><span class="n">b</span><span class="p">.</span><span class="n">Save</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="n">Drawing</span><span class="p">.</span><span class="n">Imaging</span><span class="p">.</span><span class="n">ImageFormat</span><span class="p">.</span><span class="n">Bmp</span><span class="p">)</span>
+<span class="w">            </span><span class="n">bitmapData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ms</span><span class="p">.</span><span class="n">ToArray</span><span class="p">()</span>
+<span class="w">        </span><span class="k">End</span><span class="w"> </span><span class="k">Using</span>
+<span class="w">        </span><span class="k">Return</span><span class="w"> </span><span class="n">bitmapData</span>
+<span class="w">    </span><span class="k">End</span><span class="w"> </span><span class="k">Function</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>For Code128 barcode:
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">Public</span><span class="w"> </span><span class="k">Function</span><span class="w"> </span><span class="nf">Convert128</span><span class="p">(</span><span class="n">Text</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="kt">Byte</span><span class="p">()</span>
+<span class="w">        </span><span class="k">Dim</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="n">Drawing</span><span class="p">.</span><span class="n">Bitmap</span>
+<span class="w">        </span><span class="n">bar</span><span class="p">.</span><span class="n">Alignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BarcodeLib</span><span class="p">.</span><span class="n">AlignmentPositions</span><span class="p">.</span><span class="n">LEFT</span>
+<span class="w">        </span><span class="n">bar</span><span class="p">.</span><span class="n">IncludeLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">False</span>
+<span class="w">        </span><span class="n">bar</span><span class="p">.</span><span class="n">RotateFlipType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Drawing</span><span class="p">.</span><span class="n">RotateFlipType</span><span class="p">.</span><span class="n">RotateNoneFlipNone</span>
+<span class="w">        </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bar</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">BarcodeLib</span><span class="p">.</span><span class="n">TYPE</span><span class="p">.</span><span class="n">CODE128</span><span class="p">,</span><span class="w"> </span><span class="n">Text</span><span class="p">,</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
+<span class="w">        </span><span class="k">Dim</span><span class="w"> </span><span class="n">bitmapData</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="kt">Byte</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">Nothing</span>
+<span class="w">        </span><span class="k">Using</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="ow">As</span><span class="w"> </span><span class="k">New</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">MemoryStream</span><span class="p">()</span>
+<span class="w">            </span><span class="n">b</span><span class="p">.</span><span class="n">Save</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="n">Drawing</span><span class="p">.</span><span class="n">Imaging</span><span class="p">.</span><span class="n">ImageFormat</span><span class="p">.</span><span class="n">Bmp</span><span class="p">)</span>
+<span class="w">            </span><span class="n">bitmapData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ms</span><span class="p">.</span><span class="n">ToArray</span><span class="p">()</span>
+<span class="w">        </span><span class="k">End</span><span class="w"> </span><span class="k">Using</span>
+<span class="w">        </span><span class="k">Return</span><span class="w"> </span><span class="n">bitmapData</span>
+<span class="w">    </span><span class="k">End</span><span class="w"> </span><span class="k">Function</span>
+</code></pre></div></p>
+</li>
+</ul>
+<p><img alt="ReportProperties" src="../img/BarcodeReportProperties.gif" /></p>
+</li>
+</ol>
+<p>In image properties:</p>
+<ul>
+<li>Use an Image with the following settings:<ul>
+<li>For Code3of9 Barcode:<br />
+    Image source: Database<br />
+    Expression: =Code.Convert("<em>" &amp; Fields!DocumentNumber.Value &amp; "</em>")<br />
+    MIME Type: image/bmp<br />
+    Size: Fit Proportional</li>
+<li>For Code128 Barcode:<br />
+    Image source: Database<br />
+    Expression: =Code.Convert(Fields!DocumentNumber.Value)<br />
+    MIME Type: image/bmp<br />
+    Size: Fit Proportional</li>
+</ul>
+</li>
+</ul>
+<p><img alt="ReportProperties" src="../img/BarcodeImageProperties.gif" /></p>
 
 
 
@@ -1228,13 +1497,8 @@ Please be aware that the documentation reflects the latest version of the softwa
 
 
 
-  
-  
 
 
-
-
-  
 
 
 
@@ -1278,10 +1542,10 @@ Please be aware that the documentation reflects the latest version of the softwa
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.c18c5fb9.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
     
   </body>

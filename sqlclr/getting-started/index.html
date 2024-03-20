@@ -8,26 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://granitewms.github.io/granitedocs/">
+        <link rel="canonical" href="https://granitewms.github.io/granitedocs/sqlclr/getting-started/">
       
       
+        <link rel="prev" href="../">
       
-        <link rel="next" href="custodian-api/manual/">
+      
+        <link rel="next" href="../reference/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
-        <title>Granite WMS</title>
+        <title>Getting Started - Granite WMS</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.50c56a3b.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome" class="md-skip">
+        <a href="#install-sqlclr" class="md-skip">
           Skip to content
         </a>
       
@@ -86,7 +88,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Granite WMS" class="md-header__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+    <a href="../.." title="Granite WMS" class="md-header__button md-logo" aria-label="Granite WMS" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -106,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Getting Started
             
           </span>
         </div>
@@ -199,11 +201,9 @@
         
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
         
   
     
@@ -218,11 +218,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="custodian-api/manual/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../custodian-api/manual/" class="md-tabs__link">
           
   
     
@@ -246,9 +248,7 @@
           
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -259,7 +259,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Granite WMS" class="md-nav__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+    <a href="../.." title="Granite WMS" class="md-nav__button md-logo" aria-label="Granite WMS" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -274,19 +274,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -295,7 +286,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -304,8 +294,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -334,12 +326,12 @@
       
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -353,7 +345,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Manuals
@@ -367,7 +359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="custodian-api/manual/" class="md-nav__link">
+      <a href="../../custodian-api/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -463,7 +455,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="integration/accpac/" class="md-nav__link ">
+            <a href="../../integration/accpac/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -496,7 +488,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/accpac/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/accpac/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -517,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/accpac/integration-jobs/" class="md-nav__link">
+      <a href="../../integration/accpac/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -570,7 +562,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="integration/evo/" class="md-nav__link ">
+            <a href="../../integration/evo/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -603,7 +595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/evo/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/evo/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -624,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/evo/integration-jobs/" class="md-nav__link">
+      <a href="../../integration/evo/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -653,7 +645,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/omni/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/omni/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -674,7 +666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/quickbooks/native-app/" class="md-nav__link">
+      <a href="../../integration/quickbooks/native-app/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -695,7 +687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/sapb1/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/sapb1/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -716,7 +708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/syspro/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/syspro/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -788,7 +780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="label-printing/bartender/manual/" class="md-nav__link">
+      <a href="../../label-printing/bartender/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -809,7 +801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="label-printing/zpl/manual/" class="md-nav__link">
+      <a href="../../label-printing/zpl/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -838,7 +830,7 @@
   
   
     <li class="md-nav__item">
-      <a href="repository-api/manual/" class="md-nav__link">
+      <a href="../../repository-api/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -859,7 +851,7 @@
   
   
     <li class="md-nav__item">
-      <a href="scheduler/manual/" class="md-nav__link">
+      <a href="../../scheduler/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -877,6 +869,8 @@
                 
   
   
+    
+  
   
   
     
@@ -894,17 +888,17 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="sqlclr/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -921,7 +915,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_6">
             <span class="md-nav__icon md-icon"></span>
             SQLCLR
@@ -934,10 +928,28 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="sqlclr/getting-started/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -946,6 +958,42 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-sqlclr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install SQLCLR
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-clr-procedures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using the CLR Procedures
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -958,7 +1006,7 @@
   
   
     <li class="md-nav__item">
-      <a href="sqlclr/reference/" class="md-nav__link">
+      <a href="../reference/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1015,7 +1063,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="utility-api/" class="md-nav__link ">
+            <a href="../../utility-api/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1048,7 +1096,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/getting-started/" class="md-nav__link">
+      <a href="../../utility-api/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1069,7 +1117,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/email-service/" class="md-nav__link">
+      <a href="../../utility-api/email-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1090,7 +1138,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/reporting-service/" class="md-nav__link">
+      <a href="../../utility-api/reporting-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1111,7 +1159,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/sql-export-service/" class="md-nav__link">
+      <a href="../../utility-api/sql-export-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1140,7 +1188,7 @@
   
   
     <li class="md-nav__item">
-      <a href="webdesktop/manual/" class="md-nav__link">
+      <a href="../../webdesktop/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1161,7 +1209,7 @@
   
   
     <li class="md-nav__item">
-      <a href="SSRS/getting-started/" class="md-nav__link">
+      <a href="../../SSRS/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1190,9 +1238,7 @@
             
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -1201,8 +1247,32 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-sqlclr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install SQLCLR
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-clr-procedures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using the CLR Procedures
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1217,10 +1287,97 @@
                   
 
 
-<h1 id="welcome">Welcome</h1>
-<p>This library of documentation is dedicated to technical topics related to Granite WMS. We cover setups, configurations, and various other technical aspects.</p>
-<p>To continue enhancing the value of this resource, we kindly ask the community for their support and feedback.
-Please be aware that the documentation reflects the latest version of the software. Keep this in mind as you refer to the content.</p>
+  <h1>Getting Started</h1>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The previous scripts and dlls have been replaced with: SQLCLR_Install.sql
+When opening the SQLCLR_Install.sql it will ask if you want to normalise the endings; select NO.
+Be sure to replace [GraniteDatabase] with the database in which you wish to create the procedures. </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are upgrading from an older version of CLR ensure that you change <code>Application</code> in <code>SystemSettings</code> table from <code>GraniteSQLCLR</code> to <code>SQLCLR</code></p>
+</div>
+<h2 id="install-sqlclr">Install SQLCLR</h2>
+<p>As of Granite version 5, the default database create script will include the installation of SQLCLR procedures.</p>
+<p>If you need to manually install SQLCLR version 5, you can find the install script here:</p>
+<div class="highlight"><pre><span></span><code>todo: final dropbox path.
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The create script requires the SQL <code>sysadmin</code> role to execute successfully. If you do not have the necessary permissions, ask the client's IT to run the script.</p>
+</div>
+<h3>SystemSettings table</h3>
+
+<p>Once the necessary assemblies and procedures have been created, you will need to ensure that your <code>SystemSettings</code> table includes the necessary entries:</p>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Key</th>
+<th>Value</th>
+<th>Description</th>
+<th>ValueDataType</th>
+<th>isEncrypted</th>
+<th>isActive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SQLCLR</td>
+<td>Webservice</td>
+<td>http://10.0.0.1:50002</td>
+<td>Granite Webservice Address</td>
+<td>string</td>
+<td>False</td>
+<td>True</td>
+</tr>
+<tr>
+<td>SQLCLR</td>
+<td>LabelPrintService</td>
+<td>http://10.0.0.1:50004</td>
+<td>Label Print Service Address</td>
+<td>string</td>
+<td>False</td>
+<td>True</td>
+</tr>
+<tr>
+<td>SQLCLR</td>
+<td>IntegrationService</td>
+<td>http://10.0.0.1:50003</td>
+<td>Integration Service Address</td>
+<td>string</td>
+<td>False</td>
+<td>True</td>
+</tr>
+<tr>
+<td>SQLCLR</td>
+<td>UtilityAPI</td>
+<td>https://10.0.0.1:50001</td>
+<td>UtilityAPI Address</td>
+<td>string</td>
+<td>False</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+<h2 id="using-the-clr-procedures">Using the CLR Procedures</h2>
+<p>The suggested way to start working with your CLR procedures is to right click the procedure in SSMS and select <code>Script Stored Procedure as</code> -&gt; <code>Execute To</code></p>
+<p>This will ensure that you have all of the necessary variables declared with correct datatypes, and that all parameters are specified for the EXECUTE statement</p>
+<p>If you are not specifying a particular value, just set the variable to NULL. The variable must still be supplied as a parameter when executing the CLR procedure.</p>
+<h2>Using the CLR Functions</h2>
+
+<p>CLR Functions are used to assist with formatting parameters with a more complex structure - typically a json input.
+Each function is related to a specific CLR procedure parameter. </p>
+<p>Doing it this way ensures that the complex parameter is properly formatted, without the need to manually manipulate json.
+This is especially helpful on versions of SQL Server that don't support the newer json related functions.</p>
+<p>The prefix indicates which of the CLR Procedures it is related to: </p>
+<ul>
+<li><strong>"dbo.report_"</strong> for Reporting Service procedures</li>
+<li><strong>"dbo.email_"</strong> for Email Service procedures</li>
+<li><strong>"dbo.export"</strong> for SQL Export Service procedures</li>
+</ul>
 
 
 
@@ -1228,13 +1385,8 @@ Please be aware that the documentation reflects the latest version of the softwa
 
 
 
-  
-  
 
 
-
-
-  
 
 
 
@@ -1278,10 +1430,10 @@ Please be aware that the documentation reflects the latest version of the softwa
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.c18c5fb9.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
     
   </body>

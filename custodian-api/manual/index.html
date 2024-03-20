@@ -8,26 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://granitewms.github.io/granitedocs/">
+        <link rel="canonical" href="https://granitewms.github.io/granitedocs/custodian-api/manual/">
       
       
+        <link rel="prev" href="../..">
       
-        <link rel="next" href="custodian-api/manual/">
+      
+        <link rel="next" href="../../integration/accpac/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
-        <title>Granite WMS</title>
+        <title>Custodian API - Granite WMS</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.50c56a3b.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome" class="md-skip">
+        <a href="#custodian-api" class="md-skip">
           Skip to content
         </a>
       
@@ -86,7 +88,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Granite WMS" class="md-header__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+    <a href="../.." title="Granite WMS" class="md-header__button md-logo" aria-label="Granite WMS" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -106,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Custodian API
             
           </span>
         </div>
@@ -199,11 +201,9 @@
         
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
         
   
     
@@ -218,11 +218,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="custodian-api/manual/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
     
@@ -246,9 +248,7 @@
           
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -259,7 +259,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Granite WMS" class="md-nav__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+    <a href="../.." title="Granite WMS" class="md-nav__button md-logo" aria-label="Granite WMS" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -274,19 +274,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -295,7 +286,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -304,8 +294,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -334,12 +326,12 @@
       
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -353,7 +345,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Manuals
@@ -364,10 +356,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="custodian-api/manual/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Custodian API
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -376,6 +388,101 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connectionstrings" class="md-nav__link">
+    <span class="md-ellipsis">
+      ConnectionStrings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allowedorigins" class="md-nav__link">
+    <span class="md-ellipsis">
+      AllowedOrigins
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#systemsettings" class="md-nav__link">
+    <span class="md-ellipsis">
+      SystemSettings
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshoot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshoot
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -463,7 +570,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="integration/accpac/" class="md-nav__link ">
+            <a href="../../integration/accpac/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -496,7 +603,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/accpac/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/accpac/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -517,7 +624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/accpac/integration-jobs/" class="md-nav__link">
+      <a href="../../integration/accpac/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -570,7 +677,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="integration/evo/" class="md-nav__link ">
+            <a href="../../integration/evo/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -603,7 +710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/evo/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/evo/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -624,7 +731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/evo/integration-jobs/" class="md-nav__link">
+      <a href="../../integration/evo/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -653,7 +760,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/omni/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/omni/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -674,7 +781,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/quickbooks/native-app/" class="md-nav__link">
+      <a href="../../integration/quickbooks/native-app/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -695,7 +802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/sapb1/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/sapb1/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -716,7 +823,7 @@
   
   
     <li class="md-nav__item">
-      <a href="integration/syspro/sdk-provider/" class="md-nav__link">
+      <a href="../../integration/syspro/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -788,7 +895,7 @@
   
   
     <li class="md-nav__item">
-      <a href="label-printing/bartender/manual/" class="md-nav__link">
+      <a href="../../label-printing/bartender/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -809,7 +916,7 @@
   
   
     <li class="md-nav__item">
-      <a href="label-printing/zpl/manual/" class="md-nav__link">
+      <a href="../../label-printing/zpl/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -838,7 +945,7 @@
   
   
     <li class="md-nav__item">
-      <a href="repository-api/manual/" class="md-nav__link">
+      <a href="../../repository-api/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -859,7 +966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="scheduler/manual/" class="md-nav__link">
+      <a href="../../scheduler/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -904,7 +1011,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="sqlclr/" class="md-nav__link ">
+            <a href="../../sqlclr/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -937,7 +1044,7 @@
   
   
     <li class="md-nav__item">
-      <a href="sqlclr/getting-started/" class="md-nav__link">
+      <a href="../../sqlclr/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -958,7 +1065,7 @@
   
   
     <li class="md-nav__item">
-      <a href="sqlclr/reference/" class="md-nav__link">
+      <a href="../../sqlclr/reference/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1015,7 +1122,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="utility-api/" class="md-nav__link ">
+            <a href="../../utility-api/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1048,7 +1155,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/getting-started/" class="md-nav__link">
+      <a href="../../utility-api/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1069,7 +1176,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/email-service/" class="md-nav__link">
+      <a href="../../utility-api/email-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1090,7 +1197,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/reporting-service/" class="md-nav__link">
+      <a href="../../utility-api/reporting-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1111,7 +1218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="utility-api/sql-export-service/" class="md-nav__link">
+      <a href="../../utility-api/sql-export-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1140,7 +1247,7 @@
   
   
     <li class="md-nav__item">
-      <a href="webdesktop/manual/" class="md-nav__link">
+      <a href="../../webdesktop/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1161,7 +1268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="SSRS/getting-started/" class="md-nav__link">
+      <a href="../../SSRS/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1190,9 +1297,7 @@
             
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -1203,6 +1308,89 @@
   
     
   
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connectionstrings" class="md-nav__link">
+    <span class="md-ellipsis">
+      ConnectionStrings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allowedorigins" class="md-nav__link">
+    <span class="md-ellipsis">
+      AllowedOrigins
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#systemsettings" class="md-nav__link">
+    <span class="md-ellipsis">
+      SystemSettings
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshoot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshoot
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1217,10 +1405,47 @@
                   
 
 
-<h1 id="welcome">Welcome</h1>
-<p>This library of documentation is dedicated to technical topics related to Granite WMS. We cover setups, configurations, and various other technical aspects.</p>
-<p>To continue enhancing the value of this resource, we kindly ask the community for their support and feedback.
-Please be aware that the documentation reflects the latest version of the software. Keep this in mind as you refer to the content.</p>
+<h1 id="custodian-api">Custodian API</h1>
+<p><img alt="Local Image" src="../custodian.jpg" /></p>
+<p>The primary responsibility of the Custodian API is to manage <strong>Process Templates</strong>, which encapsulate Granite Processes along with Process Steps, web templates, and pre-scripts. Each template consists of both <strong>metadata</strong> and <strong>artifact</strong> files. Metadata serves to document the process and provide additional information, while artifacts encompass all the data, scripts, views, lookups, and static data necessary for deploying the process. Ultimately, each deployment is self-contained, facilitating seamless sharing and deployment processes through the WebDesktop.</p>
+<hr />
+<h2 id="setup">Setup</h2>
+<h5 id="requirements">Requirements</h5>
+<ul>
+<li><a href="https://dotnet.microsoft.com/en-us/download/dotnet/8.0">ASP.NET Core 8 Hosting Bundle</a></li>
+<li>IIS 8 onwards</li>
+<li>Sufficient permissions for folder and file access and IIS application creation</li>
+</ul>
+<h2 id="application-settings">Application Settings</h2>
+<p>The settings below are configured in the <code>appsettings.json</code>.</p>
+<h5 id="connectionstrings">ConnectionStrings</h5>
+<p>Configuring multiple connection strings allow you to deploy to any instance of Granite.
+The name of the connection string will be used in the Webdesktop to identify the connection.
+Example CONNECTION and TEST.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;ConnectionStrings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;CONNECTION&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Data Source=.;Initial Catalog=GraniteLive;Persist Security Info=True;User ID=;TrustServerCertificate=True;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;TEST&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Data Source=.;Initial Catalog=GraniteTest;Persist Security Info=True;User ID=;TrustServerCertificate=True;&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+</code></pre></div>
+<h5 id="allowedorigins">AllowedOrigins</h5>
+<p>The 'allowed origins' is a list of addresses for applications requiring access to the API. 
+By default, the only address that requires configuration is the Granite <strong>WebDesktop</strong> address.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;AllowedOrigins&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;https://192.168.1.10:8081&quot;</span><span class="w"> </span><span class="p">]</span>
+</code></pre></div>
+<h4 id="systemsettings">SystemSettings</h4>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">SystemSettings</span><span class="w"> </span><span class="p">([</span><span class="n">Application</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="k">Key</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Description</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isEncrypted</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isActive</span><span class="p">],</span><span class="w"> </span><span class="n">AuditDate</span><span class="p">,</span><span class="w"> </span><span class="n">AuditUser</span><span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span>
+<span class="p">(</span><span class="s1">&#39;GRANITECUSTODIAN&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Repo_id&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;676912773&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">&#39;GRANITECUSTODIAN&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Token&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;******&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">&#39;GRANITECUSTODIAN&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Stores&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Approved,Draft&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><strong><code>Take Note</code></strong> Ensure that the Token is Encrypted. After 90 days reset the token. We will issue a new token prior to expiry.</li>
+<li>New stores could be introduced and added to this setting. The stores available will be communicated to the team; you cannot add names that do not exist.</li>
+</ul>
+<h2 id="troubleshoot">Troubleshoot</h2>
+<p>The most common issues will arise with the connection to the cloud store, ensuring that the token is correct and not expired.
+Run <code>\config</code> operation to verify connections, authentication and setup.</p>
 
 
 
@@ -1228,13 +1453,8 @@ Please be aware that the documentation reflects the latest version of the softwa
 
 
 
-  
-  
 
 
-
-
-  
 
 
 
@@ -1278,10 +1498,10 @@ Please be aware that the documentation reflects the latest version of the softwa
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.c18c5fb9.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
     
   </body>
