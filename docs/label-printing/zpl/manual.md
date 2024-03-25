@@ -3,7 +3,7 @@
 ## Setup
 
 ### Prerequisites
-- [IIS](../iis/getting-started.md)
+- [IIS](../../iis/getting-started.md)
 
 ### Installation
 
