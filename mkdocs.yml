@@ -34,13 +34,9 @@ nav:
       - SQL Export Service: utility-api/sql-export-service.md
     - Web Desktop: webdesktop/manual.md
     - SSRS: SSRS/getting-started.md
-  # - Release Notes:
-  #   - Database: database/release-notes.md 
-  #   - Label Printing:
-  #     - ZPL: label-printing/zpl/release-notes.md
-  #   - Scheduler: scheduler/release-notes.md
-  #   - SQLCLR: sqlclr/release-notes.md
-  #   - Utility API: utility-api/release-notes.md
+  - Updates:
+    - What's New: updates/whats-new.md
+    - Release Notes: updates/release-notes.md
 theme: 
   name: material
   features:
