@@ -34,6 +34,7 @@ nav:
       - SQL Export Service: utility-api/sql-export-service.md
     - Web Desktop: webdesktop/manual.md
     - SSRS: SSRS/getting-started.md
+    - IIS: iis/getting-started.md
   - Updates:
     - What's New: updates/whats-new.md
     - Release Notes: updates/release-notes.md
@@ -45,6 +46,7 @@ theme:
     - navigation.top
     - toc.follow
     - content.code.copy
+    - content.tabs.link
   palette:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
@@ -62,5 +64,7 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
   - attr_list
   - md_in_html
