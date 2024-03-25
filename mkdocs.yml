@@ -33,7 +33,7 @@ nav:
       - Reporting Service: utility-api/reporting-service.md
       - SQL Export Service: utility-api/sql-export-service.md
     - Web Desktop: webdesktop/manual.md
-    - SSRS: SSRS/getting-started.md
+    - SSRS: ssrs/getting-started.md
     - IIS: iis/getting-started.md
   - Updates:
     - What's New: updates/whats-new.md
