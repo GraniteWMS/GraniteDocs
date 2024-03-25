@@ -10,7 +10,7 @@ The central functionality of the system revolves around data **maintenance** and
 
 ### Requirements
 
-- IIS 8 onwards
+- [IIS](../iis/getting-started.md)
 - Sufficient permissions for folder and file access and IIS application creation
 
 ## Customization

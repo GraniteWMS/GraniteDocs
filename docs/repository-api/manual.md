@@ -13,7 +13,7 @@ The **WebDesktop** is the sole Granite application using the Repository API by d
 ##### Requirements
 
 - .Net Core 6
-- IIS 8 onwards
+- [IIS](../iis/getting-started.md)
 - Sufficient permissions for folder and file access and IIS application creation
   
 ##### IIS settings

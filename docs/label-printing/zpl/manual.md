@@ -2,21 +2,10 @@
 
 ## Setup
 
+### Prerequisites
+- [IIS](../iis/getting-started.md)
+
 ### Installation
-
-- Ensure you have installed [.NET 6 Web Hosting bundle](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
-
-    !!! note
-        You might need to perform an IISRESET after installing the hosting bundle.
-
-        ```cmd
-        C:\Windows\system32> IISRESET
-
-        Attempting stop...
-        Internet services successfully stopped
-        Attempting start...
-        Internet services successfully restarted
-        ```
 
 - Ensure that the folder that you have installed GraniteLabelPrintingZPL to has full access enabled for all users. This will ensure that the application log files can be created
 

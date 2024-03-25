@@ -6,7 +6,7 @@ The Granite Scheduler is an IIS application that can be used to schedule executi
 
 ### Prerequisites
 
-- IIS
+- [IIS](../iis/getting-started.md)
 - [.NET 6 Web Hosting bundle](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 - Database tables:
 	- `ScheduledJobs`
