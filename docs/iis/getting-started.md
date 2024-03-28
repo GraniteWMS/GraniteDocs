@@ -156,7 +156,7 @@ You can end up with multiple certificates named the same when the script has suc
 
 You can remove unused certificates from the `Manage computer certificates` explorer by right clicking them and deleting. Try to ensure when you create a new certificate that you are giving it a unique name to prevent this from happening.
 
-### Adding a site to IIS
+## Adding a site to IIS
 
 Before you add your site to IIS, ensure that you have configured the relevant `appsettings.json` or `web.config` file as per the application's installation guide
 
