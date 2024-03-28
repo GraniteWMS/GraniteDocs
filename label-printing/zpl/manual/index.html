@@ -319,6 +319,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -859,6 +863,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#installation" class="md-nav__link">
     <span class="md-ellipsis">
       Installation
@@ -1279,11 +1292,53 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../SSRS/getting-started/" class="md-nav__link">
+      <a href="../../../ssrs/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     SSRS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../iis/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IIS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../android-application/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scanner Application
   </span>
   
 
@@ -1335,6 +1390,15 @@
   
     <nav class="md-nav" aria-label="Setup">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#installation" class="md-nav__link">
@@ -1427,22 +1491,12 @@
 
 <h1 id="zpl">ZPL</h1>
 <h2 id="setup">Setup</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li><a href="../../../iis/getting-started/">IIS</a></li>
+</ul>
 <h3 id="installation">Installation</h3>
 <ul>
-<li>
-<p>Ensure you have installed <a href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">.NET 6 Web Hosting bundle</a></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You might need to perform an IISRESET after installing the hosting bundle.</p>
-<div class="highlight"><pre><span></span><code>C:\Windows\system32&gt; IISRESET
-
-Attempting stop...
-Internet services successfully stopped
-Attempting start...
-Internet services successfully restarted
-</code></pre></div>
-</div>
-</li>
 <li>
 <p>Ensure that the folder that you have installed GraniteLabelPrintingZPL to has full access enabled for all users. This will ensure that the application log files can be created</p>
 </li>
@@ -1639,6 +1693,8 @@ Internet services successfully restarted
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1674,7 +1730,7 @@ Internet services successfully restarted
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
