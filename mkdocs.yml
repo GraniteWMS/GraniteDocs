@@ -36,9 +36,9 @@ nav:
     - SSRS: ssrs/getting-started.md
     - IIS: iis/getting-started.md
     - Scanner Application: android-application/manual.md
-  - Updates:
-    - What's New: updates/whats-new.md
-    - Release Notes: updates/release-notes.md
+  #- Updates:
+   # - What's New: updates/whats-new.md
+    #- Release Notes: updates/release-notes.md
 theme: 
   name: material
   features:
