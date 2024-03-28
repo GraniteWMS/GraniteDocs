@@ -69,16 +69,7 @@ To create a QR code that can be used to add websites to the scanner you will nee
 Below is an example of the json code. You can add as many websites as needed. Remember to change the names and urls.
 
 ```json
-[
-    {
-      "name": "Test",
-      "url": "https://10.0.0.1:40186"
-    },
-    {
-      "name": "Live",
-      "url": "https://10.0.0.1:40086"
-    }
-]
+[{"name":"Test","url":"https://10.0.0.1:40186"},{"name":"Live","url":"https://10.0.0.1:40086"}]
 ```
 
 To create the Qr code you can use [QR.io](https://qr.io/) and then grab the QR code using the windows snipping tool. 
