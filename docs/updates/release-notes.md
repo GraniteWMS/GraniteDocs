@@ -98,6 +98,12 @@
 - `fix` Performance issue causing sql timeout on document jobs
 - `change` Use UtilityAPI for email notifications
 
+
+### Accpac Integration
+
+#### Injected jobs
+- `change` Use UtilityAPI for email notifications
+
 ## January 2024 Product Update : 4.5.3.0 
 
 !!! note
