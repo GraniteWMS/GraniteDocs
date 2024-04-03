@@ -83,6 +83,21 @@
 - `new` Unlimited step 200s
 - `new` Debug mode
 
+
+### Evo integration
+
+#### SDK Provider
+
+- `new` Map DocumentReference to Message1 on Evo SalesOrder post
+    - [https://granitewms.canny.io/request/p/evo-integration-sales-order-post-update-message-lines-on-sales-order](https://granitewms.canny.io/request/p/evo-integration-sales-order-post-update-message-lines-on-sales-order)
+
+#### Injected jobs
+
+- `new` Support for Inter Branch Requisition
+    - [https://granitewms.canny.io/request/p/evo-inter-branch-requisition-document-sync-job](https://granitewms.canny.io/request/p/evo-inter-branch-requisition-document-sync-job)
+- `fix` Performance issue causing sql timeout on document jobs
+- `change` Use UtilityAPI for email notifications
+
 ## January 2024 Product Update : 4.5.3.0 
 
 !!! note
