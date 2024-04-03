@@ -22,7 +22,7 @@ See below for information for specifics on how document and master data jobs wor
 
 	---
 
-	Evolution type: Inter Branch Transfer
+	Evolution type: Inter Branch Transfer OR Inter Branch Requisition
 
 -   RECEIPT
 
