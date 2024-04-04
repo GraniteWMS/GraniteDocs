@@ -35,6 +35,19 @@
 - `remove` Table SystemSettings: Email related settings removed
 - `remove` Table DataGrid: SystemSettings grid
 
+#### SQLCLR
+- `new` support for UtilityAPI operations
+	- Report Print
+	- Report Export
+	- SQL Table Export
+	- Template Email
+	- Simple Email
+- `change` CLR procedures are now deployed with database create, no need to install separately
+- `change` improved error handling to show more detailed messages when SystemSettings is incorrect
+- `change` add manufactureDate to TakeOn procedure
+- `change` add NoEntities to clr_Replenish
+
+
 #### Accpac Integration
 
 - `fix` view Integration_Accpac_AutoSimplyMODetail 
@@ -120,6 +133,11 @@
 - `new` Support for encrypted SystemSettings
 
 
+### Label Printing Bartender
+- `change` Logging provider to Nlog
+
+### Scheduler
+- `change` email jobs now use Utility API - support for old implementation removed
 
 ## January 2024 Product Update : 4.5.3.0 
 
