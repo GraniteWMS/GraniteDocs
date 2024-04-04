@@ -26,6 +26,7 @@ Keep to a single stored procedure per prescript and try to avoid further decoupl
 
 Decoupling and Abstraction often used for re-use can increase complexity, ensure the re-use value is justified.
 
+
 ### Explicit over Generic
 
 `Be Explicit`
@@ -35,11 +36,3 @@ However, it's preferable to develop Explicit (single-use) processes for the sake
 
 
 -----
-
-
-
-
-Granite processes (process flow) are designed to be versatile and generic tool, incorporating pre-scripts, web templates, lookup data, and more.
-The task of both technical and business consultants is to utilize this tool to **create clear and specific processes**.
-The goal isn't to create more generic processes, but rather to focus on refining the business domain, specifically in warehousing.
-
