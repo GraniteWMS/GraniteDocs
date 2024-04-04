@@ -3,7 +3,15 @@ site_url: https://granitewms.github.io/granitedocs/
 nav: 
   - Home: index.md
   - Manuals:
-    - Custodian API: custodian-api/manual.md
+    - IIS: iis/getting-started.md
+    - SSRS: ssrs/getting-started.md
+    - Label Printing: 
+      - Bartender: label-printing/bartender/manual.md
+      - ZPL: label-printing/zpl/manual.md
+    - SQLCLR: 
+      - sqlclr/index.md
+      - Getting Started: sqlclr/getting-started.md
+      - CLR Procedure Reference: sqlclr/reference.md
     - Integration:
       - Accpac: 
         - integration/accpac/index.md
@@ -17,24 +25,18 @@ nav:
       - QuickBooks: integration/quickbooks/native-app.md
       - SAPB1: integration/sapb1/sdk-provider.md
       - Syspro: integration/syspro/sdk-provider.md
-    - Label Printing: 
-      - Bartender: label-printing/bartender/manual.md
-      - ZPL: label-printing/zpl/manual.md
-    - Repository API: repository-api/manual.md
+    - API:
+      - Repository API: repository-api/manual.md
+      - Custodian API: custodian-api/manual.md
+      - Utility API:
+        - utility-api/index.md
+        - Getting Started: utility-api/getting-started.md
+        - Email Service: utility-api/email-service.md
+        - Reporting Service: utility-api/reporting-service.md
+        - SQL Export Service: utility-api/sql-export-service.md
+
     - Scheduler: scheduler/manual.md
-    - SQLCLR: 
-      - sqlclr/index.md
-      - Getting Started: sqlclr/getting-started.md
-      - CLR Procedure Reference: sqlclr/reference.md
-    - Utility API:
-      - utility-api/index.md
-      - Getting Started: utility-api/getting-started.md
-      - Email Service: utility-api/email-service.md
-      - Reporting Service: utility-api/reporting-service.md
-      - SQL Export Service: utility-api/sql-export-service.md
     - Web Desktop: webdesktop/manual.md
-    - SSRS: ssrs/getting-started.md
-    - IIS: iis/getting-started.md
     - Scanner Application: android-application/manual.md
   - Updates:
     - What's New: updates/whats-new.md
