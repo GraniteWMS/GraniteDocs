@@ -90,6 +90,7 @@
 
 - `new` Map DocumentReference to Message1 on Evo SalesOrder post
     - [https://granitewms.canny.io/request/p/evo-integration-sales-order-post-update-message-lines-on-sales-order](https://granitewms.canny.io/request/p/evo-integration-sales-order-post-update-message-lines-on-sales-order)
+- `new` Support for encrypted SystemSettings
 
 #### Injected jobs
 
@@ -100,9 +101,25 @@
 
 
 ### Accpac Integration
+#### SDK Provider
+- `new` Support for encrypted SystemSettings
 
 #### Injected jobs
 - `change` Use UtilityAPI for email notifications
+
+### Omni Integration
+#### SDK Provider
+- `new` Support for encrypted SystemSettings
+
+### SAPB1 Integration
+#### SDK Provider
+- `new` Support for encrypted SystemSettings
+
+### Syspro Integration
+#### SDK Provider
+- `new` Support for encrypted SystemSettings
+
+
 
 ## January 2024 Product Update : 4.5.3.0 
 
