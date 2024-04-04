@@ -28,6 +28,31 @@ Modify the JSON layout directly within this dialog interface for seamless custom
 
 ![Local Image](griddialog.png)
 
+### Grid Properties
+
+```json
+{
+        "headerName": "Column_Name",
+        "field": "SQLView_ColumnName",
+        "width": 100,
+        "filter": "agTextColumnFilter",
+        "cellRenderer": "dateCellRenderer",
+        "hide": true,
+        "cellClassRules": {
+                "cellAlert": "x == 0"
+        }
+}
+```
+
+| Property       | Value                  |
+|--------------|------------|
+| headerName     | Name you want to display on grid |
+| field          | Name of field in your SQL View|
+| width          | Width of the column |
+| filter         | Type of filter for the column. Options : agTextColumnFilter, agDateColumnFilter, agNumberColumnFilter   |
+| cellRenderer   | How do render the cell value. Options : "dateCellRenderer"     |
+| hide           | Hide the column. true / false                   |
+| cellClassRules | Condition styling, "cellAlert": "x == 0" . Options : cellBold, cellAlert, cellAttention |
 
 !!! note
         The WebDesktop mandates a minimum set of columns to be present in both the SQL data and grid.
