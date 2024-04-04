@@ -3,7 +3,7 @@
 
 ![header](./img/header-image.jpg)
 
-The Granite Scanner Application acts as a wrapper for the ProcessApp website allowing the scanner functionality to be configured with restricted access.
+The Granite Scanner Application (**Android**) acts as a browser replacement for the ProcessApp allowing the scanner functionality to be configured with restricted access.
 
 ## Setup 
 
