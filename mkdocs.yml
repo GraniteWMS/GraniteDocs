@@ -27,7 +27,9 @@ nav:
       - Syspro: integration/syspro/sdk-provider.md
     - API:
       - Repository API: repository-api/manual.md
-      - Custodian API: custodian-api/manual.md
+      - Custodian API: 
+        - Manual: custodian-api/manual.md
+        - Best Practice: custodian-api/best-practice.md
       - Utility API:
         - utility-api/index.md
         - Getting Started: utility-api/getting-started.md
