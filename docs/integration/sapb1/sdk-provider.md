@@ -47,7 +47,7 @@ You can locate the database script to create these records in the following path
 | IntegrationSAPB1   | UserName                                |       | SAP application user name|
 | IntegrationSAPB1   | Password                                |       | SAP application user password|
 | IntegrationSAPB1   | InventoryAccountCode                    |       | TAKEON AccountCode |
-| IntegrationSAPB1   | BinEntry                                |       | 0 false, 1 true. The BinEntry will be used by TAKEON, SCRAP and ADJUSTMENT |
+| IntegrationSAPB1   | BinEntry                                |       | Greater than 0. The BinEntry will be used by TAKEON, SCRAP and ADJUSTMENT |
 
 
 !!! note
@@ -81,6 +81,9 @@ Integration Methods are predefined values, each corresponding to an operation wi
 - Documents object for entering general items to inventory
 - Table: [OIGN](https://biuan.com/OIGN/)
 
+- Supports: 
+    - BinAllocations (Appsetting BinEntry)
+
 ##### ADJUSTMENT
 - Post : SAPbobsCOM.InventoryPostingsServiceDataInterfaces.ipsInventoryPosting
 - The InventoryPostingsService service enables you to add, look up, and update inventory posting transactions.
@@ -91,15 +94,27 @@ Integration Methods are predefined values, each corresponding to an operation wi
 - The InventoryPostingsService service enables you to add, look up, and update inventory posting transactions.
 - Table: [OIQR](https://biuan.com/OIQR/)
 
+- Supports: 
+    - BinAllocations (Appsetting BinEntry)
+
 ##### REPLENISH
 - Post :SAPbobsCOM.BoObjectTypes.oStockTransfer
 - StockTransfer is a business object that represents items to transfer from one warehouse to another. This object is part of the Inventory and Production module.
 - Table: [OWTR](https://biuan.com/OWTR/)
 
+- Supports: 
+    - SerialNumbers
+    - BatchNumbers
+
 ##### MOVE
 - Post :SAPbobsCOM.BoObjectTypes.oStockTransfer
 - StockTransfer is a business object that represents items to transfer from one warehouse to another. This object is part of the Inventory and Production module.
 - Table: [OWTR](https://biuan.com/OWTR/)
+
+- Supports: 
+    - BinAllocations (Appsetting BinEntry)
+    - SerialNumbers
+    - BatchNumbers
 
 ##### TRANSFER
 - Post :SAPbobsCOM.BoObjectTypes.oStockTransfer
