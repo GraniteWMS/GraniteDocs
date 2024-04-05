@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://granitewms.github.io/granitedocs/utility-api/getting-started/">
+        <link rel="canonical" href="https://granitewms.github.io/granitedocs/custodian-api/best-practice/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../manual/">
       
       
-        <link rel="next" href="../email-service/">
+        <link rel="next" href="../../utility-api/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Getting Started - Granite WMS</title>
+        <title>Best Practice - Granite WMS</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#prerequisites" class="md-skip">
+        <a href="#best-practices-process-templates" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Getting Started
+              Best Practice
             
           </span>
         </div>
@@ -1050,8 +1050,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -1065,11 +1067,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2_6_2" id="__nav_2_6_2_label" tabindex="0">
@@ -1083,7 +1085,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_6_2">
             <span class="md-nav__icon md-icon"></span>
             Custodian API
@@ -1097,7 +1099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../custodian-api/manual/" class="md-nav__link">
+      <a href="../manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1115,10 +1117,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../custodian-api/best-practice/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Best Practice
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1127,6 +1149,62 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#simplicity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Simplicity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#low-ceremony" class="md-nav__link">
+    <span class="md-ellipsis">
+      Low Ceremony
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstraction-and-decoupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Abstraction and Decoupling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicit-over-generic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicit over Generic
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1144,8 +1222,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1169,16 +1245,16 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_3" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../utility-api/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1195,7 +1271,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_6_3">
             <span class="md-nav__icon md-icon"></span>
             Utility API
@@ -1208,28 +1284,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Getting Started
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../utility-api/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1238,42 +1296,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prerequisites
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install" class="md-nav__link">
-    <span class="md-ellipsis">
-      Install
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1286,7 +1308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../email-service/" class="md-nav__link">
+      <a href="../../utility-api/email-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1307,7 +1329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reporting-service/" class="md-nav__link">
+      <a href="../../utility-api/reporting-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1328,7 +1350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sql-export-service/" class="md-nav__link">
+      <a href="../../utility-api/sql-export-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1538,6 +1560,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1546,18 +1570,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#simplicity" class="md-nav__link">
     <span class="md-ellipsis">
-      Prerequisites
+      Simplicity
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#install" class="md-nav__link">
+  <a href="#low-ceremony" class="md-nav__link">
     <span class="md-ellipsis">
-      Install
+      Low Ceremony
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstraction-and-decoupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Abstraction and Decoupling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicit-over-generic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicit over Generic
     </span>
   </a>
   
@@ -1578,24 +1620,25 @@
                   
 
 
-  <h1>Getting Started</h1>
-
-<h2 id="prerequisites">Prerequisites</h2>
-<ul>
-<li><a href="../../iis/getting-started/">IIS</a></li>
-<li><a href="https://dotnet.microsoft.com/en-us/download/dotnet/8.0">ASP.NET Core 8 Hosting Bundle</a></li>
-</ul>
-<h2 id="install">Install</h2>
-<ol>
-<li>Configure the connection string to the Granite database in the <code>appsettings.json</code> file</li>
-<li>Add the site to IIS, be sure to run as https and select a valid certificate</li>
-<li>Configure the settings for each service that you are going to make use of<ul>
-<li><a href="../email-service/#configuration">Email Service Configuration</a></li>
-<li><a href="../reporting-service/#configuration">Reporting Service Configuration</a></li>
-<li><a href="../sql-export-service/#configuration">SqlExport Service Configuration</a></li>
-</ul>
-</li>
-</ol>
+<h1 id="best-practices-process-templates">Best Practices Process Templates</h1>
+<p><img alt="Local Image" src="../template.jpg" /></p>
+<p>The aim of a template is to encapsulate a single business use-case in a self-deployable unit. It should be easy to understand, clear in its intention, and simple to deploy. Below are some guidelines on how you would achieve this. These guidelines do not state that you should avoid certain things, but rather aim to provide context and explain some of the trade-offs of your design decisions.</p>
+<h3 id="simplicity">Simplicity</h3>
+<p><code>Always aim for simplicity over any other motivation.</code></p>
+<p>Simplicity in templates refers to how easily colleagues can deploy, modify, comprehend, and upkeep processes. 
+Your process behavior should consistently yield predefined outcomes.</p>
+<h3 id="low-ceremony">Low Ceremony</h3>
+<p><code>Ready to use</code></p>
+<p>Processes often rely on predefined, hardcoded, or static data. Ensure these are minimized, and thorough documentation is provided to highlight any required setup data, such as types, categories, locations, etc.</p>
+<h3 id="abstraction-and-decoupling">Abstraction and Decoupling</h3>
+<p><code>Less moving parts</code></p>
+<p>Keep to a single stored procedure per prescript and try to avoid further decoupling.</p>
+<p>Decoupling and Abstraction often used for re-use can increase complexity, ensure the re-use value is justified.</p>
+<h3 id="explicit-over-generic">Explicit over Generic</h3>
+<p><code>Be Explicit</code></p>
+<p>While Generic (multipurpose) processes have their value, simplicity is often compromised in their favor. 
+However, it's preferable to develop Explicit (single-use) processes for the sake of simplicity.</p>
+<hr />
 
 
 
