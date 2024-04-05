@@ -28,6 +28,16 @@ Modify the JSON layout directly within this dialog interface for seamless custom
 
 ![Local Image](griddialog.png)
 
+The Datagrid **table** is responsible to store the grid information.
+When a grid is customized, its name will be prefixed with Custom and the column **isCustomGrid** will be set accordingly.
+The column **isApplicationGrid** serves as an indicator that the grid is integrated into the WebDesktop and forms an integral part of the application. These grids are preconfigured and we do not configure the SQL view (empty).
+Conversely, when **isApplicationGrid** is set to false, it signifies that the grid is designated as an **Enquiry** grid, allowing for further customization.
+
+
+![Local Image](TableDatagrid.png)
+
+----
+
 ### Grid Properties
 
 ```json
@@ -54,10 +64,13 @@ Modify the JSON layout directly within this dialog interface for seamless custom
 | hide           | Hide the column. true / false                   |
 | cellClassRules | Condition styling, "cellAlert": "x == 0" . Options : cellBold, cellAlert, cellAttention |
 
-!!! note
-        The WebDesktop mandates a minimum set of columns to be present in both the SQL data and grid.
-        These typically include the primary key fields such as Document.Number, MasterItem.Code, etc.
-        To verify the necessary columns, access the API operation.
+
+### Grid Data Columns
+
+
+The WebDesktop mandates a **minimum** set of columns to be present in both the SQL data and grid.
+These typically include the primary key fields such as Document.Number, MasterItem.Code, etc.
+To verify the necessary columns, access the **API operation**.
 
 ![Local Image](gridmenuapioperation.png)
 
@@ -69,10 +82,3 @@ If you navigate to the API operation documentation, you can observe that we docu
 In the example provided above, ID, Code, and isActive are explicitly designated as required columns.
 
 ___
-The Datagrid **table** is responsible to store the grid information.
-When a grid is customized, its name will be prefixed with Custom and the column **isCustomGrid** will be set accordingly.
-The column **isApplicationGrid** serves as an indicator that the grid is integrated into the WebDesktop and forms an integral part of the application. These grids are preconfigured and we do not configure the SQL view (empty).
-Conversely, when **isApplicationGrid** is set to false, it signifies that the grid is designated as an **Enquiry** grid, allowing for further customization.
-
-
-![Local Image](TableDatagrid.png)
