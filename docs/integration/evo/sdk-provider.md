@@ -426,18 +426,21 @@ property.
     - LOT
     - Serial
     - Comment
+    - DocumentReference
 - IntegrationPost:
     - False - Save SalesOrder
     - True - Process SalesOrder
 - Returns:
     - SalesOrder number or Invoice number, depending on IntegrationPost setting
 
-| Granite         | Evo SDK                    | Required | Behaviour |
-|-----------------|----------------------------|----------|-----------|
-| ActionQty       | Detail.ToProcess           | Y        ||
-| Batch           | Detail.Note                | N        | Only applies if setting EvoBatchInNotes is true. Adds to comma separated list of unique batches |
-| SerialNumber    | Detail.SerialNumbers       | N        | Only applies if InventoryItem is Serial tracked in Evo |
-| Comment         | SalesOrder.ExternalOrderNo | N        ||
+| Granite                       | Evo SDK                    | Required | Behaviour |
+|-------------------------------|----------------------------|----------|-----------|
+| ActionQty                     | Detail.ToProcess           | Y        ||
+| Batch                         | Detail.Note                | N        | Only applies if setting EvoBatchInNotes is true. Adds to comma separated list of unique batches |
+| SerialNumber                  | Detail.SerialNumbers       | N        | Only applies if InventoryItem is Serial tracked in Evo |
+| Comment                       | SalesOrder.ExternalOrderNo | N        ||
+| Transaction.DocumentReference | SalesOrder.MessageLine1    | N        ||
+
 
 ### DYNAMICPICK
 
