@@ -38,6 +38,10 @@ By default, the only address that requires configuration is the Granite **WebDes
 
 "AllowedOrigins": [ "https://192.168.1.10:8081" ]
 ```
+
+!!! note
+    You cannot use wildcards like `*` in the `AllowedOrigins` setting for Custodian.
+
 #### SystemSettings
 
 ```sql
