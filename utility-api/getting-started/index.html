@@ -1580,8 +1580,31 @@
 </ul>
 <h2 id="install">Install</h2>
 <ol>
-<li>Configure the connection string to the Granite database in the <code>appsettings.json</code> file</li>
-<li>Add the site to IIS, be sure to run as https and select a valid certificate</li>
+<li>
+<p>Configure the connection string to the Granite database in the <code>appsettings.json</code> file</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="nt">&quot;ConnectionStrings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;GRANITE&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Server=.\\sql2019;Database=GraniteDatabase;User ID=Granite;Password=******;Persist Security Info=False;&quot;</span>
+<span class="p">},</span>
+<span class="nt">&quot;AllowedOrigins&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;https://:40099&quot;</span><span class="w"> </span><span class="p">],</span>
+<span class="nt">&quot;Logging&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;LogLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Information&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Microsoft.AspNetCore&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Warning&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">},</span>
+<span class="nt">&quot;AllowedHosts&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You cannot use wildcards like <code>*</code> in the <code>AllowedOrigins</code> setting for the UtilityAPI.</p>
+<p>It should contain only the WebDesktop address.</p>
+</div>
+</li>
+<li>
+<p>Add the site to IIS, be sure to run as https and select a valid certificate</p>
+</li>
 <li>Configure the settings for each service that you are going to make use of<ul>
 <li><a href="../email-service/#configuration">Email Service Configuration</a></li>
 <li><a href="../reporting-service/#configuration">Reporting Service Configuration</a></li>

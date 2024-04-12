@@ -1718,6 +1718,10 @@ Example CONNECTION and TEST.</p>
 By default, the only address that requires configuration is the Granite <strong>WebDesktop</strong> address.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&quot;AllowedOrigins&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;https://192.168.1.10:8081&quot;</span><span class="w"> </span><span class="p">]</span>
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You cannot use wildcards like <code>*</code> in the <code>AllowedOrigins</code> setting for Custodian.</p>
+</div>
 <h4 id="systemsettings">SystemSettings</h4>
 <div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">SystemSettings</span><span class="w"> </span><span class="p">([</span><span class="n">Application</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="k">Key</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Description</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isEncrypted</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isActive</span><span class="p">],</span><span class="w"> </span><span class="n">AuditDate</span><span class="p">,</span><span class="w"> </span><span class="n">AuditUser</span><span class="p">)</span>
 <span class="k">VALUES</span><span class="w"> </span>

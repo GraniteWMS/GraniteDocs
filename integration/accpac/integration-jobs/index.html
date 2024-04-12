@@ -1952,7 +1952,28 @@ information related to that document from the ERP database and apply the changes
 <p><img alt="Injectedjobfiles" src="../accpac-img/injectedjobfiles.png" /></p>
 <h2 id="configure">Configure</h2>
 <h3 id="schedule-configuration">Schedule configuration</h3>
-<p>See the GraniteScheduler manual for how to configure scheduled jobs - ERP document integration jobs are of type INJECTED</p>
+<p>See the GraniteScheduler manual for the basics on how to <a href="../../../scheduler/manual/#injected-jobs-integration-jobs">configure injected jobs</a>.</p>
+<p>Sometimes when the documents in Accpac are very large, the lines will not be finished inserting before we start fetching the records to create in Granite.
+To circumvent this issue, we have a setting that allows you to configure an offset for the <code>LastUpdateDateTime</code> field in the <code>IntegrationDocumentQueue</code> table.</p>
+<p>To configure this you simply add an entry into the <code>ScheduledJobInputs</code> table with the Name <code>LastUpdateTimeOffset</code> and the Value in minutes that you want to offset by</p>
+<table>
+<thead>
+<tr>
+<th>JobName</th>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SalesOrderJob</td>
+<td>LastUpdateTimeOffset</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>Using this example, the SalesOrderJob will only pick up documents that have been sitting in the IntegrationDocumentQueue for longer than 5 minutes at the time the job runs.
+This should give Accpac the time it needs to insert all of the lines on a very large document. </p>
 <h3 id="email-on-error">Email on Error</h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
