@@ -20,7 +20,7 @@ You should have the following settings after running the script:
 |-------------------|-----------------------|---------------------------|-----------------------------------------------------------------------------------------------------------|---------------|---------------|-----------|
 | Granite.Utility	| SSRSWebServiceUrl			|  | Url of the reporting service | string	| False	| True	|
 
-The SSRS Web Service Url should look something like this: http://10.0.01/ReportServer
+The SSRS Web Service Url should look something like this: http://10.0.0.1/ReportServer
 
 You can find it on the Report Server Configuration Manager under the web service url tab. Check the configuration page (`/config`) and ensure that `Report Service URL Valid` and `Report Execution Service URL Valid` are both `true`.
 
