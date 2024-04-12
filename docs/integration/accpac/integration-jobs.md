@@ -83,7 +83,19 @@ Example:
 
 ## Configure
 ### Schedule configuration
-See the GraniteScheduler manual for how to configure scheduled jobs - ERP document integration jobs are of type INJECTED
+See the GraniteScheduler manual for the basics on how to [configure injected jobs](../../scheduler/manual.md#injected-jobs-integration-jobs).
+
+Sometimes when the documents in Accpac are very large, the lines will not be finished inserting before we start fetching the records to create in Granite.
+To circumvent this issue, we have a setting that allows you to configure an offset for the `LastUpdateDateTime` field in the `IntegrationDocumentQueue` table.
+
+To configure this you simply add an entry into the `ScheduledJobInputs` table with the Name `LastUpdateTimeOffset` and the Value in minutes that you want to offset by
+
+| JobName       | Name                  | Value |
+|---------------|-----------------------|-------|
+| SalesOrderJob | LastUpdateTimeOffset  | 5     |
+
+Using this example, the SalesOrderJob will only pick up documents that have been sitting in the IntegrationDocumentQueue for longer than 5 minutes at the time the job runs.
+This should give Accpac the time it needs to insert all of the lines on a very large document. 
 
 ### Email on Error
 
