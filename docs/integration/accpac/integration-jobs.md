@@ -68,11 +68,9 @@ The document jobs themselves also sync changes to the TradingPartners & MasterIt
 !!! note 
     If you are upgrading from the old StoredProcedure/Trigger integration, ensure that ERPIdentification (Document, DocumentDetail, MasterItem, TradingPartner) column is populated with correct values before attempting to start the new jobs
 
-### Set up database triggers & views
+### Set up database triggers, views, and data
 
-Run the create scripts for the views and triggers that you will need for the version of ERP & document types that the site uses.
-
-All document types also require the Integration_ERP_MasterItem view.
+Run the `AccpacIntegrationJobs_Create.sql` script to create all the views, triggers and ScheduledJob table entries needed. 
 
 ### Add the Injected job files to GraniteScheduler
 To add the injected job files to the GraniteScheduler, simply copy the dlls and xml files into the root folder of GraniteScheduler. 
@@ -82,8 +80,31 @@ Example:
 ![Injectedjobfiles](accpac-img\injectedjobfiles.png)
 
 ## Configure
+
+### Initial Import
+
+When you first set up a new site, there will be documents that are partially processed already in Accpac. The following document types now support setting an initial ActionQty:
+
+- Intransit
+- PurchaseOrder
+- Receipt
+- SalesOrder
+- Transfer
+
+When ActionQty is a column returned by these types' Detail view, the ActionQty will be set to the same in Granite when the lines are inserted. This ensures that users cannot action more than the actual outstanding qty on the document.
+
+!!! note
+    ActionQty will ONLY be used on insert of document lines, never on update as this would cause problems once the document is actioned in Granite.
+
+    The ActionQty column should be removed from the detail views after the initial import has completed syncing documents.
+
+You can use the `InitialImport.sql` script to enter all of the Accpac documents not in a COMPLETE/CANCELLED statue into the IntegrationDocumentQueue table. The job will then pick these up and insert them once it is enabled.
+
+!!! note
+    Reminder, ActionQty column should be removed from the detail views after the initial import is finished running.
+
 ### Schedule configuration
-See the GraniteScheduler manual for the basics on how to [configure injected jobs](../../scheduler/manual.md#injected-jobs-integration-jobs).
+See the GraniteScheduler manual for the details on how to [configure injected jobs](../../scheduler/manual.md#injected-jobs-integration-jobs). Most of the work will have already been done for you by the `AccpacIntegrationJobs_Create.sql` script, you can simply activate the jobs you want to run. 
 
 Sometimes when the documents in Accpac are very large, the lines will not be finished inserting before we start fetching the records to create in Granite.
 To circumvent this issue, we have a setting that allows you to configure an offset for the `LastUpdateDateTime` field in the `IntegrationDocumentQueue` table.
