@@ -2,182 +2,202 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://granitewms.github.io/granitedocs/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/android-application/manual/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/custodian-api/best-practice/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/custodian-api/manual/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/database/release-notes/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/iis/getting-started/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/integration/accpac/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/integration/accpac/integration-jobs/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/integration/accpac/sdk-provider/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://granitewms.github.io/granitedocs/integration/acumatica/</loc>
+         <lastmod>2024-05-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://granitewms.github.io/granitedocs/integration/acumatica/integration-jobs./</loc>
+         <lastmod>2024-05-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://granitewms.github.io/granitedocs/integration/acumatica/sdk-providers/</loc>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/integration/evo/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/integration/evo/integration-jobs/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/integration/evo/sdk-provider/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/integration/omni/sdk-provider/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/integration/quickbooks/native-app/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/integration/sapb1/sdk-provider/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/integration/syspro/sdk-provider/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/label-printing/bartender/manual/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/label-printing/zpl/manual/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/label-printing/zpl/release-notes/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/repository-api/manual/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/scheduler/manual/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/scheduler/release-notes/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/sqlclr/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/sqlclr/getting-started/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/sqlclr/reference/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/sqlclr/release-notes/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/ssrs/getting-started/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://granitewms.github.io/granitedocs/third-party-integration/GettingStarted/</loc>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/updates/release-notes/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/updates/whats-new/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/utility-api/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/utility-api/email-service/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/utility-api/getting-started/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/utility-api/release-notes/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/utility-api/reporting-service/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/utility-api/sql-export-service/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://granitewms.github.io/granitedocs/webdesktop/manual/</loc>
-         <lastmod>2024-04-12</lastmod>
+         <lastmod>2024-05-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
