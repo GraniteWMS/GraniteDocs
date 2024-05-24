@@ -672,7 +672,7 @@ This method is also used by Backflush.
 Perform an Receipt of finish goods based on the Granite Manufacture transactions for the WorkOrder.
 Prior to receipt typically the Issuances need to be done, or you need to perform a backflush as per below.
 
-- Granite Process IntegrationMethod: **AUTOSIMPLY_RECEIPT**
+- Granite Process IntegrationMethod: **AUTOSIMPLY_RECEIPTS**
 - Accpac/AutoSimply: **Manufacture -> MF Transactions -> Material Receipt -> Receipts**
 - Support for: 
     - Lots
