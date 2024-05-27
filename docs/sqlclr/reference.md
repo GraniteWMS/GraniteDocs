@@ -51,6 +51,11 @@ The following procedures directly map to the WebService request, for details bro
 ```
 /json/metadata?op=StockTakeReleaseRequest
 ```
+- dbo.clr_Transfer
+```
+/json/metadata?op=InventoryTransferRequest
+```
+
 <h4>dbo.clr_TakeOn</h4>
 
 This procedure differs from the WebService call in that it combines the parameters **"AssignTrackingEntityBarcode"** and **"TrackingEntityBarcode"** into **@assignTrackingEntityBarcode**. This parameter is not required, so leave as a null if not used for the standard TakeOn behavior.

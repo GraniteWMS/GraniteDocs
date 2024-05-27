@@ -18,7 +18,7 @@ By promoting interaction with the API, this integration enhances security, maint
 
     ---
 
-    TAKEON, SCRAP, ADJUST, MOVE, PALLETIZE, REPLENISH, RECLASSIFY
+    TAKEON, SCRAP, ADJUST, MOVE, PALLETIZE, REPLENISH, RECLASSIFY, TRANSFER
 
 -   __Inbound__
 
