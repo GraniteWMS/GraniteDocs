@@ -535,6 +535,11 @@ Same as SCRAP but Adjustment Type set to **BOTH**
 | ActionQty      | QUANTITY   | Y        | ICASEN       ||
 
 ### UPDATE_ASSEMBLIES
+!!! note 
+    Granite document number must exist in Accpac as the Assembly number. If not found will throw error.
+
+
+
 - Granite Transaction: **MANUFACTURE**
 - Accpac: **I/C Transactions Assemblies**
 - Supports:
