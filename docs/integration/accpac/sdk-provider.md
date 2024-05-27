@@ -535,7 +535,7 @@ Same as SCRAP but Adjustment Type set to **BOTH**
 | ActionQty      | QUANTITY   | Y        | ICASEN       ||
 
 ### UPDATE_ASSEMBLIES
-- Granite Transaction: **CONSUME**
+- Granite Transaction: **MANUFACTURE**
 - Accpac: **I/C Transactions Assemblies**
 - Supports:
     - Transaction IDs 
