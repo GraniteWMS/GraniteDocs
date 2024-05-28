@@ -395,19 +395,6 @@ Clear SORTBODOC Item mapping:
 | Batch         | Lot                       |               |
 | UOM           | UnitOfMeasure             |               |
 
-document.Item.Add(new SORTBODOC.Item
-{
-    SalesOrder = transactions[0].Document,
-    SalesOrderLine = item.Key,
-    StockCode = item.Value,
-    Quantity = "0",
-    CompleteLine = SORTBODOC.CompleteLine.N,
-    ReleaseFromMultipleLines = SORTBODOC.ReleaseFromMultipleLines.N,
-    AdjustOrderQuantity = SORTBODOC.AdjustOrderQuantity.N,
-    ZeroShipQuantity = SORTBODOC.ZeroShipQuantity.Y,
-    ReleaseFromShip = SORTBODOC.ReleaseFromShip.Y,
-    OrderStatus = SORTBODOC.OrderStatus.N
-});
 
 SORTBO Parameters:
 
