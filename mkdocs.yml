@@ -17,6 +17,10 @@ nav:
         - integration/accpac/index.md
         - SDK Provider: integration/accpac/sdk-provider.md
         - Integration Jobs: integration/accpac/integration-jobs.md
+      - Acumatica:
+        - integration/acumatica/index.md
+        - SDK Provider: integration/acumatica/sdk-provider.md
+        - Integration Jobs: integration/acumatica/integration-jobs.md
       - Evolution: 
         - integration/evo/index.md
         - SDK Provider: integration/evo/sdk-provider.md
