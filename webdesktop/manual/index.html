@@ -1858,14 +1858,55 @@ Conversely, when <strong>isApplicationGrid</strong> is set to false, it signifie
 </tr>
 <tr>
 <td>cellClassRules</td>
-<td>Condition styling, "cellAlert": "x == 0" . Options : cellBold, cellAlert, cellAttention</td>
+<td>Condition styling, "cellAlert": "x == 0" . Options : <strong>see list below</strong></td>
 </tr>
 </tbody>
 </table>
-<pre><code>!!! note 
-    More on cellClassRules
-    https://www.ag-grid.com/vue-data-grid/cell-styles/#cell-class-rules
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">fontGreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#51AA6C</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">fontBlue</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#00A6CE</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">fontRed</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#F24C3D</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">backgroundGreen</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="p">;</span>
+<span class="w">    </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#51AA6C</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">backgroundBlue</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="p">;</span>
+<span class="w">    </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#00A6CE</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">backgroundRed</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="p">;</span>
+<span class="w">    </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#F24C3D</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="p">.</span><span class="nc">cellAlert</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#F24C3D</span><span class="p">;</span>
+<span class="w">    </span><span class="k">text-align</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">cellBold</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">cellCenter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#97AFBA</span><span class="p">;</span>
+<span class="w">    </span><span class="k">text-align</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">cellAttention</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="kc">larger</span><span class="p">;</span>
+<span class="w">    </span><span class="k">font-style</span><span class="p">:</span><span class="w"> </span><span class="kc">italic</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="grid-data-columns">Grid Data Columns</h3>
 <p>The WebDesktop mandates a <strong>minimum</strong> set of columns to be present in both the SQL data and grid.
 These typically include the primary key fields such as Document.Number, MasterItem.Code, etc.
