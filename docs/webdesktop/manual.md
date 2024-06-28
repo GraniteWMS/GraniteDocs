@@ -1,5 +1,4 @@
 # WebDesktop
-![Local Image](./webdesktop.jpg)
 
 The Granite WebDesktop is constructed on a thick client architecture, where the software application operates primarily on the user's device (like a computer or mobile device) and conducts a substantial amount of processing locally. This approach minimizes reliance on server processing and data retrieval for enhanced efficiency.
 
@@ -54,6 +53,8 @@ Conversely, when **isApplicationGrid** is set to false, it signifies that the gr
 }
 ```
 
+
+
 | Property       | Value                  |
 |--------------|------------|
 | headerName     | Name you want to display on grid |
@@ -62,7 +63,54 @@ Conversely, when **isApplicationGrid** is set to false, it signifies that the gr
 | filter         | Type of filter for the column. Options : agTextColumnFilter, agDateColumnFilter, agNumberColumnFilter   |
 | cellRenderer   | How do render the cell value. Options : "dateCellRenderer"     |
 | hide           | Hide the column. true / false                   |
-| cellClassRules | Condition styling, "cellAlert": "x == 0" . Options : cellBold, cellAlert, cellAttention |
+| cellClassRules | Condition styling, "cellAlert": "x == 0" . Options : **see list below** |
+
+``` css
+.fontGreen {
+    font-weight: bold;
+    color: #51AA6C;
+}
+.fontBlue {
+    font-weight: bold;
+    color: #00A6CE;
+}
+.fontRed {
+    font-weight: bold;
+    color: #F24C3D;
+}
+.backgroundGreen {
+    font-weight: bold;
+    background-color: #51AA6C;
+}
+.backgroundBlue {
+    font-weight: bold;
+    background-color: #00A6CE;
+}
+.backgroundRed {
+    font-weight: bold;
+    background-color: #F24C3D;
+}
+
+
+.cellAlert {
+    font-weight: bold;
+    color: #F24C3D;
+    text-align: center;
+}
+.cellBold {
+    font-weight: bold;
+}
+
+.cellCenter {
+    color: #97AFBA;
+    text-align: center;
+}
+
+.cellAttention {
+    font-size: larger;
+    font-style: italic;
+}
+```
 
 
 ### Grid Data Columns
