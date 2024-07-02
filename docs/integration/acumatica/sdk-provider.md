@@ -7,6 +7,13 @@ The Acumatica SDK provider is responsible for mapping Granite Transactions to th
 
 ## Settings
 
+!!! note
+    To pick up any changes to the SystemSettings table, the IntegrationService will need to be restarted. 
+
+The settings for Acumatica are configured in the SystemSettings table. The IntegrationService will pick up the settings using the Application name specified in it's `.config` file:
+If this setting is missing from the config file or left empty, the IntegrationService will default to using `Acumatica` as the SystemSettingsApplicationName.
+You can browse the IntegrationService's `/config` page to have the IntegrationService create the default settings in the SystemSettings table for you. 
+
 ### Acumatica Settings
 
 #### Lot/Serial Tracking
