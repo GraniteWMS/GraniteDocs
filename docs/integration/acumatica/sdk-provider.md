@@ -2,7 +2,24 @@
 
 The Acumatica SDK provider is responsible for mapping Granite Transactions to the relevant format for posting to Acumatica. It makes use of the Acumatica REST API.
 
+## How it connects
+
+The upwards integration achieved using Acumatica's rest API. For more details on the Acumatica object's used in integration please consult the Acumatica over view. 
+
 ## Setup
+
+1. **Copy** everything in the `Providers\Acumatica` folder into Integration Service folder (root folder).
+
+2. Ensure `SDKProvider.xml` setup or copied correctly
+    ```xml
+    <module name="Provider">
+    <bind
+        service="Granite.Integration.Contract.IProvider, Granite.Integration.Contract"
+        to="Granite.Integration.Acumatica.Provider, Granite.Integration.Acumatica"/>
+    </module>
+    ```
+
+3. Configure your connection string and endpoint in the `Granite.Integration.Web.exe.config` file
 
 
 ## Settings
@@ -13,6 +30,17 @@ The Acumatica SDK provider is responsible for mapping Granite Transactions to th
 The settings for Acumatica are configured in the SystemSettings table. The IntegrationService will pick up the settings using the Application name specified in it's `.config` file:
 If this setting is missing from the config file or left empty, the IntegrationService will default to using `Acumatica` as the SystemSettingsApplicationName.
 You can browse the IntegrationService's `/config` page to have the IntegrationService create the default settings in the SystemSettings table for you. 
+
+### Config File Settings
+
+```xml
+    <add key="SystemSettingsApplicationName" value="Acumatica" />
+    <add key="EndPoint" value="http://:40091/" />
+```
+#### SystemSettingsApplicationName
+The Application name of the entries in the SystemSettings table that you want to use for this integration service. If this setting is the same as Application name for the ScheduledJobs they can use the same SystemSettings.
+
+This setting allows you to have multiple integration services running with different settings.
 
 ### Acumatica Settings
 
