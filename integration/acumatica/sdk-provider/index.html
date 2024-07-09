@@ -917,6 +917,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#how-it-connects" class="md-nav__link">
+    <span class="md-ellipsis">
+      How it connects
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#setup" class="md-nav__link">
     <span class="md-ellipsis">
       Setup
@@ -934,6 +943,30 @@
   
     <nav class="md-nav" aria-label="Settings">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#config-file-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Config File Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Config File Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#systemsettingsapplicationname" class="md-nav__link">
+    <span class="md-ellipsis">
+      SystemSettingsApplicationName
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#acumatica-settings" class="md-nav__link">
@@ -1766,6 +1799,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#how-it-connects" class="md-nav__link">
+    <span class="md-ellipsis">
+      How it connects
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#setup" class="md-nav__link">
     <span class="md-ellipsis">
       Setup
@@ -1783,6 +1825,30 @@
   
     <nav class="md-nav" aria-label="Settings">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#config-file-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Config File Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Config File Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#systemsettingsapplicationname" class="md-nav__link">
+    <span class="md-ellipsis">
+      SystemSettingsApplicationName
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#acumatica-settings" class="md-nav__link">
@@ -1881,7 +1947,26 @@
 
 <h1 id="sdk-provider">SDK Provider</h1>
 <p>The Acumatica SDK provider is responsible for mapping Granite Transactions to the relevant format for posting to Acumatica. It makes use of the Acumatica REST API.</p>
+<h2 id="how-it-connects">How it connects</h2>
+<p>The upwards integration achieved using Acumatica's rest API. For more details on the Acumatica object's used in integration please consult the Acumatica over view. </p>
 <h2 id="setup">Setup</h2>
+<ol>
+<li>
+<p><strong>Copy</strong> everything in the <code>Providers\Acumatica</code> folder into Integration Service folder (root folder).</p>
+</li>
+<li>
+<p>Ensure <code>SDKProvider.xml</code> setup or copied correctly
+    <div class="highlight"><pre><span></span><code><span class="nt">&lt;module</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Provider&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;bind</span>
+<span class="w">    </span><span class="na">service=</span><span class="s">&quot;Granite.Integration.Contract.IProvider, Granite.Integration.Contract&quot;</span>
+<span class="w">    </span><span class="na">to=</span><span class="s">&quot;Granite.Integration.Acumatica.Provider, Granite.Integration.Acumatica&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/module&gt;</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Configure your connection string and endpoint in the <code>Granite.Integration.Web.exe.config</code> file</p>
+</li>
+</ol>
 <h2 id="settings">Settings</h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1890,6 +1975,13 @@
 <p>The settings for Acumatica are configured in the SystemSettings table. The IntegrationService will pick up the settings using the Application name specified in it's <code>.config</code> file:
 If this setting is missing from the config file or left empty, the IntegrationService will default to using <code>Acumatica</code> as the SystemSettingsApplicationName.
 You can browse the IntegrationService's <code>/config</code> page to have the IntegrationService create the default settings in the SystemSettings table for you. </p>
+<h3 id="config-file-settings">Config File Settings</h3>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">&lt;add</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;SystemSettingsApplicationName&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;Acumatica&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;add</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;EndPoint&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;http://:40091/&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</code></pre></div>
+<h4 id="systemsettingsapplicationname">SystemSettingsApplicationName</h4>
+<p>The Application name of the entries in the SystemSettings table that you want to use for this integration service. If this setting is the same as Application name for the ScheduledJobs they can use the same SystemSettings.</p>
+<p>This setting allows you to have multiple integration services running with different settings.</p>
 <h3 id="acumatica-settings">Acumatica Settings</h3>
 <h4 id="lotserial-tracking">Lot/Serial Tracking</h4>
 <p>For Granite to be able to post Serial Numbers or Batch back to Acumatica the feature in System Management &gt; Enable/Disable Features &gt; Lot and Serial Tracking needs to be turned on. </p>
