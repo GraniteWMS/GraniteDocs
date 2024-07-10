@@ -470,6 +470,11 @@ Same as SCRAP but Adjustment Type set to **BOTH**
 | SerialNumber      | SERIALNUMF | N        | PORCPLS      ||
 
 ### RECEIVINGPOSTMULTIPLE
+
+!!! note 
+    The TransactionDocumentReference field is used to group all the Purchase Orders you would like to post as one receipt.
+    The RECEIVINGPOSTMULTIPLE process should be used for posting. 
+    
 - Granite Transaction: **RECEIVE**
 - Accpac: **P/O Transactions Purchase Order Entry**
 - Supports:
