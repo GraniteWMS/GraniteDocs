@@ -70,6 +70,9 @@ The document jobs themselves also sync changes to the TradingPartners & MasterIt
 
 ### Set up database triggers, views, and data
 
+!!! warning
+    The all in one script is planned for release with V6. Until then use the existing individual scripts at `Dropbox\Granite Releases\Granite V5.0\GraniteDatabase\Accpac\ScheduledJobs`
+
 Run the `AccpacIntegrationJobs_Create.sql` script to create all the views, triggers and ScheduledJob table entries needed. 
 
 ### Add the Injected job files to GraniteScheduler
@@ -82,6 +85,9 @@ Example:
 ## Configure
 
 ### Initial Import
+
+!!! warning
+    This is V6 functionality - not yet available.
 
 When you first set up a new site, there will be documents that are partially processed already in Accpac. The following document types now support setting an initial ActionQty:
 

@@ -72,6 +72,9 @@ The only thing they are really still needed for is setting isActive to false whe
 
 ### Set up database triggers, views, and data
 
+!!! warning
+    The all in one script is planned for release with V6. Until then use the existing individual scripts at `Dropbox\Granite Releases\Granite V5.0\GraniteDatabase\Evo\Scheduled Jobs`
+
 Run the `PastelEVOIntegrationJobs_Create.sql` or `PastelEVOIntegrationJobs_Create_Evo7.sql` script to create all the views, triggers and ScheduledJob table entries needed. 
 
 Use the Evo7 script only for version 7.x sites, for version 9 and up use the standard one.
@@ -85,6 +88,9 @@ Example:
 
 ## Configure
 ### Initial Import
+
+!!! warning
+    This is V6 functionality - not yet available.
 
 When you first set up a new site, there will be documents that are partially processed already in Evolution. The following document types now support setting an initial ActionQty:
 
