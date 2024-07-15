@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
@@ -26,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e359304.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.50c56a3b.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -341,15 +341,14 @@
       
     
     
-      
-        
-        
-      
-      
     
+    
+      
+      
     
     <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
+        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
@@ -430,12 +429,11 @@
       
     
     
-      
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
+        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
@@ -528,12 +526,11 @@
       
     
     
-      
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
+        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
@@ -644,12 +641,11 @@
       
     
     
-      
-      
     
     
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
+        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
@@ -692,12 +688,11 @@
       
     
     
-      
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
+        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_1" >
@@ -802,12 +797,11 @@
       
     
     
-      
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
+        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_2" >
@@ -933,12 +927,11 @@
       
     
     
-      
-      
     
     
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
+        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_3" checked>
@@ -1372,12 +1365,11 @@
       
     
     
-      
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
+        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
@@ -1437,12 +1429,11 @@
       
     
     
-      
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
+        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2" >
@@ -1539,12 +1530,11 @@
       
     
     
-      
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
+        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_3" >
@@ -1763,18 +1753,20 @@
       
     
     
+    
+    
       
       
     
-    
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
+        
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -2139,6 +2131,10 @@ The only thing they are really still needed for is setting isActive to false whe
 <p>If you are upgrading from the old StoredProcedure/Trigger integration, ensure that ERPIdentification (Document, DocumentDetail, MasterItem, TradingPartner) column is populated with correct values before attempting to start the new jobs</p>
 </div>
 <h3 id="set-up-database-triggers-views-and-data">Set up database triggers, views, and data</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The all in one script is planned for release with V6. Until then use the existing individual scripts at <code>Dropbox\Granite Releases\Granite V5.0\GraniteDatabase\Evo\Scheduled Jobs</code></p>
+</div>
 <p>Run the <code>PastelEVOIntegrationJobs_Create.sql</code> or <code>PastelEVOIntegrationJobs_Create_Evo7.sql</code> script to create all the views, triggers and ScheduledJob table entries needed. </p>
 <p>Use the Evo7 script only for version 7.x sites, for version 9 and up use the standard one.</p>
 <h3 id="add-the-injected-job-files-to-granitescheduler">Add the Injected job files to GraniteScheduler</h3>
@@ -2147,6 +2143,10 @@ The only thing they are really still needed for is setting isActive to false whe
 <p><img alt="Injectedjobfiles" src="../evo-img/injectedjobfiles.png" /></p>
 <h2 id="configure">Configure</h2>
 <h3 id="initial-import">Initial Import</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is V6 functionality - not yet available.</p>
+</div>
 <p>When you first set up a new site, there will be documents that are partially processed already in Evolution. The following document types now support setting an initial ActionQty:</p>
 <ul>
 <li>PurchaseOrder</li>
@@ -2311,7 +2311,7 @@ These views must not modify the values in ERPIdentification or iOrigLineID for a
     <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
     
   </body>
