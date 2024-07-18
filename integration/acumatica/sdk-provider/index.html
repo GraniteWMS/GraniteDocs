@@ -1017,6 +1017,24 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#takeon" class="md-nav__link">
+    <span class="md-ellipsis">
+      TAKEON
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCRAP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#adjustment" class="md-nav__link">
     <span class="md-ellipsis">
       ADJUSTMENT
@@ -1908,6 +1926,24 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#takeon" class="md-nav__link">
+    <span class="md-ellipsis">
+      TAKEON
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCRAP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#adjustment" class="md-nav__link">
     <span class="md-ellipsis">
       ADJUSTMENT
@@ -2016,6 +2052,80 @@ This needs to be disabled in order from Granite to post documents into the syste
 <h2 id="integration-methods">Integration Methods</h2>
 <p>By default if the method names below is the same as a Granite Transaction type, it will autowire the integration. 
 If you require a different integration action you can specify the name below in the Process IntegrationMethod property. </p>
+<h3 id="takeon">TAKEON</h3>
+<ul>
+<li>Granite Transaction: <strong>TAKEON</strong></li>
+<li>Acumatica: <strong>INVENTORY RECEIPT</strong></li>
+<li>
+<p>Supports:</p>
+<ul>
+<li>Lot</li>
+<li>Serial</li>
+</ul>
+</li>
+<li>
+<p>Returns:
+    Reference Number </p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Acumatica Entity</th>
+<th>Required</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Code</td>
+<td>InventoryID</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Qty</td>
+<td>Qty</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>WarehouseID</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>UOM</td>
+<td>UOM</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Lot</td>
+<td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
+<td>N</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="scrap">SCRAP</h3>
+<ul>
+<li>Granite Transaction: <strong>SCRAP</strong></li>
+<li>Acumatica: <strong>INVENTORY ADJUSTMENT</strong></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<pre><code>See ADJUSTMENT
+</code></pre>
+</div>
 <h3 id="adjustment">ADJUSTMENT</h3>
 <ul>
 <li>Granite Transaction: <strong>ADJUSTMENT</strong></li>
