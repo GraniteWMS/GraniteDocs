@@ -67,6 +67,25 @@ The setting needs to be disabled in the following places (if Granite is integrat
 By default if the method names below is the same as a Granite Transaction type, it will autowire the integration. 
 If you require a different integration action you can specify the name below in the Process IntegrationMethod property. 
 
+### ADJUSTMENT
+- Granite Transaction: **ADJUSTMENT**
+- Acumatica: **INVENTORY ADJUSTMENT**
+- Supports:
+    - Lot
+    - Serial
+
+- Returns:
+    Reference Number 
+
+| Granite    | Acumatica Entity | Required | Behavior |
+|------------|------------------|----------|-----------|
+| Code                 | InventoryID           |Y||
+| Qty                        | Qty  |Y||
+| FromLocation | WarehouseID  |Y||
+| UOM               | UOM |Y||
+| Lot                        | LotSerialNbr|N||
+| ExpirationDate                     | ExpiryDate|N||
+
 ### PICK
 
 - Granite Transaction: **PICK**
