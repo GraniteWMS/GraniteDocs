@@ -79,12 +79,12 @@ If you require a different integration action you can specify the name below in 
 
 | Granite    | Acumatica Entity | Required | Behavior |
 |------------|------------------|----------|-----------|
-| Code                 | InventoryID           |Y||
-| Qty                        | Qty  |Y||
-| FromLocation | WarehouseID  |Y||
-| UOM               | UOM |Y||
-| Lot                        | LotSerialNbr|N||
-| ExpirationDate                     | ExpiryDate|N||
+| Code                        | InventoryID           |Y||
+| Qty                         | Qty  |Y||
+| FromLocation                | WarehouseID  |Y||
+| UOM                         | UOM |Y||
+| Lot                         | LotSerialNbr|N||
+| ExpirationDate              | ExpiryDate|N||
 
 ### PICK
 
