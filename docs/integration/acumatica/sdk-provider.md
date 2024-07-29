@@ -73,7 +73,9 @@ If you require a different integration action you can specify the name below in 
 - Supports:
     - Lot
     - Serial
-
+- Integration Post
+    - False - Creates a new Inventory Adjustment with status Balanced
+    - True - Creates a new Inventory Adjustment and performs the Release action to change the Status to Released
 - Returns:
     Reference Number 
 
@@ -83,7 +85,109 @@ If you require a different integration action you can specify the name below in 
 | Qty                         | Qty  |Y||
 | FromLocation                | WarehouseID  |Y||
 | UOM                         | UOM |Y||
-| Lot                         | LotSerialNbr|N||
+| Batch                       | LotSerialNbr  |N||
+| Serial                      | LotSerialNbr  |N||
+| ExpirationDate              | ExpiryDate|N||
+
+### SCRAP
+- Granite Transaction: **SCRAP**
+- Acumatica: **INVENTORY ADJUSTMENT**
+- Supports:
+    - Lot
+    - Serial
+- Integration Post
+    - False - Creates a new Inventory Adjustment with status Balanced
+    - True - Creates a new Inventory Adjustment and performs the Release action to change the Status to Released
+- Returns:
+    Reference Number 
+
+| Granite    | Acumatica Entity | Required | Behavior |
+|------------|------------------|----------|-----------|
+| Code                        | InventoryID           |Y||
+| Qty                         | Qty  |Y||
+| FromLocation                | WarehouseID  |Y||
+| UOM                         | UOM |Y||
+| Batch                       | LotSerialNbr  |N||
+| Serial                      | LotSerialNbr  |N||
+| ExpirationDate              | ExpiryDate|N||
+
+### MOVE/REPLENISH
+
+MOVE and REPLENISH create the same transaction in Acumatica.
+
+- Granite Transaction: **MOVE/REPLENISH**
+- Acumatica: **TransferOrder**
+- Supports:
+    - Serial
+    - Lot
+- Return
+    - Transfer Number
+
+- Integration Post
+    - False - Creates a 1-Step Transfer in Acumatica with status Balanced. 
+    - True - Changes the status of the transfer from Balanced to Released
+- Returns:
+    TransferNumber
+
+| Granite    | Acumatica Entity | Required | Behavior |
+|------------|------------------|----------|-----------|
+| Code                        | InventoryID           |Y||
+| Qty                         | Qty  |Y||
+| FromLocation                | WarehouseID  |Y||
+| ToLocation                  | ToWarehouseID  |Y||
+| UOM                         | UOM |Y||
+| Batch                       | LotSerialNbr  |N||
+| Serial                      | LotSerialNbr  |N||
+| ExpirationDate              | ExpiryDate|N||
+
+### TAKEON
+
+- Granite Transaction: **TAKEON**
+- Acumatica: **Inventory Receipt**
+- Supports:
+    - Serial
+    - Lot
+- Integration Post
+    - False - Creates a Inventory Receipt in Acumatica with status Balanced
+    - True - Changes the status of the Inventory Receipt to from Balanced to Released
+- Return
+    - Inventory Receipt Number
+
+| Granite    | Acumatica Entity | Required | Behavior |
+|------------|------------------|----------|-----------|
+| Code                        | InventoryID           |Y||
+| Qty                         | Qty  |Y||
+| ToLocation                  | WarehouseID  |Y||
+| UOM                         | UOM |Y||
+| Batch                       | LotSerialNbr  |N||
+| Serial                      | LotSerialNbr  |N||
+| ExpirationDate              | ExpiryDate|N||
+
+### RECLASSIFY
+
+This process first performs as Adjustment decreasing the stock and then a receipt of the new stock.
+
+- Granite Transaction: **RECLASSIFY**
+- Acumatica: **Adjustment => Receipt**
+- Supports:
+    - Serial
+    - Lot
+- Integration Post
+    - False - Creates an Adjustment and Inventory Receipt in Acumatica with status Balanced
+    - True - Creates an Adjustment and Inventory Receipt and performs the Release action to change the Status to Released
+- Returns:
+    Receipt Number
+
+| Granite    | Acumatica Entity | Required | Behavior |
+|------------|------------------|----------|-----------|
+| FromCode                    | InventoryID|          |Y||
+| ToCode                    | InventoryID           |Y||
+| Qty                         | Qty  |Y||
+| FromLocation                | WarehouseID  |Y||
+| ToLocation                  | WarehouseID  |Y||
+| UOM                         | UOM |Y||
+| Batch                       | LotSerialNbr  |N||
+| Serial                      | LotSerialNbr  |N||
 | ExpirationDate              | ExpiryDate|N||
 
 ### PICK
@@ -97,6 +201,7 @@ If you require a different integration action you can specify the name below in 
 - Integration Post
     - False - Creates a new Shipment with the status Balanced
     - True - Creates a new shipment and performs the Release action to change the Status to Released
+
 - Returns:
     Shipment Number
 
@@ -109,6 +214,7 @@ If you require a different integration action you can specify the name below in 
 | FromLocation               | WarehouseID |Y||
 | Lot                        | LotSerialNbr|N||
 | Serial                     | LotSerialNbr|N||
+| ExpirationDate              | ExpiryDate|N||
 
 ### RECEIVE
 
@@ -131,8 +237,9 @@ If you require a different integration action you can specify the name below in 
 | Qty                        | ReceiptQty    |Y||
 | DocumentTradingPartnerCode | VendorID      |Y||
 | TLocation                  | WarehouseID   |Y||
-| Lot                        | LotSerialNbr  |N||
+| Batch                      | LotSerialNbr  |N||
 | Serial                     | LotSerialNbr  |N||
+| ExpirationDate              | ExpiryDate|N||
 
 ### TRANSFER
 
@@ -158,5 +265,6 @@ If you require a different integration action you can specify the name below in 
 | Document                   | TransferOrder/InventoryReceipt |Y||
 | LineNumber                 |               |Y||
 | Qty                        |               |Y| Compares qty to acumatica document qty |
-| Lot                        | LotSerialNbr  |N||
+| Batch                      | LotSerialNbr  |N||
 | Serial                     | LotSerialNbr  |N||
+| ExpirationDate             | ExpiryDate|N||

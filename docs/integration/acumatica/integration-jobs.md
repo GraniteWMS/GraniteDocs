@@ -40,11 +40,11 @@ See below for information for specifics on how document and master data jobs wor
 
 ## How it works
 ### Document Jobs
-All data is currently fetched through Acumatica's Rest API. 
+All data is currently fetched through Acumatica's ODataV4 endpoint. The ODataV4 endpoint allows us to construct queries on the underlying DAC (Data Access classes). ODataV4 does not uses Generic Inquiries and as such no custom views are needed in Acumatica.
 
-GraniteScheduler runs injected jobs that check the IntegrationDocumentQueue for the lastUpdated time for the relevant document type(if no lastUpdated time is found it will use current time - 24hours). With this last updated time, it will then do a get request on Acumatica's API for all relevant documents that have a last updated time greater than the lastUpdated time from the IntegrationDocumentQueue. If there are any document that fit those criteria they are inserted into the IntegrationDocumentQueue. The job then runs this queue.
+GraniteScheduler runs injected jobs that check the IntegrationDocumentQueue for the lastUpdated time for the relevant document type(if no lastUpdated time is found it will use current time - 24hours). With this last updated time, it will then do a OData request for all relevant documents that have a last updated time greater than the lastUpdated time from the IntegrationDocumentQueue. If there are any documents that fit those criteria they are inserted into the IntegrationDocumentQueue. The job then runs this queue.
 
-When a record with Status 'ENTERED' is found, the job uses the API to fetch the information related to that document from the Acumatica and apply the changes to the Granite document. 
+When a record with Status 'ENTERED' is found, the job uses a OData request to fetch the information related to that document from the Acumatica and apply the changes to the Granite document. 
 
 All valid changes to data in the Granite tables are logged to the Audit table, showing the previous value and the new value.
 
@@ -79,9 +79,11 @@ For Transfers and Receipts the statuses are mapped in the following way:
 | Released | COMPLETED|
 
 ### Master data jobs
-MasterItems has its own Job. This Job fetches all StockItems from the Acumatica Rest API and compares them to the MasterItems in Granite. Any inserts / updates are done as required. 
+MasterItems and TradingPartners have their own Jobs. These Jobs fetch all StockItems, Vendors, and Customers from  Acumatica and compares them to the MasterItems and TradingPartners in Granite. Any inserts / updates are done as required. 
 
 The document jobs also sync changes to the MasterItems that are on the document. This means that on sites that do not make many changes to their MasterItems it is better to limit running this job to once a day or even less frequently. 
+
+Document Jobs do not automatically sync trading partners as they are not required to create to the document in Granite and as such are only synced when the TradingPartner Job runs. 
 
 ## Install 
 
@@ -91,6 +93,11 @@ Run the `AcumaticaIntegrationJobs_Create.sql` script to insert the required Syst
 You can then just activate the Scheduled Jobs that are needed. 
 
 The system setting AcumaticaApplicationName is defaulted to 'Acumatica'. If you change this then you should also change it in the Integration service config file so that the scheduled Jobs amd Integration service can share settings. If you wish to use different SystemSettings for each then you need to specify a different value. 
+
+#### Base URL
+
+The base url can be found in IIS if hosted locally or provided by the customer if hosted in the cloud.
+
 ![ApplicationName](./acumatica-img/ApplicationName.PNG)
 ![SystemSettings](./acumatica-img/system-settings.PNG)
 
