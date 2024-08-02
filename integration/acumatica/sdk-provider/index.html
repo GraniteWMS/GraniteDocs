@@ -339,6 +339,8 @@
       
         
       
+        
+      
     
     
       
@@ -1017,9 +1019,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#takeon" class="md-nav__link">
+  <a href="#adjustment" class="md-nav__link">
     <span class="md-ellipsis">
-      TAKEON
+      ADJUSTMENT
     </span>
   </a>
   
@@ -1035,9 +1037,27 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#adjustment" class="md-nav__link">
+  <a href="#movereplenish" class="md-nav__link">
     <span class="md-ellipsis">
-      ADJUSTMENT
+      MOVE/REPLENISH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeon" class="md-nav__link">
+    <span class="md-ellipsis">
+      TAKEON
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reclassify" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECLASSIFY
     </span>
   </a>
   
@@ -1699,6 +1719,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../security/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Application Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1926,9 +1967,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#takeon" class="md-nav__link">
+  <a href="#adjustment" class="md-nav__link">
     <span class="md-ellipsis">
-      TAKEON
+      ADJUSTMENT
     </span>
   </a>
   
@@ -1944,9 +1985,27 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#adjustment" class="md-nav__link">
+  <a href="#movereplenish" class="md-nav__link">
     <span class="md-ellipsis">
-      ADJUSTMENT
+      MOVE/REPLENISH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeon" class="md-nav__link">
+    <span class="md-ellipsis">
+      TAKEON
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reclassify" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECLASSIFY
     </span>
   </a>
   
@@ -2052,21 +2111,22 @@ This needs to be disabled in order from Granite to post documents into the syste
 <h2 id="integration-methods">Integration Methods</h2>
 <p>By default if the method names below is the same as a Granite Transaction type, it will autowire the integration. 
 If you require a different integration action you can specify the name below in the Process IntegrationMethod property. </p>
-<h3 id="takeon">TAKEON</h3>
+<h3 id="adjustment">ADJUSTMENT</h3>
 <ul>
-<li>Granite Transaction: <strong>TAKEON</strong></li>
-<li>Acumatica: <strong>INVENTORY RECEIPT</strong></li>
-<li>
-<p>Supports:</p>
-<ul>
+<li>Granite Transaction: <strong>ADJUSTMENT</strong></li>
+<li>Acumatica: <strong>INVENTORY ADJUSTMENT</strong></li>
+<li>Supports:<ul>
 <li>Lot</li>
 <li>Serial</li>
 </ul>
 </li>
-<li>
-<p>Returns:
-    Reference Number </p>
+<li>Integration Post<ul>
+<li>False - Creates a new Inventory Adjustment with status Balanced</li>
+<li>True - Creates a new Inventory Adjustment and performs the Release action to change the Status to Released</li>
+</ul>
 </li>
+<li>Returns:
+    Reference Number </li>
 </ul>
 <table>
 <thead>
@@ -2103,7 +2163,13 @@ If you require a different integration action you can specify the name below in 
 <td></td>
 </tr>
 <tr>
-<td>Lot</td>
+<td>Batch</td>
+<td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>Serial</td>
 <td>LotSerialNbr</td>
 <td>N</td>
 <td></td>
@@ -2120,27 +2186,18 @@ If you require a different integration action you can specify the name below in 
 <ul>
 <li>Granite Transaction: <strong>SCRAP</strong></li>
 <li>Acumatica: <strong>INVENTORY ADJUSTMENT</strong></li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<pre><code>See ADJUSTMENT
-</code></pre>
-</div>
-<h3 id="adjustment">ADJUSTMENT</h3>
-<ul>
-<li>Granite Transaction: <strong>ADJUSTMENT</strong></li>
-<li>Acumatica: <strong>INVENTORY ADJUSTMENT</strong></li>
-<li>
-<p>Supports:</p>
-<ul>
+<li>Supports:<ul>
 <li>Lot</li>
 <li>Serial</li>
 </ul>
 </li>
-<li>
-<p>Returns:
-    Reference Number </p>
+<li>Integration Post<ul>
+<li>False - Creates a new Inventory Adjustment with status Balanced</li>
+<li>True - Creates a new Inventory Adjustment and performs the Release action to change the Status to Released</li>
+</ul>
 </li>
+<li>Returns:
+    Reference Number </li>
 </ul>
 <table>
 <thead>
@@ -2177,7 +2234,256 @@ If you require a different integration action you can specify the name below in 
 <td></td>
 </tr>
 <tr>
-<td>Lot</td>
+<td>Batch</td>
+<td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>Serial</td>
+<td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
+<td>N</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="movereplenish">MOVE/REPLENISH</h3>
+<p>MOVE and REPLENISH create the same transaction in Acumatica.</p>
+<ul>
+<li>Granite Transaction: <strong>MOVE/REPLENISH</strong></li>
+<li>Acumatica: <strong>TransferOrder</strong></li>
+<li>Supports:<ul>
+<li>Serial</li>
+<li>Lot</li>
+</ul>
+</li>
+<li>
+<p>Return</p>
+<ul>
+<li>Transfer Number</li>
+</ul>
+</li>
+<li>
+<p>Integration Post</p>
+<ul>
+<li>False - Creates a 1-Step Transfer in Acumatica with status Balanced. </li>
+<li>True - Changes the status of the transfer from Balanced to Released</li>
+</ul>
+</li>
+<li>Returns:
+    TransferNumber</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Acumatica Entity</th>
+<th>Required</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Code</td>
+<td>InventoryID</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Qty</td>
+<td>Qty</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>WarehouseID</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>ToWarehouseID</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>UOM</td>
+<td>UOM</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>Serial</td>
+<td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
+<td>N</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="takeon">TAKEON</h3>
+<ul>
+<li>Granite Transaction: <strong>TAKEON</strong></li>
+<li>Acumatica: <strong>Inventory Receipt</strong></li>
+<li>Supports:<ul>
+<li>Serial</li>
+<li>Lot</li>
+</ul>
+</li>
+<li>Integration Post<ul>
+<li>False - Creates a Inventory Receipt in Acumatica with status Balanced</li>
+<li>True - Changes the status of the Inventory Receipt to from Balanced to Released</li>
+</ul>
+</li>
+<li>Return<ul>
+<li>Inventory Receipt Number</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Acumatica Entity</th>
+<th>Required</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Code</td>
+<td>InventoryID</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Qty</td>
+<td>Qty</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>WarehouseID</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>UOM</td>
+<td>UOM</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>Serial</td>
+<td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
+<td>N</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="reclassify">RECLASSIFY</h3>
+<p>This process first performs as Adjustment decreasing the stock and then a receipt of the new stock.</p>
+<ul>
+<li>Granite Transaction: <strong>RECLASSIFY</strong></li>
+<li>Acumatica: <strong>Adjustment =&gt; Receipt</strong></li>
+<li>Supports:<ul>
+<li>Serial</li>
+<li>Lot</li>
+</ul>
+</li>
+<li>Integration Post<ul>
+<li>False - Creates an Adjustment and Inventory Receipt in Acumatica with status Balanced</li>
+<li>True - Creates an Adjustment and Inventory Receipt and performs the Release action to change the Status to Released</li>
+</ul>
+</li>
+<li>Returns:
+    Receipt Number</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Acumatica Entity</th>
+<th>Required</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FromCode</td>
+<td>InventoryID</td>
+<td></td>
+<td>Y</td>
+</tr>
+<tr>
+<td>ToCode</td>
+<td>InventoryID</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Qty</td>
+<td>Qty</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>WarehouseID</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>WarehouseID</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>UOM</td>
+<td>UOM</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>Serial</td>
 <td>LotSerialNbr</td>
 <td>N</td>
 <td></td>
@@ -2208,8 +2514,10 @@ If you require a different integration action you can specify the name below in 
 <li>True - Creates a new shipment and performs the Release action to change the Status to Released</li>
 </ul>
 </li>
-<li>Returns:
-    Shipment Number</li>
+<li>
+<p>Returns:
+    Shipment Number</p>
+</li>
 </ul>
 <table>
 <thead>
@@ -2260,6 +2568,12 @@ If you require a different integration action you can specify the name below in 
 <tr>
 <td>Serial</td>
 <td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
 <td>N</td>
 <td></td>
 </tr>
@@ -2327,7 +2641,7 @@ If you require a different integration action you can specify the name below in 
 <td></td>
 </tr>
 <tr>
-<td>Lot</td>
+<td>Batch</td>
 <td>LotSerialNbr</td>
 <td>N</td>
 <td></td>
@@ -2335,6 +2649,12 @@ If you require a different integration action you can specify the name below in 
 <tr>
 <td>Serial</td>
 <td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
 <td>N</td>
 <td></td>
 </tr>
@@ -2398,7 +2718,7 @@ If you require a different integration action you can specify the name below in 
 <td>Compares qty to acumatica document qty</td>
 </tr>
 <tr>
-<td>Lot</td>
+<td>Batch</td>
 <td>LotSerialNbr</td>
 <td>N</td>
 <td></td>
@@ -2406,6 +2726,12 @@ If you require a different integration action you can specify the name below in 
 <tr>
 <td>Serial</td>
 <td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
 <td>N</td>
 <td></td>
 </tr>

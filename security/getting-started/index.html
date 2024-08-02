@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://granitewms.github.io/granitedocs/custodian-api/manual/">
+        <link rel="canonical" href="https://granitewms.github.io/granitedocs/security/getting-started/">
       
       
-        <link rel="prev" href="../../repository-api/manual/">
+        <link rel="prev" href="../../android-application/manual/">
       
       
-        <link rel="next" href="../best-practice/">
+        <link rel="next" href="../../updates/whats-new/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Manual - Granite WMS</title>
+        <title>Application Security - Granite WMS</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#custodian-api" class="md-skip">
+        <a href="#security-settings-granite-version-6" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Manual
+              Application Security
             
           </span>
         </div>
@@ -1116,10 +1116,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -1135,11 +1133,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
         
           
           <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
@@ -1153,7 +1151,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_6">
             <span class="md-nav__icon md-icon"></span>
             API
@@ -1185,10 +1183,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -1202,11 +1198,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2" >
         
           
           <label class="md-nav__link" for="__nav_2_6_2" id="__nav_2_6_2_label" tabindex="0">
@@ -1220,7 +1216,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_6_2">
             <span class="md-nav__icon md-icon"></span>
             Custodian API
@@ -1231,30 +1227,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Manual
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../custodian-api/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1263,101 +1239,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      Setup
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Setup">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      Requirements
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#application-settings" class="md-nav__link">
-    <span class="md-ellipsis">
-      Application Settings
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Application Settings">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#connectionstrings" class="md-nav__link">
-    <span class="md-ellipsis">
-      ConnectionStrings
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#allowedorigins" class="md-nav__link">
-    <span class="md-ellipsis">
-      AllowedOrigins
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#systemsettings" class="md-nav__link">
-    <span class="md-ellipsis">
-      SystemSettings
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshoot" class="md-nav__link">
-    <span class="md-ellipsis">
-      Troubleshoot
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1370,7 +1251,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../best-practice/" class="md-nav__link">
+      <a href="../../custodian-api/best-practice/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1621,10 +1502,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../security/getting-started/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1633,6 +1523,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1758,89 +1649,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      Setup
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Setup">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      Requirements
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#application-settings" class="md-nav__link">
-    <span class="md-ellipsis">
-      Application Settings
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Application Settings">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#connectionstrings" class="md-nav__link">
-    <span class="md-ellipsis">
-      ConnectionStrings
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#allowedorigins" class="md-nav__link">
-    <span class="md-ellipsis">
-      AllowedOrigins
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#systemsettings" class="md-nav__link">
-    <span class="md-ellipsis">
-      SystemSettings
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshoot" class="md-nav__link">
-    <span class="md-ellipsis">
-      Troubleshoot
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1854,51 +1662,27 @@
                   
 
 
-<h1 id="custodian-api">Custodian API</h1>
-<p><img alt="Local Image" src="../custodian.jpg" /></p>
-<p>The primary responsibility of the Custodian API is to manage <strong>Process Templates</strong>, which encapsulate Granite Processes along with Process Steps, web templates, and pre-scripts. Each template consists of both <strong>metadata</strong> and <strong>artifact</strong> files. Metadata serves to document the process and provide additional information, while artifacts encompass all the data, scripts, views, lookups, and static data necessary for deploying the process. Ultimately, each deployment is self-contained, facilitating seamless sharing and deployment processes through the WebDesktop.</p>
-<hr />
-<h2 id="setup">Setup</h2>
-<h5 id="requirements">Requirements</h5>
+<h1 id="security-settings-granite-version-6">Security settings (Granite Version 6~)</h1>
+<p>The settings below related to Granite security are optional in.
+Take Note each setting is activeted by the isActive value. The Value is used for configuration of each setting.</p>
 <ul>
-<li><a href="https://dotnet.microsoft.com/en-us/download/dotnet/8.0">ASP.NET Core 8 Hosting Bundle</a></li>
-<li><a href="../../iis/getting-started/">IIS</a></li>
-<li>Sufficient permissions for folder and file access and IIS application creation</li>
+<li>
+<p>PasswordFailedAttempts
+Number of failed login attempts before user account get locked</p>
+</li>
+<li>
+<p>PasswordRecoveryMinutes
+Reset Failed Attempts after duration. This setting will only take effect if the <code>PasswordFailedAttempts</code> is active.</p>
+</li>
+<li>
+<p>EnablePasswordStrentgh 
+Enforce password policy for strong passwords</p>
+</li>
+<li>
+<p>EnablePasswordExpiry
+Enable password expiration. Set expiry in days.</p>
+</li>
 </ul>
-<h2 id="application-settings">Application Settings</h2>
-<p>The settings below are configured in the <code>appsettings.json</code>.</p>
-<h5 id="connectionstrings">ConnectionStrings</h5>
-<p>Configuring multiple connection strings allow you to deploy to any instance of Granite.
-The name of the connection string will be used in the Webdesktop to identify the connection.
-Example CONNECTION and TEST.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&quot;ConnectionStrings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;CONNECTION&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Data Source=.;Initial Catalog=GraniteLive;Persist Security Info=True;User ID=;TrustServerCertificate=True;&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;TEST&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Data Source=.;Initial Catalog=GraniteTest;Persist Security Info=True;User ID=;TrustServerCertificate=True;&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-</code></pre></div>
-<h5 id="allowedorigins">AllowedOrigins</h5>
-<p>The 'allowed origins' is a list of addresses for applications requiring access to the API. 
-By default, the only address that requires configuration is the Granite <strong>WebDesktop</strong> address.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&quot;AllowedOrigins&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&quot;https://192.168.1.10:8081&quot;</span><span class="w"> </span><span class="p">]</span>
-</code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You cannot use wildcards like <code>*</code> in the <code>AllowedOrigins</code> setting for Custodian.</p>
-</div>
-<h4 id="systemsettings">SystemSettings</h4>
-<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">SystemSettings</span><span class="w"> </span><span class="p">([</span><span class="n">Application</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="k">Key</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Description</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isEncrypted</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isActive</span><span class="p">],</span><span class="w"> </span><span class="n">AuditDate</span><span class="p">,</span><span class="w"> </span><span class="n">AuditUser</span><span class="p">)</span>
-<span class="k">VALUES</span><span class="w"> </span>
-<span class="p">(</span><span class="s1">&#39;GRANITECUSTODIAN&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Repo_id&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;676912773&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">&#39;GRANITECUSTODIAN&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Token&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;******&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">),</span>
-<span class="p">(</span><span class="s1">&#39;GRANITECUSTODIAN&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Stores&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Approved,Draft&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">)</span>
-</code></pre></div>
-<ul>
-<li><strong><code>Take Note</code></strong> Ensure that the Token is Encrypted. After 90 days reset the token. We will issue a new token prior to expiry.</li>
-<li>New stores could be introduced and added to this setting. The stores available will be communicated to the team; you cannot add names that do not exist.</li>
-</ul>
-<h2 id="troubleshoot">Troubleshoot</h2>
-<p>The most common issues will arise with the connection to the cloud store, ensuring that the token is correct and not expired.
-Run <code>\config</code> operation to verify connections, authentication and setup.</p>
 
 
 
