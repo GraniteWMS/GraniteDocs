@@ -45,6 +45,9 @@ nav:
     - Scheduler: scheduler/manual.md
     - Web Desktop: webdesktop/manual.md
     - Scanner Application: android-application/manual.md
+  - Tools:
+    - tools/index.md
+    - Jam.dev: tools/jam.md
   - Updates:
     - What's New: updates/whats-new.md
     - Release Notes: updates/release-notes.md
