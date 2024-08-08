@@ -15,7 +15,7 @@ The StockItems are Acumatica's MasterItems. They can be found under Inventory > 
 
 ![StockItem](./acumatica-img/stockitem.PNG)
 
-The most notable field is the Lot/Serial Class. In Acumatica, Lot and Serial number share the same property call LotSerialNbr. This class determines if either lot, serial, or neither is tracked. 
+The most notable field is the Lot/Serial Class (this is only visible if Lot/Serial tracking is enabled). In Acumatica, Lot and Serial number share the same property call LotSerialNbr. This class determines if either lot, serial, or neither is tracked. 
 
 Expiry date can only be tracked in the standard way if either lot or serial is tracked and cannot be tracked separately. 
 
@@ -31,7 +31,7 @@ These are found under Inventory > Warehouses.
 
 ## Documents
 
-Documents follow a similar structure to Granite's documents with one main difference being Allocations. 
+Documents follow a similar structure to Granite's documents with one main difference being Allocations. Allocations will only be visible if Lot/Serial Tracking is enabled. 
 The hierarchy is as follows: Document (Header) > Details > Allocations. Not all documents have Allocations. 
 
 The header contains the info of the documents status, vendor/customer, and number.
@@ -53,6 +53,7 @@ The following documents are used in the integration process:
 - Receipts
 - Sales Orders
 - Shipments
+- Issues
 
 #### Purchase Orders
 
@@ -109,3 +110,9 @@ Shipments are associated with a Sales order and represent the quantities picked.
 There can only one open Shipment against per Sales order. Once a Shipment is Released, a new shipment can be created if back orders are allowed on the Sales Order. 
 
 ![Shipments](./acumatica-img/shipment.PNG)
+
+#### Issues
+
+Inventory Issues are used to issue inventory from stock. Once issued it is removed from stock and no further record is kept for it. This is currently not associated with any Granite document or process but is an integration method that can be used. For details please see the Acumatica [SDK-Provider](sdk-provider.md)
+
+![Issues](./acumatica-img/issue.PNG)

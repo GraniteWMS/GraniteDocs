@@ -94,7 +94,9 @@ You can then just activate the Scheduled Jobs that are needed.
 
 The system setting AcumaticaApplicationName is defaulted to 'Acumatica'. If you change this then you should also change it in the Integration service config file so that the scheduled Jobs amd Integration service can share settings. If you wish to use different SystemSettings for each then you need to specify a different value. 
 
-#### Base URL
+#### SystemSettings
+
+##### Base URL
 
 The base url can be found in IIS if hosted locally or provided by the customer if hosted in the cloud.
 
@@ -103,6 +105,14 @@ The base url can be found in IIS if hosted locally or provided by the customer i
 
 !!! note 
       You need to set the password from inside the Webdesktop if you are going to encrypt the password. 
+
+##### AcumaticaIntansitLocation
+
+Acumatica does not specify a intransit location on its 2-step transfers so it needs to be specified in this system setting. This is the ERP location for the location used in Intransit documents. 
+
+![Intransit system setting](./acumatica-img/intransit-system-setting.PNG)
+![Intransit Location](./acumatica-img/intransit-location.PNG)
+![Intransit Document Detail](./acumatica-img/intransit-location-doc-detail.PNG)
 
 ### Add the Injected job files to GraniteScheduler
 To add the injected job files to the GraniteScheduler, simply copy the dlls and xml files into the root folder of GraniteScheduler. 

@@ -4,7 +4,7 @@ The Acumatica SDK provider is responsible for mapping Granite Transactions to th
 
 ## How it connects
 
-The upwards integration achieved using Acumatica's rest API. For more details on the Acumatica object's used in integration please consult the Acumatica over view. 
+The upwards integration achieved using Acumatica's rest API. For more details on the Acumatica object's used in integration please consult the [Acumatica Overview](acumatica-overview.md). 
 
 ## Setup
 
@@ -113,7 +113,10 @@ If you require a different integration action you can specify the name below in 
 
 ### MOVE/REPLENISH
 
-MOVE and REPLENISH create the same transaction in Acumatica.
+MOVE and REPLENISH create the same transaction in Acumatica. They both share a transaction type in Acumatica with Transfers.
+To prevent them being brought into Granite as transfers the external reference populated with Granite Move or Granite Replenish as you can see below.
+
+![Move Transfer](./acumatica-img/move-transfer.PNG)
 
 - Granite Transaction: **MOVE/REPLENISH**
 - Acumatica: **TransferOrder**
@@ -141,6 +144,10 @@ MOVE and REPLENISH create the same transaction in Acumatica.
 | ExpirationDate              | ExpiryDate|N||
 
 ### TAKEON
+
+TAKEON uses the same transaction type in Acumatica as Transfer receipts. To prevent takeon receipts from being pulled into Granite as Transfer receipts the Description is populated with "Granite Takeon".  The scheduled job will then exclude there from being integrated.
+
+![Takeon Receipt](./acumatica-img/takeon-receipt.PNG)
 
 - Granite Transaction: **TAKEON**
 - Acumatica: **Inventory Receipt**
@@ -189,6 +196,35 @@ This process first performs as Adjustment decreasing the stock and then a receip
 | Batch                       | LotSerialNbr  |N||
 | Serial                      | LotSerialNbr  |N||
 | ExpirationDate              | ExpiryDate|N||
+
+### ISSUE 
+
+This process issues inventory from stock. After this point it is no longer tracked in Acumatica. This can be seen as a pick but not against a document. 
+It is not mapped to any specific Granite transaction type. If you have a requirement you will need to specify it as the integration method on the relevant process as you can see below. 
+
+![issue integration method](./acumatica-img/issue-integration-method.PNG)
+
+- Granite Transaction: **NONE**
+- Acumatica: **ISSUE**
+- Supports:
+    - Lot
+    - Serial
+
+- Integration Post
+    - False - Creates a new Issue with the status Balanced
+    - True - Creates a new Issue and performs the Release action to change the status from balanced to Released
+
+-Returns 
+    Issue Number
+
+| Granite    | Acumatica Entity | Required | Behavior |
+|------------|------------------|----------|-----------|
+| Code                       | InventoryID           |Y||
+| Qty                        | ShippedQty  |Y||
+| FromLocation               | WarehouseID |Y||
+| Lot                        | LotSerialNbr|N||
+| Serial                     | LotSerialNbr|N||
+| ExpirationDate             | ExpiryDate|N||
 
 ### PICK
 
