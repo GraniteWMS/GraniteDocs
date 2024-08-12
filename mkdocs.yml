@@ -45,6 +45,10 @@ nav:
     - Scheduler: scheduler/manual.md
     - Web Desktop: webdesktop/manual.md
     - Scanner Application: android-application/manual.md
+    - Application Security: 
+        - security/index.md
+        - System Security: security/system-security.md
+        - Permissions: security/user-permissions.md
   - Tools:
     - tools/index.md
     - Jam.dev: tools/jam.md
