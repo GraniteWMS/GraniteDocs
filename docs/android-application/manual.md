@@ -13,6 +13,11 @@ You can either use the QR code from in the same folder to download the APK direc
 
 Once the APK is on the device, simply select it to begin the install process. If this is the first APK install you may need to update the permissions to allow to install from a folder as below (it may look different depending on the version of android). 
 
+!!! note 
+        Some scanners may prevent you from installing the app if the apk is in the downloads folder. 
+        
+        Move to DCIM or similar to resolve the issue. 
+
 ![Install](./img/install.gif)
 
 ## Using the App
