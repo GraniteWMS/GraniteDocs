@@ -1,20 +1,3 @@
-# WebDesktop
-
-The Granite WebDesktop is constructed on a thick client architecture, where the software application operates primarily on the user's device (like a computer or mobile device) and conducts a substantial amount of processing locally. This approach minimizes reliance on server processing and data retrieval for enhanced efficiency.
-
-The central functionality of the system revolves around data **maintenance** and **enquiry**. This relies on various Granite APIs to efficiently perform these tasks.
-
----
-## Setup
-
-### Requirements
-
-- [IIS](../iis/getting-started.md)
-- Sufficient permissions for folder and file access and IIS application creation
-
-## Customization
-
-
 ### Grids
 
 Our system empowers users to customize numerous grids according to their preferences and requirements.
@@ -140,5 +123,3 @@ If you navigate to the API operation documentation, you can observe that we docu
 
 
 In the example provided above, ID, Code, and isActive are explicitly designated as required columns.
-
-___

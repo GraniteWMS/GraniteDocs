@@ -43,7 +43,10 @@ nav:
         - SQL Export Service: utility-api/sql-export-service.md
 
     - Scheduler: scheduler/manual.md
-    - Web Desktop: webdesktop/manual.md
+    - Web Desktop: 
+         - webdesktop/index.md
+         - Data Grid: webdesktop/datagrid/datagrid.md
+         - Data Capture: webdesktop/datacapture/data-capture.md
     - Scanner Application: android-application/manual.md
     - Application Security: 
         - security/index.md
