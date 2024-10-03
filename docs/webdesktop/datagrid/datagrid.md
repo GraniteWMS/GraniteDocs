@@ -92,73 +92,44 @@ This guide covers the available CSS classes for styling rows and cells. The foll
 - Borders: Add or modify borders around elements to highlight specific areas.
 - Padding and Alignment: Adjust spacing and alignment for better layout control.
 
-| CSS Class           | Description                                          | Cell Format Example (`cellClassRules`)                   | Row Format Example (`rowClassRules`)                        |
-|---------------------|------------------------------------------------------|----------------------------------------------------------|-------------------------------------------------------------|
-| `.text-bold`        | Makes text bold.                                      | `"cellClassRules": { "text-bold": "x === 'COMPLETE'" }`  | `{ "text-bold": "data.Status === 'COMPLETE'" }`             |
-| `.text-italic`      | Makes text italic.                                    | `"cellClassRules": { "text-italic": "x === 'ENTERED'" }` | `{ "text-italic": "data.Status === 'ENTERED'" }`            |
-| `.text-primary`     | Applies the primary color (blue) to text.             | `"cellClassRules": { "text-primary": "x === 'ONHOLD'" }` | `{ "text-primary": "data.Status === 'ONHOLD'" }`            |
-| `.text-success`     | Applies the success color (green) to text.            | `"cellClassRules": { "text-success": "x === 'COMPLETE'" }` | `{ "text-success": "data.Status === 'COMPLETE'" }`          |
-| `.text-error`       | Applies the error color (red) to text.                | `"cellClassRules": { "text-error": "x == 0" }`           | `{ "text-error": "data.Qty == 0" }`                         |
-| `.text-warning`     | Applies the warning color (orange) to text.           | `"cellClassRules": { "text-warning": "x === 'ONHOLD'" }` | `{ "text-warning": "data.Status === 'ONHOLD'" }`            |
-| `.text-info`        | Applies the info color (cyan/light blue) to text.     | `"cellClassRules": { "text-info": "x === 'ENTERED'" }`   | `{ "text-info": "data.Status === 'ENTERED'" }`              |
-| `.text-muted`       | Applies a muted grey color to de-emphasize text.      | `"cellClassRules": { "text-muted": "x === false" }`      | `{ "text-muted": "data.isActive === false" }`               |
-| `.text-center`      | Centers text within an element.                       | `"cellClassRules": { "text-center": "x === 'ONHOLD'" }`  | `{ "text-center": "data.Status === 'ONHOLD'" }`             |
-| `.bg-primary`       | Sets the primary background color (blue).             | `"cellClassRules": { "bg-primary": "x === 'COMPLETE'" }` | `{ "bg-primary": "data.Status === 'COMPLETE'" }`            |
-| `.bg-success`       | Sets the success background color (green).            | `"cellClassRules": { "bg-success": "x === 'COMPLETE'" }` | `{ "bg-success": "data.Status === 'COMPLETE'" }`            |
-| `.bg-error`         | Sets the error background color (red).                | `"cellClassRules": { "bg-error": "x == 0" }`             | `{ "bg-error": "data.Qty == 0" }`                           |
-| `.bg-warning`       | Sets the warning background color (orange).           | `"cellClassRules": { "bg-warning": "x === 'ONHOLD'" }`   | `{ "bg-warning": "data.Status === 'ONHOLD'" }`              |
-| `.bg-info`          | Sets the info background color (cyan/light blue).     | `"cellClassRules": { "bg-info": "x === 'ENTERED'" }`     | `{ "bg-info": "data.Status === 'ENTERED'" }`                |
-| `.border`           | Adds a default grey border to the element.            | `"cellClassRules": { "border": "x === false" }`          | `{ "border": "data.isActive === false" }`                   |
-| `.border-primary`   | Adds a blue border around the element.                | `"cellClassRules": { "border-primary": "x === 'ONHOLD'" }` | `{ "border-primary": "data.Status === 'ONHOLD'" }`         |
-| `.border-error`     | Adds a red border for elements with errors.           | `"cellClassRules": { "border-error": "x == 0" }`         | `{ "border-error": "data.Qty == 0" }`                       |
-| `.padding-small`    | Adds small padding (4px) inside the element.          | `"cellClassRules": { "padding-small": "x === 'COMPLETE'" }` | `{ "padding-small": "data.Status === 'COMPLETE'" }`       |
-| `.padding-medium`   | Adds medium padding (8px) inside the element.         | `"cellClassRules": { "padding-medium": "x === 'ENTERED'" }` | `{ "padding-medium": "data.Status === 'ENTERED'" }`       |
-| `.padding-large`    | Adds large padding (16px) inside the element.         | `"cellClassRules": { "padding-large": "x === 'ONHOLD'" }` | `{ "padding-large": "data.Status === 'ONHOLD'" }`         |
-           
-
-### Complete list of CSS Classes Definitions
-
-| CSS Class             | Description                                                                 |
-|-----------------------|-----------------------------------------------------------------------------|
-| text-bold             | **Applies bold font weight.**                                               |
-| text-italic           | *Applies italic font style.*                                                |
-| text-primary          | <span style="color: #00A6CE;">Sets text color to blue (#00A6CE).</span>     |
-| bg-primary            | <span style="background-color: #00A6CE;">Sets background color to blue (#00A6CE).</span> |
-| text-primary-dark     | <span style="color: #008CBA;">Sets text color to darker blue (#008CBA).</span> |
-| bg-primary-dark       | <span style="background-color: #008CBA;">Sets background color to darker blue (#008CBA).</span> |
-| text-success          | <span style="color: #51AA6C;">Sets text color to green (#51AA6C).</span>    |
-| bg-success            | <span style="background-color: #51AA6C;">Sets background color to green (#51AA6C).</span> |
-| text-success-light    | <span style="color: #4F9E63;">Sets text color to darker green (#4F9E63).</span> |
-| bg-success-light      | <span style="background-color: #B0D7B8;">Sets background color to pastel green (#B0D7B8).</span> |
-| text-error            | <span style="color: #F24C3D;">Sets text color to red (#F24C3D).</span>      |
-| bg-error              | <span style="background-color: #F24C3D;">Sets background color to red (#F24C3D).</span> |
-| text-warning          | <span style="color: #FFA500;">Sets text color to orange (#FFA500).</span>   |
-| bg-warning            | <span style="background-color: #FFA500;">Sets background color to orange (#FFA500).</span> |
-| text-info             | <span style="color: #17A2B8;">Sets text color to light blue/cyan (#17A2B8).</span> |
-| bg-info               | <span style="background-color: #17A2B8;">Sets background color to light blue/cyan (#17A2B8).</span> |
-| text-secondary        | <span style="color: #6C757D;">Sets text color to grey/neutral (#6C757D).</span> |
-| bg-secondary          | <span style="background-color: #6C757D;">Sets background color to grey/neutral (#6C757D).</span> |
-| text-secondary-light  | <span style="color: #AEB6BF;">Sets text color to lighter neutral (#AEB6BF).</span> |
-| bg-secondary-light    | <span style="background-color: #AEB6BF;">Sets background color to lighter neutral (#AEB6BF).</span> |
-| text-dark             | <span style="color: #343A40;">Sets text color to dark grey (#343A40).</span> |
-| bg-dark               | <span style="background-color: #343A40;">Sets background color to dark grey (#343A40).</span> |
-| text-light            | <span style="color: #F8F9FA;">Sets text color to light grey (#F8F9FA).</span> |
-| bg-light              | <span style="background-color: #F8F9FA;">Sets background color to light grey (#F8F9FA).</span> |
-| text-center           | Centers text alignment.                                                     |
-| text-left             | Aligns text to the left.                                                    |
-| text-right            | Aligns text to the right.                                                   |
-| padding-small         | Adds small padding (4px) inside the element.                                |
-| padding-medium        | Adds medium padding (8px) inside the element.                               |
-| padding-large         | Adds large padding (16px) inside the element.                               |
-| border                | Adds a default grey border (1px solid #ddd).                                |
-| border-primary        | Adds a blue border (1px solid #00A6CE).                                     |
-| border-error          | Adds a red border (1px solid #F24C3D).                                      |
-| border-success        | Adds a green border (1px solid #51AA6C).                                    |
-| border-warning        | Adds an orange border (1px solid #FFA500).                                  |
-| border-dark           | Adds a dark grey border (1px solid #343A40).                                |
-
-
-
+| CSS Class             | Description                                                                 | Cell Format Example (`cellClassRules`)                         | Row Format Example (`rowClassRules`)                            |
+|-----------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------|
+| text-bold             | **Applies bold font weight.**                                               | ```json { "text-bold": "data.Status === 'COMPLETE'" } ```        | `{ "text-bold": "data.Status === 'COMPLETE'" }`                |
+| text-italic           | *Applies italic font style.*                                                | `"cellClassRules": { "text-italic": "x === 'ENTERED'" }`       | `{ "text-italic": "data.Status === 'ENTERED'" }`               |
+| text-primary          | <span style="color: #00A6CE;">Sets text color to blue (#00A6CE).</span>     | `"cellClassRules": { "text-primary": "x === 'ONHOLD'" }`       | `{ "text-primary": "data.Status === 'ONHOLD'" }`               |
+| bg-primary            | <span style="background-color: #00A6CE;">Sets background color to blue (#00A6CE).</span> | `"cellClassRules": { "bg-primary": "x === 'COMPLETE'" }`      | `{ "bg-primary": "data.Status === 'COMPLETE'" }`               |
+| text-primary-dark     | <span style="color: #008CBA;">Sets text color to darker blue (#008CBA).</span> | `"cellClassRules": { "text-primary-dark": "x === 'COMPLETE'" }` | `{ "text-primary-dark": "data.Status === 'COMPLETE'" }`        |
+| bg-primary-dark       | <span style="background-color: #008CBA;">Sets background color to darker blue (#008CBA).</span> | `"cellClassRules": { "bg-primary-dark": "x === 'ONHOLD'" }`  | `{ "bg-primary-dark": "data.Status === 'ONHOLD'" }`            |
+| text-success          | <span style="color: #51AA6C;">Sets text color to green (#51AA6C).</span>    | `"cellClassRules": { "text-success": "x === 'COMPLETE'" }`     | `{ "text-success": "data.Status === 'COMPLETE'" }`             |
+| bg-success            | <span style="background-color: #51AA6C;">Sets background color to green (#51AA6C).</span> | `"cellClassRules": { "bg-success": "x === 'COMPLETE'" }`     | `{ "bg-success": "data.Status === 'COMPLETE'" }`               |
+| text-success-light    | <span style="color: #4F9E63;">Sets text color to darker green (#4F9E63).</span> | `"cellClassRules": { "text-success-light": "x === 'ENTERED'" }` | `{ "text-success-light": "data.Status === 'ENTERED'" }`        |
+| bg-success-light      | <span style="background-color: #B0D7B8;">Sets background color to pastel green (#B0D7B8).</span> | `"cellClassRules": { "bg-success-light": "x === 'ENTERED'" }` | `{ "bg-success-light": "data.Status === 'ENTERED'" }`          |
+| text-error            | <span style="color: #F24C3D;">Sets text color to red (#F24C3D).</span>      | `"cellClassRules": { "text-error": "x == 0" }`                | `{ "text-error": "data.Qty == 0" }`                            |
+| bg-error              | <span style="background-color: #F24C3D;">Sets background color to red (#F24C3D).</span> | `"cellClassRules": { "bg-error": "x == 0" }`                 | `{ "bg-error": "data.Qty == 0" }`                              |
+| text-warning          | <span style="color: #FFA500;">Sets text color to orange (#FFA500).</span>   | `"cellClassRules": { "text-warning": "x === 'ONHOLD'" }`       | `{ "text-warning": "data.Status === 'ONHOLD'" }`               |
+| bg-warning            | <span style="background-color: #FFA500;">Sets background color to orange (#FFA500).</span> | `"cellClassRules": { "bg-warning": "x === 'ONHOLD'" }`       | `{ "bg-warning": "data.Status === 'ONHOLD'" }`                 |
+| text-info             | <span style="color: #17A2B8;">Sets text color to light blue/cyan (#17A2B8).</span> | `"cellClassRules": { "text-info": "x === 'ENTERED'" }`      | `{ "text-info": "data.Status === 'ENTERED'" }`                 |
+| bg-info               | <span style="background-color: #17A2B8;">Sets background color to light blue/cyan (#17A2B8).</span> | `"cellClassRules": { "bg-info": "x === 'ENTERED'" }`      | `{ "bg-info": "data.Status === 'ENTERED'" }`                   |
+| text-secondary        | <span style="color: #6C757D;">Sets text color to grey/neutral (#6C757D).</span> | `"cellClassRules": { "text-secondary": "x === 'COMPLETE'" }` | `{ "text-secondary": "data.Status === 'COMPLETE'" }`           |
+| bg-secondary          | <span style="background-color: #6C757D;">Sets background color to grey/neutral (#6C757D).</span> | `"cellClassRules": { "bg-secondary": "x === 'COMPLETE'" }`  | `{ "bg-secondary": "data.Status === 'COMPLETE'" }`             |
+| text-secondary-light  | <span style="color: #AEB6BF;">Sets text color to lighter neutral (#AEB6BF).</span> | `"cellClassRules": { "text-secondary-light": "x === 'ENTERED'" }` | `{ "text-secondary-light": "data.Status === 'ENTERED'" }`    |
+| bg-secondary-light    | <span style="background-color: #AEB6BF;">Sets background color to lighter neutral (#AEB6BF).</span> | `"cellClassRules": { "bg-secondary-light": "x === 'ENTERED'" }` | `{ "bg-secondary-light": "data.Status === 'ENTERED'" }`    |
+| text-dark             | <span style="color: #343A40;">Sets text color to dark grey (#343A40).</span> | `"cellClassRules": { "text-dark": "x === 'COMPLETE'" }`      | `{ "text-dark": "data.Status === 'COMPLETE'" }`                |
+| bg-dark               | <span style="background-color: #343A40;">Sets background color to dark grey (#343A40).</span> | `"cellClassRules": { "bg-dark": "x === 'ONHOLD'" }`         | `{ "bg-dark": "data.Status === 'ONHOLD'" }`                    |
+| text-light            | <span style="color: #F8F9FA;">Sets text color to light grey (#F8F9FA).</span> | `"cellClassRules": { "text-light": "x === 'ENTERED'" }`     | `{ "text-light": "data.Status === 'ENTERED'" }`                |
+| bg-light              | <span style="background-color: #F8F9FA;">Sets background color to light grey (#F8F9FA).</span> | `"cellClassRules": { "bg-light": "x === 'ENTERED'" }`      | `{ "bg-light": "data.Status === 'ENTERED'" }`                  |
+| text-center           | Centers text alignment.                                                     | `"cellClassRules": { "text-center": "x === 'ONHOLD'" }`      | `{ "text-center": "data.Status === 'ONHOLD'" }`                |
+| text-left             | Aligns text to the left.                                                    | `"cellClassRules": { "text-left": "x === 'COMPLETE'" }`      | `{ "text-left": "data.Status === 'COMPLETE'" }`                |
+| text-right            | Aligns text to the right.                                                   | `"cellClassRules": { "text-right": "x === 'ENTERED'" }`      | `{ "text-right": "data.Status === 'ENTERED'" }`                |
+| padding-small         | Adds small padding (4px) inside the element.                                | `"cellClassRules": { "padding-small": "x === 'COMPLETE'" }`  | `{ "padding-small": "data.Status === 'COMPLETE'" }`            |
+| padding-medium        | Adds medium padding (8px) inside the element.                               | `"cellClassRules": { "padding-medium": "x === 'ENTERED'" }`  | `{ "padding-medium": "data.Status === 'ENTERED'" }`            |
+| padding-large         | Adds large padding (16px) inside the element.                               | `"cellClassRules": { "padding-large": "x === 'ONHOLD'" }`    | `{ "padding-large": "data.Status === 'ONHOLD'" }`              |
+| border                | Adds a default grey border (1px solid #ddd).                                | `"cellClassRules": { "border": "x === false" }`              | `{ "border": "data.isActive === false" }`                      |
+| border-primary        | Adds a blue border (1px solid #00A6CE).                                     | `"cellClassRules": { "border-primary": "x === 'ONHOLD'" }`   | `{ "border-primary": "data.Status === 'ONHOLD'" }`             |
+| border-error          | Adds a red border (1px solid #F24C3D).                                      | `"cellClassRules": { "border-error": "x == 0" }`             | `{ "border-error": "data.Qty == 0" }`                          |
+| border-success        | Adds a green border (1px solid #51AA6C).                                    | `"cellClassRules": { "border-success": "x === 'COMPLETE'" }` | `{ "border-success": "data.Status === 'COMPLETE'" }`           |
+| border-warning        | Adds an orange border (1px solid #FFA500).                                  | `"cellClassRules": { "border-warning": "x === 'ONHOLD'" }`   | `{ "border-warning": "data.Status === 'ONHOLD'" }`             |
+| border-dark           | Adds a dark grey border (1px solid #343A40).                                | `"cellClassRules": { "border-dark": "x === 'COMPLETE'" }`    | `{ "border-dark": "data.Status === 'COMPLETE'" }`              |
 
 ### Grid Data Columns
 
