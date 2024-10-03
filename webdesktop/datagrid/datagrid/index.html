@@ -1630,15 +1630,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#complete-list-of-css-classes-definitions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Complete list of CSS Classes Definitions
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#grid-data-columns" class="md-nav__link">
     <span class="md-ellipsis">
       Grid Data Columns
@@ -2068,15 +2059,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#complete-list-of-css-classes-definitions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Complete list of CSS Classes Definitions
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#grid-data-columns" class="md-nav__link">
     <span class="md-ellipsis">
       Grid Data Columns
@@ -2212,279 +2194,220 @@ These rules are provided as a map where the keys are CSS class names and the val
 </thead>
 <tbody>
 <tr>
-<td><code>.text-bold</code></td>
-<td>Makes text bold.</td>
-<td><code>"cellClassRules": { "text-bold": "x === 'COMPLETE'" }</code></td>
+<td>text-bold</td>
+<td><strong>Applies bold font weight.</strong></td>
+<td><code>json { "text-bold": "data.Status === 'COMPLETE'" }</code></td>
 <td><code>{ "text-bold": "data.Status === 'COMPLETE'" }</code></td>
 </tr>
 <tr>
-<td><code>.text-italic</code></td>
-<td>Makes text italic.</td>
+<td>text-italic</td>
+<td><em>Applies italic font style.</em></td>
 <td><code>"cellClassRules": { "text-italic": "x === 'ENTERED'" }</code></td>
 <td><code>{ "text-italic": "data.Status === 'ENTERED'" }</code></td>
 </tr>
 <tr>
-<td><code>.text-primary</code></td>
-<td>Applies the primary color (blue) to text.</td>
+<td>text-primary</td>
+<td><span style="color: #00A6CE;">Sets text color to blue (#00A6CE).</span></td>
 <td><code>"cellClassRules": { "text-primary": "x === 'ONHOLD'" }</code></td>
 <td><code>{ "text-primary": "data.Status === 'ONHOLD'" }</code></td>
 </tr>
 <tr>
-<td><code>.text-success</code></td>
-<td>Applies the success color (green) to text.</td>
-<td><code>"cellClassRules": { "text-success": "x === 'COMPLETE'" }</code></td>
-<td><code>{ "text-success": "data.Status === 'COMPLETE'" }</code></td>
-</tr>
-<tr>
-<td><code>.text-error</code></td>
-<td>Applies the error color (red) to text.</td>
-<td><code>"cellClassRules": { "text-error": "x == 0" }</code></td>
-<td><code>{ "text-error": "data.Qty == 0" }</code></td>
-</tr>
-<tr>
-<td><code>.text-warning</code></td>
-<td>Applies the warning color (orange) to text.</td>
-<td><code>"cellClassRules": { "text-warning": "x === 'ONHOLD'" }</code></td>
-<td><code>{ "text-warning": "data.Status === 'ONHOLD'" }</code></td>
-</tr>
-<tr>
-<td><code>.text-info</code></td>
-<td>Applies the info color (cyan/light blue) to text.</td>
-<td><code>"cellClassRules": { "text-info": "x === 'ENTERED'" }</code></td>
-<td><code>{ "text-info": "data.Status === 'ENTERED'" }</code></td>
-</tr>
-<tr>
-<td><code>.text-muted</code></td>
-<td>Applies a muted grey color to de-emphasize text.</td>
-<td><code>"cellClassRules": { "text-muted": "x === false" }</code></td>
-<td><code>{ "text-muted": "data.isActive === false" }</code></td>
-</tr>
-<tr>
-<td><code>.text-center</code></td>
-<td>Centers text within an element.</td>
-<td><code>"cellClassRules": { "text-center": "x === 'ONHOLD'" }</code></td>
-<td><code>{ "text-center": "data.Status === 'ONHOLD'" }</code></td>
-</tr>
-<tr>
-<td><code>.bg-primary</code></td>
-<td>Sets the primary background color (blue).</td>
+<td>bg-primary</td>
+<td><span style="background-color: #00A6CE;">Sets background color to blue (#00A6CE).</span></td>
 <td><code>"cellClassRules": { "bg-primary": "x === 'COMPLETE'" }</code></td>
 <td><code>{ "bg-primary": "data.Status === 'COMPLETE'" }</code></td>
 </tr>
 <tr>
-<td><code>.bg-success</code></td>
-<td>Sets the success background color (green).</td>
+<td>text-primary-dark</td>
+<td><span style="color: #008CBA;">Sets text color to darker blue (#008CBA).</span></td>
+<td><code>"cellClassRules": { "text-primary-dark": "x === 'COMPLETE'" }</code></td>
+<td><code>{ "text-primary-dark": "data.Status === 'COMPLETE'" }</code></td>
+</tr>
+<tr>
+<td>bg-primary-dark</td>
+<td><span style="background-color: #008CBA;">Sets background color to darker blue (#008CBA).</span></td>
+<td><code>"cellClassRules": { "bg-primary-dark": "x === 'ONHOLD'" }</code></td>
+<td><code>{ "bg-primary-dark": "data.Status === 'ONHOLD'" }</code></td>
+</tr>
+<tr>
+<td>text-success</td>
+<td><span style="color: #51AA6C;">Sets text color to green (#51AA6C).</span></td>
+<td><code>"cellClassRules": { "text-success": "x === 'COMPLETE'" }</code></td>
+<td><code>{ "text-success": "data.Status === 'COMPLETE'" }</code></td>
+</tr>
+<tr>
+<td>bg-success</td>
+<td><span style="background-color: #51AA6C;">Sets background color to green (#51AA6C).</span></td>
 <td><code>"cellClassRules": { "bg-success": "x === 'COMPLETE'" }</code></td>
 <td><code>{ "bg-success": "data.Status === 'COMPLETE'" }</code></td>
 </tr>
 <tr>
-<td><code>.bg-error</code></td>
-<td>Sets the error background color (red).</td>
+<td>text-success-light</td>
+<td><span style="color: #4F9E63;">Sets text color to darker green (#4F9E63).</span></td>
+<td><code>"cellClassRules": { "text-success-light": "x === 'ENTERED'" }</code></td>
+<td><code>{ "text-success-light": "data.Status === 'ENTERED'" }</code></td>
+</tr>
+<tr>
+<td>bg-success-light</td>
+<td><span style="background-color: #B0D7B8;">Sets background color to pastel green (#B0D7B8).</span></td>
+<td><code>"cellClassRules": { "bg-success-light": "x === 'ENTERED'" }</code></td>
+<td><code>{ "bg-success-light": "data.Status === 'ENTERED'" }</code></td>
+</tr>
+<tr>
+<td>text-error</td>
+<td><span style="color: #F24C3D;">Sets text color to red (#F24C3D).</span></td>
+<td><code>"cellClassRules": { "text-error": "x == 0" }</code></td>
+<td><code>{ "text-error": "data.Qty == 0" }</code></td>
+</tr>
+<tr>
+<td>bg-error</td>
+<td><span style="background-color: #F24C3D;">Sets background color to red (#F24C3D).</span></td>
 <td><code>"cellClassRules": { "bg-error": "x == 0" }</code></td>
 <td><code>{ "bg-error": "data.Qty == 0" }</code></td>
 </tr>
 <tr>
-<td><code>.bg-warning</code></td>
-<td>Sets the warning background color (orange).</td>
+<td>text-warning</td>
+<td><span style="color: #FFA500;">Sets text color to orange (#FFA500).</span></td>
+<td><code>"cellClassRules": { "text-warning": "x === 'ONHOLD'" }</code></td>
+<td><code>{ "text-warning": "data.Status === 'ONHOLD'" }</code></td>
+</tr>
+<tr>
+<td>bg-warning</td>
+<td><span style="background-color: #FFA500;">Sets background color to orange (#FFA500).</span></td>
 <td><code>"cellClassRules": { "bg-warning": "x === 'ONHOLD'" }</code></td>
 <td><code>{ "bg-warning": "data.Status === 'ONHOLD'" }</code></td>
 </tr>
 <tr>
-<td><code>.bg-info</code></td>
-<td>Sets the info background color (cyan/light blue).</td>
+<td>text-info</td>
+<td><span style="color: #17A2B8;">Sets text color to light blue/cyan (#17A2B8).</span></td>
+<td><code>"cellClassRules": { "text-info": "x === 'ENTERED'" }</code></td>
+<td><code>{ "text-info": "data.Status === 'ENTERED'" }</code></td>
+</tr>
+<tr>
+<td>bg-info</td>
+<td><span style="background-color: #17A2B8;">Sets background color to light blue/cyan (#17A2B8).</span></td>
 <td><code>"cellClassRules": { "bg-info": "x === 'ENTERED'" }</code></td>
 <td><code>{ "bg-info": "data.Status === 'ENTERED'" }</code></td>
 </tr>
 <tr>
-<td><code>.border</code></td>
-<td>Adds a default grey border to the element.</td>
-<td><code>"cellClassRules": { "border": "x === false" }</code></td>
-<td><code>{ "border": "data.isActive === false" }</code></td>
+<td>text-secondary</td>
+<td><span style="color: #6C757D;">Sets text color to grey/neutral (#6C757D).</span></td>
+<td><code>"cellClassRules": { "text-secondary": "x === 'COMPLETE'" }</code></td>
+<td><code>{ "text-secondary": "data.Status === 'COMPLETE'" }</code></td>
 </tr>
 <tr>
-<td><code>.border-primary</code></td>
-<td>Adds a blue border around the element.</td>
-<td><code>"cellClassRules": { "border-primary": "x === 'ONHOLD'" }</code></td>
-<td><code>{ "border-primary": "data.Status === 'ONHOLD'" }</code></td>
+<td>bg-secondary</td>
+<td><span style="background-color: #6C757D;">Sets background color to grey/neutral (#6C757D).</span></td>
+<td><code>"cellClassRules": { "bg-secondary": "x === 'COMPLETE'" }</code></td>
+<td><code>{ "bg-secondary": "data.Status === 'COMPLETE'" }</code></td>
 </tr>
 <tr>
-<td><code>.border-error</code></td>
-<td>Adds a red border for elements with errors.</td>
-<td><code>"cellClassRules": { "border-error": "x == 0" }</code></td>
-<td><code>{ "border-error": "data.Qty == 0" }</code></td>
+<td>text-secondary-light</td>
+<td><span style="color: #AEB6BF;">Sets text color to lighter neutral (#AEB6BF).</span></td>
+<td><code>"cellClassRules": { "text-secondary-light": "x === 'ENTERED'" }</code></td>
+<td><code>{ "text-secondary-light": "data.Status === 'ENTERED'" }</code></td>
 </tr>
 <tr>
-<td><code>.padding-small</code></td>
+<td>bg-secondary-light</td>
+<td><span style="background-color: #AEB6BF;">Sets background color to lighter neutral (#AEB6BF).</span></td>
+<td><code>"cellClassRules": { "bg-secondary-light": "x === 'ENTERED'" }</code></td>
+<td><code>{ "bg-secondary-light": "data.Status === 'ENTERED'" }</code></td>
+</tr>
+<tr>
+<td>text-dark</td>
+<td><span style="color: #343A40;">Sets text color to dark grey (#343A40).</span></td>
+<td><code>"cellClassRules": { "text-dark": "x === 'COMPLETE'" }</code></td>
+<td><code>{ "text-dark": "data.Status === 'COMPLETE'" }</code></td>
+</tr>
+<tr>
+<td>bg-dark</td>
+<td><span style="background-color: #343A40;">Sets background color to dark grey (#343A40).</span></td>
+<td><code>"cellClassRules": { "bg-dark": "x === 'ONHOLD'" }</code></td>
+<td><code>{ "bg-dark": "data.Status === 'ONHOLD'" }</code></td>
+</tr>
+<tr>
+<td>text-light</td>
+<td><span style="color: #F8F9FA;">Sets text color to light grey (#F8F9FA).</span></td>
+<td><code>"cellClassRules": { "text-light": "x === 'ENTERED'" }</code></td>
+<td><code>{ "text-light": "data.Status === 'ENTERED'" }</code></td>
+</tr>
+<tr>
+<td>bg-light</td>
+<td><span style="background-color: #F8F9FA;">Sets background color to light grey (#F8F9FA).</span></td>
+<td><code>"cellClassRules": { "bg-light": "x === 'ENTERED'" }</code></td>
+<td><code>{ "bg-light": "data.Status === 'ENTERED'" }</code></td>
+</tr>
+<tr>
+<td>text-center</td>
+<td>Centers text alignment.</td>
+<td><code>"cellClassRules": { "text-center": "x === 'ONHOLD'" }</code></td>
+<td><code>{ "text-center": "data.Status === 'ONHOLD'" }</code></td>
+</tr>
+<tr>
+<td>text-left</td>
+<td>Aligns text to the left.</td>
+<td><code>"cellClassRules": { "text-left": "x === 'COMPLETE'" }</code></td>
+<td><code>{ "text-left": "data.Status === 'COMPLETE'" }</code></td>
+</tr>
+<tr>
+<td>text-right</td>
+<td>Aligns text to the right.</td>
+<td><code>"cellClassRules": { "text-right": "x === 'ENTERED'" }</code></td>
+<td><code>{ "text-right": "data.Status === 'ENTERED'" }</code></td>
+</tr>
+<tr>
+<td>padding-small</td>
 <td>Adds small padding (4px) inside the element.</td>
 <td><code>"cellClassRules": { "padding-small": "x === 'COMPLETE'" }</code></td>
 <td><code>{ "padding-small": "data.Status === 'COMPLETE'" }</code></td>
 </tr>
 <tr>
-<td><code>.padding-medium</code></td>
+<td>padding-medium</td>
 <td>Adds medium padding (8px) inside the element.</td>
 <td><code>"cellClassRules": { "padding-medium": "x === 'ENTERED'" }</code></td>
 <td><code>{ "padding-medium": "data.Status === 'ENTERED'" }</code></td>
 </tr>
 <tr>
-<td><code>.padding-large</code></td>
+<td>padding-large</td>
 <td>Adds large padding (16px) inside the element.</td>
 <td><code>"cellClassRules": { "padding-large": "x === 'ONHOLD'" }</code></td>
 <td><code>{ "padding-large": "data.Status === 'ONHOLD'" }</code></td>
 </tr>
-</tbody>
-</table>
-<h3 id="complete-list-of-css-classes-definitions">Complete list of CSS Classes Definitions</h3>
-<table>
-<thead>
-<tr>
-<th>CSS Class</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>text-bold</td>
-<td><strong>Applies bold font weight.</strong></td>
-</tr>
-<tr>
-<td>text-italic</td>
-<td><em>Applies italic font style.</em></td>
-</tr>
-<tr>
-<td>text-primary</td>
-<td><span style="color: #00A6CE;">Sets text color to blue (#00A6CE).</span></td>
-</tr>
-<tr>
-<td>bg-primary</td>
-<td><span style="background-color: #00A6CE;">Sets background color to blue (#00A6CE).</span></td>
-</tr>
-<tr>
-<td>text-primary-dark</td>
-<td><span style="color: #008CBA;">Sets text color to darker blue (#008CBA).</span></td>
-</tr>
-<tr>
-<td>bg-primary-dark</td>
-<td><span style="background-color: #008CBA;">Sets background color to darker blue (#008CBA).</span></td>
-</tr>
-<tr>
-<td>text-success</td>
-<td><span style="color: #51AA6C;">Sets text color to green (#51AA6C).</span></td>
-</tr>
-<tr>
-<td>bg-success</td>
-<td><span style="background-color: #51AA6C;">Sets background color to green (#51AA6C).</span></td>
-</tr>
-<tr>
-<td>text-success-light</td>
-<td><span style="color: #4F9E63;">Sets text color to darker green (#4F9E63).</span></td>
-</tr>
-<tr>
-<td>bg-success-light</td>
-<td><span style="background-color: #B0D7B8;">Sets background color to pastel green (#B0D7B8).</span></td>
-</tr>
-<tr>
-<td>text-error</td>
-<td><span style="color: #F24C3D;">Sets text color to red (#F24C3D).</span></td>
-</tr>
-<tr>
-<td>bg-error</td>
-<td><span style="background-color: #F24C3D;">Sets background color to red (#F24C3D).</span></td>
-</tr>
-<tr>
-<td>text-warning</td>
-<td><span style="color: #FFA500;">Sets text color to orange (#FFA500).</span></td>
-</tr>
-<tr>
-<td>bg-warning</td>
-<td><span style="background-color: #FFA500;">Sets background color to orange (#FFA500).</span></td>
-</tr>
-<tr>
-<td>text-info</td>
-<td><span style="color: #17A2B8;">Sets text color to light blue/cyan (#17A2B8).</span></td>
-</tr>
-<tr>
-<td>bg-info</td>
-<td><span style="background-color: #17A2B8;">Sets background color to light blue/cyan (#17A2B8).</span></td>
-</tr>
-<tr>
-<td>text-secondary</td>
-<td><span style="color: #6C757D;">Sets text color to grey/neutral (#6C757D).</span></td>
-</tr>
-<tr>
-<td>bg-secondary</td>
-<td><span style="background-color: #6C757D;">Sets background color to grey/neutral (#6C757D).</span></td>
-</tr>
-<tr>
-<td>text-secondary-light</td>
-<td><span style="color: #AEB6BF;">Sets text color to lighter neutral (#AEB6BF).</span></td>
-</tr>
-<tr>
-<td>bg-secondary-light</td>
-<td><span style="background-color: #AEB6BF;">Sets background color to lighter neutral (#AEB6BF).</span></td>
-</tr>
-<tr>
-<td>text-dark</td>
-<td><span style="color: #343A40;">Sets text color to dark grey (#343A40).</span></td>
-</tr>
-<tr>
-<td>bg-dark</td>
-<td><span style="background-color: #343A40;">Sets background color to dark grey (#343A40).</span></td>
-</tr>
-<tr>
-<td>text-light</td>
-<td><span style="color: #F8F9FA;">Sets text color to light grey (#F8F9FA).</span></td>
-</tr>
-<tr>
-<td>bg-light</td>
-<td><span style="background-color: #F8F9FA;">Sets background color to light grey (#F8F9FA).</span></td>
-</tr>
-<tr>
-<td>text-center</td>
-<td>Centers text alignment.</td>
-</tr>
-<tr>
-<td>text-left</td>
-<td>Aligns text to the left.</td>
-</tr>
-<tr>
-<td>text-right</td>
-<td>Aligns text to the right.</td>
-</tr>
-<tr>
-<td>padding-small</td>
-<td>Adds small padding (4px) inside the element.</td>
-</tr>
-<tr>
-<td>padding-medium</td>
-<td>Adds medium padding (8px) inside the element.</td>
-</tr>
-<tr>
-<td>padding-large</td>
-<td>Adds large padding (16px) inside the element.</td>
-</tr>
 <tr>
 <td>border</td>
 <td>Adds a default grey border (1px solid #ddd).</td>
+<td><code>"cellClassRules": { "border": "x === false" }</code></td>
+<td><code>{ "border": "data.isActive === false" }</code></td>
 </tr>
 <tr>
 <td>border-primary</td>
 <td>Adds a blue border (1px solid #00A6CE).</td>
+<td><code>"cellClassRules": { "border-primary": "x === 'ONHOLD'" }</code></td>
+<td><code>{ "border-primary": "data.Status === 'ONHOLD'" }</code></td>
 </tr>
 <tr>
 <td>border-error</td>
 <td>Adds a red border (1px solid #F24C3D).</td>
+<td><code>"cellClassRules": { "border-error": "x == 0" }</code></td>
+<td><code>{ "border-error": "data.Qty == 0" }</code></td>
 </tr>
 <tr>
 <td>border-success</td>
 <td>Adds a green border (1px solid #51AA6C).</td>
+<td><code>"cellClassRules": { "border-success": "x === 'COMPLETE'" }</code></td>
+<td><code>{ "border-success": "data.Status === 'COMPLETE'" }</code></td>
 </tr>
 <tr>
 <td>border-warning</td>
 <td>Adds an orange border (1px solid #FFA500).</td>
+<td><code>"cellClassRules": { "border-warning": "x === 'ONHOLD'" }</code></td>
+<td><code>{ "border-warning": "data.Status === 'ONHOLD'" }</code></td>
 </tr>
 <tr>
 <td>border-dark</td>
 <td>Adds a dark grey border (1px solid #343A40).</td>
+<td><code>"cellClassRules": { "border-dark": "x === 'COMPLETE'" }</code></td>
+<td><code>{ "border-dark": "data.Status === 'COMPLETE'" }</code></td>
 </tr>
 </tbody>
 </table>
