@@ -94,7 +94,7 @@ This guide covers the available CSS classes for styling rows and cells. The foll
 
 | CSS Class             | Description                                                                 | Cell Format Example (`cellClassRules`)                         | Row Format Example (`rowClassRules`)                            |
 |-----------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------|
-| text-bold             | **Applies bold font weight.**                                               | ```json { "text-bold": "data.Status === 'COMPLETE'" } ```        | `{ "text-bold": "data.Status === 'COMPLETE'" }`                |
+| text-bold             | **Applies bold font weight.**                                               | `"cellClassRules": { "text-bold": "x === 'COMPLETE'" } `        | `{ "text-bold": "data.Status === 'COMPLETE'" }`                |
 | text-italic           | *Applies italic font style.*                                                | `"cellClassRules": { "text-italic": "x === 'ENTERED'" }`       | `{ "text-italic": "data.Status === 'ENTERED'" }`               |
 | text-primary          | <span style="color: #00A6CE;">Sets text color to blue (#00A6CE).</span>     | `"cellClassRules": { "text-primary": "x === 'ONHOLD'" }`       | `{ "text-primary": "data.Status === 'ONHOLD'" }`               |
 | bg-primary            | <span style="background-color: #00A6CE;">Sets background color to blue (#00A6CE).</span> | `"cellClassRules": { "bg-primary": "x === 'COMPLETE'" }`      | `{ "bg-primary": "data.Status === 'COMPLETE'" }`               |
