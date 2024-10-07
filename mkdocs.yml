@@ -35,6 +35,7 @@ nav:
       - Custodian API: 
         - Manual: custodian-api/manual.md
         - Best Practice: custodian-api/best-practice.md
+      - Business API: business-api/manual.md  
       - Utility API:
         - utility-api/index.md
         - Getting Started: utility-api/getting-started.md
