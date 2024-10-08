@@ -5,13 +5,22 @@ nav:
   - Manuals:
     - IIS: iis/getting-started.md
     - SSRS: ssrs/getting-started.md
+    - API:
+      - Repository API: repository-api/manual.md
+      - Custodian API: 
+        - Manual: custodian-api/manual.md
+        - Best Practice: custodian-api/best-practice.md
+      - Business API: business-api/manual.md  
+      - Utility API:
+        - utility-api/index.md
+        - Getting Started: utility-api/getting-started.md
+        - Email Service: utility-api/email-service.md
+        - Reporting Service: utility-api/reporting-service.md
+        - SQL Export Service: utility-api/sql-export-service.md
     - Label Printing: 
       - Bartender: label-printing/bartender/manual.md
       - ZPL: label-printing/zpl/manual.md
-    - SQLCLR: 
-      - sqlclr/index.md
-      - Getting Started: sqlclr/getting-started.md
-      - CLR Procedure Reference: sqlclr/reference.md
+
     - Integration:
       - Accpac: 
         - integration/accpac/index.md
@@ -30,20 +39,11 @@ nav:
       - QuickBooks: integration/quickbooks/native-app.md
       - SAPB1: integration/sapb1/sdk-provider.md
       - Syspro: integration/syspro/sdk-provider.md
-    - API:
-      - Repository API: repository-api/manual.md
-      - Custodian API: 
-        - Manual: custodian-api/manual.md
-        - Best Practice: custodian-api/best-practice.md
-      - Business API: business-api/manual.md  
-      - Utility API:
-        - utility-api/index.md
-        - Getting Started: utility-api/getting-started.md
-        - Email Service: utility-api/email-service.md
-        - Reporting Service: utility-api/reporting-service.md
-        - SQL Export Service: utility-api/sql-export-service.md
-
     - Scheduler: scheduler/manual.md
+    - SQLCLR: 
+      - sqlclr/index.md
+      - Getting Started: sqlclr/getting-started.md
+      - CLR Procedure Reference: sqlclr/reference.md
     - Web Desktop: 
          - webdesktop/index.md
          - Data Grid: webdesktop/datagrid/datagrid.md
