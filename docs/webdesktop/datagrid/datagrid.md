@@ -131,6 +131,14 @@ This guide covers the available CSS classes for styling rows and cells. The foll
 | border-warning        | Adds an orange border (1px solid #FFA500).                                  | `"cellClassRules": { "border-warning": "x === 'ONHOLD'" }`   | `{ "border-warning": "data.Status === 'ONHOLD'" }`             |
 | border-dark           | Adds a dark grey border (1px solid #343A40).                                | `"cellClassRules": { "border-dark": "x === 'COMPLETE'" }`    | `{ "border-dark": "data.Status === 'COMPLETE'" }`              |
 
+
+Example: apply more than one style class
+``` json
+{ 
+        "text-center bg-error text-light text-italic ": "data.ActionQty == 0"
+}
+```
+
 ### Grid Data Columns
 
 
