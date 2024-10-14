@@ -20,6 +20,23 @@ Conversely, when **isApplicationGrid** is set to false, it signifies that the gr
 
 ----
 
+### Application Grid Columns
+
+Any data grid used by the WebDesktop (**isApplicationGrid** = `true`) will have a minium set of columns needed to allow the application to function correctly.
+These typically include the primary key fields such as Document.Number, MasterItem.Code, etc.
+To verify the necessary columns, access the **API operation**.
+
+![Local Image](gridmenuapioperation.png)
+
+If you navigate to the API operation documentation, you can observe that we document the SQL view name and the essential columns required for its proper functionality.
+
+![Local Image](apioperation.png)
+
+
+In the example provided above, ID, Code, and isActive are explicitly designated as required columns.
+
+----
+
 ### Grid Definition
 
 ```json
@@ -139,18 +156,4 @@ Example: apply more than one style class
 }
 ```
 
-### Grid Data Columns
 
-
-The WebDesktop mandates a **minimum** set of columns to be present in both the SQL data and grid.
-These typically include the primary key fields such as Document.Number, MasterItem.Code, etc.
-To verify the necessary columns, access the **API operation**.
-
-![Local Image](gridmenuapioperation.png)
-
-If you navigate to the API operation documentation, you can observe that we document the SQL view name and the essential columns required for its proper functionality.
-
-![Local Image](apioperation.png)
-
-
-In the example provided above, ID, Code, and isActive are explicitly designated as required columns.

@@ -39,6 +39,10 @@ nav:
       - QuickBooks: integration/quickbooks/native-app.md
       - SAPB1: integration/sapb1/sdk-provider.md
       - Syspro: integration/syspro/sdk-provider.md
+      - Sage 100: 
+        - integration/sage100/index.md
+      - Sage Intacct: 
+        - integration/intacct/index.md
     - Scheduler: scheduler/manual.md
     - SQLCLR: 
       - sqlclr/index.md
