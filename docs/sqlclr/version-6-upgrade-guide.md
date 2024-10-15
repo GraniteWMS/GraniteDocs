@@ -207,16 +207,16 @@ You can then replace the existing exec in prescript with the new one. Here you c
 BEFORE:
 ```sql
 EXECUTE [dbo].[clr_Adjustment] 
-   @userID
-  ,@inventoryIdentifier
-  ,@qty
-  ,@comment
-  ,@reference
-  ,@adjustmentType
-  ,@integrationReference
-  ,@processName
-  ,@responseCode OUTPUT
-  ,@responseJSON OUTPUT
+   @userID = @userID
+  ,@inventoryIdentifier = @inventoryIdentifier
+  ,@qty = @qty
+  ,@comment = @comment
+  ,@reference = @reference
+  ,@adjustmentType = @adjustmentType
+  ,@integrationReference = @integrationReference
+  ,@processName = @processName
+  ,@responseCode = @responseCode OUTPUT
+  ,@responseJSON = @responseJSON OUTPUT
 
 IF @responseCode = 200
 BEGIN
@@ -244,3 +244,26 @@ EXEC	[dbo].[clr_Adjustment]
 		@message = @message OUTPUT
 ```
 The main things to note are that you pass the UserName instead of the userID. This paired with being able to directly set the valid and message makes using the SQLCLR procedures far simpler. 
+
+In this example the SQLCLR is the last action in the prescript so you can directly set the @valid and @message. If this is not the case, you can check if it succeeded like this:
+
+```sql
+EXEC	[dbo].[clr_Adjustment]
+		@userName = @UserName,
+		@trackingEntityIdentifier = @inventoryIdentifier,
+		@adjustmentQty = @qty,
+		@comment = @comment,
+		@reference = @reference,
+		@adjustmentType = @adjustmentType,
+		@integrationReference = @integrationReference,
+		@processName = @processName,
+		@success = @success OUTPUT,
+		@message = @message OUTPUT
+
+IF(@success = 1) -- 1 indicates success
+	BEGIN 
+		-- Continue with logic here
+	END
+
+```
+
