@@ -66,7 +66,7 @@ The script to insert the default settings is also located in the GraniteDatabase
 - Supports:
     - AdjustmentAccount SystemSetting
 
-| Granite                           | Omni API                              | Required | Behaviour |
+| Granite                           | Omni API                              | Required | Behavior |
 |-----------------------------------|---------------------------------------|----------|-----------|
 | MasterItem Code                   | stockjournalentry.stock_code          | Y        ||
 | FromLocation                      | stockjournalentry.warehouse_code      | Y        ||
