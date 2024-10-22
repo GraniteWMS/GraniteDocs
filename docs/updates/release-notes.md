@@ -1,3 +1,109 @@
+## Unreleased : 6.0.0.0
+
+!!! note    
+    - Database changes required
+
+### Database
+#### Database Tables
+- `new` table UsersPermissions
+- `new` table SystemPermissions
+- `new` table IntegrationSettings
+- `new` table DataCapture
+- `new` table DataCaptureFields
+- `new` table DataCaptureFieldsLookup
+- `change` table Users
+- `change` table UsersCredentials
+- `change` table ScheduledJobs
+- `change` table ScheduledJobsHistory
+- `change` table ProcessStep
+- `change` table StockTakeLines
+- `change` table AuditStockTakeLines
+- `change` table Document
+- `change` table DocumentDetail
+- `change` table TradingPartner
+- `change` table DataGrid
+- `change` table StockTakeSession
+
+
+#### Database Views
+- `new` DataCaptureFieldsLookup_View
+- `fix` API_QueryStockReorder
+
+#### Stored Procedures
+- `new` stored procedure CreateExtendedPropertyDescription
+
+#### Database Data
+- `new` Table SystemSettings: Default security settings
+- `new` Table Migration: Default V6 migration data
+- `new` Table SystemPermissions: Default permissions data
+- `new` Table DataGrid: AuditStockTakeSession grid
+- `change` Table SystemSnippets: Updated snippets to include pagination for document lines
+- `change` Table SystemSettings: Latest Custodian Api token
+- `change` Table DataGrid: Add carrying entity barcode to AuditStockTakeLines grid
+- `change` Table DataGrid: Add LastExecutionDate to ScheduledJobs grid
+
+
+#### SQLCLR
+- `new` support for Business Api operations
+- `new` support for Repo Api operations
+- `new` support for Data Capture
+- `new` support for create carrying entity
+- `change` new certificate that won't expire
+
+#### Accpac Integration Jobs
+- `new` deploy script
+- `new` support for setting initial import qty
+- `change` Integration_Accpac_AutoSimplyMOHeader
+- `change` Integration_Accpac_InternalUsageHeader
+- `change` Integration_Accpac_IntransitHeader
+- `change` Integration_Accpac_PurchaseOrderHeader
+- `change` Integration_Accpac_ReceiptHeader
+- `change` Integration_Accpac_SalesOrderHeader
+- `change` Integration_Accpac_TransferHeader
+- `change` Integration_Accpac_WorkOrderHeader
+- `change` Integration_Accpac_TradingPartner
+- `change` Integration_Accpac_IntransitDetail
+- `change` Integration_Accpac_PurchaseOrderDetail
+- `change` Integration_Accpac_ReceiptDetail
+- `change` Integration_Accpac_SalesOrderDetail
+- `change` Integration_Accpac_TransferDetail
+- `change` Integration_Accpac_WorkOrderDetail
+- `fix` TriggerGranitePurchaseOrders
+- `fix` TriggerGraniteSalesOrders
+- `fix` TriggerGraniteWorkOrders
+- `fix` TriggerGraniteTransfers
+
+#### Evo Integration Jobs
+- `new` deploy script
+- `new` support for setting initial import qty
+- `fix` ERP_StockOnHand
+- `change` TriggerGraniteWorkOrders
+- `change` TriggerGraniteWarehouseTransfer
+- `change` TriggerGraniteSalesOrders
+- `change` TriggerGranitePurchaseOrders
+- `change` TriggerGraniteIntransit
+- `change` TriggerGraniteInterBranchRequisition
+- `change` TriggerGraniteReceipt
+- `change` Integration_Evolution_ReceiptHeader
+- `change` Integration_Evolution_InterBranchRequisitionHeader
+- `change` Integration_Evolution_IntransitHeader
+- `change` Integration_Evolution_PurchaseOrderDetail
+- `change` Integration_Evolution_PurchaseOrderDetail_V7
+- `change` Integration_Evolution_PurchaseOrderHeader
+- `change` Integration_Evolution_SalesOrderDetail
+- `change` Integration_Evolution_SalesOrderDetail_V7
+- `change` Integration_Evolution_SalesOrderHeader
+
+#### Sage 100 Integration Jobs
+- `new` trigger TriggerGranitePurchaseOrders
+- `new` view Integration_Sage100_TradingPartner
+- `new` view Integration_Sage100_SalesOrderHeader
+- `new` view Integration_Sage100_SalesOrderDetail
+- `new` view Integration_Sage100_PurchaseOrderHeader
+- `new` view Integration_Sage100_PurchaseOrderDetail
+- `new` view Integration_Sage100_MasterItem
+
+
 ## April 2024 New Release : 5.0.0.0
 
 !!! note    
