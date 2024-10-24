@@ -121,12 +121,15 @@
 
 #### Sage 100 Integration Jobs
 - `new` trigger TriggerGranitePurchaseOrders
+- `new` trigger TriggerGraniteSalesOrders
 - `new` view Integration_Sage100_TradingPartner
 - `new` view Integration_Sage100_SalesOrderHeader
 - `new` view Integration_Sage100_SalesOrderDetail
 - `new` view Integration_Sage100_PurchaseOrderHeader
 - `new` view Integration_Sage100_PurchaseOrderDetail
 - `new` view Integration_Sage100_MasterItem
+- `new` view MasterItemAlias_View
+- `new` view ERP_StockOnHand
 
 
 ### Process App
