@@ -1,30 +1,3 @@
-# Granite WMS What's New V 6.0
-
-## New Applications Overview
-
-- [Business API](#business-api) - An upgraded replacement for the Webservice
-
-## Business API
-In this first release of the Business API, our aim is that you shouldn't notice any major differences between it and the Webservice. However, this doesn't mean nothing has changed. Under the hood we've moved away from the legacy technology the Webservice was built on. This modernization enhances our ability to adapt to new requirements, allowing us to respond to business needs more quickly and efficiently. With this new API, we are better positioned to support innovation and deliver improved services to our users.
-
-While the aim is to remain as consistent as possible, there are some changes to the behaviour in the Business API. The most notable change is that creating a pallet will require a location. This is to ensure better transactional consistency throughout the lifetime of the pallet. This means that you will need to have a Location step _before_ any CarryingEntity step that creates pallets. This affects the following process types:
-- TakeOn
-- Manufacture
-- Receiving
-- Return
-- Palletize
-
-Aside from that, the behavioral changes are minor tweaks:
-
-- StocktakeHold (Release) requires TE to be on hold.
-- QCHOLD Pallet writes ContainableEntity_id to transaction
-- QCRELEASE Pallet writes ActionQty to transaction
-- RECEIVING & TAKEON Direct on hold writes ProcessName to QCHOLD transaction
-- RECEIVING a document with the same item with multiple ToLocations correctly validates the ToLocation
-- BarcodeMaster will skip barcodes for failed transactions more often than the webservice - this is part of the strategy to avoid assigning barcodes twice.
-- MANUFACTURE validates against document detail TO Location (webservice validates against FROM Location)
-- PICKING pallet pick writes containable entity id to transaction
-
 # Granite WMS What's New V 5.0
 
 ## New Applications Overview
