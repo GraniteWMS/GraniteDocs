@@ -45,6 +45,8 @@ nav:
       - Syspro: integration/syspro/sdk-provider.md
       - Sage 100: 
         - integration/sage100/index.md
+        - SDK Provider: integration/sage100/sdk-provider.md
+        - Integration Jobs: integration/sage100/integration-jobs.md
       - Sage Intacct: 
         - integration/intacct/index.md
     - Scheduler: scheduler/manual.md
