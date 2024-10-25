@@ -26,8 +26,13 @@ todo: final dropbox path.
 
 Once the necessary assemblies and procedures have been created, you will need to ensure that your `SystemSettings` table includes the necessary entries:
 
+!!! note
+	BusinessAPI replaces Webservice after version 6 and RepoAPI was added in version 6 as well.
+
 | Application	| Key					| Value						| Description					| ValueDataType	| isEncrypted	| isActive	|
 |---------------|-----------------------|---------------------------|-------------------------------|---------------|---------------|-----------|
+| SQLCLR		| BusinessAPI			| https://10.0.0.1:50006		| Granite BusinessAPI Address	| string		| False			| 
+| SQLCLR		| RepoAPI			| https://10.0.0.1:50005		| Granite RepoAPI Address	| string		| False			| 
 | SQLCLR		| Webservice			| http://10.0.0.1:50002		| Granite Webservice Address	| string		| False			| True		|
 | SQLCLR		| LabelPrintService		| http://10.0.0.1:50004		| Label Print Service Address	| string		| False			| True		|
 | SQLCLR		| IntegrationService	| http://10.0.0.1:50003		| Integration Service Address	| string		| False			| True		|

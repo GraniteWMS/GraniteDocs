@@ -14,15 +14,16 @@ While this requires some overhead to change initially it will greatly simplify u
 Rather than building in handling into the prescript the valid and message can directly be set from the output.
 
 ### BusinessAPI
-In version 6 the BusinessAPI has replaced the WebService. This has a few affects. The first is that the system setting needs to be changes to include the address of the BusinessAPI rather than the WebService.
+In version 6 the [BusinessAPI](../business-api/manual.md) has replaced the WebService. This has a few affects. The first is that the system setting needs to be changes to include the address of the BusinessAPI rather than the WebService.
 The next is that many have different parameters. 
 
 ## Upgrade Steps:
 
 1. [Remove the old certificate and login](#remove-the-old-certificate-and-login)
 2. [Install new SQLCLR](#install-new-sqlclr)
-3. [Identify all place it has been used](#identify-all-place-it-has-been-used)
-4. [Apply changes for each procedure](#apply-changes-for-each-procedure)
+3. [Update System Settings](#update-system-settings)
+4. [Identify all place it has been used](#identify-all-place-it-has-been-used)
+5. [Apply changes for each procedure](#apply-changes-for-each-procedure)
 
 ### Remove the old certificate and login
 
@@ -177,6 +178,35 @@ GO
 ### Install new SQLCLR
 
 Now you can run the version 6 SQLCLR_install.sql script from the deploy folder.
+
+### Update System Settings
+
+Add the new System Settings entries for BusinessAPI and RepoAPI and remove Webservice entry.
+You can use the below script.
+
+```sql
+INSERT INTO [dbo].[SystemSettings] ([Application], [Key], [Value], [Description], [ValueDataType], [isEncrypted], [isActive], [AuditDate], [AuditUser])
+SELECT 'SQLCLR', 'RepoAPI', '', 'Repository API Address', 'string', 0, 1, GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM [dbo].[SystemSettings]
+    WHERE [Application] = 'SQLCLR' AND [Key] = 'RepoAPI'
+);
+
+INSERT INTO [dbo].[SystemSettings] ([Application], [Key], [Value], [Description], [ValueDataType], [isEncrypted], [isActive], [AuditDate], [AuditUser])
+SELECT 'SQLCLR', 'BusinessAPI', '', 'Business API Address', 'string', 0, 1, GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM [dbo].[SystemSettings]
+    WHERE [Application] = 'SQLCLR' AND [Key] = 'BusinessAPI'
+);
+
+IF EXISTS(SELECT * FROM SystemSettings WHERE [Application] = 'SQLCLR' AND [Key] = 'Webservice')
+BEGIN
+	DELETE FROM SystemSettings
+	WHERE [Application] = 'SQLCLR' AND [Key] = 'Webservice'
+END
+```
 
 ### Identify all place it has been used
 

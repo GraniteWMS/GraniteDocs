@@ -53,6 +53,7 @@ nav:
     - SQLCLR: 
       - sqlclr/index.md
       - Getting Started: sqlclr/getting-started.md
+      - Version 6 Upgrade Guide: sqlclr/version-6-upgrade-guide.md
       - CLR Procedure Reference: sqlclr/reference.md
     - Web Desktop: 
          - webdesktop/index.md
