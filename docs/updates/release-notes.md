@@ -137,6 +137,8 @@
     - [https://granitewms.canny.io/bugs/p/manufacture-process-showing-object-reference-error](https://granitewms.canny.io/bugs/p/manufacture-process-showing-object-reference-error)
 - `fix` mashing next button in process results in multiple requests
     - [https://granitewms.canny.io/bugs/p/process-app-next-btn-bug](https://granitewms.canny.io/bugs/p/process-app-next-btn-bug)
+- `fix` adjustment with integration success message not showing correctly
+    - [https://granitewms.canny.io/bugs/p/accpac-adjustment-the-success-message-displayed-incorrectly](https://granitewms.canny.io/bugs/p/accpac-adjustment-the-success-message-displayed-incorrectly)
 - `new` show printer required message when user has not entered a printer name
     - [https://granitewms.canny.io/request/p/printer-required-message-for-a-process-on-processapp](https://granitewms.canny.io/request/p/printer-required-message-for-a-process-on-processapp)
 - `change` process dividers more clearly separate menu items 
