@@ -139,7 +139,7 @@
     - [https://granitewms.canny.io/bugs/p/process-app-next-btn-bug](https://granitewms.canny.io/bugs/p/process-app-next-btn-bug)
 - `new` show printer required message when user has not entered a printer name
     - [https://granitewms.canny.io/request/p/printer-required-message-for-a-process-on-processapp](https://granitewms.canny.io/request/p/printer-required-message-for-a-process-on-processapp)
-
+- `change` process dividers more clearly separate menu items 
 
 ### Business API (Webservice replacement)
 - `fix` clearer message when lines are complete / cancelled
@@ -154,6 +154,8 @@
     - [https://granitewms.canny.io/bugs/p/pallet-number-stock-take-transactions](https://granitewms.canny.io/bugs/p/pallet-number-stock-take-transactions)
 - `fix` StockTakeCount Pallet audit bug
     - [https://granitewms.canny.io/bugs/p/pallet-stocktakecount-audit-bug](https://granitewms.canny.io/bugs/p/pallet-stocktakecount-audit-bug)
+- `new` support for api key authentication 
+- `new` support for security settings
 
 ### Repo API
 - `fix` datagrids fail to load
@@ -162,6 +164,8 @@
     - [https://granitewms.canny.io/request/p/masteritemalias-data-import-error-change](https://granitewms.canny.io/request/p/masteritemalias-data-import-error-change)
 - `new` record pallet on stocktakecount transactions 
     - [https://granitewms.canny.io/bugs/p/pallet-number-stock-take-transactions](https://granitewms.canny.io/bugs/p/pallet-number-stock-take-transactions)
+- `new` support for api key authentication 
+- `new` support for security settings
 
 ### Webdesktop
 - `new` support configurable page size for data grids
@@ -178,6 +182,7 @@
     - [https://granitewms.canny.io/request/p/copy-user-functionality](https://granitewms.canny.io/request/p/copy-user-functionality)
 - `new` support for formatting data grids
     - [https://granitewms.canny.io/request/p/datagrid-row-formatting](https://granitewms.canny.io/request/p/datagrid-row-formatting)
+- `new` data capture feature
 
 ### Accpac Integration
 #### SDK Provder
@@ -236,6 +241,16 @@
 ### Label Printing Bartender
 - `fix` printer name case sensitive
     - [https://granitewms.canny.io/bugs/p/printername-on-processapp-login-seems-to-be-case-sensitive-previously-this-didnt](https://granitewms.canny.io/bugs/p/printername-on-processapp-login-seems-to-be-case-sensitive-previously-this-didnt)
+- `new` support for Bartender 2022 R8
+
+### Scheduler
+!!! warning
+    There are breaking changes to injected jobs from older versions in version 6. 
+    Only version 6 specific injected jobs will work with Scheduler version 6.
+
+- `change` upgrade Coravel dependency
+- `change` IInjectableJob interface
+
 ## April 2024 New Release : 5.0.0.0
 
 !!! note    
