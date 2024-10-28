@@ -51,6 +51,8 @@
 - `new` support for Repo Api operations
 - `new` support for Data Capture
 - `new` support for create carrying entity
+- `new` support for Transfer process
+    - [https://granitewms.canny.io/request/p/clr-for-transfers](https://granitewms.canny.io/request/p/clr-for-transfers)
 - `change` new certificate that won't expire
 
 #### Accpac Integration Jobs
