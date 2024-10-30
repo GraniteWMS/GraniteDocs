@@ -166,6 +166,8 @@
     - [https://granitewms.canny.io/bugs/p/webdesktop-enquiry-datagrids-fails-to-load](https://granitewms.canny.io/bugs/p/webdesktop-enquiry-datagrids-fails-to-load)
 - `fix` added validation of foreign keys on MasterItemAlias import
     - [https://granitewms.canny.io/request/p/masteritemalias-data-import-error-change](https://granitewms.canny.io/request/p/masteritemalias-data-import-error-change)
+- `fix` Invalid Username and Password on the Webdeskop using valid credentials
+    - [https://granitewms.canny.io/admin/feedback/bugs/p/webdesktop-login-expired-invalid-user-name-password](https://granitewms.canny.io/admin/feedback/bugs/p/webdesktop-login-expired-invalid-user-name-password)
 - `new` record pallet on stocktakecount transactions 
     - [https://granitewms.canny.io/bugs/p/pallet-number-stock-take-transactions](https://granitewms.canny.io/bugs/p/pallet-number-stock-take-transactions)
 - `new` support for api key authentication 
