@@ -169,7 +169,9 @@
 - `fix` added validation of foreign keys on MasterItemAlias import
     - [https://granitewms.canny.io/request/p/masteritemalias-data-import-error-change](https://granitewms.canny.io/request/p/masteritemalias-data-import-error-change)
 - `fix` Invalid Username and Password on the Webdeskop using valid credentials
-    - [https://granitewms.canny.io/admin/feedback/bugs/p/webdesktop-login-expired-invalid-user-name-password](https://granitewms.canny.io/admin/feedback/bugs/p/webdesktop-login-expired-invalid-user-name-password)
+    - [https://granitewms.canny.io/bugs/p/webdesktop-login-expired-invalid-user-name-password](https://granitewms.canny.io/bugs/p/webdesktop-login-expired-invalid-user-name-password)
+- `fix` StockTakeRelease not creating transactions
+    - [https://granitewms.canny.io/bugs/p/webdesktop-stocktakerelease-sometimes-not-creating-transactions](https://granitewms.canny.io/bugs/p/webdesktop-stocktakerelease-sometimes-not-creating-transactions`)
 - `new` record pallet on stocktakecount transactions 
     - [https://granitewms.canny.io/bugs/p/pallet-number-stock-take-transactions](https://granitewms.canny.io/bugs/p/pallet-number-stock-take-transactions)
 - `new` support for api key authentication 
