@@ -144,6 +144,8 @@
 - `new` show printer required message when user has not entered a printer name
     - [https://granitewms.canny.io/request/p/printer-required-message-for-a-process-on-processapp](https://granitewms.canny.io/request/p/printer-required-message-for-a-process-on-processapp)
 - `change` process dividers more clearly separate menu items 
+- `change` can set Replenish Step 100 ToTrackingEntity from prescript
+    - [https://granitewms.canny.io/request/p/replenish-totrackingbarcode-as-silent-step](https://granitewms.canny.io/request/p/replenish-totrackingbarcode-as-silent-step)
 
 ### Business API (Webservice replacement)
 - `fix` clearer message when lines are complete / cancelled
