@@ -144,6 +144,8 @@
 - `new` show printer required message when user has not entered a printer name
     - [https://granitewms.canny.io/request/p/printer-required-message-for-a-process-on-processapp](https://granitewms.canny.io/request/p/printer-required-message-for-a-process-on-processapp)
 - `change` process dividers more clearly separate menu items 
+- `change` can set Replenish Step 100 ToTrackingEntity from prescript
+    - [https://granitewms.canny.io/request/p/replenish-totrackingbarcode-as-silent-step](https://granitewms.canny.io/request/p/replenish-totrackingbarcode-as-silent-step)
 
 ### Business API (Webservice replacement)
 - `fix` clearer message when lines are complete / cancelled
@@ -166,6 +168,10 @@
     - [https://granitewms.canny.io/bugs/p/webdesktop-enquiry-datagrids-fails-to-load](https://granitewms.canny.io/bugs/p/webdesktop-enquiry-datagrids-fails-to-load)
 - `fix` added validation of foreign keys on MasterItemAlias import
     - [https://granitewms.canny.io/request/p/masteritemalias-data-import-error-change](https://granitewms.canny.io/request/p/masteritemalias-data-import-error-change)
+- `fix` Invalid Username and Password on the Webdeskop using valid credentials
+    - [https://granitewms.canny.io/bugs/p/webdesktop-login-expired-invalid-user-name-password](https://granitewms.canny.io/bugs/p/webdesktop-login-expired-invalid-user-name-password)
+- `fix` StockTakeRelease not creating transactions
+    - [https://granitewms.canny.io/bugs/p/webdesktop-stocktakerelease-sometimes-not-creating-transactions](https://granitewms.canny.io/bugs/p/webdesktop-stocktakerelease-sometimes-not-creating-transactions`)
 - `new` record pallet on stocktakecount transactions 
     - [https://granitewms.canny.io/bugs/p/pallet-number-stock-take-transactions](https://granitewms.canny.io/bugs/p/pallet-number-stock-take-transactions)
 - `new` support for api key authentication 
