@@ -56,4 +56,10 @@ By promoting interaction with the API, this integration enhances security, maint
 
     REPORT PRINT, REPORT EXPORT, SQL TABLE EXPORT, SIMPLE EMAIL, TEMPLATE EMAIL
 
+-   __Repository API__
+
+    ---
+
+    COPY DOCUMENT, SAVE OPTIONAL FIELDS
+
 </div>

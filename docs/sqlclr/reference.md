@@ -1,4 +1,27 @@
+## Business API
+!!! note
+    As of version 6 clr now calls the Business API rather than the Webservice. If you are upgrading from a previous version to version 6 please refer to the [Version 6 Upgrade Guide](version-6-upgrade-guide.md).
+
+## Repository API
+
+The below methods call the [Repository API](../repository-api/manual.md) to perform the relevant operations. As such, all the parameters with the exception of Username, Success, and Message directly map to the parameter with the same name. To see details of each of these parameters pleaser refer to the metadata or swagger documentation on the Repo API itself.
+
+To find the operation you can browse the {Repo API url}/metadata or use {Repo API url} + the below paths to navigate directly to the operation.
+
+![Repo Documentation](./img/repo-documentation.PNG)
+
+- dbo.clr_CopyDocument
+```
+/json/metadata?op=CopyDocument
+```
+- dbo.clr_SaveOptionalField
+```
+/json/metadata?op=SaveOptionalFields
+```
+
 ## Webservice 
+!!! note
+    From version 6 onwards the Webservice is no longer used in the SQLCLR methods. Please refer to the [Business API section](#business-api).
 
 For details of the calls that the CLR procedures make to the WebService visit the metadata page of the WebService that you are going to be calling 
 (WebServiceUrl)/metadata

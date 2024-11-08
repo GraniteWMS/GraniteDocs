@@ -11,13 +11,7 @@
 
 As of Granite version 5, the default database create script will include the installation of SQLCLR procedures.
 
-If you need to manually install SQLCLR version 5, you can find the install script here:
-
-
-```
-todo: final dropbox path.
-
-```
+If you need to manually install SQLCLR version 5, you can find the install script at the end of the Database install script.
 
 !!! note
 	The create script requires the SQL `sysadmin` role to execute successfully. If you do not have the necessary permissions, ask the client's IT to run the script.
