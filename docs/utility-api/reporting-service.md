@@ -53,6 +53,9 @@ See the API Documentation for more details on how to export a report using the A
 
 ## ReportPrint
 
+!!! note
+    From version 6 of the Utility API onwards this method no longer sends the job directly to the printer. Instead it is sent to an internal queue that then sends the job to the printer asynchronously. This allows the call to be faster. 
+
 This process calls SSRS and sends the report to a print queue. Check Printer Statues on the UtilityAPI homepage to see the list of available printers.
 
 See the API Documentation for more details on how to print a report using the API. See the SQLCLR documentation for how to print a report using SQLCLR.
