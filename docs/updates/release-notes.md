@@ -54,6 +54,7 @@
 - `new` support for Transfer process
     - [https://granitewms.canny.io/request/p/clr-for-transfers](https://granitewms.canny.io/request/p/clr-for-transfers)
 - `change` new certificate that won't expire
+- `change` added copies parameter to ReportPrint
 
 #### Accpac Integration Jobs
 - `new` Integration_Accpac_AutoSimplyMOHeader
@@ -193,6 +194,10 @@
 - `new` support for formatting data grids
     - [https://granitewms.canny.io/request/p/datagrid-row-formatting](https://granitewms.canny.io/request/p/datagrid-row-formatting)
 - `new` data capture feature
+
+### Utility API 
+- `change` added copies parameter to ReportPrint call to endable printing multiple copies
+- `change` changed report print to add the print to a queue to make the call faster
 
 ### Accpac Integration
 #### SDK Provder
