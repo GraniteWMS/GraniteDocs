@@ -136,6 +136,7 @@
 
 
 ### Process App
+- `change` upgrade to .NET 8
 - `fix` object reference error on Manufacture process looping back to before Document step
     - [https://granitewms.canny.io/bugs/p/manufacture-process-showing-object-reference-error](https://granitewms.canny.io/bugs/p/manufacture-process-showing-object-reference-error)
 - `fix` mashing next button in process results in multiple requests
@@ -165,6 +166,7 @@
 - `new` support for security settings
 
 ### Repo API
+- `change` upgrade to .NET 8
 - `fix` datagrids fail to load
     - [https://granitewms.canny.io/bugs/p/webdesktop-enquiry-datagrids-fails-to-load](https://granitewms.canny.io/bugs/p/webdesktop-enquiry-datagrids-fails-to-load)
 - `fix` added validation of foreign keys on MasterItemAlias import
@@ -196,15 +198,20 @@
 - `new` data capture feature
 
 ### Utility API 
-- `change` added copies parameter to ReportPrint call to endable printing multiple copies
+- `change` added copies parameter to ReportPrint call to enable printing multiple copies
 - `change` changed report print to add the print to a queue to make the call faster
 
 ### Accpac Integration
 #### SDK Provder
 - `fix` clearer message when encrypted SystemSettings fail to decrypt
     - [https://granitewms.canny.io/bugs/p/integration-provider-error-invalid-length-for-a-base-64-char-array-or-string](https://granitewms.canny.io/bugs/p/integration-provider-error-invalid-length-for-a-base-64-char-array-or-string)
+- `fix` reclassify failing to create second line in adjustment
+    - [https://granitewms.canny.io/bugs/p/integration-method-reclassify-split-is-not-implemented-even-though-config-shows](https://granitewms.canny.io/bugs/p/integration-method-reclassify-split-is-not-implemented-even-though-config-shows)
+- `fix` unable to post transfer receipt with serial numbers
+    - [https://granitewms.canny.io/bugs/p/accpac-integration-post-transfer-receipt-with-serial-number](https://granitewms.canny.io/bugs/p/accpac-integration-post-transfer-receipt-with-serial-number)
 
 #### Injected jobs
+- `change` upgrade to .NET 8
 - `new` 'all in one' deploy script
 - `new` support setting initial action qty on document import
     - [https://granitewms.canny.io/request/p/initial-downwards-integration-for-new-sites](https://granitewms.canny.io/request/p/initial-downwards-integration-for-new-sites)
@@ -221,6 +228,7 @@
     - [https://granitewms.canny.io/request/p/evo-posting-of-adjustments-field-changes](https://granitewms.canny.io/request/p/evo-posting-of-adjustments-field-changes)
 
 #### Injected jobs
+- `change` upgrade to .NET 8
 - `new` 'all in one' deploy script
 - `new` support setting initial action qty on document import
     - [https://granitewms.canny.io/request/p/initial-downwards-integration-for-new-sites](https://granitewms.canny.io/request/p/initial-downwards-integration-for-new-sites)
@@ -250,6 +258,7 @@
     - [https://granitewms.canny.io/request/p/quickbooks-interface-ignore-nonstock-items-flag](https://granitewms.canny.io/request/p/quickbooks-interface-ignore-nonstock-items-flag)
 
 ### Label Printing ZPL
+- `change` upgrade to .NET 8
 - `fix` printer name case sensitive
     - [https://granitewms.canny.io/bugs/p/printername-on-processapp-login-seems-to-be-case-sensitive-previously-this-didnt](https://granitewms.canny.io/bugs/p/printername-on-processapp-login-seems-to-be-case-sensitive-previously-this-didnt)
 
@@ -263,6 +272,7 @@
     There are breaking changes to injected jobs from older versions in version 6. 
     Only version 6 specific injected jobs will work with Scheduler version 6.
 
+- `change` upgrade to .NET 8
 - `change` upgrade Coravel dependency
 - `change` IInjectableJob interface
 
@@ -318,7 +328,6 @@
 
 #### Accpac Integration
 
-- `fix` view Integration_Accpac_AutoSimplyMODetail 
 - `fix` view Integration_Accpac_InternalUsageDetail 
 - `fix` view Integration_Accpac_IntransitDetail 
 - `fix` view Integration_Accpac_PurchaseOrderDetail 
