@@ -24,6 +24,10 @@ The Sage 100 SDK provider is responsible for mapping Granite transactions to the
 
 4. Configure your connection string and endpoint in the `Granite.Integration.Web.exe.config` file
 
+5. Ensure that the Sage 100 company is setup to allow external access. This setting seen below can be found under company maintenance > preferences
+
+![Allow-external-access](img/allow-external-access.png)
+
 ## Settings
 
 !!! note
