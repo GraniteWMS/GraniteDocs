@@ -86,7 +86,8 @@ If you require a different integration action you can specify the name below in 
 | FromLocation            | WarehouseCode | Y       | IM_TransactionDetail ||
 | Qty                    | TransactionQty | Y      | IM_TransactionDetail ||
 
-### ADJUSTMENT / SCRAP
+### ADJUSTMENT / SCRAP 
+
 - Granite Transaction: **ADJUSTMENT / SCRAP**
 - Sage100: **IM Transaction Adjustment**
 - Supports: 
@@ -104,6 +105,26 @@ If you require a different integration action you can specify the name below in 
 | FromLocation            | WarehouseCode | Y       | IM_TransactionDetail ||
 | Qty                    | TransactionQty | Y      | IM_TransactionDetail ||
 
+### RECLASSIFY
+
+- Granite Transaction: **RECLASSIFY**
+- Sage100: **IM Transaction Adjustment**
+- Supports: 
+    - Integration Reference
+- IntegrationPost:
+    - False - Saves transaction
+    - True - Saves transaction
+- Returns:
+    - EntryNo
+
+| Granite                | Sage 100 BOI | Required | Sage 100 Table | Behaviour |
+|------------------------|--------------|----------|---------------|-----------|
+| Reference              | Batch        | N        | GL_CompanyActiveBatch | If batch grouping of transactions is enabled, reference will be used as the BatchNo
+| FromMasterItemCode         | ItemCode     | Y        | IM_TransactionDetail ||
+| FromLocation            | WarehouseCode | Y       | IM_TransactionDetail ||
+| ToMasterItemCode         | ItemCode     | Y        | IM_TransactionDetail ||
+| ToLocation            | WarehouseCode | Y       | IM_TransactionDetail ||
+| Qty                    | TransactionQty | Y      | IM_TransactionDetail ||
 
 ### MOVE / TRANSFER / REPLENISH
 - Granite Transaction: **MOVE / TRANSFER / REPLENISH**
