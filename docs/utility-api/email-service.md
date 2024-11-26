@@ -68,7 +68,7 @@ If the `EmailProvider` setting is empty, it will default to using the SMTP provi
 !!! note
     This configuration has already been completed for the GraniteWMS Info account, it does not need to be performed again.
     
-    If you are using the GraniteWMS Info account, use the script in Dropbox to update your SystemSettings and then run the GmailAuthenticator app to log in.
+    If you are using the GraniteWMS Info account, use the script in Dropbox to update your SystemSettings and then run the [GmailAuthenticator](#gmail-authenticator) app to log in.
 
 To allow UtilityAPI access to the Gmail account in order to send email, we will need to configure some settings on the Gmail account.
 
@@ -152,14 +152,18 @@ While you are in SystemSettings, also ensure that you have the `EmailProvider` s
     !!! note
         The `Client secret` must be encrypted. Ensure that you save it through the Webdesktop so that it is not stored in plaintext.
 
-18. Browse to the folder where you have installed the UtilityAPI, and into the `GmailAuthenticator` folder. 
+##### Gmail Authenticator 
+The Gmail Authenticator connects to the Gmail API using the Client ID and Client secret from System Settings, and fetches tokens that allow the Utility API to connect to the Gmail API.
+This is a once off set up, once you have authenticated, the Utility API will be able to send email via Gmail.
+
+1. Browse to the folder where you have installed the UtilityAPI, and into the `GmailAuthenticator` folder. 
 Run the `Granite.Email.GmailAuthenticator.exe`.
 
     !!! note 
         Granite.Email.GmailAuthenticator.exe uses the UtilityApi's appSettings.json file. 
         Make sure that it is configured before trying to authenticate the Gmail account.
 
-19. A browser window will open asking you to log in to authorize the Utility API. 
+2. A browser window will open asking you to log in to authorize the Utility API. 
 Log in with the Gmail account that you are going to use to send emails. 
 Log in with the **normal username and password** - NOT the Client ID and Client secret
 
