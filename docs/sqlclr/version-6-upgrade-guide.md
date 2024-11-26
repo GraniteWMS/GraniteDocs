@@ -230,6 +230,7 @@ The first column is the prescript and the second is SQLCLR procedure executed in
 
 To alter the existing procedure the simplest process will be to right click on the procedure and select execute.
 Fill in test info to get the formatting of the execute. 
+
 ![Execute](./img/execute-procedure.PNG)
 
 You can then replace the existing exec in prescript with the new one. Here you can see a before and after using clr_Adjustment. 
