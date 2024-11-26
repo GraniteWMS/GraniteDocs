@@ -72,7 +72,7 @@ If the `EmailProvider` setting is empty, it will default to using the SMTP provi
 
 To allow UtilityAPI access to the Gmail account in order to send email, we will need to configure some settings on the Gmail account.
 
-Browse to [https//console.cloud.google.com](https//console.cloud.google.com) and log in with the account that you want to use, then follow the steps below.
+Browse to [https://console.cloud.google.com](https://console.cloud.google.com) and log in with the account that you want to use, then follow the steps below.
 
 1. Click the `Select a project` button on the top left
 
