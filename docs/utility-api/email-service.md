@@ -33,7 +33,42 @@ You should have the following settings after running the script:
 !!! note "Password isEncrypted is True"
     You will only be able to change the value of this setting from the Webdesktop System Settings page
 
-### Allow Gmail account API access
+### Email Providers
+
+Email Providers allow us to configure the way that we send emails for different types of email accounts.
+At the moment we support sending email using a SMTP server directly, or using the Gmail API.
+
+Note that as of January 2025, Gmail no longer allows sending emails using their SMTP server directly.
+This is why configuring the UtilityApi to send email via a Gmail account works slightly differently.
+
+To configure the `EmailProvider`, set the name of the provider you want to use in SystemSettings.
+If the `EmailProvider` setting is empty, it will default to using the SMTP provider.
+
+#### SMTP
+##### Required settings
+
+- UserName - User name to use when connecting to the SMTP server
+- Password - Password to use when connecting to the SMTP server
+- Host - The host address of the SMTP server (server name or IP)
+- Port - The port number to use when accessing the SMTP server
+- EnableSsl - Use SSL when accessing the SMTP server. True or False
+- From - The email address that you are sending mail from
+- FromName - The sender name that will display to users who receive emails
+
+#### Gmail
+##### Required settings
+
+- UserName - The Client ID used to connect to the Gmail API
+- Password - The Client secret used to connect to the Gmail API
+- From - The email address that you are sending mail from
+- FromName - The sender name that will display to users who receive emails
+
+##### Allow Gmail account API access
+
+!!! note
+    This configuration has already been completed for the GraniteWMS Info account, it does not need to be performed again.
+    
+    If you are using the GraniteWMS Info account, use the script in Dropbox to update your SystemSettings and then run the GmailAuthenticator app to log in.
 
 To allow UtilityAPI access to the Gmail account in order to send email, we will need to configure some settings on the Gmail account.
 
