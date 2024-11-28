@@ -2,10 +2,10 @@
 
 ## Configuration
 
-!!! warning "Google shutting down access to sending mails via smtp"
-    As of January 2025, the Utility API will not be able to send emails using smtp.
+!!! warning "Google shutting down access to sending mails via SMTP"
+    As of January 2025, the Utility API will not be able to send emails using SMTP.
 
-    If you are using a Gmail address to send emails, you will need to [enable API access for the account](#allow-gmail-account-api-access) and set the new EmailProvider setting to `GMAIL`
+    If you are using a Gmail address to send emails, you will need to switch over to the new [Gmail provider](#gmail)
 
 
 Settings for the Email Service are configured in the `SystemSettings` table. You can find the insert script for the settings in the GraniteDatabase install folder:
@@ -45,7 +45,9 @@ To configure the `EmailProvider`, set the name of the provider you want to use i
 If the `EmailProvider` setting is empty, it will default to using the SMTP provider.
 
 #### SMTP
-##### Required settings
+Sending email via SMTP is quite straightforward, all you need is the credentials of the account that you are using to send email, and the details of the server that you are using to send email. These get configured in the `System Settings`
+
+##### Required System Settings
 
 - UserName - User name to use when connecting to the SMTP server
 - Password - Password to use when connecting to the SMTP server
@@ -56,7 +58,16 @@ If the `EmailProvider` setting is empty, it will default to using the SMTP provi
 - FromName - The sender name that will display to users who receive emails
 
 #### Gmail
-##### Required settings
+Since Gmail has blocked access to SMTP, sending email via a Gmail account involves more set up.
+
+To send email via Gmail, you will first need to [enable Gmail API access](#allow-gmail-account-api-access) for the account you're using and obtain the `Client ID` and `Client secret`.
+These are the UserName and Password that you will need to set in `SystemSettings`.
+
+Next, you will need to place the API token file in the `...\GraniteUtilityAPI\GmailTokens` folder.
+If you have the token file for the account you are using already, you can simply paste it in.
+Otherwise, you will need to run the [Gmail Authenticator](#gmail-authenticator) to obtain the token file.
+
+##### Required System Settings
 
 - UserName - The Client ID used to connect to the Gmail API
 - Password - The Client secret used to connect to the Gmail API
@@ -156,18 +167,20 @@ While you are in SystemSettings, also ensure that you have the `EmailProvider` s
 The Gmail Authenticator connects to the Gmail API using the Client ID and Client secret from System Settings, and fetches tokens that allow the Utility API to connect to the Gmail API.
 This is a once off set up, once you have authenticated, the Utility API will be able to send email via Gmail.
 
-1. Browse to the folder where you have installed the UtilityAPI, and into the `GmailAuthenticator` folder. 
+1. Open a browser window that is either signed in with the Gmail account you are planning to use, or not signed in to any Gmail account. The Guest mode in Chrome works well for this.
+
+2. Browse to the folder where you have installed the UtilityAPI, and into the `GmailAuthenticator` folder. 
 Run the `Granite.Email.GmailAuthenticator.exe`.
 
     !!! note 
         Granite.Email.GmailAuthenticator.exe uses the UtilityApi's appSettings.json file. 
         Make sure that it is configured before trying to authenticate the Gmail account.
 
-2. A browser window will open asking you to log in to authorize the Utility API. 
+3. A new browser tab will open asking you to log in to authorize the Utility API. 
 Log in with the Gmail account that you are going to use to send emails. 
 Log in with the **normal username and password** - NOT the Client ID and Client secret
 
-Now that the Utility API is authorized to use the Gmail account, you will be able to send email via the UtilityAPI.
+After signing in via the browser, Gmail Authenticator will place the received token file into the `...\GraniteUtilityAPI\GmailTokens` folder
 
 ## Email Templates
 
