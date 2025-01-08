@@ -2,6 +2,79 @@
 !!! note
     As of version 6 clr now calls the Business API rather than the Webservice. If you are upgrading from a previous version to version 6 please refer to the [Version 6 Upgrade Guide](version-6-upgrade-guide.md).
 
+For detauls of the call that CLR procedure make to the Business API visit the metadata page of the Business API that you are going to be calling (BusinessApiUrl)/metadata
+
+The following procedures map directly to the request and details of the parameter can be found as (BusinessApiURL + below path)
+
+- dbo.clr_CreateCarryingEntity
+```
+/json/metadata?op=CreateCarryingEntity
+```
+- dbo.clr_Receive
+```
+/json/metadata?op=InboundReceive
+```
+- dbo.Adjustment
+```
+/json/metadata?op=InventoryAdjustment
+```
+- dbo.clr_Move
+```
+/json/metadata?op=InventoryMove
+```
+- dbo.clr_PalletizeRemove
+```
+/metadata?op=InventoryPalletizeRemove
+```
+- dbo.clr_PalletizeAdd
+```
+/metadata?op=InventoryPalletizeAdd
+```
+- dbo.clr_Reclassify
+```
+/metadata?op=InventoryReclassify
+```
+- dbo.clr_Replenish
+```
+/metadata?op=InventoryReplenish
+```
+- dbo.clr_Scrap
+```
+/metadata?op=InventoryScrap
+```
+- dbo.clr_Transfer
+```
+/metadata?op=InventoryTransfer
+```
+- dbo.clr_TakeOn
+```
+/metadata?op=InventoryTakeOn
+```
+- dbo.clr_TrackingEntityOptionalField
+```
+/json/metadata?op=SetTrackingEntityOptionalFieldValue
+```
+- dbo.clr_Pick
+```
+/json/metadata?op=OutboundPick
+```
+- dbo.clr_Pack
+```
+/json/metadata?op=OutboundPack
+```
+- dbo.clr_StockTakeCount
+```
+/json/metadata?op=StockTakeCount
+```
+- dbo.clr_StockTakeHold
+```
+/json/metadata?op=StockTakeHold
+```
+- dbo.clr_StockTakeRelease
+```
+/json/metadata?op=StockTakeRelease
+```
+
 ## Repository API
 
 The below methods call the [Repository API](../repository-api/manual.md) to perform the relevant operations. As such, all the parameters with the exception of Username, Success, and Message directly map to the parameter with the same name. To see details of each of these parameters pleaser refer to the metadata or swagger documentation on the Repo API itself.
