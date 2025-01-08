@@ -194,6 +194,11 @@ If you require a different integration action you can specify the name below in 
 !!! note
     This is alternative method to be used on Pick transactions. Creates a shipment in Sage100 rather than an invoice.
 
+To create a shipment a Shipper ID is needed. Currently the system is using the login user in SystemSettings as the shipper ID so a login with the Shipper ID that is going to be used will need to be created. 
+If the BackOrder Quantity needs to be set then the shipper id must have the 'Allow Changes to Backordered Quantity on Lines' option checked. 
+
+![Shipper ID](img/backorder_setting.png)
+
 - Granite Process IntegrationMethod: **CREATESHIPMENT**
 - Sage100: **SO Invoice**
 - Supports: 
