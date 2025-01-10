@@ -67,7 +67,8 @@ TODO : flesh out details for web desktop changes. Add screenshots etc.
 ### Data Grid changes
 
 - `new` support configurable page size for data grids
-- `new` support for formatting data grids
+- `new` support for formatting data grids [Row Formatting](..//webdesktop/datagrid/datagrid.md#row-formatting)
+- `new` standard styles for improved look across application  [Styling Guidelines](..//webdesktop/datagrid/datagrid.md#styling-guidelines)
 
 ### Process Management changes
 

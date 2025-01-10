@@ -81,7 +81,8 @@ Example Document status
 }
 ```
 
-### Row Formatting (Version 6 ~)
+# Row Formatting
+`Version 6 ~`
 
 You can define rules which can be applied to include certain CSS classes. 
 These rules are provided as a map where the keys are CSS class names and the values are expression string that if evaluated to true, the class gets used. 
@@ -95,8 +96,8 @@ Example changing background color
 }
 ```
 
-### Styling Guidelines (Version 6 ~)
-
+# Styling Guidelines
+`Version 6 ~`
 
 !!! note 
 	In order to keep a professional and consistent look to the application please use the below styling regarding colors.
