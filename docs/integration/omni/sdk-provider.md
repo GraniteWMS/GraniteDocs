@@ -86,7 +86,7 @@ The script to insert the default settings is also located in the GraniteDatabase
 - Supports:
     - IntransitWarehouse SystemSetting
 
-| Granite                           | Omni API                                              | Required  | Behaviour |
+| Granite                           | Omni API                                              | Required  | Behavior |
 |-----------------------------------|-------------------------------------------------------|-----------|-----------|
 | Document                          | inter_warehouse_transfer.req_no                       | Y         ||
 | IntransitWarehouse SystemSetting  | inter_warehouse_transfer.in_transit_warehouse_code    | Y         ||
@@ -118,7 +118,7 @@ The script to insert the default settings is also located in the GraniteDatabase
 - Supports:
     - IntransitWarehouse SystemSetting
 
-| Granite                           | Omni API                                                  | Required  | Behaviour |
+| Granite                           | Omni API                                                  | Required  | Behavior |
 |-----------------------------------|-----------------------------------------------------------|-----------|-----------|
 | Document                          | inter_warehouse_transfer.req_no                           | Y         ||
 | FromLocation                      | inter_warehouse_requisition.source_warehouse_code         | Y         ||
@@ -139,7 +139,7 @@ The script to insert the default settings is also located in the GraniteDatabase
 - Supports:
     - ScrapAccount SystemSetting
 
-| Granite                           | Omni API                              | Required | Behaviour |
+| Granite                           | Omni API                              | Required | Behavior |
 |-----------------------------------|---------------------------------------|----------|-----------|
 |                                   | stockjournalentry.reference           | Y        | Will be set to "SCRAP" |
 |                                   | stockjournalentry.transaction_type    | Y        | Will be set to "Issue" |
@@ -158,7 +158,7 @@ The script to insert the default settings is also located in the GraniteDatabase
 
 Delivery note mapping:
 
-| Granite                           | Omni API                                              | Required  | Behaviour |
+| Granite                           | Omni API                                              | Required  | Behavior |
 |-----------------------------------|-------------------------------------------------------|-----------|-----------|
 |                                   | delivery_note.source_type                             |           | Will be set to "ORDER" |
 |                                   | delivery_note.customer_branch_code                    |           | Will be set to "HO" |
@@ -173,7 +173,7 @@ Delivery note mapping:
 
 Invoice mapping:
 
-| Granite                           | Omni API                                              | Required  | Behaviour |
+| Granite                           | Omni API                                              | Required  | Behavior |
 |-----------------------------------|-------------------------------------------------------|-----------|-----------|
 |                                   | invoice.source_type                                   |           | Will be set to "ORDER" |
 | Document                          | invoice.source_reference                              | Y         ||
