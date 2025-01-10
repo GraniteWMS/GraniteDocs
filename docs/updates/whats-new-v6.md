@@ -12,7 +12,8 @@
 - [Process Management](#process-management-changes) - You can now easily copy and delete processes right from within the Webdesktop
 - [StockTake Session Auditing](#stocktake-session-management-improvements) - Stocktake session creation criteria are now audited, giving you better visibility
 - [User Management](#changes-to-user-management) - User permissions are now managed at the User Group level. You can also copy users from within the Webdesktop    
-
+- [Document Copy]
+- 
 ## Security & Permissions changes Overview
 
 - [Security Settings](#security-settings) - Opt-in system wide settings that allow you enforce policies like password strength and user account lock outs
@@ -24,6 +25,12 @@
 - [Sage 100](../integration/sage100/index.md)
 - [Acumatica](../integration/acumatica/index.md)
 - [Sage Intacct](../integration/intacct/index.md)
+
+## Custodian / Util 
+
+- Custodian merge with Util
+- SQLObjects allow adding ad-hoc views, stored proc or tables.
+
 
 ## Business API
 In this first release of the Business API, our aim is that you shouldn't notice any major differences between it and the Webservice. However, this doesn't mean nothing has changed. Under the hood we've moved away from the legacy technology the Webservice was built on. This modernization enhances our ability to adapt to new requirements, allowing us to respond to business needs more quickly and efficiently. With this new API, we are better positioned to support innovation and deliver improved services to our users.
@@ -59,14 +66,18 @@ The Jaeger UI allows you to query this data using any of the tags that are store
 TODO add image showing trace data
 
 ## Webdesktop Changes
-TODO : flesh out details for web desktop changes. Add screenshots etc.
+
+### Document Copy
+Copy document with the option to change, type, status and clear line comments and instructions.
+
+![Local Image](img/documentCopy.png)
 
 ### Datacapture Feature
 - `new` data capture feature
 
 ### Data Grid changes
 
-- `new` support configurable page size for data grids
+- `new` support configurable page size for data grids [Page Size](..//webdesktop/datagrid/datagrid.md#page-size)
 - `new` support for formatting data grids [Row Formatting](..//webdesktop/datagrid/datagrid.md#row-formatting)
 - `new` standard styles for improved look across application  [Styling Guidelines](..//webdesktop/datagrid/datagrid.md#styling-guidelines)
 
@@ -82,6 +93,18 @@ TODO : flesh out details for web desktop changes. Add screenshots etc.
 ### Changes to User management
 - `new` support for copying users
 - new permissions management in user groups
+
+### Minor
+- `new` MasterItem Alias SQL view preview. Allow user to preview the SQL view configured for MasterItem Alias.
+
+### Rename Process
+
+![Local Image](img/processRename.png)
+
+### Copy User
+Copy existing user and set password.
+
+![Local Image](img/userCopy.png)
 
 ## Security & Permissions changes
 

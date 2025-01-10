@@ -36,6 +36,12 @@ If you navigate to the API operation documentation, you can observe that we docu
 In the example provided above, ID, Code, and isActive are explicitly designated as required columns.
 
 ----
+### Page Size
+`Take note page size is available only for enquiry grids, this feuture is not supported for application grids.`
+
+Set the PageSize on the database table Datagrid.PageSize.
+
+----
 
 ### Grid Definition
 
@@ -81,10 +87,10 @@ Example Document status
 }
 ```
 
-# Row Formatting
+### Row Formatting
 `Version 6 ~`
 
-You can define rules which can be applied to include certain CSS classes. 
+You can define rules which can be applied to include certain CSS classes (CSS class defined in Styling Guidelines below). 
 These rules are provided as a map where the keys are CSS class names and the values are expression string that if evaluated to true, the class gets used. 
 
 Example changing background color 
@@ -96,7 +102,7 @@ Example changing background color
 }
 ```
 
-# Styling Guidelines
+### Styling Guidelines
 `Version 6 ~`
 
 !!! note 
