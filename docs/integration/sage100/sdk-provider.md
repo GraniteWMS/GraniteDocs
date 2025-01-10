@@ -2,6 +2,12 @@
 
 The Sage 100 SDK provider is responsible for mapping Granite transactions to the relevant format for posting to Sage 100. It makes use of the Sage 100 Business Object Interface to post to Sage 100.
 
+The Business Object Interface is access through an instance of ProvideX OLE Server. The ProvideX OLE Server is a COM-based automation server used by Sage 100 (formerly MAS 90/200) to provide access to its Business Object Interface (BOI). This server facilitates communication between external applications and Sage 100’s internal business logic and data.
+The ProvideX OLE Server is created from the pvxcom.exe. The default pathway is C:\Program Files (x86)\Common Files\Sage\Common Components
+
+![pvxcom.exe](img/providerx-file.png)
+
+
 ## Setup
 1. The Sage 100 SDK provider has currently only been tested against the 2018 version. If not on this version please reach out to the Development team. 
 
