@@ -29,13 +29,13 @@ Moreover, this update enables users to conveniently access all shared templates 
 Webdesktop Publish Process
 
 An easy to follow wizard to publish any Process as a template. 
-![](img/processTemplateCapture.png) 
+![](../img/processTemplateCapture.png) 
 
 Webdesktop Process Catalog
 
 Search, preview and deploy templates with an easy to understand UI.
 
-![](img/processCatalog.png)
+![](../img/processCatalog.png)
 
 ## Utility API
 
@@ -56,11 +56,11 @@ Email templates allow you to create good looking responsive emails without the h
 
 A templated email without any further customization looks like this:
 
-![](img/templateEmailNoMethods.png)
+![](../img/templateEmailNoMethods.png)
 
 And with just a few script methods you can build it into this:
 
-![](img/templateEmailWithMethods.png)
+![](../img/templateEmailWithMethods.png)
 
 
 #### Attachments
@@ -123,7 +123,7 @@ Several small changes was made to reduce errors and to facilitate a better exper
 - Open the item dialog when user click new line.
 - If a from, to or intransit location is captured in the previous line it will carry over to the next.
 
-![](img/documentLineEdit.png)
+![](../img/documentLineEdit.png)
 
 - Disable the edit of the header of the document when user is busy with line editing.
 
@@ -133,7 +133,7 @@ We have introduced support for optional fields in Locations, Documents, and Docu
 
 `Example showcasing an optional field at the line level.`
 
-![](img/optionalfields.png)
+![](../img/optionalfields.png)
 
 
 ### Prescript Preview
@@ -142,7 +142,7 @@ Easily preview the prescript of a ProcessStep in a readonly view.
 
 `Example: Icon displayed next to the prescript name trigger for a preview.`
 
-![](img/prescriptpreview.png)
+![](../img/prescriptpreview.png)
 
 ### Systemsettings Encryption
 
@@ -151,14 +151,14 @@ These values can never be viewed, and are securely stored with encryption keys.
 
 `Take Note` We require all current system settings to migrate sensitive setting in version 5 as part of the upgrade procedure.
 
-![](img/systemsettingsEncryption.png)
+![](../img/systemsettingsEncryption.png)
 
 
 ### Grid menu clear options
 
 Options to clear selection and filters.
 
-![](img/gridmenuOptions.png)
+![](../img/gridmenuOptions.png)
 
 
 ## Silent Steps
@@ -182,13 +182,13 @@ By offering a comprehensive view of the application's internal processes, Debug 
 
 ### Application State 
 
-![](img/debugmodeState.png)
+![](../img/debugmodeState.png)
 
 ### Prescript syntax
 
-![](img/debugmodePrescript.png)
+![](../img/debugmodePrescript.png)
 
 ### WebTemplate syntax
 
-![](img/debugmodeWebTemplate.png)
+![](../img/debugmodeWebTemplate.png)
 
