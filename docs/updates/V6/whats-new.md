@@ -6,12 +6,22 @@
 - The **Util API** is now merged into the **Custodian API**, consolidating functionalities under the unified name: Custodian API.
 - The **Repo API** is now merged into the new **Business API**, consolidating functionalities under the unified name: Business API.
   
-## New Applications & Tools Overview
+___
+## Overview
 
+### New Applications & Tools
+
+- Scaffold CLI - A simple to use CLI application (command line interface) to install, setup and configure Granite WMS.
 - [Business API](#business-api) - An upgraded replacement for the Webservice
 - [Jaeger](#system-observability-with-jaeger) - Your new favorite way to look at logs
 
-## Webdesktop Changes Overview
+### New Integration Providers
+
+- [Sage 100](../integration/sage100/index.md)
+- [Acumatica](../integration/acumatica/index.md)
+- [Sage Intacct](../integration/intacct/index.md)
+
+### Webdesktop Changes
 
 - [Document Copy](#document-copy) - Functionality to copy any document as a new document. Allowing the user to change the type of document.
 - [Data Capture](#datacapture-feature) - A new feature that gives you the ability to easily create input forms to streamline your users' experience capturing repetitive data.
@@ -19,25 +29,15 @@
 - [Process Management](#process-management-changes) - You can now easily copy and delete processes right from within the Webdesktop
 - [StockTake Session Auditing](#stocktake-session-management-improvements) - Stocktake session creation criteria are now audited, giving you better visibility
 - [User Management](#changes-to-user-management) - User permissions are now managed at the User Group level. You can also copy users from within the Webdesktop    
+- [Process Template](#process-template-sqlobjects) Allow user to add any SQLObjects (View, Proc, Table, Function) to process template.
  
-## Security & Permissions changes Overview
+### Security & Permissions changes
 
 - [Security Settings](#security-settings) - Opt-in system wide settings that allow you enforce policies like password strength and user account lock outs
 - [Api Key support](#api-keys) - a new way of authenticating against our API s
 - [Changes to Permissions](#changes-to-permissions) - Permissions are no longer columns on the user table
 
-## New Integration Providers
-
-- [Sage 100](../integration/sage100/index.md)
-- [Acumatica](../integration/acumatica/index.md)
-- [Sage Intacct](../integration/intacct/index.md)
-
-## Custodian / Util 
-
-- Custodian merge with Util
-- SQLObjects allow adding ad-hoc views, stored proc or tables.
-
-
+___
 ## Business API
 In this first release of the Business API, our aim is that you shouldn't notice any major differences between it and the Webservice. However, this doesn't mean nothing has changed. Under the hood we've moved away from the legacy technology the Webservice was built on. This modernization enhances our ability to adapt to new requirements, allowing us to respond to business needs more quickly and efficiently. With this new API, we are better positioned to support innovation and deliver improved services to our users.
 
@@ -60,6 +60,7 @@ Aside from that, the other changes are fixes that require no changes to processe
 - PICKING a pallet writes ContainableEntity_id to transaction
 - BarcodeMaster will skip barcodes for failed transactions more often than the Webservice - this is part of the strategy to avoid assigning barcodes twice.
 
+___
 ## System observability with Jaeger
 In V6 we're aiming to make it easier than ever to track down issues. 
 To achieve this, we've added OpenTelemetry instrumentation into the Business API and the Process App. 
@@ -71,6 +72,7 @@ The Jaeger UI allows you to query this data using any of the tags that are store
 
 TODO add image showing trace data
 
+___
 ## Webdesktop Changes
 
 ### Document Copy
@@ -100,11 +102,9 @@ Copy document with the option to change, type, status and clear line comments an
 - `new` support for copying users
 - new permissions management in user groups
 
-### Changes to User management
-
-
-### Minor
-- `new` MasterItem Alias SQL view preview. Allow user to preview the SQL view configured for MasterItem Alias.
+### Process Template SQLObjects
+- `new` add any sql object to your process template.
+- ![Local Image](../img/templateSQLObject.png)
 
 ### Rename Process
 
@@ -115,6 +115,10 @@ Copy existing user and set password.
 
 ![Local Image](../img/userCopy.png)
 
+### Minor Changes
+- `new` MasterItem Alias SQL view preview. Allow user to preview the SQL view configured for MasterItem Alias.
+  
+___
 ## Security & Permissions changes
 
 ### Security Settings
@@ -141,3 +145,4 @@ If a User Group is assigned a permission, all of the users that belong to that g
 
 Our V6 migration fully converts old user permissions to the new format. 
 For a mapping of old permissions to new permissions see [user permissions](../security/user-permissions.md).
+___
