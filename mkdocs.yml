@@ -3,6 +3,7 @@ site_url: https://granitewms.github.io/granitedocs/
 nav: 
   - Home: index.md
   - Manuals:
+    - Scaffold: scaffold/manual.md
     - IIS: iis/getting-started.md
     - SSRS: ssrs/getting-started.md
     - API:
