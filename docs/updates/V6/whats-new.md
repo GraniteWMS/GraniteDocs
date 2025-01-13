@@ -1,6 +1,11 @@
 # Granite WMS What's New V 6.0
 `Not released`
 
+## API Consolidation
+
+- The **Util API** is now merged into the **Custodian API**, consolidating functionalities under the unified name: Custodian API.
+- The **Repo API** is now merged into the new **Business API**, consolidating functionalities under the unified name: Business API.
+  
 ## New Applications & Tools Overview
 
 - [Business API](#business-api) - An upgraded replacement for the Webservice
@@ -8,17 +13,17 @@
 
 ## Webdesktop Changes Overview
 
+- [Document Copy](#document-copy) - Functionality to copy any document as a new document. Allowing the user to change the type of document.
 - [Data Capture](#datacapture-feature) - A new feature that gives you the ability to easily create input forms to streamline your users' experience capturing repetitive data.
 - [Data Grid Improvements](#data-grid-changes) - Data Grids now support conditional formatting and configurable page sizes
 - [Process Management](#process-management-changes) - You can now easily copy and delete processes right from within the Webdesktop
 - [StockTake Session Auditing](#stocktake-session-management-improvements) - Stocktake session creation criteria are now audited, giving you better visibility
 - [User Management](#changes-to-user-management) - User permissions are now managed at the User Group level. You can also copy users from within the Webdesktop    
-- [Document Copy]
-- 
+ 
 ## Security & Permissions changes Overview
 
 - [Security Settings](#security-settings) - Opt-in system wide settings that allow you enforce policies like password strength and user account lock outs
-- [Api Key support](#api-keys) - a new way of authenticating against our Repo API and Business API
+- [Api Key support](#api-keys) - a new way of authenticating against our API s
 - [Changes to Permissions](#changes-to-permissions) - Permissions are no longer columns on the user table
 
 ## New Integration Providers
@@ -71,7 +76,7 @@ TODO add image showing trace data
 ### Document Copy
 Copy document with the option to change, type, status and clear line comments and instructions.
 
-![Local Image](img/documentCopy.png)
+![Local Image](../img/documentCopy.png)
 
 ### Datacapture Feature
 - `new` data capture feature
@@ -95,17 +100,20 @@ Copy document with the option to change, type, status and clear line comments an
 - `new` support for copying users
 - new permissions management in user groups
 
+### Changes to User management
+
+
 ### Minor
 - `new` MasterItem Alias SQL view preview. Allow user to preview the SQL view configured for MasterItem Alias.
 
 ### Rename Process
 
-![Local Image](img/processRename.png)
+![Local Image](../img/processRename.png)
 
 ### Copy User
 Copy existing user and set password.
 
-![Local Image](img/userCopy.png)
+![Local Image](../img/userCopy.png)
 
 ## Security & Permissions changes
 
@@ -116,7 +124,7 @@ For all the details see the dedicated documentation for [Security Settings](../s
 
 ### Api Keys
 As part of the security overhaul, we've introduced api keys. 
-These can be used in place of a user name and password to authenticate against our Repo API and Business API.
+These can be used in place of a user name and password to authenticate against our Business API.
 This change will allow third-parties a much more seamless experience in working with our apis.
 SQLCLR is also making use of this new authentication method in the background.
 
