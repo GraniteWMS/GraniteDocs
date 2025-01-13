@@ -63,7 +63,9 @@ nav:
     - tools/index.md
     - Jam.dev: tools/jam.md
   - Updates:
-    - What's New: updates/whats-new.md
+    - What's New:
+      - V5: updates/V5/whats-new.md
+      - V6: updates/V6/whats-new.md
     - Release Notes: updates/release-notes.md
 theme: 
   name: material

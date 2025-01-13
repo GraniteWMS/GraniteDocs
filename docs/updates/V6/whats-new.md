@@ -1,4 +1,5 @@
 # Granite WMS What's New V 6.0
+`Not released`
 
 ## New Applications & Tools Overview
 
