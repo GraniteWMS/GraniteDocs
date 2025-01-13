@@ -13,7 +13,7 @@ ___
 
 - Scaffold CLI - A simple to use CLI application (command line interface) to install, setup and configure Granite WMS.
 - [Business API](#business-api) - An upgraded replacement for the Webservice
-- [Jaeger](#system-observability-with-jaeger) - Your new favorite way to look at logs
+- [Jaeger](#jaeger-system-observability) - Your new favorite way to look at logs
 
 ### New Integration Providers
 
@@ -61,7 +61,8 @@ Aside from that, the other changes are fixes that require no changes to processe
 - BarcodeMaster will skip barcodes for failed transactions more often than the Webservice - this is part of the strategy to avoid assigning barcodes twice.
 
 ___
-## System observability with Jaeger
+## Jaeger System observability
+
 In V6 we're aiming to make it easier than ever to track down issues. 
 To achieve this, we've added OpenTelemetry instrumentation into the Business API and the Process App. 
 This allows us to collect all the information that you would normally see in each application's log file (and much more), and correlate the information to view a complete picture of what happened when a user did something.
@@ -76,7 +77,7 @@ ___
 ## Webdesktop Changes
 
 ### Document Copy
-Copy document with the option to change, type, status and clear line comments and instructions.
+<span class="major">new</span> Copy document with the option to change, type, status and clear line comments and instructions.
 
 ![Local Image](../img/documentCopy.png)
 
@@ -91,16 +92,20 @@ Copy document with the option to change, type, status and clear line comments an
 
 ### Process Management changes
 
-- `new` support renaming processes
-- `new` support deleting processes
+- <span class="minor">new</span> support **renaming** processes
+- <span class="minor">new</span> support **deleting** processes
+- <span class="major">new</span> support **dividers** for process menu
 
 ### Stocktake Session management improvements
-- `new` refresh button for stock take session
-- `new` support for stock take session audit
+-  <span class="minor">new</span> refresh button for stock take session
+-  <span class="major">new</span> support for stock take session audit. view all changes to stocktake lines, including approvals, resets, counts etc.
+-  
+![Local Image](../img/stocktakeAudit.png)
 
 ### Changes to User management
-- `new` support for copying users
-- new permissions management in user groups
+- <span class="minor">new</span> support for copying users, carry over all setups
+  ![Local Image](../img/userCopy.png)
+- <span class="breaking">new</span> permissions management in user groups
 
 ### Process Template SQLObjects
 - `new` add any sql object to your process template.
@@ -110,10 +115,6 @@ Copy document with the option to change, type, status and clear line comments an
 
 ![Local Image](../img/processRename.png)
 
-### Copy User
-Copy existing user and set password.
-
-![Local Image](../img/userCopy.png)
 
 ### Minor Changes
 - `new` MasterItem Alias SQL view preview. Allow user to preview the SQL view configured for MasterItem Alias.
