@@ -22,7 +22,7 @@ Scaffold is a easy to use CLI to install, setup and configure Granite WMS.
 View all IIS applications. Option to easily remove IIS applications.
 
 ### Prerequisites
-Run through all Granite WMS Prerequisites. T
+Run through all Granite WMS Prerequisites.
 
 Verify and install IIS components:
 
