@@ -1,5 +1,7 @@
 site_name: Granite WMS
 site_url: https://granitewms.github.io/granitedocs/
+extra_css:
+  - extra_css/custom.css
 nav: 
   - Home: index.md
   - Manuals:
