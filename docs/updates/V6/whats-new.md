@@ -1,7 +1,9 @@
 # Granite WMS What's New V 6.0
 `Not released`
 
-## API Consolidation
+## API Consolidation changes
+
+`these changes will impact settings and configuration of the endpoint addresses. please review`
 
 - The **Util API** is now merged into the **Custodian API**, consolidating functionalities under the unified name: Custodian API.
 - The **Repo API** is now merged into the new **Business API**, consolidating functionalities under the unified name: Business API.
@@ -26,7 +28,7 @@ ___
 - [Document Copy](#document-copy) - Functionality to copy any document as a new document. Allowing the user to change the type of document.
 - [Data Capture](#datacapture-feature) - A new feature that gives you the ability to easily create input forms to streamline your users' experience capturing repetitive data.
 - [Data Grid Improvements](#data-grid-changes) - Data Grids now support conditional formatting and configurable page sizes
-- [Process Management](#process-management-changes) - You can now easily copy and delete processes right from within the Webdesktop
+- [Process Management](#process-management-changes) - Styled Menu dividers  
 - [StockTake Session Auditing](#stocktake-session-management-improvements) - Stocktake session creation criteria are now audited, giving you better visibility
 - [User Management](#changes-to-user-management) - User permissions are now managed at the User Group level. You can also copy users from within the Webdesktop    
 - [Process Template](#process-template-sqlobjects) Allow user to add any SQLObjects (View, Proc, Table, Function) to process template.
@@ -92,9 +94,14 @@ ___
 
 ### Process Management changes
 
-- <span class="minor">new</span> support **renaming** processes
-- <span class="minor">new</span> support **deleting** processes
-- <span class="major">new</span> support **dividers** for process menu
+- <span class="minor">new</span> **renaming** processes
+![Local Image](../img/processRename.png)
+
+- <span class="major">new</span> process menu dividers setup under UserGroups, allowing users to create color styled headings for each group of processes
+![Local Image](../img/processDivider.png)
+- <span class="minor">new</span> support for **deleting** processes
+
+---
 
 ### Stocktake Session management improvements
 -  <span class="minor">new</span> refresh button for stock take session
@@ -105,18 +112,13 @@ ___
 ### Changes to User management
 - <span class="minor">new</span> support for copying users, carry over all setups
   ![Local Image](../img/userCopy.png)
-- <span class="major">new</span> process menu dividers, allowing users to create color styled headings for each group of processes
-![Local Image](../img/processDivider.png)
+
 
 - <span class="breaking">new</span> permissions management in user groups
 
 ### Process Template SQLObjects
 - `new` add any sql object to your process template.
 - ![Local Image](../img/templateSQLObject.png)
-
-### Rename Process
-
-![Local Image](../img/processRename.png)
 
 
 ### Minor Changes
