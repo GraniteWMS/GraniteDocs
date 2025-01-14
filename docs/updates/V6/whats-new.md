@@ -98,13 +98,16 @@ ___
 
 ### Stocktake Session management improvements
 -  <span class="minor">new</span> refresh button for stock take session
--  <span class="major">new</span> support for stock take session audit. view all changes to stocktake lines, including approvals, resets, counts etc.
--  
-![Local Image](../img/stocktakeAudit.png)
+-  <span class="major">new</span> support for stock take session audit. Audit captures criteria, criteria total, before and after totals.
+  
+![Local Image](../img/stockTakeAuditSession.png)
 
 ### Changes to User management
 - <span class="minor">new</span> support for copying users, carry over all setups
   ![Local Image](../img/userCopy.png)
+- <span class="major">new</span> process menu dividers, allowing users to create color styled headings for each group of processes
+![Local Image](../img/processDivider.png)
+
 - <span class="breaking">new</span> permissions management in user groups
 
 ### Process Template SQLObjects
@@ -145,5 +148,5 @@ This change from fields to records to manage permissions will enable smoother mi
 If a User Group is assigned a permission, all of the users that belong to that group automatically have that permission as well. A user can never have less permissions than the group that they belong to.
 
 Our V6 migration fully converts old user permissions to the new format. 
-For a mapping of old permissions to new permissions see [user permissions](../security/user-permissions.md).
+For a mapping of old permissions to new permissions see [user permissions](../../security/user-permissions.md).
 ___
