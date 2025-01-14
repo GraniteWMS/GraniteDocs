@@ -22,17 +22,28 @@ Important Notes:
 ### EnablePasswordStrength
 
 - Description: Enforces a strong password policy for all new passwords while retaining previous passwords.
-- Configuration: Set the Value to true to enable password strength enforcement.
+- Configuration: when active set the Value to one of the options below ranging from 0 -5.
+  
+| Value | Name       | Description                                                                 |
+|-------|------------|-----------------------------------------------------------------------------|
+| 0     | Blank      | Represents a password that is empty or blank.                              |
+| 1     | VeryWeak   | Represents a password that is very weak. Such passwords are easily guessable. |
+| 2     | Weak       | Represents a weak password that might include some variation but lacks complexity. |
+| 3     | Medium     | Represents a medium-strength password that meets minimum security requirements. |
+| 4     | Strong     | Represents a strong password with a combination of letters, numbers, and special characters. |
+| 5     | VeryStrong | Represents a very strong password that exceeds typical security standards.   |
+
 
 ### EnablePasswordExpiry
 
 - Description: Activates password expiration, requiring users to update their passwords after a set period.
 - Configuration: Specify the expiration period (in days) as the Value.
 
-` Examples of error message`
+----
+
+` Examples of application handling security breaches`
 
 ![Local Image](user-locked.png)
-
 
 ----
 
