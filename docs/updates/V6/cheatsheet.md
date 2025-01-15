@@ -3,10 +3,8 @@
 
 ## Database
 
-![Local Image](../img/cheatSheetV6Database.png)
-
-
-```
+<div style="background-color:#ffffff">
+```mermaid
 %%{init: { 'logLevel': 'debug', 'theme': 'default' , 'themeVariables': {
               'cScale0': '#51AA6C', 'cScaleLabel0': '#ffffff',
               'cScale1': '#00A6CE',
@@ -35,11 +33,11 @@
 
 
 ```
+</div>
 ## Features
 
-![Local Image](../img/cheatSheetV6Features.png)
-
-```
+<div style="background-color:#ffffff">
+```mermaid
 %%{init: { 'logLevel': 'debug', 'theme': 'default' , 'themeVariables': {
               'cScale0': '#51AA6C', 'cScaleLabel0': '#ffffff',
               'cScale1': '#00A6CE',
@@ -59,3 +57,4 @@
 
           Users: Copy function : New Permissions <br> UserGroup
 ```
+</div>
