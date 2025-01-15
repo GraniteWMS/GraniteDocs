@@ -93,6 +93,9 @@ Example Document status
 You can define rules which can be applied to include certain CSS classes (CSS class defined in Styling Guidelines below). 
 These rules are provided as a map where the keys are CSS class names and the values are expression string that if evaluated to true, the class gets used. 
 
+!!! note 
+	Set on the Database.RowStyleRules
+
 Example changing background color 
 ```json
 {
@@ -156,11 +159,23 @@ This guide covers the available CSS classes for styling rows and cells. The foll
 | border-dark           | Adds a dark grey border (1px solid #343A40).                                | `"cellClassRules": { "border-dark": "x === 'COMPLETE'" }`    | `{ "border-dark": "data.Status === 'COMPLETE'" }`              |
 
 
-Example: apply more than one style class
+Example: apply when ActionQty = 0, bg-error will display red background
 ``` json
 { 
-        "text-center bg-error text-light text-italic ": "data.ActionQty == 0"
+        "bg-error": "data.ActionQty == 0"
 }
 ```
 
+Example: apply when Complete = 1, text-success will display green text
+``` json
+{ 
+        "text-success": "data.Complete == 1"
+}
+```
+Example: apply when Complete = 1, text-success will display green text
+``` json
+{ 
+        "text-success": "data.Complete == 1"
+}
+```
 
