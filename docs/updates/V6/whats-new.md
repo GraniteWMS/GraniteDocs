@@ -1,7 +1,7 @@
 # Granite WMS What's New V 6.0
 `Not released`
 
-*Also see [CheatSheet](../V6/cheatsheet.md) for a high level overview and reference* 
+*Also see [V6 Cheat Sheet](../V6/cheatsheet.md) for a high level overview and reference* 
 
 ## API Consolidation changes
 
