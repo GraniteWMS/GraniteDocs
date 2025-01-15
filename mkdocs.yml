@@ -68,7 +68,9 @@ nav:
   - Updates:
     - What's New:
       - V5: updates/V5/whats-new.md
-      - V6: updates/V6/whats-new.md
+      - V6: 
+        - Whats New : updates/V6/whats-new.md
+        - CheatSheet : updates/V6/cheatsheet.md
     - Release Notes: updates/release-notes.md
 theme: 
   name: material
