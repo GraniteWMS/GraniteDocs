@@ -1,6 +1,8 @@
 # Granite WMS What's New V 6.0
 `Not released`
 
+*Also see [CheatSheet](../V6/cheatsheet.md) for a high level overview and reference* 
+
 ## API Consolidation changes
 
 `these changes will impact settings and configuration of the endpoint addresses. please review`
