@@ -56,6 +56,9 @@
           StockTake : Refresh Session : Session Audit
 
           Users: Copy function : New Permissions <br> UserGroup
+
+         section CLR
+            ToDo
 ```
 </div>
 
