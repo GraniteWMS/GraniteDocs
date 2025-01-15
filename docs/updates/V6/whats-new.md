@@ -23,11 +23,11 @@ ___
 - [Acumatica](../integration/acumatica/index.md)
 - [Sage Intacct](../integration/intacct/index.md)
 
-### Webdesktop Changes
+### Webdesktop Enhancements
 
 - [Document Copy](#document-copy) - Functionality to copy any document as a new document. Allowing the user to change the type of document.
 - [Data Capture](#datacapture-feature) - A new feature that gives you the ability to easily create input forms to streamline your users' experience capturing repetitive data.
-- [Data Grid Improvements](#data-grid-changes) - Data Grids now support conditional formatting and configurable page sizes
+- [Data Grid Improvements](#data-grid-improvements) - Data Grids now support conditional formatting and configurable page sizes
 - [Process Management](#process-management-changes) - Styled Menu dividers  
 - [StockTake Session Auditing](#stocktake-session-management-improvements) - Stocktake session creation criteria are now audited, giving you better visibility
 - [User Management](#changes-to-user-management) - User permissions are now managed at the User Group level. You can also copy users from within the Webdesktop    
@@ -76,7 +76,7 @@ The Jaeger UI allows you to query this data using any of the tags that are store
 TODO add image showing trace data
 
 ___
-## Webdesktop Changes
+## Webdesktop Enhancements
 
 ### Document Copy
 <span class="major">new</span> Copy document with the option to change, type, status and clear line comments and instructions.
@@ -86,11 +86,11 @@ ___
 ### Datacapture Feature
 - `new` data capture feature
 
-### Data Grid changes
+### Data Grid Improvements 
 
-- `new` support configurable page size for data grids [Page Size](..//webdesktop/datagrid/datagrid.md#page-size)
-- `new` support for formatting data grids [Row Formatting](..//webdesktop/datagrid/datagrid.md#row-formatting)
-- `new` standard styles for improved look across application  [Styling Guidelines](..//webdesktop/datagrid/datagrid.md#styling-guidelines)
+- `new` [Page Size](../../webdesktop/datagrid/datagrid.md#page-size) configuration
+- `new` [Row Formatting](../../webdesktop/datagrid/datagrid.md#row-formatting) rule based row formatting
+- `new` [Styling Guidelines](../../webdesktop/datagrid/datagrid.md#styling-guidelines) built in style classes for improved look across application  
 
 ### Process Management changes
 
