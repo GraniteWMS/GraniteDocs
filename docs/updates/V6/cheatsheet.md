@@ -58,3 +58,39 @@
           Users: Copy function : New Permissions <br> UserGroup
 ```
 </div>
+
+## Technical
+
+<div style="background-color:#ffffff">
+```mermaid
+%%{init: { 'logLevel': 'debug', 'theme': 'default' , 'themeVariables': {
+              'cScale0': '#51AA6C', 'cScaleLabel0': '#ffffff',
+              'cScale1': '#00A6CE',
+              'cScale2': '#F24C0D', 'cScaleLabel2': '#ffffff'
+       } } }%%
+    timeline
+        title Granite WMS Version 6 Technical
+
+        section Installation
+          Scaffold CLI : Install and Setup Granite with EASE!
+
+        section Config
+          AppSettings : ToDo list changes
+          Database Settings : ToDo list changes
+
+
+        section Tooling
+          Jaeger : New way to view logs and traces  
+
+        section API
+          Webservice : Replaced with Business API
+          
+          API Merge & Consolidation: Util move to Custodian API
+          : Repo move to Business API
+
+          Security : API Key <br> 3rd party authentication 
+        
+       
+            
+```
+</div>
