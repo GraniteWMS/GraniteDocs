@@ -21,9 +21,9 @@ ___
 
 ### New Integration Providers
 
-- [Sage 100](../integration/sage100/index.md)
-- [Acumatica](../integration/acumatica/index.md)
-- [Sage Intacct](../integration/intacct/index.md)
+- [Sage 100](../../integration/sage100/index.md)
+- [Acumatica](../../integration/acumatica/index.md)
+- [Sage Intacct](../../integration/intacct/index.md)
 
 ### Webdesktop Enhancements
 
@@ -132,7 +132,7 @@ ___
 ### Security Settings
 Security Settings are option-in System Settings that allow you to configure Granite's security policy to meet your customers' requirements. 
 These settings allow you to configure things like password strength requirements, and lock out of user accounts after a certain number of failed attempts.
-For all the details see the dedicated documentation for [Security Settings](../security/system-security.md#security-settings-granite-version-6).
+For all the details see the dedicated documentation for [Security Settings](../../security/system-security.md).
 
 ### Api Keys
 As part of the security overhaul, we've introduced api keys. 
