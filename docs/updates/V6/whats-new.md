@@ -17,7 +17,7 @@ ___
 
 - Scaffold CLI - A simple to use CLI application (command line interface) to install, setup and configure Granite WMS.
 - [Business API](#business-api) - An upgraded replacement for the Webservice
-- [Jaeger](#jaeger-system-observability) - Your new favorite way to look at logs
+- [Jaeger](#system-observability-with-jaeger) - Your new favorite way to "check the logs"
 
 ### New Integration Providers
 
@@ -65,18 +65,19 @@ Aside from that, the other changes are fixes that require no changes to processe
 - BarcodeMaster will skip barcodes for failed transactions more often than the Webservice - this is part of the strategy to avoid assigning barcodes twice.
 
 ___
-## Jaeger System observability
+## System observability with Jaeger
 
 In V6 we're aiming to make it easier than ever to track down issues. 
-To achieve this, we've added OpenTelemetry instrumentation into the Business API and the Process App. 
+To achieve this, we've added OpenTelemetry instrumentation into almost all of our existing applications. 
 This allows us to collect all the information that you would normally see in each application's log file (and much more), and correlate the information to view a complete picture of what happened when a user did something.
 
 All of this information (called trace data) is sent to Jaeger's Elasticsearch database, where it is stored for as long as you need it.
 
 The Jaeger UI allows you to query this data using any of the tags that are stored with the trace, giving you visibility of the whole action like this:
 
-TODO add image showing trace data
+![](../../tools/jaeger-img/jaeger-trace.png)
 
+To learn more about Jaeger and Opentelemetry take a look at our [Jaeger documentation](../../tools/jaeger.md)
 ___
 ## Webdesktop Enhancements
 
