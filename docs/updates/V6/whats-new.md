@@ -135,11 +135,13 @@ Security Settings are option-in System Settings that allow you to configure Gran
 These settings allow you to configure things like password strength requirements, and lock out of user accounts after a certain number of failed attempts.
 For all the details see the dedicated documentation for [Security Settings](../../security/system-security.md).
 
-### Api Keys
-As part of the security overhaul, we've introduced api keys. 
+### API Keys
+As part of the security overhaul, we've introduced API keys. 
 These can be used in place of a user name and password to authenticate against our Business API.
-This change will allow third-parties a much more seamless experience in working with our apis.
+This change will allow third-parties a much more seamless experience in working with our APIs.
 SQLCLR is also making use of this new authentication method in the background.
+
+Find out more about our [API key implementation](../../security/api-keys.md)
 
 ### Changes to Permissions
 User permissions have changed significantly in V6. 
