@@ -48,8 +48,9 @@
 
 #### SQLCLR
 - `new` support for Business Api operations
-- `new` support for Repo Api operations
-- `new` support for Data Capture
+- `new` support for Option Field Entry (Location, Document, DocumentDetail, MasterItem)
+- `new` support for Copy Document
+- `new` support for TrackingEntityOptionalField
 - `new` support for create carrying entity
 - `new` support for Transfer process
     - [https://granitewms.canny.io/request/p/clr-for-transfers](https://granitewms.canny.io/request/p/clr-for-transfers)
