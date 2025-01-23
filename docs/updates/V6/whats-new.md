@@ -16,7 +16,7 @@ ___
 ### New Applications & Tools
 
 - Scaffold CLI - A simple to use CLI application (command line interface) to install, setup and configure Granite WMS.
-- [Business API](#business-api) - An upgraded replacement for the Webservice
+- [Business API](#business-api) - An upgraded replacement for the Webservice, and also the new home for the Repo API functionality
 - [Jaeger](#system-observability-with-jaeger) - Your new favorite way to "check the logs"
 
 ### New Integration Providers
@@ -33,21 +33,23 @@ ___
 - [Process Management](#process-management-changes) - Styled Menu dividers  
 - [StockTake Session Auditing](#stocktake-session-management-improvements) - Stocktake session creation criteria are now audited, giving you better visibility
 - [User Management](#changes-to-user-management) - User permissions are now managed at the User Group level. You can also copy users from within the Webdesktop    
-- [Process Template](#process-template-sqlobjects) Allow user to add any SQLObjects (View, Proc, Table, Function) to process template.
+- [Process Template](#process-template-sqlobjects) - Allow user to add any SQLObjects (View, Proc, Table, Function) to process template.
  
 ### Security & Permissions changes
 
 - [Security Settings](#security-settings) - Opt-in system wide settings that allow you enforce policies like password strength and user account lock outs
-- [Api Key support](#api-keys) - a new way of authenticating against our API s
+- [API Keys](#api-keys) - a new way of authenticating against our APIs
 - [Changes to Permissions](#changes-to-permissions) - Permissions are no longer columns on the user table
 
 ___
 ## Business API
-In this first release of the Business API, our aim is that you shouldn't notice any major differences between it and the Webservice. However, this doesn't mean nothing has changed. Under the hood we've moved away from the legacy technology the Webservice was built on. This modernization enhances our ability to adapt to new requirements, allowing us to respond to business needs more quickly and efficiently. With this new API, we are better positioned to support innovation and deliver improved services to our users.
+In this first release of the Business API, our aim is that you shouldn't notice any major differences between it and the Webservice & Repo API. However, this doesn't mean nothing has changed. Under the hood we've moved away from the legacy technology the Webservice was built on. This modernization enhances our ability to adapt to new requirements, allowing us to respond to business needs more quickly and efficiently. With this new API, we are better positioned to support innovation and deliver improved services to our users.
 
-While the aim is to remain as consistent as possible, there are some changes to the behaviour in the Business API. The most notable change is that creating a pallet will require a location. This is to ensure better transactional consistency throughout the lifetime of the pallet. This means that you will need to have a Location step _before_ any CarryingEntity step that creates pallets. This affects the following process types:
+The Repo API has been moved into it's new home without any major changes. There have been some bug fixes, but nothing has materially changed.
 
-- TakeOn
+On the Webservice functionality side, while the aim is to remain as consistent as possible, there are some changes to the behaviour in the Business API. The most notable change is that creating a pallet will require a location. This is to ensure better transactional consistency throughout the lifetime of the pallet. This means that you will need to have a Location step _before_ any CarryingEntity step that creates pallets. This affects the following process types:
+
+- Take On
 - Manufacture
 - Receiving
 - Return
@@ -55,15 +57,15 @@ While the aim is to remain as consistent as possible, there are some changes to 
 
 Aside from that, the other changes are fixes that require no changes to processes:
 
-- StocktakeHold (Release) requires the TrackingEntity to be on hold.
-- QCHOLD Pallet writes ContainableEntity_id to transaction
+- All Transaction types write FromContainableEntity_id and ToContainableEntity_id where applicable
+- STOCKTAKERELEASE requires the TrackingEntity to be on hold.
 - QCRELEASE Pallet writes ActionQty to transaction
 - RECEIVING & TAKEON of a MasterItem with DirectOnHold writes ProcessName to QCHOLD transaction
 - RECEIVING a document with the same item with multiple ToLocations correctly validates the ToLocation
 - MANUFACTURE validates against document detail TO Location (Webservice incorrectly validates against FROM Location)
-- PICKING a pallet writes ContainableEntity_id to transaction
 - BarcodeMaster will skip barcodes for failed transactions more often than the Webservice - this is part of the strategy to avoid assigning barcodes twice.
 
+You can find out more in the [Business API manual](../../business-api/manual.md) 
 ___
 ## System observability with Jaeger
 
@@ -73,11 +75,11 @@ This allows us to collect all the information that you would normally see in eac
 
 All of this information (called trace data) is sent to Jaeger's Elasticsearch database, where it is stored for as long as you need it.
 
-The Jaeger UI allows you to query this data using any of the tags that are stored with the trace, giving you visibility of the whole action like this:
+The Jaeger UI gives you visibility of everything that happens when a user takes an action like this:
 
 ![](../../tools/jaeger-img/jaeger-trace.png)
 
-To learn more about Jaeger and Opentelemetry take a look at our [Jaeger documentation](../../tools/jaeger.md)
+To learn more about Jaeger and Opentelemetry, and how to query trace data take a look at our [Jaeger documentation](../../tools/jaeger.md)
 ___
 ## Webdesktop Enhancements
 
@@ -131,7 +133,7 @@ ___
 ## Security & Permissions changes
 
 ### Security Settings
-Security Settings are option-in System Settings that allow you to configure Granite's security policy to meet your customers' requirements. 
+Security Settings are opt-in System Settings that allow you to configure Granite's security policy to meet your customers' requirements. 
 These settings allow you to configure things like password strength requirements, and lock out of user accounts after a certain number of failed attempts.
 For all the details see the dedicated documentation for [Security Settings](../../security/system-security.md).
 
