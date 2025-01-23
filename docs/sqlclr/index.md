@@ -17,30 +17,6 @@ By promoting interaction with the API, this integration enhances security, maint
 
 <div class="grid cards" markdown>
 
--   __Inventory__
-
-    ---
-
-    TAKEON, SCRAP, ADJUST, MOVE, PALLETIZE, REPLENISH, RECLASSIFY, TRANSFER
-
--   __Inbound__
-
-    ---
-
-    RECEIVE
-
--   __Outbound__
-
-    ---
-
-    PICK, PACK
-
--   __Stocktake__
-
-    ---
-
-    STOCKTAKECOUNT, STOCKTAKEHOLD, STOCKTAKERELEASE
-
 -   __Label Printing__
 
     ---
@@ -53,16 +29,24 @@ By promoting interaction with the API, this integration enhances security, maint
 
     POST, POST TO ENDPOINT, UPDATE
 
--   __Utility API__
+-   __Custodian API__
 
     ---
 
     REPORT PRINT, REPORT EXPORT, SQL TABLE EXPORT, SIMPLE EMAIL, TEMPLATE EMAIL
 
--   __Repository API__
+-   __Business API__
 
     ---
 
-    COPY DOCUMENT, SAVE OPTIONAL FIELDS
+    **INVENTORY:** TAKEON, SCRAP, ADJUST, MOVE, PALLETIZE, REPLENISH, RECLASSIFY, TRANSFER, SAVE TRACKING ENTITY OPTIONAL FIELD
+
+    **OUTBOUND** :PICK, PACK
+
+    **INBOUND:** RECEIVE
+
+    **STOCKTAKE:** STOCKTAKECOUNT, STOCKTAKEHOLD, STOCKTAKERELEASE
+
+    **OTHER:** COPY DOCUMENT, SAVE OPTIONAL FIELDS
 
 </div>

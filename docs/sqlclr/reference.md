@@ -74,15 +74,6 @@ The following procedures map directly to the request and details of the paramete
 ```
 /json/metadata?op=StockTakeRelease
 ```
-
-## Repository API
-
-The below methods call the [Repository API](../repository-api/manual.md) to perform the relevant operations. As such, all the parameters with the exception of Username, Success, and Message directly map to the parameter with the same name. To see details of each of these parameters pleaser refer to the metadata or swagger documentation on the Repo API itself.
-
-To find the operation you can browse the {Repo API url}/metadata or use {Repo API url} + the below paths to navigate directly to the operation.
-
-![Repo Documentation](./img/repo-documentation.PNG)
-
 - dbo.clr_CopyDocument
 ```
 /json/metadata?op=CopyDocument
@@ -217,8 +208,7 @@ The Key "MySecondIntegrationService" can now be used when executing the CLR_Inte
 | transactionType | No        | Transaction type of the transactions being posted |
 | processName     | No        | Process name of the transactions being posted |
 
-## UtilityAPI
-
+## CustodianAPI
 
 <h3>Report Service</h3>
 
@@ -233,19 +223,19 @@ Use this procedure to print a SSRS report.
 
 | Parameter Name		| Required	| Description																			|
 |-----------------------|-----------|---------------------------------------------------------------------------------------|
-| reportPath | Yes | Path to the report in SSRS (use the report properties in the UtilityAPI to find the report path) |
-| printerName | Yes | Name of the printer to print to (check available printers in UtilityAPI printer statuses ) |
+| reportPath | Yes | Path to the report in SSRS (use the report properties in the CustodianAPI to find the report path) |
+| printerName | Yes | Name of the printer to print to (check available printers in CustodianAPI printer statuses ) |
 | parameters | No | List of all parameters required by the report |
 
 
 
 <h4>dbo.clr_ReportExportToFile</h4>
 
-Use this procedure to save a SSRS report to the server where the UtilityAPI is running.
+Use this procedure to save a SSRS report to the server where the CustodianAPI is running.
 
 | Parameter Name		| Required	| Description																			|
 |-----------------------|-----------|---------------------------------------------------------------------------------------|
-| reportPath | Yes | Path to the report in SSRS (use the report properties in the UtilityAPI to find the report path) |
+| reportPath | Yes | Path to the report in SSRS (use the report properties in the CustodianAPI to find the report path) |
 | fileDestinationPath | Yes | Where the report will be save to including the file name.
 | filetype | Yes | File type that you want to save as (PDF, EXCELOPENXML (.xlsx), EXCEL (.xls)) |
 | parameters | No | List of all parameters required by the report |
@@ -407,7 +397,7 @@ Two types of emails can be sent using SQLCLR:
 The difference between these two types of emails is where the content of the email body comes from. 
 Templated emails require an email template that will be used to generate the body of the email. 
 Simple emails can only contain unformatted text in the body of the email.
-For more info on these, as well as help with designing your own email templates, see the Utility API manual.
+For more info on these, as well as help with designing your own email templates, see the Custodian API manual.
 
 Both types of emails have support for the following types of attachments:
 
@@ -542,7 +532,7 @@ To assist with this we have a set of sql functions that help to build up the req
 
 | ParameterName | Required	| Description																								|
 |---------------|-----------|-----------------------------------------------------------------------------------------------------------|
-| reportPath	| Yes		| The path to this report in SSRS. You can find the report path by browsing the UtilityAPI's reports page	|
+| reportPath	| Yes		| The path to this report in SSRS. You can find the report path by browsing the CustodianAPI's reports page	|
 | fileType		| Yes		| The file type that the report should be exported to. Valid values are PDF, EXCELOPENXML, or EXCEL			|
 
 - dbo.email_AddReportParameter

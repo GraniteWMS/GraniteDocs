@@ -4,10 +4,6 @@ You will only need to do this if you upgrading an existing database to version 6
 
 ## What has changed
 
-### Certificate 
-The certificate that was used to sign the assemblies that contain the SQLCLR code expired in August 2024. 
-The certificate and associated login are created on the master database. SQLCLR needs to be removed from all databases before they can be replaced.
-
 ### Outputs 
 All outputs have be changed from responseCode and responseJson to success and message. 
 While this requires some overhead to change initially it will greatly simplify using SQLCLR in future. 
@@ -19,186 +15,34 @@ The next is that many have different parameters.
 
 ## Upgrade Steps:
 
-1. [Remove the old certificate and login](#remove-the-old-certificate-and-login)
-2. [Install new SQLCLR](#install-new-sqlclr)
-3. [Update System Settings](#update-system-settings)
-4. [Identify all place it has been used](#identify-all-place-it-has-been-used)
-5. [Apply changes for each procedure](#apply-changes-for-each-procedure)
-
-### Remove the old certificate and login
-
-As the certificate is installed on master and is used by all SQLCLR in all databases it will have to first be remove from all databases first. Run the following script against all databases where SQLCLR is installed.
-
-```sql
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'report_AddReportParameter')
-	DROP FUNCTION [report_AddReportParameter]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'email_AddTemplateParameter')
-	DROP FUNCTION [email_AddTemplateParameter]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'email_CreateReportAttachment')
-	DROP FUNCTION [email_CreateReportAttachment]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'email_AddReportParameter')
-	DROP FUNCTION [email_AddReportParameter]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'email_AddReportAttachment')
-	DROP FUNCTION [email_AddReportAttachment]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'email_CreateExcelAttachment')
-	DROP FUNCTION [email_CreateExcelAttachment]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'email_AddExcelAttachmentFilter')
-	DROP FUNCTION [email_AddExcelAttachmentFilter]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'email_AddExcelAttachmentOrderBy')
-	DROP FUNCTION [email_AddExcelAttachmentOrderBy]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'email_AddExcelAttachment')
-	DROP FUNCTION [email_AddExcelAttachment]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'email_AddFileAttachment')
-	DROP FUNCTION [email_AddFileAttachment]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'export_AddOrderBy')
-	DROP FUNCTION [export_AddOrderBy]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'export_AddFilter')
-	DROP FUNCTION [export_AddFilter]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_Receive')
-	DROP PROCEDURE [clr_Receive]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_IntegrationPost')
-	DROP PROCEDURE [clr_IntegrationPost]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_IntegrationPostToEndpoint')
-	DROP PROCEDURE [clr_IntegrationPostToEndpoint]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_IntegrationUpdate')
-	DROP PROCEDURE [clr_IntegrationUpdate]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_TakeOn')
-	DROP PROCEDURE [clr_TakeOn]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_Scrap')
-	DROP PROCEDURE [clr_Scrap]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_Adjustment')
-	DROP PROCEDURE [clr_Adjustment]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_Move')
-	DROP PROCEDURE [clr_Move]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_Palletize')
-	DROP PROCEDURE [clr_Palletize]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_Replenish')
-	DROP PROCEDURE [clr_Replenish]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_Reclassify')
-	DROP PROCEDURE [clr_Reclassify]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_Pick')
-	DROP PROCEDURE [clr_Pick]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_Pack')
-	DROP PROCEDURE [clr_Pack]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_PrintLabel')
-	DROP PROCEDURE [clr_PrintLabel]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_StockTakeCount')
-	DROP PROCEDURE [clr_StockTakeCount]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_StockTakeHold')
-	DROP PROCEDURE [clr_StockTakeHold]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_StockTakeRelease')
-	DROP PROCEDURE [clr_StockTakeRelease]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_ReportPrint')
-	DROP PROCEDURE [clr_ReportPrint]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_ReportExportToFile')
-	DROP PROCEDURE [clr_ReportExportToFile]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_TemplateEmail')
-	DROP PROCEDURE [clr_TemplateEmail]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_SimpleEmail')
-	DROP PROCEDURE [clr_SimpleEmail]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_TableExport')
-	DROP PROCEDURE [clr_TableExport]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_GetWarehouseCost')
-	DROP PROCEDURE [clr_GetWarehouseCost]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_GetStockTakeBatch')
-	DROP PROCEDURE [clr_GetStockTakeBatch]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_CallFoodcoAPI')
-	DROP PROCEDURE [clr_CallFoodcoAPI]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_JsonTest')
-	DROP PROCEDURE [clr_JsonTest]
-GO
-IF EXISTS (SELECT * FROM sys.objects WHERE NAME = 'clr_GetJson')
-	DROP PROCEDURE [clr_GetJson]
-GO
-
-IF EXISTS (SELECT * FROM sys.assemblies WHERE NAME = 'SQLCLR')
-	DROP ASSEMBLY [SQLCLR]
-GO
-IF EXISTS (SELECT * FROM sys.assemblies WHERE NAME = 'JsonFx')
-	DROP ASSEMBLY JsonFx
-GO
-```
-
-Next you can remove the login and certificate with the following script:
-
-```sql
-USE master
-GO
-IF EXISTS(SELECT * FROM sys.syslogins WHERE name = 'CLRLogin')
-	BEGIN 
-		PRINT N'Removing Login';
-		DROP LOGIN CLRLogin;
-	END
-GO
-IF EXISTS(SELECT * FROM sys.certificates WHERE name = 'CLRCERT')
-	BEGIN
-		PRINT 'Removing certificate...'
-		DROP Certificate CLRCERT
-	END
-GO
-```
+1. [Install new SQLCLR](#install-new-sqlclr)
+2. [Update System Settings](#update-system-settings)
+3. [Identify all place it has been used](#identify-all-place-it-has-been-used)
+4. [Apply changes for each procedure](#apply-changes-for-each-procedure)
 
 ### Install new SQLCLR
 
-Now you can run the version 6 SQLCLR_install.sql script from the deploy folder.
+Either use Custodian migration to upgrade SQLCLR or run the version 6 SQLCLR_install.sql script from the deploy folder.
 
 ### Update System Settings
 
-Add the new System Settings entries for BusinessAPI and RepoAPI and remove Webservice entry.
+Add the new System Settings entry for BusinessAPI and remove Webservice entry.
 You can use the below script.
 
 ```sql
 INSERT INTO [dbo].[SystemSettings] ([Application], [Key], [Value], [Description], [ValueDataType], [isEncrypted], [isActive], [AuditDate], [AuditUser])
-SELECT 'SQLCLR', 'RepoAPI', '', 'Repository API Address', 'string', 0, 1, GETDATE(), 'AUTOMATION'
+SELECT 'SQLCLR', 'Business_API_Endpoint', '', 'Business API Address', 'string', 0, 1, GETDATE(), 'AUTOMATION'
 WHERE NOT EXISTS (
     SELECT 1
     FROM [dbo].[SystemSettings]
-    WHERE [Application] = 'SQLCLR' AND [Key] = 'RepoAPI'
+    WHERE [Application] = 'SQLCLR' AND [Key] = 'Business_API_Endpoint'
 );
-
 INSERT INTO [dbo].[SystemSettings] ([Application], [Key], [Value], [Description], [ValueDataType], [isEncrypted], [isActive], [AuditDate], [AuditUser])
-SELECT 'SQLCLR', 'BusinessAPI', '', 'Business API Address', 'string', 0, 1, GETDATE(), 'AUTOMATION'
+SELECT 'SQLCLR', 'Custodian_API_Endpoint', '', 'Custodian API Address', 'string', 0, 1, GETDATE(), 'AUTOMATION'
 WHERE NOT EXISTS (
     SELECT 1
     FROM [dbo].[SystemSettings]
-    WHERE [Application] = 'SQLCLR' AND [Key] = 'BusinessAPI'
+    WHERE [Application] = 'SQLCLR' AND [Key] = 'Custodian_API_Endpoint'
 );
 
 IF EXISTS(SELECT * FROM SystemSettings WHERE [Application] = 'SQLCLR' AND [Key] = 'Webservice')
