@@ -126,13 +126,13 @@ Most of the work will have already been done for you by the `AcumaticaIntegratio
 ### Email on Error
 
 !!! note 
-    Emailing functionality is now handled by the [Utility API](../../utility-api/index.md), set up has changed from previous versions.
+    Emailing functionality is now handled by the [Custodian API](../../custodian-api/manual.md), set up has changed from previous versions.
 
-Ensure that you have configured the UtilityApi for the Acumatica injected jobs in the `SystemSettings` table:
+Ensure that you have configured the CustodianApiUrl for the Scheduler in the `SystemSettings` table:
 
 | Application | Key | Value |
 |---|---|---|
-|GraniteScheduler | UtilityApiUrl | https://localhost:5001/ |
+| GraniteScheduler | CustodianApiUrl | https://localhost:5001/ |
 
 Ensure you have the `IntegrationError` email template in your database. This is the email template that is used for all error notifications in these injected jobs. 
 
