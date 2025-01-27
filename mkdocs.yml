@@ -62,6 +62,8 @@ nav:
         - security/index.md
         - System Security: security/system-security.md
         - Permissions: security/user-permissions.md
+    - Customization:
+        - customization/index.md
   - Tools:
     - tools/index.md
     - Jam.dev: tools/jam.md
