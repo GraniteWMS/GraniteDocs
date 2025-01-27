@@ -47,6 +47,8 @@ nav:
         - Integration Jobs: integration/sage100/integration-jobs.md
       - Sage Intacct: 
         - integration/intacct/index.md
+        - SDK Provider: integration/intacct/sdk-provider.md
+        - Integration Jobs: integration/intacct/integration-jobs.md
     - Scheduler: scheduler/manual.md
     - SQLCLR: 
       - sqlclr/index.md
@@ -67,6 +69,7 @@ nav:
   - Tools:
     - tools/index.md
     - Jam.dev: tools/jam.md
+    - Jaeger: tools/jaeger.md
   - Updates:
     - What's New:
       - V5: updates/V5/whats-new.md
