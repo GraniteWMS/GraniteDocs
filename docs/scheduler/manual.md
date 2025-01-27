@@ -384,7 +384,7 @@ CREATE OR ALTER PROCEDURE [MyProcedure]
 ```
 ### Email Jobs
 
-Email jobs make use of the [Utility API](../utility-api/index.md) to send emails. Ensure that the `UtilityApiUrl` entry in `SystemSettings` is configured correctly before you try to schedule any emails.
+Email jobs make use of the [Custodian API](../custodian-api/index.md) to send emails. Ensure that the `CustodianApiUrl` entry in `SystemSettings` is configured correctly before you try to schedule any emails.
 
 To schedule an email to be sent, we add a record to the `ScheduledJobs` table
 
