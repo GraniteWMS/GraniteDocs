@@ -9,11 +9,10 @@ nav:
     - IIS: iis/getting-started.md
     - SSRS: ssrs/getting-started.md
     - API:
-      - Repository API: repository-api/manual.md
+      - Business API: business-api/manual.md
       - Custodian API: 
         - Manual: custodian-api/manual.md
         - Best Practice: custodian-api/best-practice.md
-      - Business API: business-api/manual.md  
       - Utility API:
         - utility-api/index.md
         - Getting Started: utility-api/getting-started.md
