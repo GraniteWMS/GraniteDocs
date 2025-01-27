@@ -1,5 +1,0 @@
-# Release Notes
-
-## 5.0.0.0
-
-Initial release

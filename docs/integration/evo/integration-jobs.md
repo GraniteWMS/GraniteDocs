@@ -128,7 +128,7 @@ This should give Evo the time it needs to insert all of the lines on a very larg
 ### Email on Error
 
 !!! note
-    Emailing functionality is now handled by the [Custodian API](../../custodian-api/manual.md), set up has changed from previous versions.
+    Emailing functionality is now handled by the [Custodian API](../../custodian-api/index.md), set up has changed from previous versions.
 
 Ensure that you have configured the CustodianApiUrl for the Scheduler in the `SystemSettings` table:
 

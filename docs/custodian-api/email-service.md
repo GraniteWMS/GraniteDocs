@@ -18,17 +18,17 @@ You should have the following settings after running the script:
 
 | Application		| Key					| Value						| Description																								| ValueDataType | isEncrypted	| isActive	|
 |-------------------|-----------------------|---------------------------|-----------------------------------------------------------------------------------------------------------|---------------|---------------|-----------|
-| Granite.Utility	| UserName				|                   		| Username for the account that will be used to send email													| string		| False			| True		|
-| Granite.Utility	| Password				|                           | Password for the account that will be used to send email                                                  | string	    | True			| True		|
-| Granite.Utility	| Host					| smtp.gmail.com			| The address of the SMTP server																			| string		| False			| True		|
-| Granite.Utility	| Port					| 587						| Port number to be used when accessing the SMTP server														| int			| False			| True		|
-| Granite.Utility	| EnableSsl				| true						| Use SSL when accessing the SMTP server. True or False														| bool			| False			| True		|
-| Granite.Utility	| From					|                   		| Email address that will be used to send mail																| string		| False			| True		|
-| Granite.Utility	| FromName				|           				| The sender name that will display to users who receive emails												| string		| False			| True		|
-| Granite.Utility	| RetryInterval			| 30						| Number of seconds to wait before retrying processing an email												| int			| False			| True		|
-| Granite.Utility	| MaxNumberOfRetries	| 3							| Maximum number of times to retry processing an email.             										| int			| False			| True		|
-| Granite.Utility	| EmailAttachmentFolder |							| Full filepath to folder to export email attachments to. Leave empty to use the Utility API install folder | string		| False			| True		|
-| Granite.Utility	| EmailProvider         |							| Provider to use for sending emails. If empty, we will use the SMTP provider.                              | string		| False			| True		|
+| Granite.Custodian	| UserName				|                   		| Username for the account that will be used to send email													| string		| False			| True		|
+| Granite.Custodian	| Password				|                           | Password for the account that will be used to send email                                                  | string	    | True			| True		|
+| Granite.Custodian	| Host					| smtp.gmail.com			| The address of the SMTP server																			| string		| False			| True		|
+| Granite.Custodian	| Port					| 587						| Port number to be used when accessing the SMTP server														| int			| False			| True		|
+| Granite.Custodian	| EnableSsl				| true						| Use SSL when accessing the SMTP server. True or False														| bool			| False			| True		|
+| Granite.Custodian	| From					|                   		| Email address that will be used to send mail																| string		| False			| True		|
+| Granite.Custodian	| FromName				|           				| The sender name that will display to users who receive emails												| string		| False			| True		|
+| Granite.Custodian	| RetryInterval			| 30						| Number of seconds to wait before retrying processing an email												| int			| False			| True		|
+| Granite.Custodian	| MaxNumberOfRetries	| 3							| Maximum number of times to retry processing an email.             										| int			| False			| True		|
+| Granite.Custodian	| EmailAttachmentFolder |							| Full filepath to folder to export email attachments to. Leave empty to use the Utility API install folder | string		| False			| True		|
+| Granite.Custodian	| EmailProvider         |							| Provider to use for sending emails. If empty, we will use the SMTP provider.                              | string		| False			| True		|
 
 !!! note "Password isEncrypted is True"
     You will only be able to change the value of this setting from the Webdesktop System Settings page
@@ -119,7 +119,7 @@ You shouldn't need to change the Location/Organization. Just keep the default an
     ![](img/gmail8.png)
 
 9. Select the Application type `Web application`. 
-Enter an App name e.g. `Granite.Utility.Api`, a user support email address and a developer contact email address. 
+Enter an App name e.g. `Granite.Custodian.Api`, a user support email address and a developer contact email address. 
 You can set both of the email addresses to the email address that you are using to send email.
 Click the `Save and Continue` button once you've entered the required fields.
 
@@ -146,7 +146,7 @@ Scroll to the bottom of the page and click `Update`
 
     ![](img/gmail14.png)
 
-15. Give the client ID a name, e.g. `Granite.Utility.Api`. 
+15. Give the client ID a name, e.g. `Granite.Custodian.Api`. 
 Under Authorized redirect URIs add both `http://localhost/authorize/` and `http://127.0.0.1/authorize/`
 Then click the `Create` button at the bottom
 

@@ -11,14 +11,12 @@ nav:
     - API:
       - Business API: business-api/manual.md
       - Custodian API: 
-        - Manual: custodian-api/manual.md
-        - Best Practice: custodian-api/best-practice.md
-      - Utility API:
-        - utility-api/index.md
-        - Getting Started: utility-api/getting-started.md
-        - Email Service: utility-api/email-service.md
-        - Reporting Service: utility-api/reporting-service.md
-        - SQL Export Service: utility-api/sql-export-service.md
+        - custodian-api/index.md
+        - Getting Started: custodian-api/getting-started.md
+        - Process Template Service: custodian-api/process-template-service.md
+        - Email Service: custodian-api/email-service.md
+        - Reporting Service: custodian-api/reporting-service.md
+        - SQL Export Service: custodian-api/sql-export-service.md
     - Label Printing: 
       - Bartender: label-printing/bartender/manual.md
       - ZPL: label-printing/zpl/manual.md
