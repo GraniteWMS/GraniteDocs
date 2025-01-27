@@ -3,6 +3,7 @@
 ## Setup
 
 ### Prerequisites
+- [ASP.NET Core 8 Hosting Bundle](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 - [IIS](../../iis/getting-started.md)
 
 ### Installation
