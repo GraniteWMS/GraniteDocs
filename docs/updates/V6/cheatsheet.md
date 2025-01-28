@@ -57,8 +57,8 @@
 
           Users: Copy function : New Permissions <br> UserGroup
 
-         section CLR
-            New Procedures: Copy Document: Transfer: Create CarryingEntity: TrackingEntity Optional Field
+         section Security & Permissions
+          Permissions : todo
 ```
 </div>
 
@@ -92,7 +92,8 @@
           : Repo move to Business API
 
           Security : API Key <br> 3rd party authentication 
-        
+         section CLR
+            New Procedures: Copy Document: Transfer: Create CarryingEntity: TrackingEntity Optional Field
        
             
 ```
