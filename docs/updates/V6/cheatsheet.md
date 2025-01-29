@@ -47,7 +47,10 @@
         title Granite WMS Version 6 Features
 
         section WebDesktop
-          Process : Rename Function:  Delete Function:  UserGroups <br> Process Menu Dividers  : Template <br> Capture SQLObjects
+
+          Process Catalog : Add SQL Objects to templates
+
+          Process : Rename Function:  Delete Function:  UserGroups <br> Process Menu Dividers  : Enhanced Prescript Preview
 
           Datagrid : Datagrid PageSize : Datagrid RowStyle : Datagrid Styling Guidelines
           
@@ -55,10 +58,11 @@
 
           StockTake : Refresh Session : Session Audit
 
-          Users: Copy function : New Permissions <br> UserGroup
+          Users: Copy function 
 
          section Security & Permissions
-          Permissions : todo
+          Permissions : More Granular permissions : Permissions moved to User Groups
+          Security Enhancements : Expiring Passwords : Lockout after failed logins : Password strength requirements 
 ```
 </div>
 
@@ -78,8 +82,9 @@
           Scaffold CLI : Install and Setup Granite with EASE!
 
         section Config
-          AppSettings : ToDo list changes
-          Database Settings : ToDo list changes
+          AppSettings : Webdesktop <br> Change to Business API URL : ProcessApp <br> Change to Business API URL <br> Add telemetry settings : Integration service <br> Add telemetry settings : Custodian API <br> Add telemetry settings : Label Printing ZPL <br> Add telemetry settings : Scheduler <br> Add telemetry settings : TODO more?
+          
+          Database Settings : Custodian API <br> Application name changed to Granite.Custodian <br> Add Email and Report settings : TODO more?
 
 
         section Tooling
