@@ -84,45 +84,34 @@ ___
 ## Webdesktop Enhancements
 
 ### Document Copy
-
 <iframe src="https://share.descript.com/embed/slZUqnHkFMg" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
-<span class="major">new</span> Copy document with the option to change, type, status and clear line comments and instructions.
-
-![Local Image](../img/documentCopy.png)
 
 ### Datacapture Feature
 - `new` data capture feature
 
 ### Data Grid Improvements 
-
+- [Page Size](../../webdesktop/datagrid/datagrid.md#page-size) configuration
+- [Row Formatting](../../webdesktop/datagrid/datagrid.md#row-formatting) rule based row formatting
+- [Styling Guidelines](../../webdesktop/datagrid/datagrid.md#styling-guidelines) built in style classes for improved look across application  
 <iframe src="https://share.descript.com/embed/X27OtafGcj2" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
-- `new` [Page Size](../../webdesktop/datagrid/datagrid.md#page-size) configuration
-- `new` [Row Formatting](../../webdesktop/datagrid/datagrid.md#row-formatting) rule based row formatting
-- `new` [Styling Guidelines](../../webdesktop/datagrid/datagrid.md#styling-guidelines) built in style classes for improved look across application  
 
 ### Process Management changes
 
+- Rename process 
+- Delete process 
+- Process menu dividers
+
 <iframe src="https://share.descript.com/embed/F1TEUB5PWxq" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
-- <span class="minor">new</span> **renaming** processes
-![Local Image](../img/processRename.png)
-
-- <span class="major">new</span> process menu dividers setup under UserGroups, allowing users to create color styled headings for each group of processes
-![Local Image](../img/processDivider.png)
-- <span class="minor">new</span> support for **deleting** processes
 
 ---
 
 ### Stocktake Session management improvements
 
-<iframe src="https://share.descript.com/embed/nXrFmWnpEwl" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+- Refresh button
+- Stock Session (heading) audit
 
--  <span class="minor">new</span> refresh button for stock take session
--  <span class="major">new</span> support for stock take session audit. Audit captures criteria, criteria total, before and after totals.
-  
-![Local Image](../img/stockTakeAuditSession.png)
+<iframe src="https://share.descript.com/embed/nXrFmWnpEwl" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
 ### Changes to User management
 - <span class="minor">new</span> support for copying users, carry over all setups
@@ -133,11 +122,9 @@ ___
 
 ### Process Template SQLObjects
 
+- Include adhoc SQL views, functions or stored procedures
+ 
 <iframe src="https://share.descript.com/embed/tyzK3FNH0C1" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
-- `new` add any sql object to your process template.
-- ![Local Image](../img/templateSQLObject.png)
-
 
 ### Minor Changes
 - `new` MasterItem Alias SQL view preview. Allow user to preview the SQL view configured for MasterItem Alias.
