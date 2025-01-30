@@ -91,8 +91,9 @@ ___
 <iframe src="https://share.descript.com/embed/slZUqnHkFMg" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
 
-### Datacapture Feature
-- `new` data capture feature
+### [Datacapture Feature](../../webdesktop/datacapture/data-capture.md)
+
+<iframe src="https://share.descript.com/embed/XnsGLzgZkiW" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
 ### Data Grid Improvements 
 - [Page Size](../../webdesktop/datagrid/datagrid.md#page-size) configuration
