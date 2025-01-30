@@ -15,7 +15,7 @@ ___
 
 ### New Applications & Tools
 
-- Scaffold CLI - A simple to use CLI application (command line interface) to install, setup and configure Granite WMS.
+- [Scaffold CLI](#scaffold) - A simple to use CLI application (command line interface) to install, setup and configure Granite WMS.
 - [Business API](#business-api) - An upgraded replacement for the Webservice, and also the new home for the Repo API functionality
 - [Jaeger](#system-observability-with-jaeger) - Your new favorite way to "check the logs"
 
@@ -42,6 +42,10 @@ ___
 - [Changes to Permissions](#changes-to-permissions) - Permissions are no longer columns on the user table
 
 ___
+## Scaffold
+<iframe src="https://share.descript.com/embed/jY8IZ5GAL32" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+
+Scaffold is a straightforward command line interface that makes it easy to install, setup, and configure Granite WMS.
 ## Business API
 In this first release of the Business API, our aim is that you shouldn't notice any major differences between it and the Webservice & Repo API. However, this doesn't mean nothing has changed. Under the hood we've moved away from the legacy technology the Webservice was built on. This modernization enhances our ability to adapt to new requirements, allowing us to respond to business needs more quickly and efficiently. With this new API, we are better positioned to support innovation and deliver improved services to our users.
 
