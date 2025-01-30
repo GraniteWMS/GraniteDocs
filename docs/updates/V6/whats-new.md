@@ -84,6 +84,9 @@ ___
 ## Webdesktop Enhancements
 
 ### Document Copy
+
+<iframe src="https://share.descript.com/embed/slZUqnHkFMg" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+
 <span class="major">new</span> Copy document with the option to change, type, status and clear line comments and instructions.
 
 ![Local Image](../img/documentCopy.png)
@@ -93,11 +96,15 @@ ___
 
 ### Data Grid Improvements 
 
+<iframe src="https://share.descript.com/embed/X27OtafGcj2" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+
 - `new` [Page Size](../../webdesktop/datagrid/datagrid.md#page-size) configuration
 - `new` [Row Formatting](../../webdesktop/datagrid/datagrid.md#row-formatting) rule based row formatting
 - `new` [Styling Guidelines](../../webdesktop/datagrid/datagrid.md#styling-guidelines) built in style classes for improved look across application  
 
 ### Process Management changes
+
+<iframe src="https://share.descript.com/embed/F1TEUB5PWxq" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
 - <span class="minor">new</span> **renaming** processes
 ![Local Image](../img/processRename.png)
@@ -109,6 +116,9 @@ ___
 ---
 
 ### Stocktake Session management improvements
+
+<iframe src="https://share.descript.com/embed/nXrFmWnpEwl" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+
 -  <span class="minor">new</span> refresh button for stock take session
 -  <span class="major">new</span> support for stock take session audit. Audit captures criteria, criteria total, before and after totals.
   
@@ -122,6 +132,9 @@ ___
 - <span class="breaking">new</span> permissions management in user groups
 
 ### Process Template SQLObjects
+
+<iframe src="https://share.descript.com/embed/tyzK3FNH0C1" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+
 - `new` add any sql object to your process template.
 - ![Local Image](../img/templateSQLObject.png)
 
