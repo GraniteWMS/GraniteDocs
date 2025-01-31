@@ -15,7 +15,7 @@ In order to use Jaeger, you will need the complete GraniteTelemetry pack install
 
 ### The easy way
 The easiest way is to install GraniteTelemetry alongside the rest of Granite WMS, using [Scaffold](../scaffold/manual.md).
-If you select GraniteTelemetry as one of the applications to install, Scaffold will guid you through the process.
+If you select GraniteTelemetry as one of the applications to install, Scaffold will guide you through the process.
 
 ### The manual way
 If you need to install Jaeger from scratch, you can use the `install.ps1` script in the GraniteTelemetry folder.
@@ -152,6 +152,17 @@ Name of the process step
 The value the user entered on this step.
 
 ### Business API
+
+- `user.name`   
+The username of the user making the request
+- `session.authprovider`    
+The authentication method being used for this request (credentials / api-key)
+- `request.origin`  
+Only used when the request comes from SQLCLR, most other requests will show the parent span in Jaeger's trace waterfall. 
+- `operation`   
+The operation that was performed on the API. This corresponds to the Operations on the `/metadata` page
+
+### Custodian API
 
 - `user.name`   
 The username of the user making the request
