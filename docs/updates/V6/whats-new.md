@@ -71,19 +71,9 @@ Aside from that, the other changes are fixes that require no changes to processe
 
 You can find out more in the [Business API manual](../../business-api/manual.md) 
 ___
-## System observability with Jaeger
+## System observability with [Jaeger](../../tools/jaeger.md)
 
-In V6 we're aiming to make it easier than ever to track down issues. 
-To achieve this, we've added OpenTelemetry instrumentation into almost all of our existing applications. 
-This allows us to collect all the information that you would normally see in each application's log file (and much more), and correlate the information to view a complete picture of what happened when a user did something.
-
-All of this information (called trace data) is sent to Jaeger's Elasticsearch database, where it is stored for as long as you need it.
-
-The Jaeger UI gives you visibility of everything that happens when a user takes an action like this:
-
-![](../../tools/jaeger-img/jaeger-trace.png)
-
-To learn more about Jaeger and Opentelemetry, and how to query trace data take a look at our [Jaeger documentation](../../tools/jaeger.md)
+<iframe src="https://share.descript.com/embed/U18gcAOZSln" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 ___
 ## Webdesktop Enhancements
 
