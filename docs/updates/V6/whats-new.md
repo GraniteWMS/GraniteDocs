@@ -124,10 +124,11 @@ ___
 ___
 ## Security, Permissions and User Management changes
 
+<iframe src="https://share.descript.com/embed/7HPXdbfGbY9" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+
 - [Security Settings](../../security/system-security.md)
 - [API keys](../../security/api-keys.md)
 - [New User permissions](../../security/user-permissions.md)
 
-TODO : security & permissions video
 
 ___
