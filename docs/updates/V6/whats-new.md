@@ -41,7 +41,7 @@ ___
 
 ___
 ## Scaffold
-<iframe src="https://share.descript.com/embed/jY8IZ5GAL32" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/jY8IZ5GAL32" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 
 Scaffold is a straightforward command line interface that makes it easy to install, setup, and configure Granite WMS.
 ## Business API
@@ -75,24 +75,24 @@ ___
 
 ## System observability with [Jaeger](../../tools/jaeger.md)
 
-<iframe src="https://share.descript.com/embed/U18gcAOZSln" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/U18gcAOZSln" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 ___
 
 ## Webdesktop Enhancements
 
 ### Document Copy
-<iframe src="https://share.descript.com/embed/slZUqnHkFMg" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/slZUqnHkFMg" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 
 
 ### [Datacapture Feature](../../webdesktop/datacapture/data-capture.md)
 
-<iframe src="https://share.descript.com/embed/XnsGLzgZkiW" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/XnsGLzgZkiW" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 
 ### Data Grid Improvements 
 - [Page Size](../../webdesktop/datagrid/datagrid.md#page-size) configuration
 - [Row Formatting](../../webdesktop/datagrid/datagrid.md#row-formatting) rule based row formatting
 - [Styling Guidelines](../../webdesktop/datagrid/datagrid.md#styling-guidelines) built in style classes for improved look across application  
-<iframe src="https://share.descript.com/embed/X27OtafGcj2" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/X27OtafGcj2" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 
 ### Process Management changes
 
@@ -100,7 +100,7 @@ ___
 - Delete process 
 - Process menu dividers
 
-<iframe src="https://share.descript.com/embed/F1TEUB5PWxq" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/F1TEUB5PWxq" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 
 ---
 
@@ -109,14 +109,14 @@ ___
 - Refresh button
 - Stock Session (heading) audit
 
-<iframe src="https://share.descript.com/embed/nXrFmWnpEwl" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/nXrFmWnpEwl" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 
 
 ### Process Template SQLObjects
 
 - Include adhoc SQL views, functions or stored procedures
  
-<iframe src="https://share.descript.com/embed/tyzK3FNH0C1" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/tyzK3FNH0C1" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 
 ### Minor Changes
 - `new` MasterItem Alias SQL view preview. Allow user to preview the SQL view configured for MasterItem Alias.
@@ -124,7 +124,7 @@ ___
 ___
 ## Security, Permissions and User Management changes
 
-<iframe src="https://share.descript.com/embed/7HPXdbfGbY9" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/7HPXdbfGbY9" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 
 - [Security Settings](../../security/system-security.md)
 - [API keys](../../security/api-keys.md)
