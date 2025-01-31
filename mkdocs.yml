@@ -63,6 +63,7 @@ nav:
         - security/index.md
         - System Security: security/system-security.md
         - Permissions: security/user-permissions.md
+        - API Keys: security/api-keys.md
     - Customization:
         - customization/index.md
   - Tools:
