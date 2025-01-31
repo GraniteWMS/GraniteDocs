@@ -13,6 +13,9 @@ Rather than building in handling into the prescript the valid and message can di
 In version 6 the [BusinessAPI](../business-api/manual.md) has replaced the WebService. This has a few affects. The first is that the system setting needs to be changes to include the address of the BusinessAPI rather than the WebService.
 The next is that many have different parameters. 
 
+### UtilityAPI > CustodianAPI
+The UtilityAPI has been merged with CustodianAPI. The only affect this has is on the System settings needs to be changed. 
+
 ## Upgrade Steps:
 
 1. [Install new SQLCLR](#install-new-sqlclr)
@@ -22,9 +25,12 @@ The next is that many have different parameters.
 
 ### Install new SQLCLR
 
-Either use Custodian migration to upgrade SQLCLR or run the version 6 SQLCLR_install.sql script from the deploy folder.
+Either use Custodian migration to upgrade SQLCLR(preferred method) or run the version 6 SQLCLR_install.sql script from the deploy folder.
 
 ### Update System Settings
+
+!!! note 
+	You only need to do this if implementing the changes manually. If done through Custodian migration these changes will be made already.
 
 Add the new System Settings entry for BusinessAPI and remove Webservice entry.
 You can use the below script.
@@ -52,7 +58,7 @@ BEGIN
 END
 ```
 
-### Identify all place it has been used
+### Identify all places it has been used
 
 As a result of the changes listed in the [what has changed](#what-has-changed) section above you will need to alter the prescripts using any of the SQLCLR procedures.
 

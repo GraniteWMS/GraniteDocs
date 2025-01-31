@@ -225,6 +225,7 @@ Use this procedure to print a SSRS report.
 |-----------------------|-----------|---------------------------------------------------------------------------------------|
 | reportPath | Yes | Path to the report in SSRS (use the report properties in the CustodianAPI to find the report path) |
 | printerName | Yes | Name of the printer to print to (check available printers in CustodianAPI printer statuses ) |
+| copies | Yes | Number of copies to be printed |
 | parameters | No | List of all parameters required by the report |
 
 
@@ -256,8 +257,9 @@ Use this Function to create a report parameter to use with dbo.clr_ReportExport 
 DECLARE @reportPath varchar(50)
 DECLARE @printerName varchar(50) 
 DECLARE @parameters varchar(200)
-DECLARE @responseCode int
-DECLARE @responseJson varchar(max)
+DECLARE @copies int
+DECLARE @success bit
+DECLARE @message varchar(max)
 
 SELECT @reportPath = '/Pick Slip - Per Cage'
 SELECT @printerName = 'TestPrinter'
@@ -269,10 +271,11 @@ EXEC [dbo].[clr_ReportPrint]
 	@reportPath
 	,@printerName
 	,@parameters
-	,@responseCode OUTPUT
-	,@responseJSON OUTPUT
+  ,@copies
+	,@success OUTPUT
+	,@message OUTPUT
 
-SELECT @responseCode, @responseJson
+SELECT @success, @message
 
 ```
 
@@ -283,8 +286,8 @@ DECLARE @reportPath varchar(50)
 DECLARE @fileDestinationPath varchar(50)
 DECLARE @fileType varchar(50) 
 DECLARE @parameters varchar(200)
-DECLARE @responseCode int
-DECLARE @responseJson varchar(max)
+DECLARE @success bit
+DECLARE @message varchar(max)
 
 SELECT @reportPath = N'/Pick Slip - Per Cage'
 SELECT @fileDestinationPath = 'D:\\Granite WMS\\V5 Demo\\PickSlip.pdf'
@@ -298,10 +301,10 @@ EXEC [dbo].[clr_ReportExportToFile]
 	,@fileDestinationPath
 	,@fileType
 	,@parameters
-	,@responseCode OUTPUT
-	,@responseJson OUTPUT
+	,@success OUTPUT
+	,@message OUTPUT
 
-SELECT @responseCode, @responseJson
+SELECT @success, @message
 
 ```
 
@@ -355,8 +358,8 @@ DECLARE @fileDestinationPath varchar(100)
 DECLARE @filetype varchar(20)
 DECLARE @orderByList varchar(200)
 DECLARE @filters varchar(200)
-DECLARE @responseCode int
-DECLARE @responseJson varchar(max)
+DECLARE @success bit
+DECLARE @message varchar(max)
 
 SELECT @tableName = 'API_QueryStockTotals'
 SELECT @fileDestinationPath = 'D:\\Granite WMS\\V5 Demo\\StockInFreezer.csv'
@@ -378,10 +381,10 @@ EXEC clr_TableExport
 	,@orderByList
 	,@fileDestinationPath 
 	,@fileType
-	,@responseCode OUTPUT
-	,@responseJson OUTPUT
+	,@success OUTPUT
+	,@message OUTPUT
 
-SELECT @responseCode, @responseJson
+SELECT @success, @message
 
 ```
 
@@ -445,8 +448,8 @@ DECLARE @bccEmailAddresses nvarchar(max)
 DECLARE @reportAttachments nvarchar(max)
 DECLARE @excelAttachments nvarchar(max)
 DECLARE @fileAttachments nvarchar(max)
-DECLARE @responseCode int
-DECLARE @responseJSON nvarchar(max)
+DECLARE @success bit
+DECLARE @message varchar(max)
 
 SET @subject = 'Test Clr Mail'																			
 SET @templateName = 'PickingNotification'																-- Use the email template named PickingNotification
@@ -463,10 +466,10 @@ EXECUTE [dbo].[clr_TemplateEmail]
   ,@reportAttachments
   ,@excelAttachments
   ,@fileAttachments
-  ,@responseCode OUTPUT
-  ,@responseJSON OUTPUT
+	,@success OUTPUT
+	,@message OUTPUT
 
-  SELECT @responseCode, @responseJSON
+SELECT @success, @message
 
 ```
 
@@ -497,8 +500,8 @@ DECLARE @bccEmailAddresses nvarchar(max)
 DECLARE @reportAttachments nvarchar(max)
 DECLARE @excelAttachments nvarchar(max)
 DECLARE @fileAttachments nvarchar(max)
-DECLARE @responseCode int
-DECLARE @responseJSON nvarchar(max)
+DECLARE @success bit
+DECLARE @message varchar(max)
 
 SET @subject = 'Test Clr Mail' 
 SET @body = 'Test mail'
@@ -513,10 +516,10 @@ EXECUTE [dbo].[clr_SimpleEmail]
   ,@reportAttachments
   ,@excelAttachments
   ,@fileAttachments
-  ,@responseCode OUTPUT
-  ,@responseJSON OUTPUT
+	,@success OUTPUT
+	,@message OUTPUT
 
-  SELECT @responseCode, @responseJSON
+SELECT @success, @message
 
 ```
 
@@ -561,8 +564,8 @@ DECLARE @bccEmailAddresses nvarchar(max)
 DECLARE @reportAttachments nvarchar(max)
 DECLARE @excelAttachments nvarchar(max)
 DECLARE @fileAttachments nvarchar(max)
-DECLARE @responseCode int
-DECLARE @responseJSON nvarchar(max)
+DECLARE @success bit
+DECLARE @message varchar(max)
 DECLARE @PickingReport varchar(max)
 
 SET @PickingReport = dbo.email_CreateReportAttachment('/PickingReport', 'PDF')					-- Creating the report that we want to attach. The reportPath is /PickingReport, and fileType is PDF
@@ -580,10 +583,10 @@ EXECUTE [dbo].[clr_SimpleEmail]
   ,@reportAttachments
   ,@excelAttachments
   ,@fileAttachments
-  ,@responseCode OUTPUT
-  ,@responseJSON OUTPUT
+	,@success OUTPUT
+	,@message OUTPUT
 
-  SELECT @responseCode, @responseJSON
+SELECT @success, @message
 
 ```
 
@@ -635,8 +638,8 @@ DECLARE @bccEmailAddresses nvarchar(max)
 DECLARE @reportAttachments nvarchar(max)
 DECLARE @excelAttachments nvarchar(max)
 DECLARE @fileAttachments nvarchar(max)
-DECLARE @responseCode int
-DECLARE @responseJSON nvarchar(max)
+DECLARE @success bit
+DECLARE @message varchar(max)
 
 DECLARE @ConsumablesExport varchar(max)
 
@@ -657,10 +660,10 @@ EXECUTE [dbo].[clr_SimpleEmail]
   ,@reportAttachments
   ,@excelAttachments
   ,@fileAttachments
-  ,@responseCode OUTPUT
-  ,@responseJSON OUTPUT
+	,@success OUTPUT
+	,@message OUTPUT
 
-  SELECT @responseCode, @responseJSON
+SELECT @success, @message
 
 ```
 
@@ -686,8 +689,8 @@ DECLARE @bccEmailAddresses nvarchar(max)
 DECLARE @reportAttachments nvarchar(max)
 DECLARE @excelAttachments nvarchar(max)
 DECLARE @fileAttachments nvarchar(max)
-DECLARE @responseCode int
-DECLARE @responseJSON nvarchar(max)
+DECLARE @success bit
+DECLARE @message varchar(max)
 
 SET @fileAttachments = dbo.email_AddFileAttachment(@fileAttachments, 'C:\logexport.txt')		-- Add a file to the list of file attachments
 
@@ -703,10 +706,10 @@ EXECUTE [dbo].[clr_SimpleEmail]
   ,@reportAttachments
   ,@excelAttachments
   ,@fileAttachments
-  ,@responseCode OUTPUT
-  ,@responseJSON OUTPUT
+	,@success OUTPUT
+	,@message OUTPUT
 
-  SELECT @responseCode, @responseJSON
+SELECT @success, @message
 
 ```
 
