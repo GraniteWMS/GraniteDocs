@@ -1,4 +1,4 @@
-site_name: Granite WMS
+site_name: Granite WMS Documentation
 site_url: https://granitewms.github.io/granitedocs/
 extra_css:
   - extra_css/custom.css
@@ -6,19 +6,8 @@ extra_javascript:
   - extra_js/custom.js
 nav: 
   - Home: index.md
-  - Manuals:
+  - Applications:
     - Scaffold: scaffold/manual.md
-    - IIS: iis/getting-started.md
-    - SSRS: ssrs/getting-started.md
-    - API:
-      - Business API: business-api/manual.md
-      - Custodian API: 
-        - custodian-api/index.md
-        - Getting Started: custodian-api/getting-started.md
-        - Process Template Service: custodian-api/process-template-service.md
-        - Email Service: custodian-api/email-service.md
-        - Reporting Service: custodian-api/reporting-service.md
-        - SQL Export Service: custodian-api/sql-export-service.md
     - Label Printing: 
       - Bartender: label-printing/bartender/manual.md
       - ZPL: label-printing/zpl/manual.md
@@ -48,12 +37,6 @@ nav:
         - integration/intacct/index.md
         - SDK Provider: integration/intacct/sdk-provider.md
         - Integration Jobs: integration/intacct/integration-jobs.md
-    - Scheduler: scheduler/manual.md
-    - SQLCLR: 
-      - sqlclr/index.md
-      - Getting Started: sqlclr/getting-started.md
-      - Version 6 Upgrade Guide: sqlclr/version-6-upgrade-guide.md
-      - CLR Procedure Reference: sqlclr/reference.md
     - Web Desktop: 
          - webdesktop/index.md
          - Data Grid: webdesktop/datagrid/datagrid.md
@@ -64,7 +47,25 @@ nav:
         - System Security: security/system-security.md
         - Permissions: security/user-permissions.md
         - API Keys: security/api-keys.md
-    - Customization:
+  - API:
+      - Business API: business-api/manual.md
+      - Custodian API: 
+        - custodian-api/index.md
+        - Getting Started: custodian-api/getting-started.md
+        - Process Template Service: custodian-api/process-template-service.md
+        - Email Service: custodian-api/email-service.md
+        - Reporting Service: custodian-api/reporting-service.md
+        - SQL Export Service: custodian-api/sql-export-service.md
+  - Technical:
+    - IIS: iis/getting-started.md
+    - SSRS: ssrs/getting-started.md
+    - Scheduler: scheduler/manual.md
+    - SQLCLR: 
+      - sqlclr/index.md
+      - Getting Started: sqlclr/getting-started.md
+      - Version 6 Upgrade Guide: sqlclr/version-6-upgrade-guide.md
+      - CLR Procedure Reference: sqlclr/reference.md
+    - Granite Customization:
         - customization/index.md
   - Tools:
     - tools/index.md
