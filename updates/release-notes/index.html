@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://granitewms.github.io/granitedocs/updates/release-notes/">
       
       
-        <link rel="prev" href="../whats-new/">
+        <link rel="prev" href="../V6/cheatsheet/">
       
       
       
@@ -20,7 +20,7 @@
     
     
       
-        <title>Release Notes - Granite WMS</title>
+        <title>Hotfixes - Granite WMS Documentation</title>
       
     
     
@@ -45,6 +45,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="../../extra_css/custom.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -72,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#unreleased-6000" class="md-skip">
+        <a href="#hotfixes" class="md-skip">
           Skip to content
         </a>
       
@@ -86,7 +88,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Granite WMS" class="md-header__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+    <a href="../.." title="Granite WMS Documentation" class="md-header__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -100,13 +102,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Granite WMS
+            Granite WMS Documentation
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Release Notes
+              Hotfixes
             
           </span>
         </div>
@@ -220,12 +222,52 @@
     
     
       <li class="md-tabs__item">
+        <a href="../../scaffold/manual/" class="md-tabs__link">
+          
+  
+    
+  
+  Applications
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../business-api/manual/" class="md-tabs__link">
+          
+  
+    
+  
+  API
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
         <a href="../../iis/getting-started/" class="md-tabs__link">
           
   
     
   
-  Manuals
+  Technical
 
         </a>
       </li>
@@ -261,16 +303,27 @@
   
     
     
+      
+  
+  
+    
+  
+  
+    
+    
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../whats-new/" class="md-tabs__link">
+        <a href="../V4/whats-new/" class="md-tabs__link">
           
   
     
   
-  Updates
+  Release Notes
 
         </a>
       </li>
+    
+  
+
     
   
 
@@ -297,13 +350,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Granite WMS" class="md-nav__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+    <a href="../.." title="Granite WMS Documentation" class="md-nav__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
-    Granite WMS
+    Granite WMS Documentation
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -349,14 +402,6 @@
       
         
       
-        
-      
-        
-      
-        
-      
-        
-      
     
     
       
@@ -374,7 +419,7 @@
             
   
   <span class="md-ellipsis">
-    Manuals
+    Applications
   </span>
   
 
@@ -384,7 +429,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Manuals
+            Applications
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -395,101 +440,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../iis/getting-started/" class="md-nav__link">
+      <a href="../../scaffold/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    IIS
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../ssrs/getting-started/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SSRS
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    API
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3">
-            <span class="md-nav__icon md-icon"></span>
-            API
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../repository-api/manual/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Repository API
+    Scaffold
   </span>
   
 
@@ -522,287 +477,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
-          <label class="md-nav__link" for="__nav_2_3_2" id="__nav_2_3_2_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    Custodian API
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3_2">
-            <span class="md-nav__icon md-icon"></span>
-            Custodian API
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../custodian-api/manual/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Manual
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../custodian-api/best-practice/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Best Practice
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../business-api/manual/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Business API
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_4" >
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../utility-api/" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
-    Utility API
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_2_3_4" id="__nav_2_3_4_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3_4">
-            <span class="md-nav__icon md-icon"></span>
-            Utility API
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../utility-api/getting-started/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Getting Started
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../utility-api/email-service/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Email Service
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../utility-api/reporting-service/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Reporting Service
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../utility-api/sql-export-service/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    SQL Export Service
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -813,8 +491,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             Label Printing
           </label>
@@ -907,10 +585,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           
-          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -921,8 +599,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             Integration
           </label>
@@ -955,7 +633,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_1" >
         
           
           
@@ -971,14 +649,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_5_1" id="__nav_2_5_1_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2_3_1" id="__nav_2_3_1_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_1">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1">
             <span class="md-nav__icon md-icon"></span>
             Accpac
           </label>
@@ -1065,7 +743,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_2" >
         
           
           
@@ -1081,14 +759,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_5_2" id="__nav_2_5_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2_3_2" id="__nav_2_3_2_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_2">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_2">
             <span class="md-nav__icon md-icon"></span>
             Acumatica
           </label>
@@ -1194,7 +872,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3" >
         
           
           
@@ -1210,14 +888,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_5_3" id="__nav_2_5_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2_3_3" id="__nav_2_3_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_3">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_3">
             <span class="md-nav__icon md-icon"></span>
             Evolution
           </label>
@@ -1386,7 +1064,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_8" >
         
           
           
@@ -1402,14 +1080,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_5_8" id="__nav_2_5_8_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2_3_8" id="__nav_2_3_8_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_8">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_8">
             <span class="md-nav__icon md-icon"></span>
             Sage 100
           </label>
@@ -1480,6 +1158,10 @@
           
         
       
+        
+      
+        
+      
     
     
       
@@ -1490,7 +1172,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_9" >
         
           
           
@@ -1505,10 +1187,15 @@
 
             </a>
             
+              
+              <label class="md-nav__link " for="__nav_2_3_9" id="__nav_2_3_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_5_9">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_9">
             <span class="md-nav__icon md-icon"></span>
             Sage Intacct
           </label>
@@ -1516,161 +1203,51 @@
             
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/intacct/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/intacct/integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../scheduler/manual/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Scheduler
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../sqlclr/" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
-    SQLCLR
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_7">
-            <span class="md-nav__icon md-icon"></span>
-            SQLCLR
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../sqlclr/getting-started/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Getting Started
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../sqlclr/version-6-upgrade-guide/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Version 6 Upgrade Guide
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../sqlclr/reference/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    CLR Procedure Reference
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -1711,7 +1288,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
         
           
           
@@ -1727,14 +1304,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_8">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
             <span class="md-nav__icon md-icon"></span>
             Web Desktop
           </label>
@@ -1830,6 +1407,8 @@
       
         
       
+        
+      
     
     
       
@@ -1840,7 +1419,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
         
           
           
@@ -1856,14 +1435,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_10">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
             <span class="md-nav__icon md-icon"></span>
             Application Security
           </label>
@@ -1913,6 +1492,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/api-keys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Keys
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1937,8 +1537,6 @@
     
     
       
-        
-          
         
       
         
@@ -1956,6 +1554,567 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../business-api/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Business API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../custodian-api/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Custodian API
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Custodian API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../custodian-api/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../custodian-api/process-template-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Process Template Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../custodian-api/email-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Email Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../custodian-api/reporting-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reporting Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../custodian-api/sql-export-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQL Export Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Technical
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Technical
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iis/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IIS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ssrs/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SSRS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scheduler/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scheduler
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../sqlclr/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    SQLCLR
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            SQLCLR
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sqlclr/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sqlclr/version-6-upgrade-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Version 6 Upgrade Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sqlclr/reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CLR Procedure Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../customization/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Granite Customization
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            Granite Customization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
           
           <div class="md-nav__link md-nav__container">
             <a href="../../tools/" class="md-nav__link ">
@@ -1969,14 +2128,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Tools
           </label>
@@ -1996,6 +2155,27 @@
   
   <span class="md-ellipsis">
     Jam.dev
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/jaeger/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jaeger
   </span>
   
 
@@ -2040,24 +2220,70 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   <span class="md-ellipsis">
-    Updates
+    Release Notes
   </span>
   
 
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
-            Updates
+            Release Notes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    What's New
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            What's New
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -2068,15 +2294,211 @@
   
   
     <li class="md-nav__item">
-      <a href="../whats-new/" class="md-nav__link">
+      <a href="../V4/whats-new/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    What's New
+    V4
   </span>
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1_2" id="__nav_6_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    V5
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            V5
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V5/whats-new/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Whats New
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V5/product-update/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Product Update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1_3" id="__nav_6_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    V6
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            V6
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V6/whats-new/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Whats New
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../V6/cheatsheet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CheatSheet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -2095,12 +2517,14 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
   <span class="md-ellipsis">
-    Release Notes
+    Hotfixes
   </span>
   
 
@@ -2111,7 +2535,7 @@
         
   
   <span class="md-ellipsis">
-    Release Notes
+    Hotfixes
   </span>
   
 
@@ -2123,6 +2547,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -2131,815 +2557,20 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#unreleased-6000" class="md-nav__link">
+  <a href="#06012025-13012025" class="md-nav__link">
     <span class="md-ellipsis">
-      Unreleased : 6.0.0.0
+      06/01/2025 - 13/01/2025
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Unreleased : 6.0.0.0">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#database" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Database">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#database-tables" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Tables
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#database-views" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Views
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stored-procedures" class="md-nav__link">
-    <span class="md-ellipsis">
-      Stored Procedures
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#database-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Data
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sqlclr" class="md-nav__link">
-    <span class="md-ellipsis">
-      SQLCLR
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accpac-integration-jobs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accpac Integration Jobs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evo-integration-jobs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Evo Integration Jobs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sage-100-integration-jobs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sage 100 Integration Jobs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#process-app" class="md-nav__link">
-    <span class="md-ellipsis">
-      Process App
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#business-api-webservice-replacement" class="md-nav__link">
-    <span class="md-ellipsis">
-      Business API (Webservice replacement)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#repo-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      Repo API
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#webdesktop" class="md-nav__link">
-    <span class="md-ellipsis">
-      Webdesktop
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#utility-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      Utility API
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accpac-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accpac Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Accpac Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provder" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provder
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#injected-jobs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Injected jobs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evolution-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Evolution Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Evolution Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provder_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provder
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#injected-jobs_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Injected jobs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#syspro-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Syspro Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Syspro Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provder_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provder
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sapb1-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      SAPB1 Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="SAPB1 Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provder_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provder
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#omni-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Omni Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Omni Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provder_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provder
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#quickbooks-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      QuickBooks Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="QuickBooks Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#downwards-jobs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Downwards jobs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#label-printing-zpl" class="md-nav__link">
-    <span class="md-ellipsis">
-      Label Printing ZPL
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#label-printing-bartender" class="md-nav__link">
-    <span class="md-ellipsis">
-      Label Printing Bartender
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scheduler" class="md-nav__link">
-    <span class="md-ellipsis">
-      Scheduler
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#april-2024-new-release-5000" class="md-nav__link">
+  <a href="#14012025-20012025" class="md-nav__link">
     <span class="md-ellipsis">
-      April 2024 New Release : 5.0.0.0
+      14/01/2025 - 20/01/2025
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="April 2024 New Release : 5.0.0.0">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#database_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Database">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#database-tables_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Tables
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stored-procedures_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Stored Procedures
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#database-data_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Data
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sqlclr_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      SQLCLR
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accpac-integration_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accpac Integration
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evo-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Evo Integration
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#webdesktop_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Webdesktop
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#processapp-webservice" class="md-nav__link">
-    <span class="md-ellipsis">
-      ProcessApp &amp; Webservice
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evo-integration_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Evo integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Evo integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provider" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provider
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#injected-jobs_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Injected jobs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accpac-integration_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accpac Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Accpac Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provider_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provider
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#injected-jobs_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      Injected jobs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#omni-integration_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Omni Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Omni Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provider_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provider
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sapb1-integration_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      SAPB1 Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="SAPB1 Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provider_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provider
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#syspro-integration_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Syspro Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Syspro Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provider_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provider
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#label-printing-bartender_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Label Printing Bartender
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scheduler_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Scheduler
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#january-2024-product-update-4530" class="md-nav__link">
-    <span class="md-ellipsis">
-      January 2024 Product Update : 4.5.3.0
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="January 2024 Product Update : 4.5.3.0">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#database-24-jan-2024" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database (24 Jan 2024)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#webdesktop-23-jan-2024" class="md-nav__link">
-    <span class="md-ellipsis">
-      Webdesktop (23 Jan 2024)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#repo-api-23-jan-2024" class="md-nav__link">
-    <span class="md-ellipsis">
-      Repo API (23 Jan 2024)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#processapp-16-jan-2024" class="md-nav__link">
-    <span class="md-ellipsis">
-      ProcessApp (16 Jan 2024)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#september-2023-product-update-4520" class="md-nav__link">
-    <span class="md-ellipsis">
-      September 2023 Product Update : 4.5.2.0
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="September 2023 Product Update : 4.5.2.0">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#webdesktop_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      WebDesktop
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#processapp" class="md-nav__link">
-    <span class="md-ellipsis">
-      ProcessApp
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#labelprintservice" class="md-nav__link">
-    <span class="md-ellipsis">
-      LabelPrintService
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#august-2023-product-update-4510" class="md-nav__link">
-    <span class="md-ellipsis">
-      August 2023 Product Update : 4.5.1.0
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="August 2023 Product Update : 4.5.1.0">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#webdesktop-repository-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      WebDesktop / Repository API
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#processapp_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      ProcessApp
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#database_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Database">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#database-views_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Views
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#database-data_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Data
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accpac-database" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accpac Database
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scheduler_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Scheduler
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Scheduler">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#accpac-injected-jobs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accpac Injected jobs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evo-injected-jobs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Evo Injected jobs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zpl-labelprinting" class="md-nav__link">
-    <span class="md-ellipsis">
-      ZPL LabelPrinting
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accpac" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accpac
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2976,6 +2607,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -2984,815 +2617,20 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#unreleased-6000" class="md-nav__link">
+  <a href="#06012025-13012025" class="md-nav__link">
     <span class="md-ellipsis">
-      Unreleased : 6.0.0.0
+      06/01/2025 - 13/01/2025
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Unreleased : 6.0.0.0">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#database" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Database">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#database-tables" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Tables
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#database-views" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Views
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stored-procedures" class="md-nav__link">
-    <span class="md-ellipsis">
-      Stored Procedures
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#database-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Data
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sqlclr" class="md-nav__link">
-    <span class="md-ellipsis">
-      SQLCLR
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accpac-integration-jobs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accpac Integration Jobs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evo-integration-jobs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Evo Integration Jobs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sage-100-integration-jobs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sage 100 Integration Jobs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#process-app" class="md-nav__link">
-    <span class="md-ellipsis">
-      Process App
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#business-api-webservice-replacement" class="md-nav__link">
-    <span class="md-ellipsis">
-      Business API (Webservice replacement)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#repo-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      Repo API
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#webdesktop" class="md-nav__link">
-    <span class="md-ellipsis">
-      Webdesktop
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#utility-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      Utility API
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accpac-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accpac Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Accpac Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provder" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provder
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#injected-jobs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Injected jobs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evolution-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Evolution Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Evolution Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provder_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provder
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#injected-jobs_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Injected jobs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#syspro-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Syspro Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Syspro Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provder_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provder
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sapb1-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      SAPB1 Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="SAPB1 Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provder_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provder
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#omni-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Omni Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Omni Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provder_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provder
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#quickbooks-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      QuickBooks Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="QuickBooks Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#downwards-jobs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Downwards jobs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#label-printing-zpl" class="md-nav__link">
-    <span class="md-ellipsis">
-      Label Printing ZPL
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#label-printing-bartender" class="md-nav__link">
-    <span class="md-ellipsis">
-      Label Printing Bartender
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scheduler" class="md-nav__link">
-    <span class="md-ellipsis">
-      Scheduler
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#april-2024-new-release-5000" class="md-nav__link">
+  <a href="#14012025-20012025" class="md-nav__link">
     <span class="md-ellipsis">
-      April 2024 New Release : 5.0.0.0
+      14/01/2025 - 20/01/2025
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="April 2024 New Release : 5.0.0.0">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#database_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Database">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#database-tables_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Tables
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stored-procedures_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Stored Procedures
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#database-data_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Data
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sqlclr_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      SQLCLR
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accpac-integration_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accpac Integration
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evo-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Evo Integration
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#webdesktop_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Webdesktop
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#processapp-webservice" class="md-nav__link">
-    <span class="md-ellipsis">
-      ProcessApp &amp; Webservice
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evo-integration_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Evo integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Evo integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provider" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provider
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#injected-jobs_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Injected jobs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accpac-integration_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accpac Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Accpac Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provider_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provider
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#injected-jobs_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      Injected jobs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#omni-integration_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Omni Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Omni Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provider_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provider
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sapb1-integration_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      SAPB1 Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="SAPB1 Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provider_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provider
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#syspro-integration_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Syspro Integration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Syspro Integration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sdk-provider_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      SDK Provider
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#label-printing-bartender_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Label Printing Bartender
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scheduler_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Scheduler
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#january-2024-product-update-4530" class="md-nav__link">
-    <span class="md-ellipsis">
-      January 2024 Product Update : 4.5.3.0
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="January 2024 Product Update : 4.5.3.0">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#database-24-jan-2024" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database (24 Jan 2024)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#webdesktop-23-jan-2024" class="md-nav__link">
-    <span class="md-ellipsis">
-      Webdesktop (23 Jan 2024)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#repo-api-23-jan-2024" class="md-nav__link">
-    <span class="md-ellipsis">
-      Repo API (23 Jan 2024)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#processapp-16-jan-2024" class="md-nav__link">
-    <span class="md-ellipsis">
-      ProcessApp (16 Jan 2024)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#september-2023-product-update-4520" class="md-nav__link">
-    <span class="md-ellipsis">
-      September 2023 Product Update : 4.5.2.0
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="September 2023 Product Update : 4.5.2.0">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#webdesktop_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      WebDesktop
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#processapp" class="md-nav__link">
-    <span class="md-ellipsis">
-      ProcessApp
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#labelprintservice" class="md-nav__link">
-    <span class="md-ellipsis">
-      LabelPrintService
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#august-2023-product-update-4510" class="md-nav__link">
-    <span class="md-ellipsis">
-      August 2023 Product Update : 4.5.1.0
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="August 2023 Product Update : 4.5.1.0">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#webdesktop-repository-api" class="md-nav__link">
-    <span class="md-ellipsis">
-      WebDesktop / Repository API
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#processapp_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      ProcessApp
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#database_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Database">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#database-views_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Views
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#database-data_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Database Data
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accpac-database" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accpac Database
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scheduler_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Scheduler
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Scheduler">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#accpac-injected-jobs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accpac Injected jobs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evo-injected-jobs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Evo Injected jobs
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zpl-labelprinting" class="md-nav__link">
-    <span class="md-ellipsis">
-      ZPL LabelPrinting
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accpac" class="md-nav__link">
-    <span class="md-ellipsis">
-      Accpac
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -3811,746 +2649,44 @@
                   
 
 
-  <h1>Release Notes</h1>
-
-<h2 id="unreleased-6000">Unreleased : 6.0.0.0</h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<h1 id="hotfixes">Hotfixes</h1>
+<h2 id="06012025-13012025">06/01/2025 - 13/01/2025</h2>
 <ul>
-<li>Database changes required</li>
+<li><strong>GraniteScheduler.</strong>ServiceInterface.dll<ul>
+<li>Released 06/01/2025</li>
+<li>Version 5.0.0.1</li>
+<li>Fix bug causing error <code>The SSL connection could not be established</code> when trying to connect to Utility API to send email.</li>
 </ul>
-</div>
-<h3 id="database">Database</h3>
-<h4 id="database-tables">Database Tables</h4>
-<ul>
-<li><code>new</code> table UsersPermissions</li>
-<li><code>new</code> table SystemPermissions</li>
-<li><code>new</code> table IntegrationSettings</li>
-<li><code>new</code> table DataCapture</li>
-<li><code>new</code> table DataCaptureFields</li>
-<li><code>new</code> table DataCaptureFieldsLookup</li>
-<li><code>change</code> table Users</li>
-<li><code>change</code> table UsersCredentials</li>
-<li><code>change</code> table ScheduledJobs</li>
-<li><code>change</code> table ScheduledJobsHistory</li>
-<li><code>change</code> table ProcessStep</li>
-<li><code>change</code> table StockTakeLines</li>
-<li><code>change</code> table AuditStockTakeLines</li>
-<li><code>change</code> table Document<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/injected-job-failing-to-sync-document-with-message-string-or-binary-data-will-be">https://granitewms.canny.io/bugs/p/injected-job-failing-to-sync-document-with-message-string-or-binary-data-will-be</a></li>
-</ul>
-</li>
-<li><code>change</code> table DocumentDetail<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/injected-job-failing-to-sync-document-with-message-string-or-binary-data-will-be">https://granitewms.canny.io/bugs/p/injected-job-failing-to-sync-document-with-message-string-or-binary-data-will-be</a></li>
-</ul>
-</li>
-<li><code>change</code> table TradingPartner<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/accpac-integration-job-tradingpartners-truncated-data">https://granitewms.canny.io/bugs/p/accpac-integration-job-tradingpartners-truncated-data</a></li>
-</ul>
-</li>
-<li><code>change</code> table DataGrid</li>
-<li><code>change</code> table StockTakeSession</li>
-</ul>
-<h4 id="database-views">Database Views</h4>
-<ul>
-<li><code>new</code> DataCaptureFieldsLookup_View</li>
-<li><code>fix</code> API_QueryStockReorder<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/view-api-querystockreorder-does-not-exclude-nonstock-locations">https://granitewms.canny.io/bugs/p/view-api-querystockreorder-does-not-exclude-nonstock-locations</a></li>
-</ul>
-</li>
-</ul>
-<h4 id="stored-procedures">Stored Procedures</h4>
-<ul>
-<li><code>new</code> stored procedure CreateExtendedPropertyDescription</li>
-</ul>
-<h4 id="database-data">Database Data</h4>
-<ul>
-<li><code>new</code> Table SystemSettings: Default security settings</li>
-<li><code>new</code> Table Migration: Default V6 migration data</li>
-<li><code>new</code> Table SystemPermissions: Default permissions data</li>
-<li><code>new</code> Table DataGrid: AuditStockTakeSession grid</li>
-<li><code>change</code> Table SystemSnippets: Updated snippets to include pagination for document lines</li>
-<li><code>change</code> Table SystemSettings: Latest Custodian Api token</li>
-<li><code>change</code> Table DataGrid: Add carrying entity barcode to AuditStockTakeLines grid</li>
-<li><code>change</code> Table DataGrid: Add LastExecutionDate to ScheduledJobs grid</li>
-</ul>
-<h4 id="sqlclr">SQLCLR</h4>
-<ul>
-<li><code>new</code> support for Business Api operations</li>
-<li><code>new</code> support for Repo Api operations</li>
-<li><code>new</code> support for Data Capture</li>
-<li><code>new</code> support for create carrying entity</li>
-<li><code>new</code> support for Transfer process<ul>
-<li><a href="https://granitewms.canny.io/request/p/clr-for-transfers">https://granitewms.canny.io/request/p/clr-for-transfers</a></li>
-</ul>
-</li>
-<li><code>change</code> new certificate that won't expire</li>
-<li><code>change</code> added copies parameter to ReportPrint</li>
-</ul>
-<h4 id="accpac-integration-jobs">Accpac Integration Jobs</h4>
-<ul>
-<li><code>new</code> Integration_Accpac_AutoSimplyMOHeader</li>
-<li><code>new</code> Integration_Accpac_AutoSimplyMODetail</li>
-<li><code>new</code> TriggerGraniteAutoSimplyMO</li>
-<li>
-<p><code>fix</code> Integration_Accpac_IntransitHeader</p>
-<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/accpac-transfer-view-issues">https://granitewms.canny.io/bugs/p/accpac-transfer-view-issues</a></li>
-<li><a href="https://granitewms.canny.io/bugs/p/the-view-integration-accpac-intransitheader-fails-on-a-conversion-of-expecteddat">https://granitewms.canny.io/bugs/p/the-view-integration-accpac-intransitheader-fails-on-a-conversion-of-expecteddat</a></li>
-<li><a href="https://granitewms.canny.io/bugs/p/accpac-sales-order-document-header-view-expdate-and-isactive">https://granitewms.canny.io/bugs/p/accpac-sales-order-document-header-view-expdate-and-isactive</a></li>
-</ul>
-</li>
-<li>
-<p><code>fix</code> Integration_Accpac_PurchaseOrderHeader</p>
-<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/the-view-integration-accpac-intransitheader-fails-on-a-conversion-of-expecteddat">https://granitewms.canny.io/bugs/p/the-view-integration-accpac-intransitheader-fails-on-a-conversion-of-expecteddat</a></li>
-<li><a href="https://granitewms.canny.io/bugs/p/accpac-sales-order-document-header-view-expdate-and-isactive">https://granitewms.canny.io/bugs/p/accpac-sales-order-document-header-view-expdate-and-isactive</a></li>
-</ul>
-</li>
-<li>
-<p><code>fix</code> Integration_Accpac_ReceiptHeader</p>
-<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/accpac-transfer-view-issues">https://granitewms.canny.io/bugs/p/accpac-transfer-view-issues</a></li>
-<li><a href="https://granitewms.canny.io/bugs/p/accpac-sales-order-document-header-view-expdate-and-isactive">https://granitewms.canny.io/bugs/p/accpac-sales-order-document-header-view-expdate-and-isactive</a></li>
-</ul>
-</li>
-<li>
-<p><code>fix</code> Integration_Accpac_SalesOrderHeader</p>
-<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/the-view-integration-accpac-intransitheader-fails-on-a-conversion-of-expecteddat">https://granitewms.canny.io/bugs/p/the-view-integration-accpac-intransitheader-fails-on-a-conversion-of-expecteddat</a></li>
-<li><a href="https://granitewms.canny.io/bugs/p/accpac-sales-order-document-header-view-expdate-and-isactive">https://granitewms.canny.io/bugs/p/accpac-sales-order-document-header-view-expdate-and-isactive</a></li>
-</ul>
-</li>
-<li>
-<p><code>fix</code> Integration_Accpac_TransferHeader</p>
-<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/accpac-transfer-view-issues">https://granitewms.canny.io/bugs/p/accpac-transfer-view-issues</a></li>
-<li><a href="https://granitewms.canny.io/bugs/p/the-view-integration-accpac-intransitheader-fails-on-a-conversion-of-expecteddat">https://granitewms.canny.io/bugs/p/the-view-integration-accpac-intransitheader-fails-on-a-conversion-of-expecteddat</a></li>
-<li><a href="https://granitewms.canny.io/bugs/p/accpac-sales-order-document-header-view-expdate-and-isactive">https://granitewms.canny.io/bugs/p/accpac-sales-order-document-header-view-expdate-and-isactive</a></li>
-</ul>
-</li>
-<li>
-<p><code>fix</code> Integration_Accpac_WorkOrderHeader</p>
-<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/the-view-integration-accpac-intransitheader-fails-on-a-conversion-of-expecteddat">https://granitewms.canny.io/bugs/p/the-view-integration-accpac-intransitheader-fails-on-a-conversion-of-expecteddat</a></li>
-<li><a href="https://granitewms.canny.io/bugs/p/accpac-sales-order-document-header-view-expdate-and-isactive">https://granitewms.canny.io/bugs/p/accpac-sales-order-document-header-view-expdate-and-isactive</a></li>
-</ul>
-</li>
-<li>
-<p><code>fix</code> Integration_Accpac_TradingPartner</p>
-<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/sql-view-integration-accpac-tradingpartner-definition-is-incorrect">https://granitewms.canny.io/bugs/p/sql-view-integration-accpac-tradingpartner-definition-is-incorrect</a></li>
-</ul>
-</li>
-<li>
-<p><code>change</code> Integration_Accpac_IntransitDetail</p>
-</li>
-<li><code>change</code> Integration_Accpac_PurchaseOrderDetail</li>
-<li><code>change</code> Integration_Accpac_ReceiptDetail</li>
-<li><code>change</code> Integration_Accpac_SalesOrderDetail</li>
-<li><code>change</code> Integration_Accpac_TransferDetail</li>
-<li><code>change</code> Integration_Accpac_WorkOrderDetail</li>
-<li><code>fix</code> TriggerGranitePurchaseOrders<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/accpac-integration-view-timing-and-status-changes">https://granitewms.canny.io/bugs/p/accpac-integration-view-timing-and-status-changes</a></li>
-</ul>
-</li>
-<li><code>fix</code> TriggerGraniteSalesOrders<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/accpac-integration-view-timing-and-status-changes">https://granitewms.canny.io/bugs/p/accpac-integration-view-timing-and-status-changes</a></li>
-</ul>
-</li>
-<li><code>fix</code> TriggerGraniteWorkOrders</li>
-<li><code>fix</code> TriggerGraniteTransfers</li>
-</ul>
-<h4 id="evo-integration-jobs">Evo Integration Jobs</h4>
-<ul>
-<li><code>fix</code> ERP_StockOnHand<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/evolution-erp-stockonhand-view-join-excluding-items">https://granitewms.canny.io/bugs/p/evolution-erp-stockonhand-view-join-excluding-items</a></li>
-</ul>
-</li>
-<li><code>change</code> TriggerGraniteWorkOrders</li>
-<li><code>change</code> TriggerGraniteWarehouseTransfer</li>
-<li><code>change</code> TriggerGraniteSalesOrders</li>
-<li><code>change</code> TriggerGranitePurchaseOrders</li>
-<li><code>change</code> TriggerGraniteIntransit</li>
-<li><code>change</code> TriggerGraniteInterBranchRequisition</li>
-<li><code>change</code> TriggerGraniteReceipt</li>
-<li><code>change</code> Integration_Evolution_ReceiptHeader</li>
-<li><code>change</code> Integration_Evolution_InterBranchRequisitionHeader</li>
-<li><code>change</code> Integration_Evolution_IntransitHeader</li>
-<li><code>change</code> Integration_Evolution_PurchaseOrderDetail</li>
-<li><code>change</code> Integration_Evolution_PurchaseOrderDetail_V7</li>
-<li><code>change</code> Integration_Evolution_PurchaseOrderHeader</li>
-<li><code>change</code> Integration_Evolution_SalesOrderDetail</li>
-<li><code>change</code> Integration_Evolution_SalesOrderDetail_V7</li>
-<li><code>change</code> Integration_Evolution_SalesOrderHeader</li>
-</ul>
-<h4 id="sage-100-integration-jobs">Sage 100 Integration Jobs</h4>
-<ul>
-<li><code>new</code> trigger TriggerGranitePurchaseOrders</li>
-<li><code>new</code> trigger TriggerGraniteSalesOrders</li>
-<li><code>new</code> view Integration_Sage100_TradingPartner</li>
-<li><code>new</code> view Integration_Sage100_SalesOrderHeader</li>
-<li><code>new</code> view Integration_Sage100_SalesOrderDetail</li>
-<li><code>new</code> view Integration_Sage100_PurchaseOrderHeader</li>
-<li><code>new</code> view Integration_Sage100_PurchaseOrderDetail</li>
-<li><code>new</code> view Integration_Sage100_MasterItem</li>
-<li><code>new</code> view MasterItemAlias_View</li>
-<li><code>new</code> view ERP_StockOnHand</li>
-</ul>
-<h3 id="process-app">Process App</h3>
-<ul>
-<li><code>change</code> upgrade to .NET 8</li>
-<li><code>fix</code> object reference error on Manufacture process looping back to before Document step<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/manufacture-process-showing-object-reference-error">https://granitewms.canny.io/bugs/p/manufacture-process-showing-object-reference-error</a></li>
-</ul>
-</li>
-<li><code>fix</code> mashing next button in process results in multiple requests<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/process-app-next-btn-bug">https://granitewms.canny.io/bugs/p/process-app-next-btn-bug</a></li>
-</ul>
-</li>
-<li><code>fix</code> adjustment with integration success message not showing correctly<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/accpac-adjustment-the-success-message-displayed-incorrectly">https://granitewms.canny.io/bugs/p/accpac-adjustment-the-success-message-displayed-incorrectly</a></li>
-</ul>
-</li>
-<li><code>new</code> show printer required message when user has not entered a printer name<ul>
-<li><a href="https://granitewms.canny.io/request/p/printer-required-message-for-a-process-on-processapp">https://granitewms.canny.io/request/p/printer-required-message-for-a-process-on-processapp</a></li>
-</ul>
-</li>
-<li><code>change</code> process dividers more clearly separate menu items </li>
-<li><code>change</code> can set Replenish Step 100 ToTrackingEntity from prescript<ul>
-<li><a href="https://granitewms.canny.io/request/p/replenish-totrackingbarcode-as-silent-step">https://granitewms.canny.io/request/p/replenish-totrackingbarcode-as-silent-step</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="business-api-webservice-replacement">Business API (Webservice replacement)</h3>
-<ul>
-<li><code>fix</code> clearer message when lines are complete / cancelled<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/process-app-error-message-line-item">https://granitewms.canny.io/bugs/p/process-app-error-message-line-item</a></li>
-</ul>
-</li>
-<li><code>fix</code> quality control permission not required for direct on hold take on / receive<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/direct-onhold-quality-control">https://granitewms.canny.io/bugs/p/direct-onhold-quality-control</a></li>
-</ul>
-</li>
-<li><code>fix</code> transfer location not validating consistently <ul>
-<li><a href="https://granitewms.canny.io/bugs/p/transfer-destination-location">https://granitewms.canny.io/bugs/p/transfer-destination-location</a></li>
-</ul>
-</li>
-<li><code>fix</code> packing process not allocating transactions to correct lines<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/packing-process-incorrect-line-batch">https://granitewms.canny.io/bugs/p/packing-process-incorrect-line-batch</a></li>
-</ul>
-</li>
-<li><code>new</code> record pallet on stocktakecount transactions <ul>
-<li><a href="https://granitewms.canny.io/bugs/p/pallet-number-stock-take-transactions">https://granitewms.canny.io/bugs/p/pallet-number-stock-take-transactions</a></li>
-</ul>
-</li>
-<li><code>fix</code> StockTakeCount Pallet audit bug<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/pallet-stocktakecount-audit-bug">https://granitewms.canny.io/bugs/p/pallet-stocktakecount-audit-bug</a></li>
-</ul>
-</li>
-<li><code>new</code> support for api key authentication </li>
-<li><code>new</code> support for security settings</li>
-</ul>
-<h3 id="repo-api">Repo API</h3>
-<ul>
-<li><code>change</code> upgrade to .NET 8</li>
-<li><code>fix</code> datagrids fail to load<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/webdesktop-enquiry-datagrids-fails-to-load">https://granitewms.canny.io/bugs/p/webdesktop-enquiry-datagrids-fails-to-load</a></li>
-</ul>
-</li>
-<li><code>fix</code> added validation of foreign keys on MasterItemAlias import<ul>
-<li><a href="https://granitewms.canny.io/request/p/masteritemalias-data-import-error-change">https://granitewms.canny.io/request/p/masteritemalias-data-import-error-change</a></li>
-</ul>
-</li>
-<li><code>fix</code> Invalid Username and Password on the Webdeskop using valid credentials<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/webdesktop-login-expired-invalid-user-name-password">https://granitewms.canny.io/bugs/p/webdesktop-login-expired-invalid-user-name-password</a></li>
-</ul>
-</li>
-<li><code>fix</code> StockTakeRelease not creating transactions<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/webdesktop-stocktakerelease-sometimes-not-creating-transactions`">https://granitewms.canny.io/bugs/p/webdesktop-stocktakerelease-sometimes-not-creating-transactions</a></li>
-</ul>
-</li>
-<li><code>new</code> record pallet on stocktakecount transactions <ul>
-<li><a href="https://granitewms.canny.io/bugs/p/pallet-number-stock-take-transactions">https://granitewms.canny.io/bugs/p/pallet-number-stock-take-transactions</a></li>
-</ul>
-</li>
-<li><code>new</code> support for api key authentication </li>
-<li><code>new</code> support for security settings</li>
-</ul>
-<h3 id="webdesktop">Webdesktop</h3>
-<ul>
-<li><code>new</code> support configurable page size for data grids<ul>
-<li><a href="https://granitewms.canny.io/request/p/webdesktop-datagrid-page-size-configuraion">https://granitewms.canny.io/request/p/webdesktop-datagrid-page-size-configuraion</a></li>
-</ul>
-</li>
-<li><code>new</code> support renaming processes<ul>
-<li><a href="https://granitewms.canny.io/request/p/webdesktop-processes-rename-functionality">https://granitewms.canny.io/request/p/webdesktop-processes-rename-functionality</a></li>
-</ul>
-</li>
-<li><code>new</code> support deleting processes<ul>
-<li><a href="https://granitewms.canny.io/request/p/webdesktop-processes-delete-functionality">https://granitewms.canny.io/request/p/webdesktop-processes-delete-functionality</a></li>
-</ul>
-</li>
-<li><code>new</code> refresh button for stock take session<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/webdesktop-stocktake-session-missing-refresh">https://granitewms.canny.io/bugs/p/webdesktop-stocktake-session-missing-refresh</a></li>
-</ul>
-</li>
-<li><code>new</code> support for stock take session audit<ul>
-<li><a href="https://granitewms.canny.io/request/p/stocktake-create-audit-selection-criteria">https://granitewms.canny.io/request/p/stocktake-create-audit-selection-criteria</a></li>
-</ul>
-</li>
-<li><code>new</code> support for copying users<ul>
-<li><a href="https://granitewms.canny.io/request/p/copy-user-functionality">https://granitewms.canny.io/request/p/copy-user-functionality</a></li>
-</ul>
-</li>
-<li><code>new</code> support for formatting data grids<ul>
-<li><a href="https://granitewms.canny.io/request/p/datagrid-row-formatting">https://granitewms.canny.io/request/p/datagrid-row-formatting</a></li>
-</ul>
-</li>
-<li><code>new</code> data capture feature</li>
-</ul>
-<h3 id="utility-api">Utility API</h3>
-<ul>
-<li><code>change</code> added copies parameter to ReportPrint call to enable printing multiple copies</li>
-<li><code>change</code> changed report print to add the print to a queue to make the call faster</li>
-</ul>
-<h3 id="accpac-integration">Accpac Integration</h3>
-<h4 id="sdk-provder">SDK Provder</h4>
-<ul>
-<li><code>fix</code> clearer message when encrypted SystemSettings fail to decrypt<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/integration-provider-error-invalid-length-for-a-base-64-char-array-or-string">https://granitewms.canny.io/bugs/p/integration-provider-error-invalid-length-for-a-base-64-char-array-or-string</a></li>
-</ul>
-</li>
-<li><code>fix</code> reclassify failing to create second line in adjustment<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/integration-method-reclassify-split-is-not-implemented-even-though-config-shows">https://granitewms.canny.io/bugs/p/integration-method-reclassify-split-is-not-implemented-even-though-config-shows</a></li>
-</ul>
-</li>
-<li><code>fix</code> unable to post transfer receipt with serial numbers<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/accpac-integration-post-transfer-receipt-with-serial-number">https://granitewms.canny.io/bugs/p/accpac-integration-post-transfer-receipt-with-serial-number</a></li>
-</ul>
-</li>
-</ul>
-<h4 id="injected-jobs">Injected jobs</h4>
-<ul>
-<li><code>change</code> upgrade to .NET 8</li>
-<li><code>new</code> 'all in one' deploy script</li>
-<li><code>new</code> support setting initial action qty on document import<ul>
-<li><a href="https://granitewms.canny.io/request/p/initial-downwards-integration-for-new-sites">https://granitewms.canny.io/request/p/initial-downwards-integration-for-new-sites</a></li>
-</ul>
-</li>
-<li><code>fix</code> completed lines are not 'uncompleted' when the qty is increased in the ERP<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/injected-job-complete-flag-on-document-detail-line-not-updating">https://granitewms.canny.io/bugs/p/injected-job-complete-flag-on-document-detail-line-not-updating</a></li>
-</ul>
-</li>
-<li><code>fix</code> documents deleted in the ERP are marked as cancelled in Granite<ul>
-<li><a href="https://granitewms.canny.io/request/p/change-document-status-in-granite-when-document-is-deleted-from-erp">https://granitewms.canny.io/request/p/change-document-status-in-granite-when-document-is-deleted-from-erp</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="evolution-integration">Evolution Integration</h3>
-<h4 id="sdk-provder_1">SDK Provder</h4>
-<ul>
-<li><code>fix</code> clearer message when encrypted SystemSettings fail to decrypt<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/integration-provider-error-invalid-length-for-a-base-64-char-array-or-string">https://granitewms.canny.io/bugs/p/integration-provider-error-invalid-length-for-a-base-64-char-array-or-string</a></li>
-</ul>
-</li>
-<li><code>new</code> map adjustment's DocumentReference to Evo adjustment description<ul>
-<li><a href="https://granitewms.canny.io/request/p/evo-posting-of-adjustments-field-changes">https://granitewms.canny.io/request/p/evo-posting-of-adjustments-field-changes</a></li>
-</ul>
-</li>
-</ul>
-<h4 id="injected-jobs_1">Injected jobs</h4>
-<ul>
-<li><code>change</code> upgrade to .NET 8</li>
-<li><code>new</code> 'all in one' deploy script</li>
-<li><code>new</code> support setting initial action qty on document import<ul>
-<li><a href="https://granitewms.canny.io/request/p/initial-downwards-integration-for-new-sites">https://granitewms.canny.io/request/p/initial-downwards-integration-for-new-sites</a></li>
-</ul>
-</li>
-<li><code>fix</code> completed lines are not 'uncompleted' when the qty is increased in the ERP<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/injected-job-complete-flag-on-document-detail-line-not-updating">https://granitewms.canny.io/bugs/p/injected-job-complete-flag-on-document-detail-line-not-updating</a></li>
-</ul>
-</li>
-<li><code>fix</code> documents deleted in the ERP are marked as cancelled in Granite<ul>
-<li><a href="https://granitewms.canny.io/request/p/change-document-status-in-granite-when-document-is-deleted-from-erp">https://granitewms.canny.io/request/p/change-document-status-in-granite-when-document-is-deleted-from-erp</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="syspro-integration">Syspro Integration</h3>
-<h4 id="sdk-provder_2">SDK Provder</h4>
-<ul>
-<li><code>fix</code> clearer message when encrypted SystemSettings fail to decrypt<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/integration-provider-error-invalid-length-for-a-base-64-char-array-or-string">https://granitewms.canny.io/bugs/p/integration-provider-error-invalid-length-for-a-base-64-char-array-or-string</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="sapb1-integration">SAPB1 Integration</h3>
-<h4 id="sdk-provder_3">SDK Provder</h4>
-<ul>
-<li><code>fix</code> clearer message when encrypted SystemSettings fail to decrypt<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/integration-provider-error-invalid-length-for-a-base-64-char-array-or-string">https://granitewms.canny.io/bugs/p/integration-provider-error-invalid-length-for-a-base-64-char-array-or-string</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="omni-integration">Omni Integration</h3>
-<h4 id="sdk-provder_4">SDK Provder</h4>
-<ul>
-<li><code>fix</code> clearer message when encrypted SystemSettings fail to decrypt<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/integration-provider-error-invalid-length-for-a-base-64-char-array-or-string">https://granitewms.canny.io/bugs/p/integration-provider-error-invalid-length-for-a-base-64-char-array-or-string</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="quickbooks-integration">QuickBooks Integration</h3>
-<h4 id="downwards-jobs">Downwards jobs</h4>
-<ul>
-<li><code>change</code> document headers without any valid lines are not synced to Granite<ul>
-<li><a href="https://granitewms.canny.io/request/p/quickbooks-interface-ignore-nonstock-items-flag">https://granitewms.canny.io/request/p/quickbooks-interface-ignore-nonstock-items-flag</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="label-printing-zpl">Label Printing ZPL</h3>
-<ul>
-<li><code>change</code> upgrade to .NET 8</li>
-<li><code>fix</code> printer name case sensitive<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/printername-on-processapp-login-seems-to-be-case-sensitive-previously-this-didnt">https://granitewms.canny.io/bugs/p/printername-on-processapp-login-seems-to-be-case-sensitive-previously-this-didnt</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="label-printing-bartender">Label Printing Bartender</h3>
-<ul>
-<li><code>fix</code> printer name case sensitive<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/printername-on-processapp-login-seems-to-be-case-sensitive-previously-this-didnt">https://granitewms.canny.io/bugs/p/printername-on-processapp-login-seems-to-be-case-sensitive-previously-this-didnt</a></li>
-</ul>
-</li>
-<li><code>new</code> support for Bartender 2022 R8</li>
-</ul>
-<h3 id="scheduler">Scheduler</h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>There are breaking changes to injected jobs from older versions in version 6. 
-Only version 6 specific injected jobs will work with Scheduler version 6.</p>
-</div>
-<ul>
-<li><code>change</code> upgrade to .NET 8</li>
-<li><code>change</code> upgrade Coravel dependency</li>
-<li><code>change</code> IInjectableJob interface</li>
-</ul>
-<h2 id="april-2024-new-release-5000">April 2024 New Release : 5.0.0.0</h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul>
-<li>Database changes required</li>
-</ul>
-</div>
-<h3 id="database_1">Database</h3>
-<h4 id="database-tables_1">Database Tables</h4>
-<ul>
-<li><code>new</code> table Migration</li>
-<li><code>new</code> table OptionalFieldValues_Document</li>
-<li><code>new</code> table OptionalFieldValues_DocumentDetail</li>
-<li><code>new</code> table SystemTransientData</li>
-<li><code>new</code> table Email</li>
-<li><code>new</code> table EmailLog</li>
-<li><code>new</code> table EmailTemplate</li>
-<li><code>fix</code> table OptionalFieldValues_Location</li>
-<li><code>change</code> table Users</li>
-<li><code>change</code> table SystemSettings</li>
-<li><code>change</code> table Process</li>
-<li><code>change</code> table ProcessMembers</li>
-<li><code>change</code> table ProcessStep</li>
-<li><code>change</code> table Transaction</li>
-<li><code>change</code> table ProcessStepLookup</li>
-<li><code>change</code> table ProcessStepLookupDynamic</li>
-</ul>
-<h4 id="stored-procedures_1">Stored Procedures</h4>
-<ul>
-<li><code>remove</code> stored procedure EmailTemplate</li>
-</ul>
-<h4 id="database-data_1">Database Data</h4>
-<ul>
-<li><code>new</code> Table Migration: Default migration data</li>
-<li><code>new</code> Table EmailTemplate: IntegrationError template</li>
-<li><code>new</code> Table SystemSettings: UtilityApi and Custodian settings</li>
-<li><code>fix</code> Table Users: User 0 has all permissions</li>
-<li><code>fix</code> Table DataGrid: Add missing fields to Document grids</li>
-<li><code>change</code> Table SystemSettings: All password settings are encrypted by default</li>
-<li><code>remove</code> Table SystemSettings: Email related settings removed</li>
-<li><code>remove</code> Table DataGrid: SystemSettings grid</li>
-</ul>
-<h4 id="sqlclr_1">SQLCLR</h4>
-<ul>
-<li><code>new</code> support for UtilityAPI operations<ul>
-<li>Report Print</li>
-<li>Report Export</li>
-<li>SQL Table Export</li>
-<li>Template Email</li>
-<li>Simple Email</li>
-</ul>
-</li>
-<li><code>change</code> CLR procedures are now deployed with database create, no need to install separately</li>
-<li><code>change</code> improved error handling to show more detailed messages when SystemSettings is incorrect</li>
-<li><code>change</code> add manufactureDate to TakeOn procedure</li>
-<li><code>change</code> add NoEntities to clr_Replenish</li>
-</ul>
-<h4 id="accpac-integration_1">Accpac Integration</h4>
-<ul>
-<li><code>fix</code> view Integration_Accpac_InternalUsageDetail </li>
-<li><code>fix</code> view Integration_Accpac_IntransitDetail </li>
-<li><code>fix</code> view Integration_Accpac_PurchaseOrderDetail </li>
-<li><code>fix</code> view Integration_Accpac_ReceiptDetail </li>
-<li><code>fix</code> view Integration_Accpac_SalesOrderDetail </li>
-<li><code>fix</code> view Integration_Accpac_TransferDetail </li>
-<li><code>fix</code> view MasterItemAlias_View</li>
-</ul>
-<h4 id="evo-integration">Evo Integration</h4>
-<ul>
-<li><code>new</code> view Integration_Evolution_InterBranchRequisitionHeader</li>
-<li><code>new</code> view Integration_Evolution_InterBranchRequisitionDetail</li>
-<li><code>new</code> trigger TriggerGraniteInterBranchRequisition</li>
-</ul>
-<h3 id="webdesktop_1">Webdesktop</h3>
-<ul>
-<li><code>fix</code> wrong document displaying when selected from grid<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/webdesktop-document-selection">https://granitewms.canny.io/bugs/p/webdesktop-document-selection</a></li>
-</ul>
-</li>
-<li><code>fix</code> prevent action qty being overridden when editing document line<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/document-line-edit-overiding-action-qty">https://granitewms.canny.io/bugs/p/document-line-edit-overiding-action-qty</a></li>
-</ul>
-</li>
-<li><code>fix</code> stocktake recommendations when counts have been reset<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/stock-take-count-reset-and-recommendations">https://granitewms.canny.io/bugs/p/stock-take-count-reset-and-recommendations</a></li>
-</ul>
-</li>
-<li><code>change</code> additional fields for pickslip documents<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/pickslip-document-fields">https://granitewms.canny.io/bugs/p/pickslip-document-fields</a></li>
-</ul>
-</li>
-<li><code>change</code> only show active master items in document edit<ul>
-<li><a href="https://granitewms.canny.io/request/p/show-only-active-masteritems-in-dropdown">https://granitewms.canny.io/request/p/show-only-active-masteritems-in-dropdown</a></li>
-</ul>
-</li>
-<li><code>change</code> improve error message when executing function without selected record<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/webdesktop-functions-no-record-select-error">https://granitewms.canny.io/bugs/p/webdesktop-functions-no-record-select-error</a></li>
-</ul>
-</li>
-<li><code>change</code> improve document management user experience</li>
-<li><code>new</code> optional fields support for Document</li>
-<li><code>new</code> optional fields support for DocumentDetail</li>
-<li><code>new</code> prescript preview functionality</li>
-<li><code>new</code> SystemSettings encryption functionality</li>
-<li><code>new</code> database migration support</li>
-</ul>
-<h3 id="processapp-webservice">ProcessApp &amp; Webservice</h3>
-<ul>
-<li><code>fix</code> Document display issue<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/process-app-documentprogress-display-issue">https://granitewms.canny.io/bugs/p/process-app-documentprogress-display-issue</a></li>
-</ul>
-</li>
-<li><code>fix</code> Error creating new pallet when label print service is not configured<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/pallet-label-print-error-with-no-print-service">https://granitewms.canny.io/bugs/p/pallet-label-print-error-with-no-print-service</a></li>
-</ul>
-</li>
-<li><code>new</code> Number of Entities functionality for replenish<ul>
-<li><a href="https://granitewms.canny.io/request/p/replenish-to-multiple-tes">https://granitewms.canny.io/request/p/replenish-to-multiple-tes</a></li>
-</ul>
-</li>
-<li><code>new</code> Unlimited step 200s</li>
-<li><code>new</code> Debug mode</li>
-</ul>
-<h3 id="evo-integration_1">Evo integration</h3>
-<h4 id="sdk-provider">SDK Provider</h4>
-<ul>
-<li><code>new</code> Map DocumentReference to Message1 on Evo SalesOrder post<ul>
-<li><a href="https://granitewms.canny.io/request/p/evo-integration-sales-order-post-update-message-lines-on-sales-order">https://granitewms.canny.io/request/p/evo-integration-sales-order-post-update-message-lines-on-sales-order</a></li>
-</ul>
-</li>
-<li><code>new</code> Support for encrypted SystemSettings</li>
-</ul>
-<h4 id="injected-jobs_2">Injected jobs</h4>
-<ul>
-<li><code>new</code> Support for Inter Branch Requisition<ul>
-<li><a href="https://granitewms.canny.io/request/p/evo-inter-branch-requisition-document-sync-job">https://granitewms.canny.io/request/p/evo-inter-branch-requisition-document-sync-job</a></li>
-</ul>
-</li>
-<li><code>fix</code> Performance issue causing sql timeout on document jobs</li>
-<li><code>change</code> Use UtilityAPI for email notifications</li>
-</ul>
-<h3 id="accpac-integration_2">Accpac Integration</h3>
-<h4 id="sdk-provider_1">SDK Provider</h4>
-<ul>
-<li><code>new</code> Support for encrypted SystemSettings</li>
-</ul>
-<h4 id="injected-jobs_3">Injected jobs</h4>
-<ul>
-<li><code>change</code> Use UtilityAPI for email notifications</li>
-</ul>
-<h3 id="omni-integration_1">Omni Integration</h3>
-<h4 id="sdk-provider_2">SDK Provider</h4>
-<ul>
-<li><code>new</code> Support for encrypted SystemSettings</li>
-</ul>
-<h3 id="sapb1-integration_1">SAPB1 Integration</h3>
-<h4 id="sdk-provider_3">SDK Provider</h4>
-<ul>
-<li><code>new</code> Support for encrypted SystemSettings</li>
-</ul>
-<h3 id="syspro-integration_1">Syspro Integration</h3>
-<h4 id="sdk-provider_4">SDK Provider</h4>
-<ul>
-<li><code>new</code> Support for encrypted SystemSettings</li>
-</ul>
-<h3 id="label-printing-bartender_1">Label Printing Bartender</h3>
-<ul>
-<li><code>change</code> Logging provider to Nlog</li>
-</ul>
-<h3 id="scheduler_1">Scheduler</h3>
-<ul>
-<li><code>change</code> email jobs now use Utility API - support for old implementation removed</li>
-</ul>
-<h2 id="january-2024-product-update-4530">January 2024 Product Update : 4.5.3.0</h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul>
-<li>Database change required</li>
-<li>Release was done on 16 Jan for ProcessApp and Webdesktop / Repo Api on 23 Jan</li>
-</ul>
-</div>
-<h3 id="database-24-jan-2024">Database (24 Jan 2024)</h3>
-<ul>
-<li><code>new</code> Table OptionalFieldValues_Location</li>
-</ul>
-<h3 id="webdesktop-23-jan-2024">Webdesktop (23 Jan 2024)</h3>
-<ul>
-<li>
-<p><code>fix</code> delete stock take session when no record selected</p>
-<ul>
-<li><a href="https://stackoverflowteams.com/c/granitewms/questions/348">https://stackoverflowteams.com/c/granitewms/questions/348</a></li>
-</ul>
-</li>
-<li>
-<p><code>new</code> grid menu options to clear selection and filters</p>
-<ul>
-<li><a href="https://granitewms.canny.io/request/p/webdesktop-grid-menu-option-clear">https://granitewms.canny.io/request/p/webdesktop-grid-menu-option-clear</a></li>
-</ul>
-</li>
-<li>
-<p><code>new</code> add optional field support for Locations</p>
-<ul>
-<li><a href="https://granitewms.canny.io/request/p/optional-fields-location">https://granitewms.canny.io/request/p/optional-fields-location</a></li>
-<li><a href="https://granitewms.canny.io/request/p/additional-fields-for-locations">https://granitewms.canny.io/request/p/additional-fields-for-locations</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="repo-api-23-jan-2024">Repo API (23 Jan 2024)</h3>
-<ul>
-<li>fix error when importing documents<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/webdesktop-document-import">https://granitewms.canny.io/bugs/p/webdesktop-document-import</a></li>
-</ul>
 </li>
-</ul>
-<h3 id="processapp-16-jan-2024">ProcessApp (16 Jan 2024)</h3>
-<ul>
-<li><code>fix</code> Layout issues on various screens <ul>
-<li><a href="https://granitewms.canny.io/bugs/p/processapp-receiving-screen-issue">https://granitewms.canny.io/bugs/p/processapp-receiving-screen-issue</a></li>
-<li><a href="https://granitewms.canny.io/bugs/p/processapp-layout-issues-picking">https://granitewms.canny.io/bugs/p/processapp-layout-issues-picking</a></li>
-<li><a href="https://granitewms.canny.io/bugs/p/stocktake-scanner-detail-values-not-adjacent-to-description">https://granitewms.canny.io/bugs/p/stocktake-scanner-detail-values-not-adjacent-to-description</a></li>
+<li>Process App<ul>
+<li>Released 13/01/2025</li>
+<li>Version 5.0.0.5</li>
+<li>Properly disable the UI after the user has submitted an input. This prevents prescripts from running multiple times accidentally</li>
 </ul>
 </li>
 </ul>
-<h2 id="september-2023-product-update-4520">September 2023 Product Update : 4.5.2.0</h2>
-<h3 id="webdesktop_2">WebDesktop</h3>
+<h2 id="14012025-20012025">14/01/2025 - 20/01/2025</h2>
 <ul>
-<li><code>fix</code> Document Detail stock on hand lookup did not return<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/stock-on-hand-button-on-document-screens">https://granitewms.canny.io/bugs/p/stock-on-hand-button-on-document-screens</a></li>
+<li>Granite.Webservice.dll (second fix below)<ul>
+<li>Released 15/01/2025</li>
+<li>Version <strong>5.0.0.1</strong></li>
+<li>Fix bug when multiple people were scanning the same line on a document (or there is network latency), some transactions fail to update the document detail action qty.</li>
 </ul>
 </li>
-<li><code>new</code> Add support for user sites in Datagrid (enquiry). Filter grid data based on user that is currently logged in.</li>
-<li><code>new</code> CSS Datagrid styling. Add CSS style classes to use with datagrid. fontGreen , fontBlue , fontRed , backgroundRed ,backgroundBlue ,backgroundGreen <ul>
-<li><a href="https://granitewms.canny.io/request/p/webdesktop-datagrid-styling">https://granitewms.canny.io/request/p/webdesktop-datagrid-styling</a></li>
+<li>Granite.DomainModel.dll<ul>
+<li>Released 15/01/2025</li>
+<li>Version 5.0.1.1</li>
+<li>Fix bug replenish not printing new tracking entity labels</li>
 </ul>
 </li>
-<li><code>fix</code> Document grids with status CANCELLED not apply correct CSS style<ul>
-<li><a href="https://granitewms.canny.io/bugs/p/webdesktop-document-grids-status-not-showing-correctly">https://granitewms.canny.io/bugs/p/webdesktop-document-grids-status-not-showing-correctly</a></li>
+<li>Granite.Webservice.dll (related to 5.0.0.1)<ul>
+<li>Released 17/01/2025</li>
+<li>Version <strong>5.0.0.3</strong></li>
+<li>Fix bug introduced by the fix in 5.0.0.1 - important update. Requests that need to wait to acquire a lock do not acquire a lock even once the document is available to process - this results in long running IIS requests that never terminate, and cause slow downs in IIS.</li>
 </ul>
 </li>
-<li><code>fix</code> Saving customize application grids used incorrect GroupName for the grid. </li>
-<li><code>fix</code> Saving customize application grids caused the GridName to duplicate the prefix word Custom.</li>
-</ul>
-<h3 id="processapp">ProcessApp</h3>
-<ul>
-<li><code>fix</code> Confirmation and error sound not playing</li>
-<li><code>fix</code> Documents with larger text fields render incorrectly. <ul>
-<li><a href="https://granitewms.canny.io/bugs/p/processapp-document-display-issue">https://granitewms.canny.io/bugs/p/processapp-document-display-issue</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="labelprintservice">LabelPrintService</h3>
-<ul>
-<li><code>new</code> Add validation of printer name</li>
-</ul>
-<h2 id="august-2023-product-update-4510">August 2023 Product Update : 4.5.1.0</h2>
-<h3 id="webdesktop-repository-api">WebDesktop / Repository API</h3>
-<ul>
-<li><code>fix</code> Print label not working with illegal characters in MasterItem Code</li>
-<li><code>fix</code> Functions scripts returning <em>null</em> in Valid (field) threw error.</li>
-<li><code>fix</code> Functions for document screen fixed. Selected records not being passed on to function.</li>
-<li><code>fix</code> Grid definition for application grids, show the name and audit information correctly.</li>
-<li><code>fix</code> Data Import: various issues causing the import to not import or show records in grid.</li>
-<li><code>fix</code> TrackingEntity Import: Remove override of Barcode. Expiry and manufacture date column rename.</li>
-<li><code>fix</code> Pickslip grid not showing data.</li>
-<li><code>fix</code> Application grids update isCustomGrid value for grid entry   </li>
-<li><code>new</code> Datagrid StockAvailable (include new SQL view)</li>
-</ul>
-<h3 id="processapp_1">ProcessApp</h3>
-<ul>
-<li><code>fix</code> New Pallet ignore casing of word <em>New</em></li>
-<li><code>fix</code> Add web template support for Posting processes.</li>
-<li><code>fix</code> Expand / Collapse of trackingentity information on Pallet did not work.</li>
-<li><code>fix</code> When trying to open Transfer Post page was not found.</li>
-<li><code>new</code> Prefix all web template errors to clarify origin of error.</li>
-<li><code>change</code> Default config for logging <code>nlog.log</code> set to Info and included archive setting on size limit.</li>
-</ul>
-<h3 id="database_2">Database</h3>
-<h4 id="database-views_1">Database Views</h4>
-<ul>
-<li><code>fix</code> API_QueryDocumentProgress</li>
-<li><code>fix</code> API_QueryTransactionsPickReversal (exclude pack transactions)</li>
-<li><code>new</code> DataGrid_StockAvailable</li>
-</ul>
-<h4 id="database-data_2">Database Data</h4>
-<ul>
-<li><code>fix</code> Table Datagrid: OrderDocumentProgress, ReceivingDocumentProgress, TransferDocumentProgress, WorkOrderDocumentProgress</li>
-<li><code>fix</code> Table Datagrid: entry <strong>ImportTrackingEntity</strong>. Fix layout. Also see Tracking Entity Import on Webdesktop fix.</li>
-<li><code>fix</code> Table Datagrid: entry Document / PickslipDocument. Fix layout. </li>
-<li><code>new</code> Table Datagrid: Grid for DataGrid_StockAvailable.</li>
-<li><code>new</code> Table Snippets: various snippets added to showcase standard Granite </li>
-</ul>
-<h4 id="accpac-database">Accpac Database</h4>
-<ul>
-<li><code>fix</code> MasterItemAlias_View add union on join</li>
-<li><code>change</code> IntegrationProcessTransfer, IntegrationProcessSalesOrder, IntegrationProcessTransfer. Use ExpectedDate instead of ActionDate</li>
-</ul>
-<h3 id="scheduler_2">Scheduler</h3>
-<ul>
-<li><code>change</code> Remove execution timeout for SQL jobs</li>
-</ul>
-<h4 id="accpac-injected-jobs">Accpac Injected jobs</h4>
-<ul>
-<li><code>fix</code> Scheduler gets stuck when document line's MasterItem_ERPIdentification does not appear in Integration_Accpac_MasterItem view</li>
-</ul>
-<h4 id="evo-injected-jobs">Evo Injected jobs</h4>
-<ul>
-<li><code>fix</code> not validating changes before updating document lines</li>
-</ul>
-<h3 id="zpl-labelprinting">ZPL LabelPrinting</h3>
-<ul>
-<li><code>change</code> Variables in ZPL label templates now need to be prefixed with <code>@</code></li>
-</ul>
-<h3 id="accpac">Accpac</h3>
-<ul>
-<li><code>new</code> Support for Accpac 2023 version 7.0</li>
 </ul>
+<hr />
 
 
 
@@ -4609,6 +2745,8 @@ Only version 6 specific injected jobs will work with Scheduler version 6.</p>
     
     
       <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="../../extra_js/custom.js"></script>
       
     
   </body>
