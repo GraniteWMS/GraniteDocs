@@ -1,17 +1,16 @@
 # Granite WMS What's New V 6.0
-`Not released`
 
 *Also see [V6 Cheat Sheet](../V6/cheatsheet.md) for a high level overview and reference* 
-
-## API Consolidation changes
-
-`these changes will impact settings and configuration of the endpoint addresses. please review`
-
-- The **Util API** is now merged into the **Custodian API**, consolidating functionalities under the unified name: Custodian API.
-- The **Repo API** is now merged into the new **Business API**, consolidating functionalities under the unified name: Business API.
-  
 ___
 ## Overview
+
+### API Consolidation changes
+
+!!! danger
+    These changes will impact settings and configuration of the endpoint addresses. Please ensure that you understand the changes.
+
+- The **Utility API** is now merged into the **Custodian API**, consolidating functionalities under the unified name: **Custodian API**.
+- The **Repo API** is now merged into the new **Business API**, consolidating functionalities under the unified name: **Business API**.
 
 ### New Applications & Tools
 
@@ -71,10 +70,12 @@ Aside from that, the other changes are fixes that require no changes to processe
 
 You can find out more in the [Business API manual](../../business-api/manual.md) 
 ___
+
 ## System observability with [Jaeger](../../tools/jaeger.md)
 
 <iframe src="https://share.descript.com/embed/U18gcAOZSln" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 ___
+
 ## Webdesktop Enhancements
 
 ### Document Copy
