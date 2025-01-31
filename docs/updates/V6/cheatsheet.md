@@ -14,22 +14,23 @@
         title Granite WMS Version 6 Database
        
         section Tables
-          New Tables : AuditStockTakeSession : UsersPermissions : SystemPermissions  
+          New Tables : AuditStockTakeSession : UsersPermissions : SystemPermissions : DataCapture : DataCaptureFields : DataCaptureFieldsLookup : IntegrationSettings
 
-          Table Changes <br> New columns : AuditStockTakeLines <br> CarryingEntityBarcode <br> CarryingEntity_id : DataGrid <br> RowStyleRules  <br>  PageSize : Document <br> ERPSyncFailedReason : DocumentDetail <br> ERPSyncFailedReason : Users <br> FirstName  <br>  LastName : UsersCredential <br> LockoutEndTime  <br>  PasswordExpiration  <br>  FailedLoginAttempts  <br>  IsAccountLocked  <br>  ApiKey  <br>  PasswordLastChanged
-
-          ... New columns : ProcessStep <br> isBusinessRule : StockTakeSession <br> AuditDate <br> AuditUser <br> Version : StockTakeLines  <br> CarryingEntityBarcode <br> CarryingEntity_id  : TradingPartner <br> Address1 <br> Address2 <br> Address3 <br> Address4 <br> Address5 <br> ContactPerson : Transaction <br> FromContainableEntity_id <br> ToContainableEntity_id
+          New columns : ProcessStep <br> isBusinessRule :  StockTakeLines <br> CarryingEntityBarcode <br> CarryingEntity_id : AuditStockTakeLines <br> CarryingEntityBarcode <br> CarryingEntity_id : StockTakeSession <br> AuditDate <br> AuditUser <br> Version : DataGrid <br> RowStyleRules <br> PageSize : UsersCredential <br> LockoutEndTime <br> PasswordExpiration <br> IsAccountLocked <br> ApiKey <br> PasswordLastChanged : Users <br> FirstName <br> LastName : Transaction <br> FromContainableEntity_id <br> ToContainableEntity_id
         
-         Column Changes : Audit.RecordVersion
+         Column Changes : Audit <br> RecordVersion : Document <br> ERPSyncFailedReason : DocumentDetail <br> ERPSyncFailedReason : ScheduledJobs <br> InjectedJob : ScheduledJobsHistory <br> InjectedJob : UsersCredential <br> FailedLoginAttempts : TradingPartner <br> Address1 <br> Address2 <br> Address3 <br> Address4 <br> Address5 <br> ContactPerson
+
+         Dropped columns : Transaction <br> ContainableEntity_id : Users <br> Allow* <br> drop old permissions
 
          section Data
 
-          New Data : UsersPermissions <br> migration / script : SystemPermissions <br> migration / script : SystemSettings <br> Business_API_Endpoint <br> PasswordFailedAttempts <br> PasswordRecoveryMinutes
-          Data Alterations : Transaction <br> ContainableEntity_id <br> drop : Users.Allow* <br> drop old permissions <br> migration / script  : Datagrid <br> AuditStockTakeSession <br> AuditStockTakeLines <br> ScheduledJobs
+          New Data : UsersPermissions  : SystemPermissions : SystemSettings
+          Data Alterations :  SystemSettings : SystemSnippets : DataGrids
+          
          section Views
-          Alterations : API_QueryStockReorder : Label_Box : API_QueryTransactions : API_QueryTransactionsManufacture : API_QueryTransactionsPickReversal : API_QueryTransactionsPicking : API_QueryTransactionsReceiveReversal : API_QueryTransactionsReceiving : API_QueryTransactionsTransfer : API_QueryTransactionsTransferReversal
+          Alterations : API_QueryStockReorder : Label_Box : API_QueryTransactions : API_QueryTransactions<br>Manufacture : API_QueryTransactions<br>PickReversal : API_QueryTransactions<br>Picking : API_QueryTransactions<br>ReceiveReversal : API_QueryTransactions<br>Receiving : API_QueryTransactions<br>Transfer : API_QueryTransactions<br>TransferReversal
 
-          New Views : API_QueryUsers
+          New Views : DataCaptureFields<br>Lookup_View
 
 
 ```
@@ -56,7 +57,7 @@
           
           Document : Copy Function
 
-          StockTake : Refresh Session : Session Audit
+          StockTake : Refresh Session : Session Audit : Better Carrying Entity Visibility
 
           Users: Copy function 
 
@@ -80,11 +81,12 @@
 
         section Installation
           Scaffold CLI : Install and Setup Granite with EASE!
+          Integration Jobs : Accpac <br> all-in-one deploy script : Evo <br> all-in-one deploy script
 
         section Config
-          AppSettings : Webdesktop <br> Change to Business API URL : ProcessApp <br> Change to Business API URL <br> Add telemetry settings : Integration service <br> Add telemetry settings : Custodian API <br> Add telemetry settings : Label Printing ZPL <br> Add telemetry settings : Scheduler <br> Add telemetry settings : TODO more?
+          AppSettings : Webdesktop <br> Change to Business API URL : ProcessApp <br> Change to Business API URL <br> Add telemetry settings : Integration service <br> Add telemetry settings : Custodian API <br> Add telemetry settings : Label Printing ZPL <br> Add telemetry settings : Scheduler <br> Add telemetry settings 
           
-          Database Settings : Custodian API <br> Application name changed to Granite.Custodian <br> Add Email and Report settings : TODO more?
+          Database Settings : Custodian API <br> Application name changed to Granite.Custodian <br> Add Email and Report settings : SQLCLR <br> Webservice changed to Business API <br> Utility API changed to Custodian : Scheduler <br> Utility API changed to Custodian 
 
 
         section Tooling
@@ -99,6 +101,11 @@
           Security : API Key <br> 3rd party authentication 
          section CLR
             New Procedures: Copy Document: Transfer: Create CarryingEntity: TrackingEntity Optional Field
+        
+        section Integration
+          New Providers : Intacct : Sage 100 : Acumatica
+          Support Initial ActionQty : Evo : Accpac
+
        
             
 ```
