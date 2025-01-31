@@ -31,14 +31,13 @@ ___
 - [Data Grid Improvements](#data-grid-improvements) - Data Grids now support conditional formatting and configurable page sizes
 - [Process Management](#process-management-changes) - Styled Menu dividers  
 - [StockTake Session Auditing](#stocktake-session-management-improvements) - Stocktake session creation criteria are now audited, giving you better visibility
-- [User Management](#changes-to-user-management) - User permissions are now managed at the User Group level. You can also copy users from within the Webdesktop    
 - [Process Template](#process-template-sqlobjects) - Allow user to add any SQLObjects (View, Proc, Table, Function) to process template.
  
-### Security & Permissions changes
-
-- [Security Settings](#security-settings) - Opt-in system wide settings that allow you enforce policies like password strength and user account lock outs
-- [API Keys](#api-keys) - a new way of authenticating against our APIs
-- [Changes to Permissions](#changes-to-permissions) - Permissions are no longer columns on the user table
+### [Security and Permissions Enhancements](#security-permissions-and-user-management-changes)
+- User Management - User permissions are now managed at the User Group level. You can also copy users from within the Webdesktop    
+- New Permissions tables- Permissions are no longer columns on the user table
+- Security Settings - Opt-in system wide settings that allow you enforce policies like password strength and user account lock outs
+- API Keys - a new way of authenticating against our APIs
 
 ___
 ## Scaffold
@@ -66,6 +65,9 @@ Aside from that, the other changes are fixes that require no changes to processe
 - RECEIVING & TAKEON of a MasterItem with DirectOnHold writes ProcessName to QCHOLD transaction
 - RECEIVING a document with the same item with multiple ToLocations correctly validates the ToLocation
 - MANUFACTURE validates against document detail TO Location (Webservice incorrectly validates against FROM Location)
+- TRANSFER document validates against FromLocation and ToLocation
+- INTRANSIT document validates against FromLocation and IntransitLocation
+- RECEIPT document validates against IntransitLocation and ToLocation
 - BarcodeMaster will skip barcodes for failed transactions more often than the Webservice - this is part of the strategy to avoid assigning barcodes twice.
 
 You can find out more in the [Business API manual](../../business-api/manual.md) 
@@ -109,12 +111,6 @@ ___
 
 <iframe src="https://share.descript.com/embed/nXrFmWnpEwl" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
-### Changes to User management
-- <span class="minor">new</span> support for copying users, carry over all setups
-  ![Local Image](../img/userCopy.png)
-
-
-- <span class="breaking">new</span> permissions management in user groups
 
 ### Process Template SQLObjects
 
@@ -126,32 +122,12 @@ ___
 - `new` MasterItem Alias SQL view preview. Allow user to preview the SQL view configured for MasterItem Alias.
   
 ___
-## Security & Permissions changes
+## Security, Permissions and User Management changes
 
-### Security Settings
-Security Settings are opt-in System Settings that allow you to configure Granite's security policy to meet your customers' requirements. 
-These settings allow you to configure things like password strength requirements, and lock out of user accounts after a certain number of failed attempts.
-For all the details see the dedicated documentation for [Security Settings](../../security/system-security.md).
+- [Security Settings](../../security/system-security.md)
+- [API keys](../../security/api-keys.md)
+- [New User permissions](../../security/user-permissions.md)
 
-### API Keys
-As part of the security overhaul, we've introduced API keys. 
-These can be used in place of a user name and password to authenticate against our Business API.
-This change will allow third-parties a much more seamless experience in working with our APIs.
-SQLCLR is also making use of this new authentication method in the background.
+TODO : security & permissions video
 
-Find out more about our [API key implementation](../../security/api-keys.md)
-
-### Changes to Permissions
-User permissions have changed significantly in V6. 
-We no longer have permissions columns on the `Users` table, instead we have two tables called `SystemPermissions` and `UsersPermissions`.
-
-- `SystemPermissions` - this is where permissions are defined. For a user or group to have a permission, the permission must exist in this table.
-- `UsersPermissions` - This is where permissions are assigned to UserGroups. An entry linking a user or user group to a system permission grants the user / group that permission.
-
-This change from fields to records to manage permissions will enable smoother migrations in the future, new permissions will no longer require schema changes.
-
-If a User Group is assigned a permission, all of the users that belong to that group automatically have that permission as well. A user can never have less permissions than the group that they belong to.
-
-Our V6 migration fully converts old user permissions to the new format. 
-For a mapping of old permissions to new permissions see [user permissions](../../security/user-permissions.md).
 ___
