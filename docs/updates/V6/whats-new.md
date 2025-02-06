@@ -49,6 +49,21 @@ In this first release of the Business API, our aim is that you shouldn't notice 
 
 The Repo API has been moved into it's new home without any major changes. There have been some bug fixes, but nothing has materially changed.
 
+### Business Rules
+
+The Business API does introduce one new concept to our core functionality - Business Rules. 
+These are overrides for standard behaviour that allow you to tweak how rules are applied for specific processes by configuring special Process Steps.
+Having functionality configured at step level allows for defaulting Business Rule values, as well as setting them from prescripts, just like any other step.
+Another benefit of applying these at step level is that only the process that you want to change is affected - standard validation on other processes remains untouched.
+
+At V6 launch there are only two Business Rules available for the Pick Service:
+
+- Best Before Override - Allows picking expired stock, effectively changing the ExpiryDate field to function as Best Before field.
+- On Hold Override - Allows picking stock that is on hold. 
+
+The plan is to introduce more Business Rules allowing greater flexibility with the upcoming V6 Product Updates.
+
+### Transaction validation fixes and improvements
 On the Webservice functionality side, while the aim is to remain as consistent as possible, there are some changes to the behaviour in the Business API. The most notable change is that creating a pallet will require a location. This is to ensure better transactional consistency throughout the lifetime of the pallet. This means that you will need to have a Location step _before_ any CarryingEntity step that creates pallets. This affects the following process types:
 
 - Take On
