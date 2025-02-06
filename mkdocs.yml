@@ -71,7 +71,7 @@ nav:
     - tools/index.md
     - Jam.dev: tools/jam.md
     - Jaeger: tools/jaeger.md
-  - Release Notes:
+  - Release Notes: index.md
     - What's New:
       - V4: updates/V4/whats-new.md
       - V5: 
