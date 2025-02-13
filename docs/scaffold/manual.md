@@ -1,5 +1,4 @@
 # Scaffold
-![image info](scaffold.png)
 
 !!! warning 
     Released with Version 6 but can be used for V4.5 and V5 installations
