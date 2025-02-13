@@ -2559,6 +2559,125 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#granite-wms-security-policies-and-measures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Granite WMS Security Policies and Measures
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Security
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication-and-authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication and Authorization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#password-encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      Password Encryption
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#session-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Session Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allowed-origins-and-cross-origin-resource-sharing-cors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Allowed Origins and Cross-Origin Resource Sharing (CORS)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-patching-and-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Patching and Updates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-configurations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Configurations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-server-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      Web Server Security
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Web Server Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iis-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      IIS Hardening
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secure-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secure Communication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2573,6 +2692,80 @@
 
 
 <h1 id="security-and-permissions">Security and Permissions</h1>
+<h2 id="granite-wms-security-policies-and-measures">Granite WMS Security Policies and Measures</h2>
+<p>The following security measures should be considered within the context of on-premises hosting, which
+provides several inherent benefits that enhance overall security, control, and data protection:
+- Complete Control Over Security: On-premises hosting allows organizations to fully manage their
+security infrastructure, with the ability to implement and adjust tailored configurations as needed.
+- Physical Security: With servers located on-site, organizations benefit from direct physical security
+measures, such as secure access and surveillance, which add an extra layer of protection against
+unauthorized access.
+- Data Privacy and Compliance: On-premises environments allow organizations to keep sensitive data
+under their direct control, making it easier to comply with privacy regulations and reducing the risk of
+third-party access.
+- Custom Security Measures: On-premises hosting enables organizations to implement custom security
+solutions tailored to their specific requirements, offering flexibility beyond what’s typically available
+with cloud-based services.
+- Reduced Dependency on Internet Connectivity: Systems hosted on-premises can continue to function
+during internet outages, providing increased reliability and security in the event of connectivity issues.
+- Controlled Access: Access to on-premises systems is tightly controlled and can be secured through
+internal policies and technologies like VPNs, adding further protection from external threats.</p>
+<h2 id="application-security">Application Security</h2>
+<h3 id="authentication-and-authorization">Authentication and Authorization</h3>
+<ul>
+<li>Custom Application Authentication: We use our own custom authentication mechanisms tailored
+specifically to our application's requirements, ensuring secure user access control.</li>
+<li>Access to application features is managed through permission-based authorization, ensuring users can
+only perform actions that align with their assigned roles.</li>
+</ul>
+<h3 id="password-encryption">Password Encryption</h3>
+<ul>
+<li>Salt and Hashing: Passwords are securely hashed with a unique salt for each user, making it harder for
+attackers to crack passwords.</li>
+</ul>
+<h3 id="session-management">Session Management</h3>
+<ul>
+<li>UseSecureCookies: Cookies are only sent over HTTPS connections, preventing them from being
+transmitted in plaintext over insecure networks.</li>
+<li>UseHttpOnlyCookies: Cookies cannot be accessed by client-side scripts, which mitigates Cross-Site
+Scripting (XSS) attacks.</li>
+<li>UseSameSiteCookies: Cross-Site Request Forgery (CSRF) attacks are prevented by restricting cookies
+from being sent with cross-site requests.</li>
+<li>Session Timeout: Sessions are time-limited, with automatic logouts occurring after periods of inactivity.</li>
+</ul>
+<h3 id="allowed-origins-and-cross-origin-resource-sharing-cors">Allowed Origins and Cross-Origin Resource Sharing (CORS)</h3>
+<ul>
+<li>CORS Implementation: Strict CORS policies are enforced to control which domains can interact with our
+.NET applications, preventing unauthorized cross-origin requests.</li>
+<li>Allowed Origins: Only explicitly allowed origins are permitted to interact with the APIs and web services,
+ensuring that only trusted sources can access sensitive resources.</li>
+</ul>
+<h3 id="application-patching-and-updates">Application Patching and Updates</h3>
+<ul>
+<li>We use the GitHub Dependencies Bot to monitor and manage updates to .NET Framework, libraries,
+and dependencies. This ensures that any vulnerabilities in third-party libraries are addressed promptly
+and efficiently.</li>
+</ul>
+<h3 id="application-configurations">Application Configurations</h3>
+<ul>
+<li>DebugMode: Debug mode is set to false by default, ensuring that sensitive information, such as stack
+traces and error messages, is not exposed to users in production. This prevents attackers from gaining
+insights into the internal workings of the application.</li>
+</ul>
+<h2 id="web-server-security">Web Server Security</h2>
+<h3 id="iis-hardening">IIS Hardening</h3>
+<ul>
+<li>Disable Unnecessary Features: All unnecessary IIS modules (e.g., WebDAV, FTP) are disabled to minimize
+the attack surface.</li>
+<li>Application Pool Isolation: Each application is hosted in its own dedicated application pool. This ensures
+that if one application is compromised, others remain unaffected.</li>
+</ul>
+<h3 id="secure-communication">Secure Communication</h3>
+<ul>
+<li>SSL/TLS Encryption: All communication with the IIS-hosted applications is encrypted via SSL/TLS to
+ensure data integrity and confidentiality.</li>
+</ul>
+<hr />
 <p>Learn how to secure your system with API keys, manage user permissions, and implement best practices for system security. This section covers everything you need to control access, authenticate users, and protect sensitive data. Explore the guides below to ensure your setup is both secure and efficient.</p>
 <div class="grid cards">
 <ul>
