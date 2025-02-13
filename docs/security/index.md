@@ -3,21 +3,12 @@
 ## Granite WMS Security Policies and Measures
 The following security measures should be considered within the context of on-premises hosting, which
 provides several inherent benefits that enhance overall security, control, and data protection:
-- Complete Control Over Security: On-premises hosting allows organizations to fully manage their
-security infrastructure, with the ability to implement and adjust tailored configurations as needed.
-- Physical Security: With servers located on-site, organizations benefit from direct physical security
-measures, such as secure access and surveillance, which add an extra layer of protection against
-unauthorized access.
-- Data Privacy and Compliance: On-premises environments allow organizations to keep sensitive data
-under their direct control, making it easier to comply with privacy regulations and reducing the risk of
-third-party access.
-- Custom Security Measures: On-premises hosting enables organizations to implement custom security
-solutions tailored to their specific requirements, offering flexibility beyond what’s typically available
-with cloud-based services.
-- Reduced Dependency on Internet Connectivity: Systems hosted on-premises can continue to function
-during internet outages, providing increased reliability and security in the event of connectivity issues.
-- Controlled Access: Access to on-premises systems is tightly controlled and can be secured through
-internal policies and technologies like VPNs, adding further protection from external threats.
+- Complete Control Over Security: On-premises hosting allows organizations to fully manage their security infrastructure, with the ability to implement and adjust tailored configurations as needed.
+- Physical Security: With servers located on-site, organizations benefit from direct physical security measures, such as secure access and surveillance, which add an extra layer of protection against unauthorized access.
+- Data Privacy and Compliance: On-premises environments allow organizations to keep sensitive data under their direct control, making it easier to comply with privacy regulations and reducing the risk of third-party access.
+- Custom Security Measures: On-premises hosting enables organizations to implement custom security solutions tailored to their specific requirements, offering flexibility beyond what’s typically available with cloud-based services.
+- Reduced Dependency on Internet Connectivity: Systems hosted on-premises can continue to function during internet outages, providing increased reliability and security in the event of connectivity issues.
+- Controlled Access: Access to on-premises systems is tightly controlled and can be secured through internal policies and technologies like VPNs, adding further protection from external threats.
 
 ## Application Security
 ### Authentication and Authorization
