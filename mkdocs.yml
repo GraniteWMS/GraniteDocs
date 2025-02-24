@@ -71,6 +71,7 @@ nav:
     - tools/index.md
     - Jam.dev: tools/jam.md
     - Jaeger: tools/jaeger.md
+    - Apache NiFi: tools/nifi.md
   - Release Notes:
     - updates/index.md
     - What's New:
