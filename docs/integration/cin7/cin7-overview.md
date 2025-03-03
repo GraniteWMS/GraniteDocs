@@ -6,6 +6,8 @@
 
 The purpose of this document is to provide an overview of CIN7 in terms of integrating with Granite. For details on how integration will take place and which Granite transactions are supported please see the [SDK Provider](sdk-provider.md) and the [integration jobs](integration-jobs.md).
 
+<iframe src="https://share.descript.com/embed/aO5vgCPY5Zd" width="768" height="432" frameborder="0" allowfullscreen></iframe>
+
 ## CIN7 Business Objects:
 
 ### Product

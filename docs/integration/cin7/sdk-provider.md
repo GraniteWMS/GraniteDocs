@@ -3,17 +3,46 @@
 !!! note
     This documentation is a work in progress and is intended to show the development progress of the integration with CIN7. As such, it may be subject to change as progress is made. 
 
-## Supported Transactions
+
+## How it connects
+The upwards integration, as with the downwards, is done though the CIN7 API. 
+
+To be able to connect to the API you will need to create an API key in CIN7. To do so go to Integration>CoreAPI>AddNew as you can see in the image below. 
+
+![API Key](./cin7-img/create-api-key.png)
+
+Once created, it will generate an Account ID and a Key (as below). These need to be added to system settings in Granite into api-auth-accountid and api-auth-applicationkey respectively. These system settings will be generated when the integration service is run for the first time. Once you have added these you will need to restart the integration service.
+
+![API Key](./cin7-img/api-key.png)
+
+### SystemSetting
+
+- `BaseUrl` - CIN7 API base URL. This is set by default to https://inventory.dearsystems.com/ExternalApi/v2/
+- `api-auth-accountid` - CIN7 API Account ID.
+- `api-auth-applicationkey` - CIN7 API Application Key (encrypted).
+
+![SystemSettings](./cin7-img/system-settings.png)
+
+## Integration Methods
 
 Currently, the support transaction are 
 
 - Move (Stock Transfer)
+- Transfer (Stock Transfer)
 - Adjustment (Stock Adjustment)
 - Receive (Purchase Order Receipt)
 - Pick (Sale Fulfilment Pick)
 - Pack (Sale Fulfilment Pack)
 
 These transactions were done first as they cover all of the main transactions types in CIN7 and most other Granite transactions will be using the same base transactions types. 
+Outstanding transaction types: 
+
+- Replenish 
+- Reclassify
+- Scrap
+- Consume
+- Manufacture
+
 
 ### ADJUSTMENT
 
@@ -76,6 +105,33 @@ GROUP BY MasterItem.Code, Location.ERPLocation, ExpiryDate, Batch, SerialNumber
 | Serial                      | BatchSN  |N||
 | ExpirationDate              | ExpiryDate|N||
 
+### TRANSFER
+
+Currently only standard Transfers are implemented. Intransit and Receipt are still to be implemented. 
+
+- Granite Transaction: **TRANSFER**
+- CIN7: **STOCK Transfer**
+- Supports:
+    - Batch
+    - Serial
+    - Expiration Date
+- Integration Post
+    - False - Creates a new Stock Transfer with the status Draft
+    - True - Creates a new Stock Transfer with the status Authorized.
+- Returns:
+    Stock Transfer Task ID
+
+| Granite    | Acumatica Entity | Required | Behavior |
+|------------|------------------|----------|-----------|
+| Document                   | OrderNumber |Y||
+| Code                        | SKU           |Y||
+| Qty                         | Qty  |Y||
+| FromLocation                | FromLocation  |Y||
+| ToLocation                  | ToLocation  |Y||
+| Batch                       | BatchSN  |N||
+| Serial                      | BatchSN  |N||
+| ExpirationDate              | ExpiryDate|N||
+
 ### RECEIVE
 
 - Granite Transaction: **RECEIVE**
@@ -124,9 +180,9 @@ GROUP BY MasterItem.Code, Location.ERPLocation, ExpiryDate, Batch, SerialNumber
 | Serial                      | BatchSN  |N||
 | ExpirationDate              | ExpiryDate|N||
 
-### PICK
+### PACK
 
-- Granite Transaction: **PaCK**
+- Granite Transaction: **PACK**
 - CIN7: **Sale Fulfilment Pack**
 - Supports:
     - Batch
