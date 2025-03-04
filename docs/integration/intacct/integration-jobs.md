@@ -1,6 +1,3 @@
-!!! warning
-    The Intacct integration jobs are V6 functionality - not yet available.
-
 # Integration Jobs
 
 Integration jobs are a special type of [Scheduler](../../scheduler/manual.md) job called [injected jobs](../../scheduler/manual.md#injected-jobs-integration-jobs). 
@@ -19,6 +16,24 @@ Integration jobs are a special type of [Scheduler](../../scheduler/manual.md) jo
 	---
 	
 	Sage Intacct type: Purchase Order
+
+-   INTRANSIT
+
+    ---
+
+    Sage Intacct type: Inventory Transfer Out
+
+-   RECEIPT
+
+    ---
+
+    Sage Intacct type: Inventory Transfer In
+
+-   TRANSFER
+
+    ---
+    
+    Sage Intacct type: Warehouse Transfer
 
 </div>
 
@@ -41,7 +56,10 @@ INSERT INTO ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob,
 VALUES	(0, 'MasterItemSync', 'Syncs MasterItems from Intacct', 'INJECTED', 'Granite.Integration.SageIntacct.Job.MasterItemJob', '4', 'HOURS', GETDATE(), 'AUTOMATION'),
 		(0, 'PurchaseOrderSync', 'Syncs Purchase Orders from Intacct', 'INJECTED', 'Granite.Integration.SageIntacct.Job.PurchaseOrderJob', '5', 'MINUTES', GETDATE(), 'AUTOMATION'),
 		(0, 'SalesOrderSync', 'Syncs Sales Orders from Intacct', 'INJECTED', 'Granite.Integration.SageIntacct.Job.SalesOrderJob', '5', 'MINUTES', GETDATE(), 'AUTOMATION'),
-		(0, 'TradingPartnerSync', 'Syncs Trading Partners from Intacct', 'INJECTED', 'Granite.Integration.SageIntacct.Job.TradingPartnerJob', '4', 'HOURS', GETDATE(), 'AUTOMATION')
+		(0, 'TradingPartnerSync', 'Syncs Trading Partners from Intacct', 'INJECTED', 'Granite.Integration.SageIntacct.Job.TradingPartnerJob', '4', 'HOURS', GETDATE(), 'AUTOMATION'),
+		(0, 'IntransitTransferSync', 'Syncs Intransit Transfers from Intacct', 'INJECTED', 'Granite.Integration.SageIntacct.Job.IntransitTransferJob', '5', 'MINUTES', GETDATE(), 'AUTOMATION'),
+		(0, 'ReceiptTransferSync', 'Syncs Receipt Transfers from Intacct', 'INJECTED', 'Granite.Integration.SageIntacct.Job.ReceiptTransferJob', '5', 'MINUTES', GETDATE(), 'AUTOMATION'),
+		(0, 'WarehouseTransferSync', 'Syncs Warehouse Transfers from Intacct', 'INJECTED', 'Granite.Integration.SageIntacct.Job.WarehouseTransferJob', '4', 'HOURS', GETDATE(), 'AUTOMATION')
 ```
 
 For all the details on configuring scheduled jobs, see the scheduler documentation on [configuring schedules](../../scheduler/manual.md#configuring-schedules).
@@ -65,7 +83,9 @@ VALUES  ('Integration.SageIntacct.Job', 'SenderId', '', 'Sage Intacct API Sender
         ('Integration.SageIntacct.Job', 'SageDateFormat', 'MM/dd/yyyy HH:mm:ss', 'Sage Intacct Date Format', 1, 0, GETDATE(), 'AUTOMATION', 0),
         ('Integration.SageIntacct.Job', 'ItemTypes', 'I,K,SK', 'Comma separated list of Item Types to sync from Intacct. Valid types are I, NI, NP, NS, K, SK', 1, 0, GETDATE(), 'AUTOMATION', 0),
         ('Integration.SageIntacct.Job', 'SalesOrderTypes', 'Sales Order,Sales Order-Inventory', 'Comma separated list of Sales Order Types to sync from Intacct.', 1, 0, GETDATE(), 'AUTOMATION', 0),
-        ('Integration.SageIntacct.Job', 'PurchaseOrderTypes', 'Purchase Order,Purchase Order-Inventory', 'Comma separated list of Purchase Order Types to sync from Intacct.', 1, 0, GETDATE(), 'AUTOMATION', 0);
+        ('Integration.SageIntacct.Job', 'PurchaseOrderTypes', 'Purchase Order,Purchase Order-Inventory', 'Comma separated list of Purchase Order Types to sync from Intacct.', 1, 0, GETDATE(), 'AUTOMATION', 0),
+        ('Integration.SageIntacct.Job', 'IntransitTransferTypes', 'Inventory Transfer Out', 'Comma separated list of Intransit Transfer Types to sync from Intacct.', 1, 0, GETDATE(), 'AUTOMATION', 0),
+        ('Integration.SageIntacct.Job', 'ReceiptTransferTypes', 'Inventory Transfer In', 'Comma separated list of Receipt Transfer Types to sync from Intacct.', 1, 0, GETDATE(), 'AUTOMATION', 0);
 ```
 
 #### SenderId
@@ -125,3 +145,15 @@ Datatype: comma separated list
 This setting determines the types of PurchaseOrder documents that can be synced from Intacct.
 
 To specify multiple types, list them separated by commas e.g. `Purchase Order,Purchase Order-Inventory`
+
+#### Intransit Transfer Types
+Datatype: comma separated list
+This setting determines the types of Inventory Transfer documents that can be synced from Intacct.
+
+To specify multiple types, list them separated by commas e.g. `Inventory Transfer Out,CPT Transfer Out`
+
+#### Receipt Transfer Types
+Datatype: comma separated list
+This setting determines the types of Inventory Transfer documents that can be synced from Intacct.
+
+To specify multiple types, list them separated by commas e.g. `Inventory Transfer In,CPT Transfer In`
