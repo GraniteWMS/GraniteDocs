@@ -441,6 +441,24 @@ Same as SCRAP but Adjustment Type set to **BOTH**
 | ActionQty    | QTYSHIPPED | Y        | OEORDD       | Only applies if IntegrationPost is true |
 | UOM          | ORDUNIT    | N        | OEORDD       ||
 
+### PICK_SHIPALL
+
+!!! note 
+    Will ship all lines on Accpac Order regardless of Granite transactions.
+
+
+- Granite Transaction: **PICK**
+- Accpac: **O/E Transactions Order Entry**
+- Supports:
+- IntegrationPost:
+- Returns:
+    - SHINUMBER 
+
+| Granite    | Accpac SDK | Required | Accpac Table | Behaviour |
+|------------|------------|----------|--------------|-----------|
+| Document   | ORDNUMBER  | Y        | OESHIH       ||
+
+
 ### RECEIVE
 - Granite Transaction: **RECEIVE**
 - Accpac: **P/O Transactions Purchase Order Entry**
