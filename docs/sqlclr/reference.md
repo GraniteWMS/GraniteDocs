@@ -263,17 +263,24 @@ DECLARE @message varchar(max)
 
 SELECT @reportPath = '/Pick Slip - Per Cage'
 SELECT @printerName = 'TestPrinter'
+SELECT @copies = 1
 
-SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'DocumentNumber', 'STV-AVO-000001')
-SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'Cage', 'CAGE D')
+BEGIN TRY
+	SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'DocumentNumber', 'STV-AVO-000001')
+	SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'Cage', 'CAGE D')
 
-EXEC [dbo].[clr_ReportPrint]
-	@reportPath
-	,@printerName
-	,@parameters
-  ,@copies
-	,@success OUTPUT
-	,@message OUTPUT
+	EXEC [dbo].[clr_ReportPrint]
+		@reportPath
+		,@printerName
+		,@parameters
+		,@copies
+		,@success OUTPUT
+		,@message OUTPUT
+END TRY
+BEGIN CATCH
+	SELECT @message = ERROR_MESSAGE()
+	SELECT @success = 0
+END CATCH
 
 SELECT @success, @message
 
@@ -293,16 +300,23 @@ SELECT @reportPath = N'/Pick Slip - Per Cage'
 SELECT @fileDestinationPath = 'D:\\Granite WMS\\V5 Demo\\PickSlip.pdf'
 SELECT @fileType = 'PDF'
 
-SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'DocumentNumber', 'STV-AVO-000001')
-SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'Cage', 'CAGE D')
+BEGIN TRY
 
-EXEC [dbo].[clr_ReportExportToFile]
-	@reportPath
-	,@fileDestinationPath
-	,@fileType
-	,@parameters
-	,@success OUTPUT
-	,@message OUTPUT
+	SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'DocumentNumber', 'STV-AVO-000001')
+	SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'Cage', 'CAGE D')
+
+	EXEC [dbo].[clr_ReportExportToFile]
+		 @reportPath
+		,@fileDestinationPath
+		,@fileType
+		,@parameters
+		,@success OUTPUT
+		,@message OUTPUT
+END TRY
+BEGIN CATCH
+	SELECT @message = ERROR_MESSAGE()
+	SELECT @success = 0
+END CATCH
 
 SELECT @success, @message
 
@@ -365,24 +379,30 @@ SELECT @tableName = 'API_QueryStockTotals'
 SELECT @fileDestinationPath = 'D:\\Granite WMS\\V5 Demo\\StockInFreezer.csv'
 SELECT @filetype = 'CSV'
 
-SET @orderByList = dbo.export_AddOrderBy(@OrderByList, 'Type', 'DESC')
-SET @orderByList = dbo.export_AddOrderBy(@OrderByList, 'Code', 'ASC')
-SET @filters = dbo.export_AddFilter(@Filters, 'Category', 'Equal', 'Freezer')
-SET @filters = dbo.export_AddFilter(@Filters, 'Qty', 'GreaterThan', '0')
+BEGIN TRY
+	SET @orderByList = dbo.export_AddOrderBy(@OrderByList, 'Type', 'DESC')
+	SET @orderByList = dbo.export_AddOrderBy(@OrderByList, 'Code', 'ASC')
+	SET @filters = dbo.export_AddFilter(@Filters, 'Category', 'Equal', 'Freezer')
+	SET @filters = dbo.export_AddFilter(@Filters, 'Qty', 'GreaterThan', '0')
 
-SET @offset = 0
-SET @limit = 500
+	SET @offset = 0
+	SET @limit = 500
 
-EXEC clr_TableExport 
-	@tableName
-	,@filters
-	,@offset
-	,@limit
-	,@orderByList
-	,@fileDestinationPath 
-	,@fileType
-	,@success OUTPUT
-	,@message OUTPUT
+	EXEC clr_TableExport 
+		@tableName
+		,@filters
+		,@offset
+		,@limit
+		,@orderByList
+		,@fileDestinationPath 
+		,@fileType
+		,@success OUTPUT
+		,@message OUTPUT
+END TRY
+BEGIN CATCH
+	SELECT @message = ERROR_MESSAGE()
+	SELECT @success = 0
+END CATCH
 
 SELECT @success, @message
 
@@ -451,23 +471,31 @@ DECLARE @fileAttachments nvarchar(max)
 DECLARE @success bit
 DECLARE @message varchar(max)
 
-SET @subject = 'Test Clr Mail'																			
-SET @templateName = 'PickingNotification'																-- Use the email template named PickingNotification
-SET @templateParameters = dbo.email_AddTemplateParameter(@templateParameters, 'documentNumber', 'SO000123')	-- Add a parameter to be passed to the email template. The parameter name is documentNumber, and value is SO000123
-SET @toEmailAddresses = 'email1@gmail.com;email2@gmail.com'										
+BEGIN TRY
 
-EXECUTE [dbo].[clr_TemplateEmail] 
-   @subject
-  ,@templateName
-  ,@templateParameters
-  ,@toEmailAddresses
-  ,@ccEmailAddresses
-  ,@bccEmailAddresses
-  ,@reportAttachments
-  ,@excelAttachments
-  ,@fileAttachments
-	,@success OUTPUT
-	,@message OUTPUT
+	SET @subject = 'Test Clr Mail'																			
+	SET @templateName = 'PickingNotification' -- Use the email template named PickingNotification
+	SET @templateParameters = dbo.email_AddTemplateParameter(@templateParameters, 'documentNumber', 'SO000123')	-- Add a parameter to be passed to the email template. The parameter name is documentNumber, and value is SO000123
+	SET @toEmailAddresses = 'email1@gmail.com;email2@gmail.com'										
+
+	EXECUTE [dbo].[clr_TemplateEmail] 
+		@subject
+		,@templateName
+		,@templateParameters
+		,@toEmailAddresses
+		,@ccEmailAddresses
+		,@bccEmailAddresses
+		,@reportAttachments
+		,@excelAttachments
+		,@fileAttachments
+		,@success OUTPUT
+		,@message OUTPUT
+
+END TRY
+BEGIN CATCH
+	SELECT @message = ERROR_MESSAGE()
+	SELECT @success = 0
+END CATCH
 
 SELECT @success, @message
 
@@ -507,17 +535,23 @@ SET @subject = 'Test Clr Mail'
 SET @body = 'Test mail'
 SET @toEmailAddresses = 'email1@gmail.com;email2@gmail.com'
 
-EXECUTE [dbo].[clr_SimpleEmail] 
-   @subject
-  ,@body
-  ,@toEmailAddresses
-  ,@ccEmailAddresses
-  ,@bccEmailAddresses
-  ,@reportAttachments
-  ,@excelAttachments
-  ,@fileAttachments
-	,@success OUTPUT
-	,@message OUTPUT
+BEGIN TRY
+	EXECUTE [dbo].[clr_SimpleEmail] 
+		@subject
+		,@body
+		,@toEmailAddresses
+		,@ccEmailAddresses
+		,@bccEmailAddresses
+		,@reportAttachments
+		,@excelAttachments
+		,@fileAttachments
+		,@success OUTPUT
+		,@message OUTPUT
+END TRY
+BEGIN CATCH
+	SELECT @message = ERROR_MESSAGE()
+	SELECT @success = 0
+END CATCH
 
 SELECT @success, @message
 
@@ -568,26 +602,31 @@ DECLARE @success bit
 DECLARE @message varchar(max)
 DECLARE @PickingReport varchar(max)
 
-SET @PickingReport = dbo.email_CreateReportAttachment('/PickingReport', 'PDF')					-- Creating the report that we want to attach. The reportPath is /PickingReport, and fileType is PDF
-SET @PickingReport = dbo.email_AddReportParameter(@PickingReport, 'documentNumber', 'SO0001')		-- Adding a parameter that will be used to call the SSRS report. The parameter named 'documentNumber' will be set to 'SO0001'
-SET @reportAttachments = dbo.email_AddReportAttachment(@reportAttachments, @PickingReport)		-- Lastly, we add the picking report to the list of report attachments. 
-SET @subject = 'Test Clr Mail' 
-SET @toEmailAddresses = 'email1@gmail.com;email2@gmail.com'
+BEGIN TRY
+	SET @PickingReport = dbo.email_CreateReportAttachment('/PickingReport', 'PDF')					-- Creating the report that we want to attach. The reportPath is /PickingReport, and fileType is PDF
+	SET @PickingReport = dbo.email_AddReportParameter(@PickingReport, 'documentNumber', 'SO0001')		-- Adding a parameter that will be used to call the SSRS report. The parameter named 'documentNumber' will be set to 'SO0001'
+	SET @reportAttachments = dbo.email_AddReportAttachment(@reportAttachments, @PickingReport)		-- Lastly, we add the picking report to the list of report attachments. 
+	SET @subject = 'Test Clr Mail' 
+	SET @toEmailAddresses = 'email1@gmail.com;email2@gmail.com'
 
-EXECUTE [dbo].[clr_SimpleEmail] 
-   @subject
-  ,@body
-  ,@toEmailAddresses
-  ,@ccEmailAddresses
-  ,@bccEmailAddresses
-  ,@reportAttachments
-  ,@excelAttachments
-  ,@fileAttachments
-	,@success OUTPUT
-	,@message OUTPUT
+	EXECUTE [dbo].[clr_SimpleEmail] 
+		@subject
+		,@body
+		,@toEmailAddresses
+		,@ccEmailAddresses
+		,@bccEmailAddresses
+		,@reportAttachments
+		,@excelAttachments
+		,@fileAttachments
+		,@success OUTPUT
+		,@message OUTPUT
+END TRY
+BEGIN CATCH
+	SELECT @message = ERROR_MESSAGE()
+	SELECT @success = 0
+END CATCH
 
 SELECT @success, @message
-
 ```
 
 <h3>Excel Attachments</h3>
@@ -643,25 +682,31 @@ DECLARE @message varchar(max)
 
 DECLARE @ConsumablesExport varchar(max)
 
-SET @ConsumablesExport = dbo.email_CreateExcelAttachment('CustomView_MasterItem', 'CSV')								-- Create the excel attachment. The view we will pull from is CustomView_MasterItem, and it will export to a csv file 
-SET @ConsumablesExport = dbo.email_AddExcelAttachmentFilter(@ConsumablesExport, 'Category', 'Equal', 'CONSUMABLE')	-- Add a filter on the Category column of the view, fetch results where Category is equal to CONSUMABLE
-SET @ConsumablesExport = dbo.email_AddExcelAttachmentOrderBy(@ConsumablesExport, 'Description', 'ASC')				-- Order the results of the export using the Description column in ascending order
-SET @excelAttachments = dbo.email_AddExcelAttachment(@excelAttachments, @ConsumablesExport)							-- Lastly, we add the export to the list of excel attachments
+BEGIN TRY
+	SET @ConsumablesExport = dbo.email_CreateExcelAttachment('CustomView_MasterItem', 'CSV')								-- Create the excel attachment. The view we will pull from is CustomView_MasterItem, and it will export to a csv file 
+	SET @ConsumablesExport = dbo.email_AddExcelAttachmentFilter(@ConsumablesExport, 'Category', 'Equal', 'CONSUMABLE')	-- Add a filter on the Category column of the view, fetch results where Category is equal to CONSUMABLE
+	SET @ConsumablesExport = dbo.email_AddExcelAttachmentOrderBy(@ConsumablesExport, 'Description', 'ASC')				-- Order the results of the export using the Description column in ascending order
+	SET @excelAttachments = dbo.email_AddExcelAttachment(@excelAttachments, @ConsumablesExport)							-- Lastly, we add the export to the list of excel attachments
 
-SET @subject = 'Test Clr Mail' 
-SET @toEmailAddresses = 'email1@gmail.com;email2@gmail.com'
+	SET @subject = 'Test Clr Mail' 
+	SET @toEmailAddresses = 'email1@gmail.com;email2@gmail.com'
 
-EXECUTE [dbo].[clr_SimpleEmail] 
-   @subject
-  ,@body
-  ,@toEmailAddresses
-  ,@ccEmailAddresses
-  ,@bccEmailAddresses
-  ,@reportAttachments
-  ,@excelAttachments
-  ,@fileAttachments
-	,@success OUTPUT
-	,@message OUTPUT
+	EXECUTE [dbo].[clr_SimpleEmail] 
+		@subject
+		,@body
+		,@toEmailAddresses
+		,@ccEmailAddresses
+		,@bccEmailAddresses
+		,@reportAttachments
+		,@excelAttachments
+		,@fileAttachments
+		,@success OUTPUT
+		,@message OUTPUT
+END TRY
+BEGIN CATCH
+	SELECT @message = ERROR_MESSAGE()
+	SELECT @success = 0
+END CATCH
 
 SELECT @success, @message
 
@@ -692,25 +737,30 @@ DECLARE @fileAttachments nvarchar(max)
 DECLARE @success bit
 DECLARE @message varchar(max)
 
-SET @fileAttachments = dbo.email_AddFileAttachment(@fileAttachments, 'C:\logexport.txt')		-- Add a file to the list of file attachments
+BEGIN TRY
+	SET @fileAttachments = dbo.email_AddFileAttachment(@fileAttachments, 'C:\logexport.txt')		-- Add a file to the list of file attachments
 
-SET @subject = 'Test Clr Mail' 
-SET @toEmailAddresses = 'email1@gmail.com;email2@gmail.com'
+	SET @subject = 'Test Clr Mail' 
+	SET @toEmailAddresses = 'email1@gmail.com;email2@gmail.com'
 
-EXECUTE [dbo].[clr_SimpleEmail] 
-   @subject
-  ,@body
-  ,@toEmailAddresses
-  ,@ccEmailAddresses
-  ,@bccEmailAddresses
-  ,@reportAttachments
-  ,@excelAttachments
-  ,@fileAttachments
-	,@success OUTPUT
-	,@message OUTPUT
+	EXECUTE [dbo].[clr_SimpleEmail] 
+		@subject
+		,@body
+		,@toEmailAddresses
+		,@ccEmailAddresses
+		,@bccEmailAddresses
+		,@reportAttachments
+		,@excelAttachments
+		,@fileAttachments
+		,@success OUTPUT
+		,@message OUTPUT
+END TRY
+BEGIN CATCH
+	SELECT @message = ERROR_MESSAGE()
+	SELECT @success = 0
+END CATCH
 
 SELECT @success, @message
-
 ```
 
 ## Troubleshooting
