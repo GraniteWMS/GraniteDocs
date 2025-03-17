@@ -1537,6 +1537,24 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#intransit-transfer-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intransit Transfer Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receipt-transfer-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receipt Transfer Types
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3038,6 +3056,24 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#intransit-transfer-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intransit Transfer Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receipt-transfer-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receipt Transfer Types
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3063,10 +3099,6 @@
                   
 
 
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The Intacct integration jobs are V6 functionality - not yet available.</p>
-</div>
 <h1 id="integration-jobs">Integration Jobs</h1>
 <p>Integration jobs are a special type of <a href="../../../scheduler/manual/">Scheduler</a> job called <a href="../../../scheduler/manual/#injected-jobs-integration-jobs">injected jobs</a>. </p>
 <h2 id="supported-document-types">Supported document types</h2>
@@ -3082,6 +3114,21 @@
 <hr />
 <p>Sage Intacct type: Purchase Order</p>
 </li>
+<li>
+<p>INTRANSIT</p>
+<hr />
+<p>Sage Intacct type: Inventory Transfer Out</p>
+</li>
+<li>
+<p>RECEIPT</p>
+<hr />
+<p>Sage Intacct type: Inventory Transfer In</p>
+</li>
+<li>
+<p>TRANSFER</p>
+<hr />
+<p>Sage Intacct type: Warehouse Transfer</p>
+</li>
 </ul>
 </div>
 <h2 id="setup">Setup</h2>
@@ -3095,7 +3142,10 @@
 <span class="k">VALUES</span><span class="w">  </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MasterItemSync&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs MasterItems from Intacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.SageIntacct.Job.MasterItemJob&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;HOURS&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">),</span>
 <span class="w">        </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PurchaseOrderSync&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs Purchase Orders from Intacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.SageIntacct.Job.PurchaseOrderJob&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MINUTES&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">),</span>
 <span class="w">        </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;SalesOrderSync&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs Sales Orders from Intacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.SageIntacct.Job.SalesOrderJob&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MINUTES&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">),</span>
-<span class="w">        </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;TradingPartnerSync&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs Trading Partners from Intacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.SageIntacct.Job.TradingPartnerJob&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;HOURS&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;TradingPartnerSync&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs Trading Partners from Intacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.SageIntacct.Job.TradingPartnerJob&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;HOURS&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;IntransitTransferSync&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs Intransit Transfers from Intacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.SageIntacct.Job.IntransitTransferJob&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MINUTES&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ReceiptTransferSync&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs Receipt Transfers from Intacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.SageIntacct.Job.ReceiptTransferJob&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MINUTES&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;WarehouseTransferSync&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs Warehouse Transfers from Intacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.SageIntacct.Job.WarehouseTransferJob&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;HOURS&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">)</span>
 </code></pre></div>
 <p>For all the details on configuring scheduled jobs, see the scheduler documentation on <a href="../../../scheduler/manual/#configuring-schedules">configuring schedules</a>.</p>
 <p>After configuring the schedules, be sure to set <code>isActive</code> true for the jobs that you want to run.</p>
@@ -3113,7 +3163,9 @@ When jobs run, any missing settings will be inserted automatically.</p>
 <span class="w">        </span><span class="p">(</span><span class="s1">&#39;Integration.SageIntacct.Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;SageDateFormat&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MM/dd/yyyy HH:mm:ss&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Sage Intacct Date Format&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
 <span class="w">        </span><span class="p">(</span><span class="s1">&#39;Integration.SageIntacct.Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ItemTypes&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;I,K,SK&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comma separated list of Item Types to sync from Intacct. Valid types are I, NI, NP, NS, K, SK&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
 <span class="w">        </span><span class="p">(</span><span class="s1">&#39;Integration.SageIntacct.Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;SalesOrderTypes&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Sales Order,Sales Order-Inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comma separated list of Sales Order Types to sync from Intacct.&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
-<span class="w">        </span><span class="p">(</span><span class="s1">&#39;Integration.SageIntacct.Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PurchaseOrderTypes&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Purchase Order,Purchase Order-Inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comma separated list of Purchase Order Types to sync from Intacct.&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">        </span><span class="p">(</span><span class="s1">&#39;Integration.SageIntacct.Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PurchaseOrderTypes&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Purchase Order,Purchase Order-Inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comma separated list of Purchase Order Types to sync from Intacct.&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="s1">&#39;Integration.SageIntacct.Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;IntransitTransferTypes&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Inventory Transfer Out&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comma separated list of Intransit Transfer Types to sync from Intacct.&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="s1">&#39;Integration.SageIntacct.Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ReceiptTransferTypes&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Inventory Transfer In&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Comma separated list of Receipt Transfer Types to sync from Intacct.&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 </code></pre></div>
 <h4 id="senderid">SenderId</h4>
 <p>Datatype: string
@@ -3159,6 +3211,14 @@ This setting determines the types of SalesOrder documents that can be synced fro
 <p>Datatype: comma separated list
 This setting determines the types of PurchaseOrder documents that can be synced from Intacct.</p>
 <p>To specify multiple types, list them separated by commas e.g. <code>Purchase Order,Purchase Order-Inventory</code></p>
+<h4 id="intransit-transfer-types">Intransit Transfer Types</h4>
+<p>Datatype: comma separated list
+This setting determines the types of Inventory Transfer documents that can be synced from Intacct.</p>
+<p>To specify multiple types, list them separated by commas e.g. <code>Inventory Transfer Out,CPT Transfer Out</code></p>
+<h4 id="receipt-transfer-types">Receipt Transfer Types</h4>
+<p>Datatype: comma separated list
+This setting determines the types of Inventory Transfer documents that can be synced from Intacct.</p>
+<p>To specify multiple types, list them separated by commas e.g. <code>Inventory Transfer In,CPT Transfer In</code></p>
 
 
 

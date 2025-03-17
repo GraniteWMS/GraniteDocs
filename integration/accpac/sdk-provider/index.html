@@ -1004,6 +1004,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#pick_shipall" class="md-nav__link">
+    <span class="md-ellipsis">
+      PICK_SHIPALL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#receive" class="md-nav__link">
     <span class="md-ellipsis">
       RECEIVE
@@ -3461,6 +3470,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#pick_shipall" class="md-nav__link">
+    <span class="md-ellipsis">
+      PICK_SHIPALL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#receive" class="md-nav__link">
     <span class="md-ellipsis">
       RECEIVE
@@ -4824,6 +4842,41 @@ If you require a different integration action you can specify the name below in 
 <td>ORDUNIT</td>
 <td>N</td>
 <td>OEORDD</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="pick_shipall">PICK_SHIPALL</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Will ship all lines on Accpac Order regardless of Granite transactions.</p>
+</div>
+<ul>
+<li>Granite Transaction: <strong>PICK</strong></li>
+<li>Accpac: <strong>O/E Transactions Order Entry</strong></li>
+<li>Supports:</li>
+<li>IntegrationPost:</li>
+<li>Returns:<ul>
+<li>SHINUMBER </li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>ORDNUMBER</td>
+<td>Y</td>
+<td>OESHIH</td>
 <td></td>
 </tr>
 </tbody>
