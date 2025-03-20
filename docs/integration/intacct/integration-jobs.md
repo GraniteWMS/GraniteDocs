@@ -73,7 +73,7 @@ When jobs run, any missing settings will be inserted automatically.
 To insert all of the settings upfront you can run this script:
 
 ```sql
-INSERT INTO SystemSettings (Application, Key, Value, Description, isActive, isEncrypted, AuditDate, AuditUser, Version)
+INSERT INTO SystemSettings ([Application], [Key], [Value], [Description], isActive, isEncrypted, AuditDate, AuditUser, [Version])
 VALUES  ('Integration.SageIntacct.Job', 'SenderId', '', 'Sage Intacct API Sender ID', 1, 0, GETDATE(), 'AUTOMATION', 0),
         ('Integration.SageIntacct.Job', 'SenderPassword', '', 'Sage Intacct API Sender Password', 1, 0, GETDATE(), 'AUTOMATION', 0),
         ('Integration.SageIntacct.Job', 'CompanyId', '', 'Sage Intacct API Company ID', 1, 0, GETDATE(), 'AUTOMATION', 0),
