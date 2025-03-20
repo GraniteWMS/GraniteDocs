@@ -26,6 +26,25 @@ The Sage Intacct SDK provider is responsible for mapping Granite Transactions to
 | IntegrationSageIntacct    | TransactionDefinitionReceive         | Purchase Invoice-Inventory | Sage Intacct Transaction Definition Receive  |
 | IntegrationSageIntacct    | TransactionDefinitionReceiveOrigin   | PO Receiver-Inventory | Sage Intacct Transaction Definition ReceiveOrigin |
 
+```sql
+INSERT INTO [dbo].[SystemSettings] ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version]) 
+VALUES  (N'IntegrationSageIntacct', N'SenderId', N'', N'Sender Id for Sage Intacct', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+        (N'IntegrationSageIntacct', N'SenderPassword', N'', N'Sage Intacct SenderPassword', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+        (N'IntegrationSageIntacct', N'CompanyId', N'', N'Sage Intacct CompanyId', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+        (N'IntegrationSageIntacct', N'EntityId', N'', N'Sage Intacct EntityId', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+        (N'IntegrationSageIntacct', N'UserId', N'', N'Sage Intacct UserId', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+        (N'IntegrationSageIntacct', N'UserPassword', N'', N'Sage Intacct UserPassword', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+        (N'IntegrationSageIntacct', N'TransactionDefinitionMove', N'Warehouse Transfer', N'Sage Intacct Transaction Definition Move', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+        (N'IntegrationSageIntacct', N'TransactionDefinitionScrap', N'Inventory Scrap', N'Sage Intacct Transaction Definition Scrap', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+        (N'IntegrationSageIntacct', N'TransactionDefinitionTakeOn', N'Inventory Receipt', N'Sage Intacct Transaction Definition TakeOn', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+        (N'IntegrationSageIntacct', N'TransactionDefinitionAdjustmentIncrease', N'Adjustment Increase', N'Sage Intacct Transaction Definition Adjustment Increase', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+        (N'IntegrationSageIntacct', N'TransactionDefinitionAdjustmentDecrease', N'Adjustment Decrease', N'Sage Intacct Transaction Definition Adjustment Decrease', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+        (N'IntegrationSageIntacct', N'TransactionDefinitionPick', N'Sales Invoice-Inventory', N'Sage Intacct Transaction Definition Pick', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+        (N'IntegrationSageIntacct', N'TransactionDefinitionPickOrigin', N'Sales Order-Inventory', N'Sage Intacct Transaction Definition PickOrigin', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+        (N'IntegrationSageIntacct', N'TransactionDefinitionReceive', N'Purchase Invoice-Inventory', N'Sage Intacct Transaction Definition Receive', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+        (N'IntegrationSageIntacct', N'TransactionDefinitionReceiveOrigin', N'PO Receiver-Inventory', N'Sage Intacct Transaction Definition ReceiveOrigin', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
+```
+
 
 ## Integration Methods
 
@@ -41,6 +60,9 @@ The Sage Intacct SDK provider is responsible for mapping Granite Transactions to
 | **Code**                             | `ItemId`                               | Yes          | The identifier for the item being transacted, mapped from the transaction code (`transaction.Code`).                  |
 | **ActionQty**                        | `Quantity`                             | Yes          | The quantity of the item being transacted, mapped from the transaction data (`transaction.ActionQty`).                |
 | **UOM**                              | `Unit`                                 | Yes          | The unit of measure for the item (e.g., boxes, kg), mapped from the transaction data (`transaction.UOM`).             |
+| **Batch**                             | `LotNumber`                             | No  | Populated if `ENABLE_LOT_CATEGORY` is enabled for the item in Intacct. Taken from `transaction.Batch`.               |
+| **ExpiryDate**                        | `ItemExpiration`                        | No  | Populated if `ENABLE_EXPIRATION` is enabled for the item in Intacct. Taken from `transaction.ExpiryDate`.            |
+| **SerialNumber**                      | `SerialNumber`                          | No  | Populated if `ENABLE_SERIALNO` is enabled for the item in Intacct. Taken from `transaction.Serial`.                  |
 
 ### ADJUSTMENT
 
@@ -54,6 +76,9 @@ The Sage Intacct SDK provider is responsible for mapping Granite Transactions to
 | **Code**                             | `ItemId`                        | Yes          | The identifier for the item being adjusted, mapped from the transaction code (`transaction.Code`).              |
 | **ActionQty**                        | `Quantity`                      | Yes          | The quantity of the item being adjusted, mapped from the transaction data (`transaction.ActionQty`).           |
 | **UOM**                              | `Unit`                          | Yes          | The unit of measure for the item (e.g., boxes, kg), mapped from the transaction data (`transaction.UOM`).      |
+| **Batch**                             | `LotNumber`                             | No  | Populated if `ENABLE_LOT_CATEGORY` is enabled for the item in Intacct. Taken from `transaction.Batch`.               |
+| **ExpiryDate**                        | `ItemExpiration`                        | No  | Populated if `ENABLE_EXPIRATION` is enabled for the item in Intacct. Taken from `transaction.ExpiryDate`.            |
+| **SerialNumber**                      | `SerialNumber`                          | No  | Populated if `ENABLE_SERIALNO` is enabled for the item in Intacct. Taken from `transaction.Serial`.                  |
 
 ### MOVE
 
@@ -66,6 +91,9 @@ The Sage Intacct SDK provider is responsible for mapping Granite Transactions to
 | **Code**                             | `ItemId`                        | Yes          | The identifier for the item being moved, mapped from `transaction.Code`.                                       |
 | **ActionQty**                        | `Quantity`                      | Yes          | The quantity of the item being moved, mapped from `transaction.ActionQty`.                                    |
 | **UOM**                              | `Unit`                          | Yes          | The unit of measure for the item (e.g., boxes, kg), mapped from `transaction.UOM`.                            |
+| **Batch**                             | `LotNumber`                             | No  | Populated if `ENABLE_LOT_CATEGORY` is enabled for the item in Intacct. Taken from `transaction.Batch`.               |
+| **ExpiryDate**                        | `ItemExpiration`                        | No  | Populated if `ENABLE_EXPIRATION` is enabled for the item in Intacct. Taken from `transaction.ExpiryDate`.            |
+| **SerialNumber**                      | `SerialNumber`                          | No  | Populated if `ENABLE_SERIALNO` is enabled for the item in Intacct. Taken from `transaction.Serial`.                  |
 
 ### RECLASSIFY
 
@@ -80,6 +108,9 @@ The Sage Intacct SDK provider is responsible for mapping Granite Transactions to
 | **ActionQty**                         | `Quantity`                              | Yes          | The quantity being moved, mapped from `transaction.ActionQty`.                               |
 | **UOM**                               | `Unit`                                  | Yes          | The unit of measure for the item (e.g., boxes, kg), mapped from `transaction.UOM`.          |
 | **ToCode**                            | `ItemId` (Increase Transaction)         | Yes          | The item identifier for the inventory being increased, mapped from `transaction.ToCode`.     |
+| **Batch**                             | `LotNumber`                             | No  | Populated if `ENABLE_LOT_CATEGORY` is enabled for the item in Intacct. Taken from `transaction.Batch`.               |
+| **ExpiryDate**                        | `ItemExpiration`                        | No  | Populated if `ENABLE_EXPIRATION` is enabled for the item in Intacct. Taken from `transaction.ExpiryDate`.            |
+| **SerialNumber**                      | `SerialNumber`                          | No  | Populated if `ENABLE_SERIALNO` is enabled for the item in Intacct. Taken from `transaction.Serial`.                  |
 
 ### SCRAP
 
@@ -92,6 +123,9 @@ The Sage Intacct SDK provider is responsible for mapping Granite Transactions to
 | **Code**                             | `ItemId`                                | Yes          | The identifier for the item being scrapped, mapped from `transaction.Code`.                  |
 | **ActionQty**                        | `Quantity`                              | Yes          | The quantity of the item being scrapped, mapped from `transaction.ActionQty`.                |
 | **UOM**                              | `Unit`                                  | Yes          | The unit of measure for the item (e.g., boxes, kg), mapped from `transaction.UOM`.           |
+| **Batch**                             | `LotNumber`                             | No  | Populated if `ENABLE_LOT_CATEGORY` is enabled for the item in Intacct. Taken from `transaction.Batch`.               |
+| **ExpiryDate**                        | `ItemExpiration`                        | No  | Populated if `ENABLE_EXPIRATION` is enabled for the item in Intacct. Taken from `transaction.ExpiryDate`.            |
+| **SerialNumber**                      | `SerialNumber`                          | No  | Populated if `ENABLE_SERIALNO` is enabled for the item in Intacct. Taken from `transaction.Serial`.                  |
 
 ### PICK
 
@@ -106,6 +140,9 @@ The Sage Intacct SDK provider is responsible for mapping Granite Transactions to
 | **Code**                             | `ItemId`                                | Yes          | The identifier for the item being processed, mapped from `transaction.Code`.                              |
 | **ActionQty**                        | `Quantity`                              | Yes          | The quantity of the item being processed, mapped from `transaction.ActionQty`.                            |
 | **UOM**                              | `Unit`                                  | Yes          | The unit of measure for the item (e.g., boxes, kg), mapped from `transaction.UOM`.                       |
+| **Batch**                             | `LotNumber`                             | No  | Populated if `ENABLE_LOT_CATEGORY` is enabled for the item in Intacct. Taken from `transaction.Batch`.               |
+| **ExpiryDate**                        | `ItemExpiration`                        | No  | Populated if `ENABLE_EXPIRATION` is enabled for the item in Intacct. Taken from `transaction.ExpiryDate`.            |
+| **SerialNumber**                      | `SerialNumber`                          | No  | Populated if `ENABLE_SERIALNO` is enabled for the item in Intacct. Taken from `transaction.Serial`.                  |
 
 ### RECEIVE
 
@@ -122,6 +159,9 @@ The Sage Intacct SDK provider is responsible for mapping Granite Transactions to
 | **Code**                             | `ItemId`                                | Yes          | The identifier for the item being processed, mapped from `transaction.Code`.                              |
 | **ActionQty**                        | `Quantity`                              | Yes          | The quantity of the item being processed, mapped from `transaction.ActionQty`.                            |
 | **UOM**                              | `Unit`                                  | Yes          | The unit of measure for the item (e.g., boxes, kg), mapped from `transaction.UOM`.                       |
+| **Batch**                             | `LotNumber`                             | No  | Populated if `ENABLE_LOT_CATEGORY` is enabled for the item in Intacct. Taken from `transaction.Batch`.               |
+| **ExpiryDate**                        | `ItemExpiration`                        | No  | Populated if `ENABLE_EXPIRATION` is enabled for the item in Intacct. Taken from `transaction.ExpiryDate`.            |
+| **SerialNumber**                      | `SerialNumber`                          | No  | Populated if `ENABLE_SERIALNO` is enabled for the item in Intacct. Taken from `transaction.Serial`.                  |
 
 ### TRANSFER
 
@@ -133,3 +173,6 @@ The Sage Intacct SDK provider is responsible for mapping Granite Transactions to
 | **ActionQty**                        | `Quantity`                              | Yes          | The quantity of the item being transferred, mapped from `transaction.ActionQty`.                            |
 | **UOM**                              | `Unit`                                  | Yes          | The unit of measure for the item (e.g., boxes, kg), mapped from `transaction.UOM`.                       |
 | **ToLocation**                       | `WarehouseId`                           | Yes          | The warehouse or location to which the inventory is being transferred, mapped from `transaction.ToLocation`. |
+| **Batch**                             | `LotNumber`                             | No  | Populated if `ENABLE_LOT_CATEGORY` is enabled for the item in Intacct. Taken from `transaction.Batch`.               |
+| **ExpiryDate**                        | `ItemExpiration`                        | No  | Populated if `ENABLE_EXPIRATION` is enabled for the item in Intacct. Taken from `transaction.ExpiryDate`.            |
+| **SerialNumber**                      | `SerialNumber`                          | No  | Populated if `ENABLE_SERIALNO` is enabled for the item in Intacct. Taken from `transaction.Serial`.                  |
