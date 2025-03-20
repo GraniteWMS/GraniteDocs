@@ -3071,6 +3071,23 @@ Go to Module (Inventory, Order Entry, Purchasing) -&gt; Setup -&gt; Transaction 
 </tr>
 </tbody>
 </table>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">SystemSettings</span><span class="p">]</span><span class="w"> </span><span class="p">([</span><span class="n">Application</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="k">Key</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Description</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">ValueDataType</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isActive</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isEncrypted</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">EncryptionKey</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">AuditDate</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">AuditUser</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="k">Version</span><span class="p">])</span><span class="w"> </span>
+<span class="k">VALUES</span><span class="w">  </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;SenderId&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sender Id for Sage Intacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;SenderPassword&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct SenderPassword&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;CompanyId&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct CompanyId&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;EntityId&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct EntityId&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;UserId&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct UserId&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;UserPassword&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct UserPassword&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionMove&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Warehouse Transfer&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition Move&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionScrap&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Inventory Scrap&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition Scrap&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionTakeOn&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Inventory Receipt&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition TakeOn&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionAdjustmentIncrease&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Adjustment Increase&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition Adjustment Increase&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionAdjustmentDecrease&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Adjustment Decrease&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition Adjustment Decrease&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionPick&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sales Invoice-Inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition Pick&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionPickOrigin&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sales Order-Inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition PickOrigin&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionReceive&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Purchase Invoice-Inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition Receive&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+<span class="w">        </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionReceiveOrigin&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;PO Receiver-Inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition ReceiveOrigin&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
+</code></pre></div>
 <h2 id="integration-methods">Integration Methods</h2>
 <h3 id="takeon">TAKEON</h3>
 <table>
@@ -3130,6 +3147,24 @@ Go to Module (Inventory, Order Entry, Purchasing) -&gt; Setup -&gt; Transaction 
 <td><code>Unit</code></td>
 <td>Yes</td>
 <td>The unit of measure for the item (e.g., boxes, kg), mapped from the transaction data (<code>transaction.UOM</code>).</td>
+</tr>
+<tr>
+<td><strong>Batch</strong></td>
+<td><code>LotNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_LOT_CATEGORY</code> is enabled for the item in Intacct. Taken from <code>transaction.Batch</code>.</td>
+</tr>
+<tr>
+<td><strong>ExpiryDate</strong></td>
+<td><code>ItemExpiration</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_EXPIRATION</code> is enabled for the item in Intacct. Taken from <code>transaction.ExpiryDate</code>.</td>
+</tr>
+<tr>
+<td><strong>SerialNumber</strong></td>
+<td><code>SerialNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_SERIALNO</code> is enabled for the item in Intacct. Taken from <code>transaction.Serial</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -3192,6 +3227,24 @@ Go to Module (Inventory, Order Entry, Purchasing) -&gt; Setup -&gt; Transaction 
 <td>Yes</td>
 <td>The unit of measure for the item (e.g., boxes, kg), mapped from the transaction data (<code>transaction.UOM</code>).</td>
 </tr>
+<tr>
+<td><strong>Batch</strong></td>
+<td><code>LotNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_LOT_CATEGORY</code> is enabled for the item in Intacct. Taken from <code>transaction.Batch</code>.</td>
+</tr>
+<tr>
+<td><strong>ExpiryDate</strong></td>
+<td><code>ItemExpiration</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_EXPIRATION</code> is enabled for the item in Intacct. Taken from <code>transaction.ExpiryDate</code>.</td>
+</tr>
+<tr>
+<td><strong>SerialNumber</strong></td>
+<td><code>SerialNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_SERIALNO</code> is enabled for the item in Intacct. Taken from <code>transaction.Serial</code>.</td>
+</tr>
 </tbody>
 </table>
 <h3 id="move">MOVE</h3>
@@ -3246,6 +3299,24 @@ Go to Module (Inventory, Order Entry, Purchasing) -&gt; Setup -&gt; Transaction 
 <td><code>Unit</code></td>
 <td>Yes</td>
 <td>The unit of measure for the item (e.g., boxes, kg), mapped from <code>transaction.UOM</code>.</td>
+</tr>
+<tr>
+<td><strong>Batch</strong></td>
+<td><code>LotNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_LOT_CATEGORY</code> is enabled for the item in Intacct. Taken from <code>transaction.Batch</code>.</td>
+</tr>
+<tr>
+<td><strong>ExpiryDate</strong></td>
+<td><code>ItemExpiration</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_EXPIRATION</code> is enabled for the item in Intacct. Taken from <code>transaction.ExpiryDate</code>.</td>
+</tr>
+<tr>
+<td><strong>SerialNumber</strong></td>
+<td><code>SerialNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_SERIALNO</code> is enabled for the item in Intacct. Taken from <code>transaction.Serial</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -3314,6 +3385,24 @@ Go to Module (Inventory, Order Entry, Purchasing) -&gt; Setup -&gt; Transaction 
 <td>Yes</td>
 <td>The item identifier for the inventory being increased, mapped from <code>transaction.ToCode</code>.</td>
 </tr>
+<tr>
+<td><strong>Batch</strong></td>
+<td><code>LotNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_LOT_CATEGORY</code> is enabled for the item in Intacct. Taken from <code>transaction.Batch</code>.</td>
+</tr>
+<tr>
+<td><strong>ExpiryDate</strong></td>
+<td><code>ItemExpiration</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_EXPIRATION</code> is enabled for the item in Intacct. Taken from <code>transaction.ExpiryDate</code>.</td>
+</tr>
+<tr>
+<td><strong>SerialNumber</strong></td>
+<td><code>SerialNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_SERIALNO</code> is enabled for the item in Intacct. Taken from <code>transaction.Serial</code>.</td>
+</tr>
 </tbody>
 </table>
 <h3 id="scrap">SCRAP</h3>
@@ -3368,6 +3457,24 @@ Go to Module (Inventory, Order Entry, Purchasing) -&gt; Setup -&gt; Transaction 
 <td><code>Unit</code></td>
 <td>Yes</td>
 <td>The unit of measure for the item (e.g., boxes, kg), mapped from <code>transaction.UOM</code>.</td>
+</tr>
+<tr>
+<td><strong>Batch</strong></td>
+<td><code>LotNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_LOT_CATEGORY</code> is enabled for the item in Intacct. Taken from <code>transaction.Batch</code>.</td>
+</tr>
+<tr>
+<td><strong>ExpiryDate</strong></td>
+<td><code>ItemExpiration</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_EXPIRATION</code> is enabled for the item in Intacct. Taken from <code>transaction.ExpiryDate</code>.</td>
+</tr>
+<tr>
+<td><strong>SerialNumber</strong></td>
+<td><code>SerialNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_SERIALNO</code> is enabled for the item in Intacct. Taken from <code>transaction.Serial</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -3435,6 +3542,24 @@ Go to Module (Inventory, Order Entry, Purchasing) -&gt; Setup -&gt; Transaction 
 <td><code>Unit</code></td>
 <td>Yes</td>
 <td>The unit of measure for the item (e.g., boxes, kg), mapped from <code>transaction.UOM</code>.</td>
+</tr>
+<tr>
+<td><strong>Batch</strong></td>
+<td><code>LotNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_LOT_CATEGORY</code> is enabled for the item in Intacct. Taken from <code>transaction.Batch</code>.</td>
+</tr>
+<tr>
+<td><strong>ExpiryDate</strong></td>
+<td><code>ItemExpiration</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_EXPIRATION</code> is enabled for the item in Intacct. Taken from <code>transaction.ExpiryDate</code>.</td>
+</tr>
+<tr>
+<td><strong>SerialNumber</strong></td>
+<td><code>SerialNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_SERIALNO</code> is enabled for the item in Intacct. Taken from <code>transaction.Serial</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -3515,6 +3640,24 @@ Go to Module (Inventory, Order Entry, Purchasing) -&gt; Setup -&gt; Transaction 
 <td>Yes</td>
 <td>The unit of measure for the item (e.g., boxes, kg), mapped from <code>transaction.UOM</code>.</td>
 </tr>
+<tr>
+<td><strong>Batch</strong></td>
+<td><code>LotNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_LOT_CATEGORY</code> is enabled for the item in Intacct. Taken from <code>transaction.Batch</code>.</td>
+</tr>
+<tr>
+<td><strong>ExpiryDate</strong></td>
+<td><code>ItemExpiration</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_EXPIRATION</code> is enabled for the item in Intacct. Taken from <code>transaction.ExpiryDate</code>.</td>
+</tr>
+<tr>
+<td><strong>SerialNumber</strong></td>
+<td><code>SerialNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_SERIALNO</code> is enabled for the item in Intacct. Taken from <code>transaction.Serial</code>.</td>
+</tr>
 </tbody>
 </table>
 <h3 id="transfer">TRANSFER</h3>
@@ -3563,6 +3706,24 @@ Go to Module (Inventory, Order Entry, Purchasing) -&gt; Setup -&gt; Transaction 
 <td><code>WarehouseId</code></td>
 <td>Yes</td>
 <td>The warehouse or location to which the inventory is being transferred, mapped from <code>transaction.ToLocation</code>.</td>
+</tr>
+<tr>
+<td><strong>Batch</strong></td>
+<td><code>LotNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_LOT_CATEGORY</code> is enabled for the item in Intacct. Taken from <code>transaction.Batch</code>.</td>
+</tr>
+<tr>
+<td><strong>ExpiryDate</strong></td>
+<td><code>ItemExpiration</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_EXPIRATION</code> is enabled for the item in Intacct. Taken from <code>transaction.ExpiryDate</code>.</td>
+</tr>
+<tr>
+<td><strong>SerialNumber</strong></td>
+<td><code>SerialNumber</code></td>
+<td>No</td>
+<td>Populated if <code>ENABLE_SERIALNO</code> is enabled for the item in Intacct. Taken from <code>transaction.Serial</code>.</td>
 </tr>
 </tbody>
 </table>
