@@ -33,36 +33,10 @@ When a grid is customized, its name will be prefixed with Custom and the column 
 The column **isApplicationGrid** serves as an indicator that the grid is integrated into the WebDesktop and forms an integral part of the application. These grids are preconfigured and we do not configure the SQL view (empty).
 Conversely, when **isApplicationGrid** is set to false, it signifies that the grid is designated as an **Enquiry** grid, allowing for further customization.
 
-
 ![Local Image](TableDatagrid.png)
 
 ----
 
-### Grid Properties
-
-```json
-{
-        "headerName": "Column_Name",
-        "field": "SQLView_ColumnName",
-        "width": 100,
-        "filter": "agTextColumnFilter",
-        "cellRenderer": "dateCellRenderer",
-        "hide": true,
-        "cellClassRules": {
-                "cellAlert": "x == 0"
-        }
-}
-```
-
-| Property       | Value                  |
-|--------------|------------|
-| headerName     | Name you want to display on grid |
-| field          | Name of field in your SQL View|
-| width          | Width of the column |
-| filter         | Type of filter for the column. Options : agTextColumnFilter, agDateColumnFilter, agNumberColumnFilter   |
-| cellRenderer   | How do render the cell value. Options : "dateCellRenderer"     |
-| hide           | Hide the column. true / false                   |
-| cellClassRules | Condition styling, "cellAlert": "x == 0" . Options : cellBold, cellAlert, cellAttention |
 
 
 ### Grid Data Columns
