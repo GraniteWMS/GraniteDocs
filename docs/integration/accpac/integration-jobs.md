@@ -155,37 +155,6 @@ For fields like Document.Status where you may have custom rules / statuses, use 
 
 It is highly advised that you check the validity of yor job on the GraniteScheduler /config page after making a change to your view! Especially after changing filter criteria/joins, your view may be returning duplicate rows - the job validation will bring this to your attention.
 
-## Upgrading to version 6
-!!! warning
-    This section applies only to upgrading to version 6, which is not yet released.
-
-There are some significant changes that you need to be aware of when upgrading your injected jobs from an earlier version to version 6.
-When you upgrade, be sure to follow all of the steps below to ensure that all the new changes are applied. 
-
-### Upgrade Scheduler to version 6
-In version 6 there are changes to the contract between the Scheduler and the injected jobs. 
-This means that in order to run version 6 of the injected jobs, you will need to be using the version 6 release of the Scheduler. 
-
-**Older versions of the Scheduler will not be able to support the version 6 injected jobs.**
-
-### Copy in new dlls
-Copy the new dlls from the Accpac injected job folder to replace the old ones.
-
-### Replace triggers
-All triggers have been updated to cater to documents deleted in Accpac. 
-You should apply the new triggers so that when documents are deleted in Accpac, they are set to CANCELLED status in Granite. 
-
-### Update views
-Almost all of the views have been updated based on feedback from sites using the injected jobs. 
-These changes include better handling of null values, as well as better mapping of document statuses.
-
-A few views also have the `ActionQty` field added. 
-**If your site is already live, be sure not to add the ActionQty field to your views** 
-With version 6 we have introduced the ability to set the ActionQty on insert for document types that support it. 
-This is intended for the initial import of open documents when taking a site live - it prevents Granite from being able to action what has already processed in Accpac before the go live.
-The ActionQty column is present in the views that support it by default. 
-If you are upgrading it is best to create the views without the ActionQty column. 
-
 ## What's different about Accpac jobs
 
 ### Inserting lines between existing lines in Accpac
