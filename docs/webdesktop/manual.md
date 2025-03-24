@@ -37,7 +37,7 @@ Conversely, when **isApplicationGrid** is set to false, it signifies that the gr
 
 ----
 
-### Grid Definition
+### Grid Properties
 
 ```json
 {
@@ -53,6 +53,8 @@ Conversely, when **isApplicationGrid** is set to false, it signifies that the gr
 }
 ```
 
+
+
 | Property       | Value                  |
 |--------------|------------|
 | headerName     | Name you want to display on grid |
@@ -62,21 +64,6 @@ Conversely, when **isApplicationGrid** is set to false, it signifies that the gr
 | cellRenderer   | How do render the cell value. Options : "dateCellRenderer"     |
 | hide           | Hide the column. true / false                   |
 | cellClassRules | Condition styling, "cellAlert": "x == 0" . Options : **see list below** |
-
-### Row Style Rules (Version 6 ~)
-
-You can define rules which can be applied to include certain CSS classes. 
-These rules are provided as a map where the keys are CSS class names and the values are expression string that if evaluated to true, the class gets used. 
-
-```json
-{
-    "backgroundRed cellAttention": "data.Qty == 1000",
-    "backgroundGreen": "data.Status == 'NonStock'",
-    "backgroundBlue": "data.Qty > 0"
-}
-```
-
-### CSS Classes
 
 ``` css
 .fontGreen {
@@ -124,6 +111,7 @@ These rules are provided as a map where the keys are CSS class names and the val
     font-style: italic;
 }
 ```
+
 
 ### Grid Data Columns
 
