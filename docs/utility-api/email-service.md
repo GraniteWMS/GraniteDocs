@@ -2,6 +2,12 @@
 
 ## Configuration
 
+!!! warning "Google shutting down access to sending mails via SMTP"
+    As of January 2025, the Utility API will not be able to send emails using SMTP.
+
+    If you are using a Gmail address to send emails, you will need to switch over to the new [Gmail provider](#gmail)
+
+
 Settings for the Email Service are configured in the `SystemSettings` table. You can find the insert script for the settings in the GraniteDatabase install folder:
 
 ```
@@ -12,8 +18,8 @@ You should have the following settings after running the script:
 
 | Application		| Key					| Value						| Description																								| ValueDataType | isEncrypted	| isActive	|
 |-------------------|-----------------------|---------------------------|-----------------------------------------------------------------------------------------------------------|---------------|---------------|-----------|
-| Granite.Utility	| UserName				|                   		| Username for the SMTP server																				| string		| False			| True		|
-| Granite.Utility	| Password				|  | Password for the SMTP server |string		| True			| True		|
+| Granite.Utility	| UserName				|                   		| Username for the account that will be used to send email													| string		| False			| True		|
+| Granite.Utility	| Password				|                           | Password for the account that will be used to send email                                                  | string	    | True			| True		|
 | Granite.Utility	| Host					| smtp.gmail.com			| The address of the SMTP server																			| string		| False			| True		|
 | Granite.Utility	| Port					| 587						| Port number to be used when accessing the SMTP server														| int			| False			| True		|
 | Granite.Utility	| EnableSsl				| true						| Use SSL when accessing the SMTP server. True or False														| bool			| False			| True		|
@@ -22,9 +28,159 @@ You should have the following settings after running the script:
 | Granite.Utility	| RetryInterval			| 30						| Number of seconds to wait before retrying processing an email												| int			| False			| True		|
 | Granite.Utility	| MaxNumberOfRetries	| 3							| Maximum number of times to retry processing an email.             										| int			| False			| True		|
 | Granite.Utility	| EmailAttachmentFolder |							| Full filepath to folder to export email attachments to. Leave empty to use the Utility API install folder | string		| False			| True		|
+| Granite.Utility	| EmailProvider         |							| Provider to use for sending emails. If empty, we will use the SMTP provider.                              | string		| False			| True		|
 
 !!! note "Password isEncrypted is True"
     You will only be able to change the value of this setting from the Webdesktop System Settings page
+
+### Email Providers
+
+Email Providers allow us to configure the way that we send emails for different types of email accounts.
+At the moment we support sending email using a SMTP server directly, or using the Gmail API.
+
+Note that as of January 2025, Gmail no longer allows sending emails using their SMTP server directly.
+This is why configuring the UtilityApi to send email via a Gmail account works slightly differently.
+
+To configure the `EmailProvider`, set the name of the provider you want to use in SystemSettings.
+If the `EmailProvider` setting is empty, it will default to using the SMTP provider.
+
+#### SMTP
+Sending email via SMTP is quite straightforward, all you need is the credentials of the account that you are using to send email, and the details of the server that you are using to send email. These get configured in the `System Settings`
+
+##### Required System Settings
+
+- UserName - User name to use when connecting to the SMTP server
+- Password - Password to use when connecting to the SMTP server
+- Host - The host address of the SMTP server (server name or IP)
+- Port - The port number to use when accessing the SMTP server
+- EnableSsl - Use SSL when accessing the SMTP server. True or False
+- From - The email address that you are sending mail from
+- FromName - The sender name that will display to users who receive emails
+
+#### Gmail
+Since Gmail has blocked access to SMTP, sending email via a Gmail account involves more set up.
+
+To send email via Gmail, you will first need to [enable Gmail API access](#allow-gmail-account-api-access) for the account you're using and obtain the `Client ID` and `Client secret`.
+These are the UserName and Password that you will need to set in `SystemSettings`.
+
+Next, you will need to place the API token file in the `...\GraniteUtilityAPI\GmailTokens` folder.
+If you have the token file for the account you are using already, you can simply paste it in.
+Otherwise, you will need to run the [Gmail Authenticator](#gmail-authenticator) to obtain the token file.
+
+##### Required System Settings
+
+- UserName - The Client ID used to connect to the Gmail API
+- Password - The Client secret used to connect to the Gmail API
+- From - The email address that you are sending mail from
+- FromName - The sender name that will display to users who receive emails
+
+##### Allow Gmail account API access
+
+!!! note
+    This configuration has already been completed for the GraniteWMS Info account, it does not need to be performed again.
+    
+    If you are using the GraniteWMS Info account, use the script in Dropbox to update your SystemSettings and then run the [GmailAuthenticator](#gmail-authenticator) app to log in.
+
+To allow UtilityAPI access to the Gmail account in order to send email, we will need to configure some settings on the Gmail account.
+
+Browse to [https://console.cloud.google.com](https://console.cloud.google.com) and log in with the account that you want to use, then follow the steps below.
+
+1. Click the `Select a project` button on the top left
+
+    ![](img/gmail1.png)
+
+2. Click the `New Project` button on the top right of the box.
+
+    ![](img/gmail2.png)
+
+3. Give the new project a name e.g. `GraniteUtilityAPI`.
+You shouldn't need to change the Location/Organization. Just keep the default and click `CREATE`
+
+    ![](img/gmail3.png)
+
+4. Click the hamburger menu on the top left and select `Enabled APIs & services` from the menu
+
+    ![](img/gmail4.png)
+
+5. Click the `Enable APIs and Services` button
+
+    ![](img/gmail5.png)
+
+6. Search for "gmail", click on the Gmail API entry and then click the `Enable` button
+
+    ![](img/gmail6.png)
+
+7. Once the Gmail API is enabled, select the `OAuth consent screen` from the menu on the left
+
+    ![](img/gmail7.png)
+
+8. On the OAuth consent screen, select User Type `Internal` and click `Create`
+
+    ![](img/gmail8.png)
+
+9. Select the Application type `Web application`. 
+Enter an App name e.g. `Granite.Utility.Api`, a user support email address and a developer contact email address. 
+You can set both of the email addresses to the email address that you are using to send email.
+Click the `Save and Continue` button once you've entered the required fields.
+
+    ![](img/gmail9.png)
+
+10. Click the `Add or Remove Scopes` button
+
+    ![](img/gmail10.png)
+
+11. Filter the list of scopes by `Gmail API` and select the scope `https://mail.google.com`. 
+Scroll to the bottom of the page and click `Update`
+
+    ![](img/gmail11.png)
+
+12. Now that the scope has been added, scroll down to the bottom of the page and click `Save and Continue`
+
+    ![](img/gmail12.png)
+
+13. Select `Credentials` from the menu on the left
+
+    ![](img/gmail13.png)
+
+14. Click the `Create Credentials` button at the top and select `OAuth client ID`
+
+    ![](img/gmail14.png)
+
+15. Give the client ID a name, e.g. `Granite.Utility.Api`. 
+Under Authorized redirect URIs add both `http://localhost/authorize/` and `http://127.0.0.1/authorize/`
+Then click the `Create` button at the bottom
+
+    ![](img/gmail15.png)
+
+16. Take note of the `Client ID` and the `Client secret`. 
+These are the `UserName` and `Password` that you will need for SystemSettings
+
+    ![](img/gmail16.png)
+
+17. Set the `Client ID` and `Client secret` as your `UserName` and `Password` in SystemSettings. 
+While you are in SystemSettings, also ensure that you have the `EmailProvider` setting and that the value is set to `GMAIL`
+
+    !!! note
+        The `Client secret` must be encrypted. Ensure that you save it through the Webdesktop so that it is not stored in plaintext.
+
+##### Gmail Authenticator 
+The Gmail Authenticator connects to the Gmail API using the Client ID and Client secret from System Settings, and fetches tokens that allow the Utility API to connect to the Gmail API.
+This is a once off set up, once you have authenticated, the Utility API will be able to send email via Gmail.
+
+1. Open a browser window that is either signed in with the Gmail account you are planning to use, or not signed in to any Gmail account. The Guest mode in Chrome works well for this.
+
+2. Browse to the folder where you have installed the UtilityAPI, and into the `GmailAuthenticator` folder. 
+Run the `Granite.Email.GmailAuthenticator.exe`.
+
+    !!! note 
+        Granite.Email.GmailAuthenticator.exe uses the UtilityApi's appSettings.json file. 
+        Make sure that it is configured before trying to authenticate the Gmail account.
+
+3. A new browser tab will open asking you to log in to authorize the Utility API. 
+Log in with the Gmail account that you are going to use to send emails. 
+Log in with the **normal username and password** - NOT the Client ID and Client secret
+
+After signing in via the browser, Gmail Authenticator will place the received token file into the `...\GraniteUtilityAPI\GmailTokens` folder
 
 ## Email Templates
 
