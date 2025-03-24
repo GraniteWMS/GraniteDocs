@@ -3,6 +3,7 @@ site_url: https://granitewms.github.io/granitedocs/
 nav: 
   - Home: index.md
   - Manuals:
+    - Scaffold: scaffold/manual.md
     - IIS: iis/getting-started.md
     - SSRS: ssrs/getting-started.md
     - Label Printing: 
@@ -41,7 +42,6 @@ nav:
         - Email Service: utility-api/email-service.md
         - Reporting Service: utility-api/reporting-service.md
         - SQL Export Service: utility-api/sql-export-service.md
-
     - Scheduler: scheduler/manual.md
     - Web Desktop: webdesktop/manual.md
     - Scanner Application: android-application/manual.md
