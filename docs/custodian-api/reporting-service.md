@@ -49,13 +49,121 @@ This process calls SSRS and saves the report to the specified file path. The fil
 
 Supported file types are PDF and EXCEL, both the new .xlsx and the old .xls. If you are unsure which to use, go for .xlsx
 
-See the API Documentation for more details on how to export a report using the API. See the SQLCLR documentation for how to export a report using SQLCLR.
+See the API Documentation for more details on how to export a report using the API. See the dbo.clr_ReportExportToFile procedure for how to export a report using SQLCLR.
+
+
 
 ## ReportPrint
 
 !!! note
-    From version 6 of the Utility API onwards this method no longer sends the job directly to the printer. Instead it is sent to an internal queue that then sends the job to the printer asynchronously. This allows the call to be faster. 
+    From version 6 of the Custodian API onwards this method no longer sends the job directly to the printer. Instead it is sent to an internal queue that then sends the job to the printer asynchronously. This allows the call to be faster. 
 
 This process calls SSRS and sends the report to a print queue. Check Printer Statues on the UtilityAPI homepage to see the list of available printers.
 
-See the API Documentation for more details on how to print a report using the API. See the SQLCLR documentation for how to print a report using SQLCLR.
+See the API Documentation for more details on how to print a report using the API. See below the dbo.clr_PrintReport procedure for how to print a report using SQLCLR.
+
+## CLR Procedures
+### dbo.clr_ReportExportToFile
+
+Use this procedure to save a SSRS report to the server where the CustodianAPI is running.
+Will require using [dbo.report_AddReportParameters](#dbo.report_AddReportParameters), see a working example below.
+
+| Parameter Name		| Required	| Description																			|
+|-----------------------|-----------|---------------------------------------------------------------------------------------|
+| reportPath | Yes | Path to the report in SSRS (use the report properties in the CustodianAPI to find the report path) |
+| fileDestinationPath | Yes | Where the report will be save to including the file name.
+| filetype | Yes | File type that you want to save as (PDF, EXCELOPENXML (.xlsx), EXCEL (.xls)) |
+| parameters | No | List of all parameters required by the report |
+
+### dbo.clr_PrintReport
+
+Use this procedure to print a SSRS report. 
+Will require using [dbo.report_AddReportParameters](#dbo.report_AddReportParameters), see a working example below.
+
+| Parameter Name		| Required	| Description																			|
+|-----------------------|-----------|---------------------------------------------------------------------------------------|
+| reportPath | Yes | Path to the report in SSRS (use the report properties in the CustodianAPI to find the report path) |
+| printerName | Yes | Name of the printer to print to (check available printers in CustodianAPI printer statuses ) |
+| copies | Yes | Number of copies to be printed |
+| parameters | No | List of all parameters required by the report |
+
+### dbo.report_AddReportParameters
+
+Use this Function to create a report parameter to use with dbo.clr_ReportExport and dbo.clr_PrintReport.
+
+| Parameter Name		| Required	| Description																			|
+|-----------------------|-----------|---------------------------------------------------------------------------------------|
+| parameters | Yes | The string that will contain the report parameters |
+| name | Yes | The name of the report parameter |
+| value | Yes | The value of the parameter |
+
+Example use (printing)
+
+```sql
+DECLARE @reportPath varchar(50)
+DECLARE @printerName varchar(50) 
+DECLARE @parameters varchar(200)
+DECLARE @copies int
+DECLARE @success bit
+DECLARE @message varchar(max)
+
+SELECT @reportPath = '/Pick Slip - Per Cage'
+SELECT @printerName = 'TestPrinter'
+SELECT @copies = 1
+
+BEGIN TRY
+	SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'DocumentNumber', 'STV-AVO-000001')
+	SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'Cage', 'CAGE D')
+
+	EXEC [dbo].[clr_ReportPrint]
+		@reportPath
+		,@printerName
+		,@parameters
+		,@copies
+		,@success OUTPUT
+		,@message OUTPUT
+END TRY
+BEGIN CATCH
+	SELECT @message = ERROR_MESSAGE()
+	SELECT @success = 0
+END CATCH
+
+SELECT @success, @message
+
+```
+
+Example use (export)
+
+```sql
+DECLARE @reportPath varchar(50)
+DECLARE @fileDestinationPath varchar(50)
+DECLARE @fileType varchar(50) 
+DECLARE @parameters varchar(200)
+DECLARE @success bit
+DECLARE @message varchar(max)
+
+SELECT @reportPath = N'/Pick Slip - Per Cage'
+SELECT @fileDestinationPath = 'D:\\Granite WMS\\V5 Demo\\PickSlip.pdf'
+SELECT @fileType = 'PDF'
+
+BEGIN TRY
+
+	SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'DocumentNumber', 'STV-AVO-000001')
+	SELECT @parameters = dbo.report_AddReportParameter(@parameters, 'Cage', 'CAGE D')
+
+	EXEC [dbo].[clr_ReportExportToFile]
+		 @reportPath
+		,@fileDestinationPath
+		,@fileType
+		,@parameters
+		,@success OUTPUT
+		,@message OUTPUT
+END TRY
+BEGIN CATCH
+	SELECT @message = ERROR_MESSAGE()
+	SELECT @success = 0
+END CATCH
+
+SELECT @success, @message
+
+```
