@@ -1,8 +1,5 @@
 # Scaffold
 
-!!! warning 
-    Released with Version 6 but can be used for V4.5 and V5 installations
-
 Scaffold is a straightforward command line interface that makes it easy to install, setup, and configure Granite WMS.
 
 ## Requirements

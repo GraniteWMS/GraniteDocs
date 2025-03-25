@@ -1,5 +1,4 @@
 # Security settings 
-`Granite Version 6~`
 
 The following settings are optional and related to Granite security. Configuration is managed within the SystemSettings database table.
 
