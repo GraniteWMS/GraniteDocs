@@ -1,342 +1,342 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/safe_keep/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/safe_keep/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/android-application/manual/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/android-application/manual/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/business-api/manual/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/business-api/manual/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/custodian-api/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/custodian-api/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/custodian-api/email-service/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/custodian-api/email-service/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/custodian-api/getting-started/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/custodian-api/getting-started/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/custodian-api/process-template-service/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/custodian-api/process-template-service/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/custodian-api/reporting-service/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/custodian-api/reporting-service/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/custodian-api/sql-export-service/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/custodian-api/sql-export-service/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/customization/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/customization/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/database/release-notes/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/database/release-notes/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/iis/getting-started/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/iis/getting-started/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/accpac/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/accpac/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/accpac/integration-jobs/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/accpac/integration-jobs/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/accpac/sdk-provider/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/accpac/sdk-provider/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/acumatica/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/acumatica/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/acumatica/acumatica-overview/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/acumatica/acumatica-overview/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/acumatica/integration-jobs/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/acumatica/integration-jobs/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/acumatica/sdk-provider/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/acumatica/sdk-provider/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/cin7/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/cin7/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/cin7/cin7-overview/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/cin7/cin7-overview/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/cin7/integration-jobs/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/cin7/integration-jobs/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/cin7/sdk-provider/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/cin7/sdk-provider/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/evo/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/evo/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/evo/integration-jobs/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/evo/integration-jobs/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/evo/sdk-provider/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/evo/sdk-provider/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/intacct/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/intacct/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/intacct/integration-jobs/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/intacct/integration-jobs/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/intacct/sdk-provider/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/intacct/sdk-provider/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/omni/sdk-provider/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/omni/sdk-provider/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/quickbooks/native-app/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/quickbooks/native-app/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/sage100/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/sage100/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/sage100/integration-jobs/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/sage100/integration-jobs/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/sage100/sdk-provider/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/sage100/sdk-provider/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/sapb1/sdk-provider/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/sapb1/sdk-provider/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/integration/syspro/sdk-provider/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/integration/syspro/sdk-provider/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/label-printing/bartender/manual/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/label-printing/bartender/manual/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/label-printing/zpl/manual/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/label-printing/zpl/manual/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/label-printing/zpl/release-notes/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/label-printing/zpl/release-notes/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/scaffold/manual/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/scaffold/manual/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/scheduler/manual/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/scheduler/manual/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/scheduler/release-notes/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/scheduler/release-notes/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/security/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/security/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/security/api-keys/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/security/api-keys/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/security/system-security/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/security/system-security/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/security/user-permissions/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/security/user-permissions/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/sqlclr/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/sqlclr/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/sqlclr/getting-started/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/sqlclr/getting-started/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/sqlclr/reference/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/sqlclr/reference/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/sqlclr/release-notes/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/sqlclr/release-notes/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/sqlclr/version-6-upgrade-guide/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/sqlclr/version-6-upgrade-guide/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/ssrs/getting-started/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/ssrs/getting-started/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/third-party-integration/GettingStarted/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/third-party-integration/GettingStarted/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/tools/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/tools/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/tools/jaeger/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/tools/jaeger/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/tools/jam/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/tools/jam/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/tools/nifi/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/tools/nifi/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/updates/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/updates/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/updates/release-notes/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/updates/release-notes/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/updates/V4/whats-new/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/updates/V4/whats-new/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/updates/V5/product-update/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/updates/V5/product-update/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/updates/V5/whats-new/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/updates/V5/whats-new/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/updates/V6/cheatsheet/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/updates/V6/cheatsheet/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/updates/V6/whats-new/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/updates/V6/whats-new/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/webdesktop/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/webdesktop/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/webdesktop/datacapture/data-capture/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/webdesktop/datacapture/data-capture/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://granitewms.github.io/granitedocs/6.0/webdesktop/datagrid/datagrid/</loc>
+         <loc>https://granitewms.github.io/GraniteDocs/6.0/webdesktop/datagrid/datagrid/</loc>
          <lastmod>2025-03-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
