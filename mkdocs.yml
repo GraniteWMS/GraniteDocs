@@ -6,7 +6,7 @@ extra_javascript:
   - extra_js/custom.js
 nav: 
   - Home: index.md
-  - Applications:
+  - Documentation:
     - Scaffold: scaffold/manual.md
     - Label Printing: 
       - Bartender: label-printing/bartender/manual.md
@@ -43,37 +43,35 @@ nav:
         - SDK Provider: integration/intacct/sdk-provider.md
         - Integration Jobs: integration/intacct/integration-jobs.md
     - Web Desktop: 
-         - webdesktop/index.md
-         - Data Grid: webdesktop/datagrid/datagrid.md
-         - Data Capture: webdesktop/datacapture/data-capture.md
+      - webdesktop/index.md
+      - Data Grid: webdesktop/datagrid/datagrid.md
+      - Data Capture: webdesktop/datacapture/data-capture.md
     - Scanner Application: android-application/manual.md
+    - Business API: business-api/manual.md
+    - Custodian API: 
+      - custodian-api/index.md
+      - Getting Started: custodian-api/getting-started.md
+      - Process Template Service: custodian-api/process-template-service.md
+      - Email Service: custodian-api/email-service.md
+      - Reporting Service: custodian-api/reporting-service.md
+      - SQL Export Service: custodian-api/sql-export-service.md
+      - Scheduler: scheduler/manual.md    
+    - Customization:
+      - customization/index.md
+      - SQLCLR: 
+        - sqlclr/index.md
+        - Getting Started: sqlclr/getting-started.md
+        - Version 6 Upgrade Guide: sqlclr/version-6-upgrade-guide.md
+        - CLR Procedure Reference: sqlclr/reference.md
     - Application Security: 
-        - security/index.md
-        - System Security: security/system-security.md
-        - Permissions: security/user-permissions.md
-        - API Keys: security/api-keys.md
-  - API:
-      - Business API: business-api/manual.md
-      - Custodian API: 
-        - custodian-api/index.md
-        - Getting Started: custodian-api/getting-started.md
-        - Process Template Service: custodian-api/process-template-service.md
-        - Email Service: custodian-api/email-service.md
-        - Reporting Service: custodian-api/reporting-service.md
-        - SQL Export Service: custodian-api/sql-export-service.md
-  - Technical:
-    - IIS: iis/getting-started.md
-    - SSRS: ssrs/getting-started.md
-    - Scheduler: scheduler/manual.md
-    - SQLCLR: 
-      - sqlclr/index.md
-      - Getting Started: sqlclr/getting-started.md
-      - Version 6 Upgrade Guide: sqlclr/version-6-upgrade-guide.md
-      - CLR Procedure Reference: sqlclr/reference.md
-    - Granite Customization:
-        - customization/index.md
-  - Tools:
+      - security/index.md
+      - System Security: security/system-security.md
+      - Permissions: security/user-permissions.md
+      - API Keys: security/api-keys.md      
+  - Tools & Technology:
     - tools/index.md
+    - IIS: iis/getting-started.md
+    - SSRS: ssrs/getting-started.md  
     - Jam.dev: tools/jam.md
     - Jaeger: tools/jaeger.md
     - Apache NiFi: tools/nifi.md
@@ -82,7 +80,7 @@ nav:
     - What's New:
       - V4: updates/V4/whats-new.md
       - V5: 
-        - Whats New : updates/V5/whats-new.md
+        - Whats New : updates/V5/whats-new.mdmkdocs
         - Product Update: updates/V5/product-update.md
       - V6: 
         - Whats New : updates/V6/whats-new.md
