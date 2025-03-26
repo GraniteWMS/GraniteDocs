@@ -1,0 +1,2996 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://granitewms.github.io/granitedocs/6.0/updates/V5/whats-new/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
+    
+    
+      
+        <title>Granite WMS What's New V 5.0 - Granite WMS Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../extra_css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#granite-wms-whats-new-v-50" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Granite WMS Documentation" class="md-header__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Granite WMS Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Granite WMS What's New V 5.0
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../scaffold/manual/" class="md-tabs__link">
+          
+  
+    
+  
+  Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../tools/" class="md-tabs__link">
+          
+  
+    
+  
+  Tools & Technology
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
+          
+  
+    
+  
+  Release Notes
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Granite WMS Documentation" class="md-nav__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Granite WMS Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Documentation
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../scaffold/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scaffold
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Label Printing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Label Printing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../label-printing/bartender/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bartender
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../label-printing/zpl/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ZPL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Integration
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Integration
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../integration/accpac/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Accpac
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_1" id="__nav_2_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Accpac
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/accpac/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/accpac/integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../integration/acumatica/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Acumatica
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_2" id="__nav_2_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Acumatica
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/acumatica/acumatica-overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Acumatica Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/acumatica/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/acumatica/integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../integration/cin7/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    CIN7
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_3" id="__nav_2_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            CIN7
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/cin7/cin7-overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CIN7 Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/cin7/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/cin7/integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../integration/evo/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Evolution
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_4" id="__nav_2_3_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Evolution
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/evo/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/evo/integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/omni/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Omni
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/quickbooks/native-app/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QuickBooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/sapb1/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SAPB1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/syspro/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syspro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_9" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../integration/sage100/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Sage 100
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_9" id="__nav_2_3_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            Sage 100
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/sage100/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/sage100/integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_10" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../integration/intacct/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Sage Intacct
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_10" id="__nav_2_3_10_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            Sage Intacct
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/intacct/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../integration/intacct/integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../webdesktop/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Web Desktop
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Web Desktop
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webdesktop/datagrid/datagrid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Grid
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webdesktop/datacapture/data-capture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Capture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../android-application/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scanner Application
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../business-api/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Business API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../custodian-api/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Custodian API
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            Custodian API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../custodian-api/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../custodian-api/process-template-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Process Template Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../custodian-api/email-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Email Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../custodian-api/reporting-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reporting Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../custodian-api/sql-export-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQL Export Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../scheduler/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scheduler
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../customization/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Customization
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            Customization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../sqlclr/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    SQLCLR
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_8_2" id="__nav_2_8_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            SQLCLR
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sqlclr/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sqlclr/version-6-upgrade-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Version 6 Upgrade Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sqlclr/reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CLR Procedure Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../security/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Application Security
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            Application Security
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../security/system-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    System Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../security/user-permissions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Permissions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../security/api-keys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Keys
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../tools/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Tools & Technology
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tools & Technology
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../iis/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IIS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ssrs/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SSRS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tools/jam/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jam.dev
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tools/jaeger/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jaeger
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tools/nifi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Apache NiFi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Release Notes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    What's New
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            What's New
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../V4/whats-new/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    V4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_2" id="__nav_4_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    V5
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            V5
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../whats-new.mdmkdocs" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Whats New
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../product-update/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Product Update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2_3" id="__nav_4_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    V6
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            V6
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../V6/whats-new/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Whats New
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../V6/cheatsheet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CheatSheet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../release-notes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hotfixes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#new-applications-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Applications Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#webdesktop-changes-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      WebDesktop Changes Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#process-changes-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Process Changes Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#process-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Process Catalog
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utility-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utility API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Utility API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#email-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Email Service
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Email Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#email-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Email Templates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attachments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attachments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssrs-reporting-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      SSRS Reporting Service
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql-export-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL Export Service
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#webdesktop-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      WebDesktop Changes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="WebDesktop Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#document" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optionalfields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optionalfields
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prescript-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prescript Preview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#systemsettings-encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      Systemsettings Encryption
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grid-menu-clear-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grid menu clear options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#silent-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Silent Steps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debug Mode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Debug Mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#application-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application State
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prescript-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prescript syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webtemplate-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      WebTemplate syntax
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="granite-wms-whats-new-v-50">Granite WMS What's New V 5.0</h1>
+<h2 id="new-applications-overview">New Applications Overview</h2>
+<ul>
+<li><a href="#process-catalog">Process Catalog</a> - A process catalogue that allows you to easily share your process configurations with the team</li>
+<li><a href="#utility-api">Utility API</a> - A brand new API, home to our new <a href="#ssrs-reporting-service">SSRS Reporting Service</a> and <a href="#email-service">Email Service</a></li>
+</ul>
+<h2 id="webdesktop-changes-overview">WebDesktop Changes Overview</h2>
+<ul>
+<li><a href="#document">Document</a> - Document capture enhancements</li>
+<li><a href="#optionalfields">Optional Fields Location</a> - Support for Optional Fields for Locations</li>
+<li><a href="#optionalfields">Optional Fields Document</a> - Support for Optional Fields for Document</li>
+<li><a href="#optionalfields">Optional Fields DocumentDetail</a> - Support for Optional Fields for Document Detail</li>
+<li><a href="#prescript-preview">Pre-Script preview</a> - Preview Pre-Scripts in WebDesktop</li>
+<li><a href="#systemsettings-encryption">System Settings Encryption</a> - Allow encryption of sensitive data stored in System settings</li>
+<li><a href="#Database-Migration">Database Migration</a> - Easy migration / upgrade of version 4.5 to 5.0 via webdesktop.</li>
+</ul>
+<h2 id="process-changes-overview">Process Changes Overview</h2>
+<ul>
+<li><a href="#silent-steps">Silent Steps</a> - Unlimited silent steps</li>
+<li><a href="#debug-mode">Debug Mode</a> - Use by technical team to view webtemplates, scripts while executing a process</li>
+</ul>
+<hr />
+<h2 id="process-catalog">Process Catalog</h2>
+<p><code>Functionality not intended for end-user.</code></p>
+<p>Introducing new functionality that empowers consultants to seamlessly share Processes as Templates and securely store them in the cloud. 
+Moreover, this update enables users to conveniently access all shared templates from the central store and deploy them to production environments with ease</p>
+<p>Webdesktop Publish Process</p>
+<p>An easy to follow wizard to publish any Process as a template. 
+<img alt="" src="../../img/processTemplateCapture.png" /> </p>
+<p>Webdesktop Process Catalog</p>
+<p>Search, preview and deploy templates with an easy to understand UI.</p>
+<p><img alt="" src="../../img/processCatalog.png" /></p>
+<h2 id="utility-api">Utility API</h2>
+<p>The Granite Utility API is a brand new API that will be home to various services that enhance Granite's capabilities.</p>
+<p>The first two services that the Utility API will launch with are a SSRS Reporting Service to provide easy ways of interacting with SSRS from SQLCLR, and a new Email Service that is intended to replace the emailing currently built into the Scheduler. The new Email Service will also support the SSRS Reporting Service from the get go, allowing you to seamlessly attach SSRS Reports when sending emails.</p>
+<h3 id="email-service">Email Service</h3>
+<p>This new Email Service aims to make sending emails simpler, and at the same time far more powerful. We've achieved this by introducing <a href="#email-templates">Email Templates</a>, which are based on the same technology as the ProcessApp's Web Templates. In addition to Email Templates, the new Email Service is fully supported by SQLCLR, which means no more inserting directly into tables to send once off emails!</p>
+<p>Sending emails with <a href="#attachments">attachments</a> is also now simpler than it's ever been. When you request an email to be sent, you can specify parameters for the <a href="#ssrs-reporting-service">SSRS Reporting Service</a> which will render your reports, save them to disk and attach them to the email - all in a single request.</p>
+<h4 id="email-templates">Email Templates</h4>
+<p>Email templates allow you to create good looking responsive emails without the hassle of writing out all that html. This is done by keeping things simple - we use markdown for text formatting, and a standard layout that can be built upon. You can customize templates using script methods similar to the ones you're already familiar with from WebTemplates.</p>
+<p>A templated email without any further customization looks like this:</p>
+<p><img alt="" src="../../img/templateEmailNoMethods.png" /></p>
+<p>And with just a few script methods you can build it into this:</p>
+<p><img alt="" src="../../img/templateEmailWithMethods.png" /></p>
+<h4 id="attachments">Attachments</h4>
+<p>To attach an SSRS report to an email, we simply add the report path, file type and report parameters that we want to use to generate the attachment when we create our email:</p>
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">subject</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">body</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">toEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">ccEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">bccEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">reportAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">excelAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">fileAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="nb">int</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">PickingReport</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">PickingReport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">email_CreateReportAttachment</span><span class="p">(</span><span class="s1">&#39;/PickingReport&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span><span class="w">                  </span>
+<span class="c1">-- Creating the report that we want to attach. The reportPath is /PickingReport, and fileType is PDF</span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">PickingReport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">email_AddReportParameter</span><span class="p">(</span><span class="o">@</span><span class="n">PickingReport</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;documentNumber&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;SO0001&#39;</span><span class="p">)</span><span class="w">       </span>
+<span class="c1">-- Adding a parameter that will be used to call the SSRS report. The parameter named &#39;documentNumber&#39; will be set to &#39;SO0001&#39;</span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">reportAttachments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">email_AddReportAttachment</span><span class="p">(</span><span class="o">@</span><span class="n">reportAttachments</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">PickingReport</span><span class="p">)</span><span class="w">      </span>
+<span class="c1">-- Lastly, we add the picking report to the list of report attachments. </span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Example Clr Mail&#39;</span><span class="w"> </span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">toEmailAddresses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;email1@gmail.com;email2@gmail.com&#39;</span>
+
+<span class="k">EXECUTE</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">clr_SimpleEmail</span><span class="p">]</span><span class="w"> </span>
+<span class="w">   </span><span class="o">@</span><span class="n">subject</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">body</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">toEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">ccEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">bccEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">reportAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">excelAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">fileAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="k">OUTPUT</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="k">OUTPUT</span>
+
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">responseJSON</span>
+</code></pre></div>
+<h3 id="ssrs-reporting-service">SSRS Reporting Service</h3>
+<p>The SSRS Reporting Service adds some new functionality to Reporting 'tool-box' by enabling saving of reports to either PDF or EXCEL from a SQLCLR procedure. Printing SSRS reports has been improved and moved to this service. It is now allows for printing reports with multiple parameters and is far simpler to set up and execute with SQLCLR calls. </p>
+<h3 id="sql-export-service">SQL Export Service</h3>
+<p>The last piece of functionality being added with the Utility API is the SQL Export service. This service allows for exporting of data from Tables and Views to either Excel or CSV. Supporting filtering, order by, offset, limit, and shipping from the start with SQLCLR calls, this service aims to make it easier than ever to get data out of the Granite Database. </p>
+<hr />
+<h2 id="webdesktop-changes">WebDesktop Changes</h2>
+<h3 id="document">Document</h3>
+<p>Several small changes was made to reduce errors and to facilitate a better experience when capturing documents.</p>
+<ul>
+<li>Open the item dialog when user click new line.</li>
+<li>If a from, to or intransit location is captured in the previous line it will carry over to the next.</li>
+</ul>
+<p><img alt="" src="../../img/documentLineEdit.png" /></p>
+<ul>
+<li>Disable the edit of the header of the document when user is busy with line editing.</li>
+</ul>
+<h3 id="optionalfields">Optionalfields</h3>
+<p>We have introduced support for optional fields in Locations, Documents, and Document Details.</p>
+<p><code>Example showcasing an optional field at the line level.</code></p>
+<p><img alt="" src="../../img/optionalfields.png" /></p>
+<h3 id="prescript-preview">Prescript Preview</h3>
+<p>Easily preview the prescript of a ProcessStep in a readonly view.</p>
+<p><code>Example: Icon displayed next to the prescript name trigger for a preview.</code></p>
+<p><img alt="" src="../../img/prescriptpreview.png" /></p>
+<h3 id="systemsettings-encryption">Systemsettings Encryption</h3>
+<p><code>To ensure safety across the board, we have implemented encryption in our System Settings for storing sensitive information.</code>
+These values can never be viewed, and are securely stored with encryption keys.</p>
+<p><code>Take Note</code> We require all current system settings to migrate sensitive setting in version 5 as part of the upgrade procedure.</p>
+<p><img alt="" src="../../img/systemsettingsEncryption.png" /></p>
+<h3 id="grid-menu-clear-options">Grid menu clear options</h3>
+<p>Options to clear selection and filters.</p>
+<p><img alt="" src="../../img/gridmenuOptions.png" /></p>
+<h2 id="silent-steps">Silent Steps</h2>
+<p>We're excited to announce our support for silent steps within the range of <strong>200-299</strong>. This enhancement grants users the flexibility to set up an unlimited number of silent steps within this range. The motivation behind this update is to meet the growing demands related to tasks such as sending emails or generating reports.</p>
+<p>We highly recommend segregating these new silent steps from your regular ones, as it enhances clarity and simplifies support processes.</p>
+<p>It's important to note that silent step 200 will halt execution if validation fails, preventing any subsequent silent steps from running. However, starting from step <strong>201</strong> onwards, execution will proceed regardless of validation status.</p>
+<h2 id="debug-mode">Debug Mode</h2>
+<p><code>Functionality not intended for end-user.</code></p>
+<p>When accessing the Debug Mode within the ProcessApp, users gain invaluable insights into each Business Process setup and configuration. 
+This specialized mode enables users to examine prescripts and web template syntax, as well as analyze the current state of the application in detail.</p>
+<p>Debug Mode facilitates a systematic walkthrough of each process step, empowering users to thoroughly review their setup and identify potential issues with precision. </p>
+<p>By offering a comprehensive view of the application's internal processes, Debug Mode enhances efficiency in debugging, enabling users to streamline problem-solving and optimization efforts effectively.</p>
+<h3 id="application-state">Application State</h3>
+<p><img alt="" src="../../img/debugmodeState.png" /></p>
+<h3 id="prescript-syntax">Prescript syntax</h3>
+<p><img alt="" src="../../img/debugmodePrescript.png" /></p>
+<h3 id="webtemplate-syntax">WebTemplate syntax</h3>
+<p><img alt="" src="../../img/debugmodeWebTemplate.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
+      
+        <script src="../../../extra_js/custom.js"></script>
+      
+    
+  </body>
+</html>
