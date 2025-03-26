@@ -1,5 +1,5 @@
 site_name: Granite WMS Documentation
-site_url: https://granitewms.github.io/granitedocs/
+site_url: https://granitewms.github.io/GraniteDocs/
 extra_css:
   - extra_css/custom.css
 extra_javascript:
