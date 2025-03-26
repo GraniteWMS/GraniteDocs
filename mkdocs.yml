@@ -1,5 +1,5 @@
-site_name: Granite WMS
-site_url: https://granitewms.github.io/granitedocs/
+site_name: Granite WMS Documentation
+site_url: https://granitewms.github.io/GraniteDocs/
 nav: 
   - Home: index.md
   - Manuals:
