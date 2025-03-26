@@ -1,0 +1,3122 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://granitewms.github.io/granitedocs/5.0/sqlclr/reference/">
+      
+      
+        <link rel="prev" href="../getting-started/">
+      
+      
+        <link rel="next" href="../../integration/accpac/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
+    
+    
+      
+        <title>CLR Procedure Reference - Granite WMS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#webservice" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Granite WMS" class="md-header__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Granite WMS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CLR Procedure Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../scaffold/manual/" class="md-tabs__link">
+          
+  
+    
+  
+  Manuals
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tools/" class="md-tabs__link">
+          
+  
+    
+  
+  Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../updates/whats-new/" class="md-tabs__link">
+          
+  
+    
+  
+  Updates
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Granite WMS" class="md-nav__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Granite WMS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Manuals
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Manuals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scaffold/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scaffold
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../iis/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IIS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ssrs/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SSRS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Label Printing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Label Printing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../label-printing/bartender/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bartender
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../label-printing/zpl/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ZPL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    SQLCLR
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            SQLCLR
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    CLR Procedure Reference
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    CLR Procedure Reference
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#webservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Webservice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#label-printing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Label Printing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utilityapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      UtilityAPI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integration_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Integration
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Integration
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../integration/accpac/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Accpac
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6_1" id="__nav_2_6_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            Accpac
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/accpac/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/accpac/integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../integration/acumatica/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Acumatica
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6_2" id="__nav_2_6_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Acumatica
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/acumatica/acumatica-overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Acumatica Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/acumatica/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/acumatica/integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../integration/evo/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Evolution
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6_3" id="__nav_2_6_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            Evolution
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/evo/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/evo/integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/omni/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Omni
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/quickbooks/native-app/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QuickBooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/sapb1/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SAPB1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/syspro/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syspro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repository-api/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repository API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7_2" id="__nav_2_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Custodian API
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Custodian API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../custodian-api/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Manual
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../custodian-api/best-practice/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Best Practice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../utility-api/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Utility API
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7_3" id="__nav_2_7_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Utility API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../utility-api/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../utility-api/email-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Email Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../utility-api/reporting-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reporting Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../utility-api/sql-export-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQL Export Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scheduler/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scheduler
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../webdesktop/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web Desktop
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../android-application/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scanner Application
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tools/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/jam/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jam.dev
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Updates
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Updates
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../updates/whats-new/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    What's New
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../updates/release-notes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#webservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Webservice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#label-printing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Label Printing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utilityapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      UtilityAPI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integration_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>CLR Procedure Reference</h1>
+
+<h2 id="webservice">Webservice</h2>
+<p>For details of the calls that the CLR procedures make to the WebService visit the metadata page of the WebService that you are going to be calling 
+(WebServiceUrl)/metadata</p>
+<p>The following procedures directly map to the WebService request, for details browse to the associated details on the WebService (WebserviceURL + below path)</p>
+<p><img alt="PasteURL" src="../img/PasteUrl.gif" /></p>
+<ul>
+<li>dbo.clr_Adjustment 
+<div class="highlight"><pre><span></span><code>/json/metadata?op=InventoryAdjustmentRequest
+</code></pre></div></li>
+<li>dbo.clr_Move
+<div class="highlight"><pre><span></span><code>/json/metadata?op=InventoryMoveRequest
+</code></pre></div></li>
+<li>dbo.clr_Pack
+<div class="highlight"><pre><span></span><code>/json/metadata?op=OutboundPackingRequest
+</code></pre></div></li>
+<li>dbo.clr_Pick
+<div class="highlight"><pre><span></span><code>/json/metadata?op=OutboundPickingRequest
+</code></pre></div></li>
+<li>dbo.clr_Receive
+<div class="highlight"><pre><span></span><code>/json/metadata?op=InboundReceivingRequest
+</code></pre></div></li>
+<li>dbo.clr_Replenish
+<div class="highlight"><pre><span></span><code>/json/metadata?op=InventoryReplenishRequest
+</code></pre></div></li>
+<li>dbo.clr_Reclassify
+<div class="highlight"><pre><span></span><code>/json/metadata?op=InventoryReclassifyRequest
+</code></pre></div></li>
+<li>dbo.clr_Scrap
+<div class="highlight"><pre><span></span><code>/json/metadata?op=InventoryScrapRequest
+</code></pre></div></li>
+<li>dbo.clr_StockTakeCount
+<div class="highlight"><pre><span></span><code>/json/metadata?op=StockTakeCountRequest
+</code></pre></div></li>
+<li>dbo.clr_StockTakeHold
+<div class="highlight"><pre><span></span><code>/json/metadata?op=StockTakeHoldRequest
+</code></pre></div></li>
+<li>dbo.clr_StockTakeRelease
+<div class="highlight"><pre><span></span><code>/json/metadata?op=StockTakeReleaseRequest
+</code></pre></div></li>
+<li>dbo.clr_Transfer
+<div class="highlight"><pre><span></span><code>/json/metadata?op=InventoryTransferRequest
+</code></pre></div></li>
+</ul>
+<h4>dbo.clr_TakeOn</h4>
+
+<p>This procedure differs from the WebService call in that it combines the parameters <strong>"AssignTrackingEntityBarcode"</strong> and <strong>"TrackingEntityBarcode"</strong> into <strong>@assignTrackingEntityBarcode</strong>. This parameter is not required, so leave as a null if not used for the standard TakeOn behavior.</p>
+<p>The procedure will check if tracking entity exists. If it does exist, then the qty will be assigned to that tracking entity. If not a new tracking entity will be created with the supplied barcode. </p>
+<h2 id="label-printing">Label Printing</h2>
+<h4>dbo.clr_PrintLabel</h4>
+
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Barcode</td>
+<td>No</td>
+<td>The barcode that you want to print. If not specified, you must set the Barcodes parameter</td>
+</tr>
+<tr>
+<td>Barcodes</td>
+<td>No</td>
+<td>A comma separated list of barcodes you want to print. If not specified, you must set the Barcode parameter</td>
+</tr>
+<tr>
+<td>LabelName</td>
+<td>No</td>
+<td>Full name of the label you want to print, including the file extension (.zpl or .btw). If not set, will use the default format configured for the label type.</td>
+</tr>
+<tr>
+<td>NumberOfLabels</td>
+<td>No</td>
+<td>Number of copies of the label to print. Defaults to 1 if not set</td>
+</tr>
+<tr>
+<td>PrinterName</td>
+<td>No</td>
+<td>Name of the printer that you are printing to</td>
+</tr>
+<tr>
+<td>Type</td>
+<td>Yes</td>
+<td>The type of label that you want to print. Valid values are TRACKINGENTITY, MASTERITEM, LOCATION, USER, PALLET or BOX</td>
+</tr>
+<tr>
+<td>UserID</td>
+<td>Yes</td>
+<td>ID of the user that is printing the label</td>
+</tr>
+</tbody>
+</table>
+<h2 id="integration">Integration</h2>
+<h4>dbo.clr_IntegrationPost</h4>
+
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>transactionID</td>
+<td>No</td>
+<td>Comma separated list of transaction IDs to post</td>
+</tr>
+<tr>
+<td>document</td>
+<td>No</td>
+<td>Document number to post</td>
+</tr>
+<tr>
+<td>documents</td>
+<td>No</td>
+<td>Comma separated list of documents to post</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>No</td>
+<td>Integration reference of the transactions you want to post</td>
+</tr>
+<tr>
+<td>transactionType</td>
+<td>No</td>
+<td>Transaction type of the transactions being posted</td>
+</tr>
+<tr>
+<td>processName</td>
+<td>No</td>
+<td>Process name of the transactions being posted</td>
+</tr>
+</tbody>
+</table>
+<h4>dbo.clr_IntegrationPostToEndpoint</h4>
+
+<p>If you have multiple integration services that you need to interact with using the CLR_IntegrationPostToEndpoint procedure, 
+you will need to add them with a unique name in the Key column:</p>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Key</th>
+<th>Value</th>
+<th>Description</th>
+<th>ValueDataType</th>
+<th>isEncrypted</th>
+<th>isActive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SQLCLR</td>
+<td>MySecondIntegrationService</td>
+<td>http://10.0.0.1:50006</td>
+<td>ERP Company 2 Integration Service</td>
+<td>string</td>
+<td>False</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+<p>The Key "MySecondIntegrationService" can now be used when executing the CLR_IntegrationPostToEndpoint procedure  </p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>transactionID</td>
+<td>No</td>
+<td>Comma separated list of transaction IDs to post</td>
+</tr>
+<tr>
+<td>document</td>
+<td>No</td>
+<td>Document number to post</td>
+</tr>
+<tr>
+<td>documents</td>
+<td>No</td>
+<td>Comma separated list of documents to post</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>No</td>
+<td>Integration reference of the transactions you want to post</td>
+</tr>
+<tr>
+<td>transactionType</td>
+<td>No</td>
+<td>Transaction type of the transactions being posted</td>
+</tr>
+<tr>
+<td>processName</td>
+<td>No</td>
+<td>Process name of the transactions being posted</td>
+</tr>
+<tr>
+<td>systemSettingsURLKey</td>
+<td>Yes</td>
+<td>Key from the SystemSettings table for the url you want to post to</td>
+</tr>
+</tbody>
+</table>
+<h4>dbo.clr_IntegrationUpdate</h4>
+
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>transactionID</td>
+<td>No</td>
+<td>Comma separated list of transaction IDs to post</td>
+</tr>
+<tr>
+<td>document</td>
+<td>No</td>
+<td>Document number to post</td>
+</tr>
+<tr>
+<td>documents</td>
+<td>No</td>
+<td>Comma separated list of documents to post</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>No</td>
+<td>Integration reference of the transactions you want to post</td>
+</tr>
+<tr>
+<td>transactionType</td>
+<td>No</td>
+<td>Transaction type of the transactions being posted</td>
+</tr>
+<tr>
+<td>processName</td>
+<td>No</td>
+<td>Process name of the transactions being posted</td>
+</tr>
+</tbody>
+</table>
+<h2 id="utilityapi">UtilityAPI</h2>
+<h3>Report Service</h3>
+
+<p>The two operations supported are:</p>
+<ul>
+<li><a href="#clr_PrintReport">Print Report</a></li>
+<li><a href="#clr_ReportExportToFile">Export Report</a></li>
+</ul>
+<h4>dbo.clr_PrintReport</h4>
+
+<p>Use this procedure to print a SSRS report.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reportPath</td>
+<td>Yes</td>
+<td>Path to the report in SSRS (use the report properties in the UtilityAPI to find the report path)</td>
+</tr>
+<tr>
+<td>printerName</td>
+<td>Yes</td>
+<td>Name of the printer to print to (check available printers in UtilityAPI printer statuses )</td>
+</tr>
+<tr>
+<td>parameters</td>
+<td>No</td>
+<td>List of all parameters required by the report</td>
+</tr>
+</tbody>
+</table>
+<h4>dbo.clr_ReportExportToFile</h4>
+
+<p>Use this procedure to save a SSRS report to the server where the UtilityAPI is running.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reportPath</td>
+<td>Yes</td>
+<td>Path to the report in SSRS (use the report properties in the UtilityAPI to find the report path)</td>
+</tr>
+<tr>
+<td>fileDestinationPath</td>
+<td>Yes</td>
+<td>Where the report will be save to including the file name.</td>
+</tr>
+<tr>
+<td>filetype</td>
+<td>Yes</td>
+<td>File type that you want to save as (PDF, EXCELOPENXML (.xlsx), EXCEL (.xls))</td>
+</tr>
+<tr>
+<td>parameters</td>
+<td>No</td>
+<td>List of all parameters required by the report</td>
+</tr>
+</tbody>
+</table>
+<h4>dbo.report_AddReportParameters</h4>
+
+<p>Use this Function to create a report parameter to use with dbo.clr_ReportExport and dbo.clr_PrintReport.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parameters</td>
+<td>Yes</td>
+<td>The string that will contain the report parameters</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Yes</td>
+<td>The name of the report parameter</td>
+</tr>
+<tr>
+<td>value</td>
+<td>Yes</td>
+<td>The value of the parameter</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Example use (printing)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">reportPath</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">printerName</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="k">parameters</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="nb">int</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseJson</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">reportPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/Pick Slip - Per Cage&#39;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">printerName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;TestPrinter&#39;</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="k">parameters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">report_AddReportParameter</span><span class="p">(</span><span class="o">@</span><span class="k">parameters</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DocumentNumber&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;STV-AVO-000001&#39;</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="k">parameters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">report_AddReportParameter</span><span class="p">(</span><span class="o">@</span><span class="k">parameters</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Cage&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CAGE D&#39;</span><span class="p">)</span>
+
+<span class="k">EXEC</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">clr_ReportPrint</span><span class="p">]</span>
+<span class="w">    </span><span class="o">@</span><span class="n">reportPath</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="n">printerName</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="k">parameters</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="k">OUTPUT</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="k">OUTPUT</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">responseJson</span>
+</code></pre></div>
+<ul>
+<li>Example use (export)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">reportPath</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">fileDestinationPath</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">fileType</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="k">parameters</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="nb">int</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseJson</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">reportPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;/Pick Slip - Per Cage&#39;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">fileDestinationPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;D:\\Granite WMS\\V5 Demo\\PickSlip.pdf&#39;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">fileType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PDF&#39;</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="k">parameters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">report_AddReportParameter</span><span class="p">(</span><span class="o">@</span><span class="k">parameters</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DocumentNumber&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;STV-AVO-000001&#39;</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="k">parameters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">report_AddReportParameter</span><span class="p">(</span><span class="o">@</span><span class="k">parameters</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Cage&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CAGE D&#39;</span><span class="p">)</span>
+
+<span class="k">EXEC</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">clr_ReportExportToFile</span><span class="p">]</span>
+<span class="w">    </span><span class="o">@</span><span class="n">reportPath</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="n">fileDestinationPath</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="n">fileType</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="k">parameters</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="k">OUTPUT</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="n">responseJson</span><span class="w"> </span><span class="k">OUTPUT</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">responseJson</span>
+</code></pre></div>
+<h3>SQL Export Service</h3>
+
+<h4>dbo.clr_TableExport</h4>
+
+<p>Use this procedure to export data from a SQL Table or View to either a CSV or Excel file. </p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tableName</td>
+<td>Yes</td>
+<td>The name of the sql table or view to export data from</td>
+</tr>
+<tr>
+<td>filters</td>
+<td>No</td>
+<td>The list of filters to be applied to the dataset (see below for details)</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>No</td>
+<td>Number of lines to skip from the dataset</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>No</td>
+<td>Limit the number of rows exported (if left blank it will default to 10000)</td>
+</tr>
+<tr>
+<td>orderByList</td>
+<td>No</td>
+<td>The list of order by criteria to sort the dataset (see below for details)</td>
+</tr>
+<tr>
+<td>fileDestinationPath</td>
+<td>Yes</td>
+<td>Where the report will be save to including the file name.</td>
+</tr>
+<tr>
+<td>filetype</td>
+<td>Yes</td>
+<td>File type that you want to save as (CSV (.csv),  EXCEL (.xlsx))</td>
+</tr>
+</tbody>
+</table>
+<h4>dbo.export_AddFilter</h4>
+
+<p>This function allows you to build the filters parameter string.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filters</td>
+<td>Yes</td>
+<td>The string containing the list of filters</td>
+</tr>
+<tr>
+<td>column</td>
+<td>Yes</td>
+<td>The name of the column that is being filtered</td>
+</tr>
+<tr>
+<td>filterType</td>
+<td>Yes</td>
+<td>The type of filter being applied (Equal, NotEqual, Like, NotLike, StartsWith, EndsWith, Between, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual)</td>
+</tr>
+<tr>
+<td>value</td>
+<td>Yes</td>
+<td>The value applied to the filter</td>
+</tr>
+</tbody>
+</table>
+<h4>dbo.export_AddOrderBy</h4>
+
+<p>This function allows you to build the OrderBy parameter string.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>orderByList</td>
+<td>Yes</td>
+<td>The string containing the list of orderby parameters</td>
+</tr>
+<tr>
+<td>column</td>
+<td>Yes</td>
+<td>The name of the column that is being order by</td>
+</tr>
+<tr>
+<td>orderByType</td>
+<td>Yes</td>
+<td>The type of filter being applied (ASC or DESC)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Example usage
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">tableName</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="k">offset</span><span class="w"> </span><span class="nb">int</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="k">limit</span><span class="w"> </span><span class="nb">int</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">fileDestinationPath</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">filetype</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">orderByList</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">filters</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="nb">int</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseJson</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">tableName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;API_QueryStockTotals&#39;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">fileDestinationPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;D:\\Granite WMS\\V5 Demo\\StockInFreezer.csv&#39;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">filetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;CSV&#39;</span>
+
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">orderByList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">export_AddOrderBy</span><span class="p">(</span><span class="o">@</span><span class="n">OrderByList</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Type&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DESC&#39;</span><span class="p">)</span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">orderByList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">export_AddOrderBy</span><span class="p">(</span><span class="o">@</span><span class="n">OrderByList</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Code&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ASC&#39;</span><span class="p">)</span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">filters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">export_AddFilter</span><span class="p">(</span><span class="o">@</span><span class="n">Filters</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Category&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Equal&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Freezer&#39;</span><span class="p">)</span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">filters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">export_AddFilter</span><span class="p">(</span><span class="o">@</span><span class="n">Filters</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Qty&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;GreaterThan&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="k">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="k">limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span>
+
+<span class="k">EXEC</span><span class="w"> </span><span class="n">clr_TableExport</span><span class="w"> </span>
+<span class="w">    </span><span class="o">@</span><span class="n">tableName</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="n">filters</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="k">offset</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="k">limit</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="n">orderByList</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="n">fileDestinationPath</span><span class="w"> </span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="n">fileType</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="k">OUTPUT</span>
+<span class="w">    </span><span class="p">,</span><span class="o">@</span><span class="n">responseJson</span><span class="w"> </span><span class="k">OUTPUT</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">responseJson</span>
+</code></pre></div></li>
+</ul>
+<h3>Email Service</h3>
+
+<p>Two types of emails can be sent using SQLCLR:</p>
+<ul>
+<li><a href="#dbo.clr_templateemail">Template Emails</a></li>
+<li><a href="#dbo.clr_simpleemail">Simple Emails</a></li>
+</ul>
+<p>The difference between these two types of emails is where the content of the email body comes from. 
+Templated emails require an email template that will be used to generate the body of the email. 
+Simple emails can only contain unformatted text in the body of the email.
+For more info on these, as well as help with designing your own email templates, see the Utility API manual.</p>
+<p>Both types of emails have support for the following types of attachments:</p>
+<ul>
+<li>SSRS Reports</li>
+<li>Excel exports of SQL tables</li>
+<li>File attachments</li>
+</ul>
+<h4>dbo.clr_TemplateEmail</h4>
+
+<p>Use this procedure to send an email that uses an Email template to generate the body of the email.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>subject</td>
+<td>Yes</td>
+<td>The subject of the email</td>
+</tr>
+<tr>
+<td>templateName</td>
+<td>Yes</td>
+<td>The name of the email template to use for the body of this email</td>
+</tr>
+<tr>
+<td>templateParameters</td>
+<td>No</td>
+<td>List of parameters to pass into the email template to render the body of the email</td>
+</tr>
+<tr>
+<td>toEmailAddresses</td>
+<td>No</td>
+<td>Semicolon delimited list of email addresses to address this email to</td>
+</tr>
+<tr>
+<td>ccEmailAddresses</td>
+<td>No</td>
+<td>Semicolon delimited list of email address to CC on this email</td>
+</tr>
+<tr>
+<td>bccEmailAddresses</td>
+<td>No</td>
+<td>Semicolon delimited list of email addresses to BCC on this email</td>
+</tr>
+<tr>
+<td>reportAttachments</td>
+<td>No</td>
+<td>List of SSRS reports to attach to this email</td>
+</tr>
+<tr>
+<td>excelAttachments</td>
+<td>No</td>
+<td>List of excel exports to attach to this email</td>
+</tr>
+<tr>
+<td>fileAttachments</td>
+<td>No</td>
+<td>List of files to attach to this email</td>
+</tr>
+</tbody>
+</table>
+<h4>dbo.email_AddTemplateParameter</h4>
+
+<p>Use this function to add parameters to the list that will be used to render the email template</p>
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>templateParameters</td>
+<td>Yes</td>
+<td>The list of template parameters</td>
+</tr>
+<tr>
+<td>parameterName</td>
+<td>Yes</td>
+<td>The name of the parameter as it appears in the email template</td>
+</tr>
+<tr>
+<td>parameterValue</td>
+<td>Yes</td>
+<td>The value that you are passing into the parameter</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Example usage</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">subject</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">templateName</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">templateParameters</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">toEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">ccEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">bccEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">reportAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">excelAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">fileAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="nb">int</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test Clr Mail&#39;</span><span class="w">                                                                          </span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">templateName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;PickingNotification&#39;</span><span class="w">                                                               </span><span class="c1">-- Use the email template named PickingNotification</span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">templateParameters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">email_AddTemplateParameter</span><span class="p">(</span><span class="o">@</span><span class="n">templateParameters</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;documentNumber&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;SO000123&#39;</span><span class="p">)</span><span class="w"> </span><span class="c1">-- Add a parameter to be passed to the email template. The parameter name is documentNumber, and value is SO000123</span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">toEmailAddresses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;email1@gmail.com;email2@gmail.com&#39;</span><span class="w">                                     </span>
+
+<span class="k">EXECUTE</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">clr_TemplateEmail</span><span class="p">]</span><span class="w"> </span>
+<span class="w">   </span><span class="o">@</span><span class="n">subject</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">templateName</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">templateParameters</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">toEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">ccEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">bccEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">reportAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">excelAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">fileAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="k">OUTPUT</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="k">OUTPUT</span>
+
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">responseJSON</span>
+</code></pre></div>
+<h4>dbo.clr_SimpleEmail</h4>
+
+<table>
+<thead>
+<tr>
+<th>Parameter Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>subject</td>
+<td>Yes</td>
+<td>The subject of the email</td>
+</tr>
+<tr>
+<td>body</td>
+<td>Yes</td>
+<td>The string content that will make up the body of the email</td>
+</tr>
+<tr>
+<td>toEmailAddresses</td>
+<td>No</td>
+<td>Semicolon delimited list of email addresses to address this email to</td>
+</tr>
+<tr>
+<td>ccEmailAddresses</td>
+<td>No</td>
+<td>Semicolon delimited list of email address to CC on this email</td>
+</tr>
+<tr>
+<td>bccEmailAddresses</td>
+<td>No</td>
+<td>Semicolon delimited list of email addresses to BCC on this email</td>
+</tr>
+<tr>
+<td>reportAttachments</td>
+<td>No</td>
+<td>List of SSRS reports to attach to this email</td>
+</tr>
+<tr>
+<td>excelAttachments</td>
+<td>No</td>
+<td>List of excel exports to attach to this email</td>
+</tr>
+<tr>
+<td>fileAttachments</td>
+<td>No</td>
+<td>List of files to attach to this email</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Example usage</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">subject</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">body</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">toEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">ccEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">bccEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">reportAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">excelAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">fileAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="nb">int</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test Clr Mail&#39;</span><span class="w"> </span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test mail&#39;</span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">toEmailAddresses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;email1@gmail.com;email2@gmail.com&#39;</span>
+
+<span class="k">EXECUTE</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">clr_SimpleEmail</span><span class="p">]</span><span class="w"> </span>
+<span class="w">   </span><span class="o">@</span><span class="n">subject</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">body</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">toEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">ccEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">bccEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">reportAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">excelAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">fileAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="k">OUTPUT</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="k">OUTPUT</span>
+
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">responseJSON</span>
+</code></pre></div>
+<h3>Attachments</h3>
+
+<p>Attachments can have lots of different parameters that need to be sent along with the request to generate the files that end up being attached.
+To assist with this we have a set of sql functions that help to build up the request JSON in the correct format.</p>
+<h3>Report Attachments</h3>
+
+<ul>
+<li>dbo.email_CreateReportAttachment</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ParameterName</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reportPath</td>
+<td>Yes</td>
+<td>The path to this report in SSRS. You can find the report path by browsing the UtilityAPI's reports page</td>
+</tr>
+<tr>
+<td>fileType</td>
+<td>Yes</td>
+<td>The file type that the report should be exported to. Valid values are PDF, EXCELOPENXML, or EXCEL</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>dbo.email_AddReportParameter</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ParameterName</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reportAttachment</td>
+<td>Yes</td>
+<td>The report attachment that you are adding the parameter to. This must be created using the CreateReportAttachment function</td>
+</tr>
+<tr>
+<td>parameterName</td>
+<td>Yes</td>
+<td>The name of the SSRS report parameter you want to set</td>
+</tr>
+<tr>
+<td>parameterValue</td>
+<td>Yes</td>
+<td>The value that you want to set the SSRS report parameter to</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>dbo.email_AddReportAttachment</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ParameterName</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reportAttachments</td>
+<td>Yes</td>
+<td>The variable that contains the list of report attachments that you are going to send</td>
+</tr>
+<tr>
+<td>reportAttachmentToAdd</td>
+<td>Yes</td>
+<td>The variable that contains the report that you want to add to the list of reports that you are going to send</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Example</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">subject</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">body</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">toEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">ccEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">bccEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">reportAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">excelAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">fileAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="nb">int</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">PickingReport</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">PickingReport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">email_CreateReportAttachment</span><span class="p">(</span><span class="s1">&#39;/PickingReport&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span><span class="w">                  </span><span class="c1">-- Creating the report that we want to attach. The reportPath is /PickingReport, and fileType is PDF</span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">PickingReport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">email_AddReportParameter</span><span class="p">(</span><span class="o">@</span><span class="n">PickingReport</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;documentNumber&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;SO0001&#39;</span><span class="p">)</span><span class="w">       </span><span class="c1">-- Adding a parameter that will be used to call the SSRS report. The parameter named &#39;documentNumber&#39; will be set to &#39;SO0001&#39;</span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">reportAttachments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">email_AddReportAttachment</span><span class="p">(</span><span class="o">@</span><span class="n">reportAttachments</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">PickingReport</span><span class="p">)</span><span class="w">      </span><span class="c1">-- Lastly, we add the picking report to the list of report attachments. </span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test Clr Mail&#39;</span><span class="w"> </span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">toEmailAddresses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;email1@gmail.com;email2@gmail.com&#39;</span>
+
+<span class="k">EXECUTE</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">clr_SimpleEmail</span><span class="p">]</span><span class="w"> </span>
+<span class="w">   </span><span class="o">@</span><span class="n">subject</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">body</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">toEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">ccEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">bccEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">reportAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">excelAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">fileAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="k">OUTPUT</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="k">OUTPUT</span>
+
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">responseJSON</span>
+</code></pre></div>
+<h3>Excel Attachments</h3>
+
+<ul>
+<li>dbo.email_CreateExcelAttachment</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ParameterName</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tableName</td>
+<td>Yes</td>
+<td>The name of the table or view that you want to export results from</td>
+</tr>
+<tr>
+<td>fileType</td>
+<td>Yes</td>
+<td>The file type that the data should be exported to. Valid values are CSV or EXCEL</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>dbo.email_AddExcelAttachmentFilter</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ParameterName</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>excelAttachment</td>
+<td>Yes</td>
+<td>The excel attachment you are adding a filter to. The variable passed in must be created using the CreateExcelAttachment function</td>
+</tr>
+<tr>
+<td>filterColumn</td>
+<td>Yes</td>
+<td>The column that you want to filter on</td>
+</tr>
+<tr>
+<td>filterType</td>
+<td>Yes</td>
+<td>The filter operation you want to perform. Valid values are Equal, NotEqual, Like, NotLike, StartsWith, EndsWith, Between, GreaterThan, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual</td>
+</tr>
+<tr>
+<td>filterValue</td>
+<td>Yes</td>
+<td>The value you want to filter by</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>dbo.email_AddExcelAttachmentOrderBy</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ParameterName</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>excelAttachment</td>
+<td>Yes</td>
+<td>The excel attachment you are adding a filter to. The variable passed in must be created using the CreateExcelAttachment function</td>
+</tr>
+<tr>
+<td>orderByColumn</td>
+<td>Yes</td>
+<td>The column that you want to order by</td>
+</tr>
+<tr>
+<td>orderByType</td>
+<td>Yes</td>
+<td>Order by ascending or descending. Valid values are ASC or DESC</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>dbo.email_AddExcelAttachment</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ParameterName</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>excelAttachments</td>
+<td>Yes</td>
+<td>The variable that contains the list of excel attachments that you are going to send</td>
+</tr>
+<tr>
+<td>excelAttachmentToAdd</td>
+<td>Yes</td>
+<td>The variable that contains the excel attachment that you want to add to the list of attachments that you are going to send</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Example</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">subject</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">body</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">toEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">ccEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">bccEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">reportAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">excelAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">fileAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="nb">int</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">ConsumablesExport</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">ConsumablesExport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">email_CreateExcelAttachment</span><span class="p">(</span><span class="s1">&#39;CustomView_MasterItem&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CSV&#39;</span><span class="p">)</span><span class="w">                                </span><span class="c1">-- Create the excel attachment. The view we will pull from is CustomView_MasterItem, and it will export to a csv file </span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">ConsumablesExport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">email_AddExcelAttachmentFilter</span><span class="p">(</span><span class="o">@</span><span class="n">ConsumablesExport</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Category&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Equal&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CONSUMABLE&#39;</span><span class="p">)</span><span class="w">  </span><span class="c1">-- Add a filter on the Category column of the view, fetch results where Category is equal to CONSUMABLE</span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">ConsumablesExport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">email_AddExcelAttachmentOrderBy</span><span class="p">(</span><span class="o">@</span><span class="n">ConsumablesExport</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Description&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ASC&#39;</span><span class="p">)</span><span class="w">              </span><span class="c1">-- Order the results of the export using the Description column in ascending order</span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">excelAttachments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">email_AddExcelAttachment</span><span class="p">(</span><span class="o">@</span><span class="n">excelAttachments</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">ConsumablesExport</span><span class="p">)</span><span class="w">                         </span><span class="c1">-- Lastly, we add the export to the list of excel attachments</span>
+
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test Clr Mail&#39;</span><span class="w"> </span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">toEmailAddresses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;email1@gmail.com;email2@gmail.com&#39;</span>
+
+<span class="k">EXECUTE</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">clr_SimpleEmail</span><span class="p">]</span><span class="w"> </span>
+<span class="w">   </span><span class="o">@</span><span class="n">subject</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">body</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">toEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">ccEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">bccEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">reportAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">excelAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">fileAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="k">OUTPUT</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="k">OUTPUT</span>
+
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">responseJSON</span>
+</code></pre></div>
+<h3>File Attachments</h3>
+
+<ul>
+<li>dbo.email_AddFileAttachment</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ParameterName</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fileAttachments</td>
+<td>Yes</td>
+<td>The variable that contains all the file attachment paths that will be sent with the email</td>
+</tr>
+<tr>
+<td>fileToAttach</td>
+<td>Yes</td>
+<td>The path to the file that you want to add as an attachment</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Example</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">subject</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">body</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">toEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">ccEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">bccEmailAddresses</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">reportAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">excelAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">fileAttachments</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="nb">int</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
+
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">fileAttachments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">email_AddFileAttachment</span><span class="p">(</span><span class="o">@</span><span class="n">fileAttachments</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;C:\logexport.txt&#39;</span><span class="p">)</span><span class="w">        </span><span class="c1">-- Add a file to the list of file attachments</span>
+
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test Clr Mail&#39;</span><span class="w"> </span>
+<span class="k">SET</span><span class="w"> </span><span class="o">@</span><span class="n">toEmailAddresses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;email1@gmail.com;email2@gmail.com&#39;</span>
+
+<span class="k">EXECUTE</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">clr_SimpleEmail</span><span class="p">]</span><span class="w"> </span>
+<span class="w">   </span><span class="o">@</span><span class="n">subject</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">body</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">toEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">ccEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">bccEmailAddresses</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">reportAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">excelAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">fileAttachments</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="k">OUTPUT</span>
+<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="k">OUTPUT</span>
+
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">responseJSON</span>
+</code></pre></div>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>To run the create scripts you will need sysadmin permissions on the SQL instance that you are installing on</p>
+<p>Be sure that you are executing the procedure using ALL of the parameters. Set them to null if they are not being used</p>
+<h2 id="examples">Examples</h2>
+<h3 id="integration_1">Integration</h3>
+<p><a href="https://stackoverflowteams.com/c/granitewms/questions/349">https://stackoverflowteams.com/c/granitewms/questions/349</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
+      
+    
+  </body>
+</html>

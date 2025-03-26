@@ -1,0 +1,4675 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://granitewms.github.io/granitedocs/5.0/integration/accpac/sdk-provider/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../integration-jobs/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
+    
+    
+      
+        <title>SDK Provider - Granite WMS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sdk-provider" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Granite WMS" class="md-header__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Granite WMS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SDK Provider
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../scaffold/manual/" class="md-tabs__link">
+          
+  
+    
+  
+  Manuals
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../tools/" class="md-tabs__link">
+          
+  
+    
+  
+  Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../updates/whats-new/" class="md-tabs__link">
+          
+  
+    
+  
+  Updates
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Granite WMS" class="md-nav__button md-logo" aria-label="Granite WMS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Granite WMS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Manuals
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Manuals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../scaffold/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scaffold
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../iis/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IIS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ssrs/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SSRS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Label Printing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Label Printing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../label-printing/bartender/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bartender
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../label-printing/zpl/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ZPL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../sqlclr/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    SQLCLR
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            SQLCLR
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sqlclr/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sqlclr/reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CLR Procedure Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Integration
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            Integration
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_1" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Accpac
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6_1" id="__nav_2_6_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            Accpac
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#config-file-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Config File Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Config File Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#systemsettingsapplicationname" class="md-nav__link">
+    <span class="md-ellipsis">
+      SystemSettingsApplicationName
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-systemsettings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database SystemSettings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Database SystemSettings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#poexchangerate" class="md-nav__link">
+    <span class="md-ellipsis">
+      POExchangeRate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#purchaseorderoverridelocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      PurchaseOrderOverrideLocation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roundsummarizedactionqty" class="md-nav__link">
+    <span class="md-ellipsis">
+      RoundSummarizedActionQty
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roundsummarizedactionqtytodecimalplaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      RoundSummarizedActionQtyToDecimalPlaces
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#takeon" class="md-nav__link">
+    <span class="md-ellipsis">
+      TAKEON
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment" class="md-nav__link">
+    <span class="md-ellipsis">
+      ADJUSTMENT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment_cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      ADJUSTMENT_COST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment_both" class="md-nav__link">
+    <span class="md-ellipsis">
+      ADJUSTMENT_BOTH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustmentstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      ADJUSTMENTSTATUS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reclassify" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECLASSIFY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reclassify_cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECLASSIFY_COST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reclassify_both" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECLASSIFY_BOTH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reclassify_split" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECLASSIFY_SPLIT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCRAP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scrap_cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCRAP_COST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scrap_both" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCRAP_BOTH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move" class="md-nav__link">
+    <span class="md-ellipsis">
+      MOVE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replenish" class="md-nav__link">
+    <span class="md-ellipsis">
+      REPLENISH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      TRANSFER
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transferreceipt" class="md-nav__link">
+    <span class="md-ellipsis">
+      TRANSFERRECEIPT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamictransfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      DYNAMICTRANSFER
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pick" class="md-nav__link">
+    <span class="md-ellipsis">
+      PICK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pickweight" class="md-nav__link">
+    <span class="md-ellipsis">
+      PICKWEIGHT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamicpick" class="md-nav__link">
+    <span class="md-ellipsis">
+      DYNAMICPICK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receive" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECEIVE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receivingpostmultiple" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECEIVINGPOSTMULTIPLE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returnreceipt" class="md-nav__link">
+    <span class="md-ellipsis">
+      RETURNRECEIPT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manufacture" class="md-nav__link">
+    <span class="md-ellipsis">
+      MANUFACTURE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update_assemblies" class="md-nav__link">
+    <span class="md-ellipsis">
+      UPDATE_ASSEMBLIES
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internalusage" class="md-nav__link">
+    <span class="md-ellipsis">
+      ***INTERNALUSAGE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internalusagedynamic" class="md-nav__link">
+    <span class="md-ellipsis">
+      ***INTERNALUSAGEDYNAMIC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      ***ISSUE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#materialallocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      ***MATERIALALLOCATION
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autosimply-10-oct-2023-under-construction" class="md-nav__link">
+    <span class="md-ellipsis">
+      AutoSimply (10 Oct 2023: under construction)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AutoSimply (10 Oct 2023: under construction)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issuances" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issuances
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receipts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receipts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backflush" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backflush
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../acumatica/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Acumatica
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6_2" id="__nav_2_6_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Acumatica
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../acumatica/acumatica-overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Acumatica Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../acumatica/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../acumatica/integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../evo/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Evolution
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6_3" id="__nav_2_6_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            Evolution
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evo/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SDK Provider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evo/integration-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../omni/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Omni
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quickbooks/native-app/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QuickBooks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sapb1/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SAPB1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../syspro/sdk-provider/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syspro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../repository-api/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repository API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7_2" id="__nav_2_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Custodian API
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Custodian API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../custodian-api/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Manual
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../custodian-api/best-practice/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Best Practice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../utility-api/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Utility API
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7_3" id="__nav_2_7_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            Utility API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../utility-api/getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../utility-api/email-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Email Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../utility-api/reporting-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reporting Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../utility-api/sql-export-service/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQL Export Service
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../scheduler/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scheduler
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../webdesktop/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Web Desktop
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../android-application/manual/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scanner Application
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../tools/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tools/jam/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jam.dev
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Updates
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Updates
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../updates/whats-new/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    What's New
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../updates/release-notes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#config-file-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Config File Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Config File Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#systemsettingsapplicationname" class="md-nav__link">
+    <span class="md-ellipsis">
+      SystemSettingsApplicationName
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-systemsettings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database SystemSettings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Database SystemSettings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#poexchangerate" class="md-nav__link">
+    <span class="md-ellipsis">
+      POExchangeRate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#purchaseorderoverridelocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      PurchaseOrderOverrideLocation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roundsummarizedactionqty" class="md-nav__link">
+    <span class="md-ellipsis">
+      RoundSummarizedActionQty
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roundsummarizedactionqtytodecimalplaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      RoundSummarizedActionQtyToDecimalPlaces
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#takeon" class="md-nav__link">
+    <span class="md-ellipsis">
+      TAKEON
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment" class="md-nav__link">
+    <span class="md-ellipsis">
+      ADJUSTMENT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment_cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      ADJUSTMENT_COST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment_both" class="md-nav__link">
+    <span class="md-ellipsis">
+      ADJUSTMENT_BOTH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustmentstatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      ADJUSTMENTSTATUS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reclassify" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECLASSIFY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reclassify_cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECLASSIFY_COST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reclassify_both" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECLASSIFY_BOTH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reclassify_split" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECLASSIFY_SPLIT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCRAP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scrap_cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCRAP_COST
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scrap_both" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCRAP_BOTH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move" class="md-nav__link">
+    <span class="md-ellipsis">
+      MOVE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replenish" class="md-nav__link">
+    <span class="md-ellipsis">
+      REPLENISH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      TRANSFER
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transferreceipt" class="md-nav__link">
+    <span class="md-ellipsis">
+      TRANSFERRECEIPT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamictransfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      DYNAMICTRANSFER
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pick" class="md-nav__link">
+    <span class="md-ellipsis">
+      PICK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pickweight" class="md-nav__link">
+    <span class="md-ellipsis">
+      PICKWEIGHT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamicpick" class="md-nav__link">
+    <span class="md-ellipsis">
+      DYNAMICPICK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receive" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECEIVE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receivingpostmultiple" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECEIVINGPOSTMULTIPLE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returnreceipt" class="md-nav__link">
+    <span class="md-ellipsis">
+      RETURNRECEIPT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manufacture" class="md-nav__link">
+    <span class="md-ellipsis">
+      MANUFACTURE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update_assemblies" class="md-nav__link">
+    <span class="md-ellipsis">
+      UPDATE_ASSEMBLIES
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internalusage" class="md-nav__link">
+    <span class="md-ellipsis">
+      ***INTERNALUSAGE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internalusagedynamic" class="md-nav__link">
+    <span class="md-ellipsis">
+      ***INTERNALUSAGEDYNAMIC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      ***ISSUE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#materialallocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      ***MATERIALALLOCATION
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autosimply-10-oct-2023-under-construction" class="md-nav__link">
+    <span class="md-ellipsis">
+      AutoSimply (10 Oct 2023: under construction)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AutoSimply (10 Oct 2023: under construction)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#issuances" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issuances
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receipts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receipts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backflush" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backflush
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="sdk-provider">SDK Provider</h1>
+<p>The Accpac SDK provider is responsible for mapping Granite transactions to the relevant format for posting to Accpac. It makes use of the Accpac Advantage SDK to post to Accpac.</p>
+<h2 id="setup">Setup</h2>
+<ol>
+<li>
+<p>Check the version of the Accpac SDK that is currently installed on the server. The SDK is usually found at <code>C:\Program Files (x86)\Common Files\Sage\Sage 300 ERP</code>. Take note of the first two numbers of <code>Accpac.Advantage.dll</code> file version.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the SDK is not yet installed, please engage with the client's Accpac consultant - the SDK is required for Granite integration.</p>
+</div>
+</li>
+<li>
+<p>In the <code>Providers\Accpac</code> folder, find the <code>AccpacX.Y</code> folder matching the installed SDK version. <code>X.Y</code> must match the first two numbers of the installed SDK version.
+For example, if the installed SDK version is 6.5.0.30, you will take the files from the Accpac6.5 folder</p>
+</li>
+<li>
+<p><strong>Copy</strong> everything in the <code>Providers\Accpac\AccpacX.Y</code> folder into Integration Service folder (root folder).</p>
+</li>
+<li>
+<p>Ensure <code>SDKProvider.xml</code> setup or copied correctly
+    <div class="highlight"><pre><span></span><code><span class="nt">&lt;module</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Provider&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;bind</span>
+<span class="w">    </span><span class="na">service=</span><span class="s">&quot;Granite.Integration.Contract.IProvider, Granite.Integration.Contract&quot;</span>
+<span class="w">    </span><span class="na">to=</span><span class="s">&quot;Granite.Integration.Accpac.Provider, Granite.Integration.Accpac&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/module&gt;</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Configure your connection string and endpoint in the <code>Granite.Integration.Web.exe.config</code> file</p>
+</li>
+</ol>
+<h2 id="settings">Settings</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To pick up any changes to the SystemSettings table, the IntegrationService will need to be restarted.</p>
+</div>
+<p>The settings for Sage 300 (Accpac) are configured in the SystemSettings table. The IntegrationService will pick up the settings using the Application name specified in it's <code>.config</code> file:
+If this setting is missing from the config file or left empty, the IntegrationService will default to using <code>IntegrationSage300</code> as the SystemSettingsApplicationName
+You can browse the IntegrationService's <code>/config</code> page to have the IntegrationService create the default settings in the SystemSettings table for you.</p>
+<h3 id="config-file-settings">Config File Settings</h3>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">&lt;add</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;SystemSettingsApplicationName&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;IntegrationSage300&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;add</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;EndPoint&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;http://:40091/&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</code></pre></div>
+<h4 id="systemsettingsapplicationname">SystemSettingsApplicationName</h4>
+<p>The Application name of the entries in the SystemSettings table that you want to use for this integration service.
+This setting allows you to have multiple integration services running with different settings.</p>
+<h3 id="database-systemsettings">Database SystemSettings</h3>
+<p>The script to insert the default settings is located in the GraniteDatabase release.
+<div class="highlight"><pre><span></span><code>~\GraniteDatabase\Data\SystemSettings\SystemSettingsAccpac.sql
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Key</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IntegrationSage300</td>
+<td>UserID</td>
+<td></td>
+<td>Sage300 user name</td>
+</tr>
+<tr>
+<td>IntegrationSage300</td>
+<td>Password</td>
+<td></td>
+<td>Sage300 user password</td>
+</tr>
+<tr>
+<td>IntegrationSage300</td>
+<td>CompanyID</td>
+<td></td>
+<td>Sage300 company ID</td>
+</tr>
+<tr>
+<td>IntegrationSage300</td>
+<td>POExchangeRate</td>
+<td>false</td>
+<td>Override exchange rate for PO and Multiple PO</td>
+</tr>
+<tr>
+<td>IntegrationSage300</td>
+<td>PurchaseOrderOverrideLocation</td>
+<td>false</td>
+<td>Override line location for PO and Multiple PO</td>
+</tr>
+<tr>
+<td>IntegrationSage300</td>
+<td>RoundSummarizedActionQty</td>
+<td>true</td>
+<td>Round summed ActionQty when posting transfers and moves</td>
+</tr>
+<tr>
+<td>IntegrationSage300</td>
+<td>RoundSummarizedActionQtyToDecimalPlaces</td>
+<td>2</td>
+<td>Number of decimal places to round ActionQty to</td>
+</tr>
+</tbody>
+</table>
+<h4 id="poexchangerate">POExchangeRate</h4>
+<ul>
+<li>Options: true or false</li>
+<li>Used by: RECEIVE and RECEIVINGPOSTMULTIPLE</li>
+<li>Override the Receipt rate with the Purchase Order rate</li>
+<li>PO rate source: SELECT RATE FROM POPORH1 WHERE PONUMBER = 'your_po_number'</li>
+</ul>
+<h4 id="purchaseorderoverridelocation">PurchaseOrderOverrideLocation</h4>
+<ul>
+<li>Options: true or false</li>
+<li>Used by: RECEIVE and RECEIVINGPOSTMULTIPLE</li>
+<li>Override the Receipt location with Granite location</li>
+</ul>
+<h4 id="roundsummarizedactionqty">RoundSummarizedActionQty</h4>
+<ul>
+<li>Options: true or false</li>
+<li>Used by:<ul>
+<li>Replenish</li>
+<li>Move</li>
+<li>Dynamic Transfer</li>
+</ul>
+</li>
+<li>Turns rounding for summed ActionQty on or off</li>
+</ul>
+<h4 id="roundsummarizedactionqtytodecimalplaces">RoundSummarizedActionQtyToDecimalPlaces</h4>
+<ul>
+<li>Options: integer value</li>
+<li>Used by:<ul>
+<li>Replenish</li>
+<li>Move</li>
+<li>Dynamic Transfer</li>
+</ul>
+</li>
+<li>Only comes into effect if RoundSummarizedActionQty is true</li>
+<li>Sets the number of decimal places that we round the summed ActionQty to</li>
+</ul>
+<h2 id="integration-methods">Integration Methods</h2>
+<p>By default if the method name below is the same as a Granite Transaction type, it will autowire the integration.
+If you require a different integration action you can specify the name below in the Process IntegrationMethod property.</p>
+<h3 id="takeon">TAKEON</h3>
+<ul>
+<li>Granite Transaction: <strong>TAKEON</strong></li>
+<li>Accpac: <strong>I/C Receipts</strong></li>
+<li>Supports: <ul>
+<li>Integration Reference</li>
+<li>Lots</li>
+<li>Serials</li>
+<li>UOM</li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>False - Saves receipt</li>
+<li>True - Posts receipt</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>RECPNUMBER</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IntegrationReference</td>
+<td>RECPNUMBER</td>
+<td>Y</td>
+<td>ICREEH</td>
+<td>Create or update if exists, if empty follows Accpac sequence</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>REFERENCE</td>
+<td>Y</td>
+<td>ICREEH</td>
+<td></td>
+</tr>
+<tr>
+<td>MasterItemCode</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>ICREED</td>
+<td></td>
+</tr>
+<tr>
+<td>ERPLocation</td>
+<td>LOCATION</td>
+<td>Y</td>
+<td>ICREED</td>
+<td></td>
+</tr>
+<tr>
+<td>Qty</td>
+<td>RECPQTY</td>
+<td>Y</td>
+<td>ICREED</td>
+<td></td>
+</tr>
+<tr>
+<td>Lot</td>
+<td>LOTNUMF</td>
+<td>N</td>
+<td>ICREEDL</td>
+<td></td>
+</tr>
+<tr>
+<td>Qty</td>
+<td>QTY</td>
+<td>N</td>
+<td>ICREEDL</td>
+<td></td>
+</tr>
+<tr>
+<td>Serial</td>
+<td>SERIALNUMF</td>
+<td>N</td>
+<td>ICREEDS</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="adjustment">ADJUSTMENT</h3>
+<ul>
+<li>Granite Transaction: <strong>ADJUSTMENT</strong></li>
+<li>Accpac: <strong>I/C Adjustments</strong><ul>
+<li>Adjustment Type: <strong>Decrease Quantity</strong> OR <strong>Increase Quantity</strong></li>
+</ul>
+</li>
+<li>Supports:<ul>
+<li>Integration Reference</li>
+<li>Lots </li>
+<li>Serials</li>
+<li>WOFFACCT (GL Account), mapped to Granite Comment</li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>False - Saves adjustment</li>
+<li>True - Posts adjustment</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>DOCNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IntegrationReference</td>
+<td>DOCNUM</td>
+<td>N</td>
+<td>ICADEH</td>
+<td>Create or update if exists, if empty follows Accpac sequence</td>
+</tr>
+<tr>
+<td>MasterItemCode</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>ICADED</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>LOCATION</td>
+<td>Y</td>
+<td>ICADED</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QUANTITY</td>
+<td>Y</td>
+<td>ICADED</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LOTNUMF</td>
+<td>N</td>
+<td>ICADEDL</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTY</td>
+<td>N</td>
+<td>ICADEDL</td>
+<td></td>
+</tr>
+<tr>
+<td>SerialNumber</td>
+<td>SERIALNUMF</td>
+<td>N</td>
+<td>ICADEDS</td>
+<td></td>
+</tr>
+<tr>
+<td>Comment</td>
+<td>WOFFACCT</td>
+<td>N</td>
+<td>ICADED</td>
+<td>if comment not empty, this is the GL account</td>
+</tr>
+</tbody>
+</table>
+<h3 id="adjustment_cost">ADJUSTMENT_COST</h3>
+<p>Same as ADJUSTMENT but Adjustment Type set to <strong>Cost</strong>
+- Adjustment Type: <strong>Decrease Cost</strong> OR <strong>Increase Cost</strong></p>
+<h3 id="adjustment_both">ADJUSTMENT_BOTH</h3>
+<p>Same as ADJUSTMENT but Adjustment Type set to <strong>Both</strong> (Cost &amp; Qty)
+- Adjustment Type: <strong>Decrease Both</strong> OR <strong>Increase Both</strong></p>
+<h3 id="adjustmentstatus">ADJUSTMENTSTATUS</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Document field on Granite transaction that is posted must match the Adjustment Number in Accpac.</p>
+</div>
+<ul>
+<li>Granite Transaction: <strong>ADJUSTMENT</strong></li>
+<li>Accpac: <strong>I/C Adjustments</strong><ul>
+<li>Updates the status of the adjustment to Posted</li>
+</ul>
+</li>
+</ul>
+<h3 id="reclassify">RECLASSIFY</h3>
+<ul>
+<li>Granite Transaction: <strong>RECLASSIFY</strong></li>
+<li>Accpac: <strong>I/C Adjustments</strong><ul>
+<li>Adjustment Type: <strong>Decrease Quantity</strong> AND <strong>Increase Quantity</strong></li>
+</ul>
+</li>
+<li>Support <ul>
+<li>Integration Reference (Accpac Adjustment number, create or update if exists) </li>
+<li>Lots </li>
+<li>Serials</li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>False - Saves adjustment</li>
+<li>True - Posts adjustment</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>DOCNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IntegrationReference</td>
+<td>DOCNUM</td>
+<td>N</td>
+<td>ICADEH</td>
+<td>Create or update if exists, if empty follows Accpac sequence</td>
+</tr>
+<tr>
+<td>MasterItemCode</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>ICADED</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>LOCATION</td>
+<td>Y</td>
+<td>ICADED</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QUANTITY</td>
+<td>Y</td>
+<td>ICADED</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LOTNUMF</td>
+<td>N</td>
+<td>ICADEDL</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTY</td>
+<td>N</td>
+<td>ICADEDL</td>
+<td></td>
+</tr>
+<tr>
+<td>SerialNumber</td>
+<td>SERIALNUMF</td>
+<td>N</td>
+<td>ICADEDS</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="reclassify_cost">RECLASSIFY_COST</h3>
+<p>Same as RECLASSIFY but Adjustment Type set to <strong>COST</strong>
+- Adjustment Type: <strong>Decrease Cost</strong> AND <strong>Increase Cost</strong></p>
+<h3 id="reclassify_both">RECLASSIFY_BOTH</h3>
+<p>Same as RECLASSIFY but Adjustment Type set to <strong>BOTH</strong> (Cost &amp; Qty)
+- Adjustment Type: <strong>Decrease Both</strong> AND <strong>Increase Both</strong></p>
+<h3 id="reclassify_split">RECLASSIFY_SPLIT</h3>
+<p>Same as RECLASSIFY but <strong>Decrease Quantity</strong> and <strong>Increase Quantity</strong> post as two separate Adjustments in Accpac</p>
+<h3 id="scrap">SCRAP</h3>
+<ul>
+<li>Granite Transaction: <strong>SCRAP</strong></li>
+<li>Accpac: <strong>I/C Adjustments</strong><ul>
+<li>Adjustment Type <strong>Decrease Quantity</strong></li>
+</ul>
+</li>
+<li>Supports: <ul>
+<li>Integration Reference </li>
+<li>Lots</li>
+<li>Serials</li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>False - Saves adjustment</li>
+<li>True - Posts adjustment</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>DOCNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IntegrationReference</td>
+<td>DOCNUM</td>
+<td>N</td>
+<td>ICADEH</td>
+<td>Create or update if exists, if empty follows Accpac sequence</td>
+</tr>
+<tr>
+<td>MasterItemCode</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>ICADED</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>LOCATION</td>
+<td>Y</td>
+<td>ICADED</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QUANTITY</td>
+<td>Y</td>
+<td>ICADED</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LOTNUMF</td>
+<td>N</td>
+<td>ICADEDL</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTY</td>
+<td>N</td>
+<td>ICADEDL</td>
+<td></td>
+</tr>
+<tr>
+<td>SerialNumber</td>
+<td>SERIALNUMF</td>
+<td>N</td>
+<td>ICADEDS</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="scrap_cost">SCRAP_COST</h3>
+<p>Same as SCRAP but Adjustment Type set to <strong>COST</strong>
+- Adjustment Type: <strong>Decrease Cost</strong></p>
+<h3 id="scrap_both">SCRAP_BOTH</h3>
+<p>Same as SCRAP but Adjustment Type set to <strong>BOTH</strong>
+- Adjustment Type: <strong>Decrease Both</strong></p>
+<h3 id="move">MOVE</h3>
+<ul>
+<li>Granite Transaction: <strong>MOVE</strong></li>
+<li>Accpac: <strong>I/C Transfers</strong> Type Transfer </li>
+<li>Supports: <ul>
+<li>RoundSummarizedActionQty (See setting description)</li>
+<li>RoundSummarizedActionQtyToDecimalPlaces (See setting description)</li>
+<li>Integration Reference</li>
+<li>Serial</li>
+<li>Lot</li>
+<li>Comment </li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>False - Saves transfer</li>
+<li>True - Posts transfer</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>DOCNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IntegrationReference</td>
+<td>DOCNUM</td>
+<td>N</td>
+<td>ICTREH</td>
+<td>Create or update if exists, if empty follows Accpac sequence</td>
+</tr>
+<tr>
+<td>Document</td>
+<td>REFERENCE</td>
+<td>N</td>
+<td>ICTREH</td>
+<td></td>
+</tr>
+<tr>
+<td>MasterItemCode</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>FROMLOC</td>
+<td>Y</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>TOLOC</td>
+<td>Y</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>Comment</td>
+<td>COMMENTS</td>
+<td>N</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTYREQ</td>
+<td>Y</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LOTNUMF</td>
+<td>N</td>
+<td>ICTREDL</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTY</td>
+<td>N</td>
+<td>ICTREDL</td>
+<td></td>
+</tr>
+<tr>
+<td>SerialNumber</td>
+<td>SERIALNUMF</td>
+<td>N</td>
+<td>ICTREDS</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="replenish">REPLENISH</h3>
+<ul>
+<li>Granite Transaction: <strong>REPLENISH</strong></li>
+<li>Accpac: <strong>I/C Transfers</strong> Type Transfer </li>
+<li>Supports: <ul>
+<li>RoundSummarizedActionQty (See setting description)</li>
+<li>RoundSummarizedActionQtyToDecimalPlaces (See setting description)</li>
+<li>Integration Reference </li>
+<li>Serial</li>
+<li>Lot</li>
+<li>Comment </li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>False - Saves transfer</li>
+<li>True - Posts transfer</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>DOCNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IntegrationReference</td>
+<td>DOCNUM</td>
+<td>N</td>
+<td>ICTREH</td>
+<td>Create or update if exists, if empty follows Accpac sequence</td>
+</tr>
+<tr>
+<td>Document</td>
+<td>REFERENCE</td>
+<td>N</td>
+<td>ICTREH</td>
+<td></td>
+</tr>
+<tr>
+<td>MasterItemCode</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>FROMLOC</td>
+<td>Y</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>TOLOC</td>
+<td>Y</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>Comment</td>
+<td>COMMENTS</td>
+<td>N</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTYREQ</td>
+<td>Y</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LOTNUMF</td>
+<td>N</td>
+<td>ICTREDL</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTY</td>
+<td>N</td>
+<td>ICTREDL</td>
+<td></td>
+</tr>
+<tr>
+<td>SerialNumber</td>
+<td>SERIALNUMF</td>
+<td>N</td>
+<td>ICTREDS</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="transfer">TRANSFER</h3>
+<ul>
+<li>Granite Transaction: <strong>TRANSFER</strong></li>
+<li>Accpac: **I/C Transfers **<ul>
+<li>Type: Transfer, Transit and Receipt, based on Granite document type.</li>
+</ul>
+</li>
+<li>Supports:<ul>
+<li>Serial</li>
+<li>LOT</li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>False - Saves transfer</li>
+<li>True - Posts transfer</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>DOCNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>REFERENCE</td>
+<td>N</td>
+<td>ICTREH</td>
+</tr>
+<tr>
+<td>MasterItemCode</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>ICTRED</td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>FROMLOC</td>
+<td>Y</td>
+<td>ICTRED</td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>TOLOC</td>
+<td>Y</td>
+<td>ICTRED</td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTYREQ</td>
+<td>Y</td>
+<td>ICTRED</td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LOTNUMF</td>
+<td>N</td>
+<td>ICTREDL</td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTY</td>
+<td>N</td>
+<td>ICTREDL</td>
+</tr>
+<tr>
+<td>SerialNumber</td>
+<td>SERIALNUMF</td>
+<td>N</td>
+<td>ICTREDS</td>
+</tr>
+</tbody>
+</table>
+<h3 id="transferreceipt">TRANSFERRECEIPT</h3>
+<ul>
+<li>Granite Transaction: <strong>TRANSFER</strong></li>
+<li>Accpac: **I/C Transfers **<ul>
+<li>Type: Receipt</li>
+</ul>
+</li>
+<li>Supports:<ul>
+<li>Serial</li>
+<li>LOT</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>DOCNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>REFERENCE</td>
+<td>N</td>
+<td>ICTREH</td>
+</tr>
+<tr>
+<td>MasterItemCode</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>ICTRED</td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>FROMLOC</td>
+<td>Y</td>
+<td>ICTRED</td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>TOLOC</td>
+<td>Y</td>
+<td>ICTRED</td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTYREQ</td>
+<td>Y</td>
+<td>ICTRED</td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LOTNUMF</td>
+<td>N</td>
+<td>ICTREDL</td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTYMOVED</td>
+<td>N</td>
+<td>ICTREDL</td>
+</tr>
+<tr>
+<td>SerialNumber</td>
+<td>SERIALNUMF</td>
+<td>N</td>
+<td>ICTREDS</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dynamictransfer">DYNAMICTRANSFER</h3>
+<ul>
+<li>Granite Transaction: <strong>DYNAMICTRANSFER</strong></li>
+<li>Accpac: <strong>I/C Transfers</strong> Type Transfer </li>
+<li>Supports: <ul>
+<li>RoundSummarizedActionQty (See setting description)</li>
+<li>RoundSummarizedActionQtyToDecimalPlaces (See setting description)</li>
+<li>Integration Reference (Accpac Transfer number, create or update if exists) </li>
+<li>Serial</li>
+<li>Lot</li>
+<li>Comment (Accpac Comments field)</li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>False - Saves transfer</li>
+<li>True - Posts transfer</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>DOCNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IntegrationReference</td>
+<td>DOCNUM</td>
+<td>N</td>
+<td>ICTREH</td>
+<td>Create or update if exists, if empty follows Accpac sequence</td>
+</tr>
+<tr>
+<td>Document</td>
+<td>REFERENCE</td>
+<td>N</td>
+<td>ICTREH</td>
+<td></td>
+</tr>
+<tr>
+<td>MasterItemCode</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>FROMLOC</td>
+<td>Y</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>TOLOC</td>
+<td>Y</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>Comment</td>
+<td>COMMENTS</td>
+<td>N</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTYREQ</td>
+<td>Y</td>
+<td>ICTRED</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LOTNUMF</td>
+<td>N</td>
+<td>ICTREDL</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTY</td>
+<td>N</td>
+<td>ICTREDL</td>
+<td></td>
+</tr>
+<tr>
+<td>SerialNumber</td>
+<td>SERIALNUMF</td>
+<td>N</td>
+<td>ICTREDS</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="pick">PICK</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>IntegrationPost setting does not affect saving/invoicing for SalesOrder. Default Create Invoice option must be switched on/off in Accpac.</p>
+</div>
+<ul>
+<li>Granite Transaction: <strong>PICK</strong></li>
+<li>Accpac: <strong>O/E Transactions Order Entry</strong></li>
+<li>
+<p>Supports:</p>
+<ul>
+<li>Serial</li>
+<li>Lot</li>
+</ul>
+</li>
+<li>
+<p>IntegrationPost:</p>
+<ul>
+<li>Not supported, see NOTE above</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>LASTSHINUM if there is one, else LASTINVNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>ORDNUMBER</td>
+<td>Y</td>
+<td>OEORDH</td>
+<td></td>
+</tr>
+<tr>
+<td>LineNumber</td>
+<td>LINENUM</td>
+<td>Y</td>
+<td>OEORDD</td>
+<td></td>
+</tr>
+<tr>
+<td>Qty</td>
+<td>QTYSHIPPED</td>
+<td>Y</td>
+<td>OEORDD</td>
+<td></td>
+</tr>
+<tr>
+<td>Lot</td>
+<td>LOTNUMF</td>
+<td>N</td>
+<td>OEORDDL</td>
+<td></td>
+</tr>
+<tr>
+<td>Qty</td>
+<td>QTY</td>
+<td>N</td>
+<td>OEORDDL</td>
+<td></td>
+</tr>
+<tr>
+<td>Serial</td>
+<td>SERIALNUMF</td>
+<td>N</td>
+<td>OEORDDS</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="pickweight">PICKWEIGHT</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Weight of the item being picked in Granite must be in the Transaction Comment field. This will post to the EXTWEIGHT field in Accpac.</p>
+</div>
+<ul>
+<li>Granite Transaction: <strong>PICK</strong></li>
+<li>Accpac: <strong>O/E Transactions Order Entry</strong></li>
+<li>Supports:<ul>
+<li>Comment (posts to Accpac EXTWEIGHT field)</li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>True - CREATEINV will be set to true</li>
+<li>False - CREATEINV will be set to false</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>SHINUMBER if there is one, else LASTINVNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>ORDNUMBER</td>
+<td>Y</td>
+<td>OESHIH</td>
+<td></td>
+</tr>
+<tr>
+<td>LineNumber</td>
+<td>ORDLINENUM</td>
+<td>Y</td>
+<td>OESHID</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTYSHIPPED</td>
+<td>Y</td>
+<td>OESHID</td>
+<td></td>
+</tr>
+<tr>
+<td>Comment</td>
+<td>EXTWEIGHT</td>
+<td>Y</td>
+<td>OESHID</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="dynamicpick">DYNAMICPICK</h3>
+<ul>
+<li>Granite Transaction: <strong>PICKINGDYNAMIC</strong></li>
+<li>Accpac: <strong>O/E Transactions Order Entry</strong><ul>
+<li>Create and Post</li>
+</ul>
+</li>
+<li>Supports:<ul>
+<li>UOM</li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>Order will always be Processed regardless of setting</li>
+<li>True - Check Customer Credit Limit</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>LASTSHINUM if there is one, else LASTINVNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>ORDNUMBER</td>
+<td>Y</td>
+<td>OEORDH</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>LOCATION</td>
+<td>Y</td>
+<td>OEORDH</td>
+<td></td>
+</tr>
+<tr>
+<td>LineNumber</td>
+<td>LINENUM</td>
+<td>Y</td>
+<td>OEORDD</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTYORDERED</td>
+<td>Y</td>
+<td>OEORDD</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTYSHIPPED</td>
+<td>Y</td>
+<td>OEORDD</td>
+<td>Only applies if IntegrationPost is true</td>
+</tr>
+<tr>
+<td>UOM</td>
+<td>ORDUNIT</td>
+<td>N</td>
+<td>OEORDD</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="receive">RECEIVE</h3>
+<ul>
+<li>Granite Transaction: <strong>RECEIVE</strong></li>
+<li>Accpac: <strong>P/O Transactions Purchase Order Entry</strong></li>
+<li>Supports: <ul>
+<li>POExchangeRate (See setting description)</li>
+<li>PurchaseOrderOverrideLocation (See setting description)</li>
+<li>DocumentReference (posts to the REFERENCE field in Accpac)</li>
+<li>Lots with ExpiryDate</li>
+<li>Serials</li>
+<li>UOM</li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>Not supported, will always process receipt</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>RCPNUMBER</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>PONUMBER</td>
+<td>Y</td>
+<td>PORCPH1</td>
+<td></td>
+</tr>
+<tr>
+<td>DocumentReference</td>
+<td>REFERENCE</td>
+<td>Y</td>
+<td>PORCPH1</td>
+<td></td>
+</tr>
+<tr>
+<td>UOM</td>
+<td>RCPUNIT</td>
+<td>Y</td>
+<td>PORCPL</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>RQRECEIVED</td>
+<td>Y</td>
+<td>PORCPL</td>
+<td></td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>LOCATION</td>
+<td>Y</td>
+<td>PORCPL</td>
+<td>Only applies if PurchaseOrderOverrideLocation is true</td>
+</tr>
+<tr>
+<td>MasterItemCode</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>PORCPL</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LOTNUMF</td>
+<td>N</td>
+<td>PORCPLL</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpiryDate</td>
+<td>EXPIRYDATE</td>
+<td>N</td>
+<td>PORCPLL</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTY</td>
+<td>N</td>
+<td>PORCPLL</td>
+<td></td>
+</tr>
+<tr>
+<td>SerialNumber</td>
+<td>SERIALNUMF</td>
+<td>N</td>
+<td>PORCPLS</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="receivingpostmultiple">RECEIVINGPOSTMULTIPLE</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The TransactionDocumentReference field is used to group all the Purchase Orders you would like to post as one receipt.
+The RECEIVINGPOSTMULTIPLE process should be used for posting. </p>
+</div>
+<ul>
+<li>Granite Transaction: <strong>RECEIVE</strong></li>
+<li>Accpac: <strong>P/O Transactions Purchase Order Entry</strong></li>
+<li>Supports:<ul>
+<li>POExchangeRate (See setting description)</li>
+<li>PurchaseOrderOverrideLocation (See setting description)</li>
+<li>DocumentReference (posts to REFERENCE field in Accpac)</li>
+<li>Lots with ExpiryDate</li>
+<li>Serials</li>
+<li>UOM</li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>Not supported, will always process receipt</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>RCPNUMBER</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>PONUMBER</td>
+<td>Y</td>
+<td>PORCPR</td>
+<td></td>
+</tr>
+<tr>
+<td>DocumentReference</td>
+<td>REFERENCE</td>
+<td>Y</td>
+<td>PORCPH1</td>
+<td></td>
+</tr>
+<tr>
+<td>UOM</td>
+<td>RCPUNIT</td>
+<td>Y</td>
+<td>PORCPL</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>RQRECEIVED</td>
+<td>Y</td>
+<td>PORCPL</td>
+<td></td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>LOCATION</td>
+<td>Y</td>
+<td>PORCPL</td>
+<td>Only applies if PurchaseOrderOverrideLocation is true</td>
+</tr>
+<tr>
+<td>MasterItemCode</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>PORCPL</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LOTNUMF</td>
+<td>N</td>
+<td>PORCPLL</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpiryDate</td>
+<td>EXPIRYDATE</td>
+<td>N</td>
+<td>PORCPLL</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTY</td>
+<td>N</td>
+<td>PORCPLL</td>
+<td></td>
+</tr>
+<tr>
+<td>SerialNumber</td>
+<td>SERIALNUMF</td>
+<td>N</td>
+<td>PORCPLS</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="returnreceipt">RETURNRECEIPT</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Return document must be brought in to Granite as an ORDER document.
+We pick against it to reduce stock, and when we post we update the Return document's qtys.</p>
+</div>
+<ul>
+<li>Granite Transaction: <strong>PICK</strong></li>
+<li>Accpac: <strong>P/O Transactions Receipt Entry</strong></li>
+<li>IntegrationPost:<ul>
+<li>Not supported, will always create return</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>RETNUMBER</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>RCPNUMBER</td>
+<td>Y</td>
+<td>PORETH1</td>
+<td></td>
+</tr>
+<tr>
+<td>LineNumber</td>
+<td>RCPLSEQ</td>
+<td>Y</td>
+<td>PORETL</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>RQRETURNED</td>
+<td>Y</td>
+<td>PORETL</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="manufacture">MANUFACTURE</h3>
+<ul>
+<li>Granite Transaction: <strong>MANUFACTURE</strong></li>
+<li>Accpac: <strong>I/C Transactions Assemblies</strong></li>
+<li>Supports:<ul>
+<li>Comment</li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>False - Enters assembly</li>
+<li>True - Posts assembly</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>Comma separated list of DOCNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MasterItemCode</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>ICASEN</td>
+<td></td>
+</tr>
+<tr>
+<td>Comment</td>
+<td>BOMNO</td>
+<td>Y</td>
+<td>ICASEN</td>
+<td>Must contain Accpac BOMNO</td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>LOCATION</td>
+<td>Y</td>
+<td>ICASEN</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QUANTITY</td>
+<td>Y</td>
+<td>ICASEN</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="update_assemblies">UPDATE_ASSEMBLIES</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Granite document number must exist in Accpac as the Assembly number. If not found will throw error.</p>
+</div>
+<ul>
+<li>Granite Transaction: <strong>MANUFACTURE</strong></li>
+<li>Accpac: <strong>I/C Transactions Assemblies</strong></li>
+<li>Supports:<ul>
+<li>Transaction IDs </li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>False - Enters assembly</li>
+<li>True - Posts assembly</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>DOCNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>DOCNUM</td>
+<td>Y</td>
+<td>ICASEN</td>
+<td></td>
+</tr>
+<tr>
+<td>MasterItemCode</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>ICASEN</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QUANTITY</td>
+<td>Y</td>
+<td>ICASEN</td>
+<td></td>
+</tr>
+<tr>
+<td>Transaction ID</td>
+<td>REFERENCE</td>
+<td>Y</td>
+<td>ICASEN</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="internalusage">***INTERNALUSAGE</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Can be used with multiple Granite Transaction Types (Adjsutment, Scrap etc.). 
+Granite Transactions must be linked to a document with a number matching the Accpac Internal Usage number</p>
+</div>
+<ul>
+<li>Granite Process IntegrationMethod: <strong>INTERNALUSAGE</strong></li>
+<li>Accpac: <strong>I/C Transactions Internal Usage</strong>. <ul>
+<li>Based on document, update internal usage</li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>False - Saves internal usage</li>
+<li>True - Posts internal usage</li>
+<li>GLACCT (GL Account), mapped to Granite Comment</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>DOCNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>DOCNUM</td>
+<td>Y</td>
+<td>ICICEH</td>
+<td>Must be the Accpac Internal Usage DOCNUM</td>
+</tr>
+<tr>
+<td>"GRANITE WMS"</td>
+<td>REFERENCE</td>
+<td>Y</td>
+<td>ICICEH</td>
+<td></td>
+</tr>
+<tr>
+<td>MasterItemCode</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>ICICED</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>LOCATION</td>
+<td>Y</td>
+<td>ICICED</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QUANTITY</td>
+<td>Y</td>
+<td>ICICED</td>
+<td></td>
+</tr>
+<tr>
+<td>Comment</td>
+<td>GLACCT</td>
+<td>N</td>
+<td>ICICED</td>
+<td>if comment not empty, this is the GL account</td>
+</tr>
+</tbody>
+</table>
+<h3 id="internalusagedynamic">***INTERNALUSAGEDYNAMIC</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Can be used with multiple Granite Transaction Types, set the Process' IntegrationMethod to INTERNALUSAGEDYNAMIC to post. </p>
+</div>
+<ul>
+<li>Granite Process IntegrationMethod: <strong>INTERNALUSAGEDYNAMIC</strong></li>
+<li>Accpac: <strong>I/C Transactions Internal Usage</strong></li>
+<li>Supports: <ul>
+<li>Integration Reference (Accpac Internal Usage Number)</li>
+<li>Lots</li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li>False - Saves internal usage</li>
+<li>True - Posts internal usage</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>DOCNUM</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IntegrationReference</td>
+<td>DOCNUM</td>
+<td>Y</td>
+<td>ICICEH</td>
+<td>Create or update if exists, if empty follows Accpac sequence</td>
+</tr>
+<tr>
+<td>"GRANITE WMS"</td>
+<td>REFERENCE</td>
+<td>Y</td>
+<td>ICICEH</td>
+<td></td>
+</tr>
+<tr>
+<td>LineNumber</td>
+<td>LINENO</td>
+<td>Y</td>
+<td>ICICED</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QUANTITY</td>
+<td>Y</td>
+<td>ICICED</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LOTNUMF</td>
+<td>N</td>
+<td>ICICEDL</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QTY</td>
+<td>N</td>
+<td>ICICEDL</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="issue">***ISSUE</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires custom module (Pacific Technology Solutions' Internal Issues)
+Granite Document Description must be set to "NormalPick" to ensure that we post to an existing document in Accpac. 
+If this is not set, we still post to an existing document with matching Number when one is found - however if a matching document is not found we create it (DynamicIssue).
+Can be used with multiple Granite Transaction Types, set the Process' IntegrationMethod to ISSUE to post. 
+Granite Transactions must be linked to a document with a number matching the Accpac Internal Issue Number</p>
+</div>
+<ul>
+<li>Granite Process IntegrationMethod: <strong>ISSUE</strong></li>
+<li>Accpac: <strong>II Internal Issues</strong> Custom module (Pacific Technology Solutions' Internal Issues)</li>
+</ul>
+<h3 id="materialallocation">***MATERIALALLOCATION</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Granite Document Description must be set to CONTRACT/PROJECT/CATEGORY (in that order with slashes separating them).</p>
+</div>
+<ul>
+<li>Granite Process IntegrationMethod: <strong>MATERIALALLOCATION</strong></li>
+<li>Accpac: <strong>Project and Job Costing -&gt; PJC Transactions -&gt; Material Allocation</strong></li>
+<li>IntegrationPost:<ul>
+<li>Not supported, will always create material allocation</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>MALLOCNO</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"GRANITE"</td>
+<td>REFERENCE</td>
+<td>Y</td>
+<td>PMMTAH</td>
+</tr>
+<tr>
+<td>Document Description Contract</td>
+<td>FMTCONTNO</td>
+<td>Y</td>
+<td>PMMTAD</td>
+</tr>
+<tr>
+<td>Document Description Project</td>
+<td>PROJECT</td>
+<td>Y</td>
+<td>PMMTAD</td>
+</tr>
+<tr>
+<td>Document Description Category</td>
+<td>CATEGORY</td>
+<td>Y</td>
+<td>PMMTAD</td>
+</tr>
+<tr>
+<td>MasterItem Code</td>
+<td>RESOURCE</td>
+<td>Y</td>
+<td>PMMTAD</td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>LOCATION</td>
+<td>Y</td>
+<td>PMMTAD</td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QUANTITY</td>
+<td>Y</td>
+<td>PMMTAD</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autosimply-10-oct-2023-under-construction">AutoSimply (10 Oct 2023: under construction)</h3>
+<h4 id="issuances">Issuances</h4>
+<p>This method is used when you want to post the consumption of the work order seperate from the receipt 
+of the finish goods. It will post based on each CONSUME transaction.</p>
+<ul>
+<li>Granite Process IntegrationMethod: <strong>AUTOSIMPLY_ISSUANCES</strong></li>
+<li>Accpac/AutoSimply: <strong>Manufacture -&gt; MF Transactions -&gt; Material Issuances -&gt; Issuances</strong></li>
+<li>Support for: <ul>
+<li>Lots</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>ISSUENO</li>
+</ul>
+</li>
+<li>Notes:</li>
+<li>Single MO (work order) per Issuances</li>
+<li>MO status released</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document Description</td>
+<td>ISSDESC</td>
+<td>N</td>
+<td>MFISSUH</td>
+</tr>
+<tr>
+<td>Document Number</td>
+<td>ToMO</td>
+<td>Y</td>
+<td>MFISSUH</td>
+</tr>
+<tr>
+<td>Document Number</td>
+<td>FromMO</td>
+<td>Y</td>
+<td>MFISSUH</td>
+</tr>
+<tr>
+<td>LineNumber</td>
+<td>DETAILNUM</td>
+<td>Y</td>
+<td>MFISSUD</td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>ISSQTY</td>
+<td>Y</td>
+<td>MFISSUD</td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>XGENALCQTY</td>
+<td>N</td>
+<td>MFISSUD</td>
+</tr>
+</tbody>
+</table>
+<h4 id="receipts">Receipts</h4>
+<p>This method is also used by Backflush.
+Perform an Receipt of finish goods based on the Granite Manufacture transactions for the WorkOrder.
+Prior to receipt typically the Issuances need to be done, or you need to perform a backflush as per below.</p>
+<ul>
+<li>Granite Process IntegrationMethod: <strong>AUTOSIMPLY_RECEIPTS</strong></li>
+<li>Accpac/AutoSimply: <strong>Manufacture -&gt; MF Transactions -&gt; Material Receipt -&gt; Receipts</strong></li>
+<li>Support for: <ul>
+<li>Lots</li>
+</ul>
+</li>
+</ul>
+<h4 id="backflush">Backflush</h4>
+<p>Backflush will take the total based on manufactured transactions (finish goods) and will ask autosimply
+to "automate" the issuances. This method ignores Granite consume transactions. 
+The result will be both a Issuances and Receipt in one where only the Manufacture transactions of Granite is used.</p>
+<ul>
+<li>Granite Process IntegrationMethod: <strong>AUTOSIMPLY_BACKFLUSH</strong></li>
+<li>Accpac/AutoSimply: <strong>Manufacture -&gt; MF Transactions -&gt; MO Backflush</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document Number</td>
+<td>ToMO</td>
+<td>Y</td>
+<td>MFISSUH</td>
+</tr>
+<tr>
+<td>Document Number</td>
+<td>FromMO</td>
+<td>Y</td>
+<td>MFISSUH</td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>BaseQty</td>
+<td>Y</td>
+<td>MFISSUD</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
+      
+    
+  </body>
+</html>
