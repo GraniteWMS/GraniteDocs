@@ -30,6 +30,10 @@ nav:
         - integration/evo/index.md
         - SDK Provider: integration/evo/sdk-provider.md
         - Integration Jobs: integration/evo/integration-jobs.md
+      - ISync:
+        - integration/isync/index.md
+        - SDK Provider: integration/isync/sdk-provider.md
+        - Integration Jobs: integration/isync/integration-jobs.md
       - Omni: integration/omni/sdk-provider.md
       - QuickBooks: integration/quickbooks/native-app.md
       - SAPB1: integration/sapb1/sdk-provider.md
