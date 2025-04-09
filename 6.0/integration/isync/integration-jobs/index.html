@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://granitewms.github.io/GraniteDocs/6.0/sqlclr/version-6-upgrade-guide/">
+        <link rel="canonical" href="https://granitewms.github.io/GraniteDocs/6.0/integration/isync/integration-jobs/">
       
       
-        <link rel="prev" href="../getting-started/">
+        <link rel="prev" href="../sdk-provider/">
       
       
-        <link rel="next" href="../reference/">
+        <link rel="next" href="../../omni/sdk-provider/">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.5">
     
     
       
-        <title>Version 6 Upgrade Guide - Granite WMS Documentation</title>
+        <title>Integration Jobs - Granite WMS Documentation</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.50c56a3b.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="../../extra_css/custom.css">
+      <link rel="stylesheet" href="../../../extra_css/custom.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#version-6-upgrade-guide" class="md-skip">
+        <a href="#integration-jobs" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Granite WMS Documentation" class="md-header__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
+    <a href="../../.." title="Granite WMS Documentation" class="md-header__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Version 6 Upgrade Guide
+              Integration Jobs
             
           </span>
         </div>
@@ -209,7 +209,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
     
@@ -230,7 +230,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../scaffold/manual/" class="md-tabs__link">
+        <a href="../../../scaffold/manual/" class="md-tabs__link">
           
   
     
@@ -250,7 +250,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../tools/" class="md-tabs__link">
+        <a href="../../../tools/" class="md-tabs__link">
           
   
     
@@ -270,7 +270,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../updates/" class="md-tabs__link">
+        <a href="../../../updates/" class="md-tabs__link">
           
   
     
@@ -305,7 +305,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Granite WMS Documentation" class="md-nav__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
+    <a href="../../.." title="Granite WMS Documentation" class="md-nav__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -323,7 +323,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -405,7 +405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../scaffold/manual/" class="md-nav__link">
+      <a href="../../../scaffold/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -469,7 +469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../label-printing/bartender/manual/" class="md-nav__link">
+      <a href="../../../label-printing/bartender/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -490,7 +490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../label-printing/zpl/manual/" class="md-nav__link">
+      <a href="../../../label-printing/zpl/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -516,8 +516,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -547,12 +549,12 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
         
           
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
@@ -566,7 +568,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             Integration
@@ -604,7 +606,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../integration/accpac/" class="md-nav__link ">
+            <a href="../../accpac/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -637,7 +639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/accpac/sdk-provider/" class="md-nav__link">
+      <a href="../../accpac/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -658,7 +660,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/accpac/integration-jobs/" class="md-nav__link">
+      <a href="../../accpac/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -713,7 +715,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../integration/acumatica/" class="md-nav__link ">
+            <a href="../../acumatica/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -746,7 +748,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/acumatica/acumatica-overview/" class="md-nav__link">
+      <a href="../../acumatica/acumatica-overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -767,7 +769,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/acumatica/sdk-provider/" class="md-nav__link">
+      <a href="../../acumatica/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -788,7 +790,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/acumatica/integration-jobs/" class="md-nav__link">
+      <a href="../../acumatica/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -843,7 +845,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../integration/cin7/" class="md-nav__link ">
+            <a href="../../cin7/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -876,7 +878,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/cin7/cin7-overview/" class="md-nav__link">
+      <a href="../../cin7/cin7-overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -897,7 +899,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/cin7/sdk-provider/" class="md-nav__link">
+      <a href="../../cin7/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -918,7 +920,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/cin7/integration-jobs/" class="md-nav__link">
+      <a href="../../cin7/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -971,7 +973,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../integration/evo/" class="md-nav__link ">
+            <a href="../../evo/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1004,7 +1006,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/evo/sdk-provider/" class="md-nav__link">
+      <a href="../../evo/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1025,7 +1027,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/evo/integration-jobs/" class="md-nav__link">
+      <a href="../../evo/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1051,6 +1053,8 @@
                 
   
   
+    
+  
   
   
     
@@ -1068,17 +1072,17 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_5" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../integration/isync/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1095,7 +1099,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_3_5">
             <span class="md-nav__icon md-icon"></span>
             ISync
@@ -1111,7 +1115,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/isync/sdk-provider/" class="md-nav__link">
+      <a href="../sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1129,10 +1133,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../integration/isync/integration-jobs/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Integration Jobs
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1141,6 +1165,119 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#email-on-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      Email on Error
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Settings
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datagrid-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      Datagrid Log
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mapping
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sales-order-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sales Order mapping:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#purchase-order-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Purchase Order Mapping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#masteritem-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      MasterItem Mapping
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1161,7 +1298,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/omni/sdk-provider/" class="md-nav__link">
+      <a href="../../omni/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1182,7 +1319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/quickbooks/native-app/" class="md-nav__link">
+      <a href="../../quickbooks/native-app/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1203,7 +1340,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/sapb1/sdk-provider/" class="md-nav__link">
+      <a href="../../sapb1/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1224,7 +1361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/syspro/sdk-provider/" class="md-nav__link">
+      <a href="../../syspro/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1269,7 +1406,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../integration/sage100/" class="md-nav__link ">
+            <a href="../../sage100/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1302,7 +1439,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/sage100/sdk-provider/" class="md-nav__link">
+      <a href="../../sage100/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1323,7 +1460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/sage100/integration-jobs/" class="md-nav__link">
+      <a href="../../sage100/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1376,7 +1513,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../integration/intacct/" class="md-nav__link ">
+            <a href="../../intacct/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1409,7 +1546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/intacct/sdk-provider/" class="md-nav__link">
+      <a href="../../intacct/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1430,7 +1567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/intacct/integration-jobs/" class="md-nav__link">
+      <a href="../../intacct/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1491,7 +1628,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../webdesktop/" class="md-nav__link ">
+            <a href="../../../webdesktop/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1524,7 +1661,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../webdesktop/datagrid/datagrid/" class="md-nav__link">
+      <a href="../../../webdesktop/datagrid/datagrid/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1545,7 +1682,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../webdesktop/datacapture/data-capture/" class="md-nav__link">
+      <a href="../../../webdesktop/datacapture/data-capture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1574,7 +1711,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../android-application/manual/" class="md-nav__link">
+      <a href="../../../android-application/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1595,7 +1732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../business-api/manual/" class="md-nav__link">
+      <a href="../../../business-api/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1648,7 +1785,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../custodian-api/" class="md-nav__link ">
+            <a href="../../../custodian-api/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1681,7 +1818,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../custodian-api/getting-started/" class="md-nav__link">
+      <a href="../../../custodian-api/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1702,7 +1839,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../custodian-api/process-template-service/" class="md-nav__link">
+      <a href="../../../custodian-api/process-template-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1723,7 +1860,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../custodian-api/email-service/" class="md-nav__link">
+      <a href="../../../custodian-api/email-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1744,7 +1881,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../custodian-api/reporting-service/" class="md-nav__link">
+      <a href="../../../custodian-api/reporting-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1765,7 +1902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../custodian-api/sql-export-service/" class="md-nav__link">
+      <a href="../../../custodian-api/sql-export-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1786,7 +1923,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../scheduler/manual/" class="md-nav__link">
+      <a href="../../../scheduler/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1812,8 +1949,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1829,17 +1964,17 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../customization/" class="md-nav__link ">
+            <a href="../../../customization/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1856,7 +1991,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_8">
             <span class="md-nav__icon md-icon"></span>
             Customization
@@ -1869,8 +2004,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1890,17 +2023,17 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8_2" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../../sqlclr/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1917,7 +2050,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_8_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_8_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_8_2">
             <span class="md-nav__icon md-icon"></span>
             SQLCLR
@@ -1933,7 +2066,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/" class="md-nav__link">
+      <a href="../../../sqlclr/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1951,30 +2084,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Version 6 Upgrade Guide
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../sqlclr/version-6-upgrade-guide/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1983,119 +2096,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-has-changed" class="md-nav__link">
-    <span class="md-ellipsis">
-      What has changed
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="What has changed">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#outputs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Outputs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#businessapi" class="md-nav__link">
-    <span class="md-ellipsis">
-      BusinessAPI
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#utilityapi-custodianapi" class="md-nav__link">
-    <span class="md-ellipsis">
-      UtilityAPI &gt; CustodianAPI
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#upgrade-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      Upgrade Steps:
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Upgrade Steps:">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-new-sqlclr" class="md-nav__link">
-    <span class="md-ellipsis">
-      Install new SQLCLR
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#update-system-settings" class="md-nav__link">
-    <span class="md-ellipsis">
-      Update System Settings
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#identify-all-places-it-has-been-used" class="md-nav__link">
-    <span class="md-ellipsis">
-      Identify all places it has been used
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#apply-changes-for-each-procedure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Apply changes for each procedure
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2108,7 +2108,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/" class="md-nav__link">
+      <a href="../../../sqlclr/reference/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2171,7 +2171,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../security/" class="md-nav__link ">
+            <a href="../../../security/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2204,7 +2204,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/system-security/" class="md-nav__link">
+      <a href="../../../security/system-security/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2225,7 +2225,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/user-permissions/" class="md-nav__link">
+      <a href="../../../security/user-permissions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2246,7 +2246,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/api-keys/" class="md-nav__link">
+      <a href="../../../security/api-keys/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2315,7 +2315,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../tools/" class="md-nav__link ">
+            <a href="../../../tools/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2348,7 +2348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../iis/getting-started/" class="md-nav__link">
+      <a href="../../../iis/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2369,7 +2369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ssrs/getting-started/" class="md-nav__link">
+      <a href="../../../ssrs/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2390,7 +2390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tools/jam/" class="md-nav__link">
+      <a href="../../../tools/jam/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2411,7 +2411,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tools/jaeger/" class="md-nav__link">
+      <a href="../../../tools/jaeger/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2432,7 +2432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tools/nifi/" class="md-nav__link">
+      <a href="../../../tools/nifi/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2487,7 +2487,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../updates/" class="md-nav__link ">
+            <a href="../../../updates/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2565,7 +2565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../updates/V4/whats-new/" class="md-nav__link">
+      <a href="../../../updates/V4/whats-new/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2629,7 +2629,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../updates/V5/whats-new/" class="md-nav__link">
+      <a href="../../../updates/V5/whats-new/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2650,7 +2650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../updates/V5/product-update/" class="md-nav__link">
+      <a href="../../../updates/V5/product-update/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2722,7 +2722,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../updates/V6/whats-new/" class="md-nav__link">
+      <a href="../../../updates/V6/whats-new/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2743,7 +2743,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../updates/V6/cheatsheet/" class="md-nav__link">
+      <a href="../../../updates/V6/cheatsheet/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2780,7 +2780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../updates/release-notes/" class="md-nav__link">
+      <a href="../../../updates/release-notes/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2828,37 +2828,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-has-changed" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      What has changed
+      Overview
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="What has changed">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#outputs" class="md-nav__link">
+  <a href="#email-on-error" class="md-nav__link">
     <span class="md-ellipsis">
-      Outputs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#businessapi" class="md-nav__link">
-    <span class="md-ellipsis">
-      BusinessAPI
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#utilityapi-custodianapi" class="md-nav__link">
-    <span class="md-ellipsis">
-      UtilityAPI &gt; CustodianAPI
+      Email on Error
     </span>
   </a>
   
@@ -2870,46 +2861,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#upgrade-steps" class="md-nav__link">
+  <a href="#system-settings" class="md-nav__link">
     <span class="md-ellipsis">
-      Upgrade Steps:
+      System Settings
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Upgrade Steps:">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datagrid-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      Datagrid Log
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mapping
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mapping">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-new-sqlclr" class="md-nav__link">
+  <a href="#sales-order-mapping" class="md-nav__link">
     <span class="md-ellipsis">
-      Install new SQLCLR
+      Sales Order mapping:
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#update-system-settings" class="md-nav__link">
+  <a href="#purchase-order-mapping" class="md-nav__link">
     <span class="md-ellipsis">
-      Update System Settings
+      Purchase Order Mapping
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#identify-all-places-it-has-been-used" class="md-nav__link">
+  <a href="#masteritem-mapping" class="md-nav__link">
     <span class="md-ellipsis">
-      Identify all places it has been used
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#apply-changes-for-each-procedure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Apply changes for each procedure
+      MasterItem Mapping
     </span>
   </a>
   
@@ -2935,129 +2935,478 @@
                   
 
 
-<h1 id="version-6-upgrade-guide">Version 6 Upgrade Guide</h1>
-<p>This document explains the process of upgrading SQLCLR from version 5 to version 6 (Business API version).
-You will only need to do this if you upgrading an existing database to version 6. New version 6 installs come with SQLCLR.</p>
-<h2 id="what-has-changed">What has changed</h2>
-<h3 id="outputs">Outputs</h3>
-<p>All outputs have be changed from responseCode and responseJson to success and message. 
-While this requires some overhead to change initially it will greatly simplify using SQLCLR in future. 
-Rather than building in handling into the prescript the valid and message can directly be set from the output.</p>
-<h3 id="businessapi">BusinessAPI</h3>
-<p>In version 6 the <a href="../../business-api/manual/">BusinessAPI</a> has replaced the WebService. This has a few affects. The first is that the system setting needs to be changes to include the address of the BusinessAPI rather than the WebService.
-The next is that many have different parameters. </p>
-<h3 id="utilityapi-custodianapi">UtilityAPI &gt; CustodianAPI</h3>
-<p>The UtilityAPI has been merged with CustodianAPI. The only affect this has is on the System settings needs to be changed. </p>
-<h2 id="upgrade-steps">Upgrade Steps:</h2>
+<h1 id="integration-jobs">Integration Jobs</h1>
+<h3 id="overview">Overview</h3>
+<p>Integration with ISync is done through xml files shared with ISync via SFTP. For the integration jobs this involves reading the xml files in the steps below. </p>
 <ol>
-<li><a href="#install-new-sqlclr">Install new SQLCLR</a></li>
-<li><a href="#update-system-settings">Update System Settings</a></li>
-<li><a href="#identify-all-place-it-has-been-used">Identify all place it has been used</a></li>
-<li><a href="#apply-changes-for-each-procedure">Apply changes for each procedure</a></li>
+<li>The files are inserted into the respective folder <code>ISyncFilePath</code>/Inbound/<code>FileName</code>.</li>
+<li>The scheduled job fires and discovers the new files. </li>
+<li>The data is read from the files and mapped to the relevant Granite type (see mappings below).</li>
+<li>The job will then attempt to either insert or update existing records in Granite. </li>
+<li>The file is then moved to the Archive file path to either the success or failure folder depending on if it integrated successfully or not. </li>
 </ol>
-<h3 id="install-new-sqlclr">Install new SQLCLR</h3>
-<p>Either use Custodian migration to upgrade SQLCLR(preferred method) or run the version 6 SQLCLR_install.sql script from the deploy folder.</p>
-<h3 id="update-system-settings">Update System Settings</h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You only need to do this if implementing the changes manually. If done through Custodian migration these changes will be made already.</p>
+<p>The audit user for any changes in Granite will be the name of the xml file that contained the data rather than the standard integration. </p>
 </div>
-<p>Add the new System Settings entry for BusinessAPI and remove Webservice entry.
-You can use the below script.</p>
-<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">SystemSettings</span><span class="p">]</span><span class="w"> </span><span class="p">([</span><span class="n">Application</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="k">Key</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Description</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">ValueDataType</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isEncrypted</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isActive</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">AuditDate</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">AuditUser</span><span class="p">])</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;SQLCLR&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Business_API_Endpoint&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Business API Address&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">SystemSettings</span><span class="p">]</span>
-<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">Application</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;SQLCLR&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="k">Key</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Business_API_Endpoint&#39;</span>
-<span class="p">);</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">SystemSettings</span><span class="p">]</span><span class="w"> </span><span class="p">([</span><span class="n">Application</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="k">Key</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Description</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">ValueDataType</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isEncrypted</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isActive</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">AuditDate</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">AuditUser</span><span class="p">])</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;SQLCLR&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Custodian_API_Endpoint&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Custodian API Address&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">SystemSettings</span><span class="p">]</span>
-<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">Application</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;SQLCLR&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="k">Key</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Custodian_API_Endpoint&#39;</span>
-<span class="p">);</span>
+<h3 id="configure">Configure</h3>
+<h4 id="email-on-error">Email on Error</h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Emailing functionality is now handled by the <a href="../../../custodian-api/">Custodian API</a>, set up has changed from previous versions.</p>
+</div>
+<p>Ensure that you have configured the CustodianApiUrl for the Scheduler in the <code>SystemSettings</code> table:</p>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GraniteScheduler</td>
+<td>CustodianApiUrl</td>
+<td>https://localhost:5001/</td>
+</tr>
+</tbody>
+</table>
+<p>Ensure you have the <code>IntegrationError</code> email template in your database. This is the email template that is used for all error notifications in these injected jobs. </p>
+<p>Then for each job that needs to send failure notifications, add a job input for <code>MailOnError</code> and <code>MailOnErrorToAddresses</code>:</p>
+<table>
+<thead>
+<tr>
+<th>JobName</th>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; JobName goes here &gt;</td>
+<td>MailOnError</td>
+<td>true</td>
+</tr>
+<tr>
+<td>&lt; JobName goes here &gt;</td>
+<td>MailOnErrorToAddresses</td>
+<td>name@client.co.za;name2@client.co.za</td>
+</tr>
+</tbody>
+</table>
+<h3 id="system-settings">System Settings</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ISyncFilePath</td>
+<td>ISync File Path</td>
+<td>C:\ISync</td>
+</tr>
+<tr>
+<td>ArchiveFilePath</td>
+<td>Archive File Path</td>
+<td>C:\Archive</td>
+</tr>
+</tbody>
+</table>
+<H4>ISyncFilePath</H4>
 
-<span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SystemSettings</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">Application</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;SQLCLR&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="k">Key</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Webservice&#39;</span><span class="p">)</span>
-<span class="k">BEGIN</span>
-<span class="w">    </span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">SystemSettings</span>
-<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">Application</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;SQLCLR&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="k">Key</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Webservice&#39;</span>
-<span class="k">END</span>
-</code></pre></div>
-<h3 id="identify-all-places-it-has-been-used">Identify all places it has been used</h3>
-<p>As a result of the changes listed in the <a href="#what-has-changed">what has changed</a> section above you will need to alter the prescripts using any of the SQLCLR procedures.</p>
-<p>To find all of these procedures you can use the following script:
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w">  </span><span class="n">referencing_object_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OBJECT_NAME</span><span class="p">(</span><span class="n">sd</span><span class="p">.</span><span class="n">referencing_id</span><span class="p">),</span>
-<span class="w">        </span><span class="n">referenced_object_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">COALESCE</span><span class="p">(</span><span class="n">OBJECT_NAME</span><span class="p">(</span><span class="n">sd</span><span class="p">.</span><span class="n">referenced_id</span><span class="p">),</span><span class="w"> </span><span class="n">sd</span><span class="p">.</span><span class="n">referenced_entity_name</span><span class="p">)</span>
-<span class="k">FROM</span><span class="w">    </span><span class="n">sys</span><span class="p">.</span><span class="n">sql_expression_dependencies</span><span class="w"> </span><span class="n">sd</span>
-<span class="w">        </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">objects</span><span class="w"> </span><span class="n">so</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">sd</span><span class="p">.</span><span class="n">referencing_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">so</span><span class="p">.</span><span class="n">object_id</span>
-<span class="w">        </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">objects</span><span class="w"> </span><span class="n">so_referenced</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">sd</span><span class="p">.</span><span class="n">referenced_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">so_referenced</span><span class="p">.</span><span class="n">object_id</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">sd</span><span class="p">.</span><span class="n">referenced_entity_name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;clr_%&#39;</span><span class="p">;</span>
-</code></pre></div></p>
-<p>The first column is the prescript and the second is SQLCLR procedure executed in the script.</p>
-<p><img alt="Find prescripts" src="../img/find-prescripts.PNG" /></p>
-<h3 id="apply-changes-for-each-procedure">Apply changes for each procedure</h3>
-<p>To alter the existing procedure the simplest process will be to right click on the procedure and select execute.
-Fill in test info to get the formatting of the execute. </p>
-<p><img alt="Execute" src="../img/execute-procedure.PNG" /></p>
-<p>You can then replace the existing exec in prescript with the new one. Here you can see a before and after using clr_Adjustment. </p>
-<p>BEFORE:
-<div class="highlight"><pre><span></span><code><span class="k">EXECUTE</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">clr_Adjustment</span><span class="p">]</span><span class="w"> </span>
-<span class="w">   </span><span class="o">@</span><span class="n">userID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">userID</span>
-<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">inventoryIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">inventoryIdentifier</span>
-<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">qty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">qty</span>
-<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="k">comment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="k">comment</span>
-<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">reference</span>
-<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">adjustmentType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">adjustmentType</span>
-<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">integrationReference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">integrationReference</span>
-<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">processName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">processName</span>
-<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="k">OUTPUT</span>
-<span class="w">  </span><span class="p">,</span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">responseJSON</span><span class="w"> </span><span class="k">OUTPUT</span>
+<p>This is the base file path where files are used to integrate with ISync will be. Files for integration into Granite will be in the Inbound folder. This will then be further divided into each document type (ItemCatalogue, PurchaseOrders, WarehouseShipmentOrders).</p>
+<H4>ArchiveFilePath</H4>
 
-<span class="k">IF</span><span class="w"> </span><span class="o">@</span><span class="n">responseCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span>
-<span class="k">BEGIN</span>
-<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="k">valid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">&#39;Successfully adjusted &#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">TrackingEntityBarcode</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; to &#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">QtyToAdjustTo</span><span class="p">)</span><span class="w">  </span>
-<span class="k">END</span>
-<span class="k">ELSE</span>
-<span class="k">BEGIN</span>
-<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="k">valid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">responseJSON</span>
-<span class="k">END</span>
+<p>This folder is used to keep a backup of the files exchanged with ISync. This will have the same file structure as the ISyncFilePath with the exception that the InBound folders will also have a success and failure folder.</p>
+<h3 id="datagrid-log">Datagrid Log</h3>
+<p>Bellow are the details for the datagrid that can be used to show errors in downwards/inbound integration jobs.</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">ISyncIntegrationDownwards</span>
+<span class="k">AS</span>
+<span class="k">SELECT</span><span class="w">  </span><span class="n">IntegrationLog</span><span class="p">.</span><span class="nb">Date</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="n">LogOrigin</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="n">LogLevel</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="n">IntegrationLog</span><span class="p">.[</span><span class="k">User</span><span class="p">]</span><span class="w"> </span><span class="n">FileName</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Document</span><span class="p">.</span><span class="nb">Number</span><span class="w"> </span><span class="n">Document</span><span class="p">,</span>
+<span class="w">        </span><span class="n">MasterItem</span><span class="p">.</span><span class="n">Code</span><span class="p">,</span><span class="w"> </span>
+<span class="w">        </span><span class="n">MasterItem</span><span class="p">.</span><span class="n">Description</span><span class="p">,</span>
+<span class="w">        </span><span class="k">ISNULL</span><span class="p">(</span><span class="n">DocumentDetail</span><span class="p">.</span><span class="n">Qty</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">Qty</span><span class="p">,</span>
+<span class="w">        </span><span class="k">ISNULL</span><span class="p">(</span><span class="n">DocumentDetail</span><span class="p">.</span><span class="n">ActionQty</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">ActionQty</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Message</span>
+<span class="k">FROM</span><span class="w">    </span><span class="n">IntegrationLog</span><span class="w"> </span>
+<span class="w">        </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">Document</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">IntegrationLog</span><span class="p">.</span><span class="n">Document_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Document</span><span class="p">.</span><span class="n">ID</span>
+<span class="w">        </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">DocumentDetail</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">DocumentDetail_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DocumentDetail</span><span class="p">.</span><span class="n">ID</span>
+<span class="w">        </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">MasterItem</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">DocumentDetail</span><span class="p">.</span><span class="n">Item_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MasterItem</span><span class="p">.</span><span class="n">ID</span>
 </code></pre></div>
-AFTER:
-<div class="highlight"><pre><span></span><code><span class="k">EXEC</span><span class="w">    </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">clr_Adjustment</span><span class="p">]</span>
-<span class="w">        </span><span class="o">@</span><span class="n">userName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">UserName</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">trackingEntityIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">inventoryIdentifier</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">adjustmentQty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">qty</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="k">comment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="k">comment</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">reference</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">adjustmentType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">adjustmentType</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">integrationReference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">integrationReference</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">processName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">processName</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="k">valid</span><span class="w"> </span><span class="k">OUTPUT</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">message</span><span class="w"> </span><span class="k">OUTPUT</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Date&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">105</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agDateColumnFilter&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LogOrigin&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agTextColumnFilter&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LogLevel&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">111</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agTextColumnFilter&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;cellClassRules&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;bg-error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x == &#39;ERROR&#39;&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FileName&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">135</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agTextColumnFilter&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Document&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">117</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agTextColumnFilter&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Code&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agTextColumnFilter&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Description&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">279</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agTextColumnFilter&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Qty&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agTextColumnFilter&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ActionQty&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">118</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agTextColumnFilter&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Message&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">451</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agTextColumnFilter&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
 </code></pre></div>
-The main things to note are that you pass the UserName instead of the userID. This paired with being able to directly set the valid and message makes using the SQLCLR procedures far simpler. </p>
-<p>In this example the SQLCLR is the last action in the prescript so you can directly set the @valid and @message. If this is not the case, you can check if it succeeded like this:</p>
-<div class="highlight"><pre><span></span><code><span class="k">EXEC</span><span class="w">    </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">clr_Adjustment</span><span class="p">]</span>
-<span class="w">        </span><span class="o">@</span><span class="n">userName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">UserName</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">trackingEntityIdentifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">inventoryIdentifier</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">adjustmentQty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">qty</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="k">comment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="k">comment</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">reference</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">adjustmentType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">adjustmentType</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">integrationReference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">integrationReference</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">processName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">processName</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">success</span><span class="w"> </span><span class="k">OUTPUT</span><span class="p">,</span>
-<span class="w">        </span><span class="o">@</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@</span><span class="n">message</span><span class="w"> </span><span class="k">OUTPUT</span>
-
-<span class="k">IF</span><span class="p">(</span><span class="o">@</span><span class="n">success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">-- 1 indicates success</span>
-<span class="w">    </span><span class="k">BEGIN</span><span class="w"> </span>
-<span class="w">        </span><span class="c1">-- Continue with logic here</span>
-<span class="w">    </span><span class="k">END</span>
-</code></pre></div>
+<h3 id="mapping">Mapping</h3>
+<h4 id="sales-order-mapping">Sales Order mapping:</h4>
+<table>
+<thead>
+<tr>
+<th>WarehouseShipmentOrder Property</th>
+<th>Document Property</th>
+<th>Mapping Logic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DepositorOrderNumber</td>
+<td>Number</td>
+<td><code>documentNumberPrefix + order.DepositorOrderNumber</code></td>
+</tr>
+<tr>
+<td>BillToCode</td>
+<td>TradingPartnerCode</td>
+<td><code>order.BillToCode</code></td>
+</tr>
+<tr>
+<td>BillToCompany</td>
+<td>TradingPartnerDescription</td>
+<td><code>order.BillToCompany</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>CreateDate</td>
+<td><code>DateTime.Now</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>isActive</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>AuditDate</td>
+<td><code>DateTime.Now</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>AuditUser</td>
+<td><code>order.FileName</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Site</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Type</td>
+<td><code>"ORDER"</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Status</td>
+<td><code>"ENTERED"</code></td>
+</tr>
+<tr>
+<td>DepositorOrderNumber</td>
+<td>ERPIdentification</td>
+<td><code>order.DepositorOrderNumber</code></td>
+</tr>
+<tr>
+<td>FileName</td>
+<td>FileName</td>
+<td><code>order.FileName</code></td>
+</tr>
+<tr>
+<td>CarrierName</td>
+<td>RouteName</td>
+<td><code>order.CarrierName</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>WarehouseShipmentOrderLineItem Property</th>
+<th>DocumentDetail Property</th>
+<th>Mapping Logic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N/A</td>
+<td>LineNumber</td>
+<td><code>((index + 1) * 10).ToString()</code></td>
+</tr>
+<tr>
+<td>OrderedQty</td>
+<td>Qty</td>
+<td><code>item.OrderedQty</code></td>
+</tr>
+<tr>
+<td>OrderedQtyUOM</td>
+<td>UOM</td>
+<td><code>item.OrderedQtyUOM</code></td>
+</tr>
+<tr>
+<td>UPC</td>
+<td>MasterItem_Code</td>
+<td><code>item.UPC.ToString()</code></td>
+</tr>
+<tr>
+<td>UPC</td>
+<td>ERPIdentification</td>
+<td><code>item.UPC.ToString()</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>AuditDate</td>
+<td><code>DateTime.Now</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>AuditUser</td>
+<td><code>order.FileName</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="purchase-order-mapping">Purchase Order Mapping</h4>
+<table>
+<thead>
+<tr>
+<th>PurchaseOrder Property</th>
+<th>Document Property</th>
+<th>Mapping Logic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DepositorOrderNumber</td>
+<td>Number</td>
+<td><code>documentNumberPrefix + po.DepositorOrderNumber</code></td>
+</tr>
+<tr>
+<td>DepositorCode</td>
+<td>TradingPartnerCode</td>
+<td><code>po.DepositorCode</code></td>
+</tr>
+<tr>
+<td>Comments</td>
+<td>Description</td>
+<td><code>po.Comments</code></td>
+</tr>
+<tr>
+<td>PurchaseOrderDate</td>
+<td>CreateDate</td>
+<td><code>po.PurchaseOrderDate</code></td>
+</tr>
+<tr>
+<td>DueDate</td>
+<td>ExpectedDate</td>
+<td><code>po.DueDate</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>isActive</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>AuditDate</td>
+<td><code>DateTime.Now</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>AuditUser</td>
+<td><code>po.FileName</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Site</td>
+<td><code>""</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Type</td>
+<td><code>"RECEIVING"</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>Status</td>
+<td><code>"ENTERED"</code></td>
+</tr>
+<tr>
+<td>DepositorOrderNumber</td>
+<td>ERPIdentification</td>
+<td><code>po.DepositorOrderNumber</code></td>
+</tr>
+<tr>
+<td>FileName</td>
+<td>FileName</td>
+<td><code>po.FileName</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>PurchaseOrderItem Property</th>
+<th>DocumentDetail Property</th>
+<th>Mapping Logic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>N/A</td>
+<td>LineNumber</td>
+<td><code>((index + 1) * 10).ToString()</code></td>
+</tr>
+<tr>
+<td>OrderedQty</td>
+<td>Qty</td>
+<td><code>item.OrderedQty</code></td>
+</tr>
+<tr>
+<td>OrderedQtyUOM</td>
+<td>UOM</td>
+<td><code>item.OrderedQtyUOM</code></td>
+</tr>
+<tr>
+<td>UPC</td>
+<td>MasterItem_Code</td>
+<td><code>item.UPC.ToString()</code></td>
+</tr>
+<tr>
+<td>UPC</td>
+<td>ERPIdentification</td>
+<td><code>item.UPC.ToString()</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>AuditDate</td>
+<td><code>DateTime.Now</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>AuditUser</td>
+<td><code>po.FileName</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="masteritem-mapping">MasterItem Mapping</h4>
+<table>
+<thead>
+<tr>
+<th>ItemCatalogueItem Property</th>
+<th>MasterItem Property</th>
+<th>Mapping Logic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UPC</td>
+<td>Code</td>
+<td><code>item.UPC.ToString()</code></td>
+</tr>
+<tr>
+<td>ProductCode</td>
+<td>FormattedCode</td>
+<td><code>$"{item.ProductCode}-{item.UPC.ToString()}"</code></td>
+</tr>
+<tr>
+<td>ProductDescription</td>
+<td>Description</td>
+<td><code>item.ProductDescription</code></td>
+</tr>
+<tr>
+<td>Category</td>
+<td>RST_StyleName</td>
+<td><code>item.Category</code></td>
+</tr>
+<tr>
+<td>SizeDescription</td>
+<td>SIZ_SizeDesc</td>
+<td><code>item.SizeDescription</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>UOM</td>
+<td><code>"EACH"</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>isActive</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>AuditDate</td>
+<td><code>DateTime.Now</code></td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>AuditUser</td>
+<td><code>Path.GetFileNameWithoutExtension(filePath)</code></td>
+</tr>
+<tr>
+<td>ProductCode</td>
+<td>ERPIdentification</td>
+<td><code>item.ProductCode</code></td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -3112,12 +3461,12 @@ The main things to note are that you pass the UserName instead of the userID. Th
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c18c5fb9.min.js"></script>
       
-        <script src="../../extra_js/custom.js"></script>
+        <script src="../../../extra_js/custom.js"></script>
       
     
   </body>
