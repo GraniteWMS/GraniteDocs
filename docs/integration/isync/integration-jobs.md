@@ -157,7 +157,7 @@ FROM	IntegrationLog
 | OrderedQty                              | Qty                        | `item.OrderedQty`                                  |
 | OrderedQtyUOM                           | UOM                        | `item.OrderedQtyUOM`                               |
 | UPC                                     | MasterItem_Code            | `item.UPC.ToString()`                              |
-| UPC                                     | ERPIdentification          | `item.UPC.ToString()`                              |
+| UPC-ShipmentOrderItemId                 | ERPIdentification          | `{item.UPC.ToString()}-{item.ShipmentOrderItemId.ToString()}`                              |
 | N/A                                     | AuditDate                  | `DateTime.Now`                                     |
 | N/A                                     | AuditUser                  | `order.FileName`                                   |
 
@@ -188,7 +188,7 @@ FROM	IntegrationLog
 | OrderedQty                   | Qty                        | `item.OrderedQty`                                  |
 | OrderedQtyUOM                | UOM                        | `item.OrderedQtyUOM`                               |
 | UPC                          | MasterItem_Code            | `item.UPC.ToString()`                              |
-| UPC                          | ERPIdentification          | `item.UPC.ToString()`                              |
+| UPC-PurchaseOrderItemId      | ERPIdentification          | `{item.UPC.ToString()}-{item.PurchaseOrderItemId.ToString()`|
 | N/A                          | AuditDate                  | `DateTime.Now`                                     |
 | N/A                          | AuditUser                  | `po.FileName`                                    |
 

@@ -252,10 +252,11 @@ WarehouseShipmentAdviseItem Mapping
 |------------------------|----------------------------------------|-------------------------------------------------------------------------------|
 | `t.Code`               | `ProductCode`                          | Mapped using `graniteRepository.GetMasterItemErpIdentification(t.Code)`       |
 | `t.Code`               | `UPC`                                  | Direct assignment from `t.Code`                                               |
-| `graniteRepository.GetOrderQty(t.Code)` | `OrderedQty`                        | Mapped using `graniteRepository.GetOrderQty(t.Code)`                         |
+| `graniteRepository.GetOrderQty(t.Code)` | `OrderedQty`                        | Mapped using `graniteRepository.GetOrderQty(t.Code)`            |
 | `t.UOM`                | `OrderedQtyUOM`                        | Direct assignment from `t.UOM`                                                |
 | `t.ActionQty`          | `ShippedQty`                           | Direct assignment from `ActionQty`                                            |
 | `t.UOM`                | `ShippedQtyUOM`                        | Direct assignment from `t.UOM`                                                |
+| `documentDetailErpId.Split('-').Last()` |`ShipmentOrderItemId`| Mapped using `graniteRepository.GetDocumentDetailErpId(t.LineNumber, t.Document, t.Code)` |
 
 
 
@@ -289,6 +290,7 @@ InventoryReceiptItem Mapping
 | `t.ActionQty`          | `ReceivedQty`                   | Direct assignment from `ActionQty` (Summed by masteritem code)|
 | `t.UOM`                | `ReceivedQtyUOM`                | Direct assignment from `t.UOM`                                                |
 | N/A                    | `ReceivingConditionCode`        | Static string assignment `"00"`                                               |
+| `documentDetailErpId.Split('-').Last()` |`PurchaseOrderLineId`| Mapped using `graniteRepository.GetDocumentDetailErpId(t.LineNumber, t.Document, t.Code)` |
 
 
 
