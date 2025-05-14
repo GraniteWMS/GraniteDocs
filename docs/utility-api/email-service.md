@@ -65,9 +65,9 @@ Since Gmail has blocked access to SMTP, sending email via a Gmail account involv
     
     1. Deploy the new Utility API (V 5.0.1.1 or newer)
 
-    2. Run the SQL script at `...\Granite Releases\Granite Info Gmail Auth\CustodianSystemSettings.sql`
+    2. Run the SQL script at `...\Granite Releases\Granite Info Gmail Auth\UtilityApiSystemSettings.sql`
 
-    3. Copy the GmailTokens folder `...\Granite Releases\Granite Info Gmail Auth\GmailTokens` into the GraniteCustodian folder
+    3. Copy the GmailTokens folder `...\Granite Releases\Granite Info Gmail Auth\GmailTokens` into the GraniteUtilityAPI folder
 
 To send email via Gmail, you will first need to [enable Gmail API access](#allow-gmail-account-api-access) for the account you're using and obtain the `Client ID` and `Client secret`.
 These are the UserName and Password that you will need to set in `SystemSettings`.
