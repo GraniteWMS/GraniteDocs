@@ -3581,6 +3581,21 @@ If the <code>EmailProvider</code> setting is empty, it will default to using the
 </ul>
 <h4 id="gmail">Gmail</h4>
 <p>Since Gmail has blocked access to SMTP, sending email via a Gmail account involves more set up.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are updating in order to continue using the GraniteWMS Info to send email, all you need to do is the following:</p>
+<ol>
+<li>
+<p>Deploy the latest Custodian API </p>
+</li>
+<li>
+<p>Run the SQL script at <code>...\Granite Releases\Granite Info Gmail Auth\CustodianSystemSettings.sql</code></p>
+</li>
+<li>
+<p>Copy the GmailTokens folder <code>...\Granite Releases\Granite Info Gmail Auth\GmailTokens</code> into the GraniteCustodian folder</p>
+</li>
+</ol>
+</div>
 <p>To send email via Gmail, you will first need to <a href="#allow-gmail-account-api-access">enable Gmail API access</a> for the account you're using and obtain the <code>Client ID</code> and <code>Client secret</code>.
 These are the UserName and Password that you will need to set in <code>SystemSettings</code>.</p>
 <p>Next, you will need to place the API token file in the <code>...\GraniteUtilityAPI\GmailTokens</code> folder.

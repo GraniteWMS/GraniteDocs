@@ -3488,6 +3488,11 @@ If you require a different integration action you can specify the name below in 
 <td><code>ShippedQtyUOM</code></td>
 <td>Direct assignment from <code>t.UOM</code></td>
 </tr>
+<tr>
+<td><code>documentDetailErpId.Split('-').Last()</code></td>
+<td><code>ShipmentOrderItemId</code></td>
+<td>Mapped using <code>graniteRepository.GetDocumentDetailErpId(t.LineNumber, t.Document, t.Code)</code></td>
+</tr>
 </tbody>
 </table>
 <h3 id="receive">RECEIVE</h3>
@@ -3584,6 +3589,11 @@ If you require a different integration action you can specify the name below in 
 <td>N/A</td>
 <td><code>ReceivingConditionCode</code></td>
 <td>Static string assignment <code>"00"</code></td>
+</tr>
+<tr>
+<td><code>documentDetailErpId.Split('-').Last()</code></td>
+<td><code>PurchaseOrderLineId</code></td>
+<td>Mapped using <code>graniteRepository.GetDocumentDetailErpId(t.LineNumber, t.Document, t.Code)</code></td>
 </tr>
 </tbody>
 </table>
