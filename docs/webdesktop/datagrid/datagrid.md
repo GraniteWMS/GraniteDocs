@@ -67,6 +67,7 @@ Set the PageSize on the database table Datagrid.PageSize.
 | filter         | Type of filter for the column. Options : agTextColumnFilter, agDateColumnFilter, agNumberColumnFilter   |
 | cellRenderer   | How do render the cell value. Options : "dateCellRenderer"     |
 | hide           | Hide the column. true / false                   |
+| sort           | Set default sort order. Options: "asc", "desc" |
 | cellClassRules | Condition styling, "text-error": "x == 0" . Options : **more below** |
 
 
