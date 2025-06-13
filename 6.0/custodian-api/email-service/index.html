@@ -3435,11 +3435,11 @@
 <h2 id="configuration">Configuration</h2>
 <div class="admonition warning">
 <p class="admonition-title">Google shutting down access to sending mails via SMTP</p>
-<p>As of January 2025, the Utility API will not be able to send emails using SMTP.</p>
+<p>As of January 2025, the Custodian API will not be able to send emails using SMTP.</p>
 <p>If you are using a Gmail address to send emails, you will need to switch over to the new <a href="#gmail">Gmail provider</a></p>
 </div>
 <p>Settings for the Email Service are configured in the <code>SystemSettings</code> table. You can find the insert script for the settings in the GraniteDatabase install folder:</p>
-<div class="highlight"><pre><span></span><code>&quot;...\GraniteDatabase\Data\SystemSettings\SystemSettingsUtilityAPI.sql&quot;
+<div class="highlight"><pre><span></span><code>&quot;...\GraniteDatabase\Data\SystemSettings\SystemSettingsCustodian.sql&quot;
 </code></pre></div>
 <p>You should have the following settings after running the script:</p>
 <table>
@@ -3540,7 +3540,7 @@
 <td>Granite.Custodian</td>
 <td>EmailAttachmentFolder</td>
 <td></td>
-<td>Full filepath to folder to export email attachments to. Leave empty to use the Utility API install folder</td>
+<td>Full filepath to folder to export email attachments to. Leave empty to use the Custodian install folder</td>
 <td>string</td>
 <td>False</td>
 <td>True</td>
@@ -3564,7 +3564,7 @@
 <p>Email Providers allow us to configure the way that we send emails for different types of email accounts.
 At the moment we support sending email using a SMTP server directly, or using the Gmail API.</p>
 <p>Note that as of January 2025, Gmail no longer allows sending emails using their SMTP server directly.
-This is why configuring the UtilityApi to send email via a Gmail account works slightly differently.</p>
+This is why configuring the Email Service to send email via a Gmail account works slightly differently.</p>
 <p>To configure the <code>EmailProvider</code>, set the name of the provider you want to use in SystemSettings.
 If the <code>EmailProvider</code> setting is empty, it will default to using the SMTP provider.</p>
 <h4 id="smtp">SMTP</h4>
@@ -3598,7 +3598,7 @@ If the <code>EmailProvider</code> setting is empty, it will default to using the
 </div>
 <p>To send email via Gmail, you will first need to <a href="#allow-gmail-account-api-access">enable Gmail API access</a> for the account you're using and obtain the <code>Client ID</code> and <code>Client secret</code>.
 These are the UserName and Password that you will need to set in <code>SystemSettings</code>.</p>
-<p>Next, you will need to place the API token file in the <code>...\GraniteUtilityAPI\GmailTokens</code> folder.
+<p>Next, you will need to place the API token file in the <code>...\GraniteCustodian\GmailTokens</code> folder.
 If you have the token file for the account you are using already, you can simply paste it in.
 Otherwise, you will need to run the <a href="#gmail-authenticator">Gmail Authenticator</a> to obtain the token file.</p>
 <h5 id="required-system-settings_1">Required System Settings</h5>
@@ -3614,7 +3614,7 @@ Otherwise, you will need to run the <a href="#gmail-authenticator">Gmail Authent
 <p>This configuration has already been completed for the GraniteWMS Info account, it does not need to be performed again.</p>
 <p>If you are using the GraniteWMS Info account, use the script in Dropbox to update your SystemSettings and then run the <a href="#gmail-authenticator">GmailAuthenticator</a> app to log in.</p>
 </div>
-<p>To allow UtilityAPI access to the Gmail account in order to send email, we will need to configure some settings on the Gmail account.</p>
+<p>To allow Email Service access to the Gmail account in order to send email, we will need to configure some settings on the Gmail account.</p>
 <p>Browse to <a href="https://console.cloud.google.com">https://console.cloud.google.com</a> and log in with the account that you want to use, then follow the steps below.</p>
 <ol>
 <li>
@@ -3626,7 +3626,7 @@ Otherwise, you will need to run the <a href="#gmail-authenticator">Gmail Authent
 <p><img alt="" src="../img/gmail2.png" /></p>
 </li>
 <li>
-<p>Give the new project a name e.g. <code>GraniteUtilityAPI</code>.
+<p>Give the new project a name e.g. <code>GraniteCustodianAPI</code>.
 You shouldn't need to change the Location/Organization. Just keep the default and click <code>CREATE</code></p>
 <p><img alt="" src="../img/gmail3.png" /></p>
 </li>
@@ -3699,28 +3699,28 @@ While you are in SystemSettings, also ensure that you have the <code>EmailProvid
 </li>
 </ol>
 <h5 id="gmail-authenticator">Gmail Authenticator</h5>
-<p>The Gmail Authenticator connects to the Gmail API using the Client ID and Client secret from System Settings, and fetches tokens that allow the Utility API to connect to the Gmail API.
-This is a once off set up, once you have authenticated, the Utility API will be able to send email via Gmail.</p>
+<p>The Gmail Authenticator connects to the Gmail API using the Client ID and Client secret from System Settings, and fetches tokens that allow the Custodian API to connect to the Gmail API.
+This is a once off set up, once you have authenticated, the Email Service will be able to send email via Gmail.</p>
 <ol>
 <li>
 <p>Open a browser window that is either signed in with the Gmail account you are planning to use, or not signed in to any Gmail account. The Guest mode in Chrome works well for this.</p>
 </li>
 <li>
-<p>Browse to the folder where you have installed the UtilityAPI, and into the <code>GmailAuthenticator</code> folder. 
+<p>Browse to the folder where you have installed Custodian, and into the <code>GmailAuthenticator</code> folder. 
 Run the <code>Granite.Email.GmailAuthenticator.exe</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Granite.Email.GmailAuthenticator.exe uses the UtilityApi's appSettings.json file. 
+<p>Granite.Email.GmailAuthenticator.exe uses the Custodian's appSettings.json file. 
 Make sure that it is configured before trying to authenticate the Gmail account.</p>
 </div>
 </li>
 <li>
-<p>A new browser tab will open asking you to log in to authorize the Utility API. 
+<p>A new browser tab will open asking you to log in to authorize the Custodian API. 
 Log in with the Gmail account that you are going to use to send emails. 
 Log in with the <strong>normal username and password</strong> - NOT the Client ID and Client secret</p>
 </li>
 </ol>
-<p>After signing in via the browser, Gmail Authenticator will place the received token file into the <code>...\GraniteUtilityAPI\GmailTokens</code> folder</p>
+<p>After signing in via the browser, Gmail Authenticator will place the received token file into the <code>...\GraniteCustodian\GmailTokens</code> folder</p>
 <h2 id="email-templates">Email Templates</h2>
 <p>Email templates use MARKDOWN for text formatting - HTML is not supported. 
 If you're not familiar with markdown, take a look at the <a href="https://www.markdownguide.org/cheat-sheet/">syntax cheat-sheet</a>.</p>
