@@ -3,7 +3,7 @@
 ## Configuration
 
 !!! warning "Google shutting down access to sending mails via SMTP"
-    As of January 2025, the Utility API will not be able to send emails using SMTP.
+    As of January 2025, the Custodian API will not be able to send emails using SMTP.
 
     If you are using a Gmail address to send emails, you will need to switch over to the new [Gmail provider](#gmail)
 
@@ -11,7 +11,7 @@
 Settings for the Email Service are configured in the `SystemSettings` table. You can find the insert script for the settings in the GraniteDatabase install folder:
 
 ```
-"...\GraniteDatabase\Data\SystemSettings\SystemSettingsUtilityAPI.sql"
+"...\GraniteDatabase\Data\SystemSettings\SystemSettingsCustodian.sql"
 ```
 
 You should have the following settings after running the script:
@@ -27,7 +27,7 @@ You should have the following settings after running the script:
 | Granite.Custodian	| FromName				|           				| The sender name that will display to users who receive emails												| string		| False			| True		|
 | Granite.Custodian	| RetryInterval			| 30						| Number of seconds to wait before retrying processing an email												| int			| False			| True		|
 | Granite.Custodian	| MaxNumberOfRetries	| 3							| Maximum number of times to retry processing an email.             										| int			| False			| True		|
-| Granite.Custodian	| EmailAttachmentFolder |							| Full filepath to folder to export email attachments to. Leave empty to use the Utility API install folder | string		| False			| True		|
+| Granite.Custodian	| EmailAttachmentFolder |							| Full filepath to folder to export email attachments to. Leave empty to use the Custodian install folder   | string		| False			| True		|
 | Granite.Custodian	| EmailProvider         |							| Provider to use for sending emails. If empty, we will use the SMTP provider.                              | string		| False			| True		|
 
 !!! note "Password isEncrypted is True"
@@ -39,7 +39,7 @@ Email Providers allow us to configure the way that we send emails for different 
 At the moment we support sending email using a SMTP server directly, or using the Gmail API.
 
 Note that as of January 2025, Gmail no longer allows sending emails using their SMTP server directly.
-This is why configuring the UtilityApi to send email via a Gmail account works slightly differently.
+This is why configuring the Email Service to send email via a Gmail account works slightly differently.
 
 To configure the `EmailProvider`, set the name of the provider you want to use in SystemSettings.
 If the `EmailProvider` setting is empty, it will default to using the SMTP provider.
@@ -72,7 +72,7 @@ Since Gmail has blocked access to SMTP, sending email via a Gmail account involv
 To send email via Gmail, you will first need to [enable Gmail API access](#allow-gmail-account-api-access) for the account you're using and obtain the `Client ID` and `Client secret`.
 These are the UserName and Password that you will need to set in `SystemSettings`.
 
-Next, you will need to place the API token file in the `...\GraniteUtilityAPI\GmailTokens` folder.
+Next, you will need to place the API token file in the `...\GraniteCustodian\GmailTokens` folder.
 If you have the token file for the account you are using already, you can simply paste it in.
 Otherwise, you will need to run the [Gmail Authenticator](#gmail-authenticator) to obtain the token file.
 
@@ -90,7 +90,7 @@ Otherwise, you will need to run the [Gmail Authenticator](#gmail-authenticator) 
     
     If you are using the GraniteWMS Info account, use the script in Dropbox to update your SystemSettings and then run the [GmailAuthenticator](#gmail-authenticator) app to log in.
 
-To allow UtilityAPI access to the Gmail account in order to send email, we will need to configure some settings on the Gmail account.
+To allow Email Service access to the Gmail account in order to send email, we will need to configure some settings on the Gmail account.
 
 Browse to [https://console.cloud.google.com](https://console.cloud.google.com) and log in with the account that you want to use, then follow the steps below.
 
@@ -102,7 +102,7 @@ Browse to [https://console.cloud.google.com](https://console.cloud.google.com) a
 
     ![](img/gmail2.png)
 
-3. Give the new project a name e.g. `GraniteUtilityAPI`.
+3. Give the new project a name e.g. `GraniteCustodianAPI`.
 You shouldn't need to change the Location/Organization. Just keep the default and click `CREATE`
 
     ![](img/gmail3.png)
@@ -173,23 +173,23 @@ While you are in SystemSettings, also ensure that you have the `EmailProvider` s
         The `Client secret` must be encrypted. Ensure that you save it through the Webdesktop so that it is not stored in plaintext.
 
 ##### Gmail Authenticator 
-The Gmail Authenticator connects to the Gmail API using the Client ID and Client secret from System Settings, and fetches tokens that allow the Utility API to connect to the Gmail API.
-This is a once off set up, once you have authenticated, the Utility API will be able to send email via Gmail.
+The Gmail Authenticator connects to the Gmail API using the Client ID and Client secret from System Settings, and fetches tokens that allow the Custodian API to connect to the Gmail API.
+This is a once off set up, once you have authenticated, the Email Service will be able to send email via Gmail.
 
 1. Open a browser window that is either signed in with the Gmail account you are planning to use, or not signed in to any Gmail account. The Guest mode in Chrome works well for this.
 
-2. Browse to the folder where you have installed the UtilityAPI, and into the `GmailAuthenticator` folder. 
+2. Browse to the folder where you have installed Custodian, and into the `GmailAuthenticator` folder. 
 Run the `Granite.Email.GmailAuthenticator.exe`.
 
     !!! note 
-        Granite.Email.GmailAuthenticator.exe uses the UtilityApi's appSettings.json file. 
+        Granite.Email.GmailAuthenticator.exe uses the Custodian's appSettings.json file. 
         Make sure that it is configured before trying to authenticate the Gmail account.
 
-3. A new browser tab will open asking you to log in to authorize the Utility API. 
+3. A new browser tab will open asking you to log in to authorize the Custodian API. 
 Log in with the Gmail account that you are going to use to send emails. 
 Log in with the **normal username and password** - NOT the Client ID and Client secret
 
-After signing in via the browser, Gmail Authenticator will place the received token file into the `...\GraniteUtilityAPI\GmailTokens` folder
+After signing in via the browser, Gmail Authenticator will place the received token file into the `...\GraniteCustodian\GmailTokens` folder
 
 ## Email Templates
 
