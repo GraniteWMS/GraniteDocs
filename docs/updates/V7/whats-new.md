@@ -24,7 +24,7 @@ ___
 
 ## Process App
 
-<iframe src="https://share.descript.com/view/OQuBO8j6zjR" width="768" height="432" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/OQuBO8j6zjR" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 
 - Collapsible Menu Layout
 - Tree Menu Layout
@@ -34,7 +34,7 @@ ___
 
 ## Process Functions
 
-<iframe src="https://share.descript.com/view/onVbyM130xx" width="768" height="432" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/onVbyM130xx" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 
 Process Functions revolutionize workflow efficiency by allowing users to execute processes directly from within other processes. This feature eliminates the need to navigate away from your current task, enabling seamless workflow integration and reducing context switching.
 
@@ -44,19 +44,19 @@ ___
 
 ### Python in Version 7
 
-<iframe src="https://share.descript.com/view/nOyXOKmXVGW" width="768" height="432" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/nOyXOKmXVGW" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 
 - Python Prescripts
 - Python scheduled jobs
 
 ### Setting up VS Code for Python
 
-<iframe src="https://share.descript.com/view/bLO82PmfzMq" width="768" height="432" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/bLO82PmfzMq" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 ___
 
 ## Inventory Correction Transaction Type
 
-<iframe src="https://share.descript.com/view/tMNBqq9v6YB" width="768" height="432" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/tMNBqq9v6YB" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 
 The new Inventory Correction transaction type provides comprehensive capabilities for adhoc inventory corrections.
 ___
