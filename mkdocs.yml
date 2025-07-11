@@ -50,6 +50,8 @@ nav:
       - webdesktop/index.md
       - Data Grid: webdesktop/datagrid/datagrid.md
       - Data Capture: webdesktop/datacapture/data-capture.md
+    - Process App: 
+      - process-app/index.md
     - Scanner Application: android-application/manual.md
     - Business API: business-api/manual.md
     - Custodian API: 
