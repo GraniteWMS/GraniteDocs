@@ -46,6 +46,11 @@ nav:
         - integration/intacct/index.md
         - SDK Provider: integration/intacct/sdk-provider.md
         - Integration Jobs: integration/intacct/integration-jobs.md
+      - Sage X3: 
+        - integration/sagex3/index.md
+        - Sage X3 Overview: integration/sagex3/sagex3-overview.md
+        - SDK Provider: integration/sagex3/sdk-provider.md
+        - Integration Jobs: integration/sagex3/integration-jobs.md
     - Web Desktop: 
       - webdesktop/index.md
       - Data Grid: webdesktop/datagrid/datagrid.md
