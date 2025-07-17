@@ -1,13 +1,287 @@
 # Hotfixes
 
-# 2025-02-18 - 2025-02-24
+## 2025-07-08 - 2025-07-14
+
+Granite Process App 
+
+- Date 2025-07-14
+- Version 6.0.0.15
+- Fix error on optional field capture aborts capturing the rest of the fields.
+
+Granite Process App
+
+- Date 2025-07-11
+- Version 5.0.0.6
+- Fix takeon optional fields not capturing
+
+Granite Process App
+
+- Date 2025-07-10
+- Version 6.0.0.14
+- Fix “Not Found” error on picking when MasterItem has a trailing space
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2025-07-10
+- Version 6.0.0.9
+- Fix URL encoding issue on master item validation
+
+Granite.Custodian.ServiceInterface.dll
+
+- Date 2025-07-10
+- Version 6.0.0.2
+- Fix background retries failing with object reference error.
+
+Granite.Email.ServiceInterface.dll
+
+- Date 2025-07-10
+- Version 5.0.1.3
+- Fix background retries failing with object reference error.
+
+## 2025-07-01 - 2025-07-07
+
+Granite.Business.API.ServiceModel.dll 
+
+- Date 2025-07-03
+- Version 6.0.0.4
+- Add support for Consume & Manufacture business rules
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2025-07-03
+- Version 6.0.0.8
+- Add ActionQtyAllowance business rule to Consume & Manufacture
+
+Process App
+
+- Date 2025-07-03
+- Version 6.0.0.13
+- Add support for Consume & Manufacture business rules
+
+## 2025-06-17 - 2025-06-23
+
+Process App
+
+- Date 2025-06-20
+- Version 6.0.0.12
+- Fix “method not implemented” error on Manufacture when there is a step 200
+
+## 2025-06-10 - 2025-06-16
+
+Database SQLCLR
+
+- Date 2025-06-13
+- Version 5
+- Remove Response json truncation
+
+Database SQLCLR
+
+- Date 2025-06-10
+- Version 6
+- Added clr_Consume
+- Added clr_Manufacture
+- Fix clr_PrintLabel to work with https ZPL Label Print
+
+## 2025-06-03 - 2025-06-09
+
+ProcessApp
+
+- Date 2025-06-09
+- Version 6.0.0.11
+- Fix optional field capture for TakeOn
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2025-06-06
+- Version 6.0.0.7
+- Fix over transfer allowance for CarryingEntity and Partial TrackingEntity transfer
+
+## 2025-05-27 - 2025-06-02
+
+Process App
+
+- Date 2025-06-02
+- Version 6.0.0.10
+- Add support for Transfer business rules
+
+Granite.Business.API.ServiceInterface.dll, Granite.Business.API.ServiceModel.dll
+
+- Date 2025-06-02
+- Granite.Business.API.ServiceInterface.dll Version 6.0.0.6
+- Granite.Business.API.ServiceModel.dll version 6.0.0.3
+- Add ActionQtyAllowance business rule for transfers
+
+Granite.Integration.Accpac.Job.dll
+
+- Date 2025-05-29
+- Version 5.0.0.1 & 6.0.0.1
+- Set ERPSyncFailed = true when a line cannot be deleted in Granite because there are transactions against it
+
+## 2025-05-20 - 2025-05-26
+
+Granite.Repository.ServiceInterface.dll
+
+- Date 2025-05-21
+- Version 6.0.0.5
+- Fix batch validation on receiving and manufacture use barcode
+
+Granite.Repository.ServiceInterface.dll
+
+- Date 2025-05-20
+- Version 6.0.0.4
+- Copy Document now zeros packed qty
+
+Granite.DomainModel.dll
+
+- Date 2025-05-20
+- Version 5.0.1.2
+- Transfer overwriting qty on UseBarcode tracking entity instead of adding to it
+
+## 2025-05-13 - 2025-05-19
+
+Web Desktop
+
+- Date 2025-05-08
+- Reversal error
+
+## 2025-05-06 - 2025-05-12
+
+Web Desktop
+
+- Date 2025-05-08
+- Move, Scrap, Adjustment integration
+
+GraniteRepository.ServiceInterface.dll
+
+- Date 2025-05-08
+- Version **5.0.0.3, 6.0.0.2**
+- Delete process does not delete all process steps.
+- TRANSFER Progress **:** status update of INTRANSIT,RECEIPT document not working
+
+Process App
+
+- Date 2025-05-07
+- Version 6.0.0.9
+- Move transactions not being posted to integration service
+
+## 2025-04-29 - 2025-05-05
+
+Process App
+
+- Date 2025-05-05
+- Version 6.0.0.8
+- Fix error on manufacture use barcode step
+
+## 2025-04-22 - 2025-04-28
+
+Process App
+
+- Date: 2025-04-22
+- Version 6.0.0.7
+- Fix receiving empty use barcode step throwing error
+
+## 2025-04-08 - 2025-04-14
+
+GraniteRepository.ServiceInterface.dll
+
+- Date 2025-04-09
+- Version 4.5.3.2, 5.0.0.2, 6.0.0.1
+- Fix grid load time when view has CTE / subquerys
+
+## 2025-03-25 - 2025-03-31
+
+Repo API
+
+- Date 2025-03-28
+- Version 4.5.3.1
+- Fix CredentialsAuthProviderSync Error: Timeout expired, all pooled connections were in use.
+
+Process App
+
+- Date: 2025-03-26
+
+- Version 6.0.0.6
+- Fixed receiving business rules not actually passed to business api.
+
+Granite.Integration.PastelEvo.dll
+
+- Date: 2025-03-26
+- Version 6.0.0.3
+- New integration method **RECEIVE_WITHOUT_SERIALS**. Same as standard but does not post serial numbers for serialized items.
+
+## 2025-03-18 - 2025-03-24
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date: 2025-03-24
+- Version 6.0.0.4
+- Serial number validation override business rule on receiving
+
+Granite.Business.API.ServiceModel.dll
+
+- Date: 2025-03-24
+- Version 6.0.0.2
+- Add support for business rules to receiving
+
+Process App
+
+- Date: 2025-03-24
+- Version 6.0.0.5
+- Add support for business rules to receiving
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date: 2025-03-18
+- Version 6.0.0.3
+- New business rule override serial number validation on picking
+
+Granite.Integration.PastelEvo.dll
+
+- Date: 2025-03-18
+- Version 6.0.0.2
+- New integration method PICK_WITHOUT_SERIALS. Same as standard but does not post serial numbers for serialized items.
+
+## 2025-03-11 - 2025-03-17
+
+dbo.**API_QueryDocumentProgress**
+
+- Date: 2025-03-13
+- Added columns
+    - IntegrationReferences
+    - UnpostedTransactionCount
+
+**Process App**
+
+- Date: 2025-03-13
+- Version 6.0.0.4
+- **Fixed serialization and deserialization of dates to match the business api, added DateTimeFormat to appsettings**
+
+## 2025-03-04 - 2025-03-10
+
+Evo Integration Provider
+
+- Date: 2025-03-07
+- Evo Provider versions 5.0.0.1 & 6.0.0.1
+- Add system settings to allow specify rounding on action qty for posting back to Evo
+
+## 2025-02-25 - 2025-03-03
+
+ProcessApp & Business API
+
+- Date: 2025-02-25
+- ProcessApp version 6.0.0.3
+- Granite.Business.API.ServiceInterface.dll version 6.0.0.2
+- Granite.Business.API.ServiceModel.dll version 6.0.0.1
+- Fix Packing to allow using TrackingEntity barcode in place of MasterItem code
+
+## 2025-02-18 - 2025-02-24
 
 - Granite.Process.App
     - Date 2025-02-20
     - Version 6.0.0.2
     - Fix bug DestinationLocation step not being skipped for INTRANSIT transfers.
   
-# 2025-02-11 - 2025-02-17
+## 2025-02-11 - 2025-02-17
 
 - Granite.Business.API.ServiceInterface.dll
     - Date: 2025-02-12
@@ -32,7 +306,7 @@
     - Date 2025-02-14
     - Was missing from previous V6 Custodian release
 
-## 14/01/2025 - 20/01/2025
+## 2025-01-14 - 2025-01-20
 - Granite.Webservice.dll (second fix below)
     - Released 15/01/2025
     - Version **5.0.0.1**
@@ -46,7 +320,7 @@
     - Version **5.0.0.3**
     - Fix bug introduced by the fix in 5.0.0.1 - important update. Requests that need to wait to acquire a lock do not acquire a lock even once the document is available to process - this results in long running IIS requests that never terminate, and cause slow downs in IIS.
   
-## 06/01/2025 - 13/01/2025
+## 2025-01-06 - 2025-01-13
 - **GraniteScheduler.**ServiceInterface.dll
     - Released 06/01/2025
     - Version 5.0.0.1
