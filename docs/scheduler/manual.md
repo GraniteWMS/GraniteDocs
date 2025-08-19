@@ -174,7 +174,7 @@ To use a CRON expression on your job, set your `IntervalFormat` to CRON and put 
 
 	Be sure to test your CRON expression before deploying! 
 
-If your CRON expression is not triggering your job as you'd expect it to, try explicitly setting the timezone for the Scheduler to use in the SystemSettings table:
+If your CRON expression is not triggering your job as you'd expect it to, try explicitly setting the timezone for the Scheduler to use in the SystemSettings table (schedules and tokens use the server's local time):
 
 ![image info](img\TimeZoneSetting.png)
 
@@ -480,7 +480,7 @@ If any parameters referenced in `WhereTemplate` are missing from `WhereParams` (
 
 <h4>Date/Time Tokens for WhereParams</h4>
 
-You can use dynamic, UTC-based date/time tokens in `WhereParams` to filter rows relative to “now” or “today” without hard-coding timestamps.
+You can use dynamic, server-local date/time tokens in `WhereParams` to filter rows relative to “now” or “today” without hard-coding timestamps.
 
 - Where they’re used: Only as values within `WhereParams` (not inside `WhereTemplate`).
 - What they produce: A `DateTimeOffset` value bound as a SQL `datetimeoffset` parameter.
@@ -489,67 +489,67 @@ You can use dynamic, UTC-based date/time tokens in `WhereParams` to filter rows 
 Syntax
 
 - `${base[offsets][|rounding]}`
-  - `base` (required): `utcnow` or `utctoday`
-    - `utcnow` = current UTC date/time.
-    - `utctoday` = current UTC date at 00:00:00.000 (midnight).
-  - `offsets` (optional, repeatable): One or more signed adjustments with a unit. Chaining is allowed.
-    - Format: `+Nunit` or `-Nunit` (no spaces), where N is an integer.
-    - Units (case-sensitive):
-      - `s` = seconds
-      - `m` = minutes
-      - `h` = hours
-      - `d` = days
-      - `w` = weeks (7 days each)
-      - `M` = months (uppercase M)
-      - `y` = years
-    - Examples: `-30d`, `+2h-15m`, `-1M+7d`, `-1y`
-  - `rounding` (optional, after a single `|`):
-    - `startOfDay` → 00:00:00.000
-    - `endOfDay`   → 23:59:59.9999999
-    - `startOfMonth` → first day of month at 00:00:00.000
-    - `endOfMonth`   → last moment of the month (23:59:59.9999999)
+	- `base` (required): `now` or `today`
+		- `now` = current server local date/time (DateTimeOffset.Now).
+		- `today` = current server local date at 00:00:00.000 (midnight).
+	- `offsets` (optional, repeatable): One or more signed adjustments with a unit. Chaining is allowed.
+		- Format: `+Nunit` or `-Nunit` (no spaces), where N is an integer.
+		- Units (case-sensitive):
+			- `s` = seconds
+			- `m` = minutes
+			- `h` = hours
+			- `d` = days
+			- `w` = weeks (7 days each)
+			- `M` = months (uppercase M)
+			- `y` = years
+		- Examples: `-30d`, `+2h-15m`, `-1M+7d`, `-1y`
+	- `rounding` (optional, after a single `|`):
+		- `startOfDay` → 00:00:00.000
+		- `endOfDay`   → 23:59:59.9999999
+		- `startOfMonth` → first day of month at 00:00:00.000
+		- `endOfMonth`   → last moment of the month (23:59:59.9999999)
 
 Evaluation order
-1) Start from `base` (UTC).
+1) Start from `base` (server local time).
 2) Apply all `offsets` left-to-right.
 3) Apply `rounding` if present.
 
 Important notes
 
 - Units are case-sensitive: `m` = minutes, `M` = months.
-- All calculations are in UTC.
+- All calculations use the server's local time zone.
 - Multiple offsets can be chained; they are applied in sequence.
 
 Examples
 
 - Rows older than 30 days:
-  - WhereTemplate: `CreatedOn < @Cutoff`
-  - WhereParams: `{ "Cutoff": "${utcnow-30d}" }`
+	- WhereTemplate: `CreatedOn < @Cutoff`
+	- WhereParams: `{ "Cutoff": "${now-30d}" }`
 - All of yesterday (inclusive):
-  - WhereTemplate: `CreatedOn >= @From AND CreatedOn <= @To`
-  - WhereParams: `{ "From": "${utctoday-1d|startOfDay}", "To": "${utctoday-1d|endOfDay}" }`
+	- WhereTemplate: `CreatedOn >= @From AND CreatedOn <= @To`
+	- WhereParams: `{ "From": "${today-1d|startOfDay}", "To": "${today-1d|endOfDay}" }`
 - First day of last month at midnight:
-  - `${utctoday-1M|startOfMonth}`
+	- `${today-1M|startOfMonth}`
 - End of current month:
-  - `${utcnow|endOfMonth}`
+	- `${now|endOfMonth}`
 - Two hours and 15 minutes from now:
-  - `${utcnow+2h-15m}`
+	- `${now+2h-15m}`
 - One year ago, end of that month:
-  - `${utcnow-1y|endOfMonth}`
+	- `${now-1y|endOfMonth}`
 
 Sample configuration
 
-- Purge rows created before the start of the current UTC day:
-  - WhereTemplate: `CreatedOn < @Cutoff`
-  - WhereParams: `{ "Cutoff": "${utctoday|startOfDay}" }`
+- Purge rows created before the start of the current day:
+	- WhereTemplate: `CreatedOn < @Cutoff`
+	- WhereParams: `{ "Cutoff": "${today|startOfDay}" }`
 - Archive rows created on or before the end of last month:
-  - WhereTemplate: `CreatedOn <= @Cutoff`
-  - WhereParams: `{ "Cutoff": "${utcnow-1M|endOfMonth}" }`
+	- WhereTemplate: `CreatedOn <= @Cutoff`
+	- WhereParams: `{ "Cutoff": "${now-1M|endOfMonth}" }`
 
 Troubleshooting tokens
 
 - If a token is malformed (e.g., unknown base, bad unit, or syntax), the job input validation will fail with a log message indicating the problematic parameter.
-- If you need fixed timestamps instead, provide ISO 8601 strings (e.g., `"2025-08-01T00:00:00Z"`) instead of a token.
+- If you need fixed timestamps instead, provide ISO 8601 strings (e.g., "2025-08-01T00:00:00Z") instead of a token.
 
 
 #### Archive Table Jobs
@@ -584,7 +584,7 @@ Use this job type to move rows from a source table into an archive table in batc
 | --- | --- | --- | --- |
 | 1 | ArchiveOldOrders | TableName | dbo.Orders |
 | 2 | ArchiveOldOrders | WhereTemplate | CreatedOn < @Cutoff AND Status = @Status |
-| 3 | ArchiveOldOrders | WhereParams | { "Cutoff": "${utcnow-180d}", "Status": "Closed" } |
+| 3 | ArchiveOldOrders | WhereParams | { "Cutoff": "${now-180d}", "Status": "Closed" } |
 | 4 | ArchiveOldOrders | BatchSize | 2000 |
 | 5 | ArchiveOldOrders | MaxExecutionMinutes | 20 |
 | 6 | ArchiveOldOrders | DryRun | false |
@@ -594,7 +594,7 @@ Use this job type to move rows from a source table into an archive table in batc
 
 Notes:
 - The job runs hourly. Adjust `Interval`/`IntervalFormat` as needed, or use a CRON schedule.
-- `WhereParams` values are parsed into appropriate types; strings can be used when you want literal comparisons. Token-style values like `${...}` may be supported depending on system configuration; ensure they resolve to a valid value at runtime.
+- `WhereParams` values are parsed into appropriate types; strings can be used when you want literal comparisons. Token-style values like `${...}` resolve using server local time (e.g., `${now-180d}`).
 - The archive table `dbo.OrdersArchive` is created automatically if it does not exist.
 
 #### Delete Table Jobs
@@ -625,7 +625,7 @@ Use this job type to delete rows from a table in safe, bounded batches using a p
 | --- | --- | --- | --- |
 | 1 | PurgeTempRows | TableName | dbo.TempData |
 | 2 | PurgeTempRows | WhereTemplate | CreatedOn < @Cutoff |
-| 3 | PurgeTempRows | WhereParams | { "Cutoff": "${utcnow-7d}" } |
+| 3 | PurgeTempRows | WhereParams | { "Cutoff": "${now-7d}" } |
 | 4 | PurgeTempRows | BatchSize | 5000 |
 | 5 | PurgeTempRows | MaxExecutionMinutes | 15 |
 | 6 | PurgeTempRows | DryRun | false |
@@ -633,8 +633,8 @@ Use this job type to delete rows from a table in safe, bounded batches using a p
 | 8 | PurgeTempRows | OptimizeMode | Reorganize |
 
 Notes:
-- The CRON example runs daily at 02:00. You can use minutes/hours intervals as well.
-- `WhereParams` values can be typed (dates, numbers, booleans) and token-style values like `${utcnow-7d}` may be supported if resolvable at runtime.
+- The CRON example runs daily at 02:00 (server local time). You can use minutes/hours intervals as well.
+- `WhereParams` values can be typed (dates, numbers, booleans) and token-style values like `${now-7d}` are resolved relative to server local time.
 - Optimization is optional and only runs if rows were deleted during this run.
 
 
