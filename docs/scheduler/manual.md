@@ -461,6 +461,7 @@ The following is the information common to the two jobs above.
 <h3>Required JobInputs</h3>
 
 - `TableName` (string): The source table to either Archive or Delete from (e.g. `dbo.MyBigTable`). Avoid special characters like `;`, `--`, `/*`.
+ - `TableName` (string): The source table to either Archive or Delete from (e.g. `dbo.MyBigTable`). Avoid special characters like `;`, `--`, `/*`. For Delete Table Jobs specifically, only a limited set of tables is allowed and must be provided as the bare table name without schema; see the safety restrictions under Delete Table Jobs.
 - `WhereTemplate` (string): A SQL predicate that filters rows to either Archive or Delete, using parameter placeholders like `@FromDate`, `@Status` (e.g. `CreatedOn < @Cutoff AND Status = @Status`). Injection characters like `;`, `--`, `/*` are rejected.
 - `WhereParams` (JSON object): Name/value map for parameters referenced in `WhereTemplate`. Values are parsed into appropriate types when possible (null, bool, numbers, Guid, DateTime/DateTimeOffset). Example: `{ "Cutoff": "2024-01-01T00:00:00Z", "Status": "Closed" }`.
 
@@ -611,29 +612,44 @@ Use this job type to delete rows from a table in safe, bounded batches using a p
 - Time cap: Respects `MaxExecutionMinutes` and continues on the next scheduled run.
 - Optimization: When enabled, runs post-delete maintenance on the source table using the configured options.
 
+!!! warning
+	Safety restrictions: Delete Table Jobs are allowlisted to prevent accidental data loss. Only the following tables are permitted:
+
+	- ScheduledJobsHistory
+	- IntegrationLog
+	- LabelPrintQueue
+	- IntegrationDocumentQueue
+	- EmailLog
+	- InventoryDailyBalance
+
+	Notes:
+	- Provide `TableName` as shown above (bare table name, no schema). For example, use `IntegrationLog`, not `dbo.IntegrationLog`.
+	- Jobs targeting any other table will fail input validation and will not run.
+
 <h4>Example configuration</h4>
 
 `ScheduledJobs` (example):
 
 | ID | isActive | JobName | JobDescription | Type | StoredProcedure | InjectJob | Interval | IntervalFormat | Status | LastExecutionTime | LastExecutionResult | AuditDate | AuditUser |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 43 | True | PurgeTempRows | Delete temp rows older than 7 days | DELETETABLEDATA | NULL | NULL | 0 2 * * * | CRON | NULL | NULL | NULL | 2025-08-18 08:00:00.000 | admin |
+| 43 | True | PurgeOldIntegrationLog | Delete IntegrationLog rows older than 7 days | DELETETABLEDATA | NULL | NULL | 0 2 * * * | CRON | NULL | NULL | NULL | 2025-08-18 08:00:00.000 | admin |
 
-`ScheduledJobInputs` for `PurgeTempRows`:
+`ScheduledJobInputs` for `PurgeOldIntegrationLog`:
 
 | ID | JobName | Name | Value |
 | --- | --- | --- | --- |
-| 1 | PurgeTempRows | TableName | dbo.TempData |
-| 2 | PurgeTempRows | WhereTemplate | CreatedOn < @Cutoff |
-| 3 | PurgeTempRows | WhereParams | { "Cutoff": "${now-7d}" } |
-| 4 | PurgeTempRows | BatchSize | 5000 |
-| 5 | PurgeTempRows | MaxExecutionMinutes | 15 |
-| 6 | PurgeTempRows | DryRun | false |
-| 7 | PurgeTempRows | OptimizeTable | true |
-| 8 | PurgeTempRows | OptimizeMode | Reorganize |
+| 1 | PurgeOldIntegrationLog | TableName | IntegrationLog |
+| 2 | PurgeOldIntegrationLog | WhereTemplate | AuditDate < @Cutoff |
+| 3 | PurgeOldIntegrationLog | WhereParams | { "Cutoff": "${now-7d}" } |
+| 4 | PurgeOldIntegrationLog | BatchSize | 5000 |
+| 5 | PurgeOldIntegrationLog | MaxExecutionMinutes | 15 |
+| 6 | PurgeOldIntegrationLog | DryRun | false |
+| 7 | PurgeOldIntegrationLog | OptimizeTable | true |
+| 8 | PurgeOldIntegrationLog | OptimizeMode | Reorganize |
 
 Notes:
 - The CRON example runs daily at 02:00 (server local time). You can use minutes/hours intervals as well.
+- `TableName` must be one of the allowlisted tables and provided as a bare name (e.g., `IntegrationLog`).
 - `WhereParams` values can be typed (dates, numbers, booleans) and token-style values like `${now-7d}` are resolved relative to server local time.
 - Optimization is optional and only runs if rows were deleted during this run.
 
