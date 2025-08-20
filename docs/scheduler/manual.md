@@ -460,8 +460,7 @@ The following is the information common to the two jobs above.
 
 <h3>Required JobInputs</h3>
 
-- `TableName` (string): The source table to either Archive or Delete from (e.g. `dbo.MyBigTable`). Avoid special characters like `;`, `--`, `/*`.
- - `TableName` (string): The source table to either Archive or Delete from (e.g. `dbo.MyBigTable`). Avoid special characters like `;`, `--`, `/*`. For Delete Table Jobs specifically, only a limited set of tables is allowed and must be provided as the bare table name without schema; see the safety restrictions under Delete Table Jobs.
+- `TableName` (string): The source table to either Archive or Delete from (e.g. `MyBigTable`). Avoid special characters like `;`, `--`, `/*`. For Delete Table Jobs specifically, only a limited set of tables is allowed and must be provided as the bare table name without schema; see the safety restrictions under Delete Table Jobs.
 - `WhereTemplate` (string): A SQL predicate that filters rows to either Archive or Delete, using parameter placeholders like `@FromDate`, `@Status` (e.g. `CreatedOn < @Cutoff AND Status = @Status`). Injection characters like `;`, `--`, `/*` are rejected.
 - `WhereParams` (JSON object): Name/value map for parameters referenced in `WhereTemplate`. Values are parsed into appropriate types when possible (null, bool, numbers, Guid, DateTime/DateTimeOffset). Example: `{ "Cutoff": "2024-01-01T00:00:00Z", "Status": "Closed" }`.
 
@@ -559,7 +558,7 @@ Use this job type to move rows from a source table into an archive table in batc
 
 - Job `Type`: `ARCHIVETABLE`
 - Connection: Always uses the `GraniteConnection` from `appsettings.json`.
-- Archive table name: `<TableName>Archive` (created automatically if missing, using `SELECT INTO` from the source structure). Note that indexes, keys, and constraints are not copied by `SELECT INTO` and may need to be created manually if required.
+- Archive table name: `archive.<TableName>` (created automatically if missing, using `SELECT INTO` from the source structure). Note that indexes, keys, and constraints are not copied by `SELECT INTO` and may need to be created manually if required.
 
 <h4>Archive table specific Optional JobInputs and defaults</h4>
 - `OptimizeArchiveTable` (bool, default false): If true and rows were archived, also runs table maintenance on the archive table.
