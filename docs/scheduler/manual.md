@@ -345,6 +345,8 @@ The currenlty supported job types are:
 - [Stored Procedure Jobs](#stored-procedure-jobs)
 - [Email Jobs](#email-jobs)
 - [Injected Jobs](#injected-jobs-integration-jobs)
+- [Archive Table Job](#archive-table-jobs)
+- [Delete Table Data Job](#delete-table-jobs)
 
 ### Stored Procedure Jobs
 
@@ -449,6 +451,210 @@ When you configure an InjectedJob the `InjectJob` field on the `ScheduledJobs` t
 | 1 | True | SalesOrderSync | Sync SOs from Evo using IntegrationDocumentQueue | INJECTED | NULL | Granite.Integration.Evo.Job.SalesOrder | 1 | HOURS | NULL | NULL | NULL | 2022-05-23 08:35:50.427 | 0 |
 
 GraniteScheduler will use the XML file to find the DLL file and execute the required code
+
+### SQL Table Jobs
+
+- [Archive Table Jobs](#archive-table-jobs)
+- [Delete Table Jobs](#delete-table-jobs)
+
+The following is the information common to the two jobs above. 
+
+You can get sql insert scripts for [example jobs](./exampleJobs/sql-table-job-examples.md) here.
+
+<h3>Required JobInputs</h3>
+
+- `TableName` (string): The source table to either Archive or Delete from (e.g. `MyBigTable`). Avoid special characters like `;`, `--`, `/*`. For Delete Table Jobs specifically, only a limited set of tables is allowed and must be provided as the bare table name without schema; see the safety restrictions under Delete Table Jobs.
+- `WhereTemplate` (string): A SQL predicate that filters rows to either Archive or Delete, using parameter placeholders like `@FromDate`, `@Status` (e.g. `CreatedOn < @Cutoff AND Status = @Status`). Injection characters like `;`, `--`, `/*` are rejected.
+- `WhereParams` (JSON object): Name/value map for parameters referenced in `WhereTemplate`. Values are parsed into appropriate types when possible (null, bool, numbers, Guid, DateTime/DateTimeOffset). Example: `{ "Cutoff": "2024-01-01T00:00:00Z", "Status": "Closed" }`.
+
+If any parameters referenced in `WhereTemplate` are missing from `WhereParams` (or vice versa), the job will not run.
+
+<h4>Optional JobInputs and defaults</h4>
+
+- `BatchSize` (int, default 1000, valid 1–10000): Number of rows to move per batch. The job loops batches until no rows remain or time limit is reached.
+- `MaxExecutionMinutes` (int, default 30, valid 1–480): Upper limit for a single run. The job stops gracefully when the time limit is reached.
+- `DryRun` (bool, default false): If true, estimates and logs the number of rows matching the filter but does not modify any data.
+- `OptimizeTable` (bool, default false): If true and rows were removed, runs table maintenance on the source table after processing.
+- `OptimizeMode` (string, default `Reorganize`): Table maintenance mode. Accepted values: `Reorganize`, `Rebuild`, `Auto`.
+- `OnlineIndexRebuild` (bool, default true): Applies when `OptimizeMode` is `Rebuild`; attempts an ONLINE rebuild when supported.
+- `UpdateStatisticsAfterOptimization` (bool, default depends on mode): After `Reorganize` default is true; after `Rebuild` default is false (since rebuild updates stats).
+- `UpdateStatisticsFullScan` (bool, default false): When updating statistics, use FULLSCAN.
+- `OptimizationThreshold` (int, default 1000): Threshold for deciding whether to optimize after data movement. Note: validated by the system; current archive flow optimizes when rows were archived, independent of this threshold.
+
+<h4>Date/Time Tokens for WhereParams</h4>
+
+You can use dynamic, server-local date/time tokens in `WhereParams` to filter rows relative to “now” or “today” without hard-coding timestamps.
+
+- Where they’re used: Only as values within `WhereParams` (not inside `WhereTemplate`).
+- What they produce: A `DateTimeOffset` value bound as a SQL `datetimeoffset` parameter.
+- Validation: Tokens are validated before execution. Invalid tokens will fail the job’s input validation.
+
+Syntax
+
+- `${base[offsets][|rounding]}`
+	- `base` (required): `now` or `today`
+		- `now` = current server local date/time (DateTimeOffset.Now).
+		- `today` = current server local date at 00:00:00.000 (midnight).
+	- `offsets` (optional, repeatable): One or more signed adjustments with a unit. Chaining is allowed.
+		- Format: `+Nunit` or `-Nunit` (no spaces), where N is an integer.
+		- Units (case-sensitive):
+			- `s` = seconds
+			- `m` = minutes
+			- `h` = hours
+			- `d` = days
+			- `w` = weeks (7 days each)
+			- `M` = months (uppercase M)
+			- `y` = years
+		- Examples: `-30d`, `+2h-15m`, `-1M+7d`, `-1y`
+	- `rounding` (optional, after a single `|`):
+		- `startOfDay` → 00:00:00.000
+		- `endOfDay`   → 23:59:59.9999999
+		- `startOfMonth` → first day of month at 00:00:00.000
+		- `endOfMonth`   → last moment of the month (23:59:59.9999999)
+
+Evaluation order
+1) Start from `base` (server local time).
+2) Apply all `offsets` left-to-right.
+3) Apply `rounding` if present.
+
+Important notes
+
+- Units are case-sensitive: `m` = minutes, `M` = months.
+- All calculations use the server's local time zone.
+- Multiple offsets can be chained; they are applied in sequence.
+
+Examples
+
+- Rows older than 30 days:
+	- WhereTemplate: `CreatedOn < @Cutoff`
+	- WhereParams: `{ "Cutoff": "${now-30d}" }`
+- All of yesterday (inclusive):
+	- WhereTemplate: `CreatedOn >= @From AND CreatedOn <= @To`
+	- WhereParams: `{ "From": "${today-1d|startOfDay}", "To": "${today-1d|endOfDay}" }`
+- First day of last month at midnight:
+	- `${today-1M|startOfMonth}`
+- End of current month:
+	- `${now|endOfMonth}`
+- Two hours and 15 minutes from now:
+	- `${now+2h-15m}`
+- One year ago, end of that month:
+	- `${now-1y|endOfMonth}`
+
+Sample configuration
+
+- Purge rows created before the start of the current day:
+	- WhereTemplate: `CreatedOn < @Cutoff`
+	- WhereParams: `{ "Cutoff": "${today|startOfDay}" }`
+- Archive rows created on or before the end of last month:
+	- WhereTemplate: `CreatedOn <= @Cutoff`
+	- WhereParams: `{ "Cutoff": "${now-1M|endOfMonth}" }`
+
+Troubleshooting tokens
+
+- If a token is malformed (e.g., unknown base, bad unit, or syntax), the job input validation will fail with a log message indicating the problematic parameter.
+- If you need fixed timestamps instead, provide ISO 8601 strings (e.g., "2025-08-01T00:00:00Z") instead of a token.
+
+
+#### Archive Table Jobs
+
+Use this job type to move rows from a source table into an archive table in batches, then delete the moved rows from the source. This helps keep operational tables lean while retaining data in an archive table.
+
+- Job `Type`: `ARCHIVETABLE`
+- Connection: Always uses the `GraniteConnection` from `appsettings.json`.
+- Archive table name: `archive.<TableName>` (created automatically if missing, using `SELECT INTO` from the source structure). Note that indexes, keys, and constraints are not copied by `SELECT INTO` and may need to be created manually if required.
+
+<h4>Archive table specific Optional JobInputs and defaults</h4>
+- `OptimizeArchiveTable` (bool, default false): If true and rows were archived, also runs table maintenance on the archive table.
+
+<h4>Behavior and guarantees</h4>
+
+- Batching and atomicity: Each batch performs INSERT into the archive table and DELETE from the source within a single transaction. If the DELETE fails, the batch is rolled back.
+- Row selection: Uses a CTE to delete from and insert the output into the archive table.
+- Estimation: Before modifying data, the job estimates the row count matching the filter for logging and dry runs.
+- Time cap: The job respects `MaxExecutionMinutes` and will pause further work when the limit is reached; subsequent scheduler runs continue from where it left off.
+
+<h4>Example configuration</h4>
+
+`ScheduledJobs` (example):
+
+| ID | isActive | JobName | JobDescription | Type | StoredProcedure | InjectJob | Interval | IntervalFormat | Status | LastExecutionTime | LastExecutionResult | AuditDate | AuditUser |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 42 | True | ArchiveOldOrders | Move closed orders older than 180 days | ARCHIVETABLE | NULL | NULL | 1 | HOURS | NULL | NULL | NULL | 2025-08-18 08:00:00.000 | admin |
+
+`ScheduledJobInputs` for `ArchiveOldOrders`:
+
+| ID | JobName | Name | Value |
+| --- | --- | --- | --- |
+| 1 | ArchiveOldOrders | TableName | dbo.Orders |
+| 2 | ArchiveOldOrders | WhereTemplate | CreatedOn < @Cutoff AND Status = @Status |
+| 3 | ArchiveOldOrders | WhereParams | { "Cutoff": "${now-180d}", "Status": "Closed" } |
+| 4 | ArchiveOldOrders | BatchSize | 2000 |
+| 5 | ArchiveOldOrders | MaxExecutionMinutes | 20 |
+| 6 | ArchiveOldOrders | DryRun | false |
+| 7 | ArchiveOldOrders | OptimizeTable | true |
+| 8 | ArchiveOldOrders | OptimizeArchiveTable | false |
+| 9 | ArchiveOldOrders | OptimizeMode | Reorganize |
+
+Notes:
+- The job runs hourly. Adjust `Interval`/`IntervalFormat` as needed, or use a CRON schedule.
+- `WhereParams` values are parsed into appropriate types; strings can be used when you want literal comparisons. Token-style values like `${...}` resolve using server local time (e.g., `${now-180d}`).
+- The archive table `dbo.OrdersArchive` is created automatically if it does not exist.
+
+#### Delete Table Jobs
+
+Use this job type to delete rows from a table in safe, bounded batches using a parameterized WHERE filter.
+
+- Job `Type`: `DELETETABLEDATA`
+- Connection: Uses the `GraniteConnection` from `appsettings.json`.
+
+<h4>Behavior</h4>
+
+- Estimation: Before deleting, the job estimates the row count matching the filter for logging and dry runs.
+- Batching: Executes `DELETE TOP(@BatchSize) ... WHERE {WhereTemplate}` repeatedly until no rows match or the time cap is hit. No explicit ORDER BY; when many rows match, the specific rows deleted per batch are not ordered.
+- Time cap: Respects `MaxExecutionMinutes` and continues on the next scheduled run.
+- Optimization: When enabled, runs post-delete maintenance on the source table using the configured options.
+
+!!! warning
+	Safety restrictions: Delete Table Jobs are allowlisted to prevent accidental data loss. Only the following tables are permitted:
+
+	- ScheduledJobsHistory
+	- IntegrationLog
+	- LabelPrintQueue
+	- IntegrationDocumentQueue
+	- EmailLog
+	- InventoryDailyBalance
+
+	Notes:
+	- Provide `TableName` as shown above (bare table name, no schema). For example, use `IntegrationLog`, not `dbo.IntegrationLog`.
+	- Jobs targeting any other table will fail input validation and will not run.
+
+<h4>Example configuration</h4>
+
+`ScheduledJobs` (example):
+
+| ID | isActive | JobName | JobDescription | Type | StoredProcedure | InjectJob | Interval | IntervalFormat | Status | LastExecutionTime | LastExecutionResult | AuditDate | AuditUser |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 43 | True | PurgeOldIntegrationLog | Delete IntegrationLog rows older than 7 days | DELETETABLEDATA | NULL | NULL | 0 2 * * * | CRON | NULL | NULL | NULL | 2025-08-18 08:00:00.000 | admin |
+
+`ScheduledJobInputs` for `PurgeOldIntegrationLog`:
+
+| ID | JobName | Name | Value |
+| --- | --- | --- | --- |
+| 1 | PurgeOldIntegrationLog | TableName | IntegrationLog |
+| 2 | PurgeOldIntegrationLog | WhereTemplate | AuditDate < @Cutoff |
+| 3 | PurgeOldIntegrationLog | WhereParams | { "Cutoff": "${now-7d}" } |
+| 4 | PurgeOldIntegrationLog | BatchSize | 5000 |
+| 5 | PurgeOldIntegrationLog | MaxExecutionMinutes | 15 |
+| 6 | PurgeOldIntegrationLog | DryRun | false |
+| 7 | PurgeOldIntegrationLog | OptimizeTable | true |
+| 8 | PurgeOldIntegrationLog | OptimizeMode | Reorganize |
+
+Notes:
+- The CRON example runs daily at 02:00 (server local time). You can use minutes/hours intervals as well.
+- `TableName` must be one of the allowlisted tables and provided as a bare name (e.g., `IntegrationLog`).
+- `WhereParams` values can be typed (dates, numbers, booleans) and token-style values like `${now-7d}` are resolved relative to server local time.
+- Optimization is optional and only runs if rows were deleted during this run.
+
 
 ## Troubleshooting
 
