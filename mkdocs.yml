@@ -59,7 +59,7 @@ nav:
       - Email Service: custodian-api/email-service.md
       - Reporting Service: custodian-api/reporting-service.md
       - SQL Export Service: custodian-api/sql-export-service.md
-      - Scheduler: scheduler/manual.md    
+    - Scheduler: scheduler/manual.md    
     - Customization:
       - customization/index.md
       - SQLCLR: 
