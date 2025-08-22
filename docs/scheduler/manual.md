@@ -458,6 +458,8 @@ GraniteScheduler will use the XML file to find the DLL file and execute the requ
 
 The following is the information common to the two jobs above. 
 
+You can get sql insert scripts for [example jobs](./exampleJobs/sql-table-job-examples.md) here.
+
 <h3>Required JobInputs</h3>
 
 - `TableName` (string): The source table to either Archive or Delete from (e.g. `MyBigTable`). Avoid special characters like `;`, `--`, `/*`. For Delete Table Jobs specifically, only a limited set of tables is allowed and must be provided as the bare table name without schema; see the safety restrictions under Delete Table Jobs.
