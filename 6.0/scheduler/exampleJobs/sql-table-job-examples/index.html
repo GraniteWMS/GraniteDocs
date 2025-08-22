@@ -8,24 +8,24 @@
       
       
       
-        <link rel="canonical" href="https://granitewms.github.io/GraniteDocs/6.0/third-party-integration/GettingStarted/">
+        <link rel="canonical" href="https://granitewms.github.io/GraniteDocs/6.0/scheduler/exampleJobs/sql-table-job-examples/">
       
       
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
     
     
       
-        <title>GettingStarted - Granite WMS Documentation</title>
+        <title>SQL Table Job Examples - Granite WMS Documentation</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.0253249f.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -44,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="../../extra_css/custom.css">
+      <link rel="stylesheet" href="../../../extra_css/custom.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#getting-started" class="md-skip">
+        <a href="#sql-table-job-examples" class="md-skip">
           Skip to content
         </a>
       
@@ -90,7 +90,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Granite WMS Documentation" class="md-header__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
+    <a href="../../.." title="Granite WMS Documentation" class="md-header__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              GettingStarted
+              SQL Table Job Examples
             
           </span>
         </div>
@@ -205,7 +205,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
     
@@ -224,7 +224,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../scaffold/manual/" class="md-tabs__link">
+        <a href="../../../scaffold/manual/" class="md-tabs__link">
           
   
     
@@ -244,7 +244,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../tools/" class="md-tabs__link">
+        <a href="../../../tools/" class="md-tabs__link">
           
   
     
@@ -264,7 +264,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../updates/" class="md-tabs__link">
+        <a href="../../../updates/" class="md-tabs__link">
           
   
     
@@ -299,7 +299,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Granite WMS Documentation" class="md-nav__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
+    <a href="../../.." title="Granite WMS Documentation" class="md-nav__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -317,7 +317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -395,7 +395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../scaffold/manual/" class="md-nav__link">
+      <a href="../../../scaffold/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -460,7 +460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../label-printing/bartender/manual/" class="md-nav__link">
+      <a href="../../../label-printing/bartender/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -481,7 +481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../label-printing/zpl/manual/" class="md-nav__link">
+      <a href="../../../label-printing/zpl/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -597,7 +597,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../integration/accpac/" class="md-nav__link ">
+            <a href="../../../integration/accpac/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -630,7 +630,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/accpac/sdk-provider/" class="md-nav__link">
+      <a href="../../../integration/accpac/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -651,7 +651,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/accpac/integration-jobs/" class="md-nav__link">
+      <a href="../../../integration/accpac/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -707,7 +707,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../integration/acumatica/" class="md-nav__link ">
+            <a href="../../../integration/acumatica/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -740,7 +740,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/acumatica/acumatica-overview/" class="md-nav__link">
+      <a href="../../../integration/acumatica/acumatica-overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -761,7 +761,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/acumatica/sdk-provider/" class="md-nav__link">
+      <a href="../../../integration/acumatica/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -782,7 +782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/acumatica/integration-jobs/" class="md-nav__link">
+      <a href="../../../integration/acumatica/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -838,7 +838,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../integration/cin7/" class="md-nav__link ">
+            <a href="../../../integration/cin7/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -871,7 +871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/cin7/cin7-overview/" class="md-nav__link">
+      <a href="../../../integration/cin7/cin7-overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -892,7 +892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/cin7/sdk-provider/" class="md-nav__link">
+      <a href="../../../integration/cin7/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -913,7 +913,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/cin7/integration-jobs/" class="md-nav__link">
+      <a href="../../../integration/cin7/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -967,7 +967,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../integration/evo/" class="md-nav__link ">
+            <a href="../../../integration/evo/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1000,7 +1000,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/evo/sdk-provider/" class="md-nav__link">
+      <a href="../../../integration/evo/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1021,7 +1021,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/evo/integration-jobs/" class="md-nav__link">
+      <a href="../../../integration/evo/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1075,7 +1075,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../integration/isync/" class="md-nav__link ">
+            <a href="../../../integration/isync/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1108,7 +1108,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/isync/sdk-provider/" class="md-nav__link">
+      <a href="../../../integration/isync/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1129,7 +1129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/isync/integration-jobs/" class="md-nav__link">
+      <a href="../../../integration/isync/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1158,7 +1158,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/omni/sdk-provider/" class="md-nav__link">
+      <a href="../../../integration/omni/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1179,7 +1179,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/quickbooks/native-app/" class="md-nav__link">
+      <a href="../../../integration/quickbooks/native-app/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1200,7 +1200,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/sapb1/sdk-provider/" class="md-nav__link">
+      <a href="../../../integration/sapb1/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1221,7 +1221,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/syspro/sdk-provider/" class="md-nav__link">
+      <a href="../../../integration/syspro/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1267,7 +1267,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../integration/sage100/" class="md-nav__link ">
+            <a href="../../../integration/sage100/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1300,7 +1300,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/sage100/sdk-provider/" class="md-nav__link">
+      <a href="../../../integration/sage100/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1321,7 +1321,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/sage100/integration-jobs/" class="md-nav__link">
+      <a href="../../../integration/sage100/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1375,7 +1375,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../integration/intacct/" class="md-nav__link ">
+            <a href="../../../integration/intacct/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1408,7 +1408,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/intacct/sdk-provider/" class="md-nav__link">
+      <a href="../../../integration/intacct/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1429,7 +1429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/intacct/integration-jobs/" class="md-nav__link">
+      <a href="../../../integration/intacct/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1491,7 +1491,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../webdesktop/" class="md-nav__link ">
+            <a href="../../../webdesktop/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1524,7 +1524,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../webdesktop/datagrid/datagrid/" class="md-nav__link">
+      <a href="../../../webdesktop/datagrid/datagrid/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1545,7 +1545,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../webdesktop/datacapture/data-capture/" class="md-nav__link">
+      <a href="../../../webdesktop/datacapture/data-capture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1574,7 +1574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../android-application/manual/" class="md-nav__link">
+      <a href="../../../android-application/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1595,7 +1595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../business-api/manual/" class="md-nav__link">
+      <a href="../../../business-api/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1649,7 +1649,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../custodian-api/" class="md-nav__link ">
+            <a href="../../../custodian-api/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1682,7 +1682,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../custodian-api/getting-started/" class="md-nav__link">
+      <a href="../../../custodian-api/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1703,7 +1703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../custodian-api/process-template-service/" class="md-nav__link">
+      <a href="../../../custodian-api/process-template-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1724,7 +1724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../custodian-api/email-service/" class="md-nav__link">
+      <a href="../../../custodian-api/email-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1745,7 +1745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../custodian-api/reporting-service/" class="md-nav__link">
+      <a href="../../../custodian-api/reporting-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1766,7 +1766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../custodian-api/sql-export-service/" class="md-nav__link">
+      <a href="../../../custodian-api/sql-export-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1787,7 +1787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../scheduler/manual/" class="md-nav__link">
+      <a href="../../manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1839,7 +1839,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../customization/" class="md-nav__link ">
+            <a href="../../../customization/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1899,7 +1899,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../sqlclr/" class="md-nav__link ">
+            <a href="../../../sqlclr/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1932,7 +1932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sqlclr/getting-started/" class="md-nav__link">
+      <a href="../../../sqlclr/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1953,7 +1953,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sqlclr/version-6-upgrade-guide/" class="md-nav__link">
+      <a href="../../../sqlclr/version-6-upgrade-guide/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1974,7 +1974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sqlclr/reference/" class="md-nav__link">
+      <a href="../../../sqlclr/reference/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2038,7 +2038,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../security/" class="md-nav__link ">
+            <a href="../../../security/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2071,7 +2071,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/system-security/" class="md-nav__link">
+      <a href="../../../security/system-security/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2092,7 +2092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/user-permissions/" class="md-nav__link">
+      <a href="../../../security/user-permissions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2113,7 +2113,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/api-keys/" class="md-nav__link">
+      <a href="../../../security/api-keys/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2180,7 +2180,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../tools/" class="md-nav__link ">
+            <a href="../../../tools/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2213,7 +2213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../iis/getting-started/" class="md-nav__link">
+      <a href="../../../iis/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2234,7 +2234,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ssrs/getting-started/" class="md-nav__link">
+      <a href="../../../ssrs/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2255,7 +2255,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tools/jam/" class="md-nav__link">
+      <a href="../../../tools/jam/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2276,7 +2276,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tools/jaeger/" class="md-nav__link">
+      <a href="../../../tools/jaeger/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2297,7 +2297,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tools/nifi/" class="md-nav__link">
+      <a href="../../../tools/nifi/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2350,7 +2350,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../updates/" class="md-nav__link ">
+            <a href="../../../updates/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2429,7 +2429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../updates/V4/whats-new/" class="md-nav__link">
+      <a href="../../../updates/V4/whats-new/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2494,7 +2494,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../updates/V5/whats-new/" class="md-nav__link">
+      <a href="../../../updates/V5/whats-new/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2515,7 +2515,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../updates/V5/product-update/" class="md-nav__link">
+      <a href="../../../updates/V5/product-update/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2588,7 +2588,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../updates/V6/whats-new/" class="md-nav__link">
+      <a href="../../../updates/V6/whats-new/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2609,7 +2609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../updates/V6/cheatsheet/" class="md-nav__link">
+      <a href="../../../updates/V6/cheatsheet/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2646,7 +2646,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../updates/release-notes/" class="md-nav__link">
+      <a href="../../../updates/release-notes/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2694,77 +2694,20 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#integration-to-granite" class="md-nav__link">
+  <a href="#archive-table-job" class="md-nav__link">
     <span class="md-ellipsis">
-      Integration to Granite:
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Integration to Granite:">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#granite-apis" class="md-nav__link">
-    <span class="md-ellipsis">
-      Granite APIs:
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#business-objects" class="md-nav__link">
-    <span class="md-ellipsis">
-      Business objects:
+      Archive Table Job
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#business-object-relationships" class="md-nav__link">
+  <a href="#delete-table-data-job" class="md-nav__link">
     <span class="md-ellipsis">
-      Business object relationships
+      Delete Table Data Job
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-calls" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example calls:
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Example calls:">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#authenticate" class="md-nav__link">
-    <span class="md-ellipsis">
-      Authenticate:
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#locations" class="md-nav__link">
-    <span class="md-ellipsis">
-      Locations:
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2783,86 +2726,314 @@
                   
 
 
-<p><img src="img/Granite_WMS_Primary logo1.png" alt= "" width="50%" height="50%"></p>
-<h1 id="getting-started">Getting Started</h1>
-<h2 id="integration-to-granite">Integration to Granite:</h2>
-<p>This document details the tools and information needed to integrate with Granite WMS.</p>
-<p><strong>What will be covered:</strong></p>
-<ul>
-<li>Granite's APIs</li>
-<li>Detailing business objects</li>
-<li>Relationships between the business objects</li>
-<li>Instruction on authentication to make calls</li>
-<li>An example of a GET, POST, and  DELETE on one of the business objects. </li>
-</ul>
-<h3 id="granite-apis">Granite APIs:</h3>
-<p>Granite operates using two APIs: 
-- <strong>Webservice API</strong>: handles the business processes E.g picking or moving stock
-- <strong>Repository API</strong> : handles the CRUD functionality of the business objects. </p>
-<p>For the purposes of integration with Granite, i.e maintaining documents , masteritems, locations, and trading partners,  the Repository API will cover 99% of use cases and, as such, shall be the only API detailed in this document. </p>
-<p>Detailing all of the Repository API calls will not be covered here as there is full Swagger documentation to reference for each call. To view the swagger documentation please go to 
-localRepoAPIaddress/swagger-ui/  e.g. (https://granite.com:40196/swagger-ui/)</p>
-<h2 id="business-objects">Business objects:</h2>
-<p>Granite makes use of six core business objects. While there are other business objects used in Granite, these six represent the core functionality.</p>
-<ul>
-<li>
-<p><strong>Locations</strong>: are uniquely identified by a Barcode. Used to identify something as specific as a shelf or as general as an area in a warehouse. E.g Name: Cage A Shelf  3 Row 2 Barcode: A-3-2 or Name: Dispatch Code: DIS </p>
-</li>
-<li>
-<p><strong>MasterItems</strong>: are the identities of specific products and are uniquely identified using a Code. E.g. Code: ABCLZZ110 Product: KL371X ABRASIVE CLOTH 230 x 280mm</p>
-</li>
-<li>
-<p><strong>TradingPartners</strong>: are any parties that will be listed on a document as either a customer or supplier. Trading partners are set up per Document type and are uniquely identified with a Code. E.g. Code: AVO15 Name: Avondale Confectionary </p>
-</li>
-<li>
-<p><strong>Documents</strong>: are the objects that represent sales orders, purchase orders, transfers, or manufacturing documents (documents are generic in Granite and represent any of the previously listed types). They can be considered the documents Header and are uniquely represented by a Number. E.g. A sales order for trading partner AVO15 Number: SO001263</p>
-</li>
-<li>
-<p><strong>DocumentDetails</strong>: are the lines of the document and are uniquely assigned to a specific Document. E.g. There are multiple documentdetail entries that are assigned to SO001263 that detail the contents of the order. </p>
-</li>
-<li>
-<p><strong>TrackingEntities</strong>: represent the stock/physical goods in the system and are uniquely identified with a Barcode. A single tracking entity can represent only one masteritem. E.g. Barcode: T00000124 represents a quantity of 5 sheets of master item ABCLZZ110.</p>
-</li>
-</ul>
-<h2 id="business-object-relationships">Business object relationships</h2>
-<p><img src="img/Business object relationships.png" alt= "" width="50%" height="50%"></p>
-<h2 id="example-calls">Example calls:</h2>
-<p>Following are a few examples of calls made to the repository API to provide some initial context.<br />
-The calls for all the other objects are very similar so will not be detailed as their calls can be found in the swagger documention.  </p>
-<h3 id="authenticate">Authenticate:</h3>
-<p>The first call is /auth to authenticate for all following calls. The security uses cookies so if the same client is used this will only have to be called once per set of calls.
-The format for the examples use json but xml, jsv, and csv are also supported 
-If any other call is made without calling authorisation first it will return: 401 Unauthorized
-<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">https://granite.com:40196/auth</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Content-Length</span><span class="o">:</span> <span class="l">length</span>
+<h1 id="sql-table-job-examples">SQL Table Job Examples</h1>
+<p>Use the following to create example jobs for the SQL Table Jobs. </p>
+<h2 id="archive-table-job">Archive Table Job</h2>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobs</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">isActive</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">JobDescription</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">Type</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">StoredProcedure</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">InjectJob</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nb">Interval</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">IntervalFormat</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Status</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">LastExecutionTime</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">LastExecutionResult</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">AuditDate</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">AuditUser</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="mi">0</span><span class="w">                  </span><span class="c1">-- default switch off</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ArchiveAuditData&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Archive Audit data older than 6 months&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ARCHIVETABLE&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;00 00 * * *&#39;</span><span class="w">                </span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CRON&#39;</span><span class="w">           </span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PENDING&#39;</span><span class="w">          </span><span class="c1">-- initial status</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">()</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;SYSTEM&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
 
-<span class="p">{</span><span class="nt">&quot;UserName&quot;</span><span class="p">:</span><span class="s2">&quot;username&quot;</span><span class="p">,</span><span class="nt">&quot;Password&quot;</span><span class="p">:</span><span class="s2">&quot;password&quot;</span><span class="p">}</span>
-</code></pre></div></p>
-<h3 id="locations">Locations:</h3>
-<p>Following are examples of GET, POST, DELETE calls on the Location business object:
-<div class="highlight"><pre><span></span><code><span class="nf">GET</span> <span class="nn">https://granite.com:40196/Locations/{Barcode}?Barcode=DIS</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
-</code></pre></div></p>
-<p><div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">https://granite.com:40196/Locations</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Content-Length</span><span class="o">:</span> <span class="l">length</span>
+<span class="c1">-- Table to clean</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;ArchiveAuditData&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;TableName&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Audit&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
 
-<span class="p">{</span><span class="nt">&quot;Body&quot;</span><span class="p">:{</span><span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="s2">&quot;ExampleLocation&quot;</span><span class="p">,</span><span class="nt">&quot;Barcode&quot;</span><span class="p">:</span><span class="s2">&quot;EL123&quot;</span><span class="p">,</span><span class="nt">&quot;Site&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="nt">&quot;isActive&quot;</span><span class="p">:</span><span class="err">True</span><span class="p">,</span><span class="nt">&quot;NonStock&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">&quot;ERPLocation&quot;</span><span class="p">:</span><span class="s2">&quot;ERP1&quot;</span><span class="p">,</span><span class="nt">&quot;Category&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="nt">&quot;Type&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="nt">&quot;Status&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="nt">&quot;Width&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;Length&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;Height&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;MaximumWeight&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;ERPIdentification&quot;</span><span class="p">:</span><span class="s2">&quot;ERPid123&quot;</span><span class="p">,</span><span class="nt">&quot;AuditDate&quot;</span><span class="p">:</span><span class="s2">&quot;05/05/2023&quot;</span><span class="p">,</span><span class="nt">&quot;AuditUser&quot;</span><span class="p">:</span><span class="s2">&quot;ErpSystem&quot;</span><span class="p">,</span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">}}</span>
+<span class="c1">-- Initial Run as dry run</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;ArchiveAuditData&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DryRun&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;true&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="c1">-- Safer, parameterized filter (preferred)</span>
+<span class="c1">-- Example: delete rows with Date &lt; @Cutoff</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;ArchiveAuditData&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;WhereTemplate&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;AuditDate &lt; @Cutoff&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="c1">-- JSON parameters for the template (adjust Cutoff as needed)</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;ArchiveAuditData&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;WhereParams&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{&quot;Cutoff&quot;:&quot;${now-6M}&quot;}&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="c1">-- Optional: table optimization configuration</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;ArchiveAuditData&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;OptimizeTable&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;true&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;ArchiveAuditData&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;OptimizeArchiveTable&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;true&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;ArchiveAuditData&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;OptimizeMode&#39;</span><span class="w">                     </span><span class="c1">-- options: Reorganize | Rebuild | Auto</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Rebuild&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;ArchiveAuditData&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;OnlineIndexRebuild&#39;</span><span class="w">               </span><span class="c1">-- used if OptimizeMode = Rebuild</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;true&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;ArchiveAuditData&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;UpdateStatisticsAfterOptimization&#39;</span><span class="w"> </span><span class="c1">-- default true for Reorganize; false for Rebuild</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;true&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;ArchiveAuditData&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;UpdateStatisticsFullScan&#39;</span><span class="w">          </span><span class="c1">-- set true to use FULLSCAN on stats</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;false&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
 </code></pre></div>
-The same call can be used to modify the location by providing the granite id as part of the call:
-<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">https://granite.com:40196/Locations</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Content-Length</span><span class="o">:</span> <span class="l">length</span>
+<h2 id="delete-table-data-job">Delete Table Data Job</h2>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobs</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">isActive</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">JobDescription</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">Type</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">StoredProcedure</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">InjectJob</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="nb">Interval</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">IntervalFormat</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Status</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">LastExecutionTime</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">LastExecutionResult</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">AuditDate</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">AuditUser</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="mi">0</span><span class="w">                  </span><span class="c1">-- default switch off</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CleanScheduledJobsHistory&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Delete ScheduledJobsHistory older than 3 months&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DELETETABLEDATA&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;00 00 * * *&#39;</span><span class="w">                </span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CRON&#39;</span><span class="w">           </span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PENDING&#39;</span><span class="w">          </span><span class="c1">-- initial status</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">()</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;SYSTEM&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
 
-<span class="p">{</span><span class="nt">&quot;Body&quot;</span><span class="p">:{</span><span class="nt">&quot;ID&quot;</span><span class="p">:</span><span class="mi">6064</span><span class="p">,</span><span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="s2">&quot;NewName&quot;</span><span class="p">,</span><span class="nt">&quot;Barcode&quot;</span><span class="p">:</span><span class="s2">&quot;EL123&quot;</span><span class="p">,</span><span class="nt">&quot;Site&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="nt">&quot;isActive&quot;</span><span class="p">:</span><span class="err">True</span><span class="p">,</span><span class="nt">&quot;NonStock&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">&quot;ERPLocation&quot;</span><span class="p">:</span><span class="s2">&quot;ERP1&quot;</span><span class="p">,</span><span class="nt">&quot;Category&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="nt">&quot;Type&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="nt">&quot;Status&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="nt">&quot;Width&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;Length&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;Height&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;MaximumWeight&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;ERPIdentification&quot;</span><span class="p">:</span><span class="s2">&quot;ERPid123&quot;</span><span class="p">,</span><span class="nt">&quot;AuditDate&quot;</span><span class="p">:</span><span class="s2">&quot;05/05/2023&quot;</span><span class="p">,</span><span class="nt">&quot;AuditUser&quot;</span><span class="p">:</span><span class="s2">&quot;ErpSystem&quot;</span><span class="p">,</span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">}}</span>
+<span class="c1">-- Table to clean</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;CleanScheduledJobsHistory&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;TableName&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ScheduledJobsHistory&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="c1">-- Initial Run as dry run</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;CleanScheduledJobsHistory&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DryRun&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;true&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="c1">-- Safer, parameterized filter (preferred)</span>
+<span class="c1">-- Example: delete rows with Date &lt; @Cutoff</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;CleanScheduledJobsHistory&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;WhereTemplate&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Date &lt; @Cutoff&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="c1">-- JSON parameters for the template (adjust Cutoff as needed)</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;CleanScheduledJobsHistory&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;WhereParams&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{&quot;Cutoff&quot;:&quot;${now-3M}&quot;}&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="c1">-- Optional: table optimization configuration</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;CleanScheduledJobsHistory&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;OptimizeTable&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;true&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;CleanScheduledJobsHistory&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;OptimizeMode&#39;</span><span class="w">                     </span><span class="c1">-- options: Reorganize | Rebuild | Auto</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Reorganize&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;CleanScheduledJobsHistory&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;OnlineIndexRebuild&#39;</span><span class="w">               </span><span class="c1">-- used if OptimizeMode = Rebuild</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;true&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;CleanScheduledJobsHistory&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;UpdateStatisticsAfterOptimization&#39;</span><span class="w"> </span><span class="c1">-- default true for Reorganize; false for Rebuild</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;true&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ScheduledJobInput</span><span class="p">]</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="p">[</span><span class="n">JobName</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;CleanScheduledJobsHistory&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;UpdateStatisticsFullScan&#39;</span><span class="w">          </span><span class="c1">-- set true to use FULLSCAN on stats</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;false&#39;</span>
+<span class="p">);</span>
+<span class="k">GO</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="nf">DELETE</span> <span class="nn">https://granite.com:40196/Locations/{Barcode}?Barcode=EL123</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
-</code></pre></div></p>
 
 
 
@@ -2917,12 +3088,12 @@ The same call can be used to modify the location by providing the granite id as 
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
-        <script src="../../extra_js/custom.js"></script>
+        <script src="../../../extra_js/custom.js"></script>
       
     
   </body>
