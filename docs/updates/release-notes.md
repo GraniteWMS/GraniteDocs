@@ -1,5 +1,125 @@
 # Hotfixes
 
+## 2025-08-12 - 2025-08-18
+
+Process App
+
+- Date 2025-08-15
+- Version 7.0.0.2
+- Support optional fields on transaction submit
+- Fix MasterItem “Not Found” when it contains a special char
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2025-08-15
+- Version 7.0.0.2
+- Add Transfer Business rule AlwaysSplitTrackingEntity
+- Add optional fields to transaction submit
+- Fix allow receive to location with erp location on line with empty ToLocation
+- Fix takeon not capturing manufacture date
+
+Granite.Business.API.ServiceModel.dll
+
+- Date 2025-08-15
+- Version 7.0.0.1
+- Fix MasterItem “Not Found” when it contains a special char
+- Add optional fields to transaction submit
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2025-08-15
+- Version 6.0.0.14
+- Add Transfer Business rule AlwaysSplitTrackingEntity
+
+Granite.Repository.ServiceInterface.dll
+
+- Date 2025-08-15
+- Version 6.0.0.5 & 7.0.0.1
+- Support updating pickslip lines
+- Prevent saving process divider with same name
+- Fix error fetching document line locations
+
+Granite.Repository.ServiceModel.dll
+
+- Date 2025-08-15
+- Version 6.0.0.1 & 7.0.0.1
+- Support updating pickslip lines
+- Fix deleting process step lookups with special chars
+- Fix error fetching document line locations
+
+WebDesktop
+
+- Date 2025-08-15
+- 6.1.5, 7.0.4
+- Fix: Pickslip lines edit, allowing edit of qty, comment and instruction
+- Fix deleting process step lookups with special chars
+- Fix: Menu Divider,  prevent duplicate Names, update/maintain color field
+- Fix: Move, Adjustment Integration - try to integrate even when URL not specified
+- Fix: Reversal error (invalid URL)
+
+Process App
+
+- Date 2025-08-13
+- 7.0.0.1
+- Fix bug in process function mapping on subsequent iterations of a process
+
+Granite.Business.API.ServiceModel.dll
+
+- Date 2025-08-12
+- 6.0.0.6
+- Fix MasterItem “Not Found” when it contains a special char
+
+## 2025-08-05 - 2025-08-11
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2025-08-07
+- 6.0.0.13
+- Fix allow receive to location with erp location on line with empty ToLocation
+
+Database SQLCLR
+
+- Date 2025-08-08
+- Version 6.0.0.1
+- Remove Pack size parameter from the CLR Takeon procedure
+
+## 2025-07-29 - 2025-08-04
+
+Process App 
+
+- Date 2025-08-04
+- Version 6.0.0.17
+- Support optional fields with transaction submit
+
+Business Api
+
+- Date 2025-08-04
+- Granite.Business.API.ServiceInterface.dll 6.0.0.12
+- Granite.Business.API.ServiceModel.dll 6.0.0.5
+- Capture optional fields with transactions
+
+Granite.Integration.Evo.Job.dll
+
+- Date 2025-07-29
+- Version 6.0.0.1
+- Fix error handling, continue processing documents when one document fails
+
+## 2025-07-22 - 2025-07-28
+
+Process App
+
+- Date 2025-07-23
+- Version 6.0.0.16
+- Fix takeon printing labels before optional fields finish capturing
+
+## 2025-07-15 - 2025-07-21
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2025-07-18
+- Version 6.0.0.10 & 7.0.0.1
+- Fix document lines not sorted by line priority
+
 ## 2025-07-08 - 2025-07-14
 
 Granite Process App 
