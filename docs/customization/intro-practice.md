@@ -2,6 +2,8 @@ PRACTICE
 
 `Professional Rules And Coding Techniques In Consultant Environments`
 
+`WIP: YAML file to capture best practice for AI tools and LLMs.`
+
 PRACTICE is the official technical standards guide for implementing and customizing Granite WMS. Designed specifically for our consulting and implementation teams, it outlines the coding techniques, configuration principles, and professional behaviors expected when delivering client solutions in our low-code environment.
 
 Granite WMS is a powerful and flexible platform — but with flexibility comes responsibility. PRACTICE ensures that every consultant follows a common approach to structure, quality, and maintainability. Whether building a simple process or deploying a complex warehouse solution, PRACTICE helps us deliver results that are scalable, supportable, and aligned with our core product philosophy.
@@ -29,3 +31,4 @@ PRACTICE creates a shared foundation that helps us learn from each other, build 
 Sustainable solutions save time. PRACTICE helps us make decisions that reduce future maintenance and complexity.
 
 Granite WMS is only as strong as the standards we uphold. PRACTICE is how we build better, together.
+
