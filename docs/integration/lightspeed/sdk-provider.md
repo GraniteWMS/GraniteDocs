@@ -87,8 +87,8 @@ If you require a different integration action you can specify the name below in 
     - Partial receiving
     - Quantity validation
 - Integration Post
-    - False - Validates the transaction but does not update LightSpeed
-    - True - Updates the numReceived field on the corresponding LightSpeed purchase order lines
+    - False - Updates the numReceived field on the corresponding LightSpeed purchase order lines
+    - True - Updates the numReceived field on the corresponding LightSpeed purchase order lines and sets the document status to Check-In
 - Returns:
     Order ID and timestamp of the successful posting
 
@@ -100,39 +100,7 @@ If you require a different integration action you can specify the name below in 
 | Code | Item | Y | Used for validation and item lookup |
 
 
-### ADJUSTMENT
-- Granite Transaction: **ADJUSTMENT**
-- LightSpeed: **ItemShop Quantity Update**
-- Supports:
-    - Positive and negative adjustments
-    - Single location per transaction batch
-    - Quantity validation to prevent negative inventory
-- Returns:
-    ItemShop ID and timestamp of the successful posting
-
-| Granite | LightSpeed Entity | Required | Behavior |
-|---------|------------------|----------|----------|
-| Code | Item ID | Y | Maps to LightSpeed Item via ERPIdentification |
-| FromLocation | Shop ID | Y | Identifies the LightSpeed shop/location |
-| ToQty - FromQty | qoh adjustment | Y | Net change applied to quantity on hand |
-
-### SCRAP
-- Granite Transaction: **SCRAP**
-- LightSpeed: **ItemShop Quantity Update**
-- Supports:
-    - Negative quantity adjustments only
-    - Single location per transaction batch
-    - Quantity validation to prevent negative inventory
-- Returns:
-    ItemShop ID and timestamp of the successful posting
-
-| Granite | LightSpeed Entity | Required | Behavior |
-|---------|------------------|----------|----------|
-| Code | Item ID | Y | Maps to LightSpeed Item via ERPIdentification |
-| FromLocation | Shop ID | Y | Identifies the LightSpeed shop/location |
-| ActionQty | qoh reduction | Y | Amount to subtract from quantity on hand (posted as negative) |
-
-### DYNAMICTRANSFER
+### TRANSFER/DYNAMICTRANSFER
 - Granite Transaction: **TRANSFER**
 - LightSpeed: **Inventory Transfer Creation**
 - Supports:
