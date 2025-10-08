@@ -1,5 +1,94 @@
 # Hotfixes
 
+## 2025-10-7 - 2025-10-13
+
+Granite.Process.App.exe
+
+- Date 2025-10-07
+- Version 7.0.1.2, 6.0.0.20
+- Support picking with uom conversion
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2025-10-07
+- Version 6.0.0.18, 7.0.0.5
+- Fix performance issue picking pickslip lines caused by inefficient EF core query
+- Support pickslip reversal with ReversePickslipOnPickReversal system setting
+- Support picking with UOM conversion
+
+Granite.Process.App.exe
+
+- Date 2025-10-07
+- Version 7.0.1.1, 6.0.0.19, 5.0.0.7
+- Fix issue allowing users to select ‘Yes’ multiple times when on confirmation step.
+
+## 2025-09-30 - 2025-10-06
+
+Granite.Integration.PastelEvo.dll
+
+- Date 2025-10-01
+- Version 7.0.0.1, 6.0.0.4, 5.0.0.2
+- Fix error on dynamic pick post “No warehouse specified for warehouse item…”
+
+## 2025-09-23 - 2025-09-29
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date: 2025-09-25
+- Version 6.0.0.16, 7.0.0.4
+- Fix: allow take on of 0 qty
+
+GraniteLabelPrintingZPL.ServiceInterface.dll
+
+- Date 2025-09-25
+- Version 6.0.0.1, 7.0.0.1
+- Improved performance when printing multiple TrackingEntities in a single request
+
+## 2025-09-10 - 2025-09-16
+
+Granite.Repository.ServiceInterface
+
+- Date 2025-09-16
+- **Version 6.0.0.6, 7.0.0.2**
+- Menu divider bug
+
+Process App
+
+- Date 2025-09-10
+- **Version 7.0.1.0**
+- Add support for scale integration (! using same scale service)
+
+Webdesktop
+
+- Date 2025-09-10
+- **Version 7.0.6**
+- New add support to publish DataGrid from enquiry
+- Fix TrackingEntity lookup transaction not showing results
+- Fix Remove Print button from Variance Correction
+- Fix: Allow range selection on Status control grid (quality control / stock take hold)
+
+## 2025-09-02 - 2025-09-08
+
+Process App
+
+- Date 2025-09-08
+- Version 7.0.0.3
+- Fix return to correct step on process submit error when there are step 100s
+
+## 2025-08-19 - 2025-08-25
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2025-08-21
+- Version 7.0.0.3 & 6.0.0.15
+- Fix takeon to use master item alias’ uom conversion
+
+GraniteScheduler.ServiceInterface.dll
+
+- Date 2025-08-22
+- Version 5.0.1.0, 6.0.1.0, 7.0.1.0
+- Add Archive and Delete Table Jobs
+
 ## 2025-08-12 - 2025-08-18
 
 Process App
