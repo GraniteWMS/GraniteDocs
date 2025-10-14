@@ -230,7 +230,7 @@ Code example:
 {{
     headerImage(
     {
-      imageUrl:'https://www.granitewms.com/wp-content/uploads/2020/07/GraniteWMS-1.png',
+      imageUrl:'https://raw.githubusercontent.com/GraniteWMS/GraniteBrandAssets/main/Granite_WMS_Reversed.png',
       imageAltText:'GraniteWMS logo',
       backgroundColor:'#182026'
     })
