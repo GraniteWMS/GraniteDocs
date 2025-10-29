@@ -2,6 +2,7 @@
 
 !!! note
     This documentation is a work in progress and is intended to show the development progress of the integration with LightSpeed. As such, it may be subject to change as progress is made.
+    It is also specific to Lightspeed R-Series. This is a older Lighspeed offering and is not longer available to new customers. 
 
 This document contains all of the information needed to set up and configure integration with LightSpeed.
 There are two parts to the complete integration solution:
