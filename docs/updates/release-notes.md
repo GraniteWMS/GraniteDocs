@@ -1,5 +1,69 @@
 # Hotfixes
 
+## 2025-11-18 - 2025-11-24
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2025-11-19
+- Version 6.0.0.23
+- Fix: timeout reversing transactions with a pallet caused by cartesian explosion
+
+## 2025-11-03 - 2025-11-10
+
+Granite.Integration.Evo.Job.dll 
+
+- Date 2025-11-05
+- Version 7.0.0.1
+- Fix: Include the document que fix from 6.0.0.1 that was not ported over to the v7 branch
+
+Granite Business API and Process App
+
+- Date 2025-11-06
+- Fix: Include business rules in validation steps of Manufacture, Consume, and Transfer allowing the business rules to take affect even when the lines ActionQty = Qty of the line.
+
+Granite.Business.API.ServiceModel.dll
+
+- Version 6.0.0.7, 7.0.0.2
+
+Granite.Business.API.ServiceInterface.dll
+
+- Version 6.0.0.22 ,7.0.0.9
+
+Granite.Process.App.exe/dll
+
+- Version  6.0.0.22, 7.0.2.0
+
+## 2025-10-21 - 2025-10-27
+
+Granite.Repository.ServiceInterface.dll
+
+- Date 2025-10-27
+- Version 6.0.0.7, 7.0.0.3
+- Fix “Cannot find step for process” error when process step lookups exist for other users but not the current one.
+
+Granite Process App
+
+- Date 2025-10-22
+- Version 7.0.1.5, 6.0.0.21
+- Fix conversion for decimals stored in exponential notation
+- Fix packing carrying entity step not creating new BOX when barcode entered
+- 7.0.1.5 only:
+    - Support new scale service
+
+Granite.Business.API.DbContext.dll
+
+- Date 2025-10-22
+- Version 7.0.0.1, 6.0.0.1
+- Remove decimal precision from code - use precision from db schema
+
+## 2025-10-14 - 2025-10-20
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2025-10-20
+- Version 7.0.0.8, 6.0.0.21
+- Fix master item with special chars failing to validate
+
 ## 2025-10-7 - 2025-10-13
 
 Granite.Process.App.exe
