@@ -64,7 +64,7 @@ Granite.Business.API.ServiceInterface.dll
 - Version 7.0.0.8, 6.0.0.21
 - Fix master item with special chars failing to validate
 
-## 2025-10-7 - 2025-10-13
+## 2025-10-07 - 2025-10-13
 
 Granite.Process.App.exe
 
