@@ -2,6 +2,26 @@
 
 ## 2025-11-18 - 2025-11-24
 
+Web desktop
+
+- Date 2025-11-20
+- Version 7.0.7 & 6.1.6
+- Fix: Quality Control & Status Control scrap giving and undefined error
+
+Process App
+
+- Date 2025-11-20
+- Version 5.0.0.8
+- Fix: Reclassify object reference error when invalid location entered
+- Fix: Transfer Dynamic invalid input error when trying to transfer a pallet
+
+Granite.DomainModel.dll
+
+- Date 2025-11-20
+- Version 5.0.1.3
+- Fix: tracking entity removed from pallet when reclassified to a new location
+- Fix: Manufacture and Receiving fail to create transaction & update document but leave TrackingEntity with 0 qty.
+
 Granite.Business.API.ServiceInterface.dll
 
 - Date 2025-11-19
