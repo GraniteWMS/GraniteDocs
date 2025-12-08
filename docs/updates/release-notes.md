@@ -1,5 +1,38 @@
 # Hotfixes
 
+## 2025-12-02 - 2025-12-08
+
+Granite.Integration.Accpac.dll
+
+- Date 2025-12-08
+- 6.0.0.4 & 7.0.0.1
+- Fix transfer rounding action qty before summarization instead of after
+- Always round action qty to int for manufacture transactions (Accpac throws error on decimal)
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2025-12-04
+- 6.0.1.0 & 7.0.1.0
+- Fix receive & return not setting tracking entity manufacture date
+- Change consume, manufacture and transfer ActionQtyAllowance to decimal instead of int
+- Set audit date and audit user when creating carrying entities
+
+## 2025-11-25 - 2025-12-01
+
+Process App
+
+- Date 2025-11-28
+- 7.0.3.0 & 6.0.0.23
+- Support business rules on packing
+
+Business Api
+
+- Date 2025-11-28
+- Granite.Business.API.ServiceInterface.dll 7.0.0.10 & 6.0.0.24
+- Granite.Business.API.ServiceModel.dll 7.0.0.3 & 6.0.0.8
+- Added packing business rule ValidateAgainstDocumentQty - validates the PackQty against the Qty field instead of the ActionQty field
+- Fix consume inventory validate operation not properly applying ActionQtyAllowance business rule
+
 ## 2025-11-18 - 2025-11-24
 
 Web desktop
