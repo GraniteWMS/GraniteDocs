@@ -3443,6 +3443,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#2025-12-02-2025-12-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-12-02 - 2025-12-08
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-11-25-2025-12-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-11-25 - 2025-12-01
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#2025-11-18-2025-11-24" class="md-nav__link">
     <span class="md-ellipsis">
       2025-11-18 - 2025-11-24
@@ -3809,6 +3827,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#2025-12-02-2025-12-08" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-12-02 - 2025-12-08
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2025-11-25-2025-12-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      2025-11-25 - 2025-12-01
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#2025-11-18-2025-11-24" class="md-nav__link">
     <span class="md-ellipsis">
       2025-11-18 - 2025-11-24
@@ -4149,6 +4185,37 @@
 
 
 <h1 id="hotfixes">Hotfixes</h1>
+<h2 id="2025-12-02-2025-12-08">2025-12-02 - 2025-12-08</h2>
+<p>Granite.Integration.Accpac.dll</p>
+<ul>
+<li>Date 2025-12-08</li>
+<li>6.0.0.4 &amp; 7.0.0.1</li>
+<li>Fix transfer rounding action qty before summarization instead of after</li>
+<li>Always round action qty to int for manufacture transactions (Accpac throws error on decimal)</li>
+</ul>
+<p>Granite.Business.API.ServiceInterface.dll</p>
+<ul>
+<li>Date 2025-12-04</li>
+<li>6.0.1.0 &amp; 7.0.1.0</li>
+<li>Fix receive &amp; return not setting tracking entity manufacture date</li>
+<li>Change consume, manufacture and transfer ActionQtyAllowance to decimal instead of int</li>
+<li>Set audit date and audit user when creating carrying entities</li>
+</ul>
+<h2 id="2025-11-25-2025-12-01">2025-11-25 - 2025-12-01</h2>
+<p>Process App</p>
+<ul>
+<li>Date 2025-11-28</li>
+<li>7.0.3.0 &amp; 6.0.0.23</li>
+<li>Support business rules on packing</li>
+</ul>
+<p>Business Api</p>
+<ul>
+<li>Date 2025-11-28</li>
+<li>Granite.Business.API.ServiceInterface.dll 7.0.0.10 &amp; 6.0.0.24</li>
+<li>Granite.Business.API.ServiceModel.dll 7.0.0.3 &amp; 6.0.0.8</li>
+<li>Added packing business rule ValidateAgainstDocumentQty - validates the PackQty against the Qty field instead of the ActionQty field</li>
+<li>Fix consume inventory validate operation not properly applying ActionQtyAllowance business rule</li>
+</ul>
 <h2 id="2025-11-18-2025-11-24">2025-11-18 - 2025-11-24</h2>
 <p>Web desktop</p>
 <ul>

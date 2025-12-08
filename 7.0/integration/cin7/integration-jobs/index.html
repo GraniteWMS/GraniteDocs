@@ -1075,6 +1075,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#configure-scheduled-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Scheduled Jobs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#systemsetting" class="md-nav__link">
     <span class="md-ellipsis">
       SystemSetting
@@ -3576,6 +3585,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#configure-scheduled-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Scheduled Jobs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#systemsetting" class="md-nav__link">
     <span class="md-ellipsis">
       SystemSetting
@@ -3658,6 +3676,11 @@ See below for information for specifics on how document and master data jobs wor
 <hr />
 <p>CIN7 type: Purchase</p>
 </li>
+<li>
+<p>TRANSFER</p>
+<hr />
+<p>CIN7 type: Stock Transfer</p>
+</li>
 </ul>
 </div>
 <h2 id="how-it-works">How it works</h2>
@@ -3666,11 +3689,73 @@ See below for information for specifics on how document and master data jobs wor
 <p><img alt="API Key" src="../cin7-img/create-api-key.png" /></p>
 <p>Once created, it will generate an Account ID and a Key (as below). These need to be added to system settings in Granite into api-auth-accountid and api-auth-applicationkey respectively. These system settings will be generated when the scheduler is run for the first time. Once you have added these you will need to restart the scheduler.</p>
 <p><img alt="API Key" src="../cin7-img/api-key.png" /></p>
+<h3 id="configure-scheduled-jobs">Configure Scheduled Jobs</h3>
+<p>To create Scheduled Jobs run the following script:</p>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="p">(</span><span class="n">isActive</span><span class="p">,</span><span class="w"> </span><span class="n">JobName</span><span class="p">,</span><span class="w"> </span><span class="n">JobDescription</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">Type</span><span class="p">],</span><span class="w"> </span><span class="n">InjectJob</span><span class="p">,</span><span class="w"> </span><span class="nb">Interval</span><span class="p">,</span><span class="w"> </span><span class="n">IntervalFormat</span><span class="p">,</span><span class="w"> </span><span class="n">AuditDate</span><span class="p">,</span><span class="w"> </span><span class="n">AuditUser</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CIN7 MasterItem Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs MasterItems from CIN7&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.CIN7.Job.MasterItem&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;24&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;HOURS&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">JobName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;CIN7 MasterItem Job&#39;</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="p">(</span><span class="n">isActive</span><span class="p">,</span><span class="w"> </span><span class="n">JobName</span><span class="p">,</span><span class="w"> </span><span class="n">JobDescription</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">Type</span><span class="p">],</span><span class="w"> </span><span class="n">InjectJob</span><span class="p">,</span><span class="w"> </span><span class="nb">Interval</span><span class="p">,</span><span class="w"> </span><span class="n">IntervalFormat</span><span class="p">,</span><span class="w"> </span><span class="n">AuditDate</span><span class="p">,</span><span class="w"> </span><span class="n">AuditUser</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CIN7 Purchase Order &#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs PurchaseOrders from CIN7&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.CIN7.Job.PurchaseOrder&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MINUTES&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">JobName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;CIN7 Purchase Order &#39;</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="p">(</span><span class="n">isActive</span><span class="p">,</span><span class="w"> </span><span class="n">JobName</span><span class="p">,</span><span class="w"> </span><span class="n">JobDescription</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">Type</span><span class="p">],</span><span class="w"> </span><span class="n">InjectJob</span><span class="p">,</span><span class="w"> </span><span class="nb">Interval</span><span class="p">,</span><span class="w"> </span><span class="n">IntervalFormat</span><span class="p">,</span><span class="w"> </span><span class="n">AuditDate</span><span class="p">,</span><span class="w"> </span><span class="n">AuditUser</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CIN7 Sales Order&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs SalesOrders from CIN7&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.CIN7.Job.SalesOrder&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MINUTES&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">JobName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;CIN7 Sales Order&#39;</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="p">(</span><span class="n">isActive</span><span class="p">,</span><span class="w"> </span><span class="n">JobName</span><span class="p">,</span><span class="w"> </span><span class="n">JobDescription</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">Type</span><span class="p">],</span><span class="w"> </span><span class="n">InjectJob</span><span class="p">,</span><span class="w"> </span><span class="nb">Interval</span><span class="p">,</span><span class="w"> </span><span class="n">IntervalFormat</span><span class="p">,</span><span class="w"> </span><span class="n">AuditDate</span><span class="p">,</span><span class="w"> </span><span class="n">AuditUser</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CIN7 Transfer Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs Transfers from CIN7&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.CIN7.Job.Transfer&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MINUTES&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">JobName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;CIN7 Transfer Job&#39;</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="p">(</span><span class="n">isActive</span><span class="p">,</span><span class="w"> </span><span class="n">JobName</span><span class="p">,</span><span class="w"> </span><span class="n">JobDescription</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">Type</span><span class="p">],</span><span class="w"> </span><span class="n">InjectJob</span><span class="p">,</span><span class="w"> </span><span class="nb">Interval</span><span class="p">,</span><span class="w"> </span><span class="n">IntervalFormat</span><span class="p">,</span><span class="w"> </span><span class="n">AuditDate</span><span class="p">,</span><span class="w"> </span><span class="n">AuditUser</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CIN7 Trading Partner Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs TradingPartners from CIN7&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.CIN7.Job.TradingPartner&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;4&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;HOURS&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">JobName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;CIN7 Trading Partner Job&#39;</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="p">(</span><span class="n">isActive</span><span class="p">,</span><span class="w"> </span><span class="n">JobName</span><span class="p">,</span><span class="w"> </span><span class="n">JobDescription</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">Type</span><span class="p">],</span><span class="w"> </span><span class="n">InjectJob</span><span class="p">,</span><span class="w"> </span><span class="nb">Interval</span><span class="p">,</span><span class="w"> </span><span class="n">IntervalFormat</span><span class="p">,</span><span class="w"> </span><span class="n">AuditDate</span><span class="p">,</span><span class="w"> </span><span class="n">AuditUser</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CIN7 Product Availability Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs Product Availability from CIN7&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.CIN7.Job.ProductAvailability&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;12&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;HOURS&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">JobName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;CIN7 Product Availability Job&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>For the Product Availability Job you need this table.</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">Integration_ProductAvailability</span><span class="p">](</span>
+<span class="w">    </span><span class="p">[</span><span class="n">ProductAvailabilityID</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="nb">bigint</span><span class="p">]</span><span class="w"> </span><span class="k">IDENTITY</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">ID</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">uniqueidentifier</span><span class="p">]</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">SKU</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">nvarchar</span><span class="p">](</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">Name</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">nvarchar</span><span class="p">](</span><span class="mi">500</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">Barcode</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">nvarchar</span><span class="p">](</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="k">Location</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">nvarchar</span><span class="p">](</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">Bin</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">nvarchar</span><span class="p">](</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">Batch</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">nvarchar</span><span class="p">](</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">ExpiryDate</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">datetime2</span><span class="p">](</span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">OnHand</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="nb">decimal</span><span class="p">](</span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">Allocated</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="nb">decimal</span><span class="p">](</span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">Available</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="nb">decimal</span><span class="p">](</span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">OnOrder</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="nb">decimal</span><span class="p">](</span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">StockOnHand</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="nb">decimal</span><span class="p">](</span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">InTransit</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="nb">decimal</span><span class="p">](</span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">NextDeliveryDate</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">datetime2</span><span class="p">](</span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">CLUSTERED</span><span class="w"> </span>
+<span class="p">(</span>
+<span class="w">    </span><span class="p">[</span><span class="n">ProductAvailabilityID</span><span class="p">]</span><span class="w"> </span><span class="k">ASC</span>
+<span class="p">)</span><span class="k">WITH</span><span class="w"> </span><span class="p">(</span><span class="n">PAD_INDEX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">OFF</span><span class="p">,</span><span class="w"> </span><span class="n">STATISTICS_NORECOMPUTE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">OFF</span><span class="p">,</span><span class="w"> </span><span class="n">IGNORE_DUP_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">OFF</span><span class="p">,</span><span class="w"> </span><span class="n">ALLOW_ROW_LOCKS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">ON</span><span class="p">,</span><span class="w"> </span><span class="n">ALLOW_PAGE_LOCKS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">ON</span><span class="p">,</span><span class="w"> </span><span class="n">OPTIMIZE_FOR_SEQUENTIAL_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">OFF</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="p">[</span><span class="k">PRIMARY</span><span class="p">]</span>
+<span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="p">[</span><span class="k">PRIMARY</span><span class="p">]</span>
+<span class="k">GO</span>
+</code></pre></div>
+<p>This view will populate the StockVariance screen using the ProductAvailability data.</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ERP_StockOnHand</span><span class="p">]</span>
+<span class="k">AS</span>
+<span class="k">SELECT</span><span class="w">     </span><span class="k">Location</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">LOCATION</span><span class="p">,</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">ITEMNO</span><span class="p">,</span><span class="w"> </span><span class="n">OnHand</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">QTYONHAND</span><span class="p">,</span><span class="w"> </span><span class="n">OnOrder</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">QTYONORDER</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">QTYSALORDR</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">AVRCOST</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">Integration_ProductAvailability</span>
+<span class="k">GO</span>
+</code></pre></div>
 <h3 id="systemsetting">SystemSetting</h3>
 <ul>
 <li><code>BaseUrl</code> - CIN7 API base URL. This is set by default to https://inventory.dearsystems.com/ExternalApi/v2/</li>
 <li><code>api-auth-accountid</code> - CIN7 API Account ID.</li>
 <li><code>api-auth-applicationkey</code> - CIN7 API Application Key (encrypted).</li>
+<li><code>Locations</code> - CIN7 Locations to sync (comma delimited list).</li>
+<li><code>SyncSuppliers</code> - Enable/disable syncing suppliers from CIN7 (default: true).</li>
+<li><code>SyncCustomers</code> - Enable/disable syncing customers from CIN7 (default: true).</li>
+<li><code>SalesRepresentatives</code> - CIN7 Sales Representatives to filter sales by (comma delimited list).</li>
 </ul>
 <p><img alt="SystemSettings" src="../cin7-img/system-settings.png" /></p>
 <h3 id="document-jobs">Document Jobs</h3>
@@ -3739,63 +3824,183 @@ See below for information for specifics on how document and master data jobs wor
 </tbody>
 </table>
 </li>
+<li>
+<p><h3>Stock Transfer</h3> </p>
+<table>
+<thead>
+<tr>
+<th>CIN7 Status</th>
+<th>Granite Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Completed</td>
+<td>COMPLETE</td>
+</tr>
+<tr>
+<td>Voided</td>
+<td>CANCELLED</td>
+</tr>
+<tr>
+<td>Others</td>
+<td>ENTERED</td>
+</tr>
+</tbody>
+</table>
+</li>
 </ul>
 </div>
 <h3 id="master-data-jobs">Master data jobs</h3>
 <p>MasterItems and TradingPartners have their own Jobs. These Jobs fetch all StockItems, Vendors, and Customers from  CIN7 and compares them to the MasterItems and TradingPartners in Granite. Any inserts / updates are done as required. </p>
 <p>The document jobs also sync changes to the MasterItems that are on the document. This means that on sites that do not make many changes to their MasterItems it is better to limit running this job to once a day or even less frequently. </p>
 <p>Document Jobs do not automatically sync trading partners as they are not required to create to the document in Granite and as such are only synced when the TradingPartner Job runs. </p>
+<p>The mapping below is an example of the standard that is in place. It is configurable through the F# mapping scripts as with the documents.</p>
 <p><strong>MasterItem Mapping:</strong></p>
 <table>
 <thead>
 <tr>
+<th></th>
 <th>CIN7 Property</th>
 <th>Granite Property</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td></td>
 <td>SKU</td>
 <td>Code, FormattedCode</td>
 </tr>
 <tr>
-<td>ShortDescription</td>
+<td></td>
+<td>Name</td>
 <td>Description</td>
 </tr>
 <tr>
+<td></td>
 <td>Category</td>
 <td>Category</td>
 </tr>
 <tr>
-<td>Length</td>
-<td>Length</td>
+<td></td>
+<td>Status</td>
+<td>isActive</td>
 </tr>
 <tr>
-<td>Width</td>
-<td>Width</td>
-</tr>
-<tr>
-<td>Height</td>
-<td>Height</td>
-</tr>
-<tr>
-<td>Weight</td>
-<td>UnitWeight</td>
-</tr>
-<tr>
+<td></td>
 <td>UOM</td>
 <td>UOM</td>
 </tr>
 <tr>
+<td></td>
 <td>ID</td>
 <td>ERPIdentification</td>
 </tr>
 <tr>
-<td>Status (Active)</td>
-<td>isActive</td>
+<td></td>
+<td>Length</td>
+<td>Length</td>
+</tr>
+<tr>
+<td></td>
+<td>Width</td>
+<td>Width</td>
+</tr>
+<tr>
+<td></td>
+<td>Height</td>
+<td>Height</td>
+</tr>
+<tr>
+<td></td>
+<td>Weight</td>
+<td>UnitWeight</td>
+</tr>
+<tr>
+<td></td>
+<td>Barcode</td>
+<td>MasterItemAlias</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Trading Partner Mapping:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>CIN7 (Customer) Property</th>
+<th>Granite Property</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>Name</td>
+<td>Code, Description</td>
+</tr>
+<tr>
+<td></td>
+<td>Status</td>
+<td>isActive</td>
+</tr>
+<tr>
+<td></td>
+<td>ID</td>
+<td>ERPIdentification</td>
+</tr>
+<tr>
+<td></td>
+<td>Contact.Name</td>
+<td>ContactPerson</td>
+</tr>
+<tr>
+<td></td>
+<td>Contact.Phone</td>
+<td>Tel</td>
+</tr>
+<tr>
+<td></td>
+<td>Contact.Fax</td>
+<td>Fax</td>
+</tr>
+<tr>
+<td></td>
+<td>Contact.MobilePhone</td>
+<td>Mobile</td>
+</tr>
+<tr>
+<td></td>
+<td>Contact.Email</td>
+<td>Email</td>
+</tr>
+<tr>
+<td></td>
+<td>Address.Line1</td>
+<td>Address1</td>
+</tr>
+<tr>
+<td></td>
+<td>Address.Line2</td>
+<td>Address2</td>
+</tr>
+<tr>
+<td></td>
+<td>Address.City</td>
+<td>Address3</td>
+</tr>
+<tr>
+<td></td>
+<td>Address.State</td>
+<td>Address4</td>
+</tr>
+<tr>
+<td></td>
+<td>Address.Postcode</td>
+<td>Address5</td>
+</tr>
+</tbody>
+</table>
+<p><em>(Note: Suppliers are mapped similarly but with DocumentType set to "RECEIVING" instead of "ORDER")</em></p>
 
 
 
