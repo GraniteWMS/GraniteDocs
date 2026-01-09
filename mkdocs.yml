@@ -50,6 +50,7 @@ nav:
           - Sage Intacct:
               - integration/intacct/index.md
               - SDK Provider: integration/intacct/sdk-provider.md
+              - Intacct Integration Service: integration/intacct/standalone-service.md
               - Integration Jobs: integration/intacct/integration-jobs.md
           - Sage X3:
               - integration/sagex3/index.md
