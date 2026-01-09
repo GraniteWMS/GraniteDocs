@@ -1,6 +1,15 @@
 # Integration Jobs
 
-Integration jobs are a special type of [Scheduler](../../scheduler/manual.md) job called [injected jobs](../../scheduler/manual.md#injected-jobs-integration-jobs). 
+Integration jobs are a special type of [Scheduler](../../scheduler/manual.md) job called [injected jobs](../../scheduler/manual.md#injected-jobs-integration-jobs). These jobs pull data from Sage Intacct into Granite, including master data (items and trading partners) and documents (orders, purchase orders, transfers).
+
+## Architecture
+
+The integration jobs use the **Sage Intacct .NET SDK** to communicate with the Intacct XML API, combined with a **configurable F# mapping system** that allows for easy customization without recompiling the entire application.
+
+- **Sage Intacct .NET SDK**: Official SDK for communicating with the Sage Intacct XML API
+- **F# Mapping Scripts**: Each job has a corresponding F# script file (`.fsx`) in the `Configuration\Scripts` folder that defines what fields to fetch from Intacct, and how the XML response data maps to Granite entities
+- **Concurrent Request Protection**: The Granite Scheduler ensures jobs do not run concurrently, preventing duplicate or conflicting sync operations
+- **Easy Customization**: To customize field mappings, status translations, or add new fields, simply edit the F# script and restart the scheduler
 
 ## Supported document types
 <div class="grid cards" markdown>
@@ -9,31 +18,31 @@ Integration jobs are a special type of [Scheduler](../../scheduler/manual.md) jo
 
 	---
 
-	Sage Intacct type: Sales Order
+	Sage Intacct type: SODOCUMENT
 
 - 	RECEIVING
 
 	---
 	
-	Sage Intacct type: Purchase Order
+	Sage Intacct type: PODOCUMENT
 
 -   INTRANSIT
 
     ---
 
-    Sage Intacct type: Inventory Transfer Out
+    Sage Intacct type: INVDOCUMENT
 
 -   RECEIPT
 
     ---
 
-    Sage Intacct type: Inventory Transfer In
+    Sage Intacct type: INVDOCUMENT
 
 -   TRANSFER
 
     ---
     
-    Sage Intacct type: Warehouse Transfer
+    Sage Intacct type: ICTRANSFER
 
 </div>
 
@@ -157,3 +166,83 @@ Datatype: comma separated list
 This setting determines the types of Inventory Transfer documents that can be synced from Intacct.
 
 To specify multiple types, list them separated by commas e.g. `Inventory Transfer In,CPT Transfer In`
+
+
+## Customizing Mappings
+
+The F# configuration scripts can be customized to adapt to client-specific requirements. After making changes, simply restart the Granite Scheduler to recompile the scripts.
+
+**Example 1: Customizing Status Mapping**
+
+In `SalesOrderJobConfiguration.fsx`, you can customize how Intacct states map to Granite statuses:
+
+```fsharp
+let status = 
+    match intacctHeader.STATE with
+    | "Submitted" -> "ENTERED"
+    | "Approved" -> "RELEASED"
+    | "Partially Approved" -> "ENTERED"
+    | "Declined" -> "CANCELLED"
+    | "Closed" -> "CANCELLED"
+    | "Converted" -> "COMPLETE"
+    // Add custom status here:
+    | "Custom Status" -> "ONHOLD"
+    | _ -> "ENTERED"
+```
+
+**Example 2: Adding New Fields**
+
+To map additional Intacct fields to Granite:
+
+1. Add the field to the XML type definition:
+```fsharp
+[<XmlRoot("SODOCUMENT")>]
+type IntacctSalesOrderHeader() =
+    // ... existing fields ...
+    [<XmlElement("CUSTOMFIELD1")>]
+    member val CUSTOMFIELD1 = "" with get, set
+```
+
+2. Add the field name to the query fields list:
+```fsharp
+member this.DocumentHeaderQueryFields =
+    seq {
+        "RECORDNO"
+        "DOCNO"
+        // ... existing fields ...
+        "CUSTOMFIELD1"  // Add here
+    }
+```
+
+3. Map the field in the toDocument function:
+```fsharp
+let document = Document(
+    // ... existing mappings ...
+    Comment = intacctHeader.CUSTOMFIELD1  // Map to appropriate Granite field
+)
+```
+
+**Example 3: Conditional Logic**
+
+Apply business rules during mapping:
+
+```fsharp
+let toDocument (intacctHeader: IntacctSalesOrderHeader) =
+    // Set priority based on customer type
+    let priority = 
+        if intacctHeader.CUSTOMER_CUSTOMERID.StartsWith("VIP") then 1
+        else 0
+    
+    let document = Document(
+        // ... other fields ...
+        Priority = priority
+    )
+    Ok document
+```
+
+!!! tip "Testing Your Changes"
+    After modifying F# scripts:
+    
+    1. Delete `Configuration\Granite.Integration.SageIntacct.Job.DynamicConfiguration.dll` to force recompilation
+    2. Restart the Granite Scheduler
+    3. Check the scheduler `/config` page to ensure that there are no errors.
