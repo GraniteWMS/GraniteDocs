@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://granitewms.github.io/GraniteDocs/7.0/integration/intacct/integration-jobs/">
       
       
-        <link rel="prev" href="../sdk-provider/">
+        <link rel="prev" href="../standalone-service/">
       
       
         <link rel="next" href="../../sagex3/">
@@ -1620,6 +1620,8 @@
       
         
       
+        
+      
     
     
     
@@ -1690,6 +1692,29 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../standalone-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intacct Integration Service
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1741,6 +1766,15 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#supported-document-types" class="md-nav__link">
@@ -1904,6 +1938,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-mappings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing Mappings
+    </span>
+  </a>
   
 </li>
       
@@ -3656,6 +3699,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#supported-document-types" class="md-nav__link">
     <span class="md-ellipsis">
       Supported document types
@@ -3820,6 +3872,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#customizing-mappings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing Mappings
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3837,34 +3898,42 @@
 
 
 <h1 id="integration-jobs">Integration Jobs</h1>
-<p>Integration jobs are a special type of <a href="../../../scheduler/manual/">Scheduler</a> job called <a href="../../../scheduler/manual/#injected-jobs-integration-jobs">injected jobs</a>. </p>
+<p>Integration jobs are a special type of <a href="../../../scheduler/manual/">Scheduler</a> job called <a href="../../../scheduler/manual/#injected-jobs-integration-jobs">injected jobs</a>. These jobs pull data from Sage Intacct into Granite, including master data (items and trading partners) and documents (orders, purchase orders, transfers).</p>
+<h2 id="architecture">Architecture</h2>
+<p>The integration jobs use the <strong>Sage Intacct .NET SDK</strong> to communicate with the Intacct XML API, combined with a <strong>configurable F# mapping system</strong> that allows for easy customization without recompiling the entire application.</p>
+<ul>
+<li><strong>Sage Intacct .NET SDK</strong>: Official SDK for communicating with the Sage Intacct XML API</li>
+<li><strong>F# Mapping Scripts</strong>: Each job has a corresponding F# script file (<code>.fsx</code>) in the <code>Configuration\Scripts</code> folder that defines what fields to fetch from Intacct, and how the XML response data maps to Granite entities</li>
+<li><strong>Concurrent Request Protection</strong>: The Granite Scheduler ensures jobs do not run concurrently, preventing duplicate or conflicting sync operations</li>
+<li><strong>Easy Customization</strong>: To customize field mappings, status translations, or add new fields, simply edit the F# script and restart the scheduler</li>
+</ul>
 <h2 id="supported-document-types">Supported document types</h2>
 <div class="grid cards">
 <ul>
 <li>
 <p>ORDER </p>
 <hr />
-<p>Sage Intacct type: Sales Order</p>
+<p>Sage Intacct type: SODOCUMENT</p>
 </li>
 <li>
 <p>RECEIVING</p>
 <hr />
-<p>Sage Intacct type: Purchase Order</p>
+<p>Sage Intacct type: PODOCUMENT</p>
 </li>
 <li>
 <p>INTRANSIT</p>
 <hr />
-<p>Sage Intacct type: Inventory Transfer Out</p>
+<p>Sage Intacct type: INVDOCUMENT</p>
 </li>
 <li>
 <p>RECEIPT</p>
 <hr />
-<p>Sage Intacct type: Inventory Transfer In</p>
+<p>Sage Intacct type: INVDOCUMENT</p>
 </li>
 <li>
 <p>TRANSFER</p>
 <hr />
-<p>Sage Intacct type: Warehouse Transfer</p>
+<p>Sage Intacct type: ICTRANSFER</p>
 </li>
 </ul>
 </div>
@@ -3956,6 +4025,77 @@ This setting determines the types of Inventory Transfer documents that can be sy
 <p>Datatype: comma separated list
 This setting determines the types of Inventory Transfer documents that can be synced from Intacct.</p>
 <p>To specify multiple types, list them separated by commas e.g. <code>Inventory Transfer In,CPT Transfer In</code></p>
+<h2 id="customizing-mappings">Customizing Mappings</h2>
+<p>The F# configuration scripts can be customized to adapt to client-specific requirements. After making changes, simply restart the Granite Scheduler to recompile the scripts.</p>
+<p><strong>Example 1: Customizing Status Mapping</strong></p>
+<p>In <code>SalesOrderJobConfiguration.fsx</code>, you can customize how Intacct states map to Granite statuses:</p>
+<div class="highlight"><pre><span></span><code><span class="k">let</span><span class="w"> </span><span class="nv">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">intacctHeader</span><span class="o">.</span><span class="n">STATE</span><span class="w"> </span><span class="k">with</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="s">&quot;Submitted&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;ENTERED&quot;</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="s">&quot;Approved&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;RELEASED&quot;</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="s">&quot;Partially Approved&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;ENTERED&quot;</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="s">&quot;Declined&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;CANCELLED&quot;</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="s">&quot;Closed&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;CANCELLED&quot;</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="s">&quot;Converted&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;COMPLETE&quot;</span>
+<span class="w">    </span><span class="c1">// Add custom status here:</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="s">&quot;Custom Status&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;ONHOLD&quot;</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="o">_</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;ENTERED&quot;</span>
+</code></pre></div>
+<p><strong>Example 2: Adding New Fields</strong></p>
+<p>To map additional Intacct fields to Granite:</p>
+<ol>
+<li>
+<p>Add the field to the XML type definition:
+<div class="highlight"><pre><span></span><code><span class="o">[&lt;</span><span class="n">XmlRoot</span><span class="o">(</span><span class="s">&quot;SODOCUMENT&quot;</span><span class="o">)&gt;]</span>
+<span class="k">type</span><span class="w"> </span><span class="nc">IntacctSalesOrderHeader</span><span class="bp">()</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="c1">// ... existing fields ...</span>
+<span class="w">    </span><span class="o">[&lt;</span><span class="n">XmlElement</span><span class="o">(</span><span class="s">&quot;CUSTOMFIELD1&quot;</span><span class="o">)&gt;]</span>
+<span class="w">    </span><span class="k">member</span><span class="w"> </span><span class="k">val</span><span class="w"> </span><span class="n">CUSTOMFIELD1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">get</span><span class="o">,</span><span class="w"> </span><span class="n">set</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Add the field name to the query fields list:
+<div class="highlight"><pre><span></span><code><span class="k">member</span><span class="w"> </span><span class="n">this</span><span class="p">.</span><span class="nf">DocumentHeaderQueryFields</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">seq</span><span class="w"> </span><span class="o">{</span>
+<span class="w">        </span><span class="s">&quot;RECORDNO&quot;</span>
+<span class="w">        </span><span class="s">&quot;DOCNO&quot;</span>
+<span class="w">        </span><span class="c1">// ... existing fields ...</span>
+<span class="w">        </span><span class="s">&quot;CUSTOMFIELD1&quot;</span><span class="w">  </span><span class="c1">// Add here</span>
+<span class="w">    </span><span class="o">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Map the field in the toDocument function:
+<div class="highlight"><pre><span></span><code><span class="k">let</span><span class="w"> </span><span class="nv">document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Document</span><span class="o">(</span>
+<span class="w">    </span><span class="c1">// ... existing mappings ...</span>
+<span class="w">    </span><span class="n">Comment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intacctHeader</span><span class="o">.</span><span class="n">CUSTOMFIELD1</span><span class="w">  </span><span class="c1">// Map to appropriate Granite field</span>
+<span class="o">)</span>
+</code></pre></div></p>
+</li>
+</ol>
+<p><strong>Example 3: Conditional Logic</strong></p>
+<p>Apply business rules during mapping:</p>
+<div class="highlight"><pre><span></span><code><span class="k">let</span><span class="w"> </span><span class="nv">toDocument</span><span class="w"> </span><span class="o">(</span><span class="n">intacctHeader</span><span class="o">:</span><span class="w"> </span><span class="n">IntacctSalesOrderHeader</span><span class="o">)</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="c1">// Set priority based on customer type</span>
+<span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="nv">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">intacctHeader</span><span class="o">.</span><span class="n">CUSTOMER_CUSTOMERID</span><span class="o">.</span><span class="n">StartsWith</span><span class="o">(</span><span class="s">&quot;VIP&quot;</span><span class="o">)</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="nv">document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Document</span><span class="o">(</span>
+<span class="w">        </span><span class="c1">// ... other fields ...</span>
+<span class="w">        </span><span class="n">Priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">priority</span>
+<span class="w">    </span><span class="o">)</span>
+<span class="w">    </span><span class="n">Ok</span><span class="w"> </span><span class="n">document</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Testing Your Changes</p>
+<p>After modifying F# scripts:</p>
+<ol>
+<li>Delete <code>Configuration\Granite.Integration.SageIntacct.Job.DynamicConfiguration.dll</code> to force recompilation</li>
+<li>Restart the Granite Scheduler</li>
+<li>Check the scheduler <code>/config</code> page to ensure that there are no errors.</li>
+</ol>
+</div>
 
 
 
