@@ -1,5 +1,37 @@
 # Hotfixes
 
+## 2025-12-09 - 2025-12-15
+
+Process App
+
+- Date 2025-12-12
+- Version 7.0.3.1 & 6.0.0.24
+- Fix packing New carrying entity button not printing label
+
+DocumentImport DataGrid
+
+- Date 2025-12-10
+- Fix column naming for LineType and LineStatus
+
+Granite.Repository.ServiceInterface.dll
+
+- Date 2025-12-10
+- 7.0.0.4 & 6.0.0.8
+- Fix Data Import setting document lines’ Status to the header’s Status
+
+Granite.Repository.ServiceModel.dll
+
+- Date 2025-12-10
+- 7.0.0.2 & 6.0.0.2
+- Fix Data Import error messages not returned
+
+Granite.Business.API.ServiceModel.dll
+
+- Date 2025-12-10
+- 7.0.0.4 & 6.0.0.9
+- Fix move and scrap validation for barcodes containing special chars
+- NOTE: the service model dll must be updated in both the Business API AND Process App
+
 ## 2025-12-02 - 2025-12-08
 
 Granite.Integration.Accpac.dll
