@@ -19,13 +19,18 @@ See below for information for specifics on how document and master data jobs wor
 
     ---
 
-    CIN7 type: Purchase
+    CIN7 type: Advanced Purchase
  
  -  TRANSFER
 
     ---
 
     CIN7 type: Stock Transfer
+
+ - WORKORDER
+
+    ---
+    CIN7 type: Finished Good
 
 </div>
 
@@ -71,6 +76,10 @@ INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescripti
 SELECT 0, 'CIN7 Product Availability Job', 'Syncs Product Availability from CIN7', 'INJECTED', 'Granite.Integration.CIN7.Job.ProductAvailability', '12', 'HOURS', GETDATE(), 'AUTOMATION'
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'CIN7 Product Availability Job');
 
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'CIN7 Finished Goods Job', 'Syncs Finished Goods from CIN7', 'INJECTED', 'Granite.Integration.CIN7.Job.FinishedGoodsJob', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'CIN7 Finished Goods Job');
+
 ```
 
 For the Product Availability Job you need this table.
@@ -93,6 +102,7 @@ CREATE TABLE [dbo].[Integration_ProductAvailability](
 	[StockOnHand] [decimal](18, 4) NOT NULL,
 	[InTransit] [decimal](18, 4) NOT NULL,
 	[NextDeliveryDate] [datetime2](7) NULL,
+   [Updated] [bit] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[ProductAvailabilityID] ASC
@@ -117,55 +127,136 @@ GO
 - `BaseUrl` - CIN7 API base URL. This is set by default to https://inventory.dearsystems.com/ExternalApi/v2/
 - `api-auth-accountid` - CIN7 API Account ID.
 - `api-auth-applicationkey` - CIN7 API Application Key (encrypted).
-- `Locations` - CIN7 Locations to sync (comma delimited list).
 - `SyncSuppliers` - Enable/disable syncing suppliers from CIN7 (default: true).
 - `SyncCustomers` - Enable/disable syncing customers from CIN7 (default: true).
-- `SalesRepresentatives` - CIN7 Sales Representatives to filter sales by (comma delimited list).
+- `Locations` - CIN7 Locations to sync product availability for, comma delimited
 
 ![SystemSettings](./cin7-img/system-settings.png)
 
+
+### F# Mapping Scripts
+
+The CIN7 integration uses F# scripts for configurable mapping between CIN7 entities and Granite entities. This allows customization of how data is transformed during integration without modifying compiled code.
+
+<h4>Script Location</h4>
+
+Mapping scripts are located in the `Configuration/Scripts/` directory within the integration job deployment folder. Each job type has its own configuration script:
+
+- `MasterItemJobConfiguration.fsx` - MasterItem mappings
+- `TradingPartnerJobConfiguration.fsx` - Trading Partner (Customer/Supplier) mappings
+- `SalesOrderJobConfiguration.fsx` - Sales Order document mappings
+- `PurchaseOrderJobConfiguration.fsx` - Purchase Order document mappings
+- `TransferJobConfiguration.fsx` - Stock Transfer document mappings
+- `FinishedGoodsJobConfiguration.fsx` - Finished Goods/Work Order document mappings
+
+<h4>How It Works</h4>
+
+1. On first run, the F# scripts are compiled into a DLL (`Granite.Integration.CIN7.Job.DynamicConfiguration.dll`)
+2. The compiled DLL is loaded and used for all mapping operations
+3. To apply changes to scripts, delete the compiled DLL and restart the scheduler - it will recompile automatically
+
+<h4>Configuration Options</h4>
+
+Each configuration script can define:
+
+**Document Filtering:**
+
+- `ManagedLocations` - Array of CIN7 location names. Only documents from these locations will be synced. If empty, all locations are synced.
+- `SalesRepresentatives` - (Sales Orders only) Array of sales rep names. Only orders from these reps will be synced. If empty, all reps are included.
+- `SkipDocument` - Custom function to skip specific documents based on any criteria.
+
+**Field Configuration:**
+
+- `ERPHeaderUpdateableFields` - Fields on the document header that can be updated from CIN7
+- `ERPHeaderViewIgnoreFields` - Fields to ignore when comparing header changes
+- `ERPDetailUpdateableFields` - Fields on document lines that can be updated from CIN7
+- `ERPDetailViewIgnoreFields` - Fields to ignore when comparing line changes
+
+**Mapping Functions:**
+
+- `MapToSalesOrder` / `MapToPurchaseOrder` / `MapToTransfer` / `MapToWorkOrder` - Transform CIN7 documents to Granite documents
+- `MapToMasterItem` - Transform CIN7 products to Granite MasterItems
+- `MapCustomerToTradingPartner` / `MapSupplierToTradingPartner` - Transform CIN7 customers/suppliers to Granite Trading Partners
+
+<h4>Example: Filtering by Location</h4>
+
+To sync only documents from specific warehouses, modify the `ManagedLocations` array in the relevant configuration script:
+
+```fsharp
+member this.ManagedLocations = [|
+    "Main Warehouse";
+    "Distribution Center";|]
+```
+
+<h4>Example: Custom Document Filtering</h4>
+
+To skip documents based on custom logic, modify the `SkipDocument` function:
+
+```fsharp
+member this.SkipDocument (sale: SaleResponse): bool = 
+    // Skip draft orders
+    sale.Status = "DRAFT" ||
+    // Skip orders below minimum value
+    sale.Total < 100.0m
+```
+
+<h4>Example: Custom Field Mapping</h4>
+
+To customize how fields are mapped, modify the mapping function. For example, to map a custom field to the Description:
+
+```fsharp
+let document = Entities.Granite.Document(
+    Number = sale.Order.SaleOrderNumber,
+    Description = sale.CustomerReference, // Use customer reference instead of note
+    // ... other fields
+)
+```
+
+!!! warning
+    After modifying any F# script, you must delete the compiled DLL (`Configuration/Granite.Integration.CIN7.Job.DynamicConfiguration.dll`) and restart the scheduler for changes to take effect.
+
 ### Document Jobs
 
-GraniteScheduler runs injected jobs that check the IntegrationDocumentQueue for the lastUpdated time for the relevant document type(if no lastUpdated time is found it will use current time - 24hours). With this last updated time, it will then do a API request for all relevant documents that have a last updated time greater than the lastUpdated time from the IntegrationDocumentQueue. If there are any documents that fit those criteria they are inserted into the IntegrationDocumentQueue. The job then runs this queue.
+GraniteScheduler runs injected jobs that fetch documents from CIN7 based on their specific criteria (see below for details on each job type). Documents that meet the criteria are inserted into the IntegrationDocumentQueue. The job then processes this queue.
 
-When a record with Status 'ENTERED' is found, the job uses a OData request to fetch the information related to that document from the CIN7 and apply the changes to the Granite document.
+When a record with Status 'ENTERED' is found, the job uses a CIN7 REST API request to fetch the information related to that document from CIN7 and apply the changes to the Granite document.
 
 All valid changes to data in the Granite tables are logged to the Audit table, showing the previous value and the new value.
 
 If a change is made in the ERP system that would put Granite into an invalid state, no changes are applied. Instead, the ERPSyncFailed field is set to true and the ERPSyncFailedReason field shows the reason for the failure. The IntegrationLog table will contain further details on the failure if applicable.
 
+<h4>Sales Order (ORDER)</h4>
 
-#### Document Status
+- Fetches CIN7 Sales that have been updated since the last integration time
+- Maps to Granite document type ORDER
+- Can filter by ManagedLocations and SalesRepresentatives in configuration
+- Uses FromLocation for document lines
 
-<div class="grid cards" markdown>
+<h4>Purchase Order (RECEIVING)</h4>
 
- -   <h3>Sale</h3> 
+- Fetches CIN7 Advanced Purchases that have been updated since the last integration time
+- Maps to Granite document type RECEIVING
+- Can filter by ManagedLocations in configuration
+- Uses ToLocation for document lines
 
-    | CIN7 Status        | Granite Status |
-    |--------------------|---------------|
-    | Draft, Ordering   | ONHOLD        |
-    | Voided            | CANCELLED     |
-    | Completed        | COMPLETE      |
-    | Others           | ENTERED       |
+<h4>Transfer (TRANSFER)</h4>
 
- -  <h3>Purchase</h3> 
+- Fetches CIN7 Stock Transfers with status "ORDERED"
+- Document type is determined dynamically based on managed locations:
+    - Both locations managed → TRANSFER
+    - Only FromLocation managed → ORDER (outbound)
+    - Only ToLocation managed → RECEIVING (inbound)
+- Can filter by ManagedLocations in configuration
+- Uses both FromLocation and ToLocation for document lines
 
-    | CIN7 Status     | Granite Status |
-    |---------------|---------------|
-    | Draft, Ordering | ONHOLD        |
-    | Voided          | CANCELLED     |
-    | Completed       | COMPLETE      |
-    | Others         | ENTERED       |
+<h4>Work Order (WORKORDER)</h4>
 
- -  <h3>Stock Transfer</h3> 
-
-    | CIN7 Status     | Granite Status |
-    |---------------|---------------|
-    | Completed       | COMPLETE      |
-    | Voided          | CANCELLED     |
-    | Others         | ENTERED       |
-</div>
-
+- Fetches CIN7 Finished Goods with status "AUTHORISED"
+- Maps to Granite document type WORKORDER
+- Document lines include:
+    - INPUT lines: Raw materials from OrderLines with FromLocation
+    - OUTPUT line: Finished product with ToLocation and Batch
+- Can filter by ManagedLocations in configuration
 
 
 ### Master data jobs
@@ -212,3 +303,15 @@ The mapping below is an example of the standard that is in place. It is configur
 || Address.Postcode           | Address5             |
 
 *(Note: Suppliers are mapped similarly but with DocumentType set to "RECEIVING" instead of "ORDER")*
+
+### Product Availability Job
+
+- The job pulls CIN7 product availability (optionally per location if Locations system setting is a comma-separated list; empty = all locations).
+- For each run it:
+    1. Sets Updated = 0 on all rows in Integration_ProductAvailability.
+    2. MERGEs incoming CIN7 rows on (ID, Location), updating quantities/barcodes/batches/expiry and sets Updated = 1. CIN7 ID is stored as a GUID (new GUID generated if CIN7 returns a non-GUID).
+    3. Deletes any rows still Updated = 0, so only locations/items returned by CIN7 remain.
+- No IntegrationDocumentQueue is used; it writes directly to Integration_ProductAvailability, which feeds the ERP_StockOnHand view for StockVariance.
+- Default schedule in the example is every 12 hours; adjust the ScheduledJobs interval if you need fresher availability.
+
+
