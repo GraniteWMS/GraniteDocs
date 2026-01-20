@@ -92,6 +92,7 @@ nav:
       - Jam.dev: tools/jam.md
       - Jaeger: tools/jaeger.md
       - Apache NiFi: tools/nifi.md
+      - Superset: tools/superset.md
   - Development:
       - Overview: customization/index.md
       - Guidelines: 
