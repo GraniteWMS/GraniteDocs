@@ -6,7 +6,7 @@ Apache Superset is an open-source business intelligence and data visualization p
 
 ## Setup
 
-All files for standalone Superset install can be found in the dropbox folder: (Todo - add superset location)
+All files for standalone Superset install can be found in the dropbox folder: Granite Release/ApacheSuperset
 
 ### Install Postgresql 
 The first step is to install Postgresql 18 with the included installer postgresql-18.1-2-windows-x64.exe
