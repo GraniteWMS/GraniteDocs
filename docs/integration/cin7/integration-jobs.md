@@ -77,7 +77,7 @@ SELECT 0, 'CIN7 Product Availability Job', 'Syncs Product Availability from CIN7
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'CIN7 Product Availability Job');
 
 INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
-SELECT 0, 'CIN7 Finished Goods Job', 'Syncs Finished Goods from CIN7', 'INJECTED', 'Granite.Integration.CIN7.Job.FinishedGoodsJob', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+SELECT 0, 'CIN7 Finished Goods Job', 'Syncs Finished Goods from CIN7', 'INJECTED', 'Granite.Integration.CIN7.Job.WorkOrder', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'CIN7 Finished Goods Job');
 
 ```
