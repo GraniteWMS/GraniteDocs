@@ -93,6 +93,11 @@ You can define multiple mappings for a single function if more than one step nee
 
 ### Business Rules
 
+#### Packing
+
+**ValidateAgainstDocumentQty**
+- When set to 'YES', validates the PackedQty against the Qty field instead of ActionQty, allowing for packing without picking.
+
 #### Picking
 
 **BestBeforeOverride**
@@ -108,6 +113,9 @@ You can define multiple mappings for a single function if more than one step nee
 
 **ActionQtyAllowance**
 - When set to a value above 0, allows the user to transfer the specified percentage more than the document requires
+
+**AlwaysSplitTrackingEntity**
+- When set to "yes", will always split the qty transferred to a new tracking entity, leaving the original tracking entity in place.
 
 #### Receive
 
