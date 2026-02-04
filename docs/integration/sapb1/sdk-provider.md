@@ -1,4 +1,12 @@
 ﻿# SAP B1 
+![maturity](https://img.shields.io/badge/maturity-medium-449336)
+![production_readiness](https://img.shields.io/badge/production_readiness-partial-449336)
+
+![clients](https://img.shields.io/badge/live_clients-yes-449336)
+
+![note](https://img.shields.io/badge/customization-high-cd242c)
+
+![status](https://img.shields.io/badge/development_status-none-365893)
 
 This document contains all the information needed to setup and configure SAP B1 integration.
 The Data Interface API (DI API) is part of the SAP Business One Software Development Kit (SDK). 

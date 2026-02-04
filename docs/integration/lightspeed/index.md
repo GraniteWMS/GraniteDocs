@@ -1,5 +1,15 @@
 # LightSpeed
 
+![maturity](https://img.shields.io/badge/maturity-low-cd242c)
+
+![production_readiness](https://img.shields.io/badge/production_readiness-limited-cd242c)
+
+![clients](https://img.shields.io/badge/live_clients-yes_limited-cd242c)
+
+![status](https://img.shields.io/badge/development_status-none-cd242c)
+
+![note](https://img.shields.io/badge/product_support-no-cd242c)
+
 !!! note
     This documentation is a work in progress and is intended to show the development progress of the integration with LightSpeed. As such, it may be subject to change as progress is made.
     It is also specific to Lightspeed R-Series. This is a older Lighspeed offering and is not longer available to new customers. 

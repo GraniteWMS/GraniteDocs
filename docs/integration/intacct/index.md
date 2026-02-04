@@ -1,5 +1,13 @@
 # Sage Intacct
 
+![maturity](https://img.shields.io/badge/maturity-medium-449336)
+
+![production_readiness](https://img.shields.io/badge/production_readiness-partial-365893)
+
+![clients](https://img.shields.io/badge/live_clients-yes-449336)
+
+![status](https://img.shields.io/badge/development_status-active-365893)
+
 This document contains all of the information needed to set up and configure integration with Intacct.
 There are two parts to the complete integration solution:
 

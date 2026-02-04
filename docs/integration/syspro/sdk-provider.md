@@ -1,4 +1,13 @@
 # Syspro
+![maturity](https://img.shields.io/badge/maturity-low-cd242c)
+
+![production_readiness](https://img.shields.io/badge/production_readiness-partial-cd242c)
+
+![clients](https://img.shields.io/badge/live_clients-yes-449336)
+
+![status](https://img.shields.io/badge/development_status-none-cd242c)
+
+![note](https://img.shields.io/badge/product_support-low-cd242c)
 
 ## Setup
 

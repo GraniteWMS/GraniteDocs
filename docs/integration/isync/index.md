@@ -1,4 +1,13 @@
 # ISync
+![maturity](https://img.shields.io/badge/maturity-low-cd242c)
+
+![production_readiness](https://img.shields.io/badge/production_readiness-no-cd242c)
+
+![clients](https://img.shields.io/badge/live_clients-yes-cd242c)
+
+![status](https://img.shields.io/badge/development_status-none-365893)
+
+![note](https://img.shields.io/badge/product_support-no-cd242c)
 
 !!! note
     This provider has been specifically created for integration with ISync for a single customer. As such, there may be aspects of the code which have been tailored for their specific requirement. If needed for another customer please reach out to the development team to discuss. 

@@ -1,4 +1,11 @@
 # CIN7
+![maturity](https://img.shields.io/badge/maturity-low-cd242c)
+
+![production_readiness](https://img.shields.io/badge/production_readiness-partial-cd242c)
+
+![clients](https://img.shields.io/badge/live_clients-no-cd242c)
+
+![status](https://img.shields.io/badge/development_status-active-365893)
 
 !!! note
     This documentation is a work in progress and is intended to show the development progress of the integration with CIN7. As such, it may be subject to change as progress is made. 
