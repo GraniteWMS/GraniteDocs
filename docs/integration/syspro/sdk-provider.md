@@ -48,7 +48,7 @@ The script to insert the default settings is also located in the GraniteDatabase
 | IntegrationSyspro | Instance                                  |       | Syspro Instance to use (empty for default)                                        |
 | IntegrationSyspro | MultipleBins                              |       | true or false. Set to true when Syspro has multiple bins enabled                  |
 | IntegrationSyspro | SerialNumbers                             |       | true or false. Set to true when Syspro has SerialNumbers enabled                  |
-
+| IntegrationSyspro | WIPLedgerCode                             |       | Syspro WIP ledger code (used by CONSUME / WIPTMI)                                 |
 
 ### SysproWriteXML
 - Instead of posting the transaction write to xml. Output will be in root C:
@@ -87,6 +87,10 @@ The script to insert the default settings is also located in the GraniteDatabase
 ### SerialNumbers
 - Not fully implemented
 - Set to true when Syspro has SerialNumbers enabled
+
+### WIPLedgerCode
+- Syspro WIP ledger code
+- Used By: CONSUME (WIPTMI)
 
 ## Integration Methods
 
@@ -490,6 +494,74 @@ PORTORDOC Item mapping:
 | ToLocation    | Receipt.Warehouse             |                       |
 | Batch         | Receipt.Lot                   |                       |
 | ExpiryDate    | Receipt.LotExpiryDate         |                       |
+
+### MANUFACTURE
+- WIPTJR. Job Receipts
+
+WIPTJR Parameters:
+
+| Parameter Name                            | Value         |
+|-------------------------------------------|---------------|
+| ValidateOnly                              | N             |
+| ApplyIfEntireDocumentValid                | Y             |
+| IgnoreWarnings                            | Y             |
+| TransactionDate                           | DateTime.Now  |
+| SetJobToCompleteIfCoProductsComplete      | Y             |
+
+WIPTJRDOC Item mapping:
+
+| Granite     | Syspro                     | Behaviour                   |
+|-------------|----------------------------|-----------------------------|
+| Document    | Job                        |                             |
+| ActionQty   | Quantity                   |                             |
+| Batch       | Lot                        |                             |
+| ExpiryDate  | LotExpiryDate              | If provided                 |
+|             | UnitOfMeasure              | Set to Stocking             |
+|             | InspectionFlag             | Set to N                    |
+|             | CostBasis                  | Set to CurrentWarehouseCost |
+|             | UseSingleTypeABCElements   | Set to N                    |
+|             | JobComplete                | Set to NotComplete          |
+|             | CoProductComplete          | Set to NotComplete          |
+|             | IncreaseSalesOrderQuantity | Set to N                    |
+
+Notes:
+- Transactions are grouped by Batch + ExpiryDate + Code and the Quantity is summed before posting.
+- Job is taken from the first transaction in each group (ensure grouped transactions belong to the same Job).
+- If SysproWriteXML is enabled, the XML is written to `C:\WIPTJR.xml` and `C:\WIPTJRDOC.xml`.
+
+### CONSUME
+- WIPTMI. Post Material
+
+WIPTMI Parameters:
+
+| Parameter Name             | Value         |
+|----------------------------|---------------|
+| TransactionDate            | DateTime.Now  |
+| PostingPeriod              | Current       |
+| ApplyIfEntireDocumentValid | Y             |
+| ValidateOnly               | N             |
+| IgnoreWarnings             | Y             |
+| AutoDepleteLotsBins        | N             |
+| PostFloorstock             | N             |
+
+WIPTMIDOC Item mapping:
+
+| Granite       | Syspro         | Behaviour                         |
+|---------------|---------------|-----------------------------------|
+| Document      | Job            |                                   |
+| FromLocation  | Warehouse      |                                   |
+| Code          | StockCode      |                                   |
+| ActionQty     | QtyIssued      |                                   |
+| Batch         | Lot            |                                   |
+|               | LedgerCode     | From setting `WIPLedgerCode`      |
+|               | Notation       | Set to `Granite Issue`            |
+|               | NonStockedFlag | Set to N                          |
+|               | AllocCompleted | Set to N                          |
+
+Notes:
+- Transactions are grouped by Batch + ExpiryDate + Code + FromLocation and the QtyIssued is summed before posting.
+- Job is taken from the first transaction in each group (ensure grouped transactions belong to the same Job).
+- If SysproWriteXML is enabled, the XML is written to `C:\WIPTMI.xml` and `C:\WIPTMIDOC.xml`.
 
 ### DYNAMICPICK
 - Not Implemented/supported
