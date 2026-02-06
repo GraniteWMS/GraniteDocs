@@ -2730,6 +2730,48 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-jdk-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create JDK folder
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update Environment Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-nificmd-for-service-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure nifi.cmd for Service Compatibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nssm-service-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      NSSM Service Install
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -3354,6 +3396,48 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-jdk-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create JDK folder
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update Environment Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-nificmd-for-service-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure nifi.cmd for Service Compatibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nssm-service-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      NSSM Service Install
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -3383,9 +3467,11 @@
 <li><a href="https://www.oracle.com/za/java/technologies/downloads/">Java development kit x64 Compressed Archive</a></li>
 <li><a href="https://nssm.cc/download">NSSM</a></li>
 </ul>
+<h3 id="create-jdk-folder">Create JDK folder</h3>
 <p>Once you have extracted all the NiFi files, create a new folder inside the folder you will run Nifi from called <code>jdk</code>.
 Paste all of the files from the JDK compressed archive into the jdk folder:</p>
 <p><img alt="" src="../nifi-img/jdk.png" /></p>
+<h3 id="update-environment-variables">Update Environment Variables</h3>
 <p>Now we need to point NiFi to where we have the JDK installed. Browse into NiFi's <code>bin</code> folder and edit the <code>nifi-env.cmd</code> file to look like this:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">rem Set application home directory based on parent directory of script location</span>
 <span class="k">pushd</span> <span class="nv">%~dp0</span>..
@@ -3403,6 +3489,26 @@ Paste all of the files from the JDK compressed archive into the jdk folder:</p>
 </code></pre></div>
 <p>By default NiFi will run on port 8443. If you need to change the port, open the <code>nifi\conf\nifi.properties</code> file and set the port on line 162:</p>
 <p><img alt="" src="../nifi-img/nifi-port.png" /></p>
+<h3 id="configure-nificmd-for-service-compatibility">Configure nifi.cmd for Service Compatibility</h3>
+<p>By default, the NiFi startup script is designed to launch the application in a separate, minimized window. When running as a Windows Service, <strong>NSSM</strong> must stay "attached" to the process to monitor its health. If this change is not made, NSSM will think NiFi has crashed and will enter a restart loop.</p>
+<ol>
+<li>Browse to the <code>nifi\bin</code> folder and open <code>nifi.cmd</code> in a text editor (like Notepad++ or VS Code).</li>
+<li>Find the block of code (typically around line 65) that handles the <code>start</code> command. </li>
+<li><strong>Remove</strong> the <code>start /MIN "Apache NiFi"</code> portion of the command so that the script calls the Java executable directly.</li>
+</ol>
+<p><strong>Before:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">) else if %RUN_COMMAND% == &quot;start&quot; (</span>
+  <span class="c1">rem Start bootstrap process in new minimized window</span>
+  <span class="k">call</span> <span class="k">start</span> /MIN <span class="s2">&quot;Apache NiFi&quot;</span> <span class="s2">&quot;</span><span class="nv">%JAVA_EXE%</span><span class="s2">&quot;</span> <span class="nv">%JAVA_MEMORY%</span> <span class="nv">%JAVA_PARAMS%</span> org.apache.nifi.bootstrap.BootstrapProcess <span class="nv">%RUN_COMMAND%</span>
+<span class="c1">)</span>
+</code></pre></div></p>
+<p><strong>After</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">) else if %RUN_COMMAND% == &quot;start&quot; (</span>
+  <span class="c1">rem Call Java directly so NSSM can track the process</span>
+  <span class="k">call</span> <span class="s2">&quot;</span><span class="nv">%JAVA_EXE%</span><span class="s2">&quot;</span> <span class="nv">%JAVA_MEMORY%</span> <span class="nv">%JAVA_PARAMS%</span> org.apache.nifi.bootstrap.BootstrapProcess <span class="nv">%RUN_COMMAND%</span>
+<span class="c1">)</span>
+</code></pre></div></p>
+<h3 id="nssm-service-install">NSSM Service Install</h3>
 <p>Next, copy the <code>nssm.exe</code> into the the <code>nifi\bin</code> folder. 
 Open a terminal window and browse to the <code>nifi\bin</code> folder, then execute the following</p>
 <div class="highlight"><pre><span></span><code>nssm install NiFi
