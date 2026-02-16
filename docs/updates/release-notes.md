@@ -1,5 +1,87 @@
 # Hotfixes
 
+## 2026-02-10 - 2026-02-16
+
+BusinessApi
+
+- Date 2026-02-16
+- Granite.Business.API.ServiceInterface.dll Version 7.0.2.0 & 6.0.2.0
+- Granite.Business.API.ServiceModel.dll version 7.0.1.0 & 6.0.1.0
+- Add support for specifying Line number to action on document
+- Add support for Manufacture FromLocation
+
+Process App
+
+- Date 2026-02-16
+- Version 7.0.4.0 & 6.0.2.0
+- Add support for LineNumber steps on document processes
+- Add support for Manufacture FromLocation step
+
+Database SQLCLR
+
+- Date 2026-02-16
+- Version 7.0.1.0
+    - Add support for Reversals
+    - Add support for Inventory correction
+    - Add support for LineNumber
+    - Add support for Business Rules
+    - Add support for Tracking entity optional fields
+    - Add support Quality Control
+- Version 6.0.1.0
+    - Add support for LineNumber
+    - Add support for Business Rules
+    - Add support for Tracking entity optional fields
+    - Add support Quality Control
+
+Process App
+
+- Date 2026-02-11
+- Version 7.0.3.3 & 6.0.1.1
+- Fix icons and javascript libs failing to load when client device has no internet access
+
+API_QueryTransactions, API_QueryTransactionsTrackingEntity, Transactions Datagrid
+
+- Date 2026-02-10
+- Hotfix folder for V6 and V7. Also updated in the V7 create script.
+- Add missing FromMasterItemCode and ToMasterItemCode
+
+## 2026-02-03 - 2025-02-09
+
+Granite.Repository.ServiceInterface.dll
+
+- Date 2026-02-05
+- Version 7.0.0.5
+- Fix issues of not being able to delete usergroup because of permissions table 
+
+## 2026-01-27 - 2025-02-02
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2026-02-02
+- Version 7.0.1.1
+- Fix stocktakecount intermittent issue with null opening location
+
+GraniteScannerApp.apk
+
+- Date 2026-01-27
+- Version 2.0
+- ISSUE 1: Rotating the screen was causing logout from the process app.
+- ISSUE 2: Inputs being suggested from previous inputs 
+
+## 2026-01-20 - 2026-01-26
+
+Process App
+
+- Date 2026-01-26
+- Version 7.0.3.2 & 6.0.1.0
+- Fix custom process success notification
+
+Granite.Integration.PastelEvo.dll
+
+- Date 2026-01-26
+- Version 5.0.0.4
+- ISSUE integration method map DocumentDescription to Evo transactions’s description
+
 ## 2025-12-09 - 2025-12-15
 
 Process App
