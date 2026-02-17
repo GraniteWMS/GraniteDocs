@@ -1,21 +1,20 @@
 # Hotfixes
 
+## 2026-02-17 - 2026-02-23
+
+Database SQLCLR
+
+- Date 2026-02-17
+- Version 7.0.1.2 & 6.0.1.2
+- Added support for Manufacture FromLocation parameter
+
 ## 2026-02-10 - 2026-02-16
 
-BusinessApi
+Database SQLCLR
 
 - Date 2026-02-16
-- Granite.Business.API.ServiceInterface.dll Version 7.0.2.0 & 6.0.2.0
-- Granite.Business.API.ServiceModel.dll version 7.0.1.0 & 6.0.1.0
-- Add support for specifying Line number to action on document
-- Add support for Manufacture FromLocation
-
-Process App
-
-- Date 2026-02-16
-- Version 7.0.4.0 & 6.0.2.0
-- Add support for LineNumber steps on document processes
-- Add support for Manufacture FromLocation step
+- Version 7.0.1.1 & 6.0.1.1
+- Fixed issue of connection being closed before completion caused by out of date TLS protocol versions as well as better error handling to give clearer messages for network and connection issues.
 
 Database SQLCLR
 
@@ -32,6 +31,21 @@ Database SQLCLR
     - Add support for Business Rules
     - Add support for Tracking entity optional fields
     - Add support Quality Control
+
+Process App
+
+- Date 2026-02-16
+- Version 7.0.4.0 & 6.0.2.0
+- Add support for LineNumber steps on document processes
+- Add support for Manufacture FromLocation step
+
+BusinessApi
+
+- Date 2026-02-16
+- Granite.Business.API.ServiceInterface.dll Version 7.0.2.0 & 6.0.2.0
+- Granite.Business.API.ServiceModel.dll version 7.0.1.0 & 6.0.1.0
+- Add support for specifying Line number to action on document
+- Add support for Manufacture FromLocation
 
 Process App
 
