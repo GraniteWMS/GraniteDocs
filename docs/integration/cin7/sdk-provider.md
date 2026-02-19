@@ -20,28 +20,31 @@ Once created, it will generate an Account ID and a Key (as below). These need to
 - `BaseUrl` - CIN7 API base URL. This is set by default to https://inventory.dearsystems.com/ExternalApi/v2/
 - `api-auth-accountid` - CIN7 API Account ID.
 - `api-auth-applicationkey` - CIN7 API Application Key (encrypted).
+- `DryRun` - Dry run mode (`true`/`false`). Default: `false`. When enabled, payloads are logged and requests are not sent to CIN7.
+- `Carrier` - Default carrier for shipment operations. Default: empty.
 
 ![SystemSettings](./cin7-img/system-settings.png)
 
 ## Integration Methods
 
-Currently, the support transaction are 
+Currently supported transactions/methods are:
 
-- Move (Stock Transfer)
-- Transfer (Stock Transfer)
-- Adjustment (Stock Adjustment)
-- Receive (Purchase Order Receipt)
-- Pick (Sale Fulfilment Pick)
-- Pack (Sale Fulfilment Pack)
+- MOVE (Stock Transfer, POST)
+- TRANSFER (Stock Transfer, POST)
+- UPDATETRANSFERTOINTRANSIT (Stock Transfer, PUT)
+- UPDATETRANSFERTOCOMPLETED (Stock Transfer, PUT)
+- ADJUSTMENT (Stock Adjustment, POST)
+- RECEIVE (Purchase Stock Receive, POST)
+- PICK (Sale Fulfilment Pick, POST)
+- PACK (Sale Fulfilment Pack, POST)
+- CONSUME (Finished Goods Pick Lines, POST)
+- MANUFACTURE (Finished Goods, PUT)
 
-These transactions were done first as they cover all of the main transactions types in CIN7 and most other Granite transactions will be using the same base transactions types. 
-Outstanding transaction types: 
+Outstanding transaction types:
 
 - Replenish 
 - Reclassify
 - Scrap
-- Consume
-- Manufacture
 
 
 ### ADJUSTMENT
@@ -54,7 +57,7 @@ Outstanding transaction types:
     - Expiration Date
 - Integration Post
     - False - Creates a new Stock Adjustment with the status Draft
-    - True - Creates a new Stock Adjustment with the status Authorized.
+    - True - Creates a new Stock Adjustment with the status Completed.
 - Returns:
     Stock Adjustment Task ID
 
@@ -91,7 +94,7 @@ GROUP BY MasterItem.Code, Location.ERPLocation, ExpiryDate, Batch, SerialNumber
     - Expiration Date
 - Integration Post
     - False - Creates a new Stock Transfer with the status Draft
-    - True - Creates a new Stock Transfer with the status Authorized.
+    - True - Creates a new Stock Transfer with the status Completed.
 - Returns:
     Stock Transfer Task ID
 
@@ -107,7 +110,7 @@ GROUP BY MasterItem.Code, Location.ERPLocation, ExpiryDate, Batch, SerialNumber
 
 ### TRANSFER
 
-Currently only standard Transfers are implemented. Intransit and Receipt are still to be implemented. 
+Standard TRANSFER posting and transfer status updates are implemented.
 
 - Granite Transaction: **TRANSFER**
 - CIN7: **STOCK Transfer**
@@ -117,7 +120,7 @@ Currently only standard Transfers are implemented. Intransit and Receipt are sti
     - Expiration Date
 - Integration Post
     - False - Creates a new Stock Transfer with the status Draft
-    - True - Creates a new Stock Transfer with the status Authorized.
+    - True - Creates a new Stock Transfer with the status Completed.
 - Returns:
     Stock Transfer Task ID
 
@@ -132,6 +135,34 @@ Currently only standard Transfers are implemented. Intransit and Receipt are sti
 | Serial                      | BatchSN  |N||
 | ExpirationDate              | ExpiryDate|N||
 
+### UPDATETRANSFERTOINTRANSIT
+
+- Granite Transaction: **UPDATETRANSFERTOINTRANSIT**
+- CIN7: **STOCK Transfer (PUT update to IN TRANSIT)**
+- Behavior:
+    - Uses Granite `Document` to resolve CIN7 `TaskID` from Granite `ERPIdentification`.
+    - Validates that transfer lines match before update.
+    - Sets transfer status to `IN TRANSIT`.
+- Integration Post
+    - False - Verifies CIN7 transfer quantities match Granite quantities before update.
+    - True - Updates CIN7 transfer quantities to Granite quantities before update.
+- Returns:
+    Stock Transfer Task ID
+
+### UPDATETRANSFERTOCOMPLETED
+
+- Granite Transaction: **UPDATETRANSFERTOCOMPLETED**
+- CIN7: **STOCK Transfer (PUT update to COMPLETED)**
+- Behavior:
+    - Uses Granite `Document` to resolve CIN7 `TaskID` from Granite `ERPIdentification`.
+    - Validates that transfer lines match before update.
+    - Sets transfer status to `COMPLETED`.
+- Integration Post
+    - False - Verifies CIN7 transfer quantities match Granite quantities before update.
+    - True - Updates CIN7 transfer quantities to Granite quantities before update.
+- Returns:
+    Stock Transfer Task ID
+
 ### RECEIVE
 
 - Granite Transaction: **RECEIVE**
@@ -142,7 +173,7 @@ Currently only standard Transfers are implemented. Intransit and Receipt are sti
     - Expiration Date
 - Integration Post
     - False - Creates a new Purchase Stock Receive with the status Draft
-    - True - Creates a new Purchase Stock Receive with the status Authorized.
+    - True - Currently also creates a new Purchase Stock Receive with the status Draft (current provider behavior).
 - Returns:
     Purchase Task ID
 
@@ -199,7 +230,7 @@ Currently only standard Transfers are implemented. Intransit and Receipt are sti
 | Document                   | OrderNumber |Y||
 | Code                        | SKU           |Y||
 | Qty                         | Qty  |Y||
-| FromLocation                  | Location  |Y||
+| ToLocation                  | Location  |Y||
 | Batch                       | BatchSN  |N||
 | Serial                      | BatchSN  |N||
 | ExpirationDate              | ExpiryDate|N||
@@ -297,4 +328,58 @@ SELECT 'StepInput', @stepInput
 SELECT * FROM @Output
 
 ```
+
+### CONSUME
+
+- Granite Transaction: **CONSUME**
+- CIN7: **Finished Goods Pick Lines**
+- Supports:
+    - Batch
+    - Serial
+    - Expiration Date
+    - UOM
+- Behavior:
+    - Uses a single Granite `Document` mapped to a CIN7 finished goods `TaskID`.
+    - Groups transactions by item/batch/serial/expiry/UOM and posts pick lines.
+    - Sets finished goods status to `IN PROGRESS`.
+- Integration Post
+    - Not used by the current implementation for this method.
+- Returns:
+    Finished Goods Task ID
+
+| Granite    | CIN7 Entity | Required | Behavior |
+|------------|-------------|----------|-----------|
+| Document                   | TaskID (via ERPIdentification) |Y||
+| Code                        | ProductID / ProductCode           |Y||
+| Qty                         | Quantity  |Y||
+| Batch                       | BatchSN  |N||
+| Serial                      | BatchSN  |N||
+| ExpirationDate              | ExpiryDate|N||
+| UOM                         | Unit |N||
+
+### MANUFACTURE
+
+- Granite Transaction: **MANUFACTURE**
+- CIN7: **Finished Goods (PUT update)**
+- Supports:
+    - Batch
+    - Serial
+    - Expiration Date
+- Behavior:
+    - Uses a single Granite `Document` mapped to a CIN7 finished goods `TaskID`.
+    - Requires a single finished goods item per document.
+    - Validates batch/serial and expiry against existing CIN7 finished goods data.
+    - Updates CIN7 finished goods quantity to Granite quantity.
+- Integration Post
+    - Not used by the current implementation for this method.
+- Returns:
+    Finished Goods Task ID
+
+| Granite    | CIN7 Entity | Required | Behavior |
+|------------|-------------|----------|-----------|
+| Document                   | TaskID (via ERPIdentification) |Y||
+| Qty                         | Quantity  |Y||
+| Batch                       | BatchSN validation |N||
+| Serial                      | BatchSN validation |N||
+| ExpirationDate              | ExpiryDate validation|N||
 
