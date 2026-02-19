@@ -127,9 +127,6 @@ GO
 - `BaseUrl` - CIN7 API base URL. This is set by default to https://inventory.dearsystems.com/ExternalApi/v2/
 - `api-auth-accountid` - CIN7 API Account ID.
 - `api-auth-applicationkey` - CIN7 API Application Key (encrypted).
-- `SyncSuppliers` - Enable/disable syncing suppliers from CIN7 (default: true).
-- `SyncCustomers` - Enable/disable syncing customers from CIN7 (default: true).
-- `Locations` - CIN7 Locations to sync product availability for, comma delimited
 
 ![SystemSettings](./cin7-img/system-settings.png)
 
@@ -218,6 +215,14 @@ let document = Entities.Granite.Document(
 ### Document Jobs
 
 GraniteScheduler runs injected jobs that fetch documents from CIN7 based on their specific criteria (see below for details on each job type). Documents that meet the criteria are inserted into the IntegrationDocumentQueue. The job then processes this queue.
+In addition to CIN7-fetched records, document queue records can also be sourced from SQL views:
+
+- `Integration_TransferQueueUpdate` (Transfer job)
+- `Integration_FinishedGoodsQueueUpdate` (Work Order/Finished Goods job)
+
+These view are there to negate the issue with the CIN7 API that only allows fetching Transfers and FishedGoods documents by status rather than updated date. Meaning if a document is changed from a status that we are bringing into Granite, the status change will not be brought into Granite. The view allows documents of other status to still be integrated. 
+
+View-derived rows are inserted into `IntegrationDocumentQueue` only when the same `ERP_id` is not already queued.
 
 When a record with Status 'ENTERED' is found, the job uses a CIN7 REST API request to fetch the information related to that document from CIN7 and apply the changes to the Granite document.
 
@@ -285,6 +290,8 @@ The mapping below is an example of the standard that is in place. It is configur
 || Barcode         | MasterItemAlias   |
 
 **Trading Partner Mapping:**
+
+Please note that the integration suppliers and customers are able to be toggled individually with the F# script.
 
 || CIN7 (Customer) Property     | Granite Property     |
 ||-----------------------------|---------------------|
