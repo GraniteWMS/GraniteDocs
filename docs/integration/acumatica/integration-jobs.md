@@ -85,6 +85,24 @@ The document jobs also sync changes to the MasterItems that are on the document.
 
 Document Jobs do not automatically sync trading partners as they are not required to create to the document in Granite and as such are only synced when the TradingPartner Job runs. 
 
+### InSite Status job
+`InSiteStatusJob` synchronizes Acumatica site/item stock status data into Granite.
+
+On validation, the job signs on to Acumatica OData and logs a successful connection.
+
+On execution, the job:
+
+1. Calls Acumatica `INSiteStatus` via OData.
+2. Selects `QtyOnHand`, `QtyAvail`, `QtyPOOrders`, `QtyInTransit`, and `LastModifiedDateTime`.
+3. Expands:
+    - `InventoryItemByInventoryID` (`InventoryCD`, `NoteID`)
+    - `INSiteBySiteID` (`SiteCD`)
+4. Filters out records where site or inventory item is missing.
+5. Upserts data into `Integration_INSiteStatus` using (`InventoryCD`, `SiteCD`) as the key.
+6. Removes stale rows not returned by the latest run.
+
+If no data is returned from the endpoint, or no valid site status rows are found, the job throws an error. Errors are logged and rethrown.
+
 ## Install 
 
 ### Set up database triggers, views, and data
@@ -93,6 +111,47 @@ Run the `AcumaticaIntegrationJobs_Create.sql` script to insert the required Syst
 You can then just activate the Scheduled Jobs that are needed. 
 
 The system setting AcumaticaApplicationName is defaulted to 'Acumatica'. If you change this then you should also change it in the Integration service config file so that the scheduled Jobs amd Integration service can share settings. If you wish to use different SystemSettings for each then you need to specify a different value. 
+
+#### InSiteStatus database objects
+The `InSiteStatusJob` requires the table `Integration_INSiteStatus` and the view `ERP_StockOnHand`.
+
+Create the table:
+
+```sql
+CREATE TABLE dbo.Integration_INSiteStatus
+(
+    -- Inventory Item Information
+    InventoryCD NVARCHAR(50) NOT NULL,
+    SiteCD NVARCHAR(50) NOT NULL,
+    
+    -- Quantity Fields
+    QtyOnHand DECIMAL(18,4) NOT NULL,
+    QtyAvail DECIMAL(18,4) NOT NULL,
+    QtyInTransit DECIMAL(18,4) NOT NULL,
+    QtyPOOrders DECIMAL(18,4) NOT NULL,
+    
+    -- Additional Fields
+    NoteID NVARCHAR(100) NULL,
+    LastModifiedDateTime DATETIME2(7) NOT NULL,
+    [Updated] [bit] NULL,
+);
+GO;
+```
+
+Create (or update) the view:
+
+```sql
+CREATE OR ALTER VIEW [dbo].[ERP_StockOnHand]
+AS
+SELECT RTRIM(SiteCD) AS LOCATION,
+       RTRIM(InventoryCD) AS ITEMNO,
+       QtyOnHand AS QTYONHAND,
+       QtyPOOrders AS QTYONORDER,
+       0 AS QTYSALORDR,
+       0 AS AVRCOST
+FROM Integration_INSiteStatus
+GO
+```
 
 #### SystemSettings
 

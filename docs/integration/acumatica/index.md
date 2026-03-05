@@ -3,7 +3,7 @@
 
 ![production_readiness](https://img.shields.io/badge/production_readiness-no-cd242c)
 
-![clients](https://img.shields.io/badge/live_clients-no-cd242c)
+![clients](https://img.shields.io/badge/live_clients-yes-11bf1d)
 
 ![status](https://img.shields.io/badge/development_status-active-365893)
 

@@ -6,22 +6,6 @@ The Acumatica SDK provider is responsible for mapping Granite Transactions to th
 
 The upwards integration achieved using Acumatica's rest API. For more details on the Acumatica object's used in integration please consult the [Acumatica Overview](acumatica-overview.md). 
 
-## Setup
-
-1. **Copy** everything in the `Providers\Acumatica` folder into Integration Service folder (root folder).
-
-2. Ensure `SDKProvider.xml` setup or copied correctly
-    ```xml
-    <module name="Provider">
-    <bind
-        service="Granite.Integration.Contract.IProvider, Granite.Integration.Contract"
-        to="Granite.Integration.Acumatica.Provider, Granite.Integration.Acumatica"/>
-    </module>
-    ```
-
-3. Configure your connection string and endpoint in the `Granite.Integration.Web.exe.config` file
-
-
 ## Settings
 
 !!! note
@@ -41,6 +25,20 @@ You can browse the IntegrationService's `/config` page to have the IntegrationSe
 The Application name of the entries in the SystemSettings table that you want to use for this integration service. If this setting is the same as Application name for the ScheduledJobs they can use the same SystemSettings.
 
 This setting allows you to have multiple integration services running with different settings.
+### SystemSetting
+
+- `BaseUrl` - Acumatica base URL. Default: empty.
+- `UserID` - Acumatica user name. Default: empty.
+- `Password` - Acumatica user password (encrypted). Default: empty.
+- `Tenant` - Acumatica tenant. Default: empty.
+- `Branch` - Acumatica branch. Default: empty.
+- `DefaultLocation` - Acumatica default inventory location. Default: empty.
+- `AcumaticaSalesOrderPrefix` - Acumatica sales order prefix. Default: empty.
+- `AcumaticaPurchaseOrderPrefix` - Acumatica purchase order prefix. Default: empty.
+- `AcumaticaTransferOrderPrefix` - Acumatica transfer order prefix. Default: empty.
+- `AcumaticaTransferReceiptPrefix` - Acumatica transfer receipt prefix. Default: empty.
+- `ProductionOrderType` - Acumatica production order type. Default: empty.
+- `AcumaticaWorkOrderPrefix` - Acumatica work order prefix. Default: empty.
 
 ### Acumatica Settings
 
