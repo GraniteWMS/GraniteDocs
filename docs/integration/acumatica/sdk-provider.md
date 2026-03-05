@@ -278,27 +278,30 @@ It is not mapped to any specific Granite transaction type. If you have a require
 ### TRANSFER
 
 !!! note
-    Acumatica does not have separate fields on Transfers and Receipts for Qty vs ActionQty. As such, the current behavior is to only accept completed lines where the Qty and ActionQty in Granite are equal and therefore match the value in Acumatica.
+    The TRANSFER integration method supports Granite document types `TRANSFER`, `INTRANSIT`, and `RECEIPT` with different validation flows.
 
 - Granite Transaction: **TRANSFER**
-- Acumatica: **TransferOrder**
+- Acumatica: **TransferOrder / InventoryReceipt**
 - Supports:
     - Serial
     - Lot
-- Return
-    - Transfer Number
+- Document handling:
+    - `TRANSFER` - Validates each Transfer Order allocation against Granite `ActionQty` (line + split + lot/serial where applicable), updates `ExternalRef` to `Quantities validated in Granite`, and optionally releases.
+    - `INTRANSIT` - Uses the same validation/update path as `TRANSFER` (transfer receipt creation is currently not executed).
+    - `RECEIPT` - Requires a balanced Granite document (`Qty == ActionQty` on all lines), validates ERP receipt detail/allocation quantities against Granite grouped transactions, updates the receipt, and optionally releases.
 
 - Integration Post
-    - False - Changes the status of the transfer/receipt from On Hold to Balanced. 
-    - True - Changes the status of the transfer/receipt from On Hold to Released
+    - False - Runs validation and updates the ERP document without invoking release.
+    - True - Runs validation and invokes release (`ReleaseTransferOrder` / `ReleaseInventoryReceipt`).
 - Returns:
-    Transfer/Receipt Number
+    - `TRANSFER`/`INTRANSIT`: Transfer reference number.
+    - `RECEIPT`: `AcumaticaTransferReceiptPrefix` + receipt reference number.
 
 | Granite    | Acumatica Entity | Required | Behavior |
 |------------|------------------|----------|-----------|
 | Document                   | TransferOrder/InventoryReceipt |Y||
 | LineNumber                 |               |Y||
-| Qty                        |               |Y| Compares qty to acumatica document qty |
+| Qty / ActionQty            |               |Y| Validates Granite `ActionQty` against ERP allocation/detail quantities |
 | Batch                      | LotSerialNbr  |N||
 | Serial                     | LotSerialNbr  |N||
 | ExpirationDate             | ExpiryDate|N||
