@@ -103,14 +103,87 @@ On execution, the job:
 
 If no data is returned from the endpoint, or no valid site status rows are found, the job throws an error. Errors are logged and rethrown.
 
-## Install 
+## Setup 
+
+### Add the Acumatica providers to the Granite Scheduler
+
+Copy the dlls and xml files from `GraniteScheduler\Providers\Acumatica` into the root folder of GraniteScheduler. 
 
 ### Set up database triggers, views, and data
 
-Run the `AcumaticaIntegrationJobs_Create.sql` script to insert the required SystemSettings and ScheduledJob table entries needed. 
-You can then just activate the Scheduled Jobs that are needed. 
+To create the Scheduled Jobs run the following script:
 
-The system setting AcumaticaApplicationName is defaulted to 'Acumatica'. If you change this then you should also change it in the Integration service config file so that the scheduled Jobs amd Integration service can share settings. If you wish to use different SystemSettings for each then you need to specify a different value. 
+```sql
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'Acumatica MasterItem Job', 'Syncs MasterItems from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.MasterItem', '24', 'HOURS', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica MasterItem Job');
+
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'Acumatica Purchase Order Job', 'Syncs PurchaseOrders from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.PurchaseOrder', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Purchase Order Job');
+
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'Acumatica Receipt Job', 'Syncs Receipts from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.Receipt', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Receipt Job');
+
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'Acumatica Sales Order Job', 'Syncs SalesOrders from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.SalesOrder', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Sales Order Job');
+
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'Acumatica Transfer Job', 'Syncs Transfers from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.Transfer', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Transfer Job');
+
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'Acumatica Trading Partner Job', 'Syncs TradingPartners from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.TradingPartner', '4', 'HOURS', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Trading Partner Job');
+
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'Acumatica InSite Status Job', 'Syncs InSite Stock on Hand from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.InSiteStatus', '12', 'HOURS', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica InSite Status Job');
+
+-- Insert Acumatica System Settings
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'BaseUrl', '', 'Acumatica base URL', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'BaseUrl');
+
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'UserID', '', 'Acumatica user name', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'UserID');
+
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'Password', '', 'Acumatica user password', 'String', 1, 1, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'Password');
+
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'Tenant', '', 'Acumatica tenant', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'Tenant');
+
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'Branch', '', 'Acumatica branch', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'Branch');
+
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'AcumaticaIntransitLocation', '', 'ERP Location in intransit transfers', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaIntransitLocation');
+
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'AcumaticaSalesOrderPrefix', '', 'Acumatica sales order prefix', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaSalesOrderPrefix');
+
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'AcumaticaPurchaseOrderPrefix', '', 'Acumatica purchase order prefix', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaPurchaseOrderPrefix');
+
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'AcumaticaTransferOrderPrefix', '', 'Acumatica transfer order prefix', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaTransferOrderPrefix');
+
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'AcumaticaTransferReceiptPrefix', '', 'Acumatica transfer receipt prefix', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaTransferReceiptPrefix');
+
+```
 
 #### InSiteStatus database objects
 The `InSiteStatusJob` requires the table `Integration_INSiteStatus` and the view `ERP_StockOnHand`.
@@ -162,8 +235,40 @@ The base url can be found in IIS if hosted locally or provided by the customer i
 ![ApplicationName](./acumatica-img/ApplicationName.PNG)
 ![SystemSettings](./acumatica-img/system-settings.PNG)
 
+##### UserID
+
+The Acumatica user name that will be used for authentication with the OData endpoint.
+
+##### Password
+
+The Acumatica user password that will be used for authentication with the OData endpoint.
+
 !!! note 
       You need to set the password from inside the Webdesktop if you are going to encrypt the password. 
+
+##### Tenant
+
+The Acumatica tenant identifier (if applicable for multi-tenant deployments).
+
+##### Branch
+
+The Acumatica branch code to use for document and master data synchronization.
+
+##### AcumaticaSalesOrderPrefix
+
+The prefix used to identify Acumatica sales orders during synchronization. This helps distinguish orders from different source systems.
+
+##### AcumaticaPurchaseOrderPrefix
+
+The prefix used to identify Acumatica purchase orders during synchronization.
+
+##### AcumaticaTransferOrderPrefix
+
+The prefix used to identify Acumatica transfer orders (1-Step transfers) during synchronization.
+
+##### AcumaticaTransferReceiptPrefix
+
+The prefix used to identify Acumatica transfer receipts during synchronization.
 
 ##### AcumaticaIntansitLocation
 
@@ -172,9 +277,6 @@ Acumatica does not specify a intransit location on its 2-step transfers so it ne
 ![Intransit system setting](./acumatica-img/intransit-system-setting.PNG)
 ![Intransit Location](./acumatica-img/intransit-location.PNG)
 ![Intransit Document Detail](./acumatica-img/intransit-location-doc-detail.PNG)
-
-### Add the Injected job files to GraniteScheduler
-To add the injected job files to the GraniteScheduler, simply copy the dlls and xml files into the root folder of GraniteScheduler. 
 
 ## Configure
 
