@@ -859,15 +859,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      Setup
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#settings" class="md-nav__link">
     <span class="md-ellipsis">
       Settings
@@ -898,6 +889,15 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#systemsetting" class="md-nav__link">
+    <span class="md-ellipsis">
+      SystemSetting
+    </span>
+  </a>
   
 </li>
         
@@ -3538,15 +3538,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      Setup
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#settings" class="md-nav__link">
     <span class="md-ellipsis">
       Settings
@@ -3577,6 +3568,15 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#systemsetting" class="md-nav__link">
+    <span class="md-ellipsis">
+      SystemSetting
+    </span>
+  </a>
   
 </li>
         
@@ -3733,24 +3733,6 @@
 <p>The Acumatica SDK provider is responsible for mapping Granite Transactions to the relevant format for posting to Acumatica. It makes use of the Acumatica REST API.</p>
 <h2 id="how-it-connects">How it connects</h2>
 <p>The upwards integration achieved using Acumatica's rest API. For more details on the Acumatica object's used in integration please consult the <a href="../acumatica-overview/">Acumatica Overview</a>. </p>
-<h2 id="setup">Setup</h2>
-<ol>
-<li>
-<p><strong>Copy</strong> everything in the <code>Providers\Acumatica</code> folder into Integration Service folder (root folder).</p>
-</li>
-<li>
-<p>Ensure <code>SDKProvider.xml</code> setup or copied correctly
-    <div class="highlight"><pre><span></span><code><span class="nt">&lt;module</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;Provider&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;bind</span>
-<span class="w">    </span><span class="na">service=</span><span class="s">&quot;Granite.Integration.Contract.IProvider, Granite.Integration.Contract&quot;</span>
-<span class="w">    </span><span class="na">to=</span><span class="s">&quot;Granite.Integration.Acumatica.Provider, Granite.Integration.Acumatica&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/module&gt;</span>
-</code></pre></div></p>
-</li>
-<li>
-<p>Configure your connection string and endpoint in the <code>Granite.Integration.Web.exe.config</code> file</p>
-</li>
-</ol>
 <h2 id="settings">Settings</h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -3766,6 +3748,21 @@ You can browse the IntegrationService's <code>/config</code> page to have the In
 <h4 id="systemsettingsapplicationname">SystemSettingsApplicationName</h4>
 <p>The Application name of the entries in the SystemSettings table that you want to use for this integration service. If this setting is the same as Application name for the ScheduledJobs they can use the same SystemSettings.</p>
 <p>This setting allows you to have multiple integration services running with different settings.</p>
+<h3 id="systemsetting">SystemSetting</h3>
+<ul>
+<li><code>BaseUrl</code> - Acumatica base URL. Default: empty.</li>
+<li><code>UserID</code> - Acumatica user name. Default: empty.</li>
+<li><code>Password</code> - Acumatica user password (encrypted). Default: empty.</li>
+<li><code>Tenant</code> - Acumatica tenant. Default: empty.</li>
+<li><code>Branch</code> - Acumatica branch. Default: empty.</li>
+<li><code>DefaultLocation</code> - Acumatica default inventory location. Default: empty.</li>
+<li><code>AcumaticaSalesOrderPrefix</code> - Acumatica sales order prefix. Default: empty.</li>
+<li><code>AcumaticaPurchaseOrderPrefix</code> - Acumatica purchase order prefix. Default: empty.</li>
+<li><code>AcumaticaTransferOrderPrefix</code> - Acumatica transfer order prefix. Default: empty.</li>
+<li><code>AcumaticaTransferReceiptPrefix</code> - Acumatica transfer receipt prefix. Default: empty.</li>
+<li><code>ProductionOrderType</code> - Acumatica production order type. Default: empty.</li>
+<li><code>AcumaticaWorkOrderPrefix</code> - Acumatica work order prefix. Default: empty.</li>
+</ul>
 <h3 id="acumatica-settings">Acumatica Settings</h3>
 <h4 id="lotserial-tracking">Lot/Serial Tracking</h4>
 <p>For Granite to be able to post Serial Numbers or Batch back to Acumatica the feature in System Management &gt; Enable/Disable Features &gt; Lot and Serial Tracking needs to be turned on. </p>
@@ -4410,31 +4407,36 @@ It is not mapped to any specific Granite transaction type. If you have a require
 <h3 id="transfer">TRANSFER</h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Acumatica does not have separate fields on Transfers and Receipts for Qty vs ActionQty. As such, the current behavior is to only accept completed lines where the Qty and ActionQty in Granite are equal and therefore match the value in Acumatica.</p>
+<p>The TRANSFER integration method supports Granite document types <code>TRANSFER</code>, <code>INTRANSIT</code>, and <code>RECEIPT</code> with different validation flows.</p>
 </div>
 <ul>
 <li>Granite Transaction: <strong>TRANSFER</strong></li>
-<li>Acumatica: <strong>TransferOrder</strong></li>
+<li>Acumatica: <strong>TransferOrder / InventoryReceipt</strong></li>
 <li>Supports:<ul>
 <li>Serial</li>
 <li>Lot</li>
 </ul>
 </li>
 <li>
-<p>Return</p>
+<p>Document handling:</p>
 <ul>
-<li>Transfer Number</li>
+<li><code>TRANSFER</code> - Validates each Transfer Order allocation against Granite <code>ActionQty</code> (line + split + lot/serial where applicable), updates <code>ExternalRef</code> to <code>Quantities validated in Granite</code>, and optionally releases.</li>
+<li><code>INTRANSIT</code> - Uses the same validation/update path as <code>TRANSFER</code> (transfer receipt creation is currently not executed).</li>
+<li><code>RECEIPT</code> - Requires a balanced Granite document (<code>Qty == ActionQty</code> on all lines), validates ERP receipt detail/allocation quantities against Granite grouped transactions, updates the receipt, and optionally releases.</li>
 </ul>
 </li>
 <li>
 <p>Integration Post</p>
 <ul>
-<li>False - Changes the status of the transfer/receipt from On Hold to Balanced. </li>
-<li>True - Changes the status of the transfer/receipt from On Hold to Released</li>
+<li>False - Runs validation and updates the ERP document without invoking release.</li>
+<li>True - Runs validation and invokes release (<code>ReleaseTransferOrder</code> / <code>ReleaseInventoryReceipt</code>).</li>
 </ul>
 </li>
-<li>Returns:
-    Transfer/Receipt Number</li>
+<li>Returns:<ul>
+<li><code>TRANSFER</code>/<code>INTRANSIT</code>: Transfer reference number.</li>
+<li><code>RECEIPT</code>: <code>AcumaticaTransferReceiptPrefix</code> + receipt reference number.</li>
+</ul>
+</li>
 </ul>
 <table>
 <thead>
@@ -4459,10 +4461,10 @@ It is not mapped to any specific Granite transaction type. If you have a require
 <td></td>
 </tr>
 <tr>
-<td>Qty</td>
+<td>Qty / ActionQty</td>
 <td></td>
 <td>Y</td>
-<td>Compares qty to acumatica document qty</td>
+<td>Validates Granite <code>ActionQty</code> against ERP allocation/detail quantities</td>
 </tr>
 <tr>
 <td>Batch</td>
