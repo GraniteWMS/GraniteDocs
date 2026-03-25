@@ -1,9 +1,9 @@
 # CIN7
-![maturity](https://img.shields.io/badge/maturity-low-cd242c)
+![maturity](https://img.shields.io/badge/maturity-medium-yellow)
 
-![production_readiness](https://img.shields.io/badge/production_readiness-partial-cd242c)
+![production_readiness](https://img.shields.io/badge/production_readiness-partial-yellow)
 
-![clients](https://img.shields.io/badge/live_clients-no-cd242c)
+![clients](https://img.shields.io/badge/live_clients-yes-449336)
 
 ![status](https://img.shields.io/badge/development_status-active-365893)
 

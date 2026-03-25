@@ -35,6 +35,7 @@ Currently supported transactions/methods are:
 - UPDATETRANSFERTOCOMPLETED (Stock Transfer, PUT)
 - ADJUSTMENT (Stock Adjustment, POST)
 - RECEIVE (Purchase Stock Receive, POST)
+- POSTPUTAWAY (Purchase Stock Put Away, POST)
 - PICK (Sale Fulfilment Pick, POST)
 - PACK (Sale Fulfilment Pack, POST)
 - CONSUME (Finished Goods Pick Lines, POST)
@@ -61,7 +62,7 @@ Outstanding transaction types:
 - Returns:
     Stock Adjustment Task ID
 
-| Granite    | Acumatica Entity | Required | Behavior |
+| Granite    | CIN7 Entity | Required | Behavior |
 |------------|------------------|----------|-----------|
 | Code                        | SKU           |Y||
 | Qty                         | Qty  |Y||
@@ -98,7 +99,7 @@ GROUP BY MasterItem.Code, Location.ERPLocation, ExpiryDate, Batch, SerialNumber
 - Returns:
     Stock Transfer Task ID
 
-| Granite    | Acumatica Entity | Required | Behavior |
+| Granite    | CIN7 Entity | Required | Behavior |
 |------------|------------------|----------|-----------|
 | Code                        | SKU           |Y||
 | Qty                         | Qty  |Y||
@@ -124,7 +125,7 @@ Standard TRANSFER posting and transfer status updates are implemented.
 - Returns:
     Stock Transfer Task ID
 
-| Granite    | Acumatica Entity | Required | Behavior |
+| Granite    | CIN7 Entity | Required | Behavior |
 |------------|------------------|----------|-----------|
 | Document                   | OrderNumber |Y||
 | Code                        | SKU           |Y||
@@ -171,18 +172,51 @@ Standard TRANSFER posting and transfer status updates are implemented.
     - Batch
     - Serial
     - Expiration Date
+- Behavior:
+    - Uses Granite `Document` to resolve CIN7 `PurchaseID` from Granite `ERPIdentification`.
+    - Reads `advanced-purchase` and reuses the first existing stock receiving task that has zero lines.
+    - If no existing zero-line stock receiving task is found, uses `00000000-0000-0000-0000-000000000000` to create a new stock receiving task.
+    - Summarizes transactions by item/location/tracking fields before building CIN7 lines.
 - Integration Post
-    - False - Creates a new Purchase Stock Receive with the status Draft
-    - True - Currently also creates a new Purchase Stock Receive with the status Draft (current provider behavior).
+    - False - Posts with status `DRAFT`.
+    - True - Also posts with status `DRAFT` (current provider behavior).
 - Returns:
-    Purchase Task ID
+    Most recent Stock Receiving Task ID from the API response.
 
-| Granite    | Acumatica Entity | Required | Behavior |
-|------------|------------------|----------|-----------|
-| Document                   | OrderNumber |Y||
-| Code                        | SKU           |Y||
-| Qty                         | Qty  |Y||
-| ToLocation                  | ToLocation  |Y||
+| Granite    | CIN7 Entity | Required | Behavior |
+|------------|-------------|----------|-----------|
+| Document                   | PurchaseID (via ERPIdentification) |Y||
+| Code                        | ProductID / ProductCode           |Y||
+| Qty                         | Quantity  |Y||
+| ToLocation                  | Location  |Y||
+| Batch                       | BatchSN  |N||
+| Serial                      | BatchSN  |N||
+| ExpirationDate              | ExpiryDate|N||
+
+### POSTPUTAWAY
+
+- Granite Transaction: **POSTPUTAWAY**
+- CIN7: **Purchase Stock Put Away**
+- Supports:
+    - Batch
+    - Serial
+    - Expiration Date
+- Behavior:
+    - Uses Granite `Document` to resolve CIN7 `PurchaseID` from Granite `ERPIdentification`.
+    - Reads `advanced-purchase` and attempts to reuse an open put-away task (`DRAFT` or `NOT AVAILABLE`).
+    - Skips a put-away task when the linked invoice is not open and the put-away already has lines.
+    - If no suitable open put-away task is found, uses `00000000-0000-0000-0000-000000000000` to create a new put-away task.
+- Integration Post
+    - Not used by the current implementation for this method.
+- Returns:
+    Put-Away Task ID
+
+| Granite    | CIN7 Entity | Required | Behavior |
+|------------|-------------|----------|-----------|
+| Document                   | PurchaseID (via ERPIdentification) |Y||
+| Code                        | ProductID / ProductCode           |Y||
+| Qty                         | Quantity  |Y||
+| ToLocation                  | Location  |Y||
 | Batch                       | BatchSN  |N||
 | Serial                      | BatchSN  |N||
 | ExpirationDate              | ExpiryDate|N||
@@ -201,7 +235,7 @@ Standard TRANSFER posting and transfer status updates are implemented.
 - Returns:
     Sale Task ID
 
-| Granite    | Acumatica Entity | Required | Behavior |
+| Granite    | CIN7 Entity | Required | Behavior |
 |------------|------------------|----------|-----------|
 | Document                   | OrderNumber |Y||
 | Code                        | SKU           |Y||
@@ -225,7 +259,7 @@ Standard TRANSFER posting and transfer status updates are implemented.
 - Returns:
     Sale Task ID
 
-| Granite    | Acumatica Entity | Required | Behavior |
+| Granite    | CIN7 Entity | Required | Behavior |
 |------------|------------------|----------|-----------|
 | Document                   | OrderNumber |Y||
 | Code                        | SKU           |Y||
@@ -371,7 +405,8 @@ SELECT * FROM @Output
     - Validates batch/serial and expiry against existing CIN7 finished goods data.
     - Updates CIN7 finished goods quantity to Granite quantity.
 - Integration Post
-    - Not used by the current implementation for this method.
+    - False - Updates quantity only.
+    - True - Updates quantity and sets `CompletionDate` to the current UTC datetime (completes the finished good in CIN7).
 - Returns:
     Finished Goods Task ID
 
