@@ -1069,6 +1069,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#postputaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      POSTPUTAWAY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pick" class="md-nav__link">
     <span class="md-ellipsis">
       PICK
@@ -3560,6 +3569,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#postputaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      POSTPUTAWAY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pick" class="md-nav__link">
     <span class="md-ellipsis">
       PICK
@@ -3644,6 +3662,7 @@
 <li>UPDATETRANSFERTOCOMPLETED (Stock Transfer, PUT)</li>
 <li>ADJUSTMENT (Stock Adjustment, POST)</li>
 <li>RECEIVE (Purchase Stock Receive, POST)</li>
+<li>POSTPUTAWAY (Purchase Stock Put Away, POST)</li>
 <li>PICK (Sale Fulfilment Pick, POST)</li>
 <li>PACK (Sale Fulfilment Pack, POST)</li>
 <li>CONSUME (Finished Goods Pick Lines, POST)</li>
@@ -3677,7 +3696,7 @@
 <thead>
 <tr>
 <th>Granite</th>
-<th>Acumatica Entity</th>
+<th>CIN7 Entity</th>
 <th>Required</th>
 <th>Behavior</th>
 </tr>
@@ -3753,7 +3772,7 @@
 <thead>
 <tr>
 <th>Granite</th>
-<th>Acumatica Entity</th>
+<th>CIN7 Entity</th>
 <th>Required</th>
 <th>Behavior</th>
 </tr>
@@ -3826,7 +3845,7 @@
 <thead>
 <tr>
 <th>Granite</th>
-<th>Acumatica Entity</th>
+<th>CIN7 Entity</th>
 <th>Required</th>
 <th>Behavior</th>
 </tr>
@@ -3928,19 +3947,26 @@
 <li>Expiration Date</li>
 </ul>
 </li>
+<li>Behavior:<ul>
+<li>Uses Granite <code>Document</code> to resolve CIN7 <code>PurchaseID</code> from Granite <code>ERPIdentification</code>.</li>
+<li>Reads <code>advanced-purchase</code> and reuses the first existing stock receiving task that has zero lines.</li>
+<li>If no existing zero-line stock receiving task is found, uses <code>00000000-0000-0000-0000-000000000000</code> to create a new stock receiving task.</li>
+<li>Summarizes transactions by item/location/tracking fields before building CIN7 lines.</li>
+</ul>
+</li>
 <li>Integration Post<ul>
-<li>False - Creates a new Purchase Stock Receive with the status Draft</li>
-<li>True - Currently also creates a new Purchase Stock Receive with the status Draft (current provider behavior).</li>
+<li>False - Posts with status <code>DRAFT</code>.</li>
+<li>True - Also posts with status <code>DRAFT</code> (current provider behavior).</li>
 </ul>
 </li>
 <li>Returns:
-    Purchase Task ID</li>
+    Most recent Stock Receiving Task ID from the API response.</li>
 </ul>
 <table>
 <thead>
 <tr>
 <th>Granite</th>
-<th>Acumatica Entity</th>
+<th>CIN7 Entity</th>
 <th>Required</th>
 <th>Behavior</th>
 </tr>
@@ -3948,25 +3974,103 @@
 <tbody>
 <tr>
 <td>Document</td>
-<td>OrderNumber</td>
+<td>PurchaseID (via ERPIdentification)</td>
 <td>Y</td>
 <td></td>
 </tr>
 <tr>
 <td>Code</td>
-<td>SKU</td>
+<td>ProductID / ProductCode</td>
 <td>Y</td>
 <td></td>
 </tr>
 <tr>
 <td>Qty</td>
-<td>Qty</td>
+<td>Quantity</td>
 <td>Y</td>
 <td></td>
 </tr>
 <tr>
 <td>ToLocation</td>
+<td>Location</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>BatchSN</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>Serial</td>
+<td>BatchSN</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
+<td>N</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="postputaway">POSTPUTAWAY</h3>
+<ul>
+<li>Granite Transaction: <strong>POSTPUTAWAY</strong></li>
+<li>CIN7: <strong>Purchase Stock Put Away</strong></li>
+<li>Supports:<ul>
+<li>Batch</li>
+<li>Serial</li>
+<li>Expiration Date</li>
+</ul>
+</li>
+<li>Behavior:<ul>
+<li>Uses Granite <code>Document</code> to resolve CIN7 <code>PurchaseID</code> from Granite <code>ERPIdentification</code>.</li>
+<li>Reads <code>advanced-purchase</code> and attempts to reuse an open put-away task (<code>DRAFT</code> or <code>NOT AVAILABLE</code>).</li>
+<li>Skips a put-away task when the linked invoice is not open and the put-away already has lines.</li>
+<li>If no suitable open put-away task is found, uses <code>00000000-0000-0000-0000-000000000000</code> to create a new put-away task.</li>
+</ul>
+</li>
+<li>Integration Post<ul>
+<li>Not used by the current implementation for this method.</li>
+</ul>
+</li>
+<li>Returns:
+    Put-Away Task ID</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>CIN7 Entity</th>
+<th>Required</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>PurchaseID (via ERPIdentification)</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Code</td>
+<td>ProductID / ProductCode</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Qty</td>
+<td>Quantity</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
 <td>ToLocation</td>
+<td>Location</td>
 <td>Y</td>
 <td></td>
 </tr>
@@ -4012,7 +4116,7 @@
 <thead>
 <tr>
 <th>Granite</th>
-<th>Acumatica Entity</th>
+<th>CIN7 Entity</th>
 <th>Required</th>
 <th>Behavior</th>
 </tr>
@@ -4084,7 +4188,7 @@
 <thead>
 <tr>
 <th>Granite</th>
-<th>Acumatica Entity</th>
+<th>CIN7 Entity</th>
 <th>Required</th>
 <th>Behavior</th>
 </tr>
@@ -4317,7 +4421,8 @@ You will also need to call integration through clr on a custom process. </p>
 </ul>
 </li>
 <li>Integration Post<ul>
-<li>Not used by the current implementation for this method.</li>
+<li>False - Updates quantity only.</li>
+<li>True - Updates quantity and sets <code>CompletionDate</code> to the current UTC datetime (completes the finished good in CIN7).</li>
 </ul>
 </li>
 <li>Returns:
