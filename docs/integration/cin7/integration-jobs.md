@@ -114,10 +114,11 @@ GO
 This view will populate the StockVariance screen using the ProductAvailability data.
 
 ```sql
-CREATE VIEW [dbo].[ERP_StockOnHand]
+ALTER VIEW [dbo].[ERP_StockOnHand]
 AS
-SELECT     Location AS LOCATION, Name AS ITEMNO, OnHand AS QTYONHAND, OnOrder AS QTYONORDER, 0 AS QTYSALORDR, 0 AS AVRCOST
+SELECT     [Location] AS LOCATION, SKU AS ITEMNO, SUM(OnHand) AS QTYONHAND, SUM(OnOrder) AS QTYONORDER, 0 AS QTYSALORDR, 0 AS AVRCOST
 FROM Integration_ProductAvailability
+GROUP BY Location, SKU
 GO
 ```
 
