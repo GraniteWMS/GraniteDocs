@@ -1066,6 +1066,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#acumaticareturntosupplierprefix" class="md-nav__link">
+    <span class="md-ellipsis">
+      AcumaticaReturnToSupplierPrefix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#acumaticaintansitlocation" class="md-nav__link">
     <span class="md-ellipsis">
       AcumaticaIntansitLocation
@@ -3790,6 +3799,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#acumaticareturntosupplierprefix" class="md-nav__link">
+    <span class="md-ellipsis">
+      AcumaticaReturnToSupplierPrefix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#acumaticaintansitlocation" class="md-nav__link">
     <span class="md-ellipsis">
       AcumaticaIntansitLocation
@@ -3892,6 +3910,11 @@ See below for information for specifics on how document and master data jobs wor
 <hr />
 <p>Acumatica type: Receipt (with TransferNbr)</p>
 </li>
+<li>
+<p>RTS</p>
+<hr />
+<p>Acumatica type: Return to Supplier (Purchase Receipt with <code>ReceiptType = RN</code>, mapped to Granite <code>ORDER</code>)</p>
+</li>
 </ul>
 </div>
 <h2 id="how-it-works">How it works</h2>
@@ -3953,6 +3976,29 @@ See below for information for specifics on how document and master data jobs wor
 <tr>
 <td>Completed, Closed</td>
 <td>COMPLETED</td>
+</tr>
+</tbody>
+</table>
+<p>For Return to Supplier (RTS) the statuses are mapped in the following way:</p>
+<table>
+<thead>
+<tr>
+<th>Acumatica Status</th>
+<th>Granite Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hold = true</td>
+<td>ONHOLD</td>
+</tr>
+<tr>
+<td>Hold = false and Released = false</td>
+<td>ENTERED</td>
+</tr>
+<tr>
+<td>Released = true</td>
+<td>COMPLETE</td>
 </tr>
 </tbody>
 </table>
@@ -4018,6 +4064,10 @@ See below for information for specifics on how document and master data jobs wor
 <span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">JobName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Acumatica Receipt Job&#39;</span><span class="p">);</span>
 
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="p">(</span><span class="n">isActive</span><span class="p">,</span><span class="w"> </span><span class="n">JobName</span><span class="p">,</span><span class="w"> </span><span class="n">JobDescription</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">Type</span><span class="p">],</span><span class="w"> </span><span class="n">InjectJob</span><span class="p">,</span><span class="w"> </span><span class="nb">Interval</span><span class="p">,</span><span class="w"> </span><span class="n">IntervalFormat</span><span class="p">,</span><span class="w"> </span><span class="n">AuditDate</span><span class="p">,</span><span class="w"> </span><span class="n">AuditUser</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Acumatica Return To Supplier Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs Return-to-Supplier documents from Acumatica&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.Acumatica.Job.ReturnsToSupplier&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MINUTES&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">JobName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Acumatica Return To Supplier Job&#39;</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="p">(</span><span class="n">isActive</span><span class="p">,</span><span class="w"> </span><span class="n">JobName</span><span class="p">,</span><span class="w"> </span><span class="n">JobDescription</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">Type</span><span class="p">],</span><span class="w"> </span><span class="n">InjectJob</span><span class="p">,</span><span class="w"> </span><span class="nb">Interval</span><span class="p">,</span><span class="w"> </span><span class="n">IntervalFormat</span><span class="p">,</span><span class="w"> </span><span class="n">AuditDate</span><span class="p">,</span><span class="w"> </span><span class="n">AuditUser</span><span class="p">)</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Acumatica Sales Order Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs SalesOrders from Acumatica&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.Acumatica.Job.SalesOrder&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MINUTES&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span>
 <span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">JobName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Acumatica Sales Order Job&#39;</span><span class="p">);</span>
 
@@ -4073,6 +4123,9 @@ See below for information for specifics on how document and master data jobs wor
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">SystemSettings</span><span class="w"> </span><span class="p">([</span><span class="n">Application</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="k">Key</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Description</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">ValueDataType</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isActive</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isEncrypted</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">EncryptionKey</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">AuditDate</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">AuditUser</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="k">Version</span><span class="p">])</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;Acumatica&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;AcumaticaTransferReceiptPrefix&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Acumatica transfer receipt prefix&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;String&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span>
 <span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">SystemSettings</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">Application</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Acumatica&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="k">Key</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;AcumaticaTransferReceiptPrefix&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">SystemSettings</span><span class="w"> </span><span class="p">([</span><span class="n">Application</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="k">Key</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Value</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Description</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">ValueDataType</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isActive</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">isEncrypted</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">EncryptionKey</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">AuditDate</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">AuditUser</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="k">Version</span><span class="p">])</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;Acumatica&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;AcumaticaReturnToSupplierPrefix&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Acumatica return to supplier prefix&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;String&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">SystemSettings</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="p">[</span><span class="n">Application</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Acumatica&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="p">[</span><span class="k">Key</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;AcumaticaReturnToSupplierPrefix&#39;</span><span class="p">);</span>
 </code></pre></div>
 <h4 id="insitestatus-database-objects">InSiteStatus database objects</h4>
 <p>The <code>InSiteStatusJob</code> requires the table <code>Integration_INSiteStatus</code> and the view <code>ERP_StockOnHand</code>.</p>
@@ -4133,6 +4186,8 @@ See below for information for specifics on how document and master data jobs wor
 <p>The prefix used to identify Acumatica transfer orders (1-Step transfers) during synchronization.</p>
 <h5 id="acumaticatransferreceiptprefix">AcumaticaTransferReceiptPrefix</h5>
 <p>The prefix used to identify Acumatica transfer receipts during synchronization.</p>
+<h5 id="acumaticareturntosupplierprefix">AcumaticaReturnToSupplierPrefix</h5>
+<p>The prefix used to identify Acumatica Return-to-Supplier documents during synchronization.</p>
 <h5 id="acumaticaintansitlocation">AcumaticaIntansitLocation</h5>
 <p>Acumatica does not specify a intransit location on its 2-step transfers so it needs to be specified in this system setting. This is the ERP location for the location used in Intransit documents. </p>
 <p><img alt="Intransit system setting" src="../acumatica-img/intransit-system-setting.PNG" />

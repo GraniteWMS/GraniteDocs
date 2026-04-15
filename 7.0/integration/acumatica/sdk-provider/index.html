@@ -3778,7 +3778,8 @@ This needs to be disabled in order from Granite to post documents into the syste
 </ul>
 <h2 id="integration-methods">Integration Methods</h2>
 <p>By default if the method names below is the same as a Granite Transaction type, it will autowire the integration. 
-If you require a different integration action you can specify the name below in the Process IntegrationMethod property. </p>
+If you require a different integration action you can specify the name below in the Process IntegrationMethod property. 
+<code>CONSUME</code>/manufacturing behavior is not yet implemented for documented SDK-provider usage.</p>
 <h3 id="adjustment">ADJUSTMENT</h3>
 <ul>
 <li>Granite Transaction: <strong>ADJUSTMENT</strong></li>
@@ -3923,7 +3924,7 @@ If you require a different integration action you can specify the name below in 
 </table>
 <h3 id="movereplenish">MOVE/REPLENISH</h3>
 <p>MOVE and REPLENISH create the same transaction in Acumatica. They both share a transaction type in Acumatica with Transfers.
-To prevent them being brought into Granite as transfers the external reference populated with Granite Move or Granite Replenish as you can see below.</p>
+To prevent them being brought into Granite as transfers the external reference is populated (currently <code>Granite move</code> / <code>Granite replenish</code>) as you can see below.</p>
 <p><img alt="Move Transfer" src="../acumatica-img/move-transfer.PNG" /></p>
 <ul>
 <li>Granite Transaction: <strong>MOVE/REPLENISH</strong></li>
@@ -4010,7 +4011,7 @@ To prevent them being brought into Granite as transfers the external reference p
 </tbody>
 </table>
 <h3 id="takeon">TAKEON</h3>
-<p>TAKEON uses the same transaction type in Acumatica as Transfer receipts. To prevent takeon receipts from being pulled into Granite as Transfer receipts the Description is populated with "Granite Takeon".  The scheduled job will then exclude there from being integrated.</p>
+<p>TAKEON uses the same transaction type in Acumatica as Transfer receipts. To prevent TAKEON receipts from being pulled into Granite as Transfer receipts the Description is populated with "Granite TakeOn". The scheduled job will then exclude these from being integrated.</p>
 <p><img alt="Takeon Receipt" src="../acumatica-img/takeon-receipt.PNG" /></p>
 <ul>
 <li>Granite Transaction: <strong>TAKEON</strong></li>
@@ -4185,8 +4186,8 @@ It is not mapped to any specific Granite transaction type. If you have a require
 <li>
 <p>Integration Post</p>
 <ul>
-<li>False - Creates a new Issue with the status Balanced</li>
-<li>True - Creates a new Issue and performs the Release action to change the status from balanced to Released</li>
+<li>False - Creates a new Issue, invokes Release From Hold, and does not invoke final Release.</li>
+<li>True - Creates a new Issue, invokes Release From Hold, and then invokes Release to change status to Released.</li>
 </ul>
 </li>
 </ul>
@@ -4254,8 +4255,8 @@ It is not mapped to any specific Granite transaction type. If you have a require
 <li>
 <p>Integration Post</p>
 <ul>
-<li>False - Creates a new Shipment with the status Balanced</li>
-<li>True - Creates a new shipment and performs the Release action to change the Status to Released</li>
+<li>False - Creates a new Shipment with status Open</li>
+<li>True - Creates a new shipment and performs the Confirm Shipment action</li>
 </ul>
 </li>
 <li>
@@ -4337,7 +4338,7 @@ It is not mapped to any specific Granite transaction type. If you have a require
 <li>
 <p>Integration Post</p>
 <ul>
-<li>False - Creates a new Purchase Order Receipt with the status Balanced</li>
+<li>False - Creates a new Purchase Order Receipt with <code>On Hold</code> status (<code>Hold = true</code>)</li>
 <li>True - Creates a new Purchase Order Receipt and performs the Release action to change the Status to Released. </li>
 </ul>
 </li>
@@ -4421,15 +4422,15 @@ It is not mapped to any specific Granite transaction type. If you have a require
 <p>Document handling:</p>
 <ul>
 <li><code>TRANSFER</code> - Validates each Transfer Order allocation against Granite <code>ActionQty</code> (line + split + lot/serial where applicable), updates <code>ExternalRef</code> to <code>Quantities validated in Granite</code>, and optionally releases.</li>
-<li><code>INTRANSIT</code> - Uses the same validation/update path as <code>TRANSFER</code> (transfer receipt creation is currently not executed).</li>
-<li><code>RECEIPT</code> - Requires a balanced Granite document (<code>Qty == ActionQty</code> on all lines), validates ERP receipt detail/allocation quantities against Granite grouped transactions, updates the receipt, and optionally releases.</li>
+<li><code>INTRANSIT</code> - Uses the same validation/update path as <code>TRANSFER</code>, and when <code>Integration Post = True</code> also attempts transfer receipt creation.</li>
+<li><code>RECEIPT</code> - Validates ERP receipt detail/allocation quantities against Granite grouped transactions (<code>ActionQty</code>), updates the receipt, and optionally releases.</li>
 </ul>
 </li>
 <li>
 <p>Integration Post</p>
 <ul>
 <li>False - Runs validation and updates the ERP document without invoking release.</li>
-<li>True - Runs validation and invokes release (<code>ReleaseTransferOrder</code> / <code>ReleaseInventoryReceipt</code>).</li>
+<li>True - Runs validation and invokes release (<code>ReleaseTransferOrder</code> / <code>ReleaseInventoryReceipt</code>); for <code>INTRANSIT</code>, transfer receipt creation is also attempted.</li>
 </ul>
 </li>
 <li>Returns:<ul>
