@@ -1030,6 +1030,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#returntosupplier" class="md-nav__link">
+    <span class="md-ellipsis">
+      RETURNTOSUPPLIER
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3709,6 +3718,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#returntosupplier" class="md-nav__link">
+    <span class="md-ellipsis">
+      RETURNTOSUPPLIER
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3760,6 +3778,7 @@ You can browse the IntegrationService's <code>/config</code> page to have the In
 <li><code>AcumaticaPurchaseOrderPrefix</code> - Acumatica purchase order prefix. Default: empty.</li>
 <li><code>AcumaticaTransferOrderPrefix</code> - Acumatica transfer order prefix. Default: empty.</li>
 <li><code>AcumaticaTransferReceiptPrefix</code> - Acumatica transfer receipt prefix. Default: empty.</li>
+<li><code>AcumaticaReturnToSupplierPrefix</code> - Acumatica return to supplier prefix. Default: empty.</li>
 <li><code>ProductionOrderType</code> - Acumatica production order type. Default: empty.</li>
 <li><code>AcumaticaWorkOrderPrefix</code> - Acumatica work order prefix. Default: empty.</li>
 </ul>
@@ -4423,7 +4442,7 @@ It is not mapped to any specific Granite transaction type. If you have a require
 <ul>
 <li><code>TRANSFER</code> - Validates each Transfer Order allocation against Granite <code>ActionQty</code> (line + split + lot/serial where applicable), updates <code>ExternalRef</code> to <code>Quantities validated in Granite</code>, and optionally releases.</li>
 <li><code>INTRANSIT</code> - Uses the same validation/update path as <code>TRANSFER</code>, and when <code>Integration Post = True</code> also attempts transfer receipt creation.</li>
-<li><code>RECEIPT</code> - Validates ERP receipt detail/allocation quantities against Granite grouped transactions (<code>ActionQty</code>), updates the receipt, and optionally releases.</li>
+<li><code>RECEIPT</code> - Validates ERP receipt detail/allocation quantities against Granite grouped transactions (<code>ActionQty</code>), appends <code>. Quantities validated in Granite</code> to receipt <code>Description</code>, and optionally releases.</li>
 </ul>
 </li>
 <li>
@@ -4466,6 +4485,78 @@ It is not mapped to any specific Granite transaction type. If you have a require
 <td></td>
 <td>Y</td>
 <td>Validates Granite <code>ActionQty</code> against ERP allocation/detail quantities</td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>Serial</td>
+<td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
+<td>N</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="returntosupplier">RETURNTOSUPPLIER</h3>
+<ul>
+<li>Granite Transaction: <strong>PICK</strong></li>
+<li>Acumatica: <strong>PO RECEIPT RETURN</strong></li>
+<li>Supports:<ul>
+<li>Serial</li>
+<li>Lot</li>
+</ul>
+</li>
+<li>Validation behavior:<ul>
+<li>Validates each purchase receipt allocation against Granite <code>ActionQty</code> using <code>LineNumber-SplitLineNumber</code>.</li>
+<li>For lot/serial tracked allocations, validates quantity per lot/serial number; otherwise validates total allocation quantity for the split line.</li>
+<li>If allocations are missing or quantities do not match, integration fails with validation errors.</li>
+<li>On successful validation, sets <code>VendorRef</code> to <code>Quantity validated in Granite</code>.</li>
+</ul>
+</li>
+<li>Integration Post<ul>
+<li>False - Runs validation and updates the PO Receipt Return without releasing.</li>
+<li>True - Runs validation, updates the document, and invokes release.</li>
+</ul>
+</li>
+<li>Returns:
+    <code>AcumaticaReturnToSupplierPrefix</code> + purchase receipt return number.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Acumatica Entity</th>
+<th>Required</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>PurchaseReceipt</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>LineNumber</td>
+<td></td>
+<td>Y</td>
+<td>Use <code>LineNumber-SplitLineNumber</code> format for allocation validation</td>
+</tr>
+<tr>
+<td>Qty / ActionQty</td>
+<td></td>
+<td>Y</td>
+<td>Validates Granite <code>ActionQty</code> against ERP allocation quantities</td>
 </tr>
 <tr>
 <td>Batch</td>
