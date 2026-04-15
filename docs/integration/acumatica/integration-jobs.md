@@ -35,6 +35,12 @@ See below for information for specifics on how document and master data jobs wor
     ---
 
     Acumatica type: Receipt (with TransferNbr)
+    
+ -   RTS
+
+    ---
+
+    Acumatica type: Return to Supplier (Purchase Receipt with `ReceiptType = RN`, mapped to Granite `ORDER`)
 
 </div>
 
@@ -69,6 +75,14 @@ For Purchase Orders the statuses are mapped in the following way:
 | Canceled, Rejected | CANCELLED |
 | On hold, Pending Approval, Pending Email, Pending Printing | ONHOLD |
 | Completed, Closed | COMPLETED|
+
+For Return to Supplier (RTS) the statuses are mapped in the following way:
+
+| Acumatica Status | Granite Status |
+|------------------|----------------|
+| Hold = true | ONHOLD |
+| Hold = false and Released = false | ENTERED |
+| Released = true | COMPLETE |
 
 For Transfers and Receipts the statuses are mapped in the following way:
 
@@ -127,6 +141,10 @@ SELECT 0, 'Acumatica Receipt Job', 'Syncs Receipts from Acumatica', 'INJECTED', 
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Receipt Job');
 
 INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'Acumatica Return To Supplier Job', 'Syncs Return-to-Supplier documents from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.ReturnsToSupplier', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Return To Supplier Job');
+
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
 SELECT 0, 'Acumatica Sales Order Job', 'Syncs SalesOrders from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.SalesOrder', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Sales Order Job');
 
@@ -182,6 +200,9 @@ WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Appl
 INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
 SELECT 'Acumatica', 'AcumaticaTransferReceiptPrefix', '', 'Acumatica transfer receipt prefix', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaTransferReceiptPrefix');
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'AcumaticaReturnToSupplierPrefix', '', 'Acumatica return to supplier prefix', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaReturnToSupplierPrefix');
 
 ```
 
@@ -269,6 +290,10 @@ The prefix used to identify Acumatica transfer orders (1-Step transfers) during 
 ##### AcumaticaTransferReceiptPrefix
 
 The prefix used to identify Acumatica transfer receipts during synchronization.
+
+##### AcumaticaReturnToSupplierPrefix
+
+The prefix used to identify Acumatica Return-to-Supplier documents during synchronization.
 
 ##### AcumaticaIntansitLocation
 
