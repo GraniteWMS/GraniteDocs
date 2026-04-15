@@ -37,6 +37,7 @@ This setting allows you to have multiple integration services running with diffe
 - `AcumaticaPurchaseOrderPrefix` - Acumatica purchase order prefix. Default: empty.
 - `AcumaticaTransferOrderPrefix` - Acumatica transfer order prefix. Default: empty.
 - `AcumaticaTransferReceiptPrefix` - Acumatica transfer receipt prefix. Default: empty.
+- `AcumaticaReturnToSupplierPrefix` - Acumatica return to supplier prefix. Default: empty.
 - `ProductionOrderType` - Acumatica production order type. Default: empty.
 - `AcumaticaWorkOrderPrefix` - Acumatica work order prefix. Default: empty.
 
@@ -289,7 +290,7 @@ It is not mapped to any specific Granite transaction type. If you have a require
 - Document handling:
     - `TRANSFER` - Validates each Transfer Order allocation against Granite `ActionQty` (line + split + lot/serial where applicable), updates `ExternalRef` to `Quantities validated in Granite`, and optionally releases.
     - `INTRANSIT` - Uses the same validation/update path as `TRANSFER`, and when `Integration Post = True` also attempts transfer receipt creation.
-    - `RECEIPT` - Validates ERP receipt detail/allocation quantities against Granite grouped transactions (`ActionQty`), updates the receipt, and optionally releases.
+    - `RECEIPT` - Validates ERP receipt detail/allocation quantities against Granite grouped transactions (`ActionQty`), appends `. Quantities validated in Granite` to receipt `Description`, and optionally releases.
 
 - Integration Post
     - False - Runs validation and updates the ERP document without invoking release.
@@ -303,6 +304,33 @@ It is not mapped to any specific Granite transaction type. If you have a require
 | Document                   | TransferOrder/InventoryReceipt |Y||
 | LineNumber                 |               |Y||
 | Qty / ActionQty            |               |Y| Validates Granite `ActionQty` against ERP allocation/detail quantities |
+| Batch                      | LotSerialNbr  |N||
+| Serial                     | LotSerialNbr  |N||
+| ExpirationDate             | ExpiryDate|N||
+
+### RETURNTOSUPPLIER
+
+- Granite Transaction: **PICK**
+- Acumatica: **PO RECEIPT RETURN**
+- Supports:
+    - Serial
+    - Lot
+- Validation behavior:
+    - Validates each purchase receipt allocation against Granite `ActionQty` using `LineNumber-SplitLineNumber`.
+    - For lot/serial tracked allocations, validates quantity per lot/serial number; otherwise validates total allocation quantity for the split line.
+    - If allocations are missing or quantities do not match, integration fails with validation errors.
+    - On successful validation, sets `VendorRef` to `Quantity validated in Granite`.
+- Integration Post
+    - False - Runs validation and updates the PO Receipt Return without releasing.
+    - True - Runs validation, updates the document, and invokes release.
+- Returns:
+    `AcumaticaReturnToSupplierPrefix` + purchase receipt return number.
+
+| Granite    | Acumatica Entity | Required | Behavior |
+|------------|------------------|----------|-----------|
+| Document                   | PurchaseReceipt |Y||
+| LineNumber                 |               |Y| Use `LineNumber-SplitLineNumber` format for allocation validation |
+| Qty / ActionQty            |               |Y| Validates Granite `ActionQty` against ERP allocation quantities |
 | Batch                      | LotSerialNbr  |N||
 | Serial                     | LotSerialNbr  |N||
 | ExpirationDate             | ExpiryDate|N||
