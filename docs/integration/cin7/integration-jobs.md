@@ -290,6 +290,33 @@ The mapping below is an example of the standard that is in place. It is configur
 || Weight           | UnitWeight        |
 || Barcode         | MasterItemAlias   |
 
+**Custom Columns (MasterItem):**
+
+MasterItem supports writing additional (custom) columns into the MasterItem table via the `CustomColumns` dictionary on the entity. This is useful for persisting CIN7 fields that are not part of the standard MasterItem mapping above (for example, `ShortDescription`).
+
+How it works:
+
+- The mapping script populates `masterItem.CustomColumns` with column name / value pairs.
+- After the standard insert/update, the MasterItem Job calls `GraniteRepository.UpdateCustomColumns` which:
+    1. Resolves the MasterItem table name/schema.
+    2. Reads `INFORMATION_SCHEMA.COLUMNS` to determine which columns actually exist on the table.
+    3. Builds and executes a parameterized `UPDATE` for only the columns that match.
+    4. Logs any columns that were skipped because they do not exist on the table.
+- Only columns that already exist on the MasterItem table will be updated. Any key in `CustomColumns` that does not correspond to an existing column is ignored (and logged). The column must be added to the MasterItem table in the database first.
+
+Example (in `MasterItemJobConfiguration.fsx`) - mapping CIN7 `ShortDescription` into a `Custom_ShortDescription` column on MasterItem:
+
+```fsharp
+masterItem.CustomColumns.Add("Custom_ShortDescription", product.ShortDescription)
+```
+
+Before this mapping takes effect, ensure the target column exists on the MasterItem table, e.g.:
+
+```sql
+ALTER TABLE [dbo].[MasterItem]
+ADD [Custom_ShortDescription] NVARCHAR(500) NULL;
+```
+
 **Trading Partner Mapping:**
 
 Please note that the integration suppliers and customers are able to be toggled individually with the F# script.
