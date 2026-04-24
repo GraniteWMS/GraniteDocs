@@ -334,3 +334,42 @@ It is not mapped to any specific Granite transaction type. If you have a require
 | Batch                      | LotSerialNbr  |N||
 | Serial                     | LotSerialNbr  |N||
 | ExpirationDate             | ExpiryDate|N||
+
+### STOCKTAKE
+
+StockTake pushes Granite transactions onto an existing Acumatica **Physical Inventory Review** (PIR) using the REST entity endpoint (`PhysicalInventoryReviewApi`). The PIR must already exist in Acumatica; the integration updates it rather than creating it.
+
+- Granite Transaction: **STOCKTAKE**
+- Acumatica: **Physical Inventory Review**
+- Supports:
+    - Lot
+    - Serial
+- Session lookup:
+    - Uses the first transaction's `TransactionDocumentReference` as the PIR `ReferenceNbr`, fetched via `GetList` with `$expand=Details`.
+- Warehouse validation:
+    - Transactions whose `ToLocation` does not match the PIR's `WarehouseID` are skipped.
+    - A `Warning` row is written to Granite's `IntegrationLog` table with `LogOrigin = StockTakePosting` listing the ignored transaction IDs.
+- Detail matching and accumulation:
+    - Existing PIR details are matched to Granite transactions by `InventoryID`; when the detail has a `LotSerialNbr`, matching also requires the Granite `Batch` or `Serial` to match, and if the detail has an `ExpirationDate` the Granite `ExpiryDate` must match that date as well.
+    - For each matched detail, the summed Granite `ToQty` is accumulated into `PhysicalQty` (using `+=`) and the source Granite transaction IDs are appended to the detail `Note`.
+- New details for unmatched transactions:
+    - Transactions that do not match any existing PIR detail generate new detail rows at `AppConfig.DefaultLocation` with `Status = Entered`.
+    - Lot/Serial tracked items are grouped by `Code`/`Batch`/`Serial`/`ExpiryDate` before being added.
+    - Non-tracked items are summed per inventory code into a single new detail.
+    - The new detail's `Note` is populated with the contributing Granite transaction IDs.
+- Submit:
+    - The updated PIR is committed using `PutEntity` with `$expand=Details`.
+- Integration Post
+    - The `post` flag is accepted but not currently used; behaviour is the same whether `post` is `True` or `False` (no separate Release step is invoked).
+- Returns:
+    PIR `ReferenceNbr`.
+
+| Granite    | Acumatica Entity | Required | Behavior |
+|------------|------------------|----------|-----------|
+| Document (`TransactionDocumentReference`) | ReferenceNbr (PIR) |Y| Identifies the Physical Inventory Review to update |
+| Code                       | InventoryID   |Y||
+| Qty / ToQty                | PhysicalQty   |Y| Summed Granite quantities are accumulated into existing detail `PhysicalQty` (`+=`) |
+| ToLocation                 | WarehouseID   |Y| Transactions whose `ToLocation` differs from the PIR `WarehouseID` are skipped and logged to `IntegrationLog` |
+| Batch                      | LotSerialNbr  |N||
+| Serial                     | LotSerialNbr  |N||
+| ExpirationDate             | ExpirationDate|N||

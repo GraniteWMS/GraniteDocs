@@ -117,6 +117,31 @@ On execution, the job:
 
 If no data is returned from the endpoint, or no valid site status rows are found, the job throws an error. Errors are logged and rethrown.
 
+### Stock Take Session job
+`StockTakeSessionJob` seeds Granite `StockTakeSession` and `StockTakeLines` rows from new Acumatica **Physical Inventory Reviews** (PIRs).
+
+On validation, the job signs on to Acumatica OData and logs a successful connection.
+
+On execution, the job:
+
+1. Calls Acumatica `PX_Objects_IN_INPIHeader` via OData with filter `Status eq 'N' and LastModifiedDateTime gt {now - 24 hours}`.
+2. Selects `PIID`, `PIClassID`, `Descr`, `Status`, `NoteID`, and `LastModifiedDateTime`.
+3. Expands:
+    - `INPIDetailCollection` (`LotSerialNbr`, `ExpireDate`, `PhysicalQty`, `BookQty`, `Status`, and the `InventoryItemByInventoryID` sub-expand)
+    - `INSiteBySiteID` (`SiteCD`)
+4. Filters out PIRs without an `INSiteBySiteID`.
+5. Skips PIRs that already have a matching `StockTakeSession` (matched by `StockTakeSession.Name = PIID`).
+6. For each remaining PIR, inserts a new `StockTakeSession` with:
+    - `Name = PIID`
+    - `Active = true`
+    - `Site = ""`
+    - `AuditUser = "Integration"`
+    - `ERPLocation = INSiteBySiteID.SiteCD`
+7. Populates `StockTakeLines` for the new session by selecting every in-stock `TrackingEntity` (`InStock = 1`) whose `Location.ERPLocation` matches the session's `ERPLocation`, with each line defaulted to `Status = 'OUTSTANDING'`.
+
+!!! note
+    Unlike the document jobs, the Stock Take Session job does not use `IntegrationDocumentQueue`. The lookback is a fixed 24 hours from `DateTime.Now` on every run.
+
 ## Setup 
 
 ### Add the Acumatica providers to the Granite Scheduler
@@ -159,6 +184,10 @@ WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobNam
 INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
 SELECT 0, 'Acumatica InSite Status Job', 'Syncs InSite Stock on Hand from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.InSiteStatus', '12', 'HOURS', GETDATE(), 'AUTOMATION'
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica InSite Status Job');
+
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'Acumatica StockTake Session Job', 'Syncs Physical Inventory Reviews from Acumatica into Granite StockTake sessions', 'INJECTED', 'Granite.Integration.Acumatica.Job.StockTake', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica StockTake Session Job');
 
 -- Insert Acumatica System Settings
 INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
