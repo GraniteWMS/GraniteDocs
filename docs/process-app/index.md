@@ -119,6 +119,9 @@ You can define multiple mappings for a single function if more than one step nee
 
 #### Receive
 
+**ActionQtyAllowance**
+- When set to a value above 0, allows the user to receive the specified percentage more than the document requires
+
 **SerialValidationOverride**
 - When SerialValidationOverride's value is 'YES', the Business API will not validate the received serial number against the document lines
 
