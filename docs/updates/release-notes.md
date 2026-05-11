@@ -1,5 +1,109 @@
 # Hotfixes
 
+## 2026-05-05 - 2026-05-11
+
+Granite Database
+
+- Date 2026-05-11
+- Version 7
+- Add pack outstanding field to Order Progress Detail grid
+
+SQLCLR
+
+- Date 2026-05-11
+- Version 7.0.1.3
+- Fix: extend http timeouts for long running requests
+- Fix: error when integration service returns non json response (No outstanding integration)
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2026-05-11
+- Version 7.0.3.0 & 6.0.3.0
+- Add receiving ActionQtyAllowance Business Rule
+- Fix reversals not correctly setting from and to location
+
+Granite.Repository.ServiceInterface.dll
+
+- Date 2026-05-11
+- Version 7.0.0.6 & 6.0.0.9
+- Fix auditing non db entity properties (ProcessSteps on Process)
+
+Granite Process App
+
+- Date 2026-05-11
+- Version 7.0.5.0
+- Add support for navigateToStep script method
+
+Granite.WebTemplate.ScriptMethods.dll
+
+- Date 2026-05-11
+- Version 7.0.3.0
+- Add navigateToStep
+- Add createCardList
+- Add numericKeyboard
+- Add createButtonList
+
+Granite.Reporting.ServiceInterface.dll
+
+- Date 2026-05-11
+- Version 7.0.0.0
+- Fix use printer’s paper size when printing ssrs reports.
+
+## 2026-04-21 - 2026-04-27
+
+Granite Scaffolding
+
+- Date  2026-04-22
+- Version 7.0.0.3, 6.0.0.4, 5.0.0.3
+- Fix error message not displayed when invalid database create script selected
+
+## 2026-04-07 - 2026-04-13
+
+Granite Database
+
+- Date 2026-04-09
+- Versions 5, 6, 7
+- Fix AuditStockTakeLines FromQty & ToQty decimal places
+
+## 2026-03-25 - 2026-03-31
+
+Granite.Process.App.dll
+
+- Date 2026-03-31
+- Versions 7.0.4.3, 6.0.2.2
+- Add process name and transaction type to Consume and Manufacture post controller
+
+## 2026-03-17 - 2026-03-24
+
+Granite.Business.API.ServiceInterface.dll
+
+- Date 2026-03-18
+- Version 7.0.2.1
+- Allow for packing on Transfers
+- Ticket: https://granitewms.canny.io/request/p/business-rule-for-packing-transfer-documents
+
+## 2026-03-10 - 2026-03-16
+
+Granite.Integration.PastelEvo.dll
+
+- Date 2026-03-12
+- Version 5.0.0.5, 6.0.0.5, 7.0.0.2
+- Fix error casting long AutoIndex to int
+
+## 2026-02-24 - 2026-03-02
+
+Process App
+
+- Date 2026-02-27
+- Version 7.0.4.2
+- Fix detail divs rendering twice when no layout specified in process function
+
+Process App
+
+- Date 2026-02-27
+- Version 7.0.4.1 & 6.0.2.1
+- Fix double submit process step on next button double click
+
 ## 2026-02-17 - 2026-02-23
 
 Database SQLCLR
