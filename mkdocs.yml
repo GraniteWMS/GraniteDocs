@@ -63,6 +63,7 @@ nav:
           - Data Capture: webdesktop/datacapture/data-capture.md
       - Process App:
           - process-app/index.md
+          - Script Methods: process-app/script-methods.md
       - Scanner Application: android-application/manual.md
       - Business API: business-api/manual.md
       - Custodian API:
