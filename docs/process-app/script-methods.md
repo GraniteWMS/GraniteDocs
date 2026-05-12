@@ -95,6 +95,46 @@ Programmatically navigate to another process step.
 
 ---
 
+##  `navigateToStepButton`
+
+Create a button that navigates to a Process Step when clicked.
+
+###  Example
+
+####  Use current textbox value
+
+```handlebars
+{{ 
+    navigateToStepButton({
+        stepName: 'ConfirmLocation'
+    }) 
+}}
+```
+
+####  Override textbox value and Submit final step
+
+```handlebars
+{{ 
+    navigateToStepButton({
+        stepName: 'ConfirmLocation',
+        stepInputOverride: 'ABC123',
+        submitFinalStep: true
+    }) 
+}}
+```
+
+###  Options
+
+| Option              | Type   | Description                                |
+| ------------------- | ------ | ------------------------------------------ |
+| `stepName`          | string | Target step                                |
+| `stepInputOverride` | string | Manual input value                         |
+| `submitFinalStep`   | bool   | Submit final step automatically            |
+| `buttonText`        | string | Set the text that displays on the button   |
+
+
+---
+
 ##  `basicList`
 
 Render a Bootstrap list group.
