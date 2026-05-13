@@ -1,54 +1,47 @@
-# Hotfixes
+# Hotfixes 2026-05-05 - 2026-05-11
 
-## 2026-05-05 - 2026-05-11
-
-Granite Database
+### Granite Database
 
 - Date 2026-05-11
 - Version 7
-- Add pack outstanding field to Order Progress Detail grid
+- `Change: pack outstanding field to Order Progress Detail grid`
 
-SQLCLR
+### SQLCLR
 
 - Date 2026-05-11
 - Version 7.0.1.3
-- Fix: extend http timeouts for long running requests
-- Fix: error when integration service returns non json response (No outstanding integration)
+- `Fix: extend http timeouts for long running requests`
+- `Fix: error when integration service returns non json response (No outstanding integration)`
 
-Granite.Business.API.ServiceInterface.dll
+### Granite Business API
 
-- Date 2026-05-11
-- Version 7.0.3.0 & 6.0.3.0
-- Add receiving ActionQtyAllowance Business Rule
-- Fix reversals not correctly setting from and to location
-
-Granite.Repository.ServiceInterface.dll
-
-- Date 2026-05-11
-- Version 7.0.0.6 & 6.0.0.9
-- Fix auditing non db entity properties (ProcessSteps on Process)
-
-Granite Process App
-
-- Date 2026-05-11
-- Version 7.0.5.0
-- Add support for navigateToStep script method
-
-Granite.WebTemplate.ScriptMethods.dll
-
-- Date 2026-05-11
-- Version 7.0.3.0
-- Add navigateToStep
-- Add createCardList
-- Add numericKeyboard
-- Add createButtonList
-
-Granite.Reporting.ServiceInterface.dll
-
+- DLL Granite.Reporting.ServiceInterface.dll
 - Date 2026-05-11
 - Version 7.0.0.0
-- Fix use printer’s paper size when printing ssrs reports.
+- `Fix: use printer’s paper size when printing ssrs reports.`
 
+- DLL Granite.Business.API.ServiceInterface.dll
+- Date 2026-05-11
+- Version 7.0.3.0 & 6.0.3.0
+- `New: receiving ActionQtyAllowance Business Rule`
+- `Fix: reversals not correctly setting from and to location`
+
+- DLL Granite.Repository.ServiceInterface.dll
+- Date 2026-05-11
+- Version 7.0.0.6 & 6.0.0.9
+- `Fix: auditing non db entity properties (ProcessSteps on Process)`
+
+### Granite Process App
+
+- DLL Granite.WebTemplate.ScriptMethods.dll
+- Date 2026-05-11
+- Version 7.0.5.0
+- `New: WebTemplate function navigateToStep`
+- `New: WebTemplate function createCardList`
+- `New: WebTemplate function numericKeyboard`
+- `New: WebTemplate function createButtonList`
+
+---
 ## 2026-04-21 - 2026-04-27
 
 Granite Scaffolding
