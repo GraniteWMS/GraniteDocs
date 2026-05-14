@@ -1,8 +1,4 @@
-# Superset
-
-Apache Superset is an open-source business intelligence and data visualization platform that allows users to explore and visualize data through interactive dashboards and charts. It provides a user-friendly interface for creating sophisticated visualizations without requiring extensive coding knowledge, making it accessible for both technical and non-technical users to analyze and present data insights.
-
-![](superset-img/inbound_dashboard.png)
+# Windows Installation
 
 ## Setup
 
@@ -40,17 +36,21 @@ Then run the script provided in the folder (setup_superset_db.sql) to create the
 
 ### Install Superset
 
-Now the easy part. If you have completed the above steps. Run the install_superset.bat file. This will create superset as a windows service. 
+Now the easy part. If you have completed the above steps. First run the install_superset_python_db.bat file **Not as administrator**. This will install the python packages and restore the Superset database.
 
 ![](superset-img/install_superset_3.PNG)
 
-You can now start the service.
+Next, run the install_superset_service_nssm.bat file **As administrator**. This will create superset as a windows service. 
 
 ![](superset-img/install_superset_4.PNG)
 
-And Browse to [http://localhost:8088](http://localhost:8088) to log in. Please reach out to the development team for the password. Unless you have the wisdom to guess it.
+You can now start the service.
 
 ![](superset-img/install_superset_5.PNG)
+
+And Browse to [http://localhost:8088](http://localhost:8088) to log in. Please reach out to the development team for the password. Unless you have the wisdom to guess it.
+
+![](superset-img/install_superset_6.PNG)
 
 
 ## IIS Config

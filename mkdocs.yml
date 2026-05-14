@@ -93,7 +93,11 @@ nav:
       - Jam.dev: tools/jam.md
       - Jaeger: tools/jaeger.md
       - Apache NiFi: tools/nifi.md
-      - Superset: tools/superset.md
+      - Superset: 
+            - tools/superset/index.md
+            - Windows Installation: tools/superset/windows-installation.md
+            - Getting Started: tools/superset/getting-started.md
+
   - Development:
       - Overview: customization/index.md
       - Guidelines: 
