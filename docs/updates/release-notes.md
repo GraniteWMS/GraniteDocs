@@ -1,4 +1,4 @@
-# Hotfixes 2026-05-05 - 2026-05-11
+## 2026-05-05 - 2026-05-11
 
 ### Granite Database
 
@@ -42,11 +42,12 @@
 - `New: WebTemplate function createButtonList`
 
 ---
+
 ## 2026-04-21 - 2026-04-27
 
 Granite Scaffolding
 
-- Date  2026-04-22
+- Date 2026-04-22
 - Version 7.0.0.3, 6.0.0.4, 5.0.0.3
 - Fix error message not displayed when invalid database create script selected
 
@@ -117,17 +118,17 @@ Database SQLCLR
 
 - Date 2026-02-16
 - Version 7.0.1.0
-    - Add support for Reversals
-    - Add support for Inventory correction
-    - Add support for LineNumber
-    - Add support for Business Rules
-    - Add support for Tracking entity optional fields
-    - Add support Quality Control
+  - Add support for Reversals
+  - Add support for Inventory correction
+  - Add support for LineNumber
+  - Add support for Business Rules
+  - Add support for Tracking entity optional fields
+  - Add support Quality Control
 - Version 6.0.1.0
-    - Add support for LineNumber
-    - Add support for Business Rules
-    - Add support for Tracking entity optional fields
-    - Add support Quality Control
+  - Add support for LineNumber
+  - Add support for Business Rules
+  - Add support for Tracking entity optional fields
+  - Add support Quality Control
 
 Process App
 
@@ -162,7 +163,7 @@ Granite.Repository.ServiceInterface.dll
 
 - Date 2026-02-05
 - Version 7.0.0.5
-- Fix issues of not being able to delete usergroup because of permissions table 
+- Fix issues of not being able to delete usergroup because of permissions table
 
 ## 2026-01-27 - 2025-02-02
 
@@ -177,7 +178,7 @@ GraniteScannerApp.apk
 - Date 2026-01-27
 - Version 2.0
 - ISSUE 1: Rotating the screen was causing logout from the process app.
-- ISSUE 2: Inputs being suggested from previous inputs 
+- ISSUE 2: Inputs being suggested from previous inputs
 
 ## 2026-01-20 - 2026-01-26
 
@@ -288,7 +289,7 @@ Granite.Business.API.ServiceInterface.dll
 
 ## 2025-11-03 - 2025-11-10
 
-Granite.Integration.Evo.Job.dll 
+Granite.Integration.Evo.Job.dll
 
 - Date 2025-11-05
 - Version 7.0.0.1
@@ -309,7 +310,7 @@ Granite.Business.API.ServiceInterface.dll
 
 Granite.Process.App.exe/dll
 
-- Version  6.0.0.22, 7.0.2.0
+- Version 6.0.0.22, 7.0.2.0
 
 ## 2025-10-21 - 2025-10-27
 
@@ -326,7 +327,7 @@ Granite Process App
 - Fix conversion for decimals stored in exponential notation
 - Fix packing carrying entity step not creating new BOX when barcode entered
 - 7.0.1.5 only:
-    - Support new scale service
+  - Support new scale service
 
 Granite.Business.API.DbContext.dll
 
@@ -484,7 +485,7 @@ WebDesktop
 - 6.1.5, 7.0.4
 - Fix: Pickslip lines edit, allowing edit of qty, comment and instruction
 - Fix deleting process step lookups with special chars
-- Fix: Menu Divider,  prevent duplicate Names, update/maintain color field
+- Fix: Menu Divider, prevent duplicate Names, update/maintain color field
 - Fix: Move, Adjustment Integration - try to integrate even when URL not specified
 - Fix: Reversal error (invalid URL)
 
@@ -516,7 +517,7 @@ Database SQLCLR
 
 ## 2025-07-29 - 2025-08-04
 
-Process App 
+Process App
 
 - Date 2025-08-04
 - Version 6.0.0.17
@@ -553,7 +554,7 @@ Granite.Business.API.ServiceInterface.dll
 
 ## 2025-07-08 - 2025-07-14
 
-Granite Process App 
+Granite Process App
 
 - Date 2025-07-14
 - Version 6.0.0.15
@@ -591,7 +592,7 @@ Granite.Email.ServiceInterface.dll
 
 ## 2025-07-01 - 2025-07-07
 
-Granite.Business.API.ServiceModel.dll 
+Granite.Business.API.ServiceModel.dll
 
 - Date 2025-07-03
 - Version 6.0.0.4
@@ -798,8 +799,8 @@ dbo.**API_QueryDocumentProgress**
 
 - Date: 2025-03-13
 - Added columns
-    - IntegrationReferences
-    - UnpostedTransactionCount
+  - IntegrationReferences
+  - UnpostedTransactionCount
 
 **Process App**
 
@@ -828,58 +829,59 @@ ProcessApp & Business API
 ## 2025-02-18 - 2025-02-24
 
 - Granite.Process.App
-    - Date 2025-02-20
-    - Version 6.0.0.2
-    - Fix bug DestinationLocation step not being skipped for INTRANSIT transfers.
-  
+  - Date 2025-02-20
+  - Version 6.0.0.2
+  - Fix bug DestinationLocation step not being skipped for INTRANSIT transfers.
+
 ## 2025-02-11 - 2025-02-17
 
 - Granite.Business.API.ServiceInterface.dll
-    - Date: 2025-02-12
-    - Version: 6.0.0.1
-    - Fix bug on Packing where EF tries to delete lines on document that do not match the master item being packed (cannot actually delete because lines are referenced by FK - but packing transaction fails)
+  - Date: 2025-02-12
+  - Version: 6.0.0.1
+  - Fix bug on Packing where EF tries to delete lines on document that do not match the master item being packed (cannot actually delete because lines are referenced by FK - but packing transaction fails)
 - Granite.Scaffolding.exe
-    - Date 2025-02-13
-    - Version: 6.0.0.1
-    - Fix bug unable to leave telemetry collector address empty
-    - Fix bug fails to create firewall rule if integration service is not being installed.
+  - Date 2025-02-13
+  - Version: 6.0.0.1
+  - Fix bug unable to leave telemetry collector address empty
+  - Fix bug fails to create firewall rule if integration service is not being installed.
 - Granite.Process.App
-    - Date 2025-02-13
-    - Version: 6.0.0.1
-    - Fix bug failing to start if telemetry collector endpoint not configured
+  - Date 2025-02-13
+  - Version: 6.0.0.1
+  - Fix bug failing to start if telemetry collector endpoint not configured
 - System Snippets Data
-    - Date 2025-02-14
-    - Fix Packing snippet - incorrectly named variable resulting in corrupted template. Database create script has been updated as well as …\GraniteDatabase\Data\SystemSnippets.sql - you can delete all from SystemSnippets and then run this script to ensure that you have the latest snippets.
+  - Date 2025-02-14
+  - Fix Packing snippet - incorrectly named variable resulting in corrupted template. Database create script has been updated as well as …\GraniteDatabase\Data\SystemSnippets.sql - you can delete all from SystemSnippets and then run this script to ensure that you have the latest snippets.
 - Granite.Custodian.ServiceInterface.dll
-    - Date 2025-02-14
-    - Same fix as above (Packing snippet) fixed in v6 migration
+  - Date 2025-02-14
+  - Same fix as above (Packing snippet) fixed in v6 migration
 - Custodian GmailAuthenticator
-    - Date 2025-02-14
-    - Was missing from previous V6 Custodian release
+  - Date 2025-02-14
+  - Was missing from previous V6 Custodian release
 
 ## 2025-01-14 - 2025-01-20
-- Granite.Webservice.dll (second fix below)
-    - Released 15/01/2025
-    - Version **5.0.0.1**
-    - Fix bug when multiple people were scanning the same line on a document (or there is network latency), some transactions fail to update the document detail action qty.
-- Granite.DomainModel.dll
-    - Released 15/01/2025
-    - Version 5.0.1.1
-    - Fix bug replenish not printing new tracking entity labels
-- Granite.Webservice.dll (related to 5.0.0.1)
-    - Released 17/01/2025
-    - Version **5.0.0.3**
-    - Fix bug introduced by the fix in 5.0.0.1 - important update. Requests that need to wait to acquire a lock do not acquire a lock even once the document is available to process - this results in long running IIS requests that never terminate, and cause slow downs in IIS.
-  
-## 2025-01-06 - 2025-01-13
-- **GraniteScheduler.**ServiceInterface.dll
-    - Released 06/01/2025
-    - Version 5.0.0.1
-    - Fix bug causing error `The SSL connection could not be established` when trying to connect to Utility API to send email.
-- Process App
-    - Released 13/01/2025
-    - Version 5.0.0.5
-    - Properly disable the UI after the user has submitted an input. This prevents prescripts from running multiple times accidentally
 
+- Granite.Webservice.dll (second fix below)
+  - Released 15/01/2025
+  - Version **5.0.0.1**
+  - Fix bug when multiple people were scanning the same line on a document (or there is network latency), some transactions fail to update the document detail action qty.
+- Granite.DomainModel.dll
+  - Released 15/01/2025
+  - Version 5.0.1.1
+  - Fix bug replenish not printing new tracking entity labels
+- Granite.Webservice.dll (related to 5.0.0.1)
+  - Released 17/01/2025
+  - Version **5.0.0.3**
+  - Fix bug introduced by the fix in 5.0.0.1 - important update. Requests that need to wait to acquire a lock do not acquire a lock even once the document is available to process - this results in long running IIS requests that never terminate, and cause slow downs in IIS.
+
+## 2025-01-06 - 2025-01-13
+
+- **GraniteScheduler.**ServiceInterface.dll
+  - Released 06/01/2025
+  - Version 5.0.0.1
+  - Fix bug causing error `The SSL connection could not be established` when trying to connect to Utility API to send email.
+- Process App
+  - Released 13/01/2025
+  - Version 5.0.0.5
+  - Properly disable the UI after the user has submitted an input. This prevents prescripts from running multiple times accidentally
 
 ---
