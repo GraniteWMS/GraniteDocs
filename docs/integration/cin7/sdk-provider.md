@@ -21,6 +21,8 @@ Once created, it will generate an Account ID and a Key (as below). These need to
 - `api-auth-accountid` - CIN7 API Account ID.
 - `api-auth-applicationkey` - CIN7 API Application Key (encrypted).
 - `DryRun` - Dry run mode (`true`/`false`). Default: `false`. When enabled, payloads are logged and requests are not sent to CIN7.
+- `SetPurchaseOrderPutawayGroup` - Controls put-away grouping for `POSTPUTAWAY` (`true`/`false`). Default: `false`.
+- `StockTakeExpenseAccount` - Expense account used when posting `STOCKTAKE` (Stock Adjustment) requests.
 - `Carrier` - Default carrier for shipment operations. Default: empty.
 
 ![SystemSettings](./cin7-img/system-settings.png)
@@ -33,11 +35,12 @@ Currently supported transactions/methods are:
 - TRANSFER (Stock Transfer, POST)
 - UPDATETRANSFERTOINTRANSIT (Stock Transfer, PUT)
 - UPDATETRANSFERTOCOMPLETED (Stock Transfer, PUT)
-- ADJUSTMENT (Stock Adjustment, POST)
+- STOCKTAKE (Stock Adjustment, POST)
 - RECEIVE (Purchase Stock Receive, POST)
 - POSTPUTAWAY (Purchase Stock Put Away, POST)
 - PICK (Sale Fulfilment Pick, POST)
 - PACK (Sale Fulfilment Pack, POST)
+- POSTPACKANDSHIP (Sale Fulfilment Pack and Ship, POST)
 - CONSUME (Finished Goods Pick Lines, POST)
 - MANUFACTURE (Finished Goods, PUT)
 
@@ -48,42 +51,34 @@ Outstanding transaction types:
 - Scrap
 
 
-### ADJUSTMENT
+### STOCKTAKE
 
-- Granite Transaction: **ADJUSTMENT**
+- Granite Transaction: **STOCKTAKE**
 - CIN7: **STOCK ADJUSTMENT**
 - Supports:
     - Batch
     - Serial
     - Expiration Date
+- Behavior:
+    - Groups transactions by item, tracking fields, and destination location, then sums quantity from Granite `ToQty`.
+    - Uses Granite `Code` to resolve CIN7 `ProductID` (Master Item ERP ID).
+    - Uses the first transaction `TransactionDocumentReference` in the request reference (`Granite Stock Take {sessionName}`).
+    - Uses system setting `StockTakeExpenseAccount` for the CIN7 adjustment account.
+    - Posts with CIN7 status `DRAFT`.
 - Integration Post
-    - False - Creates a new Stock Adjustment with the status Draft
-    - True - Creates a new Stock Adjustment with the status Completed.
+    - Not used by the current implementation for this method.
 - Returns:
     Stock Adjustment Task ID
 
 | Granite    | CIN7 Entity | Required | Behavior |
-|------------|------------------|----------|-----------|
-| Code                        | SKU           |Y||
-| Qty                         | Qty  |Y||
-| FromLocation                | Location  |Y||
+|------------|-------------|----------|-----------|
+| Code                        | ProductID (via Master Item ERP ID) |Y||
+| ToQty                       | Quantity  |Y||
+| ToLocation                  | Location  |Y||
 | Batch                       | BatchSN  |N||
 | Serial                      | BatchSN  |N||
 | ExpirationDate              | ExpiryDate|N||
-
-The quantity filed that is sent to CIN7 is the total qty of the product in that location so the integration provider uses this view to get that qty for each item being adjusted. This view needs to be created on the Granite Database. 
-
-```sql
-CREATE VIEW Integration_CIN7_StockOnHand
-AS
-select MasterItem.Code, Location.ERPLocation, ExpiryDate, Batch, SerialNumber, SUM(Qty) Qty
-from TrackingEntity 
-		INNER JOIN Location on TrackingEntity.Location_id = Location.ID
-		INNER JOIN MasterItem ON TrackingEntity.MasterItem_id = MasterItem.ID
-WHERE Location.NonStock = 0 AND TrackingEntity.InStock = 1
-GROUP BY MasterItem.Code, Location.ERPLocation, ExpiryDate, Batch, SerialNumber
-
-```
+| Comment                     | Comments|N||
 
 ### MOVE
 
@@ -203,8 +198,10 @@ Standard TRANSFER posting and transfer status updates are implemented.
     - Expiration Date
 - Behavior:
     - Uses Granite `Document` to resolve CIN7 `PurchaseID` from Granite `ERPIdentification`.
-    - Reads `advanced-purchase` and attempts to reuse an open put-away task (`DRAFT` or `NOT AVAILABLE`).
-    - Skips a put-away task when the linked invoice is not open and the put-away already has lines.
+    - When `SetPurchaseOrderPutawayGroup` is `false` (default), reads `advanced-purchase` and attempts to reuse an open put-away task (`DRAFT` or `NOT AVAILABLE`).
+    - In default mode, skips reusing a put-away task when the linked invoice is not open and the put-away already has lines.
+    - When `SetPurchaseOrderPutawayGroup` is `true`, requires a single `TransactionDocumentReference`, extracts the trailing numeric suffix (for example `ABC-123` -> `123`), and matches that value to CIN7 `InvoicingAndReceivingNumber`.
+    - With put-away grouping enabled, reuses only an open matching put-away task (`DRAFT` or `NOT AVAILABLE`); otherwise creates a new put-away task.
     - If no suitable open put-away task is found, uses `00000000-0000-0000-0000-000000000000` to create a new put-away task.
 - Integration Post
     - Not used by the current implementation for this method.
@@ -264,6 +261,36 @@ Standard TRANSFER posting and transfer status updates are implemented.
 | Document                   | OrderNumber |Y||
 | Code                        | SKU           |Y||
 | Qty                         | Qty  |Y||
+| ToLocation                  | Location  |Y||
+| Batch                       | BatchSN  |N||
+| Serial                      | BatchSN  |N||
+| ExpirationDate              | ExpiryDate|N||
+
+### POSTPACKANDSHIP
+
+- Granite Transaction: **POSTPACKANDSHIP**
+- CIN7: **Sale Fulfilment Pack and Ship**
+- Supports:
+    - Batch
+    - Serial
+    - Expiration Date
+- Behavior:
+    - Uses Granite `Document` to resolve CIN7 `TaskID` from Granite `ERPIdentification`.
+    - Posts pack lines to `sale/fulfilment/pack` with status `AUTHORISED`.
+    - Resolves carrying entities and maps carrying entity barcodes to CIN7 `Box`.
+    - Posts shipment lines to `sale/fulfilment/ship` using system setting `Carrier`.
+    - Uses a default box barcode of `1` when no carrying-entity barcodes are found.
+- Integration Post
+    - False - Posts shipment with status `DRAFT`.
+    - True - Posts shipment with status `AUTHORISED`.
+- Returns:
+    Sale Task ID
+
+| Granite    | CIN7 Entity | Required | Behavior |
+|------------|-------------|----------|-----------|
+| Document                   | TaskID (via ERPIdentification) |Y||
+| Code                        | SKU / ProductID           |Y||
+| Qty                         | Quantity  |Y||
 | ToLocation                  | Location  |Y||
 | Batch                       | BatchSN  |N||
 | Serial                      | BatchSN  |N||
@@ -404,9 +431,11 @@ SELECT * FROM @Output
     - Requires a single finished goods item per document.
     - Validates batch/serial and expiry against existing CIN7 finished goods data.
     - Updates CIN7 finished goods quantity to Granite quantity.
+    - When posting with integration post enabled, follows the quantity update by posting `finishedGoods/pick` with status `COMPLETED` and a completion datetime.
+    - On API errors, attempts to deserialize and surface CIN7 error details in the returned exception message.
 - Integration Post
     - False - Updates quantity only.
-    - True - Updates quantity and sets `CompletionDate` to the current UTC datetime (completes the finished good in CIN7).
+    - True - Updates quantity, then posts a follow-up completed finished-goods pick update.
 - Returns:
     Finished Goods Task ID
 
