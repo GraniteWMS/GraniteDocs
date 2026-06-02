@@ -71,6 +71,8 @@ The script to insert the default settings is also located in the GraniteDatabase
 | IntegrationSage200 | EvoTransactionCodeTransfer              | WHT        |                                                       |
 | IntegrationSage200 | EvoManufactureActive                    | false      |                                                       |
 | IntegrationSage200 | EvoManufactureCodes                     | 2          | List of comma separated codes                         |
+| IntegrationSage200 | EvoBatchInNotes                         | false      |                          |
+
 
 
 !!! note 
@@ -497,6 +499,7 @@ Transactions are grouped by Code, Batch, ExpiryDate, Serial, FromLocation, ToLoc
 |-----------------|--------------------------------|----------|---------------------|
 | ActionQty       | Detail.ToProcess               | Y        ||
 | Batch           | Detail.Lot.Code                | N        | Only applies if InventoryItem is Lot tracked in Evo, and Lot is not specified on the line in Evo |
+| Batch           | Detail.Note                    | N        | Only applies if setting EvoBatchInNotes is true. Adds to comma separated list of unique batches |
 | ExpiryDate      | Detail.Lot.Code                | N        | Only applies if InventoryItem Lots are set to expire in Evo |
 | SerialNumber    | Detail.SerialNumbers           | N        | Only applies if InventoryItem is Serial tracked in Evo |
 | Comment         | PurchaseOrder.ExternalOrderNo  | N        ||
