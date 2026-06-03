@@ -252,6 +252,145 @@ It is not mapped to any specific Granite transaction type. If you have a require
 | Serial                     | LotSerialNbr|N||
 | ExpirationDate              | ExpiryDate|N||
 
+### PACK
+
+PACK appends package information to an existing [Acumatica Shipment](./acumatica-overview.md#shipments). 
+
+- Granite Transaction: **PACK**
+- Acumatica: **Shipment (Packages)**
+- Shipment lookup and validation:
+    - Uses `TransactionDocumentReference` as the `ShipmentNbr`.
+    - Requires exactly one shipment number across the provided transactions.
+    - Fails if multiple shipment numbers are found, no shipment number is provided, or the shipment is not found in Acumatica.
+- Package source:
+    - Reads carrying entity data for the provided Granite transaction IDs from `CarryingEntity` (joined via `Transaction.ToContainableEntity_id`).
+    - Appends one package per carrying entity to the shipment `Packages` collection and updates the shipment.
+- Integration Post
+    - The `post` flag is accepted but currently not used; behavior is the same for `True` and `False`.
+- Returns:
+    Shipment Number
+
+| Granite    | Acumatica Entity | Required | Behavior |
+|------------|------------------|----------|-----------|
+| Document (`TransactionDocumentReference`) | ShipmentNbr |Y| All transactions must reference a single shipment number |
+| CarryingEntity type (`MasterItem.Code`)   | BoxID       |N| Mapped to package box code/type |
+| CarryingEntity Barcode                     | Description |N| Mapped to package description |
+| CarryingEntity Weight                      | Weight      |N||
+| CarryingEntity Height                      | Height      |N||
+| CarryingEntity Length                      | Length      |N||
+| CarryingEntity Width                       | Width       |N||
+
+You need a separate view for the pack transactions that changes the integration type from pack to something else. 
+You will also need to call integration through clr on a custom process. 
+In the examples below the process name is PACKINGPOST. The ShipmentNbr that needs to be in the TransactionDocumentReference is the integration reference that is returned from Pick post. 
+
+```sql
+CREATE VIEW [dbo].[Integration_Transactions_PACKINGPOST]
+AS
+SELECT * FROM 
+(SELECT DISTINCT 
+    dbo.[Transaction].ID, dbo.[Transaction].Date, dbo.Users.Name AS [User], dbo.[Transaction].IntegrationStatus, dbo.[Transaction].IntegrationReady, dbo.MasterItem.Code, ISNULL(dbo.[Transaction].UOM, dbo.MasterItem.UOM) 
+    AS UOM, dbo.[Transaction].UOMConversion, dbo.[Transaction].FromQty, dbo.[Transaction].ToQty, dbo.[Transaction].ActionQty, dbo.Location.ERPLocation AS FromLocationERPLocation, 
+    Location_1.ERPLocation AS ToLocationERPLocation, dbo.[Document].Number AS [Document], dbo.DocumentDetail.LineNumber, MasterItem_1.Code AS FromCode, MasterItem_2.Code AS ToCode, dbo.TrackingEntity.Batch, 
+    dbo.[Transaction].Comment, 
+    CASE 
+    WHEN (dbo.[Transaction].Type = 'PACK')
+    THEN 'CUSTOMPACK'
+    ELSE dbo.[Transaction].Type
+    END AS Type, 
+    dbo.[Transaction].Process, dbo.TrackingEntity.SerialNumber, dbo.[Document].Type AS DocumentType, dbo.[Transaction].IntegrationReference, 
+    dbo.[Document].Description AS DocumentDescription, dbo.TrackingEntity.ExpiryDate, [log].Message, dbo.DocumentDetail.Cancelled AS DocumentLineCancelled, Location_1.Site AS ToSite, dbo.Location.Site AS FromSite, 
+    Process.Name,
+    CASE 
+    WHEN dbo.[Transaction].Process ='PACKING' AND dbo.Process.IntegrationIsActive = 0  THEN 
+    (SELECT IntegrationIsActive FROM dbo.Process WHERE [Name] = 'PACKINGPOST')
+    ELSE dbo.Process.IntegrationIsActive END
+    as IntegrationIsActive, 
+    dbo.[Document].TradingPartnerCode AS DocumentTradingPartnerCode, dbo.[Transaction].DocumentReference AS TransactionDocumentReference, dbo.[Transaction].ReversalTransaction_id
+FROM    dbo.[Transaction] INNER JOIN
+        dbo.TrackingEntity ON dbo.[Transaction].TrackingEntity_id = dbo.TrackingEntity.ID INNER JOIN
+        dbo.MasterItem ON dbo.TrackingEntity.MasterItem_id = dbo.MasterItem.ID INNER JOIN
+        dbo.Users ON dbo.[Transaction].User_id = dbo.Users.ID LEFT OUTER JOIN
+        dbo.Process ON dbo.[Transaction].Process = dbo.Process.Name LEFT OUTER JOIN
+        dbo.Location AS Location_1 ON dbo.[Transaction].ToLocation_id = Location_1.ID LEFT OUTER JOIN
+        dbo.Location ON dbo.[Transaction].FromLocation_id = dbo.Location.ID LEFT OUTER JOIN
+        dbo.[Document] ON dbo.[Transaction].Document_id = dbo.[Document].ID LEFT OUTER JOIN
+        dbo.MasterItem AS MasterItem_1 ON dbo.[Transaction].FromMasterItem_id = MasterItem_1.ID LEFT OUTER JOIN
+        dbo.MasterItem AS MasterItem_2 ON dbo.[Transaction].ToMasterItem_id = MasterItem_2.ID LEFT OUTER JOIN
+        dbo.DocumentDetail ON dbo.[Transaction].DocumentLine_id = dbo.DocumentDetail.ID OUTER APPLY
+        (
+            SELECT TOP(1) [Message]
+            FROM dbo.IntegrationLog
+            WHERE GraniteTransaction_id = [Transaction].ID
+            ORDER BY [Date] DESC
+        ) [log]
+WHERE       dbo.[Transaction].Type = 'PACK' AND 
+            IntegrationStatus = 0 AND ISNULL(ReversalTransaction_id, 0) = 0
+) AS table_1
+WHERE table_1.IntegrationIsActive = 1
+GO
+```
+
+```sql
+CREATE PROCEDURE [dbo].PrescriptPackingPostDocument (
+   @input dbo.ScriptInputParameters READONLY 
+)
+AS
+DECLARE @Output TABLE(
+  Name varchar(max),  
+  Value varchar(max)  
+  )
+
+SET NOCOUNT ON;
+
+DECLARE @valid bit
+DECLARE @message varchar(MAX)
+DECLARE @stepInput varchar(MAX) 
+SELECT @stepInput = Value FROM @input WHERE Name = 'StepInput' 
+
+
+EXEC	[dbo].[clr_IntegrationPost]
+		@transactionID = null,
+		@document = @stepInput,
+		@documents = null,
+		@reference = null,
+		@transactionType = N'CUSTOMPACK', -- Can be anything, just must match the view above
+		@processName = N'PACKINGPOST',
+		@success = @valid OUTPUT,
+		@message = @message OUTPUT
+
+
+INSERT INTO @Output
+SELECT 'Message', @message
+INSERT INTO @Output
+SELECT 'Valid', @valid
+INSERT INTO @Output
+SELECT 'StepInput', @stepInput
+
+
+SELECT * FROM @Output
+
+```
+
+The Carrying entities that are sent to the shipment are fetched with the following query
+
+``` sql
+SELECT DISTINCT
+    CarryingEntity.Barcode,
+    MasterItem.Code AS BoxCode,
+    CarryingEntity.[Weight],
+    CarryingEntity.[Length],
+    CarryingEntity.[Width],
+    CarryingEntity.[Height]
+FROM CarryingEntity
+INNER JOIN [Transaction] T
+    ON CarryingEntity.ID = T.ToContainableEntity_id
+LEFT JOIN MasterItem
+    ON CarryingEntity.type_id = MasterItem.ID
+WHERE T.IntegrationStatus = 0
+    AND ISNULL(T.ReversalTransaction_id, 0) = 0
+    AND T.ID IN (); // The pack transaction ids are passed in here. 
+```
 ### RECEIVE
 
 - Granite Transaction: **RECEIVE**

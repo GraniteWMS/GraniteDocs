@@ -67,7 +67,11 @@ These documents are not updated with directly with received quantities, rather, 
 #### Purchase Receipts
 
 Purchase receipts are associated with a Purchase order and represent what was actually received against the Purchase Order. 
-You can have multiple Purchase Receipts per Purchase order. 
+You can have multiple Purchase Receipts per Purchase order or multiple Purchase orders on a single receipt. 
+
+These documents can also be brought into Granite as a purchase order with `LinkedDetail_id` on the lines allowing you to group the receiving of multiple purchase orders. See [Purchase Receipt Job](./integration-jobs.md#purchase-receipt-job)
+
+The purchase receipt also functions as a return to supplier when of type (RN). This can be brought into Granite as an ORDER with the Return to Supplier job and posted back to Acumatica with the [RTS method](./sdk-provider.md#returntosupplier).
 
 ![PurchaseReceipt](./acumatica-img/purchase-receipt.PNG)
 
@@ -111,8 +115,18 @@ There can only one open Shipment against per Sales order. Once a Shipment is Rel
 
 ![Shipments](./acumatica-img/shipment.PNG)
 
+Shipments can also include information on the packages shipped. These can be integrated from Granite using the [Pack method](./sdk-provider.md#pack)
+
+![](./acumatica-img/shipment-packages.png)
+
 #### Issues
 
 Inventory Issues are used to issue inventory from stock. Once issued it is removed from stock and no further record is kept for it. This is currently not associated with any Granite document or process but is an integration method that can be used. For details please see the Acumatica [SDK-Provider](sdk-provider.md)
 
 ![Issues](./acumatica-img/issue.PNG)
+
+## Physical Inventory Count
+
+This is the stock take in Acumatica and is generated from a Physical Inventory Count Type. A full inventory count will count all of the stock in a specific [Warehouse](#warehouses) (ERPLocation in Granite). This can be brought into Granite as a stock take session with [Stock Take Session Job](./integration-jobs.md#stock-take-session-job) and is posted back with the [Stock Take Method](./sdk-provider.md#stocktake)
+
+![](./acumatica-img/physical-inventory.png)

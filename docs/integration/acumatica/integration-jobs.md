@@ -16,7 +16,7 @@ See below for information for specifics on how document and master data jobs wor
 
     ---
 
-    Acumatica type: Purchase Order
+    Acumatica type: Purchase Order / Purchase Receipt 
 
  -   TRANSFER
 
@@ -58,6 +58,8 @@ If a change is made in the ERP system that would put Granite into an invalid sta
 
 #### Document Statuses
 
+<h5>Sales Order</h5>
+
 For Sales Orders the statuses are mapped in the following way:
 
 | Acumatica Status | Granite Status | 
@@ -67,6 +69,14 @@ For Sales Orders the statuses are mapped in the following way:
 | On Hold, Credit Hold, Risk Hold, Pending Approval, Pending Processing | ONHOLD |
 | Completed, Invoiced, Shipping | COMPLETE |
 
+Sales Order allocation behavior:
+
+- Sales order lines are fetched with `SOLineSplitCollection`.
+- A line is only pickable when all splits on that line have `IsAllocated = true`; if not, Granite line `Qty` is set to `0`.
+- If `ShipComplete = C` and not all sales order lines are fully allocated, Granite status is forced to `ONHOLD`.
+
+<h5>Purchase Order</h5>
+
 For Purchase Orders the statuses are mapped in the following way:
 
 | Acumatica Status | Granite Status | 
@@ -75,6 +85,14 @@ For Purchase Orders the statuses are mapped in the following way:
 | Canceled, Rejected | CANCELLED |
 | On hold, Pending Approval, Pending Email, Pending Printing | ONHOLD |
 | Completed, Closed | COMPLETED|
+
+For Purchase Receipts (`ReceiptType = RT` and `AttributeGRANITE = 1`) the statuses are mapped in the following way:
+
+| Acumatica Status | Granite Status |
+|------------------|----------------|
+| Hold = true | ONHOLD |
+| Hold = false and Released = false | ENTERED |
+| Released = true | COMPLETE |
 
 For Return to Supplier (RTS) the statuses are mapped in the following way:
 
@@ -92,6 +110,14 @@ For Transfers and Receipts the statuses are mapped in the following way:
 | On hold | ONHOLD |
 | Released | COMPLETED|
 
+#### Purchase Receipt job
+`PurchaseOrderReceiptJob` integrates Acumatica Purchase Receipts into Granite as a Purchase order with the lines linked back to the original Purchase Order line via the `LinkedDetail_id`.
+This allows the grouping of Purchase orders to be received using a single Receipt number if multiple purchase orders are going to be delivered in a single shipment. See the [Acumatica overview](./acumatica-overview.md#purchase-receipts) for more details
+
+The user defined attribute GRANITE must be added to the header of the document in order for it to be flagged to integrate into Granite. 
+
+![](./acumatica-img/granite-attribute.png) ![](./acumatica-img/sync-to-granite.png)
+
 ### Master data jobs
 MasterItems and TradingPartners have their own Jobs. These Jobs fetch all StockItems, Vendors, and Customers from  Acumatica and compares them to the MasterItems and TradingPartners in Granite. Any inserts / updates are done as required. 
 
@@ -100,44 +126,14 @@ The document jobs also sync changes to the MasterItems that are on the document.
 Document Jobs do not automatically sync trading partners as they are not required to create to the document in Granite and as such are only synced when the TradingPartner Job runs. 
 
 ### InSite Status job
-`InSiteStatusJob` synchronizes Acumatica site/item stock status data into Granite.
-
-On validation, the job signs on to Acumatica OData and logs a successful connection.
-
-On execution, the job:
-
-1. Calls Acumatica `INSiteStatus` via OData.
-2. Selects `QtyOnHand`, `QtyAvail`, `QtyPOOrders`, `QtyInTransit`, and `LastModifiedDateTime`.
-3. Expands:
-    - `InventoryItemByInventoryID` (`InventoryCD`, `NoteID`)
-    - `INSiteBySiteID` (`SiteCD`)
-4. Filters out records where site or inventory item is missing.
-5. Upserts data into `Integration_INSiteStatus` using (`InventoryCD`, `SiteCD`) as the key.
-6. Removes stale rows not returned by the latest run.
-
-If no data is returned from the endpoint, or no valid site status rows are found, the job throws an error. Errors are logged and rethrown.
+`InSiteStatusJob` synchronizes Acumatica site/item stock status data into Granite into the custom table [`Integration_INSiteStatus`](#insitestatus-database-objects). This is table can then be used for inventory variance. 
 
 ### Stock Take Session job
 `StockTakeSessionJob` seeds Granite `StockTakeSession` and `StockTakeLines` rows from new Acumatica **Physical Inventory Reviews** (PIRs).
+This job currently only support full warehouse stock take, meaning all items in the specific ERPLocation in Granite must be counted. 
+It does this by selecting every in-stock `TrackingEntity` (`InStock = 1`) whose `Location.ERPLocation` matches the session's `ERPLocation`, with each line defaulted to `Status = 'OUTSTANDING'`.
 
-On validation, the job signs on to Acumatica OData and logs a successful connection.
-
-On execution, the job:
-
-1. Calls Acumatica `PX_Objects_IN_INPIHeader` via OData with filter `Status eq 'N' and LastModifiedDateTime gt {now - 24 hours}`.
-2. Selects `PIID`, `PIClassID`, `Descr`, `Status`, `NoteID`, and `LastModifiedDateTime`.
-3. Expands:
-    - `INPIDetailCollection` (`LotSerialNbr`, `ExpireDate`, `PhysicalQty`, `BookQty`, `Status`, and the `InventoryItemByInventoryID` sub-expand)
-    - `INSiteBySiteID` (`SiteCD`)
-4. Filters out PIRs without an `INSiteBySiteID`.
-5. Skips PIRs that already have a matching `StockTakeSession` (matched by `StockTakeSession.Name = PIID`).
-6. For each remaining PIR, inserts a new `StockTakeSession` with:
-    - `Name = PIID`
-    - `Active = true`
-    - `Site = ""`
-    - `AuditUser = "Integration"`
-    - `ERPLocation = INSiteBySiteID.SiteCD`
-7. Populates `StockTakeLines` for the new session by selecting every in-stock `TrackingEntity` (`InStock = 1`) whose `Location.ERPLocation` matches the session's `ERPLocation`, with each line defaulted to `Status = 'OUTSTANDING'`.
+![](./acumatica-img/stock-take-session.png)
 
 !!! note
     Unlike the document jobs, the Stock Take Session job does not use `IntegrationDocumentQueue`. The lookback is a fixed 24 hours from `DateTime.Now` on every run.
@@ -160,6 +156,10 @@ WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobNam
 INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
 SELECT 0, 'Acumatica Purchase Order Job', 'Syncs PurchaseOrders from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.PurchaseOrder', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Purchase Order Job');
+
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'Acumatica Purchase Receipt Job', 'Syncs PurchaseReceipts from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.PurchaseOrderReceipt', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Purchase Receipt Job');
 
 INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
 SELECT 0, 'Acumatica Receipt Job', 'Syncs Receipts from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.Receipt', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
@@ -223,6 +223,10 @@ SELECT 'Acumatica', 'AcumaticaPurchaseOrderPrefix', '', 'Acumatica purchase orde
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaPurchaseOrderPrefix');
 
 INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'AcumaticaPurchaseOrderReceiptPrefix', '', 'Acumatica purchase order receipt prefix', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaPurchaseOrderReceiptPrefix');
+
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
 SELECT 'Acumatica', 'AcumaticaTransferOrderPrefix', '', 'Acumatica transfer order prefix', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaTransferOrderPrefix');
 
@@ -278,53 +282,57 @@ GO
 
 #### SystemSettings
 
-##### Base URL
+<h5>Base URL</h5>
 
 The base url can be found in IIS if hosted locally or provided by the customer if hosted in the cloud.
 
 ![ApplicationName](./acumatica-img/ApplicationName.PNG)
 ![SystemSettings](./acumatica-img/system-settings.PNG)
 
-##### UserID
+<h5>UserID</h5>
 
 The Acumatica user name that will be used for authentication with the OData endpoint.
 
-##### Password
+<h5>Password</h5>
 
 The Acumatica user password that will be used for authentication with the OData endpoint.
 
 !!! note 
       You need to set the password from inside the Webdesktop if you are going to encrypt the password. 
 
-##### Tenant
+<h5>Tenant</h5>
 
 The Acumatica tenant identifier (if applicable for multi-tenant deployments).
 
-##### Branch
+<h5>Branch</h5>
 
 The Acumatica branch code to use for document and master data synchronization.
 
-##### AcumaticaSalesOrderPrefix
+<h5>AcumaticaSalesOrderPrefix</h5>
 
 The prefix used to identify Acumatica sales orders during synchronization. This helps distinguish orders from different source systems.
 
-##### AcumaticaPurchaseOrderPrefix
+<h5>AcumaticaPurchaseOrderPrefix</h5>
 
 The prefix used to identify Acumatica purchase orders during synchronization.
 
-##### AcumaticaTransferOrderPrefix
+<h5>AcumaticaPurchaseOrderReceiptPrefix</h5>
+
+The prefix used to identify Acumatica purchase receipts during synchronization.
+
+<h5>AcumaticaTransferOrderPrefix</h5>
 
 The prefix used to identify Acumatica transfer orders (1-Step transfers) during synchronization.
 
-##### AcumaticaTransferReceiptPrefix
+<h5>AcumaticaTransferReceiptPrefix</h5>
 
 The prefix used to identify Acumatica transfer receipts during synchronization.
 
-##### AcumaticaReturnToSupplierPrefix
+<h5>AcumaticaReturnToSupplierPrefix</h5>
 
 The prefix used to identify Acumatica Return-to-Supplier documents during synchronization.
 
-##### AcumaticaIntansitLocation
+<h5>AcumaticaIntansitLocation</h5>
 
 Acumatica does not specify a intransit location on its 2-step transfers so it needs to be specified in this system setting. This is the ERP location for the location used in Intransit documents. 
 
@@ -334,11 +342,11 @@ Acumatica does not specify a intransit location on its 2-step transfers so it ne
 
 ## Configure
 
-### Schedule configuration
+<h5>Schedule configuration</h5>
 See the GraniteScheduler manual for the details on how to [configure injected jobs](../../scheduler/manual.md#injected-jobs-integration-jobs).
 Most of the work will have already been done for you by the `AcumaticaIntegrationJobs_Create.sql` script, you can simply activate the jobs you want to run.
 
-### Email on Error
+<h5>Email on Error</h5>
 
 !!! note 
     Emailing functionality is now handled by the [Custodian API](../../custodian-api/index.md), set up has changed from previous versions.
