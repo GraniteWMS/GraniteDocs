@@ -53,6 +53,8 @@ Outstanding transaction types:
 
 ### STOCKTAKE
 
+An important thing to note about this process is that it will set the total qty of the stock in the specific warehouse for the items being counted (see [Stocktake](./cin7-overview.md#stocktakeadjustment)). As such, all of the tracking entities for the given Masteritem in the ERPLocation should be counted so that the total count of that item is submitted on post.
+
 - Granite Transaction: **STOCKTAKE**
 - CIN7: **STOCK ADJUSTMENT**
 - Supports:
