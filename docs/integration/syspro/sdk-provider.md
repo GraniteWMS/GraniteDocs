@@ -149,12 +149,35 @@ INVTMADOC Items mapping:
 |---------------|---------------|
 | ToLocation    | Warehouse     |
 | Code          | StockCode     |
-| ActionQty     | Quantity      |
+| ToQty - FromQty | Quantity    |
 | Batch         | Lot           |
 | UOM           | UnitOfMeasure |
 
 ### RECLASSIFY
-- Not implemented/supported
+- INVTMA. Inventory Adjustments
+
+INVMA Parameters:
+
+| Parameter Name                | Value         |
+|-------------------------------|---------------|
+| TransactionDate               | DateTime.Now  |
+| PhysicalCount                 | N             |
+| PostingPeriod                 | C             |
+| IgnoreAnalysis                | Y             |
+| IgnoreWarnings                | N             |
+| ApplyIfEntireDocumentValid    | Y             |
+| ValidateOnly                  | N             |
+
+INVTMADOC Items mapping:
+
+| Granite       | Syspro        | Behaviour |
+|---------------|---------------|-----------|
+| FromCode      | StockCode     | Posted as a negative adjustment (`-ActionQty`) |
+| ToCode        | StockCode     | Posted as a positive adjustment (`ActionQty`) |
+| Batch         | Lot           |           |
+| UOM           | UnitOfMeasure |           |
+| FromLocation  | Warehouse     | Used for the `FromCode` line |
+| ToLocation    | Warehouse     | Used for the `ToCode` line |
 
 ### REPLENISH
 - INVTMO. Inventory Warehouse Transfer
@@ -318,13 +341,17 @@ INVMA Parameters:
 
 INVTMADOC Items mapping:
 
-| Granite       | Syspro                | 
-|---------------|-----------------------|
-| Code          | StockCode             |
-| ActionQty     | Quantity              |
-| Batch         | Lot                   |
-| UOM           | UnitOfMeasure         |
-| ToLocation    | Warehouse             |
+| Granite       | Syspro                | Behaviour |
+|---------------|-----------------------|-----------|
+| Code          | StockCode             |           |
+| ActionQty     | Quantity              | Posted as a negative adjustment (`-ActionQty`) |
+| Batch         | Lot                   |           |
+| UOM           | UnitOfMeasure         |           |
+| ToLocation    | Warehouse             |           |
+Notes:
+- `SCRAP` is posted via the dedicated `InventoryControl.Scrap` flow.
+- When `MultipleBins=true`, warehouse is currently hardcoded to `KG` and `ToLocation` maps to `BinLocation`.
+
 
 ### PICK
 Based on setting SalesOrderPosting (SORTBO/SORTOS/ALL)
