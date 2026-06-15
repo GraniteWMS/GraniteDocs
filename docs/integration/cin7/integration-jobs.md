@@ -128,6 +128,8 @@ GO
 - `BaseUrl` - CIN7 API base URL. This is set by default to https://inventory.dearsystems.com/ExternalApi/v2/
 - `api-auth-accountid` - CIN7 API Account ID.
 - `api-auth-applicationkey` - CIN7 API Application Key (encrypted).
+- `SalesOrderLookbackMinutes` - Number of minutes to look back before the last integration time when fetching sales orders (default 0). Prevents missing orders created during the job run.
+- `PurchaseOrderLookbackMinutes` - Number of minutes to look back before the last integration time when fetching purchase orders (default 0). Prevents missing orders created during the job run.
 
 ![SystemSettings](./cin7-img/system-settings.png)
 
@@ -225,7 +227,7 @@ These view are there to negate the issue with the CIN7 API that only allows fetc
 
 View-derived rows are inserted into `IntegrationDocumentQueue` only when the same `ERP_id` is not already queued.
 
-When a record with Status 'ENTERED' is found, the job uses a CIN7 REST API request to fetch the information related to that document from CIN7 and apply the changes to the Granite document.
+When a record with Status 'ENTERED' is found, the job uses a CIN7 REST API request to fetch the information related to that document from CIN7 and apply the changes to the Granite document. Documents are fetched individually per record to ensure the current ERP state is retrieved and to avoid mismatches when ERP IDs differ.
 
 All valid changes to data in the Granite tables are logged to the Audit table, showing the previous value and the new value.
 
@@ -234,13 +236,16 @@ If a change is made in the ERP system that would put Granite into an invalid sta
 <h4>Sales Order (ORDER)</h4>
 
 - Fetches CIN7 Sales that have been updated since the last integration time
+- Applies `SalesOrderLookbackMinutes` system setting to look back before the last integration time, preventing missed orders created during the job run
 - Maps to Granite document type ORDER
 - Can filter by ManagedLocations and SalesRepresentatives in configuration
+- When ManagedLocations are configured, the repository builds per-location API endpoints with pagination to fetch orders only for those locations
 - Uses FromLocation for document lines
 
 <h4>Purchase Order (RECEIVING)</h4>
 
 - Fetches CIN7 Advanced Purchases that have been updated since the last integration time
+- Applies `PurchaseOrderLookbackMinutes` system setting to look back before the last integration time, preventing missed orders created during the job run
 - Maps to Granite document type RECEIVING
 - Can filter by ManagedLocations in configuration
 - Uses ToLocation for document lines
