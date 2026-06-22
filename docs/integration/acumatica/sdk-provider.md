@@ -33,7 +33,9 @@ This setting allows you to have multiple integration services running with diffe
 - `Tenant` - Acumatica tenant. Default: empty.
 - `Branch` - Acumatica branch. Default: empty.
 - `DefaultLocation` - Acumatica default inventory location. Default: empty.
+- `ReceiveToBin` - When `true`, RECEIVE allocations use `ToSite` as the bin location instead of `DefaultLocation`. Default: `false`.
 - `AcumaticaSalesOrderPrefix` - Acumatica sales order prefix. Default: empty.
+- `AcumaticaCustomerReturnPrefix` - Acumatica customer return prefix. Default: empty.
 - `AcumaticaPurchaseOrderPrefix` - Acumatica purchase order prefix. Default: empty.
 - `AcumaticaTransferOrderPrefix` - Acumatica transfer order prefix. Default: empty.
 - `AcumaticaTransferReceiptPrefix` - Acumatica transfer receipt prefix. Default: empty.
@@ -129,6 +131,8 @@ To prevent them being brought into Granite as transfers the external reference i
 - Integration Post
     - False - Creates a 1-Step Transfer in Acumatica with status Balanced. 
     - True - Changes the status of the transfer from Balanced to Released
+- Allocation behavior
+    - Transfer allocations are created per source location/bin from each transaction line.
 - Returns:
     TransferNumber
 
@@ -138,6 +142,36 @@ To prevent them being brought into Granite as transfers the external reference i
 | Qty                         | Qty  |Y||
 | FromLocation                | WarehouseID  |Y||
 | ToLocation                  | ToWarehouseID  |Y||
+| UOM                         | UOM |Y||
+| Batch                       | LotSerialNbr  |N||
+| Serial                      | LotSerialNbr  |N||
+| ExpirationDate              | ExpiryDate|N||
+
+### BINTRANSFER
+
+- Granite Transaction: **BINTRANSFER**
+- Acumatica: **TransferOrder**
+- Supports:
+    - Serial
+    - Lot
+- Validation and mapping behavior:
+    - Requires a single `FromLocation` and `ToLocation` across the posted transactions.
+    - Uses transaction `FromSite`/`ToSite` as transfer line bin locations (`FromLocationID`/`ToLocationID`).
+    - Fails if any transaction has an empty `FromSite` or `ToSite`.
+- Integration Post
+    - False - Creates a 1-Step Transfer in Acumatica with status Balanced.
+    - True - Changes the status of the transfer from Balanced to Released.
+- Returns:
+    Transfer Number
+
+| Granite    | Acumatica Entity | Required | Behavior |
+|------------|------------------|----------|-----------|
+| Code                        | InventoryID           |Y||
+| Qty                         | Qty  |Y||
+| FromLocation                | WarehouseID  |Y| Single warehouse per post |
+| ToLocation                  | ToWarehouseID  |Y| Single warehouse per post |
+| FromSite                    | FromLocationID |Y| Source bin on transfer line |
+| ToSite                      | ToLocationID |Y| Destination bin on transfer line |
 | UOM                         | UOM |Y||
 | Batch                       | LotSerialNbr  |N||
 | Serial                      | LotSerialNbr  |N||
@@ -233,6 +267,11 @@ It is not mapped to any specific Granite transaction type. If you have a require
 - Supports:
     - Lot
     - Serial
+- Validation and mapping behavior:
+    - Requires a single document number, trading partner code, and warehouse across the posted transactions.
+    - Uses Acumatica Sales Order `OrderType` for the shipment lines (defaults to `SO` if not found).
+    - Non-kit transactions are summarized per line before shipment details are created.
+    - Supports kit-component line numbers (`ParentLine-ComponentLine`) and posts kit shipment details using Acumatica kit specifications.
 
 - Integration Post
     - False - Creates a new Shipment with status Open
@@ -251,6 +290,35 @@ It is not mapped to any specific Granite transaction type. If you have a require
 | Lot                        | LotSerialNbr|N||
 | Serial                     | LotSerialNbr|N||
 | ExpirationDate              | ExpiryDate|N||
+
+### CUSTOMERRETURN
+
+- Granite Transaction: **NONE** (`Process.IntegrationMethod = CUSTOMERRETURN`)
+- Acumatica: **CREATE SHIPMENT (Operation = Receipt)**
+- Supports:
+    - Lot
+    - Serial
+- Validation and mapping behavior:
+    - Requires a single document number, trading partner code, and warehouse across the posted transactions.
+    - Uses `AcumaticaCustomerReturnPrefix` to resolve the Acumatica order number.
+    - Uses Acumatica Sales Order `OrderType` for shipment lines (defaults to `RC` if not found).
+    - Supports kit-component line numbers (`ParentLine-ComponentLine`) and posts kit shipment details using Acumatica kit specifications.
+- Integration Post
+    - False - Creates a new return shipment with status Open
+    - True - Creates a new return shipment and performs the Confirm Shipment action
+- Returns:
+    Shipment Number
+
+| Granite    | Acumatica Entity | Required | Behavior |
+|------------|------------------|----------|-----------|
+| Document                   | OrderNumber |Y||  
+| LineNumber                 |             |Y||
+| Qty                        | ShippedQty  |Y||
+| DocumentTradingPartnerCode | CustomerID  |Y||
+| FromLocation               | WarehouseID |Y||
+| Lot                        | LotSerialNbr|N||
+| Serial                     | LotSerialNbr|N||
+| ExpirationDate             | ExpiryDate|N||
 
 ### PACK
 
@@ -398,6 +466,9 @@ WHERE T.IntegrationStatus = 0
 - Supports:
     - Lot
     - Serial
+- Allocation location behavior:
+    - Default: allocation `Location` uses `DefaultLocation`.
+    - If `ReceiveToBin = true`, allocation `Location` uses transaction `ToSite` (and `ToSite` is required).
 
 - Integration Post
     - False - Creates a new Purchase Order Receipt with `On Hold` status (`Hold = true`)
@@ -411,7 +482,8 @@ WHERE T.IntegrationStatus = 0
 | LineNumber                 |               |Y||
 | Qty                        | ReceiptQty    |Y||
 | DocumentTradingPartnerCode | VendorID      |Y||
-| TLocation                  | WarehouseID   |Y||
+| ToLocation                 | WarehouseID   |Y||
+| ToSite                     | Allocation Location |N| Used when `ReceiveToBin = true` |
 | Batch                      | LotSerialNbr  |N||
 | Serial                     | LotSerialNbr  |N||
 | ExpirationDate              | ExpiryDate|N||

@@ -18,6 +18,12 @@ See below for information for specifics on how document and master data jobs wor
 
     Acumatica type: Purchase Order / Purchase Receipt 
 
+ -   CUSTOMER_RETURN
+
+    ---
+
+    Acumatica type: Sales Order (configured return types, mapped to Granite `RECEIVING`)
+
  -   TRANSFER
 
     ---
@@ -69,11 +75,16 @@ For Sales Orders the statuses are mapped in the following way:
 | On Hold, Credit Hold, Risk Hold, Pending Approval, Pending Processing | ONHOLD |
 | Completed, Invoiced, Shipping | COMPLETE |
 
-Sales Order allocation behavior:
+<h5>Customer Return</h5>
 
-- Sales order lines are fetched with `SOLineSplitCollection`.
-- A line is only pickable when all splits on that line have `IsAllocated = true`; if not, Granite line `Qty` is set to `0`.
-- If `ShipComplete = C` and not all sales order lines are fully allocated, Granite status is forced to `ONHOLD`.
+For Customer Return orders (Sales Orders filtered by `AcumaticaCustomerReturnTypes`) the statuses are mapped in the following way:
+
+| Acumatica Status | Granite Status |
+|------------------|----------------|
+| Back Order, Open | ENTERED |
+| Expired, Canceled, Rejected | CANCELLED |
+| On Hold, Credit Hold, Risk Hold, Pending Approval, Pending Processing | ONHOLD |
+| Completed, Invoiced, Shipping | COMPLETE |
 
 <h5>Purchase Order</h5>
 
@@ -118,10 +129,34 @@ The user defined attribute GRANITE must be added to the header of the document i
 
 ![](./acumatica-img/granite-attribute.png) ![](./acumatica-img/sync-to-granite.png)
 
+#### Order Types Filtering
+
+Order-type filtering behavior:
+
+- `SalesOrderJob`:
+    - If `AcumaticaSalesOrderTypes` is set (comma-delimited), only those Sales Order `OrderType` values are integrated as Granite `ORDER`.
+    - If `AcumaticaSalesOrderTypes` is empty, all updated Sales Orders are considered.
+- `CustomerReturnJob`:
+    - Uses `AcumaticaCustomerReturnTypes` (comma-delimited, default `RC`) to decide which Sales Orders are integrated as customer returns.
+    - Integrated customer returns are written to Granite as `RECEIVING` documents.
+
+#### Sales Order Allocation 
+
+Sales Order allocation behavior:
+
+- Sales order lines are fetched with `SOLineSplitCollection`.
+- If `SOLineSplitCollection` is missing for a line, that line is skipped.
+- A line is pickable when any split on that line has `IsAllocated = true`.
+- Granite line `Qty` is calculated as the sum of allocated split quantities; if not pickable, Granite line `Qty` is set to `0`.
+- For kit parent lines, Granite sets `Qty = 0` and `Completed = true` so components are picked instead, and writes a `Comment` with the number of kits.
+- Component line quantities for kits are calculated from the computed parent quantity (allocated split qty sum).
+- Sales order detail `Comment` is synchronized from Acumatica for supported updates (for example, kit count comments).
+- If `ShipComplete = C` and not all sales order lines are fully allocated, Granite status is forced to `ONHOLD`.
+
+
 ### Master data jobs
 MasterItems and TradingPartners have their own Jobs. These Jobs fetch all StockItems, Vendors, and Customers from  Acumatica and compares them to the MasterItems and TradingPartners in Granite. Any inserts / updates are done as required. 
-
-The document jobs also sync changes to the MasterItems that are on the document. This means that on sites that do not make many changes to their MasterItems it is better to limit running this job to once a day or even less frequently. 
+Before processing queued documents, document jobs also sync all updated MasterItems from Acumatica (based on the latest posted document integration time), and then upsert MasterItems referenced on each document. This means that on sites that do not make many changes to their MasterItems it is better to limit running this job to once a day or even less frequently. 
 
 Document Jobs do not automatically sync trading partners as they are not required to create to the document in Granite and as such are only synced when the TradingPartner Job runs. 
 
@@ -158,15 +193,19 @@ SELECT 0, 'Acumatica Purchase Order Job', 'Syncs PurchaseOrders from Acumatica',
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Purchase Order Job');
 
 INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
-SELECT 0, 'Acumatica Purchase Receipt Job', 'Syncs PurchaseReceipts from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.PurchaseOrderReceipt', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
-WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Purchase Receipt Job');
+SELECT 0, 'Acumatica Purchase Order Receipt Job', 'Syncs PurchaseOrderReceipts from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.PurchaseOrderReceipt', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Purchase Order Receipt Job');
 
 INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
 SELECT 0, 'Acumatica Receipt Job', 'Syncs Receipts from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.Receipt', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Receipt Job');
 
 INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
-SELECT 0, 'Acumatica Return To Supplier Job', 'Syncs Return-to-Supplier documents from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.ReturnsToSupplier', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+SELECT 0, 'Acumatica Customer Return Job', 'Syncs Customer Returns from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.CustomerReturn', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Customer Return Job');
+
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'Acumatica Return To Supplier Job', 'Syncs Returns To Supplier from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.ReturnsToSupplier', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Return To Supplier Job');
 
 INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
@@ -186,8 +225,8 @@ SELECT 0, 'Acumatica InSite Status Job', 'Syncs InSite Stock on Hand from Acumat
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica InSite Status Job');
 
 INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
-SELECT 0, 'Acumatica StockTake Session Job', 'Syncs Physical Inventory Reviews from Acumatica into Granite StockTake sessions', 'INJECTED', 'Granite.Integration.Acumatica.Job.StockTake', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
-WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica StockTake Session Job');
+SELECT 0, 'Acumatica Stock Take Session Job', 'Syncs Stock Take Sessions from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.StockTakeSession', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Stock Take Session Job');
 
 -- Insert Acumatica System Settings
 INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
@@ -223,6 +262,10 @@ SELECT 'Acumatica', 'AcumaticaSalesOrderPrefix', '', 'Acumatica sales order pref
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaSalesOrderPrefix');
 
 INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'AcumaticaCustomerReturnPrefix', '', 'Acumatica customer return prefix', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaCustomerReturnPrefix');
+
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
 SELECT 'Acumatica', 'AcumaticaPurchaseOrderPrefix', '', 'Acumatica purchase order prefix', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaPurchaseOrderPrefix');
 
@@ -241,6 +284,14 @@ WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Appl
 INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
 SELECT 'Acumatica', 'AcumaticaReturnToSupplierPrefix', '', 'Acumatica return to supplier prefix', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaReturnToSupplierPrefix');
+
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'AcumaticaSalesOrderTypes', '', 'Acumatica Sales order types to bring in as orders to pick with sales order job. Comma deliminated.', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaSalesOrderTypes');
+
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'AcumaticaCustomerReturnTypes', 'RC', 'Acumatica Sales order types to bring in as customer returns (RECEIVING Document). Comma deliminated.', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaCustomerReturnTypes');
 
 ```
 
@@ -317,6 +368,10 @@ The Acumatica branch code to use for document and master data synchronization.
 
 The prefix used to identify Acumatica sales orders during synchronization. This helps distinguish orders from different source systems.
 
+<h5>AcumaticaCustomerReturnPrefix</h5>
+
+The prefix used to identify Acumatica customer return orders (for configured return order types such as `RC`) during synchronization.
+
 <h5>AcumaticaPurchaseOrderPrefix</h5>
 
 The prefix used to identify Acumatica purchase orders during synchronization.
@@ -337,7 +392,15 @@ The prefix used to identify Acumatica transfer receipts during synchronization.
 
 The prefix used to identify Acumatica Return-to-Supplier documents during synchronization.
 
-<h5>AcumaticaIntansitLocation</h5>
+<h5>AcumaticaSalesOrderTypes</h5>
+
+Optional comma-delimited list of Acumatica Sales Order `OrderType` values to integrate as Granite `ORDER` documents. If empty, all order types are considered.
+
+<h5>AcumaticaCustomerReturnTypes</h5>
+
+Comma-delimited list of Acumatica Sales Order `OrderType` values to integrate as customer returns (Granite `RECEIVING`). Default: `RC`.
+
+<h5>AcumaticaIntransitLocation</h5>
 
 Acumatica does not specify a intransit location on its 2-step transfers so it needs to be specified in this system setting. This is the ERP location for the location used in Intransit documents. 
 
