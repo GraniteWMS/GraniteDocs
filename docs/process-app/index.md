@@ -93,6 +93,9 @@ You can define multiple mappings for a single function if more than one step nee
 
 ### Business Rules
 
+Business rules are passed in the `BusinessRules` dictionary on transaction requests to adjust default behavior. Rule names are case-sensitive and values are strings (typically `YES`/`NO` or a number).
+
+
 #### Packing
 
 **ValidateAgainstDocumentQty**
@@ -109,13 +112,24 @@ You can define multiple mappings for a single function if more than one step nee
 **SerialValidationOverride**
 - When SerialValidationOverride's value is 'YES', the Business API will not validate the picked serial number against the document lines
 
+**ActionQtyAllowance**
+- When set to a value above 0, allows the user to pick the specified percentage more than the document requires
+
 #### Transfer
 
 **ActionQtyAllowance**
 - When set to a value above 0, allows the user to transfer the specified percentage more than the document requires
 
 **AlwaysSplitTrackingEntity**
-- When set to "yes", will always split the qty transferred to a new tracking entity, leaving the original tracking entity in place.
+- When set to "YES", will always split the qty transferred to a new tracking entity, leaving the original tracking entity in place.
+
+**OnHoldOverride**
+- When OnHoldOverride's value is 'YES', users will be allowed to transfer stock that is on hold
+
+#### Transfer Dynamic
+
+**OnHoldOverride**
+- When OnHoldOverride's value is 'YES', users will be allowed to transfer stock that is on hold
 
 #### Receive
 
@@ -139,3 +153,8 @@ You can define multiple mappings for a single function if more than one step nee
 
 **PreventInStockCorrection**
 - Prevent not in stock tracking entities from being placed back into stock
+
+#### Pick Reversal
+
+**ReversePackTransactions**
+- When ReversePackTransactions' value is 'YES', any pack transactions on the line being reversed will be reversed before the picking transactions.
