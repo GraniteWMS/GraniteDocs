@@ -98,63 +98,78 @@ Business rules are passed in the `BusinessRules` dictionary on transaction reque
 
 #### Packing
 
-**ValidateAgainstDocumentQty**
-- When set to 'YES', validates the PackedQty against the Qty field instead of ActionQty, allowing for packing without picking.
+- **ValidateAgainstDocumentQty** 
+    
+    When set to 'YES', validates the PackedQty against the Qty field instead of ActionQty, allowing for packing without picking.
 
 #### Picking
 
-**BestBeforeOverride**
-- When BestBeforeOverride's value is 'YES', users will be allowed to pick stock that is past the ExpiryDate
+- **BestBeforeOverride**
+    
+    When BestBeforeOverride's value is 'YES', users will be allowed to pick stock that is past the ExpiryDate
 
-**OnHoldOverride**
-- When OnHoldOverride's value is 'YES', users will be allowed to pick stock that is on hold
+- **OnHoldOverride**
+    
+    When OnHoldOverride's value is 'YES', users will be allowed to pick stock that is on hold
 
-**SerialValidationOverride**
-- When SerialValidationOverride's value is 'YES', the Business API will not validate the picked serial number against the document lines
+- **SerialValidationOverride**
+    
+    When SerialValidationOverride's value is 'YES', the Business API will not validate the picked serial number against the document lines
 
-**ActionQtyAllowance**
-- When set to a value above 0, allows the user to pick the specified percentage more than the document requires
+- **ActionQtyAllowance**
+    
+    When set to a value above 0, allows the user to pick the specified percentage more than the document requires
 
 #### Transfer
 
-**ActionQtyAllowance**
-- When set to a value above 0, allows the user to transfer the specified percentage more than the document requires
+- **ActionQtyAllowance**
+    
+    When set to a value above 0, allows the user to transfer the specified percentage more than the document requires
 
-**AlwaysSplitTrackingEntity**
-- When set to "YES", will always split the qty transferred to a new tracking entity, leaving the original tracking entity in place.
+- **AlwaysSplitTrackingEntity**
+    
+    When set to "YES", will always split the qty transferred to a new tracking entity, leaving the original tracking entity in place.
 
-**OnHoldOverride**
-- When OnHoldOverride's value is 'YES', users will be allowed to transfer stock that is on hold
+- **OnHoldOverride**
+    
+    When OnHoldOverride's value is 'YES', users will be allowed to transfer stock that is on hold
 
 #### Transfer Dynamic
 
-**OnHoldOverride**
-- When OnHoldOverride's value is 'YES', users will be allowed to transfer stock that is on hold
+- **OnHoldOverride**
+    
+    When OnHoldOverride's value is 'YES', users will be allowed to transfer stock that is on hold
 
 #### Receive
 
-**ActionQtyAllowance**
-- When set to a value above 0, allows the user to receive the specified percentage more than the document requires
+- **ActionQtyAllowance**
+    
+    When set to a value above 0, allows the user to receive the specified percentage more than the document requires
 
-**SerialValidationOverride**
-- When SerialValidationOverride's value is 'YES', the Business API will not validate the received serial number against the document lines
+- **SerialValidationOverride**
+    
+    When SerialValidationOverride's value is 'YES', the Business API will not validate the received serial number against the document lines
 
 #### Manufacture
 
-**ActionQtyAllowance**
-- Percentage allowance for manufacturing more than the document line quantity. Default is 0%
+- **ActionQtyAllowance**
+    
+    Percentage allowance for manufacturing more than the document line quantity. Default is 0%
 
 #### Consume
 
-**ActionQtyAllowance**
-- Percentage allowance for consuming more than the document line quantity. Default is 0%
+- **ActionQtyAllowance**
+    
+    Percentage allowance for consuming more than the document line quantity. Default is 0%
 
 #### Correction
 
-**PreventInStockCorrection**
-- Prevent not in stock tracking entities from being placed back into stock
+- **PreventInStockCorrection**
+    
+    Prevent not in stock tracking entities from being placed back into stock
 
 #### Pick Reversal
 
-**ReversePackTransactions**
-- When ReversePackTransactions' value is 'YES', any pack transactions on the line being reversed will be reversed before the picking transactions.
+- **ReversePackTransactions**
+    
+    When ReversePackTransactions' value is 'YES', any pack transactions on the line being reversed will be reversed before the picking transactions.
