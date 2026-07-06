@@ -3893,44 +3893,92 @@ Step names in ProcessFunctionMapping must exist in their respective process defi
 <h3 id="business-rules">Business Rules</h3>
 <p>Business rules are passed in the <code>BusinessRules</code> dictionary on transaction requests to adjust default behavior. Rule names are case-sensitive and values are strings (typically <code>YES</code>/<code>NO</code> or a number).</p>
 <h4 id="packing">Packing</h4>
-<p><strong>ValidateAgainstDocumentQty</strong>
-- When set to 'YES', validates the PackedQty against the Qty field instead of ActionQty, allowing for packing without picking.</p>
+<ul>
+<li>
+<p><strong>ValidateAgainstDocumentQty</strong> </p>
+<p>When set to 'YES', validates the PackedQty against the Qty field instead of ActionQty, allowing for packing without picking.</p>
+</li>
+</ul>
 <h4 id="picking">Picking</h4>
-<p><strong>BestBeforeOverride</strong>
-- When BestBeforeOverride's value is 'YES', users will be allowed to pick stock that is past the ExpiryDate</p>
-<p><strong>OnHoldOverride</strong>
-- When OnHoldOverride's value is 'YES', users will be allowed to pick stock that is on hold</p>
-<p><strong>SerialValidationOverride</strong>
-- When SerialValidationOverride's value is 'YES', the Business API will not validate the picked serial number against the document lines</p>
-<p><strong>ActionQtyAllowance</strong>
-- When set to a value above 0, allows the user to pick the specified percentage more than the document requires</p>
+<ul>
+<li>
+<p><strong>BestBeforeOverride</strong></p>
+<p>When BestBeforeOverride's value is 'YES', users will be allowed to pick stock that is past the ExpiryDate</p>
+</li>
+<li>
+<p><strong>OnHoldOverride</strong></p>
+<p>When OnHoldOverride's value is 'YES', users will be allowed to pick stock that is on hold</p>
+</li>
+<li>
+<p><strong>SerialValidationOverride</strong></p>
+<p>When SerialValidationOverride's value is 'YES', the Business API will not validate the picked serial number against the document lines</p>
+</li>
+<li>
+<p><strong>ActionQtyAllowance</strong></p>
+<p>When set to a value above 0, allows the user to pick the specified percentage more than the document requires</p>
+</li>
+</ul>
 <h4 id="transfer">Transfer</h4>
-<p><strong>ActionQtyAllowance</strong>
-- When set to a value above 0, allows the user to transfer the specified percentage more than the document requires</p>
-<p><strong>AlwaysSplitTrackingEntity</strong>
-- When set to "YES", will always split the qty transferred to a new tracking entity, leaving the original tracking entity in place.</p>
-<p><strong>OnHoldOverride</strong>
-- When OnHoldOverride's value is 'YES', users will be allowed to transfer stock that is on hold</p>
+<ul>
+<li>
+<p><strong>ActionQtyAllowance</strong></p>
+<p>When set to a value above 0, allows the user to transfer the specified percentage more than the document requires</p>
+</li>
+<li>
+<p><strong>AlwaysSplitTrackingEntity</strong></p>
+<p>When set to "YES", will always split the qty transferred to a new tracking entity, leaving the original tracking entity in place.</p>
+</li>
+<li>
+<p><strong>OnHoldOverride</strong></p>
+<p>When OnHoldOverride's value is 'YES', users will be allowed to transfer stock that is on hold</p>
+</li>
+</ul>
 <h4 id="transfer-dynamic">Transfer Dynamic</h4>
-<p><strong>OnHoldOverride</strong>
-- When OnHoldOverride's value is 'YES', users will be allowed to transfer stock that is on hold</p>
+<ul>
+<li>
+<p><strong>OnHoldOverride</strong></p>
+<p>When OnHoldOverride's value is 'YES', users will be allowed to transfer stock that is on hold</p>
+</li>
+</ul>
 <h4 id="receive">Receive</h4>
-<p><strong>ActionQtyAllowance</strong>
-- When set to a value above 0, allows the user to receive the specified percentage more than the document requires</p>
-<p><strong>SerialValidationOverride</strong>
-- When SerialValidationOverride's value is 'YES', the Business API will not validate the received serial number against the document lines</p>
+<ul>
+<li>
+<p><strong>ActionQtyAllowance</strong></p>
+<p>When set to a value above 0, allows the user to receive the specified percentage more than the document requires</p>
+</li>
+<li>
+<p><strong>SerialValidationOverride</strong></p>
+<p>When SerialValidationOverride's value is 'YES', the Business API will not validate the received serial number against the document lines</p>
+</li>
+</ul>
 <h4 id="manufacture">Manufacture</h4>
-<p><strong>ActionQtyAllowance</strong>
-- Percentage allowance for manufacturing more than the document line quantity. Default is 0%</p>
+<ul>
+<li>
+<p><strong>ActionQtyAllowance</strong></p>
+<p>Percentage allowance for manufacturing more than the document line quantity. Default is 0%</p>
+</li>
+</ul>
 <h4 id="consume">Consume</h4>
-<p><strong>ActionQtyAllowance</strong>
-- Percentage allowance for consuming more than the document line quantity. Default is 0%</p>
+<ul>
+<li>
+<p><strong>ActionQtyAllowance</strong></p>
+<p>Percentage allowance for consuming more than the document line quantity. Default is 0%</p>
+</li>
+</ul>
 <h4 id="correction">Correction</h4>
-<p><strong>PreventInStockCorrection</strong>
-- Prevent not in stock tracking entities from being placed back into stock</p>
+<ul>
+<li>
+<p><strong>PreventInStockCorrection</strong></p>
+<p>Prevent not in stock tracking entities from being placed back into stock</p>
+</li>
+</ul>
 <h4 id="pick-reversal">Pick Reversal</h4>
-<p><strong>ReversePackTransactions</strong>
-- When ReversePackTransactions' value is 'YES', any pack transactions on the line being reversed will be reversed before the picking transactions.</p>
+<ul>
+<li>
+<p><strong>ReversePackTransactions</strong></p>
+<p>When ReversePackTransactions' value is 'YES', any pack transactions on the line being reversed will be reversed before the picking transactions.</p>
+</li>
+</ul>
 
 
 
