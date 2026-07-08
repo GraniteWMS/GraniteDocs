@@ -187,6 +187,42 @@ Render a searchable HTML table from a query result.
 
 ---
 
+##  `pagedTable`
+
+Render a paged table backed by a server-side SQL view.
+
+###  Example
+
+```handlebars
+{{ 
+    pagedTable({
+        dataSource: 'LocationView',
+        selectOnColumn: 'Barcode',
+        enableSearch: true,
+        searchColumn: 'Barcode',
+        pageSize: 50
+    }) 
+}}
+```
+
+###  Behavior
+
+* Loads data from `/{Controller}/SqlView` using `sqlViewName`
+* Uses server-side paging and optional search
+* `selectOnColumn` values call `ProceedNext(...)`
+
+###  Options
+
+| Option           | Type   | Description                                                      |
+| ---------------- | ------ | ---------------------------------------------------------------- |
+| `dataSource`     | string | SQL view name passed as `sqlViewName`                            |
+| `selectOnColumn` | string | Makes the column clickable                                       |
+| `pageSize`       | int    | Rows per page (defaults to 50)                                   |
+| `enableSearch`   | bool   | Adds server-side search input                                    |
+| `searchColumn`   | string | Column to filter with `[lk]` when search is enabled and provided |
+
+---
+
 ##  `setInputModeDecimal`
 
 Configure the main textbox for decimal entry.
@@ -247,7 +283,9 @@ Render records as large action buttons.
 {{ 
     'SELECT Barcode FROM Location' 
     | dbSelect({}) 
-    | createButtonList('Barcode') 
+    | createButtonList({
+        columnName: 'Barcode'
+    }) 
 }}
 
 {{ hideTextBox() }}
@@ -287,6 +325,33 @@ Usually combined with:
 
 ---
 
+##  `notificationMessageBox`
+
+Render a dismissible banner that consolidates process messages.
+
+###  Example
+
+```handlebars
+{{ notificationMessageBox({ hideTextBox: true }) }}
+```
+
+###  Behavior
+
+* Reads from `divError`, `divInformation`, and `divSuccess`
+* Hides the original message divs and shows a banner with dismiss buttons
+* Optionally hides the textbox until all messages are dismissed
+
+###  Options
+
+| Option        | Type | Description                                                  |
+| ------------- | ---- | ------------------------------------------------------------ |
+| `hideTextBox` | bool | Hide the textbox while messages are visible                  |
+| `error`       | bool | Show error messages                                          |
+| `info`        | bool | Show informational messages                                  |
+| `success`     | bool | Show success messages                                        |
+
+---
+
 ##  Common Pattern Examples
 
 ###  Mobile Scanner Selection Screen
@@ -309,7 +374,7 @@ Usually combined with:
 {{ 
     'SELECT ItemCode, Qty, ActionQty FROM PickSlipLines' 
     | dbSelect({}) 
-    | dynamicCardList({
+    | createCardList({
         selectOnColumn: 'ItemCode',
         enableSearch: true
     }) 
