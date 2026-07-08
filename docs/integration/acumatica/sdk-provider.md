@@ -291,6 +291,34 @@ It is not mapped to any specific Granite transaction type. If you have a require
 | Serial                     | LotSerialNbr|N||
 | ExpirationDate              | ExpiryDate|N||
 
+### VALIDATESHIPMENTPICK
+
+- Granite Transaction: **NONE** (`Process.IntegrationMethod = VALIDATESHIPMENTPICK`)
+- Acumatica: **Shipment (validate picked quantities against allocations)**
+- Supports:
+    - Lot
+    - Serial
+- Validation and mapping behavior:
+    - Requires a single document number across the posted transactions.
+    - Resolves Acumatica shipment from Granite document `ERPIdentification`.
+    - Validates every shipment allocation using Granite transaction `LineNumber` in `Line-SplitLine` format.
+    - For lot/serial allocations, validates quantity per lot/serial number; otherwise validates total quantity for the split line.
+    - Fails with aggregated validation errors if any line/split quantities do not match.
+    - On success, appends `Quantity validated in Granite yyyy-MM-dd HH:mm:ss` to shipment `Description`.
+- Integration Post
+    - False - Runs validation and updates shipment description.
+    - True - Runs validation, updates shipment description, and invokes Confirm Shipment.
+- Returns:
+    Shipment Number
+
+| Granite    | Acumatica Entity | Required | Behavior |
+|------------|------------------|----------|-----------|
+| Document                   | Shipment (via Granite `ERPIdentification`) |Y||
+| LineNumber                 | Detail/Split line |Y| Use `LineNumber-SplitLineNumber` format for allocation validation |
+| Qty / ActionQty            | Allocation Qty    |Y| Validates Granite `ActionQty` against ERP allocation quantities |
+| Batch                      | LotSerialNbr      |N||
+| Serial                     | LotSerialNbr      |N||
+
 ### CUSTOMERRETURN
 
 - Granite Transaction: **NONE** (`Process.IntegrationMethod = CUSTOMERRETURN`)
@@ -303,6 +331,7 @@ It is not mapped to any specific Granite transaction type. If you have a require
     - Uses `AcumaticaCustomerReturnPrefix` to resolve the Acumatica order number.
     - Uses Acumatica Sales Order `OrderType` for shipment lines (defaults to `RC` if not found).
     - Supports kit-component line numbers (`ParentLine-ComponentLine`) and posts kit shipment details using Acumatica kit specifications.
+    - Allocation location defaults to `DefaultLocation`; when `ReceiveToBin = true`, allocation location uses transaction `ToSite` (and `ToSite` is required).
 - Integration Post
     - False - Creates a new return shipment with status Open
     - True - Creates a new return shipment and performs the Confirm Shipment action
@@ -316,6 +345,7 @@ It is not mapped to any specific Granite transaction type. If you have a require
 | Qty                        | ShippedQty  |Y||
 | DocumentTradingPartnerCode | CustomerID  |Y||
 | FromLocation               | WarehouseID |Y||
+| ToSite                     | LocationID  |N| Used when `ReceiveToBin = true` |
 | Lot                        | LotSerialNbr|N||
 | Serial                     | LotSerialNbr|N||
 | ExpirationDate             | ExpiryDate|N||
@@ -334,7 +364,8 @@ PACK appends package information to an existing [Acumatica Shipment](./acumatica
     - Reads carrying entity data for the provided Granite transaction IDs from `CarryingEntity` (joined via `Transaction.ToContainableEntity_id`).
     - Appends one package per carrying entity to the shipment `Packages` collection and updates the shipment.
 - Integration Post
-    - The `post` flag is accepted but currently not used; behavior is the same for `True` and `False`.
+    - False - Updates shipment package data only.
+    - True - Updates shipment package data and invokes the Confirm Shipment action.
 - Returns:
     Shipment Number
 
@@ -530,7 +561,7 @@ WHERE T.IntegrationStatus = 0
     - Validates each purchase receipt allocation against Granite `ActionQty` using `LineNumber-SplitLineNumber`.
     - For lot/serial tracked allocations, validates quantity per lot/serial number; otherwise validates total allocation quantity for the split line.
     - If allocations are missing or quantities do not match, integration fails with validation errors.
-    - On successful validation, sets `VendorRef` to `Quantity validated in Granite`.
+    - On successful validation, sets `VendorRef` to `Quantity validated in Granite yyyy-MM-dd HH:mm:ss`.
 - Integration Post
     - False - Runs validation and updates the PO Receipt Return without releasing.
     - True - Runs validation, updates the document, and invokes release.

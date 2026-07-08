@@ -12,6 +12,12 @@ See below for information for specifics on how document and master data jobs wor
 
     Acumatica type: Sales Order
 
+ -   SHIPMENT
+
+    ---
+
+    Acumatica type: Shipment
+
  -   RECEIVING
 
     ---
@@ -74,6 +80,16 @@ For Sales Orders the statuses are mapped in the following way:
 | Expired, Canceled, Rejected | CANCELLED | 
 | On Hold, Credit Hold, Risk Hold, Pending Approval, Pending Processing | ONHOLD |
 | Completed, Invoiced, Shipping | COMPLETE |
+
+<h5>Shipment</h5>
+
+For Shipments the statuses are mapped in the following way:
+
+| Acumatica Status | Granite Status |
+|------------------|----------------|
+| Open (`Status = N`) and `Hold = false` and all non-kit lines fully assigned across splits | ENTERED |
+| Hold = true, or Open but not fully assigned | ONHOLD |
+| Confirmed = true or Released = true | COMPLETE |
 
 <h5>Customer Return</h5>
 
@@ -148,15 +164,28 @@ Sales Order allocation behavior:
 - If `SOLineSplitCollection` is missing for a line, that line is skipped.
 - A line is pickable when any split on that line has `IsAllocated = true`.
 - Granite line `Qty` is calculated as the sum of allocated split quantities; if not pickable, Granite line `Qty` is set to `0`.
+- Calculated split quantity is capped at ERP `OrderQty` before pickability logic is applied.
 - For kit parent lines, Granite sets `Qty = 0` and `Completed = true` so components are picked instead, and writes a `Comment` with the number of kits.
 - Component line quantities for kits are calculated from the computed parent quantity (allocated split qty sum).
 - Sales order detail `Comment` is synchronized from Acumatica for supported updates (for example, kit count comments).
 - If `ShipComplete = C` and not all sales order lines are fully allocated, Granite status is forced to `ONHOLD`.
 
+#### Shipment job
+`ShipmentJob` integrates Acumatica Shipments into Granite.
+
+Shipment job behavior:
+
+- New/updated shipments are read from Acumatica OData (`PX_Objects_SO_SOShipment`) and queued by `NoteID`.
+- Shipment details are built from `SOShipLineCollection` and split lines (`SOShipLineSplitCollection`) including source warehouse (`INSiteBySiteID.SiteCD`).
+- Kit parent shipment lines are written as `Qty = 0` with a `Comment` indicating number of kits; split/component lines carry the actual quantities.
+- Open shipments are only set to Granite `ENTERED` when every non-kit ship line is fully assigned across its splits; otherwise they remain `ONHOLD`.
+- Shipment document number prefix is configured with `AcumaticaShipmentPrefix`.
+
 
 ### Master data jobs
 MasterItems and TradingPartners have their own Jobs. These Jobs fetch all StockItems, Vendors, and Customers from  Acumatica and compares them to the MasterItems and TradingPartners in Granite. Any inserts / updates are done as required. 
 Before processing queued documents, document jobs also sync all updated MasterItems from Acumatica (based on the latest posted document integration time), and then upsert MasterItems referenced on each document. This means that on sites that do not make many changes to their MasterItems it is better to limit running this job to once a day or even less frequently. 
+MasterItem `isActive` is treated as `false` for item statuses `DE` (discontinued) and `IN` (inactive); all other statuses are treated as active.
 
 Document Jobs do not automatically sync trading partners as they are not required to create to the document in Granite and as such are only synced when the TradingPartner Job runs. 
 
@@ -213,6 +242,10 @@ SELECT 0, 'Acumatica Sales Order Job', 'Syncs SalesOrders from Acumatica', 'INJE
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Sales Order Job');
 
 INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'Acumatica Shipment Job', 'Syncs Shipments from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.Shipment', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Shipment Job');
+
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
 SELECT 0, 'Acumatica Transfer Job', 'Syncs Transfers from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.Transfer', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Transfer Job');
 
@@ -264,6 +297,10 @@ WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Appl
 INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
 SELECT 'Acumatica', 'AcumaticaCustomerReturnPrefix', '', 'Acumatica customer return prefix', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaCustomerReturnPrefix');
+
+INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
+SELECT 'Acumatica', 'AcumaticaShipmentPrefix', '', 'Acumatica shipment prefix', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.SystemSettings WHERE [Application] = 'Acumatica' AND [Key] = 'AcumaticaShipmentPrefix');
 
 INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
 SELECT 'Acumatica', 'AcumaticaPurchaseOrderPrefix', '', 'Acumatica purchase order prefix', 'String', 1, 0, NULL, GETDATE(), 'AUTOMATION', 1
@@ -371,6 +408,9 @@ The prefix used to identify Acumatica sales orders during synchronization. This 
 <h5>AcumaticaCustomerReturnPrefix</h5>
 
 The prefix used to identify Acumatica customer return orders (for configured return order types such as `RC`) during synchronization.
+<h5>AcumaticaShipmentPrefix</h5>
+
+The prefix used to identify Acumatica shipment documents during synchronization.
 
 <h5>AcumaticaPurchaseOrderPrefix</h5>
 
