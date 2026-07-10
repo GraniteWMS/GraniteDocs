@@ -64,6 +64,7 @@ nav:
       - Process App:
           - process-app/index.md
           - Script Methods: process-app/script-methods.md
+          - Session Timeout: process-app/session-timeout.md
       - Scanner Application: android-application/manual.md
       - Business API: business-api/manual.md
       - Custodian API:
