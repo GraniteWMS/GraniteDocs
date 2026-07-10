@@ -1066,6 +1066,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#validateshipmentpick" class="md-nav__link">
+    <span class="md-ellipsis">
+      VALIDATESHIPMENTPICK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#customerreturn" class="md-nav__link">
     <span class="md-ellipsis">
       CUSTOMERRETURN
@@ -2291,6 +2300,8 @@
       
         
       
+        
+      
     
     
     
@@ -2347,6 +2358,29 @@
   
   <span class="md-ellipsis">
     Script Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../process-app/session-timeout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Session Timeout
     
   </span>
   
@@ -4065,6 +4099,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#validateshipmentpick" class="md-nav__link">
+    <span class="md-ellipsis">
+      VALIDATESHIPMENTPICK
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#customerreturn" class="md-nav__link">
     <span class="md-ellipsis">
       CUSTOMERRETURN
@@ -4843,6 +4886,74 @@ It is not mapped to any specific Granite transaction type. If you have a require
 </tr>
 </tbody>
 </table>
+<h3 id="validateshipmentpick">VALIDATESHIPMENTPICK</h3>
+<ul>
+<li>Granite Transaction: <strong>NONE</strong> (<code>Process.IntegrationMethod = VALIDATESHIPMENTPICK</code>)</li>
+<li>Acumatica: <strong>Shipment (validate picked quantities against allocations)</strong></li>
+<li>Supports:<ul>
+<li>Lot</li>
+<li>Serial</li>
+</ul>
+</li>
+<li>Validation and mapping behavior:<ul>
+<li>Requires a single document number across the posted transactions.</li>
+<li>Resolves Acumatica shipment from Granite document <code>ERPIdentification</code>.</li>
+<li>Validates every shipment allocation using Granite transaction <code>LineNumber</code> in <code>Line-SplitLine</code> format.</li>
+<li>For lot/serial allocations, validates quantity per lot/serial number; otherwise validates total quantity for the split line.</li>
+<li>Fails with aggregated validation errors if any line/split quantities do not match.</li>
+<li>On success, appends <code>Quantity validated in Granite yyyy-MM-dd HH:mm:ss</code> to shipment <code>Description</code>.</li>
+</ul>
+</li>
+<li>Integration Post<ul>
+<li>False - Runs validation and updates shipment description.</li>
+<li>True - Runs validation, updates shipment description, and invokes Confirm Shipment.</li>
+</ul>
+</li>
+<li>Returns:
+    Shipment Number</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Acumatica Entity</th>
+<th>Required</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>Shipment (via Granite <code>ERPIdentification</code>)</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>LineNumber</td>
+<td>Detail/Split line</td>
+<td>Y</td>
+<td>Use <code>LineNumber-SplitLineNumber</code> format for allocation validation</td>
+</tr>
+<tr>
+<td>Qty / ActionQty</td>
+<td>Allocation Qty</td>
+<td>Y</td>
+<td>Validates Granite <code>ActionQty</code> against ERP allocation quantities</td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>Serial</td>
+<td>LotSerialNbr</td>
+<td>N</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="customerreturn">CUSTOMERRETURN</h3>
 <ul>
 <li>Granite Transaction: <strong>NONE</strong> (<code>Process.IntegrationMethod = CUSTOMERRETURN</code>)</li>
@@ -4857,6 +4968,7 @@ It is not mapped to any specific Granite transaction type. If you have a require
 <li>Uses <code>AcumaticaCustomerReturnPrefix</code> to resolve the Acumatica order number.</li>
 <li>Uses Acumatica Sales Order <code>OrderType</code> for shipment lines (defaults to <code>RC</code> if not found).</li>
 <li>Supports kit-component line numbers (<code>ParentLine-ComponentLine</code>) and posts kit shipment details using Acumatica kit specifications.</li>
+<li>Allocation location defaults to <code>DefaultLocation</code>; when <code>ReceiveToBin = true</code>, allocation location uses transaction <code>ToSite</code> (and <code>ToSite</code> is required).</li>
 </ul>
 </li>
 <li>Integration Post<ul>
@@ -4908,6 +5020,12 @@ It is not mapped to any specific Granite transaction type. If you have a require
 <td></td>
 </tr>
 <tr>
+<td>ToSite</td>
+<td>LocationID</td>
+<td>N</td>
+<td>Used when <code>ReceiveToBin = true</code></td>
+</tr>
+<tr>
 <td>Lot</td>
 <td>LotSerialNbr</td>
 <td>N</td>
@@ -4944,7 +5062,8 @@ It is not mapped to any specific Granite transaction type. If you have a require
 </ul>
 </li>
 <li>Integration Post<ul>
-<li>The <code>post</code> flag is accepted but currently not used; behavior is the same for <code>True</code> and <code>False</code>.</li>
+<li>False - Updates shipment package data only.</li>
+<li>True - Updates shipment package data and invokes the Confirm Shipment action.</li>
 </ul>
 </li>
 <li>Returns:
@@ -5294,7 +5413,7 @@ In the examples below the process name is PACKINGPOST. The ShipmentNbr that need
 <li>Validates each purchase receipt allocation against Granite <code>ActionQty</code> using <code>LineNumber-SplitLineNumber</code>.</li>
 <li>For lot/serial tracked allocations, validates quantity per lot/serial number; otherwise validates total allocation quantity for the split line.</li>
 <li>If allocations are missing or quantities do not match, integration fails with validation errors.</li>
-<li>On successful validation, sets <code>VendorRef</code> to <code>Quantity validated in Granite</code>.</li>
+<li>On successful validation, sets <code>VendorRef</code> to <code>Quantity validated in Granite yyyy-MM-dd HH:mm:ss</code>.</li>
 </ul>
 </li>
 <li>Integration Post<ul>
