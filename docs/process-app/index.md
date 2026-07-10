@@ -102,6 +102,10 @@ Business rules are passed in the `BusinessRules` dictionary on transaction reque
     
     When set to 'YES', validates the PackedQty against the Qty field instead of ActionQty, allowing for packing without picking.
 
+- **IgnoreBatch**
+    
+    When IgnoreBatch's value is 'YES', the Business API will not validate the batch of the packed tracking entity against the document lines when allocating a transaction to a line.
+
 #### Picking
 
 - **BestBeforeOverride**
@@ -158,7 +162,11 @@ Business rules are passed in the `BusinessRules` dictionary on transaction reque
 
 #### Consume
 
-- **ActionQtyAllowance**
+- **BestBeforeOverride**
+    
+    When BestBeforeOverride's value is 'YES', users will be allowed to consume stock that is past the ExpiryDate
+
+- **ActionQtyAllowance** 
     
     Percentage allowance for consuming more than the document line quantity. Default is 0%
 
