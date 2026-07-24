@@ -144,11 +144,27 @@ Business rules are passed in the `BusinessRules` dictionary on transaction reque
     
     When OnHoldOverride's value is 'YES', users will be allowed to transfer stock that is on hold
 
+#### Take On
+
+- **CreateOnHold**
+    
+    When CreateOnHold's value is 'YES', tracking entities created by this transaction will be placed on hold, in the same way as the master item's DirectOnHold setting.
+
+#### Return
+
+- **CreateOnHold**
+    
+    When CreateOnHold's value is 'YES', tracking entities created by this transaction will be placed on hold, in the same way as the master item's DirectOnHold setting.
+
 #### Receive
 
 - **ActionQtyAllowance**
     
     When set to a value above 0, allows the user to receive the specified percentage more than the document requires
+
+- **CreateOnHold**
+    
+    When CreateOnHold's value is 'YES', tracking entities created by this transaction will be placed on hold, in the same way as the master item's DirectOnHold setting.
 
 - **SerialValidationOverride**
     
@@ -159,6 +175,10 @@ Business rules are passed in the `BusinessRules` dictionary on transaction reque
 - **ActionQtyAllowance**
     
     Percentage allowance for manufacturing more than the document line quantity. Default is 0%
+
+- **CreateOnHold**
+    
+    When CreateOnHold's value is 'YES', tracking entities created by this transaction will be placed on hold, in the same way as the master item's DirectOnHold setting.
 
 #### Consume
 
