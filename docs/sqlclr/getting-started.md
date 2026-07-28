@@ -52,7 +52,7 @@ The prefix indicates which of the CLR Procedures it is related to:
 - **"dbo.report_"** for Reporting Service procedures
 - **"dbo.email_"** for Email Service procedures
 - **"dbo.export"** for SQL Export Service procedures
-- **"dbo.parcelPerfect_"** for [Parcel Perfect](../integration/parcel-perfect/sql-clr-invocation.md) quote/accept procedures
+- **"dbo.parcelPerfect_"** for [Parcel Perfect](../integration/parcel-perfect/service.md#sql-clr) quote/accept procedures
 
 
 

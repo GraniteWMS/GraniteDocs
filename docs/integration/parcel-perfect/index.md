@@ -19,7 +19,7 @@ Every other integration in this section is called by Granite's Integration Servi
 
 Instead, Granite calls this service's API directly from SQL Server using **SQL CLR** — not through the Integration Service pipeline.
 
-See [SQL CLR Invocation](sql-clr-invocation.md) for the procedures, parameters and worked examples, and the general [SQLCLR](../../sqlclr/index.md) reference for background on Granite's SQL CLR layer.
+See [Service → SQL CLR](service.md#sql-clr) for the procedures, parameters and worked examples, and the general [SQLCLR](../../sqlclr/index.md) reference for background on Granite's SQL CLR layer.
 
 ## What it does
 

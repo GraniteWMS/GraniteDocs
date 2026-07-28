@@ -34,9 +34,6 @@ The Parcel Perfect service lets Granite request courier quotes and convert them 
     }
     ```
 
-    !!! warning
-        The checked-in `appsettings.json` points at Parcel Perfect's **sandbox** environment (`adpdemo.pperfect.com`) with a demo token. Replace `BaseUrl`, `TokenId` and `AccountNumber` with the client's real production values before going live.
-
 2. **Create an IIS site** for the service, following the [Adding a site to IIS](../../iis/getting-started.md#adding-a-site-to-iis) guide, pointed at the published service files.
 
 3. **Verify installation** — `GET /up` should return a healthy status.
@@ -50,102 +47,234 @@ The Parcel Perfect service lets Granite request courier quotes and convert them 
 | `ParcelPerfect:TokenId` | Parcel Perfect API token (`token_id`) | Yes |
 | `ParcelPerfect:AccountNumber` | Parcel Perfect account number (`accnum`), sent on every quote request | Yes |
 
-!!! note "Prepaid credit"
-    Converting a quote into a waybill or collection (`AcceptQuote`) requires the Parcel Perfect account to have sufficient **prepaid credit**. If the balance is insufficient, Parcel Perfect rejects the conversion (`errorcode 1`, "Not enough prepaid credit") even though the original quote succeeded.
+## SQL CLR
 
-## API
+Unlike every other integration in this section, Parcel Perfect is not called by the Integration Service through an SDK Provider. Granite calls the [Parcel Perfect service](service.md)'s `/quotes` endpoints directly from SQL Server using two SQL CLR procedures:
 
-### `POST /quotes` — Create a quote
+- `dbo.clr_ParcelPerfect_CreateQuote` → `POST /quotes`
+- `dbo.clr_ParcelPerfect_AcceptQuote` → `POST /quotes/{QuoteId}/accept`
 
-Requests a courier quote for a shipment. Persists a `ParcelPerfectQuote` (and its parcel lines) locally and returns Parcel Perfect's rate options.
+Two CLR functions build the JSON array parameters those procedures need:
 
-**Request**
-
-| Field | Type | Required | Notes |
-|-------|------|----------|-------|
-| `Reference` | string | Yes | Caller's own reference for the quote |
-| `SpecialInstructions` | string | No | |
-| `Origin` | QuoteParty | Yes | Sender address |
-| `Destination` | QuoteParty | Yes | Receiver address |
-| `Parcels` | list of QuoteParcel | Yes | One entry per carton/parcel |
-| `WaybillReferences` | list of string | No | Printed on the waybill, one per page |
-
-**QuoteParty**
-
-| Field | Type | Required |
-|-------|------|----------|
-| `PersonName` | string | Yes |
-| `ContactName` | string | No |
-| `AddressLine1` | string | Yes |
-| `AddressLine2`–`AddressLine4` | string | No |
-| `PostalCode` | string | Yes |
-| `Phone` | string | No |
-| `Cell` | string | No |
-
-**QuoteParcel**
-
-| Field | Type | Required | Notes |
-|-------|------|----------|-------|
-| `ItemNo` | string | Yes | |
-| `Description` | string | Yes | |
-| `Pieces` | int | No | Defaults to 1 |
-| `Length`, `Width`, `Height` | decimal | Yes | |
-| `ActualMassKg` | decimal | Yes | |
-
-**Response**
-
-| Field | Notes |
-|-------|-------|
-| `QuoteId` | Granite's own quote ID — used to accept the quote |
-| `PpQuoteNumber` | Parcel Perfect's quote number |
-| `Rates` | List of `{ ServiceCode, Description, Price }` — the options available to accept |
-
-### `POST /quotes/{QuoteId}/accept` — Accept a quote
-
-Accepts one of the rated service codes and converts the quote into either a waybill or a collection.
-
-**Request**
-
-| Field | Type | Required | Notes |
-|-------|------|----------|-------|
-| `QuoteId` | long | Yes | From the create-quote response |
-| `ServiceCode` | string | Yes | Must be one of the `Rates` returned for this quote |
-| `ConversionType` | `Waybill` (1) / `Collection` (2) | Yes | |
-| `SpecialInstructions` | string | No | |
-| `PrintWaybill` | bool | No | Defaults to `true` |
-| `PrintLabels` | bool | No | Defaults to `true` |
-| `CollectionDate` | date | Only for `Collection` | |
-| `CollectionStartTime` | string | Only for `Collection` | Exact `"HH:mm"`, e.g. `"08:00"` |
-| `CollectionEndTime` | string | Only for `Collection` | Exact `"HH:mm"`, e.g. `"17:00"` |
+- `dbo.parcelPerfect_AddParcel`
+- `dbo.parcelPerfect_AddWaybillReference`
 
 !!! note
-    `CollectionDate`, `CollectionStartTime` and `CollectionEndTime` are required when `ConversionType` is `Collection`, and the two time fields must parse as exact `HH:mm` — send plain strings, not `DateTime`/time-of-day values.
+    See the general [SQLCLR](../../sqlclr/index.md) documentation and [Getting Started](../../sqlclr/getting-started.md) guide for background on how Granite's SQL CLR layer works, and the [Application Security → API Keys](../../security/api-keys.md) page for how `@userName` is used to authenticate the call below.
 
-**Response**
+### System Settings
 
-| Field | Notes |
-|-------|-------|
-| `WaybillNumber` | |
-| `ConversionType` | Echoes the request |
-| `CollectionDate` | Only set for `Collection` |
-| `CollectionNumber` | Only set for `Collection` — the new collection request's own number |
-| `Total` | Actual charged amount incl. VAT — can differ from the originally quoted price |
-| `WaybillPdfBase64` | Present when `PrintWaybill` was requested |
-| `LabelsPdfBase64` | Present when `PrintLabels` was requested |
+The procedures resolve the Parcel Perfect service's base URL from the `SystemSettings` table at call time:
 
-**Validation errors**
+| Application | Key | Description |
+|-------------|-----|--------------|
+| `SQLCLR` | `ParcelPerfectIntegrationServiceUrl` | Base URL of the `Granite.Integration.ParcelPerfect` service (no trailing slash — `/quotes` and `/quotes/{id}/accept` are appended by the CLR procedures) |
 
-| Condition | Result |
-|-----------|--------|
-| `QuoteId` doesn't exist | 404 |
-| Quote isn't in the `Requested` state, or has no Parcel Perfect quote number | 400 |
-| `ServiceCode` wasn't one of the rates returned for this quote | 400 |
-| Collection fields missing or not `HH:mm` when `ConversionType` is `Collection` | 400 |
+```sql
+INSERT INTO [dbo].[SystemSettings] ([Application], [Key], [Value], [Description], [ValueDataType], [isEncrypted], [isActive], [AuditDate], [AuditUser])
+SELECT 'SQLCLR', 'ParcelPerfectIntegrationServiceUrl', 'http://10.0.0.1:50010', 'GraniteIntegrationParcelPerfect API Address', 'string', 0, 1, GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (
+    SELECT 1 FROM [dbo].[SystemSettings] WHERE [Application] = 'SQLCLR' AND [Key] = 'ParcelPerfectIntegrationServiceUrl'
+);
+```
 
-## Error Handling
+!!! note
+    Both procedures authenticate the call with `@userName`'s own Granite API key (`Authorization: Bearer ...`), the same way as other CLR-called services — the user executing the procedure must have an API key configured in Granite.
 
-If Parcel Perfect rejects a request (e.g. invalid account, insufficient prepaid credit), the service returns **HTTP 502** carrying Parcel Perfect's own error message.
+### CLR Procedures
 
-## Resources
+#### dbo.clr_ParcelPerfect_CreateQuote
 
-- Calling this service: [SQL CLR Invocation](sql-clr-invocation.md)
+Requests a quote and returns Parcel Perfect's rate options. Build `@parcels` (and, if needed, `@waybillReferences`) with the [CLR functions](#clr-functions) below before calling this.
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `@userName` | Yes | Granite username — used to resolve the API key for calling the service |
+| `@reference` | Yes | Caller's own reference for the quote |
+| `@specialInstructions` | No | |
+| `@originPersonName` | Yes | |
+| `@originContactName` | No | |
+| `@originAddressLine1` | Yes | |
+| `@originAddressLine2` | No | |
+| `@originAddressLine3` | No | |
+| `@originAddressLine4` | No | |
+| `@originPostalCode` | Yes | |
+| `@originPhone` | No | |
+| `@originCell` | No | |
+| `@destinationPersonName` | Yes | |
+| `@destinationContactName` | No | |
+| `@destinationAddressLine1` | Yes | |
+| `@destinationAddressLine2` | No | |
+| `@destinationAddressLine3` | No | |
+| `@destinationAddressLine4` | No | |
+| `@destinationPostalCode` | Yes | |
+| `@destinationPhone` | No | |
+| `@destinationCell` | No | |
+| `@parcels` | Yes | JSON array of parcel lines — build with `dbo.parcelPerfect_AddParcel`, e.g. `[{"ItemNo":"1","Description":"Box","Pieces":1,"Length":10,"Width":10,"Height":10,"ActualMassKg":2.5}]` |
+| `@waybillReferences` | No | JSON array of strings — build with `dbo.parcelPerfect_AddWaybillReference` |
+| `@success` (OUTPUT) | | `bit` — whether the call succeeded |
+| `@message` (OUTPUT) | | On success, the raw `CreateQuoteResponse` JSON — parse `Rates[]` from it to get the `ServiceCode` options for `clr_ParcelPerfect_AcceptQuote`. On failure, an error message. |
+| `@quoteId` (OUTPUT) | | `bigint` — the new quote's ID, needed for `clr_ParcelPerfect_AcceptQuote`. `0` if the call failed or the response couldn't be parsed. |
+| `@quoteNumber` (OUTPUT) | | Parcel Perfect's own quote number (`PpQuoteNumber`). `NULL` if the call failed or the response couldn't be parsed. |
+
+#### dbo.clr_ParcelPerfect_AcceptQuote
+
+Accepts one of the rated service codes from a prior `clr_ParcelPerfect_CreateQuote` call and converts it into a waybill or a collection.
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `@userName` | Yes | |
+| `@quoteId` | Yes | `bigint` — the `QuoteId` from the create-quote response |
+| `@serviceCode` | Yes | One of the `ServiceCode` values from the create-quote response |
+| `@conversionType` | Yes | `'Waybill'` or `'Collection'` (case-insensitive) |
+| `@specialInstructions` | No | |
+| `@printWaybill` | No | `bit`, defaults to `1` if `NULL` |
+| `@printLabels` | No | `bit`, defaults to `1` if `NULL` |
+| `@collectionDate` | Only for `Collection` | `datetime` — only the date portion is used |
+| `@collectionStartTime` | Only for `Collection` | Exact `"HH:mm"`, e.g. `'08:00'` |
+| `@collectionEndTime` | Only for `Collection` | Exact `"HH:mm"`, e.g. `'17:00'` |
+| `@success` (OUTPUT) | | |
+| `@message` (OUTPUT) | | On success, the response JSON (`WaybillNumber`, `Total`, `WaybillPdfBase64`, `LabelsPdfBase64`, ...). On failure, an error message. |
+| `@waybillNumber` (OUTPUT) | | The generated waybill number. `NULL` if the call failed or the response couldn't be parsed. |
+
+### CLR Functions
+
+These assist with building the JSON array parameters above — call once per item, threading the result back in as the input, then pass the final value to the procedure. See the "Using the CLR Functions" section of [Getting Started](../../sqlclr/getting-started.md) for the general pattern.
+
+#### dbo.parcelPerfect_AddParcel
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `@parcels` | Yes | Existing JSON array — `NULL` or empty starts a new array |
+| `@itemNo` | Yes | |
+| `@description` | Yes | |
+| `@pieces` | Yes | `int` |
+| `@length`, `@width`, `@height` | Yes | `decimal(19,4)` |
+| `@actualMassKg` | Yes | `decimal(19,4)` |
+
+#### dbo.parcelPerfect_AddWaybillReference
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `@waybillReferences` | Yes | Existing JSON array — `NULL` or empty starts a new array |
+| `@waybillReference` | Yes | Reference text to add |
+
+### Examples
+
+#### Create a quote
+
+```sql
+DECLARE @parcels nvarchar(max)
+DECLARE @waybillRefs nvarchar(max)
+DECLARE @success bit
+DECLARE @message nvarchar(max)
+DECLARE @quoteId bigint
+DECLARE @quoteNumber nvarchar(200)
+
+SELECT @parcels = dbo.parcelPerfect_AddParcel(@parcels, 'ITEM001', 'Carton of widgets', 1, 30, 20, 15, 4.5)
+SELECT @parcels = dbo.parcelPerfect_AddParcel(@parcels, 'ITEM002', 'Carton of gadgets', 2, 25, 25, 10, 2.0)
+
+SELECT @waybillRefs = dbo.parcelPerfect_AddWaybillReference(@waybillRefs, 'SO-100234')
+
+BEGIN TRY
+    EXEC [dbo].[clr_ParcelPerfect_CreateQuote]
+        @userName = 'jsmith',
+        @reference = 'SO-100234',
+        @specialInstructions = 'Handle with care',
+        @originPersonName = 'Granite Warehouse',
+        @originContactName = NULL,
+        @originAddressLine1 = '1 Warehouse Rd',
+        @originAddressLine2 = NULL,
+        @originAddressLine3 = NULL,
+        @originAddressLine4 = NULL,
+        @originPostalCode = '6730',
+        @originPhone = NULL,
+        @originCell = NULL,
+        @destinationPersonName = 'John Customer',
+        @destinationContactName = NULL,
+        @destinationAddressLine1 = '2 Customer Ave',
+        @destinationAddressLine2 = NULL,
+        @destinationAddressLine3 = NULL,
+        @destinationAddressLine4 = NULL,
+        @destinationPostalCode = '7700',
+        @destinationPhone = NULL,
+        @destinationCell = NULL,
+        @parcels = @parcels,
+        @waybillReferences = @waybillRefs,
+        @success = @success OUTPUT,
+        @message = @message OUTPUT,
+        @quoteId = @quoteId OUTPUT,
+        @quoteNumber = @quoteNumber OUTPUT
+END TRY
+BEGIN CATCH
+    SELECT @message = ERROR_MESSAGE()
+    SELECT @success = 0
+END CATCH
+
+SELECT @success, @message, @quoteId, @quoteNumber
+-- @quoteId is what you pass to clr_ParcelPerfect_AcceptQuote. On success, @message is
+-- also the raw CreateQuoteResponse JSON — parse Rates[].ServiceCode from it.
+```
+
+#### Accept a quote as a waybill
+
+```sql
+DECLARE @success bit
+DECLARE @message nvarchar(max)
+DECLARE @waybillNumber nvarchar(200)
+
+BEGIN TRY
+    EXEC [dbo].[clr_ParcelPerfect_AcceptQuote]
+        @userName = 'jsmith',
+        @quoteId = 123,
+        @serviceCode = 'ECO',
+        @conversionType = 'Waybill',
+        @specialInstructions = NULL,
+        @printWaybill = 1,
+        @printLabels = 1,
+        @collectionDate = NULL,
+        @collectionStartTime = NULL,
+        @collectionEndTime = NULL,
+        @success = @success OUTPUT,
+        @message = @message OUTPUT,
+        @waybillNumber = @waybillNumber OUTPUT
+END TRY
+BEGIN CATCH
+    SELECT @message = ERROR_MESSAGE()
+    SELECT @success = 0
+END CATCH
+
+SELECT @success, @message, @waybillNumber
+```
+
+#### Accept a quote as a collection
+
+```sql
+DECLARE @success bit
+DECLARE @message nvarchar(max)
+DECLARE @waybillNumber nvarchar(200)
+
+BEGIN TRY
+    EXEC [dbo].[clr_ParcelPerfect_AcceptQuote]
+        @userName = 'jsmith',
+        @quoteId = 123,
+        @serviceCode = 'ECO',
+        @conversionType = 'Collection',
+        @specialInstructions = NULL,
+        @printWaybill = 1,
+        @printLabels = 1,
+        @collectionDate = '2026-08-01',
+        @collectionStartTime = '08:00',
+        @collectionEndTime = '17:00',
+        @success = @success OUTPUT,
+        @message = @message OUTPUT,
+        @waybillNumber = @waybillNumber OUTPUT
+END TRY
+BEGIN CATCH
+    SELECT @message = ERROR_MESSAGE()
+    SELECT @success = 0
+END CATCH
+
+SELECT @success, @message, @waybillNumber
+```
+
