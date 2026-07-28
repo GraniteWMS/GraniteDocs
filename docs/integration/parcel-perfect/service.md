@@ -12,7 +12,7 @@ The Parcel Perfect service lets Granite request courier quotes and convert them 
 1. **IIS** — installed and configured with the matching .NET Hosting Bundle
     - See [IIS Getting Started Guide](../../iis/getting-started.md) for installation instructions
 2. A connection string to the Granite database — the service creates its own tables in it automatically.
-3. Parcel Perfect account details, added to the Granite `SystemSettings` table (see [Configuration Reference](#configuration-reference)):
+3. Parcel Perfect account details, set in the Granite `SystemSettings` table (see [Configuration Reference](#configuration-reference)):
     - **AccountNumber** — the Parcel Perfect account code (`accnum` on every request). Defaults to `WMS001` if not set.
     - **TokenId** — the API token (`token_id`) issued by Parcel Perfect.
     - **BaseUrl** — the `ecomService v32` JSON endpoint to call (sandbox vs. production differ).
@@ -29,31 +29,26 @@ The Parcel Perfect service lets Granite request courier quotes and convert them 
     }
     ```
 
-2. **Add the Parcel Perfect settings** to the `SystemSettings` table:
+2. **Create an IIS site** for the service, following the [Adding a site to IIS](../../iis/getting-started.md#adding-a-site-to-iis) guide, pointed at the published service files.
 
-    ```sql
-    INSERT INTO [dbo].[SystemSettings] ([Application], [Key], [Value], [Description], [ValueDataType], [isEncrypted], [isActive], [AuditDate], [AuditUser])
-    VALUES
-        ('granite.integration.parcelperfect', 'BaseUrl', 'https://adpdemo.pperfect.com/ecomService/v32/Json/', 'Parcel Perfect ecomService v32 JSON API endpoint', 'string', 0, 1, GETDATE(), 'AUTOMATION'),
-        ('granite.integration.parcelperfect', 'TokenId', 'YOUR_TOKEN_ID', 'Parcel Perfect API token', 'string', 0, 1, GETDATE(), 'AUTOMATION'),
-        ('granite.integration.parcelperfect', 'AccountNumber', 'YOUR_ACCOUNT_NUMBER', 'Parcel Perfect account number', 'string', 0, 1, GETDATE(), 'AUTOMATION');
-    ```
+3. **Start the site once** — on first startup the service seeds any missing rows from [Configuration Reference](#configuration-reference) into `SystemSettings` with blank/default values. No manual `INSERT` is needed.
 
-3. **Create an IIS site** for the service, following the [Adding a site to IIS](../../iis/getting-started.md#adding-a-site-to-iis) guide, pointed at the published service files.
+4. **Update the seeded `SystemSettings` rows** with the real values, then restart the IIS site.
 
-4. **Verify installation** — `GET /up` should return a healthy status.
+5. **Verify installation** — `GET /up` should return a healthy status.
 
 ## Configuration Reference
 
-| Key | Where | Description | Required |
-|-----|-------|--------------|----------|
-| `ConnectionStrings:Granite` | `appsettings.json` | Connection string to the Granite SQL Server database | Yes |
-| `BaseUrl` | `SystemSettings` (`Application` = `granite.integration.parcelperfect`) | Base URL of Parcel Perfect's `ecomService v32` JSON API | Yes |
-| `TokenId` | `SystemSettings` (`Application` = `granite.integration.parcelperfect`) | Parcel Perfect API token (`token_id`) | Yes |
-| `AccountNumber` | `SystemSettings` (`Application` = `granite.integration.parcelperfect`) | Parcel Perfect account number (`accnum`), sent on every quote request | No — defaults to `WMS001` |
+| Key | Where | Description | Seeded default | Required |
+|-----|-------|--------------|-----------------|----------|
+| `ConnectionStrings:Granite` | `appsettings.json` | Connection string to the Granite SQL Server database | — (not seeded) | Yes |
+| `BaseUrl` | `SystemSettings` (`Application` = `Granite.Integration.ParcelPerfect`) | Base URL of Parcel Perfect's `ecomService v32` JSON API | `https://adpdemo.pperfect.com/ecomService/v32/Json/` (sandbox) | Yes |
+| `TokenId` | `SystemSettings` (`Application` = `Granite.Integration.ParcelPerfect`) | Parcel Perfect API token (`token_id`) | *(blank)* | Yes |
+| `AccountNumber` | `SystemSettings` (`Application` = `Granite.Integration.ParcelPerfect`) | Parcel Perfect account number (`accnum`), sent on every quote request | `WMS001` | No |
+| `ParcelPerfectIntegrationServiceUrl` | `SystemSettings` (`Application` = `SQLCLR`) | Base URL of this service itself, used by the [SQL CLR](#sql-clr) procedures (no trailing slash — `/quotes` and `/quotes/{id}/accept` are appended by the CLR procedures) | *(blank)* | Yes, for SQL CLR callers |
 
 !!! note
-    Unlike the connection string, the Parcel Perfect account settings live in Granite's `SystemSettings` table (not `appsettings.json`) — the same place every other integration's settings live. They're loaded once at startup, so restart the IIS site after changing them.
+    Unlike the connection string, all of these `SystemSettings` rows — including `ParcelPerfectIntegrationServiceUrl`, which is consumed by the SQL CLR procedures rather than this service — are seeded automatically by the service on first startup and are loaded once at startup, so restart the IIS site after changing them.
 
 ## SQL CLR
 
@@ -70,21 +65,7 @@ Two CLR functions build the JSON array parameters those procedures need:
 !!! note
     See the general [SQLCLR](../../sqlclr/index.md) documentation and [Getting Started](../../sqlclr/getting-started.md) guide for background on how Granite's SQL CLR layer works, and the [Application Security → API Keys](../../security/api-keys.md) page for how `@userName` is used to authenticate the call below.
 
-### System Settings
-
-The procedures resolve the Parcel Perfect service's base URL from the `SystemSettings` table at call time:
-
-| Application | Key | Description |
-|-------------|-----|--------------|
-| `SQLCLR` | `ParcelPerfectIntegrationServiceUrl` | Base URL of the `Granite.Integration.ParcelPerfect` service (no trailing slash — `/quotes` and `/quotes/{id}/accept` are appended by the CLR procedures) |
-
-```sql
-INSERT INTO [dbo].[SystemSettings] ([Application], [Key], [Value], [Description], [ValueDataType], [isEncrypted], [isActive], [AuditDate], [AuditUser])
-SELECT 'SQLCLR', 'ParcelPerfectIntegrationServiceUrl', 'http://10.0.0.1:50010', 'GraniteIntegrationParcelPerfect API Address', 'string', 0, 1, GETDATE(), 'AUTOMATION'
-WHERE NOT EXISTS (
-    SELECT 1 FROM [dbo].[SystemSettings] WHERE [Application] = 'SQLCLR' AND [Key] = 'ParcelPerfectIntegrationServiceUrl'
-);
-```
+The procedures resolve the Parcel Perfect service's own base URL from the `ParcelPerfectIntegrationServiceUrl` `SystemSettings` row at call time — see [Configuration Reference](#configuration-reference) for that setting (it's seeded automatically, along with the service's own settings).
 
 !!! note
     Both procedures authenticate the call with `@userName`'s own Granite API key (`Authorization: Bearer ...`), the same way as other CLR-called services — the user executing the procedure must have an API key configured in Granite.
