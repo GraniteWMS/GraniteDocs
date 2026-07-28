@@ -1,6 +1,6 @@
 # Parcel Perfect Service
 
-The Parcel Perfect integration is a standalone ASP.NET Core (.NET 10) service built on ServiceStack. It is published as its own container image (`granite.integration.parcel-perfect`) rather than deployed into IIS alongside the Integration Service.
+The Parcel Perfect integration is a standalone ASP.NET Core (.NET 10) service built on ServiceStack. Like Granite's other applications, it's deployed to IIS.
 
 !!! note
     This service only handles courier **quoting and waybill/collection conversion**. There is no downward sync job — Parcel Perfect has no document or master-data feed back into Granite today.
@@ -23,8 +23,10 @@ The Parcel Perfect integration is a standalone ASP.NET Core (.NET 10) service bu
 
 ### Prerequisites
 
-1. A connection string to the Granite database — the service creates its own tables in it automatically.
-2. Parcel Perfect account details:
+1. **IIS** — installed and configured with the matching .NET Hosting Bundle
+    - See [IIS Getting Started Guide](../../iis/getting-started.md) for installation instructions
+2. A connection string to the Granite database — the service creates its own tables in it automatically.
+3. Parcel Perfect account details:
     - **AccountNumber** — the Parcel Perfect account code (`accnum` on every request).
     - **TokenId** — the API token (`token_id`) issued by Parcel Perfect.
     - **BaseUrl** — the `ecomService v32` JSON endpoint to call (sandbox vs. production differ).
@@ -49,7 +51,7 @@ The Parcel Perfect integration is a standalone ASP.NET Core (.NET 10) service bu
     !!! warning
         The checked-in `appsettings.json` points at Parcel Perfect's **sandbox** environment (`adpdemo.pperfect.com`) with a demo token. Replace `BaseUrl`, `TokenId` and `AccountNumber` with the client's real production values before going live.
 
-2. **Deploy the service** as a container (see `PublishProfile: DefaultContainer` in the project) and point it at the Granite database.
+2. **Create an IIS site** for the service, following the [Adding a site to IIS](../../iis/getting-started.md#adding-a-site-to-iis) guide, pointed at the published service files.
 
 3. **Verify installation** — `GET /up` should return a healthy status. The four `ParcelPerfectQuote*` tables should appear in the Granite database on first start.
 
