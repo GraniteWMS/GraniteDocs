@@ -37,3 +37,4 @@ See [Service](service.md) for the full architecture, configuration and API refer
 ## Resources
 
 - Parcel Perfect sandbox: `https://adpdemo.pperfect.com/ecomService/v32/Json/`
+- Parcel Perfect demo dashboard: [https://adpdemo.pperfect.com/pponline/](https://adpdemo.pperfect.com/pponline/)
