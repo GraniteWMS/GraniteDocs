@@ -17,10 +17,7 @@ Parcel Perfect is a third-party courier quoting and waybill/collection managemen
 
 Every other integration in this section is called by Granite's Integration Service through an [SDK Provider](../accpac/sdk-provider.md), with downward sync handled by [Scheduler](../../scheduler/manual.md) integration jobs. **Parcel Perfect does not use either of those.**
 
-Instead:
-
-- It's a small, standalone ASP.NET Core / ServiceStack service (`Granite.Integration.ParcelPerfect`) that exposes its own REST API and owns its own audit tables in the Granite database.
-- Granite calls that API directly from SQL Server using **SQL CLR** — not through the Integration Service pipeline.
+Instead, Granite calls this service's API directly from SQL Server using **SQL CLR** — not through the Integration Service pipeline.
 
 See [SQL CLR Invocation](sql-clr-invocation.md) for the procedures, parameters and worked examples, and the general [SQLCLR](../../sqlclr/index.md) reference for background on Granite's SQL CLR layer.
 
@@ -32,7 +29,7 @@ See [SQL CLR Invocation](sql-clr-invocation.md) for the procedures, parameters a
     - a **Collection** — a specific pickup date and time window is requested.
 - Optionally returns the generated waybill and label documents (base64-encoded PDFs) in the accept response.
 
-See [Service](service.md) for the full architecture, configuration and API reference.
+See [Service](service.md) for setup, configuration and the full API reference.
 
 ## Resources
 

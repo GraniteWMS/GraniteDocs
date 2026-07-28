@@ -1,23 +1,9 @@
 # Parcel Perfect Service
 
-The Parcel Perfect integration is a standalone ASP.NET Core (.NET 10) service built on ServiceStack. Like Granite's other applications, it's deployed to IIS.
+The Parcel Perfect service lets Granite request courier quotes and convert them into waybills or collections with Parcel Perfect. It's deployed to IIS, like Granite's other applications.
 
 !!! note
     This service only handles courier **quoting and waybill/collection conversion**. There is no downward sync job — Parcel Perfect has no document or master-data feed back into Granite today.
-
-## Architecture Overview
-
-- **ASP.NET Core / ServiceStack** — REST API exposing the quote endpoints below.
-- **SQL Server (OrmLite)** — persists every quote, its parcels, the rates Parcel Perfect returned, and every accept/convert attempt, directly in the Granite database.
-- **HttpClient-based Parcel Perfect client** — wraps Parcel Perfect's own `ecomService v32` JSON API.
-
-### Key Components
-
-- **QuoteServices** — the two REST endpoints (`CreateQuote`, `AcceptQuote`).
-- **IParcelPerfectClient / ParcelPerfectClient** — wraps the underlying `ecomService` HTTP calls (`requestQuote`, `updateService`, `quoteToWaybill`, `quoteToCollection`).
-- **IQuoteRepository / QuoteRepository** — OrmLite persistence for quotes, parcels, rates and conversions.
-- **ParcelPerfectDbInitializer** — a hosted service that creates the four audit tables on startup if they don't already exist (greenfield service, no migration framework).
-- **Health check** — `GET /up`.
 
 ## Setup
 
@@ -53,7 +39,7 @@ The Parcel Perfect integration is a standalone ASP.NET Core (.NET 10) service bu
 
 2. **Create an IIS site** for the service, following the [Adding a site to IIS](../../iis/getting-started.md#adding-a-site-to-iis) guide, pointed at the published service files.
 
-3. **Verify installation** — `GET /up` should return a healthy status. The four `ParcelPerfectQuote*` tables should appear in the Granite database on first start.
+3. **Verify installation** — `GET /up` should return a healthy status.
 
 ## Configuration Reference
 
@@ -156,39 +142,9 @@ Accepts one of the rated service codes and converts the quote into either a wayb
 | `ServiceCode` wasn't one of the rates returned for this quote | 400 |
 | Collection fields missing or not `HH:mm` when `ConversionType` is `Collection` | 400 |
 
-## Quote Lifecycle
-
-```mermaid
-stateDiagram-v2
-    [*] --> Requested: POST /quotes
-    Requested --> RequestFailed: Parcel Perfect rejects requestQuote
-    Requested --> Accepted: POST /quotes/{id}/accept succeeds
-    RequestFailed --> [*]
-    Accepted --> [*]
-```
-
-Each accept *attempt* is recorded separately (`Pending` → `Succeeded`/`Failed`) rather than overwriting a single outcome, so a retry after a Parcel Perfect failure stays auditable — the latest conversion row is the current outcome for a quote.
-
-## Database
-
-Four tables, created automatically on startup (`CreateTableIfNotExists` — no migration framework, this is a greenfield service):
-
-| Table | Purpose |
-|-------|---------|
-| `ParcelPerfectQuote` | One row per quote request — origin/destination, status, and the raw request/response JSON exchanged with Parcel Perfect |
-| `ParcelPerfectQuoteParcel` | Parcel/carton lines for a quote |
-| `ParcelPerfectQuoteRate` | Rate options Parcel Perfect returned for a quote |
-| `ParcelPerfectQuoteConversion` | One row per accept *attempt* — keeps retries auditable |
-
 ## Error Handling
 
-- Any non-zero `errorcode`, unparseable body, or non-2xx HTTP response from Parcel Perfect raises an internal exception, which this service surfaces to callers as **HTTP 502** carrying Parcel Perfect's own error message.
-- The raw request/response JSON exchanged with Parcel Perfect is always persisted for troubleshooting, even on failure.
-- The Parcel Perfect API token (`token_id`) is never written to logs.
-
-## Underlying Parcel Perfect API
-
-This service is a Granite-shaped wrapper around Parcel Perfect's own `ecomService v32` JSON API — form-urlencoded POSTs with a `method`/`class` dispatch pair and the payload as a JSON string in a `params` field, returning an `{ errorcode, errormessage, total, results }` envelope. Nothing outside this service calls that API directly.
+If Parcel Perfect rejects a request (e.g. invalid account, insufficient prepaid credit), the service returns **HTTP 502** carrying Parcel Perfect's own error message.
 
 ## Resources
 
