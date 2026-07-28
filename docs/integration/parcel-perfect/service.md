@@ -190,4 +190,4 @@ This service is a Granite-shaped wrapper around Parcel Perfect's own `ecomServic
 
 ## Resources
 
-- Calling this service: [SQL CLR Invocation](sql-clr-invocation.md) *(placeholder — details coming soon)*
+- Calling this service: [SQL CLR Invocation](sql-clr-invocation.md)

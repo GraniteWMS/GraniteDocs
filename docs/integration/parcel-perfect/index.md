@@ -22,8 +22,7 @@ Instead:
 - It's a small, standalone ASP.NET Core / ServiceStack service (`Granite.Integration.ParcelPerfect`) that exposes its own REST API and owns its own audit tables in the Granite database.
 - Granite calls that API directly from SQL Server using **SQL CLR** — not through the Integration Service pipeline.
 
-!!! note "Coming soon"
-    The SQL CLR specifics (procedure names, parameters, deployment) haven't been written up yet — see [SQL CLR Invocation](sql-clr-invocation.md) for a placeholder, and the general [SQLCLR](../../sqlclr/index.md) reference for background in the meantime.
+See [SQL CLR Invocation](sql-clr-invocation.md) for the procedures, parameters and worked examples, and the general [SQLCLR](../../sqlclr/index.md) reference for background on Granite's SQL CLR layer.
 
 ## What it does
 
