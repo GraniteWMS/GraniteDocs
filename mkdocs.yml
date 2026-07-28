@@ -40,6 +40,10 @@ nav:
               - SDK Provider: integration/lightspeed/sdk-provider.md
               - Integration Jobs: integration/lightspeed/integration-jobs.md
           - Omni: integration/omni/sdk-provider.md
+          - Parcel Perfect:
+              - integration/parcel-perfect/index.md
+              - Service: integration/parcel-perfect/service.md
+              - SQL CLR Invocation: integration/parcel-perfect/sql-clr-invocation.md
           - QuickBooks: integration/quickbooks/native-app.md
           - SAPB1: integration/sapb1/sdk-provider.md
           - Syspro: integration/syspro/sdk-provider.md
