@@ -12,8 +12,8 @@ The Parcel Perfect service lets Granite request courier quotes and convert them 
 1. **IIS** — installed and configured with the matching .NET Hosting Bundle
     - See [IIS Getting Started Guide](../../iis/getting-started.md) for installation instructions
 2. A connection string to the Granite database — the service creates its own tables in it automatically.
-3. Parcel Perfect account details:
-    - **AccountNumber** — the Parcel Perfect account code (`accnum` on every request).
+3. Parcel Perfect account details, added to the Granite `SystemSettings` table (see [Configuration Reference](#configuration-reference)):
+    - **AccountNumber** — the Parcel Perfect account code (`accnum` on every request). Defaults to `WMS001` if not set.
     - **TokenId** — the API token (`token_id`) issued by Parcel Perfect.
     - **BaseUrl** — the `ecomService v32` JSON endpoint to call (sandbox vs. production differ).
 
@@ -25,27 +25,35 @@ The Parcel Perfect service lets Granite request courier quotes and convert them 
     {
       "ConnectionStrings": {
         "Granite": "Server=YOUR_SERVER;Database=YOUR_GRANITE_DB;User ID=Granite;Password=YOUR_PASSWORD;TrustServerCertificate=true;"
-      },
-      "ParcelPerfect": {
-        "BaseUrl": "https://adpdemo.pperfect.com/ecomService/v32/Json/",
-        "TokenId": "YOUR_TOKEN_ID",
-        "AccountNumber": "YOUR_ACCOUNT_NUMBER"
       }
     }
     ```
 
-2. **Create an IIS site** for the service, following the [Adding a site to IIS](../../iis/getting-started.md#adding-a-site-to-iis) guide, pointed at the published service files.
+2. **Add the Parcel Perfect settings** to the `SystemSettings` table:
 
-3. **Verify installation** — `GET /up` should return a healthy status.
+    ```sql
+    INSERT INTO [dbo].[SystemSettings] ([Application], [Key], [Value], [Description], [ValueDataType], [isEncrypted], [isActive], [AuditDate], [AuditUser])
+    VALUES
+        ('granite.integration.parcelperfect', 'BaseUrl', 'https://adpdemo.pperfect.com/ecomService/v32/Json/', 'Parcel Perfect ecomService v32 JSON API endpoint', 'string', 0, 1, GETDATE(), 'AUTOMATION'),
+        ('granite.integration.parcelperfect', 'TokenId', 'YOUR_TOKEN_ID', 'Parcel Perfect API token', 'string', 0, 1, GETDATE(), 'AUTOMATION'),
+        ('granite.integration.parcelperfect', 'AccountNumber', 'YOUR_ACCOUNT_NUMBER', 'Parcel Perfect account number', 'string', 0, 1, GETDATE(), 'AUTOMATION');
+    ```
+
+3. **Create an IIS site** for the service, following the [Adding a site to IIS](../../iis/getting-started.md#adding-a-site-to-iis) guide, pointed at the published service files.
+
+4. **Verify installation** — `GET /up` should return a healthy status.
 
 ## Configuration Reference
 
-| Key | Description | Required |
-|-----|-------------|----------|
-| `ConnectionStrings:Granite` | Connection string to the Granite SQL Server database | Yes |
-| `ParcelPerfect:BaseUrl` | Base URL of Parcel Perfect's `ecomService v32` JSON API | Yes |
-| `ParcelPerfect:TokenId` | Parcel Perfect API token (`token_id`) | Yes |
-| `ParcelPerfect:AccountNumber` | Parcel Perfect account number (`accnum`), sent on every quote request | Yes |
+| Key | Where | Description | Required |
+|-----|-------|--------------|----------|
+| `ConnectionStrings:Granite` | `appsettings.json` | Connection string to the Granite SQL Server database | Yes |
+| `BaseUrl` | `SystemSettings` (`Application` = `granite.integration.parcelperfect`) | Base URL of Parcel Perfect's `ecomService v32` JSON API | Yes |
+| `TokenId` | `SystemSettings` (`Application` = `granite.integration.parcelperfect`) | Parcel Perfect API token (`token_id`) | Yes |
+| `AccountNumber` | `SystemSettings` (`Application` = `granite.integration.parcelperfect`) | Parcel Perfect account number (`accnum`), sent on every quote request | No — defaults to `WMS001` |
+
+!!! note
+    Unlike the connection string, the Parcel Perfect account settings live in Granite's `SystemSettings` table (not `appsettings.json`) — the same place every other integration's settings live. They're loaded once at startup, so restart the IIS site after changing them.
 
 ## SQL CLR
 
