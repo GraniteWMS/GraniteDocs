@@ -3783,10 +3783,6 @@
 <p><img alt="production_readiness" src="https://img.shields.io/badge/production_readiness-no-cd242c" /></p>
 <p><img alt="clients" src="https://img.shields.io/badge/live_clients-no-cd242c" /></p>
 <p><img alt="status" src="https://img.shields.io/badge/development_status-active-365893" /></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This documentation is a work in progress and is intended to show the development progress of the integration with Parcel Perfect. As such, it may be subject to change as progress is made.</p>
-</div>
 <p>Parcel Perfect is a third-party courier quoting and waybill/collection management platform, accessed here via its <code>ecomService v32</code> JSON API. This integration lets Granite request a courier quote for a shipment and, once a rate is accepted, convert it into either a waybill or a scheduled collection.</p>
 <h2 id="how-this-differs-from-other-granite-integrations">How this differs from other Granite integrations</h2>
 <p>Every other integration in this section is called by Granite's Integration Service through an <a href="../accpac/sdk-provider/">SDK Provider</a>, with downward sync handled by <a href="../../scheduler/manual/">Scheduler</a> integration jobs. <strong>Parcel Perfect does not use either of those.</strong></p>
