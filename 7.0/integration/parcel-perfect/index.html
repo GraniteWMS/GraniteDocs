@@ -3801,8 +3801,9 @@
 </ul>
 </li>
 <li>Optionally returns the generated waybill and label documents (base64-encoded PDFs) in the accept response.</li>
+<li>Receives waybill status, tracking and proof-of-delivery <strong>webhooks</strong> pushed from Parcel Perfect. This is a separate capability from quoting above — it can be enabled independently and has no dependency on the quoting/accept configuration.</li>
 </ul>
-<p>See <a href="service/">Service</a> for setup, configuration and the full API reference.</p>
+<p>See <a href="service/">Service</a> for setup, configuration and the full API reference, and <a href="service/#receiving-webhooks">Service → Receiving Webhooks</a> for the webhook endpoint specifically.</p>
 <h2 id="resources">Resources</h2>
 <ul>
 <li>Parcel Perfect sandbox: <code>https://adpdemo.pperfect.com/ecomService/v32/Json/</code></li>

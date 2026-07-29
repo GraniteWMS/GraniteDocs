@@ -1701,6 +1701,48 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#receiving-webhooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receiving Webhooks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Receiving Webhooks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-create-a-dedicated-granite-user-for-parcel-perfect" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Create a dedicated Granite user for Parcel Perfect
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-arrange-inbound-access-from-parcel-perfect" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Arrange inbound access from Parcel Perfect
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-give-parcel-perfect-the-endpoint-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Give Parcel Perfect the endpoint details
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4107,6 +4149,48 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#receiving-webhooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Receiving Webhooks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Receiving Webhooks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-create-a-dedicated-granite-user-for-parcel-perfect" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Create a dedicated Granite user for Parcel Perfect
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-arrange-inbound-access-from-parcel-perfect" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Arrange inbound access from Parcel Perfect
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-give-parcel-perfect-the-endpoint-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Give Parcel Perfect the endpoint details
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4643,6 +4727,31 @@
 
 <span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">success</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">waybillNumber</span>
 </code></pre></div>
+<h2 id="receiving-webhooks">Receiving Webhooks</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Receiving webhooks is a <strong>separate capability</strong> from quoting and waybill/collection conversion above. It has its own endpoint, its own database tables, and no configuration dependency on the <code>BaseUrl</code>/<code>TokenId</code>/<code>AccountNumber</code> settings — it can be enabled and exercised entirely independently of whether this service is being used to create quotes at all.</p>
+</div>
+<p>Once enabled, Parcel Perfect calls <strong>this service</strong> to push waybill status updates, tracking history and proof-of-delivery documents as they happen, rather than Granite having to poll for them.</p>
+<h3 id="1-create-a-dedicated-granite-user-for-parcel-perfect">1. Create a dedicated Granite user for Parcel Perfect</h3>
+<p>The webhook endpoint requires the same Granite API key authentication as the rest of this service — see <a href="../../../security/api-keys/">Application Security → API Keys</a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Create a <strong>dedicated Granite user for Parcel Perfect</strong> and issue the API key from that account, rather than reusing a real person's key. This keeps the credential Parcel Perfect holds independent of any individual's login, and lets it be rotated or revoked without affecting anyone else.</p>
+</div>
+<h3 id="2-arrange-inbound-access-from-parcel-perfect">2. Arrange inbound access from Parcel Perfect</h3>
+<p>For Parcel Perfect's servers to reach this service, they need inbound network access to wherever it's hosted on the customer's network.</p>
+<div class="admonition warning">
+<p class="admonition-title">Ingress into the customer's network</p>
+<p>This is almost always a firewall/reverse-proxy/DNS change outside of Granite's control. Raise it with the <strong>customer's IT team</strong> early — it's usually the longest lead-time item in getting webhooks live.</p>
+</div>
+<h3 id="3-give-parcel-perfect-the-endpoint-details">3. Give Parcel Perfect the endpoint details</h3>
+<p>Webhook delivery is configured on <strong>Parcel Perfect's side</strong>, not ours — there's no API in this service to register a callback URL. Provide Parcel Perfect (via their support/account team) with:</p>
+<ul>
+<li>This service's public URL for <code>POST /webhooks/parcelperfect</code></li>
+<li>The dedicated Granite API key from step 1, for them to send as the <code>Authorization: Bearer</code> header on every webhook call</li>
+</ul>
+<p>Once Parcel Perfect has both, they'll start pushing events as they occur — no further setup is needed on the Granite side, and this can be enabled independently of whether the service is also being used to create quotes.</p>
 
 
 
