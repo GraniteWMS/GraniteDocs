@@ -28,8 +28,9 @@ See [Service → SQL CLR](service.md#sql-clr) for the procedures, parameters and
     - a **Waybill** — collected on the courier's next scheduled run, or
     - a **Collection** — a specific pickup date and time window is requested.
 - Optionally returns the generated waybill and label documents (base64-encoded PDFs) in the accept response.
+- Receives waybill status, tracking and proof-of-delivery **webhooks** pushed from Parcel Perfect. This is a separate capability from quoting above — it can be enabled independently and has no dependency on the quoting/accept configuration.
 
-See [Service](service.md) for setup, configuration and the full API reference.
+See [Service](service.md) for setup, configuration and the full API reference, and [Service → Receiving Webhooks](service.md#receiving-webhooks) for the webhook endpoint specifically.
 
 ## Resources
 

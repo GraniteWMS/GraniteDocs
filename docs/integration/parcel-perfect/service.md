@@ -267,3 +267,32 @@ END CATCH
 SELECT @success, @message, @waybillNumber
 ```
 
+## Receiving Webhooks
+
+!!! note
+    Receiving webhooks is a **separate capability** from quoting and waybill/collection conversion above. It has its own endpoint, its own database tables, and no configuration dependency on the `BaseUrl`/`TokenId`/`AccountNumber` settings — it can be enabled and exercised entirely independently of whether this service is being used to create quotes at all.
+
+Once enabled, Parcel Perfect calls **this service** to push waybill status updates, tracking history and proof-of-delivery documents as they happen, rather than Granite having to poll for them.
+
+### 1. Create a dedicated Granite user for Parcel Perfect
+
+The webhook endpoint requires the same Granite API key authentication as the rest of this service — see [Application Security → API Keys](../../security/api-keys.md).
+
+!!! tip
+    Create a **dedicated Granite user for Parcel Perfect** and issue the API key from that account, rather than reusing a real person's key. This keeps the credential Parcel Perfect holds independent of any individual's login, and lets it be rotated or revoked without affecting anyone else.
+
+### 2. Arrange inbound access from Parcel Perfect
+
+For Parcel Perfect's servers to reach this service, they need inbound network access to wherever it's hosted on the customer's network.
+
+!!! warning "Ingress into the customer's network"
+    This is almost always a firewall/reverse-proxy/DNS change outside of Granite's control. Raise it with the **customer's IT team** early — it's usually the longest lead-time item in getting webhooks live.
+
+### 3. Give Parcel Perfect the endpoint details
+
+Webhook delivery is configured on **Parcel Perfect's side**, not ours — there's no API in this service to register a callback URL. Provide Parcel Perfect (via their support/account team) with:
+
+- This service's public URL for `POST /webhooks/parcelperfect`
+- The dedicated Granite API key from step 1, for them to send as the `Authorization: Bearer` header on every webhook call
+
+Once Parcel Perfect has both, they'll start pushing events as they occur — no further setup is needed on the Granite side, and this can be enabled independently of whether the service is also being used to create quotes.
