@@ -94,6 +94,28 @@ The script to insert the default settings is located in the GraniteDatabase rele
 By default if the method name below is the same as a Granite Transaction type, it will autowire the integration.
 If you require a different integration action you can specify the name below in the Process IntegrationMethod property.
 
+### SHIPMENT
+- Granite Transaction:  *configure via IntegrationMethod*
+- Accpac: **I/C Shipments** 
+
+- Supports:
+    - Lot / Serial
+- IntegrationPost:
+    - `post = false` → header `STATUS` = 1 (Entered)
+    - `post = true` → header `STATUS` = 2 (Posted)
+- Returns:
+    - DOCNUM of the created shipment
+
+| Granite      | Accpac SDK | Required | Accpac Table          | Behaviour |
+|--------------|------------|----------|-----------------------|-----------|
+| Document     | REFERENCE  | N        | IC0640 (Ship Header)  | Set as header reference if provided |
+| Comment      | HDRDESC    | N        | IC0640 (Ship Header)  | Set as header description if provided |
+| Code         | ITEMNO     | Y        | IC0630 (Ship Detail)  ||
+| FromLocation | LOCATION   | Y        | IC0630 (Ship Detail)  ||
+| ActionQty    | QUANTITY   | Y        | IC0630 (Ship Detail)  | Summed per Code/Batch/ExpiryDate/Serial/FromLocation/ToLocation/UOM/Comment group |
+| Batch        | LOTNUMF, QTY | N      | IC0636 (Ship Detail Lot) | Only applies if item is lot controlled |
+| Serial       | SERIALNUMF | N        | IC0632 (Ship Detail Serial) | Only applies if item is serial controlled |
+
 
 ### TAKEON
 - Granite Transaction: **TAKEON**
