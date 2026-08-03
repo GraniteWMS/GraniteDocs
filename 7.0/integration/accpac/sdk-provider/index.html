@@ -866,6 +866,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#shipment" class="md-nav__link">
+    <span class="md-ellipsis">
+      SHIPMENT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#takeon" class="md-nav__link">
     <span class="md-ellipsis">
       TAKEON
@@ -4313,6 +4322,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#shipment" class="md-nav__link">
+    <span class="md-ellipsis">
+      SHIPMENT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#takeon" class="md-nav__link">
     <span class="md-ellipsis">
       TAKEON
@@ -4788,6 +4806,90 @@ This setting allows you to have multiple integration services running with diffe
 <h2 id="integration-methods">Integration Methods</h2>
 <p>By default if the method name below is the same as a Granite Transaction type, it will autowire the integration.
 If you require a different integration action you can specify the name below in the Process IntegrationMethod property.</p>
+<h3 id="shipment">SHIPMENT</h3>
+<ul>
+<li>Granite Transaction:  <em>configure via IntegrationMethod</em></li>
+<li>
+<p>Accpac: <strong>I/C Shipments</strong> </p>
+</li>
+<li>
+<p>Supports:</p>
+<ul>
+<li>Lot / Serial</li>
+</ul>
+</li>
+<li>IntegrationPost:<ul>
+<li><code>post = false</code> → header <code>STATUS</code> = 1 (Entered)</li>
+<li><code>post = true</code> → header <code>STATUS</code> = 2 (Posted)</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>DOCNUM of the created shipment</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>Accpac SDK</th>
+<th>Required</th>
+<th>Accpac Table</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>REFERENCE</td>
+<td>N</td>
+<td>IC0640 (Ship Header)</td>
+<td>Set as header reference if provided</td>
+</tr>
+<tr>
+<td>Comment</td>
+<td>HDRDESC</td>
+<td>N</td>
+<td>IC0640 (Ship Header)</td>
+<td>Set as header description if provided</td>
+</tr>
+<tr>
+<td>Code</td>
+<td>ITEMNO</td>
+<td>Y</td>
+<td>IC0630 (Ship Detail)</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>LOCATION</td>
+<td>Y</td>
+<td>IC0630 (Ship Detail)</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>QUANTITY</td>
+<td>Y</td>
+<td>IC0630 (Ship Detail)</td>
+<td>Summed per Code/Batch/ExpiryDate/Serial/FromLocation/ToLocation/UOM/Comment group</td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>LOTNUMF, QTY</td>
+<td>N</td>
+<td>IC0636 (Ship Detail Lot)</td>
+<td>Only applies if item is lot controlled</td>
+</tr>
+<tr>
+<td>Serial</td>
+<td>SERIALNUMF</td>
+<td>N</td>
+<td>IC0632 (Ship Detail Serial)</td>
+<td>Only applies if item is serial controlled</td>
+</tr>
+</tbody>
+</table>
 <h3 id="takeon">TAKEON</h3>
 <ul>
 <li>Granite Transaction: <strong>TAKEON</strong></li>
