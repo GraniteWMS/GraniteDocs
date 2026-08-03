@@ -2,11 +2,11 @@
 
 ![maturity](https://img.shields.io/badge/maturity-low-cd242c)
 
-![production_readiness](https://img.shields.io/badge/production_readiness-no-cd242c)
+![production_readiness](https://img.shields.io/badge/production_readiness-medium-449336)
 
 ![clients](https://img.shields.io/badge/live_clients-no-cd242c)
 
-![status](https://img.shields.io/badge/development_status-active-365893)
+![status](https://img.shields.io/badge/development_status-none-365893)
 
 Parcel Perfect is a third-party courier quoting and waybill/collection management platform, accessed here via its `ecomService v32` JSON API. This integration lets Granite request a courier quote for a shipment and, once a rate is accepted, convert it into either a waybill or a scheduled collection.
 
