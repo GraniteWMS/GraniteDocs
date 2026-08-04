@@ -9,8 +9,8 @@ The Parcel Perfect service lets Granite request courier quotes and convert them 
 
 ### Prerequisites
 
-1. **IIS** — installed and configured with the matching .NET Hosting Bundle
-    - See [IIS Getting Started Guide](../../iis/getting-started.md) for installation instructions
+1. **IIS** — installed and configured with the [ASP.NET Core 10 Hosting Bundle](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
+    - See [IIS Getting Started Guide](../../iis/getting-started.md) for general IIS installation instructions
 2. A connection string to the Granite database — the service creates its own tables in it automatically.
 3. Parcel Perfect account details, set in the Granite `SystemSettings` table (see [Configuration Reference](#configuration-reference)):
     - **AccountNumber** — the Parcel Perfect account code (`accnum` on every request). Defaults to `WMS001` if not set.
@@ -159,9 +159,19 @@ DECLARE @success bit
 DECLARE @message nvarchar(max)
 DECLARE @quoteId bigint
 DECLARE @quoteNumber nvarchar(200)
+DECLARE @itemNo nvarchar(50)
+DECLARE @description nvarchar(200)
+DECLARE @pieces int
+DECLARE @length decimal(19,4)
+DECLARE @width decimal(19,4)
+DECLARE @height decimal(19,4)
+DECLARE @actualMassKg decimal(19,4)
 
-SELECT @parcels = dbo.parcelPerfect_AddParcel(@parcels, 'ITEM001', 'Carton of widgets', 1, 30, 20, 15, 4.5)
-SELECT @parcels = dbo.parcelPerfect_AddParcel(@parcels, 'ITEM002', 'Carton of gadgets', 2, 25, 25, 10, 2.0)
+SELECT @itemNo = 'ITEM001', @description = 'Carton of widgets', @pieces = 1, @length = 30, @width = 20, @height = 15, @actualMassKg = 4.5
+SELECT @parcels = dbo.parcelPerfect_AddParcel(@parcels, @itemNo, @description, @pieces, @length, @width, @height, @actualMassKg)
+
+SELECT @itemNo = 'ITEM002', @description = 'Carton of gadgets', @pieces = 2, @length = 25, @width = 25, @height = 10, @actualMassKg = 2.0
+SELECT @parcels = dbo.parcelPerfect_AddParcel(@parcels, @itemNo, @description, @pieces, @length, @width, @height, @actualMassKg)
 
 SELECT @waybillRefs = dbo.parcelPerfect_AddWaybillReference(@waybillRefs, 'SO-100234')
 
