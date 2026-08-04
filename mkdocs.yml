@@ -26,6 +26,7 @@ nav:
               - CIN7 Overview: integration/cin7/cin7-overview.md
               - SDK Provider: integration/cin7/sdk-provider.md
               - Integration Jobs: integration/cin7/integration-jobs.md
+              - Change Log: integration/cin7/cin7-change-log.md
           - Evolution:
               - integration/evo/index.md
               - SDK Provider: integration/evo/sdk-provider.md

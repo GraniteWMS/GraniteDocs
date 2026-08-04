@@ -23,6 +23,7 @@ Once created, it will generate an Account ID and a Key (as below). These need to
 - `DryRun` - Dry run mode (`true`/`false`). Default: `false`. When enabled, payloads are logged and requests are not sent to CIN7.
 - `SetPurchaseOrderPutawayGroup` - Controls put-away grouping for `POSTPUTAWAY` (`true`/`false`). Default: `false`.
 - `StockTakeExpenseAccount` - Expense account used when posting `STOCKTAKE` (Stock Adjustment) requests.
+- `StockAdjustmentExpenseAccount` - Expense account used when posting `RECLASSIFY` and `ADJUSTMENT` (Stock Adjustment) requests. Default: empty.
 - `Carrier` - Default carrier for shipment operations. Default: empty.
 
 ![SystemSettings](./cin7-img/system-settings.png)
@@ -36,6 +37,8 @@ Currently supported transactions/methods are:
 - UPDATETRANSFERTOINTRANSIT (Stock Transfer, PUT)
 - UPDATETRANSFERTOCOMPLETED (Stock Transfer, PUT)
 - STOCKTAKE (Stock Adjustment, POST)
+- RECLASSIFY (Stock Adjustment, POST)
+- ADJUSTMENT (Stock Adjustment, POST)
 - RECEIVE (Purchase Stock Receive, POST)
 - POSTPUTAWAY (Purchase Stock Put Away, POST)
 - PICK (Sale Fulfilment Pick, POST)
@@ -47,8 +50,11 @@ Currently supported transactions/methods are:
 Outstanding transaction types:
 
 - Replenish 
-- Reclassify
 - Scrap
+
+### Retry behavior
+
+Requests to the CIN7 API are made through a shared retry pipeline. Responses with HTTP status `429` (Too Many Requests) or `503` (Service Unavailable) are automatically retried up to 2 times using exponential backoff with jitter, starting at a 3 second delay.
 
 
 ### STOCKTAKE
@@ -81,6 +87,71 @@ An important thing to note about this process is that it will set the total qty 
 | Serial                      | BatchSN  |N||
 | ExpirationDate              | ExpiryDate|N||
 | Comment                     | Comments|N||
+
+### RECLASSIFY
+
+- Granite Transaction: **RECLASSIFY**
+- CIN7: **STOCK ADJUSTMENT**
+- Supports:
+    - Batch
+    - Expiration Date
+- Behavior:
+    - Not supported for serialized items - throws an exception if any transaction has a `Serial`.
+    - Fetches CIN7 product availability (by SKU) for both the `FromCode` and `ToCode` items involved.
+    - Groups transactions by code, location, and whichever of batch/expiry the item tracks (determined from the availability data).
+    - For the "from" side, reduces the matching availability `OnHand` quantity by the transaction `ActionQty`. Throws if no matching availability record is found, or if the resulting quantity would be negative.
+    - For the "to" side, increases the matching availability `OnHand` quantity by the transaction `ActionQty` (or uses `ActionQty` directly if no existing availability record is found for that batch/expiry/location).
+    - Uses Granite `Code` to resolve CIN7 `ProductID` (Master Item ERP ID). Throws if the code is empty or if the corresponding Granite MasterItem has no `ERPIdentification`.
+    - Sets each line's comment to `Granite Reclassify by: {quantity}`.
+    - Uses system setting `StockAdjustmentExpenseAccount` for the CIN7 adjustment account.
+    - Reference is set to `Granite Reclassify. Transaction ids: {transaction ids}`.
+    - Posts with CIN7 status `DRAFT`.
+- Integration Post
+    - Not used by the current implementation for this method.
+- Returns:
+    Stock Adjustment Task ID
+
+| Granite    | CIN7 Entity | Required | Behavior |
+|------------|-------------|----------|-----------|
+| FromCode                    | ProductID (via Master Item ERP ID) |Y| Source item, quantity reduced by ActionQty |
+| ToCode                      | ProductID (via Master Item ERP ID) |Y| Destination item, quantity increased by ActionQty |
+| ActionQty                   | Quantity delta |Y||
+| FromLocation                | Location  |Y| Used for the source line |
+| ToLocation                  | Location  |Y| Used for the destination line |
+| Batch                       | BatchSN  |N||
+| ExpirationDate              | ExpiryDate|N||
+
+### ADJUSTMENT
+
+- Granite Transaction: **ADJUSTMENT**
+- CIN7: **STOCK ADJUSTMENT**
+- Supports:
+    - Batch
+    - Expiration Date
+- Behavior:
+    - Not supported for serialized items - throws an exception if any transaction has a `Serial`.
+    - Fetches CIN7 product availability (by SKU) for the `FromCode` items involved.
+    - Groups transactions by code, location, and whichever of batch/expiry the item tracks (determined from the availability data).
+    - Calculates the adjustment quantity per line as `ToQty - FromQty`.
+    - Adds the adjustment quantity to the matching availability `OnHand` quantity (or uses the adjustment quantity directly if no existing availability record is found). Throws if no matching availability record is found and the adjustment is negative, or if the resulting quantity would be negative.
+    - Uses Granite `Code` to resolve CIN7 `ProductID` (Master Item ERP ID). Throws if the code is empty or if the corresponding Granite MasterItem has no `ERPIdentification`.
+    - Sets each line's comment to `Granite Adjustment by: {quantity}`.
+    - Uses system setting `StockAdjustmentExpenseAccount` for the CIN7 adjustment account.
+    - Reference is set to `Granite Adjustment. Transaction ids: {transaction ids}`.
+    - Posts with CIN7 status `DRAFT`.
+- Integration Post
+    - Not used by the current implementation for this method.
+- Returns:
+    Stock Adjustment Task ID
+
+| Granite    | CIN7 Entity | Required | Behavior |
+|------------|-------------|----------|-----------|
+| FromCode                    | ProductID (via Master Item ERP ID) |Y||
+| FromQty                     | -  |Y| Used with ToQty to calculate the adjustment quantity |
+| ToQty                       | Quantity (adjustment = ToQty - FromQty) |Y||
+| FromLocation                | Location  |Y||
+| Batch                       | BatchSN  |N||
+| ExpirationDate              | ExpiryDate|N||
 
 ### MOVE
 
@@ -203,8 +274,9 @@ Standard TRANSFER posting and transfer status updates are implemented.
     - When `SetPurchaseOrderPutawayGroup` is `false` (default), reads `advanced-purchase` and attempts to reuse an open put-away task (`DRAFT` or `NOT AVAILABLE`).
     - In default mode, skips reusing a put-away task when the linked invoice is not open and the put-away already has lines.
     - When `SetPurchaseOrderPutawayGroup` is `true`, requires a single `TransactionDocumentReference`, extracts the trailing numeric suffix (for example `ABC-123` -> `123`), and matches that value to CIN7 `InvoicingAndReceivingNumber`.
-    - With put-away grouping enabled, reuses only an open matching put-away task (`DRAFT` or `NOT AVAILABLE`); otherwise creates a new put-away task.
-    - If no suitable open put-away task is found, uses `00000000-0000-0000-0000-000000000000` to create a new put-away task.
+    - With put-away grouping enabled, reuses the matching put-away task's `TaskID` when it is open (`DRAFT` or `NOT AVAILABLE`); otherwise uses `00000000-0000-0000-0000-000000000000` to create a new put-away task.
+    - With put-away grouping enabled, if no put-away task matches the `InvoicingAndReceivingNumber`, falls back to the matching invoice's `TaskID` if one exists; if neither a matching put-away task nor a matching invoice is found, throws an exception.
+    - In default (non-grouping) mode, if no suitable open put-away task is found, uses `00000000-0000-0000-0000-000000000000` to create a new put-away task.
 - Integration Post
     - Not used by the current implementation for this method.
 - Returns:

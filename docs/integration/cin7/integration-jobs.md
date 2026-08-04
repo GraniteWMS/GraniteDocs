@@ -273,6 +273,8 @@ If a change is made in the ERP system that would put Granite into an invalid sta
 ### Master data jobs
 MasterItems and TradingPartners have their own Jobs. These Jobs fetch all StockItems, Vendors, and Customers from  CIN7 and compares them to the MasterItems and TradingPartners in Granite. Any inserts / updates are done as required. 
 
+When the full MasterItem sync runs (`SyncAllMasterItems`), any Granite MasterItem whose `ERPIdentification` is no longer present in the CIN7 StockItems returned is marked inactive and has `_REMOVED` appended to its `Code` and `FormattedCode`. Items whose `Code`/`FormattedCode` already end with `_REMOVED` are skipped so they are not re-marked on subsequent runs. This removal marking only happens on the full sync - incremental updates do not mark items as removed.
+
 The document jobs also sync changes to the MasterItems that are on the document. This means that on sites that do not make many changes to their MasterItems it is better to limit running this job to once a day or even less frequently. 
 
 Document Jobs do not automatically sync trading partners as they are not required to create to the document in Granite and as such are only synced when the TradingPartner Job runs. 
