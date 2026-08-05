@@ -44,6 +44,7 @@ Currently supported transactions/methods are:
 - PICK (Sale Fulfilment Pick, POST)
 - PACK (Sale Fulfilment Pack, POST)
 - POSTPACKANDSHIP (Sale Fulfilment Pack and Ship, POST)
+- SALECREDITNOTE (Sale Credit Note, VALIDATE)
 - CONSUME (Finished Goods Pick Lines, POST)
 - MANUFACTURE (Finished Goods, PUT)
 
@@ -210,11 +211,11 @@ Standard TRANSFER posting and transfer status updates are implemented.
 - CIN7: **STOCK Transfer (PUT update to IN TRANSIT)**
 - Behavior:
     - Uses Granite `Document` to resolve CIN7 `TaskID` from Granite `ERPIdentification`.
-    - Validates that transfer lines match before update.
+    - Matches transfer lines to Granite transactions by SKU and whichever of batch/serial/expiry the line specifies, flagging lines with no matching transaction, transactions claimed by more than one line, and quantity mismatches.
     - Sets transfer status to `IN TRANSIT`.
 - Integration Post
-    - False - Verifies CIN7 transfer quantities match Granite quantities before update.
-    - True - Updates CIN7 transfer quantities to Granite quantities before update.
+    - False - Verifies CIN7 transfer quantities match Granite quantities before update; throws if any line discrepancies are found.
+    - True - Updates CIN7 transfer quantities to match Granite quantities before update. Lines with no matching Granite transactions have their quantity set to 0. Granite transactions not claimed by any CIN7 line are grouped and appended as new lines (CIN7 `ProductID` resolved via Granite MasterItem ERP ID). Lines added or adjusted this way are tagged with a `Comments` note.
 - Returns:
     Stock Transfer Task ID
 
@@ -224,11 +225,11 @@ Standard TRANSFER posting and transfer status updates are implemented.
 - CIN7: **STOCK Transfer (PUT update to COMPLETED)**
 - Behavior:
     - Uses Granite `Document` to resolve CIN7 `TaskID` from Granite `ERPIdentification`.
-    - Validates that transfer lines match before update.
+    - Matches transfer lines to Granite transactions by SKU and whichever of batch/serial/expiry the line specifies, flagging lines with no matching transaction, transactions claimed by more than one line, and quantity mismatches.
     - Sets transfer status to `COMPLETED`.
 - Integration Post
-    - False - Verifies CIN7 transfer quantities match Granite quantities before update.
-    - True - Updates CIN7 transfer quantities to Granite quantities before update.
+    - False - Verifies CIN7 transfer quantities match Granite quantities before update; throws if any line discrepancies are found.
+    - True - Updates CIN7 transfer quantities to match Granite quantities before update. Lines with no matching Granite transactions have their quantity set to 0. Granite transactions not claimed by any CIN7 line are grouped and appended as new lines (CIN7 `ProductID` resolved via Granite MasterItem ERP ID). Lines added or adjusted this way are tagged with a `Comments` note.
 - Returns:
     Stock Transfer Task ID
 
@@ -463,6 +464,33 @@ SELECT 'StepInput', @stepInput
 SELECT * FROM @Output
 
 ```
+
+### SALECREDITNOTE
+
+- Granite Transaction: **SALECREDITNOTE**
+- CIN7: **Sale Credit Note**
+- Supports:
+    - Batch
+    - Serial
+    - Expiration Date
+- Behavior:
+    - Uses Granite `Document` to resolve the CIN7 credit note `TaskID` from Granite `ERPIdentification`.
+    - Fetches the credit note from `sale/creditnote` and matches it by `TaskID`.
+    - Validates each CIN7 restock line against Granite transactions by SKU and whichever of batch/serial/expiry the line specifies, flagging lines with no matching transaction, transactions claimed by more than one line, quantity mismatches, and Granite transactions with no matching restock line.
+    - Does not post anything to CIN7 - throws (and logs) an exception listing all validation errors found.
+- Integration Post
+    - Not used by the current implementation for this method.
+- Returns:
+    Sale Credit Note Task ID
+
+| Granite    | CIN7 Entity | Required | Behavior |
+|------------|-------------|----------|-----------|
+| Document                   | TaskID (via ERPIdentification) |Y||
+| Code                        | SKU  |Y||
+| ActionQty                   | Quantity  |Y||
+| Batch                       | BatchSN  |N||
+| Serial                      | BatchSN  |N||
+| ExpirationDate              | ExpiryDate|N||
 
 ### CONSUME
 

@@ -31,6 +31,30 @@ Template:
 ```
 -->
 
+## 2026-08-05
+
+### SDK Provider
+
+<h4>Version: 7.0.12.0</h4>
+<h4>Changes:</h4>
+- Added a new SALECREDITNOTE method that validates a CIN7 sale credit note's restock lines against the matching Granite transactions (by SKU, batch/serial and expiry), reporting missing matches, transactions claimed by more than one line, quantity mismatches, and unmatched Granite transactions.
+- Improved line validation for stock transfer IN TRANSIT/COMPLETED updates: matching now also considers expiry date, and detects transactions claimed by more than one line.
+- When posting stock transfer quantity updates, lines with no matching Granite transaction now have their quantity set to 0, and Granite transactions with no matching CIN7 line are now added as new lines on the transfer instead of being left out.
+
+### Injected Jobs
+
+<h4>Version: 7.0.7.0</h4>
+<h4>Changes:</h4>
+- Added a new Sale Credit Note job that syncs CIN7 sale credit notes (status AUTHORISED) into Granite as RECEIVING documents, with a configurable lookback window (`SaleCreditNoteLookbackMinutes`) and location filtering.
+- Transfer document lines now also map Batch and ExpiryDate from the CIN7 transfer line.
+<h4>Fixes:</h4>
+- MasterItem sync from document lines now matches items using the line's MasterItem ERP identification instead of the document line's own identification, fixing lookups for lines where these values differ (for example, batched transfer lines). Lines missing this identification are now logged and skipped instead of causing incorrect matches.
+
+!!! warning "Action required"
+    Any customized detail-mapping F# script (`Configuration/Scripts/*JobConfiguration.fsx`) must set `MasterItem_ERPIdentification` on the mapped `DocumentDetail`. Scripts that do not set this value will have their document lines logged as errors and skipped when syncing MasterItems from documents.
+
+    Example: `MasterItem_ERPIdentification = productId`
+
 ## 2026-07-23
 
 ### SDK Provider

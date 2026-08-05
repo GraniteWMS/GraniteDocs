@@ -80,6 +80,10 @@ INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescripti
 SELECT 0, 'CIN7 Finished Goods Job', 'Syncs Finished Goods from CIN7', 'INJECTED', 'Granite.Integration.CIN7.Job.WorkOrder', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'CIN7 Finished Goods Job');
 
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'CIN7 Sale Credit Note Job', 'Syncs Sale Credit Notes from CIN7', 'INJECTED', 'Granite.Integration.CIN7.Job.SalesCreditNote', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'CIN7 Sale Credit Note Job');
+
 ```
 
 For the Product Availability Job you need this table.
@@ -130,8 +134,13 @@ GO
 - `api-auth-applicationkey` - CIN7 API Application Key (encrypted).
 - `SalesOrderLookbackMinutes` - Number of minutes to look back before the last integration time when fetching sales orders (default 0). Prevents missing orders created during the job run.
 - `PurchaseOrderLookbackMinutes` - Number of minutes to look back before the last integration time when fetching purchase orders (default 0). Prevents missing orders created during the job run.
+- `SaleCreditNoteLookbackMinutes` - Number of minutes to look back before the last integration time when fetching sale credit notes (default 0). Prevents missing credit notes created during the job run.
 
 ![SystemSettings](./cin7-img/system-settings.png)
+
+### Retry behavior
+
+CIN7 API calls made by the job (e.g. fetching products, orders, and credit notes) are retried up to 3 times. Responses with HTTP status `429` (Too Many Requests) or `503` (Service Unavailable) are treated as rate-limited and retried with exponential backoff (30s, 60s, 120s). Other request failures are retried with a shorter exponential backoff (starting at 5s).
 
 
 ### F# Mapping Scripts
@@ -148,6 +157,7 @@ Mapping scripts are located in the `Configuration/Scripts/` directory within the
 - `PurchaseOrderJobConfiguration.fsx` - Purchase Order document mappings
 - `TransferJobConfiguration.fsx` - Stock Transfer document mappings
 - `FinishedGoodsJobConfiguration.fsx` - Finished Goods/Work Order document mappings
+- `SaleCreditNoteJobConfiguration.fsx` - Sale Credit Note document mappings
 
 <h4>How It Works</h4>
 
@@ -174,7 +184,7 @@ Each configuration script can define:
 
 **Mapping Functions:**
 
-- `MapToSalesOrder` / `MapToPurchaseOrder` / `MapToTransfer` / `MapToWorkOrder` - Transform CIN7 documents to Granite documents
+- `MapToSalesOrder` / `MapToPurchaseOrder` / `MapToTransfer` / `MapToWorkOrder` / `MapToCreditNote` - Transform CIN7 documents to Granite documents
 - `MapToMasterItem` - Transform CIN7 products to Granite MasterItems
 - `MapCustomerToTradingPartner` / `MapSupplierToTradingPartner` - Transform CIN7 customers/suppliers to Granite Trading Partners
 
@@ -250,6 +260,14 @@ If a change is made in the ERP system that would put Granite into an invalid sta
 - Can filter by ManagedLocations in configuration
 - Uses ToLocation for document lines
 
+<h4>Sale Credit Note (RECEIVING)</h4>
+
+- Fetches CIN7 Sale Credit Notes with status "AUTHORISED" that have been updated since the last integration time
+- Applies `SaleCreditNoteLookbackMinutes` system setting to look back before the last integration time, preventing missed credit notes created during the job run
+- Maps to Granite document type RECEIVING
+- Can filter by ManagedLocations in configuration - a credit note is skipped unless at least one of its restock lines is for a managed location
+- Uses ToLocation (per restock line) for document lines
+
 <h4>Transfer (TRANSFER)</h4>
 
 - Fetches CIN7 Stock Transfers with status "ORDERED"
@@ -259,6 +277,7 @@ If a change is made in the ERP system that would put Granite into an invalid sta
     - Only ToLocation managed → RECEIVING (inbound)
 - Can filter by ManagedLocations in configuration
 - Uses both FromLocation and ToLocation for document lines
+- Document lines also map Batch and ExpiryDate from the CIN7 transfer line
 
 <h4>Work Order (WORKORDER)</h4>
 
@@ -276,6 +295,8 @@ MasterItems and TradingPartners have their own Jobs. These Jobs fetch all StockI
 When the full MasterItem sync runs (`SyncAllMasterItems`), any Granite MasterItem whose `ERPIdentification` is no longer present in the CIN7 StockItems returned is marked inactive and has `_REMOVED` appended to its `Code` and `FormattedCode`. Items whose `Code`/`FormattedCode` already end with `_REMOVED` are skipped so they are not re-marked on subsequent runs. This removal marking only happens on the full sync - incremental updates do not mark items as removed.
 
 The document jobs also sync changes to the MasterItems that are on the document. This means that on sites that do not make many changes to their MasterItems it is better to limit running this job to once a day or even less frequently. 
+
+When syncing MasterItems from a document, each document line is matched to Granite using its `MasterItem_ERPIdentification` value (rather than the line's own `ERPIdentification`, which may be a composite value such as ProductID+Batch). If a document line has no `MasterItem_ERPIdentification`, it is logged as an error and skipped so it does not block the rest of the document's items from being synced.
 
 Document Jobs do not automatically sync trading partners as they are not required to create to the document in Granite and as such are only synced when the TradingPartner Job runs. 
 
