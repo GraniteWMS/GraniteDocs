@@ -275,7 +275,7 @@ It is not mapped to any specific Granite transaction type. If you have a require
 
 - Integration Post
     - False - Creates a new Shipment with status Open
-    - True - Creates a new shipment and performs the Confirm Shipment action
+    - True - Creates a new shipment, performs the Confirm Shipment action, and waits for the action to complete before returning
 
 - Returns:
     Shipment Number
@@ -507,11 +507,14 @@ WHERE T.IntegrationStatus = 0
 - Returns:
     Purchase Order Receipt Number
 
+!!! note
+    `ReceiptQty` is no longer sent on the receipt detail — Acumatica was duplicating allocations when both `ReceiptQty` and `Allocations` were posted together. Quantity is now derived from `Allocations` only.
+
 | Granite    | Acumatica Entity | Required | Behavior |
 |------------|------------------|----------|-----------|
 | Document                   | POOrderNumber |Y||
 | LineNumber                 |               |Y||
-| Qty                        | ReceiptQty    |Y||
+| Qty                        | (via Allocations) |Y| Quantity is sent through the allocation lines; `ReceiptQty` is not posted |
 | DocumentTradingPartnerCode | VendorID      |Y||
 | ToLocation                 | WarehouseID   |Y||
 | ToSite                     | Allocation Location |N| Used when `ReceiveToBin = true` |
@@ -560,11 +563,12 @@ WHERE T.IntegrationStatus = 0
 - Validation behavior:
     - Validates each purchase receipt allocation against Granite `ActionQty` using `LineNumber-SplitLineNumber`.
     - For lot/serial tracked allocations, validates quantity per lot/serial number; otherwise validates total allocation quantity for the split line.
+    - When the ERP allocation has an expiry date, lot/serial quantity validation also filters the matching Granite transactions by `ExpiryDate`, and the resulting mismatch error message includes the expiry date.
     - If allocations are missing or quantities do not match, integration fails with validation errors.
     - On successful validation, sets `VendorRef` to `Quantity validated in Granite yyyy-MM-dd HH:mm:ss`.
 - Integration Post
     - False - Runs validation and updates the PO Receipt Return without releasing.
-    - True - Runs validation, updates the document, and invokes release.
+    - True - Runs validation, updates the document, invokes release, and waits for the release action to complete before returning.
 - Returns:
     `AcumaticaReturnToSupplierPrefix` + purchase receipt return number.
 

@@ -16,3 +16,5 @@ There are two parts to the complete integration solution:
 
 To get an overview of the Acumatica entities/objects that are used in integration see [Acumatica Overview](acumatica-overview.md)
 
+All changes can be found here [Change Log](acumatica-change-log.md)
+

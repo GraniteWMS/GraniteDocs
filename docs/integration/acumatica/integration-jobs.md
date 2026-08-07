@@ -129,6 +129,8 @@ For Return to Supplier (RTS) the statuses are mapped in the following way:
 | Hold = false and Released = false | ENTERED |
 | Released = true | COMPLETE |
 
+Return to Supplier document lines now include the split's `ExpireDate` as the Granite line `ExpiryDate`, so the [SDK Provider's `RETURNTOSUPPLIER` expiry validation](./sdk-provider.md#returntosupplier) has an expiry date to match against.
+
 For Transfers and Receipts the statuses are mapped in the following way:
 
 | Acumatica Status | Granite Status | 
@@ -136,6 +138,18 @@ For Transfers and Receipts the statuses are mapped in the following way:
 | Balanced | ENTERED |
 | On hold | ONHOLD |
 | Released | COMPLETED|
+
+#### Document Optional Fields
+Documents support generic optional fields, stored in the `OptionalFields` / `OptionalFieldValues_Document` tables rather than as dedicated columns, so new ERP-sourced supplementary data can be attached to a Document without a schema change.
+
+After a document header is synced, each key/value pair present on `Document.OptionalFields` is synced to Granite:
+
+- If no active `OptionalField` definition exists for the key (`AppliesTo = DOCUMENT`), one is created automatically and used going forward.
+- If a value doesn't exist yet for the document, it is inserted (empty values are skipped).
+- If a value already exists and differs from the ERP value, it is updated.
+- Errors syncing an individual optional field are logged to the document's `IntegrationLog` and do not stop the rest of the document sync.
+
+**Ship-To Address** is the first optional field populated this way: for Sales Orders, the ship-to address (`SOAddressByShipAddressID` - address lines, city, state, country, postal code) is combined into a single comma-separated value and synced as the `Ship To Address` optional field.
 
 #### Purchase Receipt job
 `PurchaseOrderReceiptJob` integrates Acumatica Purchase Receipts into Granite as a Purchase order with the lines linked back to the original Purchase Order line via the `LinkedDetail_id`.
@@ -180,12 +194,22 @@ Shipment job behavior:
 - Kit parent shipment lines are written as `Qty = 0` with a `Comment` indicating number of kits; split/component lines carry the actual quantities.
 - Open shipments are only set to Granite `ENTERED` when every non-kit ship line is fully assigned across its splits; otherwise they remain `ONHOLD`.
 - Shipment document number prefix is configured with `AcumaticaShipmentPrefix`.
+- Document `Priority` is set to the highest Sales Order `Priority` (`SOOrderByOrigOrderNbr`) found across the shipment's lines.
+- Document `ExpectedDate` is set from the Acumatica shipment `ShipDate`.
+
+##### Deleted shipment handling
+Shipments deleted in Acumatica are detected and cancelled in Granite:
+
+- Before queuing regular updates, the job queries Acumatica's audit history (`PX_SM_AuditHistory`) for `SOShipment` delete operations (`Operation eq 'D'`) since the last integration time, and queues the matching Granite documents (by number) for processing, skipping any already queued.
+- When a queued document's ERP record can no longer be found (this applies to any document type processed through `DocumentJob`, not just shipments), the existing Granite document is set to `CANCELLED` and `Document deleted in Acumatica` is appended to (or used as) its `Description`, instead of failing the sync.
 
 
 ### Master data jobs
 MasterItems and TradingPartners have their own Jobs. These Jobs fetch all StockItems, Vendors, and Customers from  Acumatica and compares them to the MasterItems and TradingPartners in Granite. Any inserts / updates are done as required. 
 Before processing queued documents, document jobs also sync all updated MasterItems from Acumatica (based on the latest posted document integration time), and then upsert MasterItems referenced on each document. This means that on sites that do not make many changes to their MasterItems it is better to limit running this job to once a day or even less frequently. 
 MasterItem `isActive` is treated as `false` for item statuses `DE` (discontinued) and `IN` (inactive); all other statuses are treated as active.
+
+MasterItem `UnitValue` is synced only when StockItems are fetched directly from Acumatica (not when a MasterItem is upserted from a document, where cost data isn't present). The value is taken from the stock item's cost collection (`INItemCostCollection`) entry whose `CuryID` matches the `AcumaticaStockItemCurrencyID` system setting (default `ZAR`); if no entry matches, `UnitValue` defaults to `0` and a warning is logged listing the currencies that were available.
 
 Document Jobs do not automatically sync trading partners as they are not required to create to the document in Granite and as such are only synced when the TradingPartner Job runs. 
 
@@ -439,6 +463,10 @@ Optional comma-delimited list of Acumatica Sales Order `OrderType` values to int
 <h5>AcumaticaCustomerReturnTypes</h5>
 
 Comma-delimited list of Acumatica Sales Order `OrderType` values to integrate as customer returns (Granite `RECEIVING`). Default: `RC`.
+
+<h5>AcumaticaStockItemCurrencyID</h5>
+
+The Acumatica currency ID used to select which entry in a stock item's cost collection is synced to MasterItem `UnitValue`. Default: `ZAR`.
 
 <h5>AcumaticaIntransitLocation</h5>
 

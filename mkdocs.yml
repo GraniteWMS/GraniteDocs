@@ -21,6 +21,7 @@ nav:
               - Acumatica Overview: integration/acumatica/acumatica-overview.md
               - SDK Provider: integration/acumatica/sdk-provider.md
               - Integration Jobs: integration/acumatica/integration-jobs.md
+              - Change Log: integration/acumatica/acumatica-change-log.md
           - CIN7:
               - integration/cin7/index.md
               - CIN7 Overview: integration/cin7/cin7-overview.md
