@@ -2,6 +2,8 @@
 
 Integration jobs are a special type of [Scheduler](../../scheduler/manual.md) job called [injected jobs](../../scheduler/manual.md#injected-jobs-integration-jobs). These jobs pull data from Sage Intacct into Granite, including master data (items and trading partners) and documents (orders, purchase orders, transfers).
 
+Documents are queued for these jobs in real time via the [Webhook Listener API](webhook-listener-api.md).
+
 ## Architecture
 
 The integration jobs use the **Sage Intacct .NET SDK** to communicate with the Intacct XML API, combined with a **configurable F# mapping system** that allows for easy customization without recompiling the entire application.
@@ -46,9 +48,23 @@ The integration jobs use the **Sage Intacct .NET SDK** to communicate with the I
 
 </div>
 
+## Inventory Totals Job
+
+In addition to the document and master data jobs above, `InventoryTotalsJob` syncs on-hand quantities, on-order quantities, and average cost from Intacct's `ITEMWAREHOUSEINFO` object into the `Integration_Intacct_StockOnHand` table, for every warehouse that has a matching `ERPLocation` configured on a Granite `Location`.
+
 ## Setup
 
-### Add the Sage Intacct providers to the Granite Scheduler
+### 1. Run the Database Setup Script
+
+Run `SageIntacctIntegration_Create.sql` — which ships in the `GraniteDatabase` folder of the Granite release — against the Granite database. This provisions:
+
+- The `Integration_Intacct_StockOnHand` table
+- The `ScheduledJobs` rows for each Sage Intacct integration job
+- The `SystemSettings` rows used by the Integration Jobs
+
+The manual SQL scripts in the remaining steps are shown for reference, and for updating an existing installation that predates the setup script.
+
+### 2. Add the Sage Intacct providers to the Granite Scheduler
 
 Copy the dlls and xml files from `GraniteScheduler\Providers\Intacct` into the root folder of GraniteScheduler. 
 
@@ -56,7 +72,7 @@ Example:
 
 ![Injectedjobfiles](intacct-img\injectedjobfiles.png)
 
-### Configure Scheduled Jobs
+### 3. Configure Scheduled Jobs
 
 To create Scheduled Jobs run the following script:
 
@@ -68,14 +84,15 @@ VALUES	(0, 'MasterItemSync', 'Syncs MasterItems from Intacct', 'INJECTED', 'Gran
 		(0, 'TradingPartnerSync', 'Syncs Trading Partners from Intacct', 'INJECTED', 'Granite.Integration.SageIntacct.Job.TradingPartnerJob', '4', 'HOURS', GETDATE(), 'AUTOMATION'),
 		(0, 'IntransitTransferSync', 'Syncs Intransit Transfers from Intacct', 'INJECTED', 'Granite.Integration.SageIntacct.Job.IntransitTransferJob', '5', 'MINUTES', GETDATE(), 'AUTOMATION'),
 		(0, 'ReceiptTransferSync', 'Syncs Receipt Transfers from Intacct', 'INJECTED', 'Granite.Integration.SageIntacct.Job.ReceiptTransferJob', '5', 'MINUTES', GETDATE(), 'AUTOMATION'),
-		(0, 'WarehouseTransferSync', 'Syncs Warehouse Transfers from Intacct', 'INJECTED', 'Granite.Integration.SageIntacct.Job.WarehouseTransferJob', '4', 'HOURS', GETDATE(), 'AUTOMATION')
+		(0, 'WarehouseTransferSync', 'Syncs Warehouse Transfers from Intacct', 'INJECTED', 'Granite.Integration.SageIntacct.Job.WarehouseTransferJob', '4', 'HOURS', GETDATE(), 'AUTOMATION'),
+		(0, 'InventoryTotalsSync', 'Syncs Inventory Totals (stock on hand) from Intacct', 'INJECTED', 'Granite.Integration.SageIntacct.Job.InventoryTotalsJob', '4', 'HOURS', GETDATE(), 'AUTOMATION')
 ```
 
 For all the details on configuring scheduled jobs, see the scheduler documentation on [configuring schedules](../../scheduler/manual.md#configuring-schedules).
 
 After configuring the schedules, be sure to set `isActive` true for the jobs that you want to run.
 
-### System Settings
+### 4. System Settings
 The settings for Intacct Integration Jobs are all stored in the SystemSettings table. 
 When jobs run, any missing settings will be inserted automatically.
 
@@ -90,11 +107,7 @@ VALUES  ('Integration.SageIntacct.Job', 'SenderId', '', 'Sage Intacct API Sender
         ('Integration.SageIntacct.Job', 'UserId', '', 'Sage Intacct API User ID', 1, 0, GETDATE(), 'AUTOMATION', 0),
         ('Integration.SageIntacct.Job', 'UserPassword', '', 'Sage Intacct API User Password', 1, 0, GETDATE(), 'AUTOMATION', 0),
         ('Integration.SageIntacct.Job', 'SageDateFormat', 'MM/dd/yyyy HH:mm:ss', 'Sage Intacct Date Format', 1, 0, GETDATE(), 'AUTOMATION', 0),
-        ('Integration.SageIntacct.Job', 'ItemTypes', 'I,K,SK', 'Comma separated list of Item Types to sync from Intacct. Valid types are I, NI, NP, NS, K, SK', 1, 0, GETDATE(), 'AUTOMATION', 0),
-        ('Integration.SageIntacct.Job', 'SalesOrderTypes', 'Sales Order,Sales Order-Inventory', 'Comma separated list of Sales Order Types to sync from Intacct.', 1, 0, GETDATE(), 'AUTOMATION', 0),
-        ('Integration.SageIntacct.Job', 'PurchaseOrderTypes', 'Purchase Order,Purchase Order-Inventory', 'Comma separated list of Purchase Order Types to sync from Intacct.', 1, 0, GETDATE(), 'AUTOMATION', 0),
-        ('Integration.SageIntacct.Job', 'IntransitTransferTypes', 'Inventory Transfer Out', 'Comma separated list of Intransit Transfer Types to sync from Intacct.', 1, 0, GETDATE(), 'AUTOMATION', 0),
-        ('Integration.SageIntacct.Job', 'ReceiptTransferTypes', 'Inventory Transfer In', 'Comma separated list of Receipt Transfer Types to sync from Intacct.', 1, 0, GETDATE(), 'AUTOMATION', 0);
+        ('Integration.SageIntacct.Job', 'ItemTypes', 'I,K,SK', 'Comma separated list of Item Types to sync from Intacct. Valid types are I, NI, NP, NS, K, SK', 1, 0, GETDATE(), 'AUTOMATION', 0);
 ```
 
 #### SenderId
@@ -143,30 +156,8 @@ Valid values:
 
 To add multiple types, list them separated by commas e.g. `I,K,SK`
 
-#### Sales Order Types
-Datatype: comma separated list
-This setting determines the types of SalesOrder documents that can be synced from Intacct.
-
-To specify multiple types, list them separated by commas e.g. `Sales Order,Sales Order-Inventory`
-
-#### Purchase Order Types
-Datatype: comma separated list
-This setting determines the types of PurchaseOrder documents that can be synced from Intacct.
-
-To specify multiple types, list them separated by commas e.g. `Purchase Order,Purchase Order-Inventory`
-
-#### Intransit Transfer Types
-Datatype: comma separated list
-This setting determines the types of Inventory Transfer documents that can be synced from Intacct.
-
-To specify multiple types, list them separated by commas e.g. `Inventory Transfer Out,CPT Transfer Out`
-
-#### Receipt Transfer Types
-Datatype: comma separated list
-This setting determines the types of Inventory Transfer documents that can be synced from Intacct.
-
-To specify multiple types, list them separated by commas e.g. `Inventory Transfer In,CPT Transfer In`
-
+!!! note
+    Which document types (e.g. Sales Order, Purchase Order, Inventory Transfer) are synced by each job is controlled in that job's F# configuration script, via `IntacctDOCPARIDs` — see [Customizing Mappings](#customizing-mappings) below.
 
 ## Customizing Mappings
 
@@ -183,14 +174,27 @@ let status =
     | "Approved" -> "RELEASED"
     | "Partially Approved" -> "ENTERED"
     | "Declined" -> "CANCELLED"
-    | "Closed" -> "CANCELLED"
+    // ... other Intacct states map to ENTERED/RELEASED/CANCELLED/COMPLETE ...
     | "Converted" -> "COMPLETE"
     // Add custom status here:
     | "Custom Status" -> "ONHOLD"
     | _ -> "ENTERED"
 ```
 
-**Example 2: Adding New Fields**
+**Example 2: Changing Which Document Types Sync**
+
+Each job's `IntacctDOCPARIDs` list determines which Intacct document types (transaction definitions) are pulled into Granite. For example, in `SalesOrderJobConfiguration.fsx`:
+
+```fsharp
+member this.IntacctDOCPARIDs = 
+    [
+        "Sales Order"
+        // Add additional Sales Order document types here, e.g.:
+        // "Sales Order-Inventory"
+    ]
+```
+
+**Example 3: Adding New Fields**
 
 To map additional Intacct fields to Granite:
 
@@ -222,7 +226,7 @@ let document = Document(
 )
 ```
 
-**Example 3: Conditional Logic**
+**Example 4: Conditional Logic**
 
 Apply business rules during mapping:
 
