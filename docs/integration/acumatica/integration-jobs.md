@@ -209,6 +209,15 @@ MasterItems and TradingPartners have their own Jobs. These Jobs fetch all StockI
 Before processing queued documents, document jobs also sync all updated MasterItems from Acumatica (based on the latest posted document integration time), and then upsert MasterItems referenced on each document. This means that on sites that do not make many changes to their MasterItems it is better to limit running this job to once a day or even less frequently. 
 MasterItem `isActive` is treated as `false` for item statuses `DE` (discontinued) and `IN` (inactive); all other statuses are treated as active.
 
+MasterItem upserts are matched primarily by `ERPIdentification`, falling back to `Code` for items not yet linked to an ERP ID:
+
+- If a MasterItem with the incoming `ERPIdentification` already exists in Granite, it is updated. If that record can't be found by ID, or if its `Code` is already in use by a different MasterItem, the conflict is logged and the item is skipped.
+- If no MasterItem exists for the `ERPIdentification`, Granite is checked for an existing MasterItem with the same `Code`. If found and its `ERPIdentification` is not a GUID (i.e. not yet linked to an ERP record), it is updated; if it is already linked to a different ERP ID, the conflict is logged and the item is skipped.
+- Otherwise, a new MasterItem is inserted.
+- An unexpected error processing one MasterItem is logged and does not stop the rest of the batch from being processed.
+
+Errors and conflicts encountered during MasterItem upserts are written to both the application log and the `IntegrationLog` table for traceability.
+
 MasterItem `UnitValue` is synced only when StockItems are fetched directly from Acumatica (not when a MasterItem is upserted from a document, where cost data isn't present). The value is taken from the stock item's cost collection (`INItemCostCollection`) entry whose `CuryID` matches the `AcumaticaStockItemCurrencyID` system setting (default `ZAR`); if no entry matches, `UnitValue` defaults to `0` and a warning is logged listing the currencies that were available.
 
 Document Jobs do not automatically sync trading partners as they are not required to create to the document in Granite and as such are only synced when the TradingPartner Job runs. 

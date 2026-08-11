@@ -31,6 +31,14 @@ Template:
 ```
 -->
 
+## 2026-08-11
+
+### Injected Jobs
+
+<h4>Version: 7.0.6.1</h4>
+<h4>Fixes:</h4>
+- MasterItem upserts are now matched primarily by ERPIdentification, with Code/ERP conflicts detected and logged instead of silently overwriting the wrong record. Processing now continues after a per-item failure instead of stopping the batch, and conflicts/errors are recorded to the IntegrationLog table as well as the application log.
+
 ## 2026-08-07
 
 ### Injected Jobs
