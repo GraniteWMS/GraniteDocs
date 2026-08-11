@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://granitewms.github.io/GraniteDocs/7.0/tools/">
+        <link rel="canonical" href="https://granitewms.github.io/GraniteDocs/7.0/integration/intacct/webhook-listener-api/">
       
       
-        <link rel="prev" href="../security/api-keys/">
+        <link rel="prev" href="../integration-jobs/">
       
       
-        <link rel="next" href="../iis/getting-started/">
+        <link rel="next" href="../../sagex3/">
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
     
     
       
-        <title>Tools - Granite WMS Documentation</title>
+        <title>Webhook Listener API - Granite WMS Documentation</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.2a3383ac.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2a3383ac.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="../extra_css/custom.css">
+      <link rel="stylesheet" href="../../../extra_css/custom.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tools" class="md-skip">
+        <a href="#webhook-listener-api" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Granite WMS Documentation" class="md-header__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
+    <a href="../../.." title="Granite WMS Documentation" class="md-header__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Tools
+              Webhook Listener API
             
           </span>
         </div>
@@ -213,7 +213,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
   
@@ -230,11 +230,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../scaffold/manual/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../scaffold/manual/" class="md-tabs__link">
           
   
   
@@ -252,13 +254,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../tools/" class="md-tabs__link">
           
   
   
@@ -280,7 +280,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../customization/" class="md-tabs__link">
+        <a href="../../../customization/" class="md-tabs__link">
           
   
   
@@ -302,7 +302,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../updates/" class="md-tabs__link">
+        <a href="../../../updates/" class="md-tabs__link">
           
   
   
@@ -338,7 +338,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Granite WMS Documentation" class="md-nav__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
+    <a href="../../.." title="Granite WMS Documentation" class="md-nav__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -356,7 +356,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -375,8 +375,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -406,17 +408,20 @@
     
     
       
+        
+        
+      
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -429,7 +434,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Documentation
@@ -443,7 +448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../scaffold/manual/" class="md-nav__link">
+      <a href="../../../scaffold/manual/" class="md-nav__link">
         
   
   
@@ -513,7 +518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../label-printing/bartender/manual/" class="md-nav__link">
+      <a href="../../../label-printing/bartender/manual/" class="md-nav__link">
         
   
   
@@ -536,7 +541,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../label-printing/zpl/manual/" class="md-nav__link">
+      <a href="../../../label-printing/zpl/manual/" class="md-nav__link">
         
   
   
@@ -564,8 +569,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -604,11 +611,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
         
           
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
@@ -624,7 +631,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             Integration
@@ -663,7 +670,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/accpac/" class="md-nav__link ">
+            <a href="../../accpac/" class="md-nav__link ">
               
   
   
@@ -698,7 +705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/accpac/sdk-provider/" class="md-nav__link">
+      <a href="../../accpac/sdk-provider/" class="md-nav__link">
         
   
   
@@ -721,7 +728,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/accpac/integration-jobs/" class="md-nav__link">
+      <a href="../../accpac/integration-jobs/" class="md-nav__link">
         
   
   
@@ -779,7 +786,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/acumatica/" class="md-nav__link ">
+            <a href="../../acumatica/" class="md-nav__link ">
               
   
   
@@ -814,7 +821,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/acumatica/acumatica-overview/" class="md-nav__link">
+      <a href="../../acumatica/acumatica-overview/" class="md-nav__link">
         
   
   
@@ -837,7 +844,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/acumatica/sdk-provider/" class="md-nav__link">
+      <a href="../../acumatica/sdk-provider/" class="md-nav__link">
         
   
   
@@ -860,7 +867,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/acumatica/integration-jobs/" class="md-nav__link">
+      <a href="../../acumatica/integration-jobs/" class="md-nav__link">
         
   
   
@@ -920,7 +927,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/cin7/" class="md-nav__link ">
+            <a href="../../cin7/" class="md-nav__link ">
               
   
   
@@ -955,7 +962,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/cin7/cin7-overview/" class="md-nav__link">
+      <a href="../../cin7/cin7-overview/" class="md-nav__link">
         
   
   
@@ -978,7 +985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/cin7/sdk-provider/" class="md-nav__link">
+      <a href="../../cin7/sdk-provider/" class="md-nav__link">
         
   
   
@@ -1001,7 +1008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/cin7/integration-jobs/" class="md-nav__link">
+      <a href="../../cin7/integration-jobs/" class="md-nav__link">
         
   
   
@@ -1024,7 +1031,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/cin7/cin7-change-log/" class="md-nav__link">
+      <a href="../../cin7/cin7-change-log/" class="md-nav__link">
         
   
   
@@ -1080,7 +1087,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/evo/" class="md-nav__link ">
+            <a href="../../evo/" class="md-nav__link ">
               
   
   
@@ -1115,7 +1122,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/evo/sdk-provider/" class="md-nav__link">
+      <a href="../../evo/sdk-provider/" class="md-nav__link">
         
   
   
@@ -1138,7 +1145,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/evo/integration-jobs/" class="md-nav__link">
+      <a href="../../evo/integration-jobs/" class="md-nav__link">
         
   
   
@@ -1194,7 +1201,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/isync/" class="md-nav__link ">
+            <a href="../../isync/" class="md-nav__link ">
               
   
   
@@ -1229,7 +1236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/isync/sdk-provider/" class="md-nav__link">
+      <a href="../../isync/sdk-provider/" class="md-nav__link">
         
   
   
@@ -1252,7 +1259,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/isync/integration-jobs/" class="md-nav__link">
+      <a href="../../isync/integration-jobs/" class="md-nav__link">
         
   
   
@@ -1310,7 +1317,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/lightspeed/" class="md-nav__link ">
+            <a href="../../lightspeed/" class="md-nav__link ">
               
   
   
@@ -1345,7 +1352,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/lightspeed/lightspeed-overview/" class="md-nav__link">
+      <a href="../../lightspeed/lightspeed-overview/" class="md-nav__link">
         
   
   
@@ -1368,7 +1375,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/lightspeed/sdk-provider/" class="md-nav__link">
+      <a href="../../lightspeed/sdk-provider/" class="md-nav__link">
         
   
   
@@ -1391,7 +1398,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/lightspeed/integration-jobs/" class="md-nav__link">
+      <a href="../../lightspeed/integration-jobs/" class="md-nav__link">
         
   
   
@@ -1422,7 +1429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/omni/sdk-provider/" class="md-nav__link">
+      <a href="../../omni/sdk-provider/" class="md-nav__link">
         
   
   
@@ -1468,7 +1475,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/parcel-perfect/" class="md-nav__link ">
+            <a href="../../parcel-perfect/" class="md-nav__link ">
               
   
   
@@ -1503,7 +1510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/parcel-perfect/service/" class="md-nav__link">
+      <a href="../../parcel-perfect/service/" class="md-nav__link">
         
   
   
@@ -1534,7 +1541,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/quickbooks/native-app/" class="md-nav__link">
+      <a href="../../quickbooks/native-app/" class="md-nav__link">
         
   
   
@@ -1557,7 +1564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/sapb1/sdk-provider/" class="md-nav__link">
+      <a href="../../sapb1/sdk-provider/" class="md-nav__link">
         
   
   
@@ -1580,7 +1587,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/syspro/sdk-provider/" class="md-nav__link">
+      <a href="../../syspro/sdk-provider/" class="md-nav__link">
         
   
   
@@ -1628,7 +1635,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/sage100/" class="md-nav__link ">
+            <a href="../../sage100/" class="md-nav__link ">
               
   
   
@@ -1663,7 +1670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/sage100/sdk-provider/" class="md-nav__link">
+      <a href="../../sage100/sdk-provider/" class="md-nav__link">
         
   
   
@@ -1686,7 +1693,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/sage100/integration-jobs/" class="md-nav__link">
+      <a href="../../sage100/integration-jobs/" class="md-nav__link">
         
   
   
@@ -1714,6 +1721,8 @@
                 
   
   
+    
+  
   
   
     
@@ -1736,15 +1745,15 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_13" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_13" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/intacct/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -1763,7 +1772,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_13_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_13_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_3_13">
             <span class="md-nav__icon md-icon"></span>
             Sage Intacct
@@ -1779,7 +1788,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/intacct/standalone-service/" class="md-nav__link">
+      <a href="../standalone-service/" class="md-nav__link">
         
   
   
@@ -1802,7 +1811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/intacct/integration-jobs/" class="md-nav__link">
+      <a href="../integration-jobs/" class="md-nav__link">
         
   
   
@@ -1822,10 +1831,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../integration/intacct/webhook-listener-api/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Webhook Listener API
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1836,6 +1867,146 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#network-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-fits-with-the-integration-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      How it fits with the Integration Jobs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configure-connection-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Connection String
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure API Keys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-sage-intacct-smart-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Sage Intacct Smart Events
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring Sage Intacct Smart Events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-smartlink" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example smartLink
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required-customization-per-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required customization per client
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loading-the-package-into-sage-intacct" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading the package into Sage Intacct
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1883,7 +2054,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/sagex3/" class="md-nav__link ">
+            <a href="../../sagex3/" class="md-nav__link ">
               
   
   
@@ -1918,7 +2089,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/sagex3/sagex3-overview/" class="md-nav__link">
+      <a href="../../sagex3/sagex3-overview/" class="md-nav__link">
         
   
   
@@ -1941,7 +2112,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/sagex3/sdk-provider/" class="md-nav__link">
+      <a href="../../sagex3/sdk-provider/" class="md-nav__link">
         
   
   
@@ -1964,7 +2135,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/sagex3/integration-jobs/" class="md-nav__link">
+      <a href="../../sagex3/integration-jobs/" class="md-nav__link">
         
   
   
@@ -2028,7 +2199,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../webdesktop/" class="md-nav__link ">
+            <a href="../../../webdesktop/" class="md-nav__link ">
               
   
   
@@ -2063,7 +2234,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../webdesktop/datagrid/datagrid/" class="md-nav__link">
+      <a href="../../../webdesktop/datagrid/datagrid/" class="md-nav__link">
         
   
   
@@ -2086,7 +2257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../webdesktop/datacapture/data-capture/" class="md-nav__link">
+      <a href="../../../webdesktop/datacapture/data-capture/" class="md-nav__link">
         
   
   
@@ -2142,7 +2313,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../process-app/" class="md-nav__link ">
+            <a href="../../../process-app/" class="md-nav__link ">
               
   
   
@@ -2177,7 +2348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../process-app/script-methods/" class="md-nav__link">
+      <a href="../../../process-app/script-methods/" class="md-nav__link">
         
   
   
@@ -2200,7 +2371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../process-app/session-timeout/" class="md-nav__link">
+      <a href="../../../process-app/session-timeout/" class="md-nav__link">
         
   
   
@@ -2231,7 +2402,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../android-application/manual/" class="md-nav__link">
+      <a href="../../../android-application/manual/" class="md-nav__link">
         
   
   
@@ -2254,7 +2425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../business-api/manual/" class="md-nav__link">
+      <a href="../../../business-api/manual/" class="md-nav__link">
         
   
   
@@ -2308,7 +2479,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../custodian-api/" class="md-nav__link ">
+            <a href="../../../custodian-api/" class="md-nav__link ">
               
   
   
@@ -2343,7 +2514,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../custodian-api/getting-started/" class="md-nav__link">
+      <a href="../../../custodian-api/getting-started/" class="md-nav__link">
         
   
   
@@ -2366,7 +2537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../custodian-api/process-template-service/" class="md-nav__link">
+      <a href="../../../custodian-api/process-template-service/" class="md-nav__link">
         
   
   
@@ -2389,7 +2560,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../custodian-api/email-service/" class="md-nav__link">
+      <a href="../../../custodian-api/email-service/" class="md-nav__link">
         
   
   
@@ -2412,7 +2583,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../custodian-api/reporting-service/" class="md-nav__link">
+      <a href="../../../custodian-api/reporting-service/" class="md-nav__link">
         
   
   
@@ -2435,7 +2606,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../custodian-api/sql-export-service/" class="md-nav__link">
+      <a href="../../../custodian-api/sql-export-service/" class="md-nav__link">
         
   
   
@@ -2466,7 +2637,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../scheduler/manual/" class="md-nav__link">
+      <a href="../../../scheduler/manual/" class="md-nav__link">
         
   
   
@@ -2512,7 +2683,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../customization/" class="md-nav__link ">
+            <a href="../../../customization/" class="md-nav__link ">
               
   
   
@@ -2574,7 +2745,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../sqlclr/" class="md-nav__link ">
+            <a href="../../../sqlclr/" class="md-nav__link ">
               
   
   
@@ -2609,7 +2780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sqlclr/getting-started/" class="md-nav__link">
+      <a href="../../../sqlclr/getting-started/" class="md-nav__link">
         
   
   
@@ -2632,7 +2803,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sqlclr/version-6-upgrade-guide/" class="md-nav__link">
+      <a href="../../../sqlclr/version-6-upgrade-guide/" class="md-nav__link">
         
   
   
@@ -2655,7 +2826,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sqlclr/reference/" class="md-nav__link">
+      <a href="../../../sqlclr/reference/" class="md-nav__link">
         
   
   
@@ -2721,7 +2892,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../security/" class="md-nav__link ">
+            <a href="../../../security/" class="md-nav__link ">
               
   
   
@@ -2756,7 +2927,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../security/system-security/" class="md-nav__link">
+      <a href="../../../security/system-security/" class="md-nav__link">
         
   
   
@@ -2779,7 +2950,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../security/user-permissions/" class="md-nav__link">
+      <a href="../../../security/user-permissions/" class="md-nav__link">
         
   
   
@@ -2802,7 +2973,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../security/api-keys/" class="md-nav__link">
+      <a href="../../../security/api-keys/" class="md-nav__link">
         
   
   
@@ -2837,8 +3008,6 @@
       
   
   
-    
-  
   
   
     
@@ -2864,21 +3033,18 @@
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="./" class="md-nav__link md-nav__link--active">
+            <a href="../../../tools/" class="md-nav__link ">
               
   
   
@@ -2891,13 +3057,13 @@
             </a>
             
               
-              <label class="md-nav__link md-nav__link--active" for="__nav_3" id="__nav_3_label" tabindex="">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Tools & Technology
@@ -2913,7 +3079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../iis/getting-started/" class="md-nav__link">
+      <a href="../../../iis/getting-started/" class="md-nav__link">
         
   
   
@@ -2936,7 +3102,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ssrs/getting-started/" class="md-nav__link">
+      <a href="../../../ssrs/getting-started/" class="md-nav__link">
         
   
   
@@ -2959,7 +3125,7 @@
   
   
     <li class="md-nav__item">
-      <a href="jam/" class="md-nav__link">
+      <a href="../../../tools/jam/" class="md-nav__link">
         
   
   
@@ -2982,7 +3148,7 @@
   
   
     <li class="md-nav__item">
-      <a href="jaeger/" class="md-nav__link">
+      <a href="../../../tools/jaeger/" class="md-nav__link">
         
   
   
@@ -3005,7 +3171,7 @@
   
   
     <li class="md-nav__item">
-      <a href="nifi/" class="md-nav__link">
+      <a href="../../../tools/nifi/" class="md-nav__link">
         
   
   
@@ -3053,7 +3219,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="superset/" class="md-nav__link ">
+            <a href="../../../tools/superset/" class="md-nav__link ">
               
   
   
@@ -3088,7 +3254,7 @@
   
   
     <li class="md-nav__item">
-      <a href="superset/windows-installation/" class="md-nav__link">
+      <a href="../../../tools/superset/windows-installation/" class="md-nav__link">
         
   
   
@@ -3111,7 +3277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="superset/getting-started/" class="md-nav__link">
+      <a href="../../../tools/superset/getting-started/" class="md-nav__link">
         
   
   
@@ -3172,7 +3338,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../customization/" class="md-nav__link ">
+            <a href="../../../customization/" class="md-nav__link ">
               
   
   
@@ -3256,7 +3422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../customization/intro-practice/" class="md-nav__link">
+      <a href="../../../customization/intro-practice/" class="md-nav__link">
         
   
   
@@ -3279,7 +3445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../customization/triggers/triggers/" class="md-nav__link">
+      <a href="../../../customization/triggers/triggers/" class="md-nav__link">
         
   
   
@@ -3302,7 +3468,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../customization/prescripts/prescripts/" class="md-nav__link">
+      <a href="../../../customization/prescripts/prescripts/" class="md-nav__link">
         
   
   
@@ -3365,7 +3531,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../updates/" class="md-nav__link ">
+            <a href="../../../updates/" class="md-nav__link ">
               
   
   
@@ -3451,7 +3617,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../updates/V4/whats-new/" class="md-nav__link">
+      <a href="../../../updates/V4/whats-new/" class="md-nav__link">
         
   
   
@@ -3521,7 +3687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../updates/V5/whats-new/" class="md-nav__link">
+      <a href="../../../updates/V5/whats-new/" class="md-nav__link">
         
   
   
@@ -3544,7 +3710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../updates/V5/product-update/" class="md-nav__link">
+      <a href="../../../updates/V5/product-update/" class="md-nav__link">
         
   
   
@@ -3622,7 +3788,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../updates/V6/whats-new/" class="md-nav__link">
+      <a href="../../../updates/V6/whats-new/" class="md-nav__link">
         
   
   
@@ -3645,7 +3811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../updates/V6/cheatsheet/" class="md-nav__link">
+      <a href="../../../updates/V6/cheatsheet/" class="md-nav__link">
         
   
   
@@ -3676,7 +3842,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../updates/V7/whats-new/" class="md-nav__link">
+      <a href="../../../updates/V7/whats-new/" class="md-nav__link">
         
   
   
@@ -3707,7 +3873,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../updates/release-notes/" class="md-nav__link">
+      <a href="../../../updates/release-notes/" class="md-nav__link">
         
   
   
@@ -3750,6 +3916,134 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#network-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-fits-with-the-integration-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      How it fits with the Integration Jobs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configure-connection-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Connection String
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure API Keys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-sage-intacct-smart-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Sage Intacct Smart Events
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring Sage Intacct Smart Events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-smartlink" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example smartLink
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required-customization-per-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required customization per client
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loading-the-package-into-sage-intacct" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading the package into Sage Intacct
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -3764,8 +4058,203 @@
 
 
 
-<h1 id="tools">Tools</h1>
-<p>Here you can find recommended tools and tutorials that can help you work more efficiently.</p>
+<h1 id="webhook-listener-api">Webhook Listener API</h1>
+<p>The Webhook Listener API is a small, standalone ASP.NET Core web service that lets Sage Intacct (or an integration middleware layer) notify Granite in real time that a document has changed. It queues a record for the <a href="../integration-jobs/">Integration Jobs</a> to pick up on their next run, rather than waiting for the job's normal polling interval or its catch-up scan of all open documents.</p>
+<p>This service does not replace the Integration Jobs — it only queues a notification. The Integration Jobs still fetch the full document from the Sage Intacct XML API before syncing it into Granite.</p>
+<h2 id="network-requirements">Network Requirements</h2>
+<p>Sage Intacct is a cloud SaaS product. For its Smart Events to reach this service, <strong>the Webhook Listener API's endpoint must be reachable from the internet</strong>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Customer Responsibility</p>
+<p>Granite is not responsible for exposing this service to the internet. The customer's IT team must arrange the necessary network ingress — DNS record, firewall rule, reverse proxy, TLS certificate, etc. — so that Sage Intacct can reach the deployed endpoint (e.g. <code>https://your-exposed-hostname/integration-queue/document</code>). This must be arranged and confirmed working before Smart Events are configured in Sage Intacct (see <a href="#configuring-sage-intacct-smart-events">Configuring Sage Intacct Smart Events</a> below).</p>
+</div>
+<h2 id="architecture-overview">Architecture Overview</h2>
+<ul>
+<li><strong>ASP.NET Core / ServiceStack</strong> - REST API for receiving webhook notifications</li>
+<li><strong>SQL Server</strong> - writes to the same <code>IntegrationDocumentQueue</code> table used by the Integration Jobs</li>
+<li><strong>API Key Authentication</strong> - requests must present a valid, pre-configured API key</li>
+</ul>
+<h2 id="how-it-fits-with-the-integration-jobs">How it fits with the Integration Jobs</h2>
+<p>Both this service and the Integration Jobs project share the <code>IntegrationDocumentQueue</code> table:</p>
+<ol>
+<li>A document changes in Sage Intacct.</li>
+<li>Sage Intacct (or middleware) calls this API's <code>/integration-queue/document</code> endpoint with the document's identifiers.</li>
+<li>The service inserts a row into <code>IntegrationDocumentQueue</code> with <code>Status = 'ENTERED'</code>.</li>
+<li>On its next run, the relevant Integration Job (matched by <code>DocumentType</code>) selects rows where <code>Status = 'ENTERED'</code>, fetches the full document from Intacct, and syncs it into Granite — updating the queue row to <code>POSTED</code> or <code>FAILED</code>.</li>
+</ol>
+<p>If a row already exists for the same <code>DocumentType</code> and <code>ErpIdentification</code> with <code>Status = 'ENTERED'</code> (i.e. it hasn't been processed yet), the request is rejected as a duplicate rather than queuing a second entry.</p>
+<h2 id="setup">Setup</h2>
+<h3 id="configure-connection-string">Configure Connection String</h3>
+<p>Edit <code>appsettings.json</code> in the published folder to point to the Granite database that owns the <code>IntegrationDocumentQueue</code> table (the same database used by the Integration Jobs):</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;ConnectionStrings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;DefaultConnection&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Server=YOUR_SERVER;Database=YOUR_GRANITE_DB;Integrated Security=true;TrustServerCertificate=true;&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="configure-api-keys">Configure API Keys</h3>
+<p>At least one API key must be configured, or the service will fail to start:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;ApiKeys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;SageIntacct&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;your-secret-key-here&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Multiple named keys can be configured if more than one caller needs access. Any of the configured values will be accepted as a valid <code>ApiKey</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Treat these keys as secrets. Do not communicate keys insecurely.</p>
+</div>
+<h3 id="deployment">Deployment</h3>
+<p>Deploy behind IIS in the same way as the other Sage Intacct services — see <a href="../../../iis/getting-started/">IIS Getting Started</a>.</p>
+<h2 id="configuring-sage-intacct-smart-events">Configuring Sage Intacct Smart Events</h2>
+<p>Once the service is deployed and reachable from the internet (see <a href="#network-requirements">Network Requirements</a>), Sage Intacct needs to be configured to actually call it. Sage Intacct doesn't do this on its own — it requires <strong>Smart Events</strong> to be loaded into the company.</p>
+<p>Smart Events are defined in a <strong>Custom ERP Package</strong>: an XML file that Sage Intacct imports via Platform Services. Each <code>smartLink</code> in the package watches an Intacct object for <code>add</code>, <code>delete</code>, and <code>set</code> events and, when one fires, issues an HTTP POST to a target URL — in this case, this service's <code>/integration-queue/document</code> endpoint.</p>
+<p>A template package, <code>GraniteSmartEventsTemplate.xml</code>, is provided as a starting point and covers the same five document types used by the <a href="../integration-jobs/#supported-document-types">Integration Jobs</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Intacct Object</th>
+<th>Intacct Document Type</th>
+<th>Events</th>
+<th>Granite <code>DocumentType</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sodocument</td>
+<td>Sales Order-Inventory</td>
+<td>add, delete, set</td>
+<td>ORDER</td>
+</tr>
+<tr>
+<td>podocument</td>
+<td>Purchase Order-Inventory</td>
+<td>add, delete, set</td>
+<td>RECEIVING</td>
+</tr>
+<tr>
+<td>invdocument</td>
+<td>SYS-Warehouse Transfer Out</td>
+<td>add, delete, set</td>
+<td>TRANSFER</td>
+</tr>
+<tr>
+<td>invdocument</td>
+<td>Inv Transfer Out Qty Value</td>
+<td>add, delete, set</td>
+<td>INTRANSIT</td>
+</tr>
+<tr>
+<td>invdocument</td>
+<td>Inv Transfer In Qty Value</td>
+<td>add, delete, set</td>
+<td>RECEIPT</td>
+</tr>
+</tbody>
+</table>
+<p>Each <code>smartLink</code>'s <code>httpPostAction</code> sends arguments that map directly onto this service's request fields, using Intacct merge-field syntax to pull values from the document that triggered the event:</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ApiKey</td>
+<td>Static value</td>
+<td>Must match one of the values configured under <code>ApiKeys</code> in this service's <code>appsettings.json</code></td>
+</tr>
+<tr>
+<td>LastUpdateDateTime</td>
+<td><code>{!&lt;OBJECT&gt;.WHENMODIFIED!}</code></td>
+<td></td>
+</tr>
+<tr>
+<td>ErpIdentification</td>
+<td><code>{!&lt;OBJECT&gt;.RECORDNO!}</code></td>
+<td></td>
+</tr>
+<tr>
+<td>DocumentNumber</td>
+<td><code>{!&lt;OBJECT&gt;.DOCNO!}</code></td>
+<td></td>
+</tr>
+<tr>
+<td>DocumentType</td>
+<td>Static value</td>
+<td>One of <code>ORDER</code>, <code>RECEIVING</code>, <code>INTRANSIT</code>, <code>RECEIPT</code>, <code>TRANSFER</code></td>
+</tr>
+</tbody>
+</table>
+<p>Each <code>smartLink</code> also has a <code>condition</code> that filters on <code>MEGAENTITYID</code>, so the event only fires for the Sage Intacct entity being integrated with Granite — this matters in multi-entity companies, where otherwise every entity's documents would trigger a webhook call:</p>
+<div class="highlight"><pre><span></span><code>{!SODOCUMENT.MEGAENTITYID!}==400
+</code></pre></div>
+<h3 id="example-smartlink">Example smartLink</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;smartLink&gt;</span>
+<span class="w">    </span><span class="nt">&lt;smartLinkId&gt;</span>GRANITE_SODOCUMENT_MODIFIED<span class="nt">&lt;/smartLinkId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;type&gt;</span>workflow<span class="nt">&lt;/type&gt;</span>
+<span class="w">    </span><span class="nt">&lt;ownerObject&gt;</span>sodocument<span class="nt">&lt;/ownerObject&gt;</span>
+<span class="w">    </span><span class="nt">&lt;documentType&gt;</span>Sales<span class="w"> </span>Order-Inventory<span class="nt">&lt;/documentType&gt;</span>
+<span class="w">    </span><span class="nt">&lt;events&gt;</span>
+<span class="w">        </span><span class="nt">&lt;event&gt;</span>add<span class="nt">&lt;/event&gt;</span>
+<span class="w">        </span><span class="nt">&lt;event&gt;</span>delete<span class="nt">&lt;/event&gt;</span>
+<span class="w">        </span><span class="nt">&lt;event&gt;</span>set<span class="nt">&lt;/event&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/events&gt;</span>
+<span class="w">    </span><span class="nt">&lt;target&gt;</span>https://YOUR-EXPOSED-URL/integration-queue/document<span class="nt">&lt;/target&gt;</span>
+<span class="w">    </span><span class="nt">&lt;renderDetails&gt;</span>
+<span class="w">        </span><span class="nt">&lt;workflow&gt;</span>
+<span class="w">            </span><span class="nt">&lt;action&gt;</span>
+<span class="w">                </span><span class="nt">&lt;httpPostAction&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;method&gt;</span>post<span class="nt">&lt;/method&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;arguments&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;argument&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;argument&gt;</span>ApiKey<span class="nt">&lt;/argument&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;value&gt;</span>YOUR-API-KEY<span class="nt">&lt;/value&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/argument&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;argument&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;argument&gt;</span>LastUpdateDateTime<span class="nt">&lt;/argument&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;value&gt;</span>{!SODOCUMENT.WHENMODIFIED!}<span class="nt">&lt;/value&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/argument&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;argument&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;argument&gt;</span>ErpIdentification<span class="nt">&lt;/argument&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;value&gt;</span>{!SODOCUMENT.RECORDNO!}<span class="nt">&lt;/value&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/argument&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;argument&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;argument&gt;</span>DocumentNumber<span class="nt">&lt;/argument&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;value&gt;</span>{!SODOCUMENT.DOCNO!}<span class="nt">&lt;/value&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/argument&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;argument&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;argument&gt;</span>DocumentType<span class="nt">&lt;/argument&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;value&gt;</span>ORDER<span class="nt">&lt;/value&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/argument&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;/arguments&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;requestTimeout&gt;</span>5<span class="nt">&lt;/requestTimeout&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/httpPostAction&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/action&gt;</span>
+<span class="w">            </span><span class="nt">&lt;condition&gt;</span>{!SODOCUMENT.MEGAENTITYID!}==YOUR_ENTITY_ID<span class="nt">&lt;/condition&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/workflow&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/renderDetails&gt;</span>
+<span class="w">    </span><span class="nt">&lt;active&gt;</span>true<span class="nt">&lt;/active&gt;</span>
+<span class="nt">&lt;/smartLink&gt;</span>
+</code></pre></div>
+<p>The full template repeats this pattern for <code>podocument</code> and <code>invdocument</code>, one <code>smartLink</code> per row in the table above.</p>
+<h3 id="required-customization-per-client">Required customization per client</h3>
+<p>The template must be edited before it's loaded into a client's Sage Intacct company — none of the following are shared across clients:</p>
+<ol>
+<li><strong><code>target</code></strong> — every <code>smartLink</code>'s target URL must be updated to the actual internet-facing URL the customer's IT team has exposed (see <a href="#network-requirements">Network Requirements</a>).</li>
+<li><strong><code>ApiKey</code> argument</strong> — must match a value configured under <code>ApiKeys</code> in that deployment's Webhook Listener API <code>appsettings.json</code>.</li>
+<li><strong><code>condition</code> (<code>MEGAENTITYID</code>)</strong> — must match the Sage Intacct entity ID (or entity code) of the entity being integrated with Granite, found in Sage Intacct under Company &gt; Setup &gt; Entities.</li>
+</ol>
+<h3 id="loading-the-package-into-sage-intacct">Loading the package into Sage Intacct</h3>
+<p>Custom ERP Packages are uploaded and activated through Sage Intacct's Platform Services. Refer to Sage Intacct's Smart Events / Custom ERP Package documentation, or handover to your Intacct implementation partner to import the package for you. </p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><strong>Integration Jobs</strong>: See <a href="../integration-jobs/">Integration jobs</a> for how queued documents are processed</li>
+<li><strong>Developer Documentation</strong>: <a href="https://developer.intacct.com/">https://developer.intacct.com/</a></li>
+</ul>
 
 
 
@@ -3822,12 +4311,12 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy", "content.tabs.link"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
       
-        <script src="../extra_js/custom.js"></script>
+        <script src="../../../extra_js/custom.js"></script>
       
     
   </body>

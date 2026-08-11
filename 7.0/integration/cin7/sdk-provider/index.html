@@ -912,6 +912,8 @@
       
         
       
+        
+      
     
     
     
@@ -1069,9 +1071,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#retry-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retry behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stocktake" class="md-nav__link">
     <span class="md-ellipsis">
       STOCKTAKE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reclassify" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECLASSIFY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment" class="md-nav__link">
+    <span class="md-ellipsis">
+      ADJUSTMENT
     </span>
   </a>
   
@@ -1159,6 +1188,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#salecreditnote" class="md-nav__link">
+    <span class="md-ellipsis">
+      SALECREDITNOTE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#consume" class="md-nav__link">
     <span class="md-ellipsis">
       CONSUME
@@ -1203,6 +1241,29 @@
   
   <span class="md-ellipsis">
     Integration Jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cin7-change-log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change Log
     
   </span>
   
@@ -1952,29 +2013,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../intacct/sdk-provider/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    SDK Provider
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../intacct/standalone-service/" class="md-nav__link">
         
   
@@ -2004,6 +2042,29 @@
   
   <span class="md-ellipsis">
     Integration Jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../intacct/webhook-listener-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Webhook Listener API
     
   </span>
   
@@ -3959,9 +4020,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#retry-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retry behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stocktake" class="md-nav__link">
     <span class="md-ellipsis">
       STOCKTAKE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reclassify" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECLASSIFY
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment" class="md-nav__link">
+    <span class="md-ellipsis">
+      ADJUSTMENT
     </span>
   </a>
   
@@ -4049,6 +4137,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#salecreditnote" class="md-nav__link">
+    <span class="md-ellipsis">
+      SALECREDITNOTE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#consume" class="md-nav__link">
     <span class="md-ellipsis">
       CONSUME
@@ -4106,6 +4203,7 @@
 <li><code>DryRun</code> - Dry run mode (<code>true</code>/<code>false</code>). Default: <code>false</code>. When enabled, payloads are logged and requests are not sent to CIN7.</li>
 <li><code>SetPurchaseOrderPutawayGroup</code> - Controls put-away grouping for <code>POSTPUTAWAY</code> (<code>true</code>/<code>false</code>). Default: <code>false</code>.</li>
 <li><code>StockTakeExpenseAccount</code> - Expense account used when posting <code>STOCKTAKE</code> (Stock Adjustment) requests.</li>
+<li><code>StockAdjustmentExpenseAccount</code> - Expense account used when posting <code>RECLASSIFY</code> and <code>ADJUSTMENT</code> (Stock Adjustment) requests. Default: empty.</li>
 <li><code>Carrier</code> - Default carrier for shipment operations. Default: empty.</li>
 </ul>
 <p><img alt="SystemSettings" src="../cin7-img/system-settings.png" /></p>
@@ -4117,20 +4215,24 @@
 <li>UPDATETRANSFERTOINTRANSIT (Stock Transfer, PUT)</li>
 <li>UPDATETRANSFERTOCOMPLETED (Stock Transfer, PUT)</li>
 <li>STOCKTAKE (Stock Adjustment, POST)</li>
+<li>RECLASSIFY (Stock Adjustment, POST)</li>
+<li>ADJUSTMENT (Stock Adjustment, POST)</li>
 <li>RECEIVE (Purchase Stock Receive, POST)</li>
 <li>POSTPUTAWAY (Purchase Stock Put Away, POST)</li>
 <li>PICK (Sale Fulfilment Pick, POST)</li>
 <li>PACK (Sale Fulfilment Pack, POST)</li>
 <li>POSTPACKANDSHIP (Sale Fulfilment Pack and Ship, POST)</li>
+<li>SALECREDITNOTE (Sale Credit Note, VALIDATE)</li>
 <li>CONSUME (Finished Goods Pick Lines, POST)</li>
 <li>MANUFACTURE (Finished Goods, PUT)</li>
 </ul>
 <p>Outstanding transaction types:</p>
 <ul>
 <li>Replenish </li>
-<li>Reclassify</li>
 <li>Scrap</li>
 </ul>
+<h3 id="retry-behavior">Retry behavior</h3>
+<p>Requests to the CIN7 API are made through a shared retry pipeline. Responses with HTTP status <code>429</code> (Too Many Requests) or <code>503</code> (Service Unavailable) are automatically retried up to 2 times using exponential backoff with jitter, starting at a 3 second delay.</p>
 <h3 id="stocktake">STOCKTAKE</h3>
 <p>An important thing to note about this process is that it will set the total qty of the stock in the specific warehouse for the items being counted (see <a href="../cin7-overview/#stocktakeadjustment">Stocktake</a>). As such, all of the tracking entities for the given Masteritem in the ERPLocation should be counted so that the total count of that item is submitted on post.</p>
 <ul>
@@ -4206,6 +4308,166 @@
 <tr>
 <td>Comment</td>
 <td>Comments</td>
+<td>N</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="reclassify">RECLASSIFY</h3>
+<ul>
+<li>Granite Transaction: <strong>RECLASSIFY</strong></li>
+<li>CIN7: <strong>STOCK ADJUSTMENT</strong></li>
+<li>Supports:<ul>
+<li>Batch</li>
+<li>Expiration Date</li>
+</ul>
+</li>
+<li>Behavior:<ul>
+<li>Not supported for serialized items - throws an exception if any transaction has a <code>Serial</code>.</li>
+<li>Fetches CIN7 product availability (by SKU) for both the <code>FromCode</code> and <code>ToCode</code> items involved.</li>
+<li>Groups transactions by code, location, and whichever of batch/expiry the item tracks (determined from the availability data).</li>
+<li>For the "from" side, reduces the matching availability <code>OnHand</code> quantity by the transaction <code>ActionQty</code>. Throws if no matching availability record is found, or if the resulting quantity would be negative.</li>
+<li>For the "to" side, increases the matching availability <code>OnHand</code> quantity by the transaction <code>ActionQty</code> (or uses <code>ActionQty</code> directly if no existing availability record is found for that batch/expiry/location).</li>
+<li>Uses Granite <code>Code</code> to resolve CIN7 <code>ProductID</code> (Master Item ERP ID). Throws if the code is empty or if the corresponding Granite MasterItem has no <code>ERPIdentification</code>.</li>
+<li>Sets each line's comment to <code>Granite Reclassify by: {quantity}</code>.</li>
+<li>Uses system setting <code>StockAdjustmentExpenseAccount</code> for the CIN7 adjustment account.</li>
+<li>Reference is set to <code>Granite Reclassify. Transaction ids: {transaction ids}</code>.</li>
+<li>Posts with CIN7 status <code>DRAFT</code>.</li>
+</ul>
+</li>
+<li>Integration Post<ul>
+<li>Not used by the current implementation for this method.</li>
+</ul>
+</li>
+<li>Returns:
+    Stock Adjustment Task ID</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>CIN7 Entity</th>
+<th>Required</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FromCode</td>
+<td>ProductID (via Master Item ERP ID)</td>
+<td>Y</td>
+<td>Source item, quantity reduced by ActionQty</td>
+</tr>
+<tr>
+<td>ToCode</td>
+<td>ProductID (via Master Item ERP ID)</td>
+<td>Y</td>
+<td>Destination item, quantity increased by ActionQty</td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>Quantity delta</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>Location</td>
+<td>Y</td>
+<td>Used for the source line</td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>Location</td>
+<td>Y</td>
+<td>Used for the destination line</td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>BatchSN</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
+<td>N</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="adjustment">ADJUSTMENT</h3>
+<ul>
+<li>Granite Transaction: <strong>ADJUSTMENT</strong></li>
+<li>CIN7: <strong>STOCK ADJUSTMENT</strong></li>
+<li>Supports:<ul>
+<li>Batch</li>
+<li>Expiration Date</li>
+</ul>
+</li>
+<li>Behavior:<ul>
+<li>Not supported for serialized items - throws an exception if any transaction has a <code>Serial</code>.</li>
+<li>Fetches CIN7 product availability (by SKU) for the <code>FromCode</code> items involved.</li>
+<li>Groups transactions by code, location, and whichever of batch/expiry the item tracks (determined from the availability data).</li>
+<li>Calculates the adjustment quantity per line as <code>ToQty - FromQty</code>.</li>
+<li>Adds the adjustment quantity to the matching availability <code>OnHand</code> quantity (or uses the adjustment quantity directly if no existing availability record is found). Throws if no matching availability record is found and the adjustment is negative, or if the resulting quantity would be negative.</li>
+<li>Uses Granite <code>Code</code> to resolve CIN7 <code>ProductID</code> (Master Item ERP ID). Throws if the code is empty or if the corresponding Granite MasterItem has no <code>ERPIdentification</code>.</li>
+<li>Sets each line's comment to <code>Granite Adjustment by: {quantity}</code>.</li>
+<li>Uses system setting <code>StockAdjustmentExpenseAccount</code> for the CIN7 adjustment account.</li>
+<li>Reference is set to <code>Granite Adjustment. Transaction ids: {transaction ids}</code>.</li>
+<li>Posts with CIN7 status <code>DRAFT</code>.</li>
+</ul>
+</li>
+<li>Integration Post<ul>
+<li>Not used by the current implementation for this method.</li>
+</ul>
+</li>
+<li>Returns:
+    Stock Adjustment Task ID</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>CIN7 Entity</th>
+<th>Required</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FromCode</td>
+<td>ProductID (via Master Item ERP ID)</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>FromQty</td>
+<td>-</td>
+<td>Y</td>
+<td>Used with ToQty to calculate the adjustment quantity</td>
+</tr>
+<tr>
+<td>ToQty</td>
+<td>Quantity (adjustment = ToQty - FromQty)</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>Location</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>BatchSN</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
 <td>N</td>
 <td></td>
 </tr>
@@ -4368,13 +4630,13 @@
 <li>CIN7: <strong>STOCK Transfer (PUT update to IN TRANSIT)</strong></li>
 <li>Behavior:<ul>
 <li>Uses Granite <code>Document</code> to resolve CIN7 <code>TaskID</code> from Granite <code>ERPIdentification</code>.</li>
-<li>Validates that transfer lines match before update.</li>
+<li>Matches transfer lines to Granite transactions by SKU and whichever of batch/serial/expiry the line specifies, flagging lines with no matching transaction, transactions claimed by more than one line, and quantity mismatches.</li>
 <li>Sets transfer status to <code>IN TRANSIT</code>.</li>
 </ul>
 </li>
 <li>Integration Post<ul>
-<li>False - Verifies CIN7 transfer quantities match Granite quantities before update.</li>
-<li>True - Updates CIN7 transfer quantities to Granite quantities before update.</li>
+<li>False - Verifies CIN7 transfer quantities match Granite quantities before update; throws if any line discrepancies are found.</li>
+<li>True - Updates CIN7 transfer quantities to match Granite quantities before update. Lines with no matching Granite transactions have their quantity set to 0. Granite transactions not claimed by any CIN7 line are grouped and appended as new lines (CIN7 <code>ProductID</code> resolved via Granite MasterItem ERP ID). Lines added or adjusted this way are tagged with a <code>Comments</code> note.</li>
 </ul>
 </li>
 <li>Returns:
@@ -4386,13 +4648,13 @@
 <li>CIN7: <strong>STOCK Transfer (PUT update to COMPLETED)</strong></li>
 <li>Behavior:<ul>
 <li>Uses Granite <code>Document</code> to resolve CIN7 <code>TaskID</code> from Granite <code>ERPIdentification</code>.</li>
-<li>Validates that transfer lines match before update.</li>
+<li>Matches transfer lines to Granite transactions by SKU and whichever of batch/serial/expiry the line specifies, flagging lines with no matching transaction, transactions claimed by more than one line, and quantity mismatches.</li>
 <li>Sets transfer status to <code>COMPLETED</code>.</li>
 </ul>
 </li>
 <li>Integration Post<ul>
-<li>False - Verifies CIN7 transfer quantities match Granite quantities before update.</li>
-<li>True - Updates CIN7 transfer quantities to Granite quantities before update.</li>
+<li>False - Verifies CIN7 transfer quantities match Granite quantities before update; throws if any line discrepancies are found.</li>
+<li>True - Updates CIN7 transfer quantities to match Granite quantities before update. Lines with no matching Granite transactions have their quantity set to 0. Granite transactions not claimed by any CIN7 line are grouped and appended as new lines (CIN7 <code>ProductID</code> resolved via Granite MasterItem ERP ID). Lines added or adjusted this way are tagged with a <code>Comments</code> note.</li>
 </ul>
 </li>
 <li>Returns:
@@ -4492,8 +4754,9 @@
 <li>When <code>SetPurchaseOrderPutawayGroup</code> is <code>false</code> (default), reads <code>advanced-purchase</code> and attempts to reuse an open put-away task (<code>DRAFT</code> or <code>NOT AVAILABLE</code>).</li>
 <li>In default mode, skips reusing a put-away task when the linked invoice is not open and the put-away already has lines.</li>
 <li>When <code>SetPurchaseOrderPutawayGroup</code> is <code>true</code>, requires a single <code>TransactionDocumentReference</code>, extracts the trailing numeric suffix (for example <code>ABC-123</code> -&gt; <code>123</code>), and matches that value to CIN7 <code>InvoicingAndReceivingNumber</code>.</li>
-<li>With put-away grouping enabled, reuses only an open matching put-away task (<code>DRAFT</code> or <code>NOT AVAILABLE</code>); otherwise creates a new put-away task.</li>
-<li>If no suitable open put-away task is found, uses <code>00000000-0000-0000-0000-000000000000</code> to create a new put-away task.</li>
+<li>With put-away grouping enabled, reuses the matching put-away task's <code>TaskID</code> when it is open (<code>DRAFT</code> or <code>NOT AVAILABLE</code>); otherwise uses <code>00000000-0000-0000-0000-000000000000</code> to create a new put-away task.</li>
+<li>With put-away grouping enabled, if no put-away task matches the <code>InvoicingAndReceivingNumber</code>, falls back to the matching invoice's <code>TaskID</code> if one exists; if neither a matching put-away task nor a matching invoice is found, throws an exception.</li>
+<li>In default (non-grouping) mode, if no suitable open put-away task is found, uses <code>00000000-0000-0000-0000-000000000000</code> to create a new put-away task.</li>
 </ul>
 </li>
 <li>Integration Post<ul>
@@ -4868,6 +5131,78 @@ You will also need to call integration through clr on a custom process. </p>
 
 <span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="o">@</span><span class="k">Output</span>
 </code></pre></div>
+<h3 id="salecreditnote">SALECREDITNOTE</h3>
+<ul>
+<li>Granite Transaction: <strong>SALECREDITNOTE</strong></li>
+<li>CIN7: <strong>Sale Credit Note</strong></li>
+<li>Supports:<ul>
+<li>Batch</li>
+<li>Serial</li>
+<li>Expiration Date</li>
+</ul>
+</li>
+<li>Behavior:<ul>
+<li>Uses Granite <code>Document</code> to resolve the CIN7 credit note <code>TaskID</code> from Granite <code>ERPIdentification</code>.</li>
+<li>Fetches the credit note from <code>sale/creditnote</code> and matches it by <code>TaskID</code>.</li>
+<li>Validates each CIN7 restock line against Granite transactions by SKU and whichever of batch/serial/expiry the line specifies, flagging lines with no matching transaction, transactions claimed by more than one line, quantity mismatches, and Granite transactions with no matching restock line.</li>
+<li>Does not post anything to CIN7 - throws (and logs) an exception listing all validation errors found.</li>
+</ul>
+</li>
+<li>Integration Post<ul>
+<li>Not used by the current implementation for this method.</li>
+</ul>
+</li>
+<li>Returns:
+    Sale Credit Note Task ID</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>CIN7 Entity</th>
+<th>Required</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>TaskID (via ERPIdentification)</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Code</td>
+<td>SKU</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>Quantity</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>BatchSN</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>Serial</td>
+<td>BatchSN</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
+<td>N</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="consume">CONSUME</h3>
 <ul>
 <li>Granite Transaction: <strong>CONSUME</strong></li>

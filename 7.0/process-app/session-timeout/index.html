@@ -908,6 +908,8 @@
       
         
       
+        
+      
     
     
     
@@ -1010,6 +1012,29 @@
   
   <span class="md-ellipsis">
     Integration Jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/cin7/cin7-change-log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change Log
     
   </span>
   
@@ -1759,29 +1784,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integration/intacct/sdk-provider/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    SDK Provider
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../integration/intacct/standalone-service/" class="md-nav__link">
         
   
@@ -1811,6 +1813,29 @@
   
   <span class="md-ellipsis">
     Integration Jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integration/intacct/webhook-listener-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Webhook Listener API
     
   </span>
   
@@ -2238,6 +2263,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Process App">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-set-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to set it
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2246,6 +2286,21 @@
       Business API
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Business API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-set-it_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to set it
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2260,9 +2315,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#app-pool-settings" class="md-nav__link">
+  <a href="#how-to-set-it_2" class="md-nav__link">
     <span class="md-ellipsis">
-      App Pool Settings
+      How to set it
     </span>
   </a>
   
@@ -3833,6 +3888,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Process App">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-set-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to set it
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3841,6 +3911,21 @@
       Business API
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Business API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-set-it_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to set it
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3855,9 +3940,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#app-pool-settings" class="md-nav__link">
+  <a href="#how-to-set-it_2" class="md-nav__link">
     <span class="md-ellipsis">
-      App Pool Settings
+      How to set it
     </span>
   </a>
   
@@ -3894,30 +3979,45 @@
 
 
 <h1 id="session-timeout-configuration">Session Timeout Configuration</h1>
-<p>This guide explains how to set the session timeout values for the Process App and the Business API, and how to prevent IIS recycling from wiping sessions.</p>
+<p>Users are automatically logged out of the Process App and Business API after they've been idle for a while. This page explains how to change how long that takes — useful when a client asks for it, for example because long warehouse shifts keep logging people out, or because a security policy requires shorter idle windows.</p>
+<div class="admonition note">
+<p class="admonition-title">Four settings, one goal</p>
+<p>Getting the timeout you want takes <strong>four</strong> changes: two in the Process App, one in the Business API, and one in IIS. They all need to agree with each other, so change them together — set the timeout you want, then work through this whole page.</p>
+</div>
 <h2 id="process-app">Process App</h2>
-<p>Edit the Process App settings files:
-- <code>appsettings.json</code></p>
-<p>Set these keys to your desired inactivity window:
+<p>When someone stops using the Process App, they're eventually logged out and have to sign in again. Two settings control this together:</p>
+<ul>
+<li>How long the server will wait before ending an idle session.</li>
+<li>How long the browser is allowed to hold onto that person's login before it expires anyway.</li>
+</ul>
+<p>Both need to be long enough to cover the idle period you want, so unless there's a specific reason to keep them different, set them to the same value.</p>
+<h3 id="how-to-set-it">How to set it</h3>
+<p>Edit the Process App's <code>appsettings.json</code> and set:
 <div class="highlight"><pre><span></span><code>&quot;SessionIdleTimeoutMinutes&quot;: 480,
 &quot;AuthCookieExpireMinutes&quot;: 480
 </code></pre></div></p>
-<p>What they do:
-- <code>SessionIdleTimeoutMinutes</code> controls the server session idle timeout.
-- <code>AuthCookieExpireMinutes</code> controls the auth cookie lifetime.</p>
+<ul>
+<li><code>SessionIdleTimeoutMinutes</code> — how many minutes of inactivity before the server ends the session.</li>
+<li><code>AuthCookieExpireMinutes</code> — how many minutes the browser keeps the user logged in for.</li>
+</ul>
 <h2 id="business-api">Business API</h2>
-<p>Edit the Business API settings file:
-- <code>appsettings.json</code></p>
-<p>Set the session expiry value:
+<p>The Business API keeps its own record of how long a login stays valid before whatever is calling it (the Process App, an integration, etc.) has to sign in again.</p>
+<h3 id="how-to-set-it_1">How to set it</h3>
+<p>Edit the Business API's <code>appsettings.json</code> and set:
 <div class="highlight"><pre><span></span><code>&quot;Auth&quot;: {
   &quot;SessionExpiryMinutes&quot;: 480
 }
 </code></pre></div></p>
-<p>What it does:
-- <code>Auth:SessionExpiryMinutes</code> controls how long a credentials session remains valid.</p>
+<ul>
+<li><code>Auth:SessionExpiryMinutes</code> — how many idle minutes before that login stops working.</li>
+</ul>
 <h2 id="iis-configuration-both-apps">IIS Configuration (both apps)</h2>
-<p>To avoid sessions being lost due to app pool recycling:</p>
-<h3 id="app-pool-settings">App Pool Settings</h3>
+<p>Separately from the settings above, IIS periodically restarts each app behind the scenes as routine maintenance — whether or not anyone is using it. By default this can happen well before the timeouts you just configured, which logs everyone out early and makes it look like the settings above "didn't work."</p>
+<div class="admonition warning">
+<p class="admonition-title">Don't skip this step</p>
+<p>If you leave IIS's own restart timers at their defaults, users can still get logged out sooner than expected — even after correctly setting the Process App and Business API values above.</p>
+</div>
+<h3 id="how-to-set-it_2">How to set it</h3>
 <ul>
 <li>Open <strong>IIS Manager</strong>.</li>
 <li>Select <strong>Application Pools</strong>.</li>

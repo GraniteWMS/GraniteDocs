@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://granitewms.github.io/GraniteDocs/7.0/integration/intacct/standalone-service/">
       
       
-        <link rel="prev" href="../sdk-provider/">
+        <link rel="prev" href="../">
       
       
         <link rel="next" href="../integration-jobs/">
@@ -910,6 +910,8 @@
       
         
       
+        
+      
     
     
     
@@ -1012,6 +1014,29 @@
   
   <span class="md-ellipsis">
     Integration Jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cin7/cin7-change-log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change Log
     
   </span>
   
@@ -1760,29 +1785,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../sdk-provider/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    SDK Provider
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -1934,15 +1936,6 @@
   <a href="#waitforintacctseconds" class="md-nav__link">
     <span class="md-ellipsis">
       WaitForIntacctSeconds
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mapbatchtolinememo" class="md-nav__link">
-    <span class="md-ellipsis">
-      MapBatchToLineMemo
     </span>
   </a>
   
@@ -2145,6 +2138,29 @@
   
   <span class="md-ellipsis">
     Integration Jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../webhook-listener-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Webhook Listener API
     
   </span>
   
@@ -4170,15 +4186,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#mapbatchtolinememo" class="md-nav__link">
-    <span class="md-ellipsis">
-      MapBatchToLineMemo
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#salesorderitemtypesthatcopylines" class="md-nav__link">
     <span class="md-ellipsis">
       SalesOrderItemTypesThatCopyLines
@@ -4420,6 +4427,10 @@
 <h3 id="installation">Installation</h3>
 <ol>
 <li>
+<p><strong>Run the Database Setup Script</strong></p>
+<p>Run <code>SageIntacctIntegration_Create.sql</code> — which ships in the <code>GraniteDatabase</code> folder of the Granite release — against the Granite database. This provisions the <a href="#settings">Settings</a> described below, along with the tables and views used by the <a href="../integration-jobs/">Integration Jobs</a>.</p>
+</li>
+<li>
 <p><strong>Configure Connection String</strong></p>
 <p>Edit <code>appsettings.json</code> in the published folder to point to your Granite database:
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -4438,9 +4449,9 @@
 <p>Browse to the <code>/config</code> to verify the service is running.</p>
 <p>The config page shows:
 - <strong>Connection String</strong> - Censored connection string to Granite database
-- <strong>Intacct Connection State</strong> - Tests connection to Sage Intacct API
+- <strong>Intacct Connection State</strong> - Confirms the Intacct client can be initialized with the configured credentials
 - <strong>System Settings</strong> - Lists all configured settings (passwords hidden)</p>
-<p>If everything is configured correctly, you should see "Connected" for the Intacct Connection State.</p>
+<p>If everything is configured correctly, you should see "Connected" for the Intacct Connection State. Note that this check confirms the credentials are well-formed, not that Intacct has authenticated a live request — a real posting error can still occur later if Intacct rejects the credentials.</p>
 </li>
 <li>
 <p><strong>Update ProcessApp appsettings</strong></p>
@@ -4448,7 +4459,7 @@
 </li>
 </ol>
 <h2 id="settings">Settings</h2>
-<p>Settings are stored in the Granite database <code>SystemSettings</code> table. The service will automatically create missing settings with default values on first access.</p>
+<p>Settings are stored in the Granite database <code>SystemSettings</code> table. The service will automatically create missing settings with default values on first access. See <a href="#installation">step 1 of Installation</a> above to provision them upfront instead. The <a href="#sql-setup-script">SQL Setup Script</a> below is shown for reference, and for updating an existing installation that predates the setup script.</p>
 <h3 id="sage-intacct-api-credentials">Sage Intacct API Credentials</h3>
 <p>The service requires two sets of credentials to authenticate with Sage Intacct:</p>
 <p><strong>Web Services Credentials</strong></p>
@@ -4521,11 +4532,6 @@ They must be configured by the Intacct implementation partner before we can star
 </thead>
 <tbody>
 <tr>
-<td>TransactionDefinitionMove</td>
-<td>Warehouse Transfer</td>
-<td>Transaction definition for MOVE operations</td>
-</tr>
-<tr>
 <td>TransactionDefinitionScrap</td>
 <td>Inventory Scrap</td>
 <td>Transaction definition for SCRAP operations</td>
@@ -4575,15 +4581,6 @@ They must be configured by the Intacct implementation partner before we can star
 When a timeout occurs, the request continues in the background and the user is notified to check back later to see if the request completed successfully.</p>
 <p>This setting is necessary because posting to the Intacct Api is slower than legacy on prem ERPs. 
 Sometimes posting a large invoice can take upwards of 30s to complete, which would mean that the user cannot do anything else on the scanner until posting is finalized.</p>
-<h4 id="mapbatchtolinememo">MapBatchToLineMemo</h4>
-<p><strong>Default</strong>: <code>false</code><br />
-<strong>Type</strong>: Boolean</p>
-<p>When enabled, this setting copies the batch/lot number from Granite's TrackingEntity to the line memo field on Sage Intacct sales order lines during PICK operations.</p>
-<ul>
-<li><code>true</code> - Batch numbers are written to the invoice line memo</li>
-<li><code>false</code> - Batch numbers are not written to the memo field</li>
-</ul>
-<p>This is useful for customers who need batch/lot traceability visible in Intacct invoice line details but don't want to actually carry lot numbers in Intacct.</p>
 <h4 id="salesorderitemtypesthatcopylines">SalesOrderItemTypesThatCopyLines</h4>
 <p><strong>Default</strong>: (empty)<br />
 <strong>Type</strong>: Comma-separated string</p>
@@ -4593,10 +4590,11 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 </code></pre></div></p>
 <p><strong>How it works</strong>:</p>
 <ol>
-<li>Service retrieves all lines from the original sales order in Intacct</li>
+<li>On the first invoice created against a sales order, the service retrieves all lines from the original sales order in Intacct</li>
 <li>For each line, checks if the item's type matches any in this setting</li>
 <li>If matched, the entire line (quantity, price, description) is copied to the new invoice</li>
 <li>This happens in addition to the inventory lines being picked from Granite</li>
+<li>Subsequent invoices created against the same sales order (e.g. partial picks/back-orders) do not repeat this copy</li>
 </ol>
 <p>Leave empty if you only want inventory items from Granite to appear on invoices.</p>
 <h3 id="sql-setup-script">SQL Setup Script</h3>
@@ -4610,7 +4608,6 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 <span class="w">    </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;EntityId&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct EntityId&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
 <span class="w">    </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;UserId&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct UserId&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
 <span class="w">    </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;UserPassword&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct UserPassword&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
-<span class="w">    </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionMove&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Warehouse Transfer&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition Move&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
 <span class="w">    </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionScrap&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Inventory Scrap&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition Scrap&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
 <span class="w">    </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionTakeOn&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Inventory Receipt&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition TakeOn&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
 <span class="w">    </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionAdjustmentIncrease&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Adjustment Increase&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition Adjustment Increase&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
@@ -4620,7 +4617,6 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 <span class="w">    </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionReceive&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Purchase Invoice-Inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition Receive&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
 <span class="w">    </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;TransactionDefinitionReceiveOrigin&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;PO Receiver-Inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Sage Intacct Transaction Definition ReceiveOrigin&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
 <span class="w">    </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;WaitForIntacctSeconds&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;10&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Number of seconds to wait for Intacct when processing an integration request&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;int&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
-<span class="w">    </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;MapBatchToLineMemo&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;false&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Update Sales Order line memo with the batch from the TrackingEntity&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;bool&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span>
 <span class="w">    </span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;IntegrationSageIntacct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;SalesOrderItemTypesThatCopyLines&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;Comma separated list of Item Types that should be copied from SalesOrders to Invoices&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;string&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="s1">&#39;AUTOMATION&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">);</span>
 </code></pre></div>
 <div class="admonition note">
@@ -4645,12 +4641,12 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 <ul>
 <li><strong>New workflows</strong> can be created by combining existing steps or writing new steps</li>
 <li><strong>Custom logic</strong> can be added for specific scenarios without affecting standard methods</li>
-<li><strong>Process-specific methods</strong> can be configured via the <code>IntegrationMethod</code> field in the Process settings</li>
+<li>Granite's <code>Process</code> table has an <code>IntegrationMethod</code> column that determines which workflow a given process uses</li>
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Custom Method Example</p>
-<p>If a client needs a special "TRANSFER" operation that performs additional validation or custom field mapping, a new workflow can be created (e.g., <code>CustomTransferWorkflow</code>) with the required steps. The Process in Granite is then linked to this new <code>CustomTransferWorkflow</code> workflow in place of the default TRANSFER integration method.</p>
-<p>This design provides both <strong>standard methods</strong> that work out of the box and the <strong>flexibility</strong> to adapt to unique business requirements.</p>
+<p>If a client needs a special "TRANSFER" operation that performs additional validation or custom field mapping, a developer adds a new workflow class (e.g., <code>CustomTransferWorkflow</code>) with the required steps and registers it as a new integration method in the service. The client's <code>Process</code> row in Granite is then set to that new <code>IntegrationMethod</code> value.</p>
+<p>Adding a genuinely new integration method requires a code change and redeploy of the service — it is not a pure configuration change. Once deployed, however, individual Processes can be pointed at it via the <code>IntegrationMethod</code> setting without further code changes.</p>
 </div>
 <h3 id="standard-integration-methods">Standard Integration Methods</h3>
 <p>The following methods are available by default:</p>
@@ -4826,12 +4822,12 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 </tbody>
 </table>
 <h3 id="move">MOVE</h3>
-<p>Moves inventory between warehouses within the same location.</p>
+<p>Creates a new warehouse transfer to move inventory between warehouses.</p>
 <ul>
 <li><strong>Granite Transaction Type</strong>: MOVE</li>
-<li><strong>Intacct Transaction</strong>: Inventory Transaction (configured via TransactionDefinitionMove)</li>
-<li><strong>Supports</strong>: Lot tracking, Serial numbers, Expiry dates</li>
+<li><strong>Intacct Transaction</strong>: New Warehouse Transfer (ICTRANSFER)</li>
 </ul>
+<p>Warehouse Transfers don't use a Transaction Definition in Sage Intacct, so this method has no <code>TransactionDefinition</code> setting. Each transaction produces a pair of lines: an "Out" line for the source warehouse and an "In" line for the destination warehouse.</p>
 <table>
 <thead>
 <tr>
@@ -4843,14 +4839,8 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 </thead>
 <tbody>
 <tr>
-<td>TransactionDefinitionMove</td>
-<td>TransactionDefinition</td>
-<td>Yes</td>
-<td>From system setting</td>
-</tr>
-<tr>
-<td>ReferenceNumber</td>
-<td>ReferenceNumber</td>
+<td>—</td>
+<td>Description</td>
 <td>Yes</td>
 <td>Set to "Granite"</td>
 </tr>
@@ -4858,11 +4848,17 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 <td>EntityId</td>
 <td>LocationId</td>
 <td>Yes</td>
-<td>From system setting</td>
+<td>From system setting, set on both lines</td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>WarehouseId (Out line)</td>
+<td>Yes</td>
+<td>Source warehouse</td>
 </tr>
 <tr>
 <td>ToLocation</td>
-<td>WarehouseId</td>
+<td>WarehouseId (In line)</td>
 <td>Yes</td>
 <td>Destination warehouse</td>
 </tr>
@@ -4870,37 +4866,19 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 <td>Code</td>
 <td>ItemId</td>
 <td>Yes</td>
-<td>Item identifier</td>
+<td>Item identifier, set on both lines</td>
 </tr>
 <tr>
 <td>ActionQty</td>
 <td>Quantity</td>
 <td>Yes</td>
-<td>Quantity to move</td>
+<td>Quantity to move, set on both lines</td>
 </tr>
 <tr>
 <td>UOM</td>
 <td>Unit</td>
 <td>Yes</td>
 <td>Unit of measure</td>
-</tr>
-<tr>
-<td>Batch</td>
-<td>LotNumber</td>
-<td>No</td>
-<td>If ENABLE_LOT_CATEGORY enabled</td>
-</tr>
-<tr>
-<td>ExpiryDate</td>
-<td>ItemExpiration</td>
-<td>No</td>
-<td>If ENABLE_EXPIRATION enabled</td>
-</tr>
-<tr>
-<td>SerialNumber</td>
-<td>SerialNumber</td>
-<td>No</td>
-<td>If ENABLE_SERIALNO enabled</td>
 </tr>
 </tbody>
 </table>
@@ -5076,11 +5054,10 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 </tbody>
 </table>
 <h3 id="pick">PICK</h3>
-<p>Creates or updates sales order invoices.</p>
+<p>Creates a sales order invoice.</p>
 <ul>
 <li><strong>Granite Transaction Type</strong>: PICK</li>
 <li><strong>Intacct Transaction</strong>: Order Entry Transaction (Sales Invoice)</li>
-<li><strong>Supports</strong>: Lot tracking, Serial numbers, Expiry dates</li>
 </ul>
 <table>
 <thead>
@@ -5095,6 +5072,12 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 <tr>
 <td>TransactionDefinitionPick</td>
 <td>TransactionDefinition</td>
+<td>Yes</td>
+<td>From system setting</td>
+</tr>
+<tr>
+<td>EntityId</td>
+<td>LocationId</td>
 <td>Yes</td>
 <td>From system setting</td>
 </tr>
@@ -5146,32 +5129,13 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 <td>Yes</td>
 <td>Unit of measure</td>
 </tr>
-<tr>
-<td>Batch</td>
-<td>LotNumber</td>
-<td>No</td>
-<td>If ENABLE_LOT_CATEGORY enabled</td>
-</tr>
-<tr>
-<td>ExpiryDate</td>
-<td>ItemExpiration</td>
-<td>No</td>
-<td>If ENABLE_EXPIRATION enabled</td>
-</tr>
-<tr>
-<td>SerialNumber</td>
-<td>SerialNumber</td>
-<td>No</td>
-<td>If ENABLE_SERIALNO enabled</td>
-</tr>
 </tbody>
 </table>
 <h3 id="receive">RECEIVE</h3>
-<p>Creates or updates purchase order receipts.</p>
+<p>Creates a purchase order receipt.</p>
 <ul>
 <li><strong>Granite Transaction Type</strong>: RECEIVE</li>
 <li><strong>Intacct Transaction</strong>: Purchasing Transaction (Purchase Invoice)</li>
-<li><strong>Supports</strong>: Lot tracking, Serial numbers, Expiry dates</li>
 </ul>
 <table>
 <thead>
@@ -5186,6 +5150,12 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 <tr>
 <td>TransactionDefinitionReceive</td>
 <td>TransactionDefinition</td>
+<td>Yes</td>
+<td>From system setting</td>
+</tr>
+<tr>
+<td>EntityId</td>
+<td>LocationId</td>
 <td>Yes</td>
 <td>From system setting</td>
 </tr>
@@ -5226,7 +5196,7 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 <td>"Closed" or "Pending" based on post flag</td>
 </tr>
 <tr>
-<td>FromLocation</td>
+<td>ToLocation</td>
 <td>WarehouseId</td>
 <td>Yes</td>
 <td>Destination warehouse</td>
@@ -5249,32 +5219,13 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 <td>Yes</td>
 <td>Unit of measure</td>
 </tr>
-<tr>
-<td>Batch</td>
-<td>LotNumber</td>
-<td>No</td>
-<td>If ENABLE_LOT_CATEGORY enabled</td>
-</tr>
-<tr>
-<td>ExpiryDate</td>
-<td>ItemExpiration</td>
-<td>No</td>
-<td>If ENABLE_EXPIRATION enabled</td>
-</tr>
-<tr>
-<td>SerialNumber</td>
-<td>SerialNumber</td>
-<td>No</td>
-<td>If ENABLE_SERIALNO enabled</td>
-</tr>
 </tbody>
 </table>
 <h3 id="transfer">TRANSFER</h3>
-<p>Creates or updates warehouse transfers between locations.</p>
+<p>Updates and posts an existing warehouse transfer in Sage Intacct. This is typically used to complete a transfer that was previously created via MOVE — for example, when the receiving warehouse confirms the transfer.</p>
 <ul>
 <li><strong>Granite Transaction Type</strong>: TRANSFER</li>
-<li><strong>Intacct Transaction</strong>: Warehouse Transfer</li>
-<li><strong>Supports</strong>: Lot tracking, Serial numbers, Expiry dates</li>
+<li><strong>Intacct Transaction</strong>: Existing Warehouse Transfer (ICTRANSFER, looked up by Document number)</li>
 </ul>
 <table>
 <thead>
@@ -5287,20 +5238,44 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 </thead>
 <tbody>
 <tr>
-<td>Description</td>
+<td>Document</td>
+<td>—</td>
+<td>Yes</td>
+<td>Used to look up the existing transfer by its Intacct document number</td>
+</tr>
+<tr>
+<td>—</td>
 <td>Description</td>
 <td>Yes</td>
 <td>Set to "Granite"</td>
 </tr>
 <tr>
+<td>—</td>
+<td>Action</td>
+<td>Yes</td>
+<td>Set to "Post"</td>
+</tr>
+<tr>
+<td>—</td>
+<td>State</td>
+<td>Yes</td>
+<td>"Posted" or "Pending" based on post flag</td>
+</tr>
+<tr>
+<td>EntityId</td>
+<td>LocationId</td>
+<td>Yes</td>
+<td>From system setting, set on both lines</td>
+</tr>
+<tr>
 <td>FromLocation</td>
-<td>WarehouseId</td>
+<td>WarehouseId (Out line)</td>
 <td>Yes</td>
 <td>Source warehouse</td>
 </tr>
 <tr>
 <td>ToLocation</td>
-<td>WarehouseId</td>
+<td>WarehouseId (In line)</td>
 <td>Yes</td>
 <td>Destination warehouse</td>
 </tr>
@@ -5308,13 +5283,13 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 <td>Code</td>
 <td>ItemId</td>
 <td>Yes</td>
-<td>Item identifier</td>
+<td>Item identifier, set on both lines</td>
 </tr>
 <tr>
 <td>ActionQty</td>
 <td>Quantity</td>
 <td>Yes</td>
-<td>Quantity to transfer</td>
+<td>Quantity to transfer, set on both lines</td>
 </tr>
 <tr>
 <td>UOM</td>
@@ -5322,36 +5297,21 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 <td>Yes</td>
 <td>Unit of measure</td>
 </tr>
-<tr>
-<td>Batch</td>
-<td>LotNumber</td>
-<td>No</td>
-<td>If ENABLE_LOT_CATEGORY enabled</td>
-</tr>
-<tr>
-<td>ExpiryDate</td>
-<td>ItemExpiration</td>
-<td>No</td>
-<td>If ENABLE_EXPIRATION enabled</td>
-</tr>
-<tr>
-<td>SerialNumber</td>
-<td>SerialNumber</td>
-<td>No</td>
-<td>If ENABLE_SERIALNO enabled</td>
-</tr>
 </tbody>
 </table>
 <h2 id="performance-considerations">Performance Considerations</h2>
 <h3 id="request-deduplication-and-concurrency-protection">Request Deduplication and Concurrency Protection</h3>
 <p>The service implements robust protection against duplicate and concurrent requests to prevent double-posting to Intacct:</p>
 <p><strong>Queue Key Generation</strong></p>
-<p>Each integration request generates a unique queue key based on:
-- Transaction IDs
-- Document number
-- Process name
-- Transaction type</p>
-<p>This key uniquely identifies the work being requested.</p>
+<p>Each integration request generates a queue key from the first of the following fields present on the request, in priority order:</p>
+<ol>
+<li>Transaction IDs</li>
+<li>Document Reference</li>
+<li>Document number</li>
+<li>Documents (list)</li>
+<li>Reference</li>
+</ol>
+<p>Only one of these is used per request — whichever is present highest in the list above. The queue key does not include Process Name or Transaction Type, so two different processes or transaction types referencing the same Document value will share a queue key.</p>
 <p><strong>Duplicate Request Handling</strong></p>
 <p>When a request is received, the service checks for existing workflows with the same queue key:</p>
 <ul>
@@ -5371,7 +5331,8 @@ Sometimes posting a large invoice can take upwards of 30s to complete, which wou
 <h2 id="resources">Resources</h2>
 <ul>
 <li><strong>Developer Documentation</strong>: <a href="https://developer.intacct.com/">https://developer.intacct.com/</a></li>
-<li><strong>Integration Jobs</strong>: See <a href="../integration-jobs/">integration-jobs.md</a> for downward sync</li>
+<li><strong>Integration Jobs</strong>: See <a href="../integration-jobs/">Integration Jobs</a> for downward sync</li>
+<li><strong>Webhook Listener API</strong>: See <a href="../webhook-listener-api/">Webhook Listener Api</a> for real-time document queuing</li>
 <li><strong>IIS Setup</strong>: See <a href="../../../iis/getting-started/">IIS Getting Started</a></li>
 </ul>
 

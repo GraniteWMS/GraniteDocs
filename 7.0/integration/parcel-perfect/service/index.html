@@ -910,6 +910,8 @@
       
         
       
+        
+      
     
     
     
@@ -1012,6 +1014,29 @@
   
   <span class="md-ellipsis">
     Integration Jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cin7/cin7-change-log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change Log
     
   </span>
   
@@ -2012,29 +2037,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../intacct/sdk-provider/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    SDK Provider
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../intacct/standalone-service/" class="md-nav__link">
         
   
@@ -2064,6 +2066,29 @@
   
   <span class="md-ellipsis">
     Integration Jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../intacct/webhook-listener-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Webhook Listener API
     
   </span>
   
@@ -4216,8 +4241,8 @@
 <h2 id="setup">Setup</h2>
 <h3 id="prerequisites">Prerequisites</h3>
 <ol>
-<li><strong>IIS</strong> — installed and configured with the matching .NET Hosting Bundle<ul>
-<li>See <a href="../../../iis/getting-started/">IIS Getting Started Guide</a> for installation instructions</li>
+<li><strong>IIS</strong> — installed and configured with the <a href="https://dotnet.microsoft.com/en-us/download/dotnet/10.0">ASP.NET Core 10 Hosting Bundle</a><ul>
+<li>See <a href="../../../iis/getting-started/">IIS Getting Started Guide</a> for general IIS installation instructions</li>
 </ul>
 </li>
 <li>A connection string to the Granite database — the service creates its own tables in it automatically.</li>
@@ -4626,9 +4651,19 @@
 <span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">message</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="k">max</span><span class="p">)</span>
 <span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">quoteId</span><span class="w"> </span><span class="nb">bigint</span>
 <span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">quoteNumber</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">itemNo</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">description</span><span class="w"> </span><span class="n">nvarchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">pieces</span><span class="w"> </span><span class="nb">int</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="k">length</span><span class="w"> </span><span class="nb">decimal</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">width</span><span class="w"> </span><span class="nb">decimal</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">height</span><span class="w"> </span><span class="nb">decimal</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">DECLARE</span><span class="w"> </span><span class="o">@</span><span class="n">actualMassKg</span><span class="w"> </span><span class="nb">decimal</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 
-<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">parcels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">parcelPerfect_AddParcel</span><span class="p">(</span><span class="o">@</span><span class="n">parcels</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ITEM001&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Carton of widgets&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">parcels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">parcelPerfect_AddParcel</span><span class="p">(</span><span class="o">@</span><span class="n">parcels</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ITEM002&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Carton of gadgets&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">itemNo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;ITEM001&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Carton of widgets&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">pieces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="k">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">actualMassKg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">.</span><span class="mi">5</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">parcels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">parcelPerfect_AddParcel</span><span class="p">(</span><span class="o">@</span><span class="n">parcels</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">itemNo</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">description</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">pieces</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="k">length</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">actualMassKg</span><span class="p">)</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">itemNo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;ITEM002&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Carton of gadgets&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">pieces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="k">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">actualMassKg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">parcels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">parcelPerfect_AddParcel</span><span class="p">(</span><span class="o">@</span><span class="n">parcels</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">itemNo</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">description</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">pieces</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="k">length</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">actualMassKg</span><span class="p">)</span>
 
 <span class="k">SELECT</span><span class="w"> </span><span class="o">@</span><span class="n">waybillRefs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbo</span><span class="p">.</span><span class="n">parcelPerfect_AddWaybillReference</span><span class="p">(</span><span class="o">@</span><span class="n">waybillRefs</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;SO-100234&#39;</span><span class="p">)</span>
 

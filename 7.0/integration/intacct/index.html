@@ -14,7 +14,7 @@
         <link rel="prev" href="../sage100/integration-jobs/">
       
       
-        <link rel="next" href="sdk-provider/">
+        <link rel="next" href="standalone-service/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -910,6 +910,8 @@
       
         
       
+        
+      
     
     
     
@@ -1012,6 +1014,29 @@
   
   <span class="md-ellipsis">
     Integration Jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cin7/cin7-change-log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Change Log
     
   </span>
   
@@ -1763,29 +1788,6 @@
   
   
     <li class="md-nav__item">
-      <a href="sdk-provider/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    SDK Provider
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="standalone-service/" class="md-nav__link">
         
   
@@ -1815,6 +1817,29 @@
   
   <span class="md-ellipsis">
     Integration Jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="webhook-listener-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Webhook Listener API
     
   </span>
   
@@ -3766,13 +3791,16 @@
 <p><img alt="clients" src="https://img.shields.io/badge/live_clients-yes-449336" /></p>
 <p><img alt="status" src="https://img.shields.io/badge/development_status-active-365893" /></p>
 <p>This document contains all of the information needed to set up and configure integration with Intacct.
-There are two parts to the complete integration solution:</p>
+There are three parts to the complete integration solution:</p>
 <ul>
 <li>
-<p>The <a href="sdk-provider/">SDK Provider</a> is used by the Integration Service to map transactions performed in Granite to the relevant format for Intacct.</p>
+<p>The <a href="standalone-service/">Integration Service</a> handles upward integration, posting transactions performed in Granite (TAKEON, ADJUSTMENT, MOVE, RECLASSIFY, SCRAP, PICK, RECEIVE, TRANSFER) to Sage Intacct.</p>
 </li>
 <li>
-<p>The <a href="integration-jobs/">integration jobs</a> are used by the <a href="../../scheduler/manual/">Scheduler</a> to pull Intacct's documents, item codes, and trading partners into Granite.</p>
+<p>The <a href="integration-jobs/">Integration Jobs</a> are used by the <a href="../../scheduler/manual/">Scheduler</a> to pull Intacct's documents, item codes, trading partners, and inventory totals into Granite.</p>
+</li>
+<li>
+<p>The <a href="webhook-listener-api/">Webhook Listener API</a> lets Sage Intacct notify Granite in real time that a document has changed, so the Integration Jobs can fetch the new/modified document.</p>
 </li>
 </ul>
 <h3 id="resources">Resources</h3>
