@@ -45,7 +45,11 @@ Before installing the service, ensure the following are in place:
 
 ### Installation
 
-1. **Configure Connection String**
+1. **Run the Database Setup Script**
+
+    Run `SageIntacctIntegration_Create.sql` — which ships in the `GraniteDatabase` folder of the Granite release — against the Granite database. This provisions the [Settings](#settings) described below, along with the tables and views used by the [Integration Jobs](integration-jobs.md).
+
+2. **Configure Connection String**
 
     Edit `appsettings.json` in the published folder to point to your Granite database:
     ```json
@@ -56,29 +60,29 @@ Before installing the service, ensure the following are in place:
     }
     ```
 
-2. **Create IIS Site**
+3. **Create IIS Site**
 
     Add the service as a new site in IIS following the [Adding a site to IIS](../../iis/getting-started.md#adding-a-site-to-iis) guide.
 
-3. **Verify Installation**
+4. **Verify Installation**
 
     Browse to the `/config` to verify the service is running.
     
     The config page shows:
     - **Connection String** - Censored connection string to Granite database
-    - **Intacct Connection State** - Tests connection to Sage Intacct API
+    - **Intacct Connection State** - Confirms the Intacct client can be initialized with the configured credentials
     - **System Settings** - Lists all configured settings (passwords hidden)
 
-    If everything is configured correctly, you should see "Connected" for the Intacct Connection State.
+    If everything is configured correctly, you should see "Connected" for the Intacct Connection State. Note that this check confirms the credentials are well-formed, not that Intacct has authenticated a live request — a real posting error can still occur later if Intacct rejects the credentials.
 
-4. **Update ProcessApp appsettings**
+5. **Update ProcessApp appsettings**
 
     Point the ProcessApp's IntegrationService setting to the endpoint that you have configured.
 
 
 ## Settings
 
-Settings are stored in the Granite database `SystemSettings` table. The service will automatically create missing settings with default values on first access.
+Settings are stored in the Granite database `SystemSettings` table. The service will automatically create missing settings with default values on first access. See [step 1 of Installation](#installation) above to provision them upfront instead. The [SQL Setup Script](#sql-setup-script) below is shown for reference, and for updating an existing installation that predates the setup script.
 
 ### Sage Intacct API Credentials
 
@@ -108,7 +112,6 @@ The service requires two sets of credentials to authenticate with Sage Intacct:
 
 | Key | Default Value | Description |
 |-----|---------------|-------------|
-| TransactionDefinitionMove | Warehouse Transfer | Transaction definition for MOVE operations |
 | TransactionDefinitionScrap | Inventory Scrap | Transaction definition for SCRAP operations |
 | TransactionDefinitionTakeOn | Inventory Receipt | Transaction definition for TAKEON operations |
 | TransactionDefinitionAdjustmentIncrease | Adjustment Increase | Transaction definition for ADJUSTMENT increases |
@@ -131,18 +134,6 @@ When a timeout occurs, the request continues in the background and the user is n
 This setting is necessary because posting to the Intacct Api is slower than legacy on prem ERPs. 
 Sometimes posting a large invoice can take upwards of 30s to complete, which would mean that the user cannot do anything else on the scanner until posting is finalized.
 
-#### MapBatchToLineMemo
-
-**Default**: `false`  
-**Type**: Boolean
-
-When enabled, this setting copies the batch/lot number from Granite's TrackingEntity to the line memo field on Sage Intacct sales order lines during PICK operations.
-
-- `true` - Batch numbers are written to the invoice line memo
-- `false` - Batch numbers are not written to the memo field
-
-This is useful for customers who need batch/lot traceability visible in Intacct invoice line details but don't want to actually carry lot numbers in Intacct.
-
 #### SalesOrderItemTypesThatCopyLines
 
 **Default**: (empty)  
@@ -157,10 +148,11 @@ Service,Charge
 
 **How it works**:
 
-1. Service retrieves all lines from the original sales order in Intacct
+1. On the first invoice created against a sales order, the service retrieves all lines from the original sales order in Intacct
 2. For each line, checks if the item's type matches any in this setting
 3. If matched, the entire line (quantity, price, description) is copied to the new invoice
 4. This happens in addition to the inventory lines being picked from Granite
+5. Subsequent invoices created against the same sales order (e.g. partial picks/back-orders) do not repeat this copy
 
 Leave empty if you only want inventory items from Granite to appear on invoices.
 
@@ -178,7 +170,6 @@ VALUES
     (N'IntegrationSageIntacct', N'EntityId', N'', N'Sage Intacct EntityId', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
     (N'IntegrationSageIntacct', N'UserId', N'', N'Sage Intacct UserId', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
     (N'IntegrationSageIntacct', N'UserPassword', N'', N'Sage Intacct UserPassword', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
-    (N'IntegrationSageIntacct', N'TransactionDefinitionMove', N'Warehouse Transfer', N'Sage Intacct Transaction Definition Move', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
     (N'IntegrationSageIntacct', N'TransactionDefinitionScrap', N'Inventory Scrap', N'Sage Intacct Transaction Definition Scrap', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
     (N'IntegrationSageIntacct', N'TransactionDefinitionTakeOn', N'Inventory Receipt', N'Sage Intacct Transaction Definition TakeOn', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
     (N'IntegrationSageIntacct', N'TransactionDefinitionAdjustmentIncrease', N'Adjustment Increase', N'Sage Intacct Transaction Definition Adjustment Increase', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
@@ -188,7 +179,6 @@ VALUES
     (N'IntegrationSageIntacct', N'TransactionDefinitionReceive', N'Purchase Invoice-Inventory', N'Sage Intacct Transaction Definition Receive', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
     (N'IntegrationSageIntacct', N'TransactionDefinitionReceiveOrigin', N'PO Receiver-Inventory', N'Sage Intacct Transaction Definition ReceiveOrigin', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
     (N'IntegrationSageIntacct', N'WaitForIntacctSeconds', N'10', N'Number of seconds to wait for Intacct when processing an integration request', N'int', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
-    (N'IntegrationSageIntacct', N'MapBatchToLineMemo', N'false', N'Update Sales Order line memo with the batch from the TrackingEntity', N'bool', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL),
     (N'IntegrationSageIntacct', N'SalesOrderItemTypesThatCopyLines', N'', N'Comma separated list of Item Types that should be copied from SalesOrders to Invoices', N'string', 1, 0, NULL, GETDATE(), N'AUTOMATION', NULL);
 ```
 
@@ -219,12 +209,12 @@ The workflow-based architecture allows for **custom integration methods** to be 
 
 - **New workflows** can be created by combining existing steps or writing new steps
 - **Custom logic** can be added for specific scenarios without affecting standard methods
-- **Process-specific methods** can be configured via the `IntegrationMethod` field in the Process settings
+- Granite's `Process` table has an `IntegrationMethod` column that determines which workflow a given process uses
 
 !!! example "Custom Method Example"
-    If a client needs a special "TRANSFER" operation that performs additional validation or custom field mapping, a new workflow can be created (e.g., `CustomTransferWorkflow`) with the required steps. The Process in Granite is then linked to this new `CustomTransferWorkflow` workflow in place of the default TRANSFER integration method.
+    If a client needs a special "TRANSFER" operation that performs additional validation or custom field mapping, a developer adds a new workflow class (e.g., `CustomTransferWorkflow`) with the required steps and registers it as a new integration method in the service. The client's `Process` row in Granite is then set to that new `IntegrationMethod` value.
 
-    This design provides both **standard methods** that work out of the box and the **flexibility** to adapt to unique business requirements.
+    Adding a genuinely new integration method requires a code change and redeploy of the service — it is not a pure configuration change. Once deployed, however, individual Processes can be pointed at it via the `IntegrationMethod` setting without further code changes.
 
 ### Standard Integration Methods
 
@@ -278,24 +268,22 @@ The service automatically determines whether to use TransactionDefinitionAdjustm
 
 ### MOVE
 
-Moves inventory between warehouses within the same location.
+Creates a new warehouse transfer to move inventory between warehouses.
 
 - **Granite Transaction Type**: MOVE
-- **Intacct Transaction**: Inventory Transaction (configured via TransactionDefinitionMove)
-- **Supports**: Lot tracking, Serial numbers, Expiry dates
+- **Intacct Transaction**: New Warehouse Transfer (ICTRANSFER)
+
+Warehouse Transfers don't use a Transaction Definition in Sage Intacct, so this method has no `TransactionDefinition` setting. Each transaction produces a pair of lines: an "Out" line for the source warehouse and an "In" line for the destination warehouse.
 
 | Granite Field | Intacct Field | Required | Behavior |
 |---------------|---------------|----------|----------|
-| TransactionDefinitionMove | TransactionDefinition | Yes | From system setting |
-| ReferenceNumber | ReferenceNumber | Yes | Set to "Granite" |
-| EntityId | LocationId | Yes | From system setting |
-| ToLocation | WarehouseId | Yes | Destination warehouse |
-| Code | ItemId | Yes | Item identifier |
-| ActionQty | Quantity | Yes | Quantity to move |
+| — | Description | Yes | Set to "Granite" |
+| EntityId | LocationId | Yes | From system setting, set on both lines |
+| FromLocation | WarehouseId (Out line) | Yes | Source warehouse |
+| ToLocation | WarehouseId (In line) | Yes | Destination warehouse |
+| Code | ItemId | Yes | Item identifier, set on both lines |
+| ActionQty | Quantity | Yes | Quantity to move, set on both lines |
 | UOM | Unit | Yes | Unit of measure |
-| Batch | LotNumber | No | If ENABLE_LOT_CATEGORY enabled |
-| ExpiryDate | ItemExpiration | No | If ENABLE_EXPIRATION enabled |
-| SerialNumber | SerialNumber | No | If ENABLE_SERIALNO enabled |
 
 ### RECLASSIFY
 
@@ -345,15 +333,15 @@ Records scrapped/disposed inventory.
 
 ### PICK
 
-Creates or updates sales order invoices.
+Creates a sales order invoice.
 
 - **Granite Transaction Type**: PICK
 - **Intacct Transaction**: Order Entry Transaction (Sales Invoice)
-- **Supports**: Lot tracking, Serial numbers, Expiry dates
 
 | Granite Field | Intacct Field | Required | Behavior |
 |---------------|---------------|----------|----------|
 | TransactionDefinitionPick | TransactionDefinition | Yes | From system setting |
+| EntityId | LocationId | Yes | From system setting |
 | CustomerId | CustomerId | Yes | From DocumentTradingPartnerCode |
 | TransactionDate | TransactionDate | Yes | Current date/time |
 | CreatedFrom | CreatedFrom | Yes | "{PickOrigin}-{Document}" |
@@ -362,54 +350,48 @@ Creates or updates sales order invoices.
 | Code | ItemId | Yes | Item identifier |
 | ActionQty | Quantity | Yes | Quantity to pick |
 | UOM | Unit | Yes | Unit of measure |
-| Batch | LotNumber | No | If ENABLE_LOT_CATEGORY enabled |
-| ExpiryDate | ItemExpiration | No | If ENABLE_EXPIRATION enabled |
-| SerialNumber | SerialNumber | No | If ENABLE_SERIALNO enabled |
 
 ### RECEIVE
 
-Creates or updates purchase order receipts.
+Creates a purchase order receipt.
 
 - **Granite Transaction Type**: RECEIVE
 - **Intacct Transaction**: Purchasing Transaction (Purchase Invoice)
-- **Supports**: Lot tracking, Serial numbers, Expiry dates
 
 | Granite Field | Intacct Field | Required | Behavior |
 |---------------|---------------|----------|----------|
 | TransactionDefinitionReceive | TransactionDefinition | Yes | From system setting |
+| EntityId | LocationId | Yes | From system setting |
 | VendorId | VendorId | Yes | From DocumentTradingPartnerCode |
 | VendorDocNumber | VendorDocNumber | Yes | From Document |
 | TransactionDate | TransactionDate | Yes | Current date/time |
 | DueDate | DueDate | Yes | Current date/time |
 | CreatedFrom | CreatedFrom | Yes | "{ReceiveOrigin}-{Document}" |
 | State | State | Yes | "Closed" or "Pending" based on post flag |
-| FromLocation | WarehouseId | Yes | Destination warehouse |
+| ToLocation | WarehouseId | Yes | Destination warehouse |
 | Code | ItemId | Yes | Item identifier |
 | ActionQty | Quantity | Yes | Quantity to receive |
 | UOM | Unit | Yes | Unit of measure |
-| Batch | LotNumber | No | If ENABLE_LOT_CATEGORY enabled |
-| ExpiryDate | ItemExpiration | No | If ENABLE_EXPIRATION enabled |
-| SerialNumber | SerialNumber | No | If ENABLE_SERIALNO enabled |
 
 ### TRANSFER
 
-Creates or updates warehouse transfers between locations.
+Updates and posts an existing warehouse transfer in Sage Intacct. This is typically used to complete a transfer that was previously created via MOVE — for example, when the receiving warehouse confirms the transfer.
 
 - **Granite Transaction Type**: TRANSFER
-- **Intacct Transaction**: Warehouse Transfer
-- **Supports**: Lot tracking, Serial numbers, Expiry dates
+- **Intacct Transaction**: Existing Warehouse Transfer (ICTRANSFER, looked up by Document number)
 
 | Granite Field | Intacct Field | Required | Behavior |
 |---------------|---------------|----------|----------|
-| Description | Description | Yes | Set to "Granite" |
-| FromLocation | WarehouseId | Yes | Source warehouse |
-| ToLocation | WarehouseId | Yes | Destination warehouse |
-| Code | ItemId | Yes | Item identifier |
-| ActionQty | Quantity | Yes | Quantity to transfer |
+| Document | — | Yes | Used to look up the existing transfer by its Intacct document number |
+| — | Description | Yes | Set to "Granite" |
+| — | Action | Yes | Set to "Post" |
+| — | State | Yes | "Posted" or "Pending" based on post flag |
+| EntityId | LocationId | Yes | From system setting, set on both lines |
+| FromLocation | WarehouseId (Out line) | Yes | Source warehouse |
+| ToLocation | WarehouseId (In line) | Yes | Destination warehouse |
+| Code | ItemId | Yes | Item identifier, set on both lines |
+| ActionQty | Quantity | Yes | Quantity to transfer, set on both lines |
 | UOM | Unit | Yes | Unit of measure |
-| Batch | LotNumber | No | If ENABLE_LOT_CATEGORY enabled |
-| ExpiryDate | ItemExpiration | No | If ENABLE_EXPIRATION enabled |
-| SerialNumber | SerialNumber | No | If ENABLE_SERIALNO enabled |
 
 
 ## Performance Considerations
@@ -420,13 +402,15 @@ The service implements robust protection against duplicate and concurrent reques
 
 **Queue Key Generation**
 
-Each integration request generates a unique queue key based on:
-- Transaction IDs
-- Document number
-- Process name
-- Transaction type
+Each integration request generates a queue key from the first of the following fields present on the request, in priority order:
 
-This key uniquely identifies the work being requested.
+1. Transaction IDs
+2. Document Reference
+3. Document number
+4. Documents (list)
+5. Reference
+
+Only one of these is used per request — whichever is present highest in the list above. The queue key does not include Process Name or Transaction Type, so two different processes or transaction types referencing the same Document value will share a queue key.
 
 **Duplicate Request Handling**
 
@@ -450,5 +434,6 @@ SQL Server connection pooling is enabled by default. The service efficiently reu
 ## Resources
 
 - **Developer Documentation**: [https://developer.intacct.com/](https://developer.intacct.com/)
-- **Integration Jobs**: See [integration-jobs.md](integration-jobs.md) for downward sync
+- **Integration Jobs**: See [Integration Jobs](integration-jobs.md) for downward sync
+- **Webhook Listener API**: See [Webhook Listener Api](webhook-listener-api.md) for real-time document queuing
 - **IIS Setup**: See [IIS Getting Started](../../iis/getting-started.md)

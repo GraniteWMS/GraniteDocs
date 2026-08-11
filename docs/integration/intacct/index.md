@@ -9,11 +9,13 @@
 ![status](https://img.shields.io/badge/development_status-active-365893)
 
 This document contains all of the information needed to set up and configure integration with Intacct.
-There are two parts to the complete integration solution:
+There are three parts to the complete integration solution:
 
-- The [SDK Provider](sdk-provider.md) is used by the Integration Service to map transactions performed in Granite to the relevant format for Intacct.
+- The [Integration Service](standalone-service.md) handles upward integration, posting transactions performed in Granite (TAKEON, ADJUSTMENT, MOVE, RECLASSIFY, SCRAP, PICK, RECEIVE, TRANSFER) to Sage Intacct.
 
-- The [integration jobs](integration-jobs.md) are used by the [Scheduler](../../scheduler/manual.md) to pull Intacct's documents, item codes, and trading partners into Granite.
+- The [Integration Jobs](integration-jobs.md) are used by the [Scheduler](../../scheduler/manual.md) to pull Intacct's documents, item codes, trading partners, and inventory totals into Granite.
+
+- The [Webhook Listener API](webhook-listener-api.md) lets Sage Intacct notify Granite in real time that a document has changed, so the Integration Jobs can fetch the new/modified document.
 
 ### Resources
 
