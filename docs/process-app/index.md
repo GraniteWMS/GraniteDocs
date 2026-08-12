@@ -106,6 +106,10 @@ Business rules are passed in the `BusinessRules` dictionary on transaction reque
     
     When IgnoreBatch's value is 'YES', the Business API will not validate the batch of the packed tracking entity against the document lines when allocating a transaction to a line.
 
+- **CancelledLineOverride**
+    
+    When CancelledLineOverride's value is 'YES', users will be allowed to pack document lines that are cancelled
+
 #### Picking
 
 - **BestBeforeOverride**
@@ -124,6 +128,10 @@ Business rules are passed in the `BusinessRules` dictionary on transaction reque
     
     When set to a value above 0, allows the user to pick the specified percentage more than the document requires
 
+- **CancelledLineOverride**
+    
+    When CancelledLineOverride's value is 'YES', users will be allowed to pick document lines that are cancelled
+
 #### Transfer
 
 - **ActionQtyAllowance**
@@ -137,6 +145,10 @@ Business rules are passed in the `BusinessRules` dictionary on transaction reque
 - **OnHoldOverride**
     
     When OnHoldOverride's value is 'YES', users will be allowed to transfer stock that is on hold
+
+- **CancelledLineOverride**
+    
+    When CancelledLineOverride's value is 'YES', users will be allowed to transfer against document lines that are cancelled
 
 #### Transfer Dynamic
 
@@ -170,6 +182,10 @@ Business rules are passed in the `BusinessRules` dictionary on transaction reque
     
     When SerialValidationOverride's value is 'YES', the Business API will not validate the received serial number against the document lines
 
+- **CancelledLineOverride**
+    
+    When CancelledLineOverride's value is 'YES', users will be allowed to receive against document lines that are cancelled
+
 #### Manufacture
 
 - **ActionQtyAllowance**
@@ -180,6 +196,10 @@ Business rules are passed in the `BusinessRules` dictionary on transaction reque
     
     When CreateOnHold's value is 'YES', tracking entities created by this transaction will be placed on hold, in the same way as the master item's DirectOnHold setting.
 
+- **CancelledLineOverride**
+    
+    When CancelledLineOverride's value is 'YES', users will be allowed to manufacture against document lines that are cancelled
+
 #### Consume
 
 - **BestBeforeOverride**
@@ -189,6 +209,10 @@ Business rules are passed in the `BusinessRules` dictionary on transaction reque
 - **ActionQtyAllowance** 
     
     Percentage allowance for consuming more than the document line quantity. Default is 0%
+
+- **CancelledLineOverride**
+    
+    When CancelledLineOverride's value is 'YES', users will be allowed to consume against document lines that are cancelled
 
 #### Correction
 
