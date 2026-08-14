@@ -127,6 +127,10 @@ INVTMRDOC Items mapping:
 | ActionQty     | Quantity      |
 | Batch         | Lot           |
 | UOM           | UnitOfMeasure |
+| ID            | Reference     |
+
+Notes:
+- `Reference` is set to `GraniteID: {ID}` for traceability back to the originating Granite transaction.
 
 ### ADJUSTMENT
 - INVTMA. Inventory Adjustments
@@ -152,6 +156,10 @@ INVTMADOC Items mapping:
 | ToQty - FromQty | Quantity    |
 | Batch         | Lot           |
 | UOM           | UnitOfMeasure |
+| ID            | Reference     |
+
+Notes:
+- `Reference` is set to `GraniteID: {ID}` for traceability back to the originating Granite transaction.
 
 ### RECLASSIFY
 - INVTMA. Inventory Adjustments
@@ -178,6 +186,7 @@ INVTMADOC Items mapping:
 | UOM           | UnitOfMeasure |           |
 | FromLocation  | Warehouse     | Used for the `FromCode` line |
 | ToLocation    | Warehouse     | Used for the `ToCode` line |
+| ID            | Reference     | Formatted as `GraniteID: {ID}`; set on both the `FromCode` and `ToCode` lines |
 
 ### REPLENISH
 - INVTMO. Inventory Warehouse Transfer
@@ -203,6 +212,7 @@ INVTMODOC Items mapping:
 | ActionQty     | Quantity      |           |
 | Batch         | Lot           |           |
 | UOM           | UnitOfMeasure |           |
+| ID            | Reference     | Formatted as `GraniteID: {ID}` |
 
 ### TRANSFER
 Based on setting TransferPosting (INVT or GIT)
@@ -236,6 +246,7 @@ INVTMODOC Items mapping:
 | ActionQty             | Quantity      |           |
 | Batch                 | Lot           |           |
 | UOM                   | UnitOfMeasure |           |
+| ID                    | Notation      | Formatted as `GraniteID: {ID}`. `Reference` is already used for `DocumentDescription`. |
 
 SORTBO Parameters:
 
@@ -278,7 +289,10 @@ INVTMIDOC Item mapping
 | ActionQty             | Quantity      |
 | Batch                 | Lot           |
 | UOM                   | UnitOfMeasure |
+| ID                    | Notation      |
 
+Notes:
+- `Notation` is set to `GraniteID: {ID}`. `Reference` is already used for `DocumentDescription`.
 
 INVTMN Parameters:
 
@@ -297,7 +311,10 @@ INVTMNDOC Item mapping:
 | FromLocation          | Key.SourceWarehouse   |
 | DocumentDescription   | Key.GtrReference      |
 | ActionQty             | Quantity              |
+| ID                    | Notation              |
 
+Notes:
+- `Notation` is set to `GraniteID: {ID}`. `Key.GtrReference` is already used for `DocumentDescription`.
 
 ### MOVE
 - INVTMO. Inventory Warehouse Transfer
@@ -323,6 +340,7 @@ INVTMODOC Items mapping:
 | ActionQty     | Quantity              |           |
 | Batch         | Lot                   |           |
 | UOM           | UnitOfMeasure         |           |
+| ID            | Reference             | Formatted as `GraniteID: {ID}` |
 
 ### SCRAP
 - INVTMA. Inventory Adjustments
@@ -348,6 +366,7 @@ INVTMADOC Items mapping:
 | Batch         | Lot                   |           |
 | UOM           | UnitOfMeasure         |           |
 | ToLocation    | Warehouse             |           |
+| ID            | Reference             | Formatted as `GraniteID: {ID}` |
 Notes:
 - `SCRAP` is posted via the dedicated `InventoryControl.Scrap` flow.
 - When `MultipleBins=true`, warehouse is currently hardcoded to `KG` and `ToLocation` maps to `BinLocation`.
@@ -526,7 +545,7 @@ PORTORDOC Item mapping:
 | Code          | Receipt.StockCode             |                       |
 | ActionQty     | Receipt.Quantity              |                       |
 | UOM           | Receipt.UnitOfMeasure         |                       |
-| Comment       | Receipt.Reference             |                       |
+| ID            | Receipt.Reference             | Formatted as `GraniteID: {ID}` |
 | ToLocation    | Receipt.Warehouse             |                       |
 | Batch         | Receipt.Lot                   |                       |
 | ExpiryDate    | Receipt.LotExpiryDate         |                       |
@@ -559,10 +578,12 @@ WIPTJRDOC Item mapping:
 |             | JobComplete                | Set to NotComplete          |
 |             | CoProductComplete          | Set to NotComplete          |
 |             | IncreaseSalesOrderQuantity | Set to N                    |
+| ID (grouped) | Reference                 | Comma-separated list of the source transaction IDs in the group |
 
 Notes:
 - Transactions are grouped by Batch + ExpiryDate + Code and the Quantity is summed before posting.
 - Job is taken from the first transaction in each group (ensure grouped transactions belong to the same Job).
+- `Reference` carries the comma-separated source transaction IDs for the group, for traceability.
 - If SysproWriteXML is enabled, the XML is written to `C:\WIPTJR.xml` and `C:\WIPTJRDOC.xml`.
 
 ### CONSUME
@@ -593,10 +614,12 @@ WIPTMIDOC Item mapping:
 |               | Notation       | Set to `Granite Issue`            |
 |               | NonStockedFlag | Set to N                          |
 |               | AllocCompleted | Set to N                          |
+| ID (grouped)  | Reference      | Comma-separated list of the source transaction IDs in the group |
 
 Notes:
 - Transactions are grouped by Batch + ExpiryDate + Code + FromLocation and the QtyIssued is summed before posting.
 - Job is taken from the first transaction in each group (ensure grouped transactions belong to the same Job).
+- `Reference` carries the comma-separated source transaction IDs for the group, for traceability.
 - If SysproWriteXML is enabled, the XML is written to `C:\WIPTMI.xml` and `C:\WIPTMIDOC.xml`.
 
 ### DYNAMICPICK
