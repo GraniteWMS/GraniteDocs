@@ -31,6 +31,32 @@ Template:
 ```
 -->
 
+## 2026-08-21
+
+!!! warning
+    This release requires a database schema update before deploying: add an `ERPBin` column to the `Location` table, and `FromERPBin`, `ToERPBin`, and `IntransitERPBin` columns to the `DocumentDetail` table.
+
+### SDK Provider
+
+<h4>Version: 7.0.8.1</h4>
+<h4>Changes:</h4>
+- Added `UseSiteAsBin` (renamed from `ReceiveToBin`), which lets the transaction's site drive the ERP bin/location on adjustments, scrap, issue, take-on, reclassify, transfers, receipts, picks/customer returns, and stock take, not just receiving.
+- SCRAP now posts through the same flow as a manual Issue (Acumatica ISSUE entity) instead of creating its own Inventory Adjustment.
+- RECLASSIFY now posts a single Inventory Adjustment with a decrease and increase line, instead of an Adjustment followed by a separate Inventory Receipt.
+- ISSUE and TAKEON now support a reason code, taken from the transaction comment.
+- ISSUE no longer invokes Release From Hold as part of posting.
+- TAKEON, RECLASSIFY, 1-step transfers, and customer returns now wait for their ERP release/confirm action to finish before returning, instead of returning immediately after invoking it.
+<h4>Fixes:</h4>
+- Fixed a TakeOn allocation bug where an allocation value was compared against the wrong type and never matched.
+- Fixed inventory receipt/issue posting (`ADJUSTMENTISSUERECEIPT`) using the wrong warehouse and over-grouping lines with different reason codes together.
+- Fixed a 1-step transfer bug where same-warehouse lines could be skipped even when moving between different bins under `UseSiteAsBin`.
+
+### Injected Jobs
+
+<h4>Version: 7.0.7.0</h4>
+<h4>Changes:</h4>
+- Shipment, Transfer, Receipt, Purchase Order Receipt, and Return to Supplier documents now carry bin location data (`FromBin`/`ToBin`/`IntransitBin`), matching the SDK Provider's `UseSiteAsBin` support. Attempting to change the bin on a line already actioned in Granite is now blocked the same way a warehouse change is.
+
 ## 2026-08-11
 
 ### Injected Jobs

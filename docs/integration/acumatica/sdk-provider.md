@@ -33,7 +33,7 @@ This setting allows you to have multiple integration services running with diffe
 - `Tenant` - Acumatica tenant. Default: empty.
 - `Branch` - Acumatica branch. Default: empty.
 - `DefaultLocation` - Acumatica default inventory location. Default: empty.
-- `ReceiveToBin` - When `true`, RECEIVE allocations use `ToSite` as the bin location instead of `DefaultLocation`. Default: `false`.
+- `UseSiteAsBin` - When `true`, the transaction's `FromSite`/`ToSite` is used as the bin/location value for ERP postings instead of `DefaultLocation`. Applies broadly across adjustments, scrap, issue, take-on, reclassify, transfers, receipts, picks/customer returns, and stock take. Default: `false`.
 - `AcumaticaSalesOrderPrefix` - Acumatica sales order prefix. Default: empty.
 - `AcumaticaCustomerReturnPrefix` - Acumatica customer return prefix. Default: empty.
 - `AcumaticaPurchaseOrderPrefix` - Acumatica purchase order prefix. Default: empty.
@@ -75,6 +75,9 @@ If you require a different integration action you can specify the name below in 
 - Supports:
     - Lot
     - Serial
+- Allocation location behavior:
+    - Default: detail `LocationID` uses `DefaultLocation`.
+    - If `UseSiteAsBin = true`, detail `LocationID` uses transaction `FromSite` (required — fails if empty).
 - Integration Post
     - False - Creates a new Inventory Adjustment with status Balanced
     - True - Creates a new Inventory Adjustment and performs the Release action to change the Status to Released
@@ -86,29 +89,37 @@ If you require a different integration action you can specify the name below in 
 | Code                        | InventoryID           |Y||
 | Qty                         | Qty  |Y||
 | FromLocation                | WarehouseID  |Y||
+| FromSite                    | LocationID  |N| Used when `UseSiteAsBin = true` |
 | UOM                         | UOM |Y||
 | Batch                       | LotSerialNbr  |N||
 | Serial                      | LotSerialNbr  |N||
 | ExpirationDate              | ExpiryDate|N||
 
 ### SCRAP
+SCRAP now posts through the same [ISSUE](#issue) flow as a manual issue, using external reference `Granite Scrap` — it no longer creates its own Inventory Adjustment.
+
 - Granite Transaction: **SCRAP**
-- Acumatica: **INVENTORY ADJUSTMENT**
+- Acumatica: **ISSUE**
 - Supports:
     - Lot
     - Serial
+- Allocation location behavior:
+    - Default: allocation `Location` uses `DefaultLocation`.
+    - If `UseSiteAsBin = true`, allocation `Location` uses transaction `FromSite` (required — fails if empty).
 - Integration Post
-    - False - Creates a new Inventory Adjustment with status Balanced
-    - True - Creates a new Inventory Adjustment and performs the Release action to change the Status to Released
+    - False - Creates a new Issue with status Balanced
+    - True - Creates a new Issue and performs the Release action to change the Status to Released
 - Returns:
-    Reference Number 
+    Issue Number
 
 | Granite    | Acumatica Entity | Required | Behavior |
 |------------|------------------|----------|-----------|
 | Code                        | InventoryID           |Y||
-| Qty                         | Qty  |Y||
+| Qty                         | ShippedQty  |Y||
 | FromLocation                | WarehouseID  |Y||
+| FromSite                    | Allocation Location |N| Used when `UseSiteAsBin = true` |
 | UOM                         | UOM |Y||
+| Comment                     | ReasonCode |N||
 | Batch                       | LotSerialNbr  |N||
 | Serial                      | LotSerialNbr  |N||
 | ExpirationDate              | ExpiryDate|N||
@@ -130,9 +141,13 @@ To prevent them being brought into Granite as transfers the external reference i
 
 - Integration Post
     - False - Creates a 1-Step Transfer in Acumatica with status Balanced. 
-    - True - Changes the status of the transfer from Balanced to Released
+    - True - Changes the status of the transfer from Balanced to Released, and waits for the release action to complete before returning.
 - Allocation behavior
     - Transfer allocations are created per source location/bin from each transaction line.
+    - A line is skipped (not posted) when `FromLocation == ToLocation`; if `UseSiteAsBin = true`, it is only skipped when `FromSite` also equals `ToSite` — a same-warehouse move between different bins is still posted.
+- Site-as-bin behavior:
+    - Default: `FromLocationID`/`ToLocationID` use `DefaultLocation`.
+    - If `UseSiteAsBin = true`, `FromLocationID`/`ToLocationID` use transaction `FromSite`/`ToSite` (required — fails if either is empty).
 - Returns:
     TransferNumber
 
@@ -142,12 +157,17 @@ To prevent them being brought into Granite as transfers the external reference i
 | Qty                         | Qty  |Y||
 | FromLocation                | WarehouseID  |Y||
 | ToLocation                  | ToWarehouseID  |Y||
+| FromSite                    | FromLocationID |N| Used when `UseSiteAsBin = true` |
+| ToSite                      | ToLocationID |N| Used when `UseSiteAsBin = true` |
 | UOM                         | UOM |Y||
 | Batch                       | LotSerialNbr  |N||
 | Serial                      | LotSerialNbr  |N||
 | ExpirationDate              | ExpiryDate|N||
 
 ### BINTRANSFER
+
+!!! warning
+    `PostBinTransfer()` is currently disabled and throws `NotImplementedException` — posting a `BINTRANSFER` transaction will fail. Bin-level transfers have been folded into the [MOVE/REPLENISH](#movereplenish) `Post()` flow above, gated behind `UseSiteAsBin`, but `Provider.cs` still routes `BINTRANSFER` to the disabled `PostBinTransfer()` method pending rewiring. The description below is kept for reference only until that rewiring lands.
 
 - Granite Transaction: **BINTRANSFER**
 - Acumatica: **TransferOrder**
@@ -188,9 +208,13 @@ TAKEON uses the same transaction type in Acumatica as Transfer receipts. To prev
 - Supports:
     - Serial
     - Lot
+- Allocation location behavior:
+    - Default: allocation `Location` uses `DefaultLocation`.
+    - If `UseSiteAsBin = true`, allocation `Location` uses transaction `ToSite` (required — fails if empty).
+- Detail lines are grouped by `Code`/`ToLocation`/`Comment`, so lines with different reason codes are posted as separate detail lines.
 - Integration Post
     - False - Creates a Inventory Receipt in Acumatica with status Balanced
-    - True - Changes the status of the Inventory Receipt to from Balanced to Released
+    - True - Changes the status of the Inventory Receipt from Balanced to Released, and waits for the release action to complete before returning.
 - Return
     - Inventory Receipt Number
 
@@ -199,25 +223,30 @@ TAKEON uses the same transaction type in Acumatica as Transfer receipts. To prev
 | Code                        | InventoryID           |Y||
 | Qty                         | Qty  |Y||
 | ToLocation                  | WarehouseID  |Y||
+| ToSite                      | Allocation Location |N| Used when `UseSiteAsBin = true` |
 | UOM                         | UOM |Y||
+| Comment                     | ReasonCode |N||
 | Batch                       | LotSerialNbr  |N||
 | Serial                      | LotSerialNbr  |N||
 | ExpirationDate              | ExpiryDate|N||
 
 ### RECLASSIFY
 
-This process first performs as Adjustment decreasing the stock and then a receipt of the new stock.
+This process posts a single Inventory Adjustment containing a decrease line for the old item/location and an increase line for the new item/location.
 
 - Granite Transaction: **RECLASSIFY**
-- Acumatica: **Adjustment => Receipt**
+- Acumatica: **Inventory Adjustment**
 - Supports:
     - Serial
     - Lot
+- Site-as-bin behavior:
+    - Default: both the decrease and increase lines' `LocationID` use `DefaultLocation`.
+    - If `UseSiteAsBin = true`, the decrease line's `LocationID` uses transaction `FromSite` and the increase line's `LocationID` uses transaction `ToSite` (both required — fails if empty).
 - Integration Post
-    - False - Creates an Adjustment and Inventory Receipt in Acumatica with status Balanced
-    - True - Creates an Adjustment and Inventory Receipt and performs the Release action to change the Status to Released
+    - False - Creates an Inventory Adjustment in Acumatica with status Balanced
+    - True - Creates an Inventory Adjustment and performs the Release action to change the Status to Released, and waits for the release action to complete before returning.
 - Returns:
-    Receipt Number
+    Adjustment Reference Number
 
 | Granite    | Acumatica Entity | Required | Behavior |
 |------------|------------------|----------|-----------|
@@ -226,9 +255,11 @@ This process first performs as Adjustment decreasing the stock and then a receip
 | Qty                         | Qty  |Y||
 | FromLocation                | WarehouseID  |Y||
 | ToLocation                  | WarehouseID  |Y||
+| FromSite                    | LocationID (decrease line) |N| Used when `UseSiteAsBin = true` |
+| ToSite                      | LocationID (increase line) |N| Used when `UseSiteAsBin = true` |
 | UOM                         | UOM |Y||
-| Batch                       | LotSerialNbr  |N||
-| Serial                      | LotSerialNbr  |N||
+| Batch                       | LotSerialNbr  |N| Only sent if the respective item (`FromCode`/`ToCode`) is lot/serial tracked |
+| Serial                      | LotSerialNbr  |N| Only sent if the respective item (`FromCode`/`ToCode`) is lot/serial tracked |
 | ExpirationDate              | ExpiryDate|N||
 
 ### ISSUE 
@@ -243,10 +274,17 @@ It is not mapped to any specific Granite transaction type. If you have a require
 - Supports:
     - Lot
     - Serial
+- Allocation location behavior:
+    - Default: allocation `Location` uses `DefaultLocation`.
+    - If `UseSiteAsBin = true`, allocation `Location` uses transaction `FromSite` (required — fails if empty).
+- Detail lines are grouped by `Code`/`FromLocation`/`Comment`, so lines with different reason codes are posted as separate detail lines.
 
 - Integration Post
-    - False - Creates a new Issue, invokes Release From Hold, and does not invoke final Release.
-    - True - Creates a new Issue, invokes Release From Hold, and then invokes Release to change status to Released.
+    - False - Creates a new Issue with status Balanced. Release From Hold is not invoked.
+    - True - Creates a new Issue and invokes Release to change status to Released. Release From Hold is not invoked.
+
+!!! note
+    Release From Hold is no longer invoked as part of this flow (the call is currently commented out in code).
 
 -Returns 
     Issue Number
@@ -256,6 +294,8 @@ It is not mapped to any specific Granite transaction type. If you have a require
 | Code                       | InventoryID           |Y||
 | Qty                        | ShippedQty  |Y||
 | FromLocation               | WarehouseID |Y||
+| FromSite                   | Allocation Location |N| Used when `UseSiteAsBin = true` |
+| Comment                    | ReasonCode  |N||
 | Lot                        | LotSerialNbr|N||
 | Serial                     | LotSerialNbr|N||
 | ExpirationDate             | ExpiryDate|N||
@@ -331,10 +371,10 @@ It is not mapped to any specific Granite transaction type. If you have a require
     - Uses `AcumaticaCustomerReturnPrefix` to resolve the Acumatica order number.
     - Uses Acumatica Sales Order `OrderType` for shipment lines (defaults to `RC` if not found).
     - Supports kit-component line numbers (`ParentLine-ComponentLine`) and posts kit shipment details using Acumatica kit specifications.
-    - Allocation location defaults to `DefaultLocation`; when `ReceiveToBin = true`, allocation location uses transaction `ToSite` (and `ToSite` is required).
+    - Allocation location defaults to `DefaultLocation`; when `UseSiteAsBin = true`, allocation location uses transaction `ToSite` (and `ToSite` is required).
 - Integration Post
     - False - Creates a new return shipment with status Open
-    - True - Creates a new return shipment and performs the Confirm Shipment action
+    - True - Creates a new return shipment, performs the Confirm Shipment action, and waits for it to complete before returning
 - Returns:
     Shipment Number
 
@@ -345,7 +385,7 @@ It is not mapped to any specific Granite transaction type. If you have a require
 | Qty                        | ShippedQty  |Y||
 | DocumentTradingPartnerCode | CustomerID  |Y||
 | FromLocation               | WarehouseID |Y||
-| ToSite                     | LocationID  |N| Used when `ReceiveToBin = true` |
+| ToSite                     | LocationID  |N| Used when `UseSiteAsBin = true` |
 | Lot                        | LotSerialNbr|N||
 | Serial                     | LotSerialNbr|N||
 | ExpirationDate             | ExpiryDate|N||
@@ -499,7 +539,7 @@ WHERE T.IntegrationStatus = 0
     - Serial
 - Allocation location behavior:
     - Default: allocation `Location` uses `DefaultLocation`.
-    - If `ReceiveToBin = true`, allocation `Location` uses transaction `ToSite` (and `ToSite` is required).
+    - If `UseSiteAsBin = true`, allocation `Location` uses transaction `ToSite` (and `ToSite` is required).
 
 - Integration Post
     - False - Creates a new Purchase Order Receipt with `On Hold` status (`Hold = true`)
@@ -517,7 +557,7 @@ WHERE T.IntegrationStatus = 0
 | Qty                        | (via Allocations) |Y| Quantity is sent through the allocation lines; `ReceiptQty` is not posted |
 | DocumentTradingPartnerCode | VendorID      |Y||
 | ToLocation                 | WarehouseID   |Y||
-| ToSite                     | Allocation Location |N| Used when `ReceiveToBin = true` |
+| ToSite                     | Allocation Location |N| Used when `UseSiteAsBin = true` |
 | Batch                      | LotSerialNbr  |N||
 | Serial                     | LotSerialNbr  |N||
 | ExpirationDate              | ExpiryDate|N||
@@ -536,6 +576,9 @@ WHERE T.IntegrationStatus = 0
     - `TRANSFER` - Validates each Transfer Order allocation against Granite `ActionQty` (line + split + lot/serial where applicable), updates `ExternalRef` to `Quantities validated in Granite`, and optionally releases.
     - `INTRANSIT` - Uses the same validation/update path as `TRANSFER`, and when `Integration Post = True` also attempts transfer receipt creation.
     - `RECEIPT` - Validates ERP receipt detail/allocation quantities against Granite grouped transactions (`ActionQty`), appends `. Quantities validated in Granite` to receipt `Description`, and optionally releases.
+- Bin validation (when `UseSiteAsBin = true`):
+    - For each allocation, the corresponding Granite transactions for that line must share a single, non-empty bin (`FromSite` for `TRANSFER`/`INTRANSIT` pick allocations, `ToSite` for `RECEIPT` allocations) that matches the ERP allocation's bin.
+    - If multiple Granite bins are found for a line, the Granite bin is missing, or it doesn't match the ERP bin, validation fails with an error message for that line and processing continues to check remaining lines.
 
 - Integration Post
     - False - Runs validation and updates the ERP document without invoking release.
@@ -565,6 +608,7 @@ WHERE T.IntegrationStatus = 0
     - For lot/serial tracked allocations, validates quantity per lot/serial number; otherwise validates total allocation quantity for the split line.
     - When the ERP allocation has an expiry date, lot/serial quantity validation also filters the matching Granite transactions by `ExpiryDate`, and the resulting mismatch error message includes the expiry date.
     - If allocations are missing or quantities do not match, integration fails with validation errors.
+    - When `UseSiteAsBin = true`, each allocation's Granite transactions must share a single, non-empty `FromSite` that matches the ERP allocation's bin; multiple/missing Granite bins or a bin mismatch fails validation for that line.
     - On successful validation, sets `VendorRef` to `Quantity validated in Granite yyyy-MM-dd HH:mm:ss`.
 - Integration Post
     - False - Runs validation and updates the PO Receipt Return without releasing.
@@ -599,9 +643,9 @@ StockTake pushes Granite transactions onto an existing Acumatica **Physical Inve
     - Existing PIR details are matched to Granite transactions by `InventoryID`; when the detail has a `LotSerialNbr`, matching also requires the Granite `Batch` or `Serial` to match, and if the detail has an `ExpirationDate` the Granite `ExpiryDate` must match that date as well.
     - For each matched detail, the summed Granite `ToQty` is accumulated into `PhysicalQty` (using `+=`) and the source Granite transaction IDs are appended to the detail `Note`.
 - New details for unmatched transactions:
-    - Transactions that do not match any existing PIR detail generate new detail rows at `AppConfig.DefaultLocation` with `Status = Entered`.
-    - Lot/Serial tracked items are grouped by `Code`/`Batch`/`Serial`/`ExpiryDate` before being added.
-    - Non-tracked items are summed per inventory code into a single new detail.
+    - Transactions that do not match any existing PIR detail generate new detail rows with `Status = Entered`.
+    - Default: new detail `LocationID` uses `DefaultLocation`. Lot/Serial tracked items are grouped by `Code`/`Batch`/`Serial`/`ExpiryDate` before being added; non-tracked items are summed per inventory code into a single new detail.
+    - If `UseSiteAsBin = true`, new detail `LocationID` uses transaction `ToSite` (required — fails if empty). Lot/serial tracked items are grouped by `Code`/`Batch`/`Serial`/`ExpiryDate`/`ToSite`, and non-tracked items are grouped and summed per `Code`/`ToSite` — one detail row per bin instead of one row per item.
     - The new detail's `Note` is populated with the contributing Granite transaction IDs.
 - Submit:
     - The updated PIR is committed using `PutEntity` with `$expand=Details`.
@@ -619,3 +663,32 @@ StockTake pushes Granite transactions onto an existing Acumatica **Physical Inve
 | Batch                      | LotSerialNbr  |N||
 | Serial                     | LotSerialNbr  |N||
 | ExpirationDate             | ExpirationDate|N||
+
+### ADJUSTMENTISSUERECEIPT
+
+- Granite Transaction: **NONE** (`Process.IntegrationMethod = ADJUSTMENTISSUERECEIPT`)
+- Acumatica: **Inventory Receipt** (receipt transactions) / **Inventory Issue** (issue transactions)
+- Supports:
+    - Lot
+    - Serial
+- Detail lines are grouped by `Code`/`FromLocation`/`Comment`, so lines with different reason codes are posted as separate detail lines.
+- Allocation location behavior:
+    - Default: allocation `Location` uses `DefaultLocation`.
+    - If `UseSiteAsBin = true`, allocation `Location` uses transaction `FromSite` (required — fails if empty).
+- Integration Post
+    - False - Creates a new Inventory Receipt/Inventory Issue with status Balanced.
+    - True - Creates a new Inventory Receipt/Inventory Issue and performs the Release action to change the Status to Released.
+- Returns:
+    Reference Number
+
+| Granite    | Acumatica Entity | Required | Behavior |
+|------------|------------------|----------|-----------|
+| Code                        | InventoryID   |Y||
+| Qty / ActionQty             | Qty  |Y||
+| FromLocation                | WarehouseID  |Y| Receipt detail `WarehouseID` uses `FromLocation`, not `ToLocation` |
+| FromSite                    | Allocation Location |N| Used when `UseSiteAsBin = true` |
+| UOM                         | UOM |Y||
+| Comment                     | ReasonCode |N||
+| Batch                       | LotSerialNbr  |N||
+| Serial                      | LotSerialNbr  |N||
+| ExpirationDate              | ExpiryDate|N||

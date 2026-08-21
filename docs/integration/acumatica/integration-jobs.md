@@ -151,6 +151,14 @@ After a document header is synced, each key/value pair present on `Document.Opti
 
 **Ship-To Address** is the first optional field populated this way: for Sales Orders, the ship-to address (`SOAddressByShipAddressID` - address lines, city, state, country, postal code) is combined into a single comma-separated value and synced as the `Ship To Address` optional field.
 
+#### Bin Location Support
+
+Document lines now carry `FromBin`, `ToBin`, and `IntransitBin` alongside the existing `FromLocation`/`ToLocation`/`IntransitLocation` warehouse fields, so the [SDK Provider's `UseSiteAsBin` behavior](./sdk-provider.md#settings) has bin data on both sides of the integration to validate against.
+
+- Bin data is fetched via new OData `$expand` clauses on `INLocationByLocationID` (and `INLocationByToLocationID` for transfers), added to the `ShipmentJob`, `TransferJob`, `ReceiptJob`, and `PurchaseOrderReceiptJob` queries.
+- `ERPDetailUpdateableFields` was extended so bin changes coming from the ERP are accepted: `ShipmentJob` adds `FromBin`; `TransferJob` adds `FromBin` and `ToBin`; `ReceiptJob` and `PurchaseOrderReceiptJob` add `ToBin`.
+- Bin-conflict validation was added alongside the existing warehouse-conflict checks in `ShipmentJob`, `TransferJob`, `ReceiptJob`, `PurchaseOrderReceiptJob`, and `ReturnToSupplierJob`: if a line already has `ActionQty > 0` in Granite and the incoming ERP bin differs from the Granite line's bin, the sync fails that line with a message in the form `This line has already been picked/received/transferred to/from bin X. Cannot change bin to Y.` (mirroring the existing warehouse-conflict messages).
+
 #### Purchase Receipt job
 `PurchaseOrderReceiptJob` integrates Acumatica Purchase Receipts into Granite as a Purchase order with the lines linked back to the original Purchase Order line via the `LinkedDetail_id`.
 This allows the grouping of Purchase orders to be received using a single Receipt number if multiple purchase orders are going to be delivered in a single shipment. See the [Acumatica overview](./acumatica-overview.md#purchase-receipts) for more details
