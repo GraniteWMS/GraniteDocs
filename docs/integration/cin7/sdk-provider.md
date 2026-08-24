@@ -215,7 +215,10 @@ Standard TRANSFER posting and transfer status updates are implemented.
     - Sets transfer status to `IN TRANSIT`.
 - Integration Post
     - False - Verifies CIN7 transfer quantities match Granite quantities before update; throws if any line discrepancies are found.
-    - True - Updates CIN7 transfer quantities to match Granite quantities before update. Lines with no matching Granite transactions have their quantity set to 0. Granite transactions not claimed by any CIN7 line are grouped and appended as new lines (CIN7 `ProductID` resolved via Granite MasterItem ERP ID). Lines added or adjusted this way are tagged with a `Comments` note.
+    - True - Behavior depends on whether CIN7 has already returned transfer lines:
+        - If the transfer already has lines in CIN7 (skip-order transfers), updates those line quantities to match Granite quantities. A line with no matching Granite transaction now causes the update to fail with a line discrepancy error, instead of having its quantity silently set to 0.
+        - If the transfer is order-driven and CIN7 has not yet returned any transfer lines, builds the transfer lines from the order lines instead. Order lines with no matching Granite transaction are omitted from the request rather than failing the update.
+        - In both cases, Granite transactions not claimed by any line are grouped and appended as new lines (CIN7 `ProductID` resolved via Granite MasterItem ERP ID), tagged with a `Comments` note.
 - Returns:
     Stock Transfer Task ID
 
@@ -229,7 +232,10 @@ Standard TRANSFER posting and transfer status updates are implemented.
     - Sets transfer status to `COMPLETED`.
 - Integration Post
     - False - Verifies CIN7 transfer quantities match Granite quantities before update; throws if any line discrepancies are found.
-    - True - Updates CIN7 transfer quantities to match Granite quantities before update. Lines with no matching Granite transactions have their quantity set to 0. Granite transactions not claimed by any CIN7 line are grouped and appended as new lines (CIN7 `ProductID` resolved via Granite MasterItem ERP ID). Lines added or adjusted this way are tagged with a `Comments` note.
+    - True - Behavior depends on whether CIN7 has already returned transfer lines:
+        - If the transfer already has lines in CIN7 (skip-order transfers, or the transfer is already `IN TRANSIT`), updates those line quantities to match Granite quantities. A line with no matching Granite transaction now causes the update to fail with a line discrepancy error, instead of having its quantity silently set to 0.
+        - If the transfer is order-driven and CIN7 has not yet returned any transfer lines, builds the transfer lines from the order lines instead. Order lines with no matching Granite transaction are omitted from the request rather than failing the update.
+        - In both cases, Granite transactions not claimed by any line are grouped and appended as new lines (CIN7 `ProductID` resolved via Granite MasterItem ERP ID), tagged with a `Comments` note.
 - Returns:
     Stock Transfer Task ID
 

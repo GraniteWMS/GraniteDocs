@@ -31,6 +31,16 @@ Template:
 ```
 -->
 
+## 2026-08-24
+
+### SDK Provider
+
+<h4>Version: 7.0.12.1</h4>
+<h4>Changes:</h4>
+- Stock transfer IN TRANSIT/COMPLETED quantity updates for order-driven transfers with no CIN7 lines yet now build the transfer lines from the order lines instead, matching them against Granite transactions. Order lines with no matching Granite transaction are left out of the request rather than being included at 0.
+<h4>Fixes:</h4>
+- Stock transfer IN TRANSIT/COMPLETED quantity updates for transfers that already have CIN7 lines no longer silently set an unmatched line's quantity to 0 — the update now fails with a line discrepancy error instead, consistent with the non-posting validation.
+
 ## 2026-08-05
 
 ### SDK Provider
