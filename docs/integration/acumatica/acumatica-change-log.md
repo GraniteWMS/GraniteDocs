@@ -31,6 +31,14 @@ Template:
 ```
 -->
 
+## 2026-08-25
+
+### Injected Jobs
+
+<h4>Version: 7.0.8.0</h4>
+<h4>Changes:</h4>
+- Added a new Yearly Sales job that syncs trailing 12-month dispatched quantities from Acumatica's `MonthlyTradingReport` Generic Inquiry onto MasterItems, as a new `Yearly Sales` optional field.
+
 ## 2026-08-21
 
 !!! warning

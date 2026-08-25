@@ -243,6 +243,19 @@ It does this by selecting every in-stock `TrackingEntity` (`InStock = 1`) whose 
 !!! note
     Unlike the document jobs, the Stock Take Session job does not use `IntegrationDocumentQueue`. The lookback is a fixed 24 hours from `DateTime.Now` on every run.
 
+### Generic Inquiry (GI) Jobs
+
+Some custom jobs source data from an Acumatica **Generic Inquiry (GI)** published as an OData feed (`odata/{tenant}/<GI name>`), rather than the standard ODataV4 endpoint (`PX_Objects_...`) used by the document and master data jobs above. These jobs require the corresponding Generic Inquiry to be published in Acumatica with the field names the job expects.
+
+#### Yearly Sales job
+`YearlySalesJob` syncs trailing 12-month sales totals onto Granite MasterItems.
+
+- Queries the `MonthlyTradingReport` Generic Inquiry, filtered to rows with `Date` in the last 12 months, selecting `InventoryID` and `QtyDespatched`.
+- Aggregates `QtyDespatched` per `InventoryID` across the filtered rows.
+- Writes the totals to a `Yearly Sales` optional field on MasterItems (`OptionalFieldValues_MasterItem`, `AppliesTo = MASTERITEM`); the optional field definition is created automatically the first time the job runs, the same way document optional fields are auto-created (see [Document Optional Fields](#document-optional-fields)).
+- MasterItems are matched by `Code` (not `ERPIdentification`); if no MasterItem is found for an inventory code, that code is skipped and a warning is logged.
+- If a MasterItem already has a `Yearly Sales` value but is not present in the current run's aggregated results, its value is reset to `0`.
+
 ## Setup 
 
 ### Add the Acumatica providers to the Granite Scheduler
@@ -301,6 +314,10 @@ WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobNam
 INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
 SELECT 0, 'Acumatica Stock Take Session Job', 'Syncs Stock Take Sessions from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.StockTakeSession', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Stock Take Session Job');
+
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'Acumatica Yearly Sales Job', 'Syncs yearly sales totals onto MasterItems from Acumatica', 'INJECTED', 'Granite.Integration.Acumatica.Job.YearlySales', '0 0 * * 0', 'CRON', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'Acumatica Yearly Sales Job');
 
 -- Insert Acumatica System Settings
 INSERT INTO [GraniteDatabase].dbo.SystemSettings ([Application], [Key], [Value], [Description], [ValueDataType], [isActive], [isEncrypted], [EncryptionKey], [AuditDate], [AuditUser], [Version])
