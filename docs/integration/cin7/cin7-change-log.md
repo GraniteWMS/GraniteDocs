@@ -31,6 +31,20 @@ Template:
 ```
 -->
 
+## 2026-09-03
+
+### SDK Provider
+
+<h4>Version: 7.0.13.0</h4>
+<h4>Changes:</h4>
+- Added a new PURCHASECREDITNOTE method that validates a CIN7 purchase credit note's unstock lines against the matching Granite transactions (by SKU, batch/serial and expiry), reporting missing matches, transactions claimed by more than one line, quantity mismatches, and unmatched Granite transactions.
+
+### Injected Jobs
+
+<h4>Version: 7.0.8.0</h4>
+<h4>Changes:</h4>
+- Added a new Purchase Credit Note job that syncs CIN7 purchase credit notes (status AUTHORISED) into Granite as ORDER documents (goods returned to a supplier), with a configurable lookback window (`PurchaseCreditNoteLookbackMinutes`) and location filtering.
+
 ## 2026-08-24
 
 ### SDK Provider

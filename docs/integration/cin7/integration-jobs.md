@@ -84,6 +84,10 @@ INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescripti
 SELECT 0, 'CIN7 Sale Credit Note Job', 'Syncs Sale Credit Notes from CIN7', 'INJECTED', 'Granite.Integration.CIN7.Job.SalesCreditNote', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'CIN7 Sale Credit Note Job');
 
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'CIN7 Purchase Credit Note', 'Syncs Purchase Credit Notes from CIN7', 'INJECTED', 'Granite.Integration.CIN7.Job.PurchaseCreditNote', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'CIN7 Purchase Credit Note');
+
 ```
 
 For the Product Availability Job you need this table.
@@ -135,6 +139,7 @@ GO
 - `SalesOrderLookbackMinutes` - Number of minutes to look back before the last integration time when fetching sales orders (default 0). Prevents missing orders created during the job run.
 - `PurchaseOrderLookbackMinutes` - Number of minutes to look back before the last integration time when fetching purchase orders (default 0). Prevents missing orders created during the job run.
 - `SaleCreditNoteLookbackMinutes` - Number of minutes to look back before the last integration time when fetching sale credit notes (default 0). Prevents missing credit notes created during the job run.
+- `PurchaseCreditNoteLookbackMinutes` - Number of minutes to look back before the last integration time when fetching purchase credit notes (default 0). Prevents missing credit notes created during the job run.
 
 ![SystemSettings](./cin7-img/system-settings.png)
 
@@ -158,6 +163,7 @@ Mapping scripts are located in the `Configuration/Scripts/` directory within the
 - `TransferJobConfiguration.fsx` - Stock Transfer document mappings
 - `FinishedGoodsJobConfiguration.fsx` - Finished Goods/Work Order document mappings
 - `SaleCreditNoteJobConfiguration.fsx` - Sale Credit Note document mappings
+- `PurchaseCreditNoteJobConfiguration.fsx` - Purchase Credit Note document mappings
 
 <h4>How It Works</h4>
 
@@ -184,7 +190,7 @@ Each configuration script can define:
 
 **Mapping Functions:**
 
-- `MapToSalesOrder` / `MapToPurchaseOrder` / `MapToTransfer` / `MapToWorkOrder` / `MapToCreditNote` - Transform CIN7 documents to Granite documents
+- `MapToSalesOrder` / `MapToPurchaseOrder` / `MapToTransfer` / `MapToWorkOrder` / `MapToCreditNote` / `MapToPurchaseCreditNote` - Transform CIN7 documents to Granite documents
 - `MapToMasterItem` - Transform CIN7 products to Granite MasterItems
 - `MapCustomerToTradingPartner` / `MapSupplierToTradingPartner` - Transform CIN7 customers/suppliers to Granite Trading Partners
 
@@ -267,6 +273,14 @@ If a change is made in the ERP system that would put Granite into an invalid sta
 - Maps to Granite document type RECEIVING
 - Can filter by ManagedLocations in configuration - a credit note is skipped unless at least one of its restock lines is for a managed location
 - Uses ToLocation (per restock line) for document lines
+
+<h4>Purchase Credit Note (ORDER)</h4>
+
+- Fetches CIN7 Purchase Credit Notes with status "AUTHORISED" that have been updated since the last integration time
+- Applies `PurchaseCreditNoteLookbackMinutes` system setting to look back before the last integration time, preventing missed credit notes created during the job run
+- Maps to Granite document type ORDER, modeled as an outbound movement (goods returned to a supplier) rather than the inbound RECEIVING type used by the other purchase-side jobs
+- Can filter by ManagedLocations in configuration - a credit note is skipped unless at least one of its unstock lines is for a managed location
+- Uses FromLocation (per unstock line) for document lines
 
 <h4>Transfer (TRANSFER)</h4>
 

@@ -45,6 +45,7 @@ Currently supported transactions/methods are:
 - PACK (Sale Fulfilment Pack, POST)
 - POSTPACKANDSHIP (Sale Fulfilment Pack and Ship, POST)
 - SALECREDITNOTE (Sale Credit Note, VALIDATE)
+- PURCHASECREDITNOTE (Purchase Credit Note, VALIDATE)
 - CONSUME (Finished Goods Pick Lines, POST)
 - MANUFACTURE (Finished Goods, PUT)
 
@@ -492,6 +493,33 @@ SELECT * FROM @Output
 | Granite    | CIN7 Entity | Required | Behavior |
 |------------|-------------|----------|-----------|
 | Document                   | TaskID (via ERPIdentification) |Y||
+| Code                        | SKU  |Y||
+| ActionQty                   | Quantity  |Y||
+| Batch                       | BatchSN  |N||
+| Serial                      | BatchSN  |N||
+| ExpirationDate              | ExpiryDate|N||
+
+### PURCHASECREDITNOTE
+
+- Granite Transaction: **PURCHASECREDITNOTE**
+- CIN7: **Purchase Credit Note**
+- Supports:
+    - Batch
+    - Serial
+    - Expiration Date
+- Behavior:
+    - Uses Granite `Document` to resolve the CIN7 credit note `PurchaseID`/`TaskID` from Granite `ERPIdentification`. Throws if no matching ERP ID is found.
+    - Fetches the credit note from `advanced-purchase/creditnote` and matches it by `TaskID`.
+    - Validates each CIN7 unstock line against Granite transactions by SKU and whichever of batch/serial/expiry the line specifies (expiry compared by date only, ignoring time-of-day), flagging lines with no matching transaction, transactions claimed by more than one line, quantity mismatches, and Granite transactions with no matching unstock line.
+    - Does not post anything to CIN7 - throws (and logs) an exception listing all validation errors found.
+- Integration Post
+    - Not used by the current implementation for this method.
+- Returns:
+    Purchase Credit Note Task ID
+
+| Granite    | CIN7 Entity | Required | Behavior |
+|------------|-------------|----------|-----------|
+| Document                   | PurchaseID/TaskID (via ERPIdentification) |Y||
 | Code                        | SKU  |Y||
 | ActionQty                   | Quantity  |Y||
 | Batch                       | BatchSN  |N||
