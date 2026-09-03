@@ -183,10 +183,14 @@ INVTMADOC Items mapping:
 | FromCode      | StockCode     | Posted as a negative adjustment (`-ActionQty`) |
 | ToCode        | StockCode     | Posted as a positive adjustment (`ActionQty`) |
 | Batch         | Lot           |           |
-| UOM           | UnitOfMeasure |           |
+| UOM           | UnitOfMeasure | Used for the `ToCode` line |
+| Master item UOM (by `FromCode`), falling back to `UOM` | UnitOfMeasure | Used for the `FromCode` line |
 | FromLocation  | Warehouse     | Used for the `FromCode` line |
 | ToLocation    | Warehouse     | Used for the `ToCode` line |
 | ID            | Reference     | Formatted as `GraniteID: {ID}`; set on both the `FromCode` and `ToCode` lines |
+
+Notes:
+- The `FromCode` line's `UnitOfMeasure` is looked up from the Syspro `Masteritem` table using `FromCode`. If no master item UOM is found, it falls back to the transaction's `UOM`.
 
 ### REPLENISH
 - INVTMO. Inventory Warehouse Transfer

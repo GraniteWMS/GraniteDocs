@@ -31,6 +31,14 @@ Template:
 ```
 -->
 
+## 2026-09-03
+
+### SDK Provider
+
+<h4>Version: 7.0.2.5</h4>
+<h4>Fixes:</h4>
+- RECLASSIFY postings now use the outgoing stock item's own master unit of measure (falling back to the transaction's UOM when no master item is found), instead of always using the transaction's UOM.
+
 ## 2026-08-14
 
 ### SDK Provider
