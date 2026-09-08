@@ -1,10 +1,10 @@
 ![CIN 7 Logo](./cin7-img/cin7-logo.png)
 
-!!! note
-    This documentation is a work in progress and is intended to show the development progress of the integration with CIN7. As such, it may be subject to change as progress is made. 
-
+## Intro
 
 The purpose of this document is to provide an overview of CIN7 in terms of integrating with Granite. For details on how integration will take place and which Granite transactions are supported please see the [SDK Provider](sdk-provider.md) and the [integration jobs](integration-jobs.md).
+
+CIN7 has very good documentation which you can find [here](https://help.core.cin7.com/hc/en-us/categories/8314483542671-General) should you need more detail than this overview provides. 
 
 <iframe src="https://share.descript.com/embed/aO5vgCPY5Zd" width="768" height="432" frameborder="0" allowfullscreen></iframe>
 
@@ -38,7 +38,23 @@ The next transaction type is StockTake/Adjustment. CIN7 used the same transactio
 
 ### Purchase
 
-Next up is Purchase. This CIN7 transaction is brought into Granite as Receiving document. Each Purchase will have a Supplier (Inbound Trading Partner in Granite) and a location specified where the stock is going to be received. Below you can see a example of a purchase and all the available statuses. 
+Next up are Purchases. These CIN7 documents are brought into Granite as Receiving documents. Each Purchase will have a Supplier (Inbound Trading Partner in Granite) and a location specified where the stock is going to be received. Below you can see an example of a purchase and all the available statuses.
+
+Another thing to note about CIN7 purchase orders is that they can either be Simple or Advanced, and there is a configuration setting that affects which integration method must be used when posting transactions back to CIN7.
+
+As described in the CIN7 documentation: 
+
+> - **Simple Purchases** are used for purchases of goods or goods and services, with a single invoice and delivery. Most purchases will fall under a simple purchase.
+> - **Advanced Purchases** allow partial invoicing and receipt of items while still being considered part of the same purchase. They also allow multiple credit notes to be issued for a single purchase order. You can convert simple purchases into advanced purchases but not vice versa.
+
+#### Use Put Away 
+
+There is a very important setting in CIN7 under Settings > General Settings > Purchase Process Customization called `Use Put Away`. From the CIN7 documentation: 
+
+> Put away is applicable to Advanced purchases and the CIN7 Core Warehouse Management System. This splits the receiving process into two steps, receiving the goods, then putting them away into the correct locations or bins. Enable put away if you receive large quantities of goods at once before putting them away later. Disable put away if you receive each purchase and store it straight away.
+
+If it is enabled, use the standard [RECEIVE](../cin7/sdk-provider.md#receive) method.
+If it is disabled, use [POSTPUTAWAY](../cin7/sdk-provider.md#postputaway). 
 
 ![Purchase](./cin7-img/purchase.png)
 
