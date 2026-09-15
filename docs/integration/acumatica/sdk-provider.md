@@ -62,11 +62,44 @@ The setting needs to be disabled in the following places (if Granite is integrat
 - Sales Order Preferences > Validate Shipment Total on Confirmation
 - Inventory Preferences > Validate Document Totals on Entry
 
+## Error Handling
+
+The message returned to Granite (and written to the `IntegrationLog`) contains only the reason reported by Acumatica. The full error, including the HTTP status and raw response, is still written to the IntegrationService log.
+
+| Situation | Message returned |
+|-----------|------------------|
+| Acumatica rejects an action (e.g. release) | The Acumatica error text, without the generic `Error 500 calling ...` / `An error has occurred.` wrapper, e.g. `PO Error: IN Document failed to release with the following error: '...'` |
+| Acumatica rejects field values when saving | The field errors, e.g. `Details[0].InventoryID: 'Inventory ID' cannot be found in the system.` |
+| Acumatica returns an HTML or empty error page | `Acumatica returned <status code> <reason>`, e.g. `Acumatica returned 502 Bad Gateway` |
+| Acumatica cannot be reached | The network error, e.g. `The remote name could not be resolved: '<host>'` |
+| Acumatica does not respond in time | `Timed out waiting for a response from Acumatica at <BaseUrl>.` |
+
+### Documents saved but not released
+
+If a document was saved in Acumatica but a later step failed (an update, the Release action, or the Confirm Shipment action), the message names the document that was left in Acumatica, so it can be released or corrected there:
+
+- `<reference> created but failed to release: <reason>` - e.g. `000123 created but failed to release: PO Error: IN Document failed to release ...`
+- `<reference> updated but failed to release: <reason>` - an existing document (TRANSFER, RETURNTOSUPPLIER) was validated and updated, but not released.
+- `<reference> created but failed to confirm: <reason>` - a shipment was created (PICK, CUSTOMERRETURN) but not confirmed.
+- `<reference> updated but failed to confirm: <reason>` - an existing shipment was updated (PACK, VALIDATESHIPMENTPICK) but not confirmed.
+
+The reference is the same value the integration method returns on success (including any configured prefix).
+
+### Connection test
+
+The IntegrationService connection test reports why the connection failed, for example:
+
+- `ERROR Failed to connect: Invalid credentials. Please try again.`
+- `ERROR Failed to connect: API login limit exceeded. Please try again later.`
+- `ERROR Failed to connect: The remote name could not be resolved: '<host>'`
+
+A failed logout at the end of a post no longer replaces the original error; it is written to the IntegrationService log and the Acumatica session expires on the server.
 
 ## Integration Methods
 
 By default if the method names below is the same as a Granite Transaction type, it will autowire the integration. 
 If you require a different integration action you can specify the name below in the Process IntegrationMethod property. 
+If the configured method is not one of the methods below, the post fails with `Integration setup error: Configured integration method <method> not implemented.`
 `CONSUME`/manufacturing behavior is not yet implemented for documented SDK-provider usage.
 
 ### ADJUSTMENT
@@ -80,7 +113,7 @@ If you require a different integration action you can specify the name below in 
     - If `UseSiteAsBin = true`, detail `LocationID` uses transaction `FromSite` (required — fails if empty).
 - Integration Post
     - False - Creates a new Inventory Adjustment with status Balanced
-    - True - Creates a new Inventory Adjustment and performs the Release action to change the Status to Released
+    - True - Creates a new Inventory Adjustment and performs the Release action to change the Status to Released, and waits for the release action to complete before returning
 - Returns:
     Reference Number 
 
@@ -108,7 +141,7 @@ SCRAP now posts through the same [ISSUE](#issue) flow as a manual issue, using e
     - If `UseSiteAsBin = true`, allocation `Location` uses transaction `FromSite` (required — fails if empty).
 - Integration Post
     - False - Creates a new Issue with status Balanced
-    - True - Creates a new Issue and performs the Release action to change the Status to Released
+    - True - Creates a new Issue and performs the Release action to change the Status to Released, and waits for the release action to complete before returning
 - Returns:
     Issue Number
 
@@ -164,38 +197,8 @@ To prevent them being brought into Granite as transfers the external reference i
 | Serial                      | LotSerialNbr  |N||
 | ExpirationDate              | ExpiryDate|N||
 
-### BINTRANSFER
-
-!!! warning
-    `PostBinTransfer()` is currently disabled and throws `NotImplementedException` — posting a `BINTRANSFER` transaction will fail. Bin-level transfers have been folded into the [MOVE/REPLENISH](#movereplenish) `Post()` flow above, gated behind `UseSiteAsBin`, but `Provider.cs` still routes `BINTRANSFER` to the disabled `PostBinTransfer()` method pending rewiring. The description below is kept for reference only until that rewiring lands.
-
-- Granite Transaction: **BINTRANSFER**
-- Acumatica: **TransferOrder**
-- Supports:
-    - Serial
-    - Lot
-- Validation and mapping behavior:
-    - Requires a single `FromLocation` and `ToLocation` across the posted transactions.
-    - Uses transaction `FromSite`/`ToSite` as transfer line bin locations (`FromLocationID`/`ToLocationID`).
-    - Fails if any transaction has an empty `FromSite` or `ToSite`.
-- Integration Post
-    - False - Creates a 1-Step Transfer in Acumatica with status Balanced.
-    - True - Changes the status of the transfer from Balanced to Released.
-- Returns:
-    Transfer Number
-
-| Granite    | Acumatica Entity | Required | Behavior |
-|------------|------------------|----------|-----------|
-| Code                        | InventoryID           |Y||
-| Qty                         | Qty  |Y||
-| FromLocation                | WarehouseID  |Y| Single warehouse per post |
-| ToLocation                  | ToWarehouseID  |Y| Single warehouse per post |
-| FromSite                    | FromLocationID |Y| Source bin on transfer line |
-| ToSite                      | ToLocationID |Y| Destination bin on transfer line |
-| UOM                         | UOM |Y||
-| Batch                       | LotSerialNbr  |N||
-| Serial                      | LotSerialNbr  |N||
-| ExpirationDate              | ExpiryDate|N||
+!!! note
+    The `BINTRANSFER` integration method has been removed. Bin-level transfers are posted through MOVE/REPLENISH with `UseSiteAsBin = true`. A process still configured with `BINTRANSFER` fails with the integration setup error and must be changed to `MOVE`.
 
 ### TAKEON
 
@@ -281,7 +284,7 @@ It is not mapped to any specific Granite transaction type. If you have a require
 
 - Integration Post
     - False - Creates a new Issue with status Balanced. Release From Hold is not invoked.
-    - True - Creates a new Issue and invokes Release to change status to Released. Release From Hold is not invoked.
+    - True - Creates a new Issue, invokes Release to change status to Released, and waits for the release action to complete before returning. Release From Hold is not invoked.
 
 !!! note
     Release From Hold is no longer invoked as part of this flow (the call is currently commented out in code).
@@ -347,7 +350,7 @@ It is not mapped to any specific Granite transaction type. If you have a require
     - On success, appends `Quantity validated in Granite yyyy-MM-dd HH:mm:ss` to shipment `Description`.
 - Integration Post
     - False - Runs validation and updates shipment description.
-    - True - Runs validation, updates shipment description, and invokes Confirm Shipment.
+    - True - Runs validation, updates shipment description, invokes Confirm Shipment, and waits for the action to complete before returning.
 - Returns:
     Shipment Number
 
@@ -543,7 +546,7 @@ WHERE T.IntegrationStatus = 0
 
 - Integration Post
     - False - Creates a new Purchase Order Receipt with `On Hold` status (`Hold = true`)
-    - True - Creates a new Purchase Order Receipt and performs the Release action to change the Status to Released. 
+    - True - Creates a new Purchase Order Receipt and performs the Release action to change the Status to Released, and waits for the release action to complete before returning. 
 - Returns:
     Purchase Order Receipt Number
 
@@ -576,13 +579,15 @@ WHERE T.IntegrationStatus = 0
     - `TRANSFER` - Validates each Transfer Order allocation against Granite `ActionQty` (line + split + lot/serial where applicable), updates `ExternalRef` to `Quantities validated in Granite`, and optionally releases.
     - `INTRANSIT` - Uses the same validation/update path as `TRANSFER`, and when `Integration Post = True` also attempts transfer receipt creation.
     - `RECEIPT` - Validates ERP receipt detail/allocation quantities against Granite grouped transactions (`ActionQty`), appends `. Quantities validated in Granite` to receipt `Description`, and optionally releases.
+- Document validation:
+    - Fails with `Document with number <document> could not be found.` if the Granite document does not exist, or `Document with number <document> has no details.` if it has no lines.
 - Bin validation (when `UseSiteAsBin = true`):
     - For each allocation, the corresponding Granite transactions for that line must share a single, non-empty bin (`FromSite` for `TRANSFER`/`INTRANSIT` pick allocations, `ToSite` for `RECEIPT` allocations) that matches the ERP allocation's bin.
     - If multiple Granite bins are found for a line, the Granite bin is missing, or it doesn't match the ERP bin, validation fails with an error message for that line and processing continues to check remaining lines.
 
 - Integration Post
     - False - Runs validation and updates the ERP document without invoking release.
-    - True - Runs validation and invokes release (`ReleaseTransferOrder` / `ReleaseInventoryReceipt`); for `INTRANSIT`, transfer receipt creation is also attempted.
+    - True - Runs validation, invokes release (`ReleaseTransferOrder` / `ReleaseInventoryReceipt`), and waits for the release action to complete; for `INTRANSIT`, transfer receipt creation is also attempted.
 - Returns:
     - `TRANSFER`/`INTRANSIT`: Transfer reference number.
     - `RECEIPT`: `AcumaticaTransferReceiptPrefix` + receipt reference number.
@@ -604,6 +609,8 @@ WHERE T.IntegrationStatus = 0
     - Serial
     - Lot
 - Validation behavior:
+    - Fails with `Document with number <document> could not be found.` if the Granite document does not exist, or `Document with number <document> has no details.` if it has no lines.
+    - Fails with `Purchase receipt for document <document> could not be found in Acumatica (ID <ERPIdentification>).` if the linked purchase receipt does not exist.
     - Validates each purchase receipt allocation against Granite `ActionQty` using `LineNumber-SplitLineNumber`.
     - For lot/serial tracked allocations, validates quantity per lot/serial number; otherwise validates total allocation quantity for the split line.
     - When the ERP allocation has an expiry date, lot/serial quantity validation also filters the matching Granite transactions by `ExpiryDate`, and the resulting mismatch error message includes the expiry date.
@@ -677,7 +684,7 @@ StockTake pushes Granite transactions onto an existing Acumatica **Physical Inve
     - If `UseSiteAsBin = true`, allocation `Location` uses transaction `FromSite` (required — fails if empty).
 - Integration Post
     - False - Creates a new Inventory Receipt/Inventory Issue with status Balanced.
-    - True - Creates a new Inventory Receipt/Inventory Issue and performs the Release action to change the Status to Released.
+    - True - Creates a new Inventory Receipt/Inventory Issue and performs the Release action to change the Status to Released, and waits for the release action to complete before returning.
 - Returns:
     Reference Number
 

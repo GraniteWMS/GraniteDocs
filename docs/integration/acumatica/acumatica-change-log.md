@@ -31,6 +31,22 @@ Template:
 ```
 -->
 
+## 2026-09-15
+
+### SDK Provider
+
+<h4>Version: 7.0.8.2</h4>
+<h4>Changes:</h4>
+- Error messages returned to Granite now contain only the reason reported by Acumatica; the full error detail is still written to the IntegrationService log.
+- When a document is saved in Acumatica but its release or confirm step fails, the message now names the document left in Acumatica, e.g. `000123 created but failed to release: <reason>`.
+- The connection test now reports why the connection failed, e.g. invalid credentials, login limit reached, or Acumatica unreachable.
+- Removed the `BINTRANSFER` integration method; bin-level transfers are posted through `MOVE` with `UseSiteAsBin`.
+<h4>Fixes:</h4>
+- ADJUSTMENT, ISSUE, SCRAP, RECEIVE, VALIDATESHIPMENTPICK, transfer receipts and ADJUSTMENTISSUERECEIPT now wait for the release/confirm action to finish before returning.
+- TRANSFER and RETURNTOSUPPLIER no longer mark transactions as integrated when the Granite document or Acumatica purchase receipt cannot be found.
+- Posts using an integration method that is not implemented now fail instead of being marked as integrated.
+- A failed logout no longer replaces the original error message.
+
 ## 2026-08-25
 
 ### Injected Jobs
