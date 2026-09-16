@@ -68,6 +68,12 @@ All valid changes to data in the Granite tables are logged to the Audit table, s
 
 If a change is made in the ERP system that would put Granite into an invalid state, no changes are applied. Instead, the ERPSyncFailed field is set to true and the ERPSyncFailedReason field shows the reason for the failure. The IntegrationLog table will contain further details on the failure if applicable.
 
+#### Removed document lines
+When a line that exists on the Granite document is no longer present on the Acumatica document, the job either removes it or cancels it:
+
+- If the line has not been actioned or packed in Granite and has no transactions against it, it is deleted from the Granite document.
+- If the line has been actioned, packed, or has transactions against it, it cannot be deleted. It is flagged as cancelled instead, and the change is written to the Audit table like any other line update.
+
 #### Document Statuses
 
 <h5>Sales Order</h5>

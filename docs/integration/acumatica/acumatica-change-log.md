@@ -31,6 +31,14 @@ Template:
 ```
 -->
 
+## 2026-09-16
+
+### Injected Jobs
+
+<h4>Version: 7.0.8.1</h4>
+<h4>Fixes:</h4>
+- Document lines removed in Acumatica that have already been actioned, packed, or transacted against in Granite are now correctly flagged as cancelled. Previously the cancellation was never saved to the line or recorded in the Audit table, even though the job reported the line as updated.
+
 ## 2026-09-15
 
 ### SDK Provider
