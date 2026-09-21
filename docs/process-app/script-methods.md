@@ -291,6 +291,12 @@ Render records as large action buttons.
 {{ hideTextBox() }}
 ```
 
+###  Example: Static List
+
+```handlebars
+{{ ['Pick','Pack','Dispatch'] | map => { value: it } | createButtonList({}) }}
+```
+
 ###  Behavior
 
 * Generates one large button per row
