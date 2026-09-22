@@ -21,7 +21,7 @@ When handing this off to a client's IT provider to arrange the network access, m
     The public address exposed for this service (the `target` URL used in the Smart Events package — see [Required customization per client](#required-customization-per-client)) **must resolve to port 80 or 443**. In practice this means:
 
     - Use the default port for the scheme — `https://your-exposed-hostname/...` (443) with no `:port` suffix in the URL.
-    - If the Webhook Listener API itself is bound to a non-standard port (e.g. a custom IIS site binding), the IT provider must front it with a reverse proxy, load balancer, or firewall port-forward that terminates the public connection on 80/443 and forwards internally to the actual service port.
+    - If the Webhook Listener API itself is bound to a non-standard port (e.g. a custom IIS site binding), the IT provider must front it with a tunnel, reverse proxy, or firewall port-forward that terminates the public connection on 80/443 and forwards internally to the actual service port.
 
 Beyond the port, the usual requirements apply: a public DNS record for the exposed hostname, a valid TLS certificate if using HTTPS, and a firewall/NAT rule allowing inbound traffic from Sage Intacct to reach the service.
 
