@@ -196,6 +196,7 @@ Sales Order allocation behavior:
 - For kit parent lines, Granite sets `Qty = 0` and `Completed = true` so components are picked instead, and writes a `Comment` with the number of kits.
 - Component line quantities for kits are calculated from the computed parent quantity (allocated split qty sum).
 - Sales order detail `Comment` is synchronized from Acumatica for supported updates (for example, kit count comments).
+- Sales order line `Completed` and `Cancelled` flags are taken from the Acumatica SO line, and are updated on existing Granite lines when they change in Acumatica. Kit parent lines are always `Completed = true`, regardless of the Acumatica value.
 - If `ShipComplete = C` and not all sales order lines are fully allocated, Granite status is forced to `ONHOLD`.
 
 #### Shipment job

@@ -31,6 +31,14 @@ Template:
 ```
 -->
 
+## 2026-09-29
+
+### Injected Jobs
+
+<h4>Version: 7.0.8.2</h4>
+<h4>Changes:</h4>
+- Sales order lines now take their Completed and Cancelled status from Acumatica, and existing Granite lines are updated when those values change on the Acumatica sales order.
+
 ## 2026-09-16
 
 ### Injected Jobs
