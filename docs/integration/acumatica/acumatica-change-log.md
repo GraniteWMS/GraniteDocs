@@ -33,6 +33,12 @@ Template:
 
 ## 2026-09-29
 
+### SDK Provider
+
+<h4>Version: 7.0.8.3</h4>
+<h4>Fixes:</h4>
+- Purchase receipts created from Granite RECEIVE transactions now include the received quantity on each receipt line, instead of leaving it unset.
+
 ### Injected Jobs
 
 <h4>Version: 7.0.8.2</h4>

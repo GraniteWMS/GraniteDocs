@@ -551,13 +551,13 @@ WHERE T.IntegrationStatus = 0
     Purchase Order Receipt Number
 
 !!! note
-    `ReceiptQty` is no longer sent on the receipt detail — Acumatica was duplicating allocations when both `ReceiptQty` and `Allocations` were posted together. Quantity is now derived from `Allocations` only.
+    Each receipt detail carries both `ReceiptQty` and its `Allocations`. `ReceiptQty` is the total Granite `ActionQty` for the line, so the received quantity on the Acumatica receipt line is always populated.
 
 | Granite    | Acumatica Entity | Required | Behavior |
 |------------|------------------|----------|-----------|
 | Document                   | POOrderNumber |Y||
 | LineNumber                 |               |Y||
-| Qty                        | (via Allocations) |Y| Quantity is sent through the allocation lines; `ReceiptQty` is not posted |
+| Qty / ActionQty            | ReceiptQty    |Y| Summed per line and posted as `ReceiptQty`; also sent through the allocation lines |
 | DocumentTradingPartnerCode | VendorID      |Y||
 | ToLocation                 | WarehouseID   |Y||
 | ToSite                     | Allocation Location |N| Used when `UseSiteAsBin = true` |
