@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://granitewms.github.io/GraniteDocs/7.0/process-app/">
+        <link rel="canonical" href="https://granitewms.github.io/GraniteDocs/7.0/integration/sapb1/">
       
       
-        <link rel="prev" href="../webdesktop/datacapture/data-capture/">
+        <link rel="prev" href="../quickbooks/native-app/">
       
       
-        <link rel="next" href="script-methods/">
+        <link rel="next" href="sdk-provider/">
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
     
     
       
-        <title>Process App - Granite WMS Documentation</title>
+        <title>SAP B1 - Granite WMS Documentation</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="../extra_css/custom.css">
+      <link rel="stylesheet" href="../../extra_css/custom.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#process-app" class="md-skip">
+        <a href="#sap-b1" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Granite WMS Documentation" class="md-header__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
+    <a href="../.." title="Granite WMS Documentation" class="md-header__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Process App
+              SAP B1
             
           </span>
         </div>
@@ -209,7 +209,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
     
@@ -230,7 +230,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../scaffold/manual/" class="md-tabs__link">
+        <a href="../../scaffold/manual/" class="md-tabs__link">
           
   
     
@@ -250,7 +250,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../tools/" class="md-tabs__link">
+        <a href="../../tools/" class="md-tabs__link">
           
   
     
@@ -270,7 +270,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../customization/" class="md-tabs__link">
+        <a href="../../customization/" class="md-tabs__link">
           
   
     
@@ -290,7 +290,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../updates/" class="md-tabs__link">
+        <a href="../../updates/" class="md-tabs__link">
           
   
     
@@ -325,7 +325,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Granite WMS Documentation" class="md-nav__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
+    <a href="../.." title="Granite WMS Documentation" class="md-nav__button md-logo" aria-label="Granite WMS Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -343,7 +343,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -430,7 +430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../scaffold/manual/" class="md-nav__link">
+      <a href="../../scaffold/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -495,7 +495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../label-printing/bartender/manual/" class="md-nav__link">
+      <a href="../../label-printing/bartender/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -516,7 +516,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../label-printing/zpl/manual/" class="md-nav__link">
+      <a href="../../label-printing/zpl/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -542,8 +542,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -581,11 +583,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
         
           
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
@@ -599,7 +601,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             Integration
@@ -638,7 +640,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/accpac/" class="md-nav__link ">
+            <a href="../accpac/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -671,7 +673,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/accpac/sdk-provider/" class="md-nav__link">
+      <a href="../accpac/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -692,7 +694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/accpac/integration-jobs/" class="md-nav__link">
+      <a href="../accpac/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -750,7 +752,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/acumatica/" class="md-nav__link ">
+            <a href="../acumatica/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -783,7 +785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/acumatica/acumatica-overview/" class="md-nav__link">
+      <a href="../acumatica/acumatica-overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -804,7 +806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/acumatica/sdk-provider/" class="md-nav__link">
+      <a href="../acumatica/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -825,7 +827,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/acumatica/integration-jobs/" class="md-nav__link">
+      <a href="../acumatica/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -846,7 +848,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/acumatica/acumatica-change-log/" class="md-nav__link">
+      <a href="../acumatica/acumatica-change-log/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -904,7 +906,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/cin7/" class="md-nav__link ">
+            <a href="../cin7/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -937,7 +939,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/cin7/cin7-overview/" class="md-nav__link">
+      <a href="../cin7/cin7-overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -958,7 +960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/cin7/sdk-provider/" class="md-nav__link">
+      <a href="../cin7/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -979,7 +981,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/cin7/integration-jobs/" class="md-nav__link">
+      <a href="../cin7/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1000,7 +1002,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/cin7/cin7-change-log/" class="md-nav__link">
+      <a href="../cin7/cin7-change-log/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1054,7 +1056,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/evo/" class="md-nav__link ">
+            <a href="../evo/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1087,7 +1089,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/evo/sdk-provider/" class="md-nav__link">
+      <a href="../evo/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1108,7 +1110,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/evo/integration-jobs/" class="md-nav__link">
+      <a href="../evo/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1162,7 +1164,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/isync/" class="md-nav__link ">
+            <a href="../isync/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1195,7 +1197,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/isync/sdk-provider/" class="md-nav__link">
+      <a href="../isync/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1216,7 +1218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/isync/integration-jobs/" class="md-nav__link">
+      <a href="../isync/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1272,7 +1274,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/lightspeed/" class="md-nav__link ">
+            <a href="../lightspeed/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1305,7 +1307,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/lightspeed/lightspeed-overview/" class="md-nav__link">
+      <a href="../lightspeed/lightspeed-overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1326,7 +1328,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/lightspeed/sdk-provider/" class="md-nav__link">
+      <a href="../lightspeed/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1347,7 +1349,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/lightspeed/integration-jobs/" class="md-nav__link">
+      <a href="../lightspeed/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1376,7 +1378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/omni/sdk-provider/" class="md-nav__link">
+      <a href="../omni/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1420,7 +1422,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/parcel-perfect/" class="md-nav__link ">
+            <a href="../parcel-perfect/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1453,7 +1455,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/parcel-perfect/service/" class="md-nav__link">
+      <a href="../parcel-perfect/service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1482,7 +1484,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/quickbooks/native-app/" class="md-nav__link">
+      <a href="../quickbooks/native-app/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1500,6 +1502,8 @@
                 
   
   
+    
+  
   
   
     
@@ -1519,16 +1523,16 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_10" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/sapb1/" class="md-nav__link ">
+            <a href="./" class="md-nav__link md-nav__link--active">
               
   
   <span class="md-ellipsis">
@@ -1539,13 +1543,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_3_10" id="__nav_2_3_10_label" tabindex="0">
+              <label class="md-nav__link md-nav__link--active" for="__nav_2_3_10" id="__nav_2_3_10_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_10_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_10_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_3_10">
             <span class="md-nav__icon md-icon"></span>
             SAPB1
@@ -1561,7 +1565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/sapb1/sdk-provider/" class="md-nav__link">
+      <a href="sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1582,7 +1586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/sapb1/integration-jobs/" class="md-nav__link">
+      <a href="integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1655,7 +1659,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/syspro/sdk-provider/" class="md-nav__link">
+      <a href="../syspro/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1676,7 +1680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/syspro/syspro-change-log/" class="md-nav__link">
+      <a href="../syspro/syspro-change-log/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1730,7 +1734,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/sage100/" class="md-nav__link ">
+            <a href="../sage100/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1763,7 +1767,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/sage100/sdk-provider/" class="md-nav__link">
+      <a href="../sage100/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1784,7 +1788,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/sage100/integration-jobs/" class="md-nav__link">
+      <a href="../sage100/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1840,7 +1844,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/intacct/" class="md-nav__link ">
+            <a href="../intacct/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1873,7 +1877,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/intacct/standalone-service/" class="md-nav__link">
+      <a href="../intacct/standalone-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1894,7 +1898,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/intacct/integration-jobs/" class="md-nav__link">
+      <a href="../intacct/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1915,7 +1919,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/intacct/webhook-listener-api/" class="md-nav__link">
+      <a href="../intacct/webhook-listener-api/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1971,7 +1975,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integration/sagex3/" class="md-nav__link ">
+            <a href="../sagex3/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2004,7 +2008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/sagex3/sagex3-overview/" class="md-nav__link">
+      <a href="../sagex3/sagex3-overview/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2025,7 +2029,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/sagex3/sdk-provider/" class="md-nav__link">
+      <a href="../sagex3/sdk-provider/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2046,7 +2050,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integration/sagex3/integration-jobs/" class="md-nav__link">
+      <a href="../sagex3/integration-jobs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2108,7 +2112,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../webdesktop/" class="md-nav__link ">
+            <a href="../../webdesktop/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2141,7 +2145,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../webdesktop/datagrid/datagrid/" class="md-nav__link">
+      <a href="../../webdesktop/datagrid/datagrid/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2162,7 +2166,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../webdesktop/datacapture/data-capture/" class="md-nav__link">
+      <a href="../../webdesktop/datacapture/data-capture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2188,8 +2192,6 @@
                 
   
   
-    
-  
   
   
     
@@ -2209,16 +2211,16 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="./" class="md-nav__link md-nav__link--active">
+            <a href="../../process-app/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2229,13 +2231,13 @@
             </a>
             
               
-              <label class="md-nav__link md-nav__link--active" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_5">
             <span class="md-nav__icon md-icon"></span>
             Process App
@@ -2251,7 +2253,7 @@
   
   
     <li class="md-nav__item">
-      <a href="script-methods/" class="md-nav__link">
+      <a href="../../process-app/script-methods/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2272,7 +2274,7 @@
   
   
     <li class="md-nav__item">
-      <a href="session-timeout/" class="md-nav__link">
+      <a href="../../process-app/session-timeout/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2301,7 +2303,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../android-application/manual/" class="md-nav__link">
+      <a href="../../android-application/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2322,7 +2324,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../business-api/manual/" class="md-nav__link">
+      <a href="../../business-api/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2374,7 +2376,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../custodian-api/" class="md-nav__link ">
+            <a href="../../custodian-api/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2407,7 +2409,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../custodian-api/getting-started/" class="md-nav__link">
+      <a href="../../custodian-api/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2428,7 +2430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../custodian-api/process-template-service/" class="md-nav__link">
+      <a href="../../custodian-api/process-template-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2449,7 +2451,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../custodian-api/email-service/" class="md-nav__link">
+      <a href="../../custodian-api/email-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2470,7 +2472,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../custodian-api/reporting-service/" class="md-nav__link">
+      <a href="../../custodian-api/reporting-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2491,7 +2493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../custodian-api/sql-export-service/" class="md-nav__link">
+      <a href="../../custodian-api/sql-export-service/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2520,7 +2522,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../scheduler/manual/" class="md-nav__link">
+      <a href="../../scheduler/manual/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2564,7 +2566,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../customization/" class="md-nav__link ">
+            <a href="../../customization/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2624,7 +2626,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../sqlclr/" class="md-nav__link ">
+            <a href="../../sqlclr/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2657,7 +2659,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sqlclr/getting-started/" class="md-nav__link">
+      <a href="../../sqlclr/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2678,7 +2680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sqlclr/version-6-upgrade-guide/" class="md-nav__link">
+      <a href="../../sqlclr/version-6-upgrade-guide/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2699,7 +2701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sqlclr/reference/" class="md-nav__link">
+      <a href="../../sqlclr/reference/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2763,7 +2765,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../security/" class="md-nav__link ">
+            <a href="../../security/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2796,7 +2798,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../security/system-security/" class="md-nav__link">
+      <a href="../../security/system-security/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2817,7 +2819,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../security/user-permissions/" class="md-nav__link">
+      <a href="../../security/user-permissions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2838,7 +2840,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../security/api-keys/" class="md-nav__link">
+      <a href="../../security/api-keys/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2907,7 +2909,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../tools/" class="md-nav__link ">
+            <a href="../../tools/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2940,7 +2942,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../iis/getting-started/" class="md-nav__link">
+      <a href="../../iis/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2961,7 +2963,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ssrs/getting-started/" class="md-nav__link">
+      <a href="../../ssrs/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2982,7 +2984,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tools/jam/" class="md-nav__link">
+      <a href="../../tools/jam/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3003,7 +3005,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tools/jaeger/" class="md-nav__link">
+      <a href="../../tools/jaeger/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3024,7 +3026,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tools/nifi/" class="md-nav__link">
+      <a href="../../tools/nifi/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3070,7 +3072,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../tools/superset/" class="md-nav__link ">
+            <a href="../../tools/superset/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3103,7 +3105,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tools/superset/windows-installation/" class="md-nav__link">
+      <a href="../../tools/superset/windows-installation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3124,7 +3126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tools/superset/getting-started/" class="md-nav__link">
+      <a href="../../tools/superset/getting-started/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3183,7 +3185,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../customization/" class="md-nav__link ">
+            <a href="../../customization/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3262,7 +3264,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../customization/intro-practice/" class="md-nav__link">
+      <a href="../../customization/intro-practice/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3283,7 +3285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../customization/triggers/triggers/" class="md-nav__link">
+      <a href="../../customization/triggers/triggers/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3304,7 +3306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../customization/prescripts/prescripts/" class="md-nav__link">
+      <a href="../../customization/prescripts/prescripts/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3365,7 +3367,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../updates/" class="md-nav__link ">
+            <a href="../../updates/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3446,7 +3448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../updates/V4/whats-new/" class="md-nav__link">
+      <a href="../../updates/V4/whats-new/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3511,7 +3513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../updates/V5/whats-new/" class="md-nav__link">
+      <a href="../../updates/V5/whats-new/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3532,7 +3534,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../updates/V5/product-update/" class="md-nav__link">
+      <a href="../../updates/V5/product-update/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3605,7 +3607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../updates/V6/whats-new/" class="md-nav__link">
+      <a href="../../updates/V6/whats-new/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3626,7 +3628,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../updates/V6/cheatsheet/" class="md-nav__link">
+      <a href="../../updates/V6/cheatsheet/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3655,7 +3657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../updates/V7/whats-new/" class="md-nav__link">
+      <a href="../../updates/V7/whats-new/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3684,7 +3686,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../updates/release-notes/" class="md-nav__link">
+      <a href="../../updates/release-notes/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3725,218 +3727,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      Setup
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Setup">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      Requirements
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Configuration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#menu-layout" class="md-nav__link">
-    <span class="md-ellipsis">
-      Menu Layout
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#process-layout" class="md-nav__link">
-    <span class="md-ellipsis">
-      Process Layout
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#process-functions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Process Functions
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Process Functions">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#processfunction" class="md-nav__link">
-    <span class="md-ellipsis">
-      ProcessFunction
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#processfunctionmapping" class="md-nav__link">
-    <span class="md-ellipsis">
-      ProcessFunctionMapping
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#business-rules" class="md-nav__link">
-    <span class="md-ellipsis">
-      Business Rules
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Business Rules">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#packing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Packing
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#picking" class="md-nav__link">
-    <span class="md-ellipsis">
-      Picking
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#transfer" class="md-nav__link">
-    <span class="md-ellipsis">
-      Transfer
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#transfer-dynamic" class="md-nav__link">
-    <span class="md-ellipsis">
-      Transfer Dynamic
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#take-on" class="md-nav__link">
-    <span class="md-ellipsis">
-      Take On
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#return" class="md-nav__link">
-    <span class="md-ellipsis">
-      Return
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#receive" class="md-nav__link">
-    <span class="md-ellipsis">
-      Receive
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#manufacture" class="md-nav__link">
-    <span class="md-ellipsis">
-      Manufacture
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#consume" class="md-nav__link">
-    <span class="md-ellipsis">
-      Consume
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#correction" class="md-nav__link">
-    <span class="md-ellipsis">
-      Correction
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pick-reversal" class="md-nav__link">
-    <span class="md-ellipsis">
-      Pick Reversal
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -3950,218 +3740,20 @@
                   
 
 
-<h1 id="process-app">Process App</h1>
-<p>The Granite Process App is an ASP.NET Core mobile application designed specifically for warehouse operations. It provides users with intuitive, step-driven workflows to perform various warehouse transactions directly from mobile devices.</p>
-<p>The application guides users through structured processes, ensuring accuracy and efficiency in warehouse operations such as receiving, picking, shipping, and inventory management. Each workflow is designed to be simple and user-friendly, and ensure all warehouse activities are properly recorded and tracked.</p>
-<hr />
-<h2 id="setup">Setup</h2>
-<h3 id="requirements">Requirements</h3>
-<ul>
-<li><a href="https://dotnet.microsoft.com/en-us/download/dotnet/8.0">ASP.NET Core 8 Hosting Bundle</a></li>
-<li><a href="../iis/getting-started/">IIS</a></li>
-</ul>
-<h2 id="configuration">Configuration</h2>
-<h3 id="menu-layout">Menu Layout</h3>
-<p>You can configure the menu layout in the appSettings.json:</p>
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">&quot;MenuLayout&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Default&quot;</span><span class="p">,</span><span class="w"> </span><span class="cm">/* Options: Default, Collapsible, Tree */</span>
-</code></pre></div>
-<h3 id="process-layout">Process Layout</h3>
-<p>In the Process table you can configure the layout that the process should use. </p>
-<p>The default is <code>StepSequence</code>, but you can select a <code>Form</code> layout as well.</p>
-<h3 id="process-functions">Process Functions</h3>
-<p>Process functions are configured in the following two database tables:</p>
-<ul>
-<li>[dbo].[ProcessFunction]</li>
-<li>[dbo].[ProcessFunctionMapping]</li>
-</ul>
-<h4 id="processfunction">ProcessFunction</h4>
-<p>Links a process as function to a specific parent process step or parent process.</p>
-<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ProcessFunction</span><span class="p">]</span>
-<span class="p">(</span>
-<span class="w">    </span><span class="n">Process_id</span><span class="p">,</span><span class="w">                 </span><span class="c1">-- the ID of the Process that will be available as a function</span>
-<span class="w">    </span><span class="n">ParentProcessStep_id</span><span class="p">,</span><span class="w">       </span><span class="c1">-- the ID of the ProcessStep that the function will be available on. EITHER this OR ParentProcess_id must be set</span>
-<span class="w">    </span><span class="n">ParentProcess_id</span><span class="p">,</span><span class="w">           </span><span class="c1">-- the ID of the Process that the function will be available on. EITHER this OR ParentProcessStep_id must be set</span>
-<span class="w">    </span><span class="n">IsActive</span><span class="p">,</span><span class="w">                   </span><span class="c1">-- is the process function enabled?</span>
-<span class="w">    </span><span class="n">ProcessFunctionMenuIndex</span><span class="p">,</span><span class="w">   </span><span class="c1">-- determines the order of the process function menu</span>
-<span class="w">    </span><span class="n">FinalStepBehavior</span><span class="p">,</span><span class="w">          </span><span class="c1">-- CLOSE or CONTINUE.</span>
-<span class="w">    </span><span class="n">ProcessLayoutOverride</span><span class="p">,</span><span class="w">      </span><span class="c1">-- leave empty to use the process&#39; layout, or specify StepSequence or Form to override.</span>
-<span class="w">    </span><span class="n">AuditUser</span><span class="p">,</span><span class="w">                  </span><span class="c1">-- user that edited this record.</span>
-<span class="w">    </span><span class="n">AuditDate</span><span class="p">,</span><span class="w">                  </span><span class="c1">-- date this record was edited. </span>
-<span class="w">    </span><span class="k">Version</span><span class="w">                     </span><span class="c1">-- number of times this record has changed</span>
-<span class="p">)</span>
-<span class="k">VALUES</span>
-<span class="p">(</span>
-<span class="w">    </span><span class="mi">101</span><span class="p">,</span><span class="w">                </span>
-<span class="w">    </span><span class="mi">5</span><span class="p">,</span><span class="w">                  </span>
-<span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">                  </span>
-<span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">                  </span>
-<span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">                  </span>
-<span class="w">    </span><span class="s1">&#39;CLOSE&#39;</span><span class="p">,</span><span class="w">   </span>
-<span class="w">    </span><span class="k">NULL</span><span class="p">,</span><span class="w">       </span>
-<span class="w">    </span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="w">       </span>
-<span class="w">    </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w">          </span>
-<span class="w">    </span><span class="mi">1</span><span class="w">                   </span>
-<span class="p">);</span>
-</code></pre></div>
-<h4 id="processfunctionmapping">ProcessFunctionMapping</h4>
-<p>Maps steps between the parent process and the function process.</p>
-<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">ProcessFunctionMapping</span><span class="p">]</span>
-<span class="p">(</span>
-<span class="w">    </span><span class="n">ProcessFunction_id</span><span class="p">,</span>
-<span class="w">    </span><span class="n">ParentProcessStep</span><span class="p">,</span>
-<span class="w">    </span><span class="n">FunctionStep</span>
-<span class="p">)</span>
-<span class="k">VALUES</span>
-<span class="p">(</span>
-<span class="w">    </span><span class="mi">10</span><span class="p">,</span><span class="w">            </span><span class="c1">-- ProcessFunction ID</span>
-<span class="w">    </span><span class="s1">&#39;FromLocation&#39;</span><span class="p">,</span><span class="w"> </span><span class="c1">-- Step in parent process</span>
-<span class="w">    </span><span class="s1">&#39;ToLocation&#39;</span><span class="w">   </span><span class="c1">-- Step in function process</span>
-<span class="p">);</span>
-</code></pre></div>
-<p>Notes
-Step names in ProcessFunctionMapping must exist in their respective process definitions.</p>
-<p>You can define multiple mappings for a single function if more than one step needs to be passed through.</p>
-<h3 id="business-rules">Business Rules</h3>
-<p>Business rules are passed in the <code>BusinessRules</code> dictionary on transaction requests to adjust default behavior. Rule names are case-sensitive and values are strings (typically <code>YES</code>/<code>NO</code> or a number).</p>
-<h4 id="packing">Packing</h4>
+<h1 id="sap-b1">SAP B1</h1>
+<p><img alt="maturity" src="https://img.shields.io/badge/maturity-medium-449336" /></p>
+<p><img alt="production_readiness" src="https://img.shields.io/badge/production_readiness-partial-449336" /></p>
+<p><img alt="clients" src="https://img.shields.io/badge/live_clients-yes-449336" /></p>
+<p><img alt="note" src="https://img.shields.io/badge/customization-high-cd242c" /></p>
+<p><img alt="status" src="https://img.shields.io/badge/development_status-none-365893" /></p>
+<p>This document contains all of the information needed to set up and configure integration with SAP B1.
+There are two parts to the complete integration solution:</p>
 <ul>
 <li>
-<p><strong>ValidateAgainstDocumentQty</strong> </p>
-<p>When set to 'YES', validates the PackedQty against the Qty field instead of ActionQty, allowing for packing without picking.</p>
+<p>The <a href="sdk-provider/">SDK Provider</a> is used by the Integration Service to map transactions performed in Granite to the relevant format for SAP B1.</p>
 </li>
 <li>
-<p><strong>IgnoreBatch</strong></p>
-<p>When IgnoreBatch's value is 'YES', the Business API will not validate the batch of the packed tracking entity against the document lines when allocating a transaction to a line.</p>
-</li>
-<li>
-<p><strong>CancelledLineOverride</strong></p>
-<p>When CancelledLineOverride's value is 'YES', users will be allowed to pack document lines that are cancelled</p>
-</li>
-</ul>
-<h4 id="picking">Picking</h4>
-<ul>
-<li>
-<p><strong>BestBeforeOverride</strong></p>
-<p>When BestBeforeOverride's value is 'YES', users will be allowed to pick stock that is past the ExpiryDate</p>
-</li>
-<li>
-<p><strong>OnHoldOverride</strong></p>
-<p>When OnHoldOverride's value is 'YES', users will be allowed to pick stock that is on hold</p>
-</li>
-<li>
-<p><strong>SerialValidationOverride</strong></p>
-<p>When SerialValidationOverride's value is 'YES', the Business API will not validate the picked serial number against the document lines</p>
-</li>
-<li>
-<p><strong>ActionQtyAllowance</strong></p>
-<p>When set to a value above 0, allows the user to pick the specified percentage more than the document requires</p>
-</li>
-<li>
-<p><strong>CancelledLineOverride</strong></p>
-<p>When CancelledLineOverride's value is 'YES', users will be allowed to pick document lines that are cancelled</p>
-</li>
-</ul>
-<h4 id="transfer">Transfer</h4>
-<ul>
-<li>
-<p><strong>ActionQtyAllowance</strong></p>
-<p>When set to a value above 0, allows the user to transfer the specified percentage more than the document requires</p>
-</li>
-<li>
-<p><strong>AlwaysSplitTrackingEntity</strong></p>
-<p>When set to "YES", will always split the qty transferred to a new tracking entity, leaving the original tracking entity in place.</p>
-</li>
-<li>
-<p><strong>OnHoldOverride</strong></p>
-<p>When OnHoldOverride's value is 'YES', users will be allowed to transfer stock that is on hold</p>
-</li>
-<li>
-<p><strong>CancelledLineOverride</strong></p>
-<p>When CancelledLineOverride's value is 'YES', users will be allowed to transfer against document lines that are cancelled</p>
-</li>
-</ul>
-<h4 id="transfer-dynamic">Transfer Dynamic</h4>
-<ul>
-<li>
-<p><strong>OnHoldOverride</strong></p>
-<p>When OnHoldOverride's value is 'YES', users will be allowed to transfer stock that is on hold</p>
-</li>
-</ul>
-<h4 id="take-on">Take On</h4>
-<ul>
-<li>
-<p><strong>CreateOnHold</strong></p>
-<p>When CreateOnHold's value is 'YES', tracking entities created by this transaction will be placed on hold, in the same way as the master item's DirectOnHold setting.</p>
-</li>
-</ul>
-<h4 id="return">Return</h4>
-<ul>
-<li>
-<p><strong>CreateOnHold</strong></p>
-<p>When CreateOnHold's value is 'YES', tracking entities created by this transaction will be placed on hold, in the same way as the master item's DirectOnHold setting.</p>
-</li>
-</ul>
-<h4 id="receive">Receive</h4>
-<ul>
-<li>
-<p><strong>ActionQtyAllowance</strong></p>
-<p>When set to a value above 0, allows the user to receive the specified percentage more than the document requires</p>
-</li>
-<li>
-<p><strong>CreateOnHold</strong></p>
-<p>When CreateOnHold's value is 'YES', tracking entities created by this transaction will be placed on hold, in the same way as the master item's DirectOnHold setting.</p>
-</li>
-<li>
-<p><strong>SerialValidationOverride</strong></p>
-<p>When SerialValidationOverride's value is 'YES', the Business API will not validate the received serial number against the document lines</p>
-</li>
-<li>
-<p><strong>CancelledLineOverride</strong></p>
-<p>When CancelledLineOverride's value is 'YES', users will be allowed to receive against document lines that are cancelled</p>
-</li>
-</ul>
-<h4 id="manufacture">Manufacture</h4>
-<ul>
-<li>
-<p><strong>ActionQtyAllowance</strong></p>
-<p>Percentage allowance for manufacturing more than the document line quantity. Default is 0%</p>
-</li>
-<li>
-<p><strong>CreateOnHold</strong></p>
-<p>When CreateOnHold's value is 'YES', tracking entities created by this transaction will be placed on hold, in the same way as the master item's DirectOnHold setting.</p>
-</li>
-<li>
-<p><strong>CancelledLineOverride</strong></p>
-<p>When CancelledLineOverride's value is 'YES', users will be allowed to manufacture against document lines that are cancelled</p>
-</li>
-</ul>
-<h4 id="consume">Consume</h4>
-<ul>
-<li>
-<p><strong>BestBeforeOverride</strong></p>
-<p>When BestBeforeOverride's value is 'YES', users will be allowed to consume stock that is past the ExpiryDate</p>
-</li>
-<li>
-<p><strong>ActionQtyAllowance</strong> </p>
-<p>Percentage allowance for consuming more than the document line quantity. Default is 0%</p>
-</li>
-<li>
-<p><strong>CancelledLineOverride</strong></p>
-<p>When CancelledLineOverride's value is 'YES', users will be allowed to consume against document lines that are cancelled</p>
-</li>
-</ul>
-<h4 id="correction">Correction</h4>
-<ul>
-<li>
-<p><strong>PreventInStockCorrection</strong></p>
-<p>Prevent not in stock tracking entities from being placed back into stock</p>
-</li>
-</ul>
-<h4 id="pick-reversal">Pick Reversal</h4>
-<ul>
-<li>
-<p><strong>ReversePackTransactions</strong></p>
-<p>When ReversePackTransactions' value is 'YES', any pack transactions on the line being reversed will be reversed before the picking transactions.</p>
+<p>The <a href="integration-jobs/">integration jobs</a> are used by the <a href="../../scheduler/manual/">Scheduler</a> to pull SAP B1's documents, item codes, and trading partners into Granite.</p>
 </li>
 </ul>
 
@@ -4218,12 +3810,12 @@ Step names in ProcessFunctionMapping must exist in their respective process defi
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy", "content.tabs.link"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.indexes", "navigation.top", "toc.follow", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
-        <script src="../extra_js/custom.js"></script>
+        <script src="../../extra_js/custom.js"></script>
       
     
   </body>
