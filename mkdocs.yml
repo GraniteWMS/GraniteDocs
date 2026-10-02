@@ -46,7 +46,10 @@ nav:
               - integration/parcel-perfect/index.md
               - Service: integration/parcel-perfect/service.md
           - QuickBooks: integration/quickbooks/native-app.md
-          - SAPB1: integration/sapb1/sdk-provider.md
+          - SAPB1:
+              - integration/sapb1/index.md
+              - SDK Provider: integration/sapb1/sdk-provider.md
+              - Integration Jobs: integration/sapb1/integration-jobs.md
           - Syspro:
               - SDK Provider: integration/syspro/sdk-provider.md
               - Change Log: integration/syspro/syspro-change-log.md
