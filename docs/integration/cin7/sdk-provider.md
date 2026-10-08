@@ -102,7 +102,7 @@ PARTIALSTOCKTAKE, RECLASSIFY, ADJUSTMENT, SCRAP and TAKEON all post a CIN7 Stock
 
 - Each transaction is turned into one or more stock changes keyed by item code, batch, expiry date (date only) and location. Changes with the same key are netted together; keys whose changes cancel out are skipped, and if every key cancels out nothing is posted (the method returns `No stock changes`).
 - Fetches CIN7 product availability (by SKU) for each item involved and finds the availability record matching the key. If no record exists, CIN7 is treated as holding zero stock for that key.
-- The posted line quantity is the CIN7 `OnHand` quantity plus the net change. If any key would go negative, nothing is posted and the error lists every offending key with its current on-hand quantity, change, location and transaction ids.
+- The posted line quantity is the CIN7 `OnHand` quantity plus the net change, and the adjustment is posted with `UpdateOnHand` set to true so CIN7 applies it to the on-hand quantity rather than the available quantity. If any key would go negative, nothing is posted and the error lists every offending key with its current on-hand quantity, change, location and transaction ids.
 - Resolves CIN7 `ProductID` from the availability record, falling back to the Granite MasterItem ERP ID. Throws if neither is found.
 - Sets each line's comment to `Granite {Action} by: {net quantity}, transaction Ids: {transaction ids}`. The line expiry date is taken from the CIN7 availability record when one exists.
 - Posts with CIN7 status `DRAFT` and a unit cost of 1.
