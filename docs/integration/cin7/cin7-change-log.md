@@ -35,7 +35,7 @@ Template:
 
 ### SDK Provider
 
-<h4>Version: 7.0.14.1</h4>
+<h4>Version: 7.0.14.2</h4>
 
 <h4>Changes:</h4>
 - STOCKTAKE now creates a CIN7 Stocktake for the counted location and updates it with the Granite counts, instead of posting a Stock Adjustment. It returns the Stocktake number, requires all transactions to be in one session and one location, and does not support dry run.
@@ -54,6 +54,7 @@ Template:
 - POSTPUTAWAY with put-away grouping now reads the invoicing and receiving number after an underscore in the transaction document reference.
 - MANUFACTURE no longer fails the batch check when neither Granite nor CIN7 has a batch.
 - Stock adjustments (RECLASSIFY, ADJUSTMENT, SCRAP, TAKEON, PARTIALSTOCKTAKE) now update the CIN7 on-hand quantity. Previously CIN7 applied the posted quantity to the available quantity, so on-hand stock ended up too high by the allocated quantity whenever the item had stock allocated to open orders.
+- CONSUME now posts one pick line per item, batch and expiry date with the quantities summed, and no longer sends the Granite UOM. Previously transactions in different UOMs for the same item produced separate pick lines, and the UOM was sent to a CIN7 field that is read-only and ignored.
 
 ### Injected Jobs
 

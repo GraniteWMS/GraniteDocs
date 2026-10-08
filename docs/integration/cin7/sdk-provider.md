@@ -625,10 +625,9 @@ SELECT * FROM @Output
 - Supports:
     - Batch
     - Expiration Date
-    - UOM
 - Behavior:
     - Uses a single Granite `Document` mapped to a CIN7 finished goods `TaskID`.
-    - Groups transactions by item/batch/expiry/UOM and posts pick lines.
+    - Groups transactions by item/batch/expiry and posts one pick line per group, summing the quantity. Quantities are posted as-is in the CIN7 product unit; the Granite UOM is not sent (the CIN7 pick line `Unit` is read-only) and no unit conversion is applied.
     - Sets finished goods status to `IN PROGRESS`.
 - Integration Post
     - Not used by the current implementation for this method.
@@ -639,10 +638,9 @@ SELECT * FROM @Output
 |------------|-------------|----------|-----------|
 | Document                   | TaskID (via ERPIdentification) |Y||
 | Code                        | ProductID / ProductCode           |Y||
-| Qty                         | Quantity  |Y||
+| Qty                         | Quantity  |Y| Summed per item, batch and expiry date; no UOM conversion |
 | Batch                       | BatchSN  |N||
 | ExpirationDate              | ExpiryDate|N||
-| UOM                         | Unit |N||
 
 ### MANUFACTURE
 
