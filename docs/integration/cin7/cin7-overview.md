@@ -31,7 +31,7 @@ The first transaction type is StockTransfer. This is a movement of stock from on
 
 ### StockTake/Adjustment
 
-The next transaction type is StockTake/Adjustment. CIN7 used the same transaction type for both. As you can see at the bottom of the image below, it has tabs for Zero Stock and Non-zero Stock. These simply show if it is creating stock where there was now stock before in that location or if it is adjusting an existing stock level. An interesting thing to note about this transaction, is that you specify the total stock at the location, rather than the amount that you are adjusting by and it will work out how much the stock is changing by. 
+The next transaction types are Stocktake and Stock Adjustment. They look the same in the CIN7 screens and share a numbering sequence, but they are two separate documents with their own API endpoints and statuses: a Stock Adjustment moves from `DRAFT` to `COMPLETED`, while a Stocktake is created as `IN PROGRESS` and is then completed. Granite uses a Stocktake for a full STOCKTAKE and a Stock Adjustment for everything else (see the [SDK Provider](sdk-provider.md#stock-adjustments)). As you can see at the bottom of the image below, both have tabs for Zero Stock and Non-zero Stock. These simply show if it is creating stock where there was no stock before in that location or if it is adjusting an existing stock level. An interesting thing to note about both documents is that you specify the total stock at the location, rather than the amount that you are adjusting by, and CIN7 works out how much the stock is changing by. 
 
 ![Adjustment](./cin7-img/adjustment.png)
 
@@ -40,7 +40,7 @@ The next transaction type is StockTake/Adjustment. CIN7 used the same transactio
 
 Next up are Purchases. These CIN7 documents are brought into Granite as Receiving documents. Each Purchase will have a Supplier (Inbound Trading Partner in Granite) and a location specified where the stock is going to be received. Below you can see an example of a purchase and all the available statuses.
 
-Another thing to note about CIN7 purchase orders is that they can either be Simple or Advanced, and there is a configuration setting that affects which integration method must be used when posting transactions back to CIN7.
+Another thing to note about CIN7 purchase orders is that they can either be Simple or Advanced. Granite always posts receipts through the Advanced Purchase endpoints, which accept both types and convert a Simple Purchase to an Advanced Purchase on the first receipt. The `Use Put Away` setting described below determines which integration method must be used when posting receipts back to CIN7.
 
 As described in the CIN7 documentation: 
 
@@ -64,7 +64,7 @@ The recommendation is to have it disabled as Granite will handle the put away th
 
 ### Sale
 
-A CIN7 Sale is integrated into Granite as an Order document. It has a Customer(Outbound trading Partner) and a Location where the stock will be picked from. It is processed in three stages. Pick, Pack, and Ship. It must be processed in this order and each previous step needs to be completed before the next step. Below you can see an example and all of the available status. 
+A CIN7 Sale is integrated into Granite as an Order document. It has a Customer(Outbound trading Partner) and a Location where the stock will be picked from. It is processed in three stages. Pick, Pack, and Ship. It must be processed in this order and each previous step needs to be authorised before the next step: CIN7 rejects a pick unless the sale order is `AUTHORISED`, rejects a pack while the pick is still `DRAFT`, and only marks the shipment `AUTHORISED` once every packed box has been shipped. Below you can see an example and all of the available status. 
 
 ![Sale](./cin7-img/sale.png)
 

@@ -156,6 +156,8 @@ GO
 
 CIN7 API calls made by the job (e.g. fetching products, orders, and credit notes) are retried up to 3 times. Responses with HTTP status `429` (Too Many Requests) or `503` (Service Unavailable) are treated as rate-limited and retried with exponential backoff (30s, 60s, 120s). Other request failures are retried with a shorter exponential backoff (starting at 5s).
 
+CIN7 limits each API application key to 60 calls per minute and returns `429` when the limit is exceeded. Give the Scheduler its own API key rather than sharing the SDK Provider's key, so that a busy job run does not throttle live transaction posting.
+
 
 ### F# Mapping Scripts
 
@@ -298,7 +300,7 @@ If a change is made in the ERP system that would put Granite into an invalid sta
 
 <h4>Transfer (TRANSFER)</h4>
 
-- Fetches CIN7 Stock Transfers with status "ORDERED"
+- Fetches CIN7 Stock Transfers with status "ORDERED" (a transfer whose transfer order has been authorised; this status is returned by the CIN7 transfer list even though the CIN7 API documentation only lists `DRAFT`, `IN TRANSIT`, `COMPLETED` and `VOIDED`)
 - Document type is determined dynamically based on managed locations:
     - Both locations managed → TRANSFER
     - Only FromLocation managed → ORDER (outbound)
@@ -333,9 +335,11 @@ If a change is made in the ERP system that would put Granite into an invalid sta
 
 
 ### Master data jobs
-MasterItems and TradingPartners have their own Jobs. These Jobs fetch all StockItems, Vendors, and Customers from  CIN7 and compares them to the MasterItems and TradingPartners in Granite. Any inserts / updates are done as required. 
+MasterItems and TradingPartners have their own Jobs. These Jobs fetch all Products, Suppliers, and Customers from  CIN7 and compares them to the MasterItems and TradingPartners in Granite. Any inserts / updates are done as required. 
 
-When the full MasterItem sync runs (`SyncAllMasterItems`), any Granite MasterItem whose `ERPIdentification` is no longer present in the CIN7 StockItems returned is marked inactive and has `_REMOVED` appended to its `Code` and `FormattedCode`. Items whose `Code`/`FormattedCode` already end with `_REMOVED` are skipped so they are not re-marked on subsequent runs. This removal marking only happens on the full sync - incremental updates do not mark items as removed.
+When the full MasterItem sync runs (`SyncAllMasterItems`), any Granite MasterItem whose `ERPIdentification` is no longer present in the CIN7 Products returned is marked inactive and has `_REMOVED` appended to its `Code` and `FormattedCode`. Items whose `Code`/`FormattedCode` already end with `_REMOVED` are skipped so they are not re-marked on subsequent runs. This removal marking only happens on the full sync - incremental updates do not mark items as removed.
+
+Note that CIN7 omits products with the status `Deprecated` from the product list unless the request asks for them (`IncludeDeprecated=true`), so a product that is deprecated in CIN7 is treated as missing by the full sync and marked `_REMOVED` unless the job requests deprecated products. A CIN7 product `Status` can be `Active`, `Setup required` or `Deprecated`.
 
 The document jobs also sync changes to the MasterItems that are on the document. This means that on sites that do not make many changes to their MasterItems it is better to limit running this job to once a day or even less frequently. 
 
