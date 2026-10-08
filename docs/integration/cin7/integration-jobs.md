@@ -32,6 +32,11 @@ See below for information for specifics on how document and master data jobs wor
     ---
     CIN7 type: Finished Good
 
+ - BOM
+
+    ---
+    CIN7 type: Assembly Product (Bill of Materials)
+
 </div>
 
 
@@ -79,6 +84,10 @@ WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobNam
 INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
 SELECT 0, 'CIN7 Finished Goods Job', 'Syncs Finished Goods from CIN7', 'INJECTED', 'Granite.Integration.CIN7.Job.WorkOrder', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
 WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'CIN7 Finished Goods Job');
+
+INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
+SELECT 0, 'CIN7 BOM Job', 'Syncs Bills of Materials of Assembly products from CIN7', 'INJECTED', 'Granite.Integration.CIN7.Job.BOM', '1', 'HOURS', GETDATE(), 'AUTOMATION'
+WHERE NOT EXISTS (SELECT 1 FROM [GraniteDatabase].dbo.ScheduledJobs WHERE JobName = 'CIN7 BOM Job');
 
 INSERT INTO [GraniteDatabase].dbo.ScheduledJobs (isActive, JobName, JobDescription, [Type], InjectJob, Interval, IntervalFormat, AuditDate, AuditUser)
 SELECT 0, 'CIN7 Sale Credit Note Job', 'Syncs Sale Credit Notes from CIN7', 'INJECTED', 'Granite.Integration.CIN7.Job.SalesCreditNote', '5', 'MINUTES', GETDATE(), 'AUTOMATION'
@@ -162,6 +171,7 @@ Mapping scripts are located in the `Configuration/Scripts/` directory within the
 - `PurchaseOrderJobConfiguration.fsx` - Purchase Order document mappings
 - `TransferJobConfiguration.fsx` - Stock Transfer document mappings
 - `FinishedGoodsJobConfiguration.fsx` - Finished Goods/Work Order document mappings
+- `BOMJobConfiguration.fsx` - Bill of Materials document mappings
 - `SaleCreditNoteJobConfiguration.fsx` - Sale Credit Note document mappings
 - `PurchaseCreditNoteJobConfiguration.fsx` - Purchase Credit Note document mappings
 
@@ -190,7 +200,7 @@ Each configuration script can define:
 
 **Mapping Functions:**
 
-- `MapToSalesOrder` / `MapToPurchaseOrder` / `MapToTransfer` / `MapToWorkOrder` / `MapToCreditNote` / `MapToPurchaseCreditNote` - Transform CIN7 documents to Granite documents
+- `MapToSalesOrder` / `MapToPurchaseOrder` / `MapToTransfer` / `MapToWorkOrder` / `MapToBOM` / `MapToCreditNote` / `MapToPurchaseCreditNote` - Transform CIN7 documents to Granite documents
 - `MapToMasterItem` - Transform CIN7 products to Granite MasterItems
 - `MapCustomerToTradingPartner` / `MapSupplierToTradingPartner` - Transform CIN7 customers/suppliers to Granite Trading Partners
 
@@ -271,16 +281,20 @@ If a change is made in the ERP system that would put Granite into an invalid sta
 - Fetches CIN7 Sale Credit Notes with status "AUTHORISED" that have been updated since the last integration time
 - Applies `SaleCreditNoteLookbackMinutes` system setting to look back before the last integration time, preventing missed credit notes created during the job run
 - Maps to Granite document type RECEIVING
+- Stores the document `ERPIdentification` as the composite `{saleId}:{creditNoteNumber}`. CIN7 reuses the sale ID for a credit note raised on a simple sale, so the credit note number is what keeps the credit note document distinct from the sales order document. Credit notes with no credit note number are logged and skipped.
 - Can filter by ManagedLocations in configuration - a credit note is skipped unless at least one of its restock lines is for a managed location
 - Uses ToLocation (per restock line) for document lines
+- Document lines also map Batch and ExpiryDate from the CIN7 restock line
 
 <h4>Purchase Credit Note (ORDER)</h4>
 
 - Fetches CIN7 Purchase Credit Notes with status "AUTHORISED" that have been updated since the last integration time
 - Applies `PurchaseCreditNoteLookbackMinutes` system setting to look back before the last integration time, preventing missed credit notes created during the job run
 - Maps to Granite document type ORDER, modeled as an outbound movement (goods returned to a supplier) rather than the inbound RECEIVING type used by the other purchase-side jobs
+- Stores the document `ERPIdentification` as the composite `{purchaseId}:{creditNoteNumber}`. CIN7 reuses the purchase ID for a credit note raised on a simple purchase, so the credit note number is what keeps the credit note document distinct from the purchase order document. Credit notes with no credit note number are logged and skipped.
 - Can filter by ManagedLocations in configuration - a credit note is skipped unless at least one of its unstock lines is for a managed location
 - Uses FromLocation (per unstock line) for document lines
+- Document lines also map Batch and ExpiryDate from the CIN7 unstock line
 
 <h4>Transfer (TRANSFER)</h4>
 
@@ -301,6 +315,21 @@ If a change is made in the ERP system that would put Granite into an invalid sta
     - INPUT lines: Raw materials from OrderLines with FromLocation
     - OUTPUT line: Finished product with ToLocation and Batch
 - Can filter by ManagedLocations in configuration
+
+<h4>Bill of Materials (BOM)</h4>
+
+- Fetches CIN7 products together with their Bill of Materials. Only products modified since the last successfully posted BOM integration (with a 5 minute overlap) are fetched; the first run fetches all products
+- Queues a BOM document for every product that is an active Assembly (`BOMType` = `Assembly` and `Status` = `Active`). A product that no longer qualifies is only queued when a BOM document already exists for it in Granite, so that the document can be deactivated
+- Maps to Granite document type BOM, numbered `BOM_{SKU}`, with the CIN7 product ID as `ERPIdentification`
+- Document lines include:
+    - INPUT lines: one per component (product components first, then service components) with the component quantity
+    - OUTPUT line: the assembled product itself, with the CIN7 `QuantityToProduce` as the quantity
+- CIN7 does not return a product code for service components, so the job looks the component product up to get its SKU. If the SKU cannot be resolved the BOM is logged as an error and skipped
+- An active Assembly with no components is logged as an error and skipped, since a BOM needs at least one input
+- When a product stops being an active Assembly, its existing BOM document is deactivated. The last known recipe lines are kept
+- The MasterItems on the document are synced in the same way as for the other document jobs
+- Changes to BOM lines in CIN7 are always applied to the Granite document, because a BOM is a recipe and is never transacted against
+- Location filtering does not apply - a BOM has no location
 
 
 ### Master data jobs

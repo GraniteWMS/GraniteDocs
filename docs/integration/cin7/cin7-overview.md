@@ -56,6 +56,8 @@ There is a very important setting in CIN7 under Settings > General Settings > Pu
 If it is enabled, use the standard [RECEIVE](../cin7/sdk-provider.md#receive) method.
 If it is disabled, use [POSTPUTAWAY](../cin7/sdk-provider.md#postputaway). 
 
+The recommendation is to have it disabled as Granite will handle the put away this setting is more for CIN7's internal WMS. 
+
 ![Purchase](./cin7-img/purchase.png)
 
 ![Purchase status](./cin7-img/purchase-status.png)

@@ -31,6 +31,38 @@ Template:
 ```
 -->
 
+## 2026-10-08
+
+### SDK Provider
+
+<h4>Version: 7.0.14.0</h4>
+<h4>Changes:</h4>
+- STOCKTAKE now creates a CIN7 Stocktake for the counted location and updates it with the Granite counts, instead of posting a Stock Adjustment. It returns the Stocktake number, requires all transactions to be in one session and one location, and does not support dry run.
+- Added PARTIALSTOCKTAKE, which adjusts only the counted items in a location by the difference between the counted and expected quantities.
+- Added SCRAP and TAKEON, which reduce or increase stock for an item at a location as a Stock Adjustment.
+- Added REPLENISH, posted as a Stock Transfer in the same way as MOVE.
+- Stock adjustments (RECLASSIFY, ADJUSTMENT, SCRAP, TAKEON, PARTIALSTOCKTAKE) now net all changes per item, batch, expiry and location before posting, skip changes that cancel out, treat items with no CIN7 availability record as zero on hand, and report every line that would go negative in a single error.
+- RECLASSIFY now requires the from and to location to be the same.
+- The Granite Batch field is now the only value sent as CIN7 BatchSN; the Serial field is no longer sent or used for matching in any method.
+- Stock transfer IN TRANSIT and COMPLETED updates now check the Granite locations against the CIN7 transfer, validate instead of changing quantities when the transfer is already in transit, and build lines from the Granite transactions for order-driven transfers that have no lines yet.
+- Stock transfers posted as completed now carry a completion date.
+- Every CIN7 response is logged, and a non-JSON response fails with a clear message pointing to the integration logs.
+<h4>Fixes:</h4>
+- SALECREDITNOTE and PURCHASECREDITNOTE now resolve the CIN7 sale or purchase from the composite ERP identification written by the credit note jobs, so a credit note raised on a simple sale or purchase validates against the correct record.
+- RECEIVE no longer reuses a receiving task that is not open (DRAFT or NOT AVAILABLE).
+- POSTPUTAWAY with put-away grouping now reads the invoicing and receiving number after an underscore in the transaction document reference.
+- MANUFACTURE no longer fails the batch check when neither Granite nor CIN7 has a batch.
+
+### Injected Jobs
+
+<h4>Version: 7.0.9.0</h4>
+<h4>Changes:</h4>
+- Added a new BOM job that syncs the Bill of Materials of active CIN7 Assembly products into Granite as BOM documents (one INPUT line per component and an OUTPUT line for the assembled product), and deactivates the document when a product stops being an active Assembly.
+- Sale and purchase credit note document lines now map Batch and ExpiryDate from the CIN7 restock or unstock line.
+<h4>Fixes:</h4>
+- Sale and purchase credit notes are now stored with a composite ERP identification (CIN7 ID plus credit note number), so a credit note raised on a simple sale or purchase no longer overwrites the sales order or purchase order document that shares its CIN7 ID.
+- Queued documents whose queue time equals the processing cut-off are no longer skipped.
+
 ## 2026-09-03
 
 ### SDK Provider
