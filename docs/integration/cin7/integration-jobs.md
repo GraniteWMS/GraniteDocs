@@ -149,6 +149,7 @@ GO
 - `PurchaseOrderLookbackMinutes` - Number of minutes to look back before the last integration time when fetching purchase orders (default 0). Prevents missing orders created during the job run.
 - `SaleCreditNoteLookbackMinutes` - Number of minutes to look back before the last integration time when fetching sale credit notes (default 0). Prevents missing credit notes created during the job run.
 - `PurchaseCreditNoteLookbackMinutes` - Number of minutes to look back before the last integration time when fetching purchase credit notes (default 0). Prevents missing credit notes created during the job run.
+- `PreventCompleteStatusOverride` - When `True`, documents that are `COMPLETE` in Granite keep their status when CIN7 sends an update, provided every CIN7 line has been fully actioned (default `False`). See [Completed documents](#completed-documents).
 
 ![SystemSettings](./cin7-img/system-settings.png)
 
@@ -260,6 +261,19 @@ When a record with Status 'ENTERED' is found, the job uses a CIN7 REST API reque
 All valid changes to data in the Granite tables are logged to the Audit table, showing the previous value and the new value.
 
 If a change is made in the ERP system that would put Granite into an invalid state, no changes are applied. Instead, the ERPSyncFailed field is set to true and the ERPSyncFailedReason field shows the reason for the failure. The IntegrationLog table will contain further details on the failure if applicable.
+
+<h4 id="completed-documents">Completed documents</h4>
+
+By default, the document header `Status` is always overwritten with the status mapped from CIN7. If a document is completed in Granite before it is completed in CIN7, the next update from CIN7 sets it back to the CIN7 status.
+
+When the `PreventCompleteStatusOverride` system setting is `True`, a document keeps its `COMPLETE` status when both of the following are true:
+
+- The document's status in Granite is `COMPLETE`
+- Every line on the CIN7 document has a matching Granite line whose `ActionQty` is equal to or greater than the CIN7 quantity
+
+The other header fields are still updated from CIN7, and the job log records the CIN7 status that was ignored. If CIN7 adds a line or raises a line quantity above what has been actioned in Granite, the CIN7 status is applied as normal. Lines that have been removed in CIN7 are not considered.
+
+This setting applies to every document job (ORDER, RECEIVING, TRANSFER, WORKORDER, BOM and both credit note types). A status that would cancel the document (for example a sale voided in CIN7) is also ignored for a document that meets these conditions.
 
 <h4>Sales Order (ORDER)</h4>
 

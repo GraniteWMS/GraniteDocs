@@ -31,6 +31,14 @@ Template:
 ```
 -->
 
+## 2026-10-16
+
+### Injected Jobs
+
+<h4>Version: 7.0.10.0</h4>
+<h4>Changes:</h4>
+- Added the `PreventCompleteStatusOverride` system setting (off by default). When it is on, a document that is COMPLETE in Granite, with every CIN7 line fully actioned, keeps its COMPLETE status when CIN7 sends an update. Other header fields still update. If CIN7 adds a line or raises a quantity above what has been actioned, the CIN7 status is applied as before.
+
 ## 2026-10-08
 
 ### SDK Provider
