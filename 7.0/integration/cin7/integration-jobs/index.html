@@ -3992,6 +3992,11 @@ See below for information for specifics on how document and master data jobs wor
 <hr />
 <p>CIN7 type: Finished Good</p>
 </li>
+<li>
+<p>BOM</p>
+<hr />
+<p>CIN7 type: Assembly Product (Bill of Materials)</p>
+</li>
 </ul>
 </div>
 <h2 id="how-it-works">How it works</h2>
@@ -4029,6 +4034,10 @@ See below for information for specifics on how document and master data jobs wor
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="p">(</span><span class="n">isActive</span><span class="p">,</span><span class="w"> </span><span class="n">JobName</span><span class="p">,</span><span class="w"> </span><span class="n">JobDescription</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">Type</span><span class="p">],</span><span class="w"> </span><span class="n">InjectJob</span><span class="p">,</span><span class="w"> </span><span class="nb">Interval</span><span class="p">,</span><span class="w"> </span><span class="n">IntervalFormat</span><span class="p">,</span><span class="w"> </span><span class="n">AuditDate</span><span class="p">,</span><span class="w"> </span><span class="n">AuditUser</span><span class="p">)</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CIN7 Finished Goods Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs Finished Goods from CIN7&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.CIN7.Job.WorkOrder&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MINUTES&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span>
 <span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">JobName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;CIN7 Finished Goods Job&#39;</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="p">(</span><span class="n">isActive</span><span class="p">,</span><span class="w"> </span><span class="n">JobName</span><span class="p">,</span><span class="w"> </span><span class="n">JobDescription</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">Type</span><span class="p">],</span><span class="w"> </span><span class="n">InjectJob</span><span class="p">,</span><span class="w"> </span><span class="nb">Interval</span><span class="p">,</span><span class="w"> </span><span class="n">IntervalFormat</span><span class="p">,</span><span class="w"> </span><span class="n">AuditDate</span><span class="p">,</span><span class="w"> </span><span class="n">AuditUser</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CIN7 BOM Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs Bills of Materials of Assembly products from CIN7&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.CIN7.Job.BOM&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;HOURS&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">JobName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;CIN7 BOM Job&#39;</span><span class="p">);</span>
 
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="p">[</span><span class="n">GraniteDatabase</span><span class="p">].</span><span class="n">dbo</span><span class="p">.</span><span class="n">ScheduledJobs</span><span class="w"> </span><span class="p">(</span><span class="n">isActive</span><span class="p">,</span><span class="w"> </span><span class="n">JobName</span><span class="p">,</span><span class="w"> </span><span class="n">JobDescription</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="k">Type</span><span class="p">],</span><span class="w"> </span><span class="n">InjectJob</span><span class="p">,</span><span class="w"> </span><span class="nb">Interval</span><span class="p">,</span><span class="w"> </span><span class="n">IntervalFormat</span><span class="p">,</span><span class="w"> </span><span class="n">AuditDate</span><span class="p">,</span><span class="w"> </span><span class="n">AuditUser</span><span class="p">)</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CIN7 Sale Credit Note Job&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Syncs Sale Credit Notes from CIN7&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;INJECTED&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Granite.Integration.CIN7.Job.SalesCreditNote&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;MINUTES&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">GETDATE</span><span class="p">(),</span><span class="w"> </span><span class="s1">&#39;AUTOMATION&#39;</span>
@@ -4081,10 +4090,12 @@ See below for information for specifics on how document and master data jobs wor
 <li><code>PurchaseOrderLookbackMinutes</code> - Number of minutes to look back before the last integration time when fetching purchase orders (default 0). Prevents missing orders created during the job run.</li>
 <li><code>SaleCreditNoteLookbackMinutes</code> - Number of minutes to look back before the last integration time when fetching sale credit notes (default 0). Prevents missing credit notes created during the job run.</li>
 <li><code>PurchaseCreditNoteLookbackMinutes</code> - Number of minutes to look back before the last integration time when fetching purchase credit notes (default 0). Prevents missing credit notes created during the job run.</li>
+<li><code>PreventCompleteStatusOverride</code> - When <code>True</code>, documents that are <code>COMPLETE</code> in Granite keep their status when CIN7 sends an update, provided every CIN7 line has been fully actioned (default <code>False</code>). See <a href="#completed-documents">Completed documents</a>.</li>
 </ul>
 <p><img alt="SystemSettings" src="../cin7-img/system-settings.png" /></p>
 <h3 id="retry-behavior">Retry behavior</h3>
 <p>CIN7 API calls made by the job (e.g. fetching products, orders, and credit notes) are retried up to 3 times. Responses with HTTP status <code>429</code> (Too Many Requests) or <code>503</code> (Service Unavailable) are treated as rate-limited and retried with exponential backoff (30s, 60s, 120s). Other request failures are retried with a shorter exponential backoff (starting at 5s).</p>
+<p>CIN7 limits each API application key to 60 calls per minute and returns <code>429</code> when the limit is exceeded. Give the Scheduler its own API key rather than sharing the SDK Provider's key, so that a busy job run does not throttle live transaction posting.</p>
 <h3 id="f-mapping-scripts">F# Mapping Scripts</h3>
 <p>The CIN7 integration uses F# scripts for configurable mapping between CIN7 entities and Granite entities. This allows customization of how data is transformed during integration without modifying compiled code.</p>
 <h4>Script Location</h4>
@@ -4097,6 +4108,7 @@ See below for information for specifics on how document and master data jobs wor
 <li><code>PurchaseOrderJobConfiguration.fsx</code> - Purchase Order document mappings</li>
 <li><code>TransferJobConfiguration.fsx</code> - Stock Transfer document mappings</li>
 <li><code>FinishedGoodsJobConfiguration.fsx</code> - Finished Goods/Work Order document mappings</li>
+<li><code>BOMJobConfiguration.fsx</code> - Bill of Materials document mappings</li>
 <li><code>SaleCreditNoteJobConfiguration.fsx</code> - Sale Credit Note document mappings</li>
 <li><code>PurchaseCreditNoteJobConfiguration.fsx</code> - Purchase Credit Note document mappings</li>
 </ul>
@@ -4125,7 +4137,7 @@ See below for information for specifics on how document and master data jobs wor
 </ul>
 <p><strong>Mapping Functions:</strong></p>
 <ul>
-<li><code>MapToSalesOrder</code> / <code>MapToPurchaseOrder</code> / <code>MapToTransfer</code> / <code>MapToWorkOrder</code> / <code>MapToCreditNote</code> / <code>MapToPurchaseCreditNote</code> - Transform CIN7 documents to Granite documents</li>
+<li><code>MapToSalesOrder</code> / <code>MapToPurchaseOrder</code> / <code>MapToTransfer</code> / <code>MapToWorkOrder</code> / <code>MapToBOM</code> / <code>MapToCreditNote</code> / <code>MapToPurchaseCreditNote</code> - Transform CIN7 documents to Granite documents</li>
 <li><code>MapToMasterItem</code> - Transform CIN7 products to Granite MasterItems</li>
 <li><code>MapCustomerToTradingPartner</code> / <code>MapSupplierToTradingPartner</code> - Transform CIN7 customers/suppliers to Granite Trading Partners</li>
 </ul>
@@ -4170,6 +4182,16 @@ In addition to CIN7-fetched records, document queue records can also be sourced 
 <p>When a record with Status 'ENTERED' is found, the job uses a CIN7 REST API request to fetch the information related to that document from CIN7 and apply the changes to the Granite document. Documents are fetched individually per record to ensure the current ERP state is retrieved and to avoid mismatches when ERP IDs differ.</p>
 <p>All valid changes to data in the Granite tables are logged to the Audit table, showing the previous value and the new value.</p>
 <p>If a change is made in the ERP system that would put Granite into an invalid state, no changes are applied. Instead, the ERPSyncFailed field is set to true and the ERPSyncFailedReason field shows the reason for the failure. The IntegrationLog table will contain further details on the failure if applicable.</p>
+<h4 id="completed-documents">Completed documents</h4>
+
+<p>By default, the document header <code>Status</code> is always overwritten with the status mapped from CIN7. If a document is completed in Granite before it is completed in CIN7, the next update from CIN7 sets it back to the CIN7 status.</p>
+<p>When the <code>PreventCompleteStatusOverride</code> system setting is <code>True</code>, a document keeps its <code>COMPLETE</code> status when both of the following are true:</p>
+<ul>
+<li>The document's status in Granite is <code>COMPLETE</code></li>
+<li>Every line on the CIN7 document has a matching Granite line whose <code>ActionQty</code> is equal to or greater than the CIN7 quantity</li>
+</ul>
+<p>The other header fields are still updated from CIN7, and the job log records the CIN7 status that was ignored. If CIN7 adds a line or raises a line quantity above what has been actioned in Granite, the CIN7 status is applied as normal. Lines that have been removed in CIN7 are not considered.</p>
+<p>This setting applies to every document job (ORDER, RECEIVING, TRANSFER, WORKORDER, BOM and both credit note types). A status that would cancel the document (for example a sale voided in CIN7) is also ignored for a document that meets these conditions.</p>
 <h4>Sales Order (ORDER)</h4>
 
 <ul>
@@ -4195,8 +4217,10 @@ In addition to CIN7-fetched records, document queue records can also be sourced 
 <li>Fetches CIN7 Sale Credit Notes with status "AUTHORISED" that have been updated since the last integration time</li>
 <li>Applies <code>SaleCreditNoteLookbackMinutes</code> system setting to look back before the last integration time, preventing missed credit notes created during the job run</li>
 <li>Maps to Granite document type RECEIVING</li>
+<li>Stores the document <code>ERPIdentification</code> as the composite <code>{saleId}:{creditNoteNumber}</code>. CIN7 reuses the sale ID for a credit note raised on a simple sale, so the credit note number is what keeps the credit note document distinct from the sales order document. Credit notes with no credit note number are logged and skipped.</li>
 <li>Can filter by ManagedLocations in configuration - a credit note is skipped unless at least one of its restock lines is for a managed location</li>
 <li>Uses ToLocation (per restock line) for document lines</li>
+<li>Document lines also map Batch and ExpiryDate from the CIN7 restock line</li>
 </ul>
 <h4>Purchase Credit Note (ORDER)</h4>
 
@@ -4204,13 +4228,15 @@ In addition to CIN7-fetched records, document queue records can also be sourced 
 <li>Fetches CIN7 Purchase Credit Notes with status "AUTHORISED" that have been updated since the last integration time</li>
 <li>Applies <code>PurchaseCreditNoteLookbackMinutes</code> system setting to look back before the last integration time, preventing missed credit notes created during the job run</li>
 <li>Maps to Granite document type ORDER, modeled as an outbound movement (goods returned to a supplier) rather than the inbound RECEIVING type used by the other purchase-side jobs</li>
+<li>Stores the document <code>ERPIdentification</code> as the composite <code>{purchaseId}:{creditNoteNumber}</code>. CIN7 reuses the purchase ID for a credit note raised on a simple purchase, so the credit note number is what keeps the credit note document distinct from the purchase order document. Credit notes with no credit note number are logged and skipped.</li>
 <li>Can filter by ManagedLocations in configuration - a credit note is skipped unless at least one of its unstock lines is for a managed location</li>
 <li>Uses FromLocation (per unstock line) for document lines</li>
+<li>Document lines also map Batch and ExpiryDate from the CIN7 unstock line</li>
 </ul>
 <h4>Transfer (TRANSFER)</h4>
 
 <ul>
-<li>Fetches CIN7 Stock Transfers with status "ORDERED"</li>
+<li>Fetches CIN7 Stock Transfers with status "ORDERED" (a transfer whose transfer order has been authorised; this status is returned by the CIN7 transfer list even though the CIN7 API documentation only lists <code>DRAFT</code>, <code>IN TRANSIT</code>, <code>COMPLETED</code> and <code>VOIDED</code>)</li>
 <li>Document type is determined dynamically based on managed locations:<ul>
 <li>Both locations managed → TRANSFER</li>
 <li>Only FromLocation managed → ORDER (outbound)</li>
@@ -4233,9 +4259,28 @@ In addition to CIN7-fetched records, document queue records can also be sourced 
 </li>
 <li>Can filter by ManagedLocations in configuration</li>
 </ul>
+<h4>Bill of Materials (BOM)</h4>
+
+<ul>
+<li>Fetches CIN7 products together with their Bill of Materials. Only products modified since the last successfully posted BOM integration (with a 5 minute overlap) are fetched; the first run fetches all products</li>
+<li>Queues a BOM document for every product that is an active Assembly (<code>BOMType</code> = <code>Assembly</code> and <code>Status</code> = <code>Active</code>). A product that no longer qualifies is only queued when a BOM document already exists for it in Granite, so that the document can be deactivated</li>
+<li>Maps to Granite document type BOM, numbered <code>BOM_{SKU}</code>, with the CIN7 product ID as <code>ERPIdentification</code></li>
+<li>Document lines include:<ul>
+<li>INPUT lines: one per component (product components first, then service components) with the component quantity</li>
+<li>OUTPUT line: the assembled product itself, with the CIN7 <code>QuantityToProduce</code> as the quantity</li>
+</ul>
+</li>
+<li>CIN7 does not return a product code for service components, so the job looks the component product up to get its SKU. If the SKU cannot be resolved the BOM is logged as an error and skipped</li>
+<li>An active Assembly with no components is logged as an error and skipped, since a BOM needs at least one input</li>
+<li>When a product stops being an active Assembly, its existing BOM document is deactivated. The last known recipe lines are kept</li>
+<li>The MasterItems on the document are synced in the same way as for the other document jobs</li>
+<li>Changes to BOM lines in CIN7 are always applied to the Granite document, because a BOM is a recipe and is never transacted against</li>
+<li>Location filtering does not apply - a BOM has no location</li>
+</ul>
 <h3 id="master-data-jobs">Master data jobs</h3>
-<p>MasterItems and TradingPartners have their own Jobs. These Jobs fetch all StockItems, Vendors, and Customers from  CIN7 and compares them to the MasterItems and TradingPartners in Granite. Any inserts / updates are done as required. </p>
-<p>When the full MasterItem sync runs (<code>SyncAllMasterItems</code>), any Granite MasterItem whose <code>ERPIdentification</code> is no longer present in the CIN7 StockItems returned is marked inactive and has <code>_REMOVED</code> appended to its <code>Code</code> and <code>FormattedCode</code>. Items whose <code>Code</code>/<code>FormattedCode</code> already end with <code>_REMOVED</code> are skipped so they are not re-marked on subsequent runs. This removal marking only happens on the full sync - incremental updates do not mark items as removed.</p>
+<p>MasterItems and TradingPartners have their own Jobs. These Jobs fetch all Products, Suppliers, and Customers from  CIN7 and compares them to the MasterItems and TradingPartners in Granite. Any inserts / updates are done as required. </p>
+<p>When the full MasterItem sync runs (<code>SyncAllMasterItems</code>), any Granite MasterItem whose <code>ERPIdentification</code> is no longer present in the CIN7 Products returned is marked inactive and has <code>_REMOVED</code> appended to its <code>Code</code> and <code>FormattedCode</code>. Items whose <code>Code</code>/<code>FormattedCode</code> already end with <code>_REMOVED</code> are skipped so they are not re-marked on subsequent runs. This removal marking only happens on the full sync - incremental updates do not mark items as removed.</p>
+<p>Note that CIN7 omits products with the status <code>Deprecated</code> from the product list unless the request asks for them (<code>IncludeDeprecated=true</code>), so a product that is deprecated in CIN7 is treated as missing by the full sync and marked <code>_REMOVED</code> unless the job requests deprecated products. A CIN7 product <code>Status</code> can be <code>Active</code>, <code>Setup required</code> or <code>Deprecated</code>.</p>
 <p>The document jobs also sync changes to the MasterItems that are on the document. This means that on sites that do not make many changes to their MasterItems it is better to limit running this job to once a day or even less frequently. </p>
 <p>When syncing MasterItems from a document, each document line is matched to Granite using its <code>MasterItem_ERPIdentification</code> value (rather than the line's own <code>ERPIdentification</code>, which may be a composite value such as ProductID+Batch). If a document line has no <code>MasterItem_ERPIdentification</code>, it is logged as an error and skipped so it does not block the rest of the document's items from being synced.</p>
 <p>Document Jobs do not automatically sync trading partners as they are not required to create to the document in Granite and as such are only synced when the TradingPartner Job runs. </p>

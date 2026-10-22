@@ -1051,9 +1051,45 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#response-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Response handling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-and-serial-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch and serial numbers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stocktake" class="md-nav__link">
     <span class="md-ellipsis">
       STOCKTAKE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stock-adjustments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stock Adjustments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#partialstocktake" class="md-nav__link">
+    <span class="md-ellipsis">
+      PARTIALSTOCKTAKE
     </span>
   </a>
   
@@ -1078,9 +1114,36 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCRAP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeon" class="md-nav__link">
+    <span class="md-ellipsis">
+      TAKEON
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#move" class="md-nav__link">
     <span class="md-ellipsis">
       MOVE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replenish" class="md-nav__link">
+    <span class="md-ellipsis">
+      REPLENISH
     </span>
   </a>
   
@@ -4009,9 +4072,45 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#response-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Response handling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-and-serial-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch and serial numbers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stocktake" class="md-nav__link">
     <span class="md-ellipsis">
       STOCKTAKE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stock-adjustments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stock Adjustments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#partialstocktake" class="md-nav__link">
+    <span class="md-ellipsis">
+      PARTIALSTOCKTAKE
     </span>
   </a>
   
@@ -4036,9 +4135,36 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      SCRAP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takeon" class="md-nav__link">
+    <span class="md-ellipsis">
+      TAKEON
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#move" class="md-nav__link">
     <span class="md-ellipsis">
       MOVE
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replenish" class="md-nav__link">
+    <span class="md-ellipsis">
+      REPLENISH
     </span>
   </a>
   
@@ -4190,8 +4316,8 @@
 <li><code>api-auth-applicationkey</code> - CIN7 API Application Key (encrypted).</li>
 <li><code>DryRun</code> - Dry run mode (<code>true</code>/<code>false</code>). Default: <code>false</code>. When enabled, payloads are logged and requests are not sent to CIN7.</li>
 <li><code>SetPurchaseOrderPutawayGroup</code> - Controls put-away grouping for <code>POSTPUTAWAY</code> (<code>true</code>/<code>false</code>). Default: <code>false</code>.</li>
-<li><code>StockTakeExpenseAccount</code> - Expense account used when posting <code>STOCKTAKE</code> (Stock Adjustment) requests.</li>
-<li><code>StockAdjustmentExpenseAccount</code> - Expense account used when posting <code>RECLASSIFY</code> and <code>ADJUSTMENT</code> (Stock Adjustment) requests. Default: empty.</li>
+<li><code>StockTakeExpenseAccount</code> - Expense account used when posting <code>STOCKTAKE</code> (Stocktake) and <code>PARTIALSTOCKTAKE</code> (Stock Adjustment) requests.</li>
+<li><code>StockAdjustmentExpenseAccount</code> - Expense account used when posting <code>RECLASSIFY</code>, <code>ADJUSTMENT</code>, <code>SCRAP</code> and <code>TAKEON</code> (Stock Adjustment) requests. Default: empty.</li>
 <li><code>Carrier</code> - Default carrier for shipment operations. Default: empty.</li>
 </ul>
 <p><img alt="SystemSettings" src="../cin7-img/system-settings.png" /></p>
@@ -4199,12 +4325,16 @@
 <p>Currently supported transactions/methods are:</p>
 <ul>
 <li>MOVE (Stock Transfer, POST)</li>
+<li>REPLENISH (Stock Transfer, POST)</li>
 <li>TRANSFER (Stock Transfer, POST)</li>
 <li>UPDATETRANSFERTOINTRANSIT (Stock Transfer, PUT)</li>
 <li>UPDATETRANSFERTOCOMPLETED (Stock Transfer, PUT)</li>
-<li>STOCKTAKE (Stock Adjustment, POST)</li>
+<li>STOCKTAKE (Stocktake, POST + PUT)</li>
+<li>PARTIALSTOCKTAKE (Stock Adjustment, POST)</li>
 <li>RECLASSIFY (Stock Adjustment, POST)</li>
 <li>ADJUSTMENT (Stock Adjustment, POST)</li>
+<li>SCRAP (Stock Adjustment, POST)</li>
+<li>TAKEON (Stock Adjustment, POST)</li>
 <li>RECEIVE (Purchase Stock Receive, POST)</li>
 <li>POSTPUTAWAY (Purchase Stock Put Away, POST)</li>
 <li>PICK (Sale Fulfilment Pick, POST)</li>
@@ -4215,30 +4345,120 @@
 <li>CONSUME (Finished Goods Pick Lines, POST)</li>
 <li>MANUFACTURE (Finished Goods, PUT)</li>
 </ul>
-<p>Outstanding transaction types:</p>
-<ul>
-<li>Replenish </li>
-<li>Scrap</li>
-</ul>
 <h3 id="retry-behavior">Retry behavior</h3>
 <p>Requests to the CIN7 API are made through a shared retry pipeline. Responses with HTTP status <code>429</code> (Too Many Requests) or <code>503</code> (Service Unavailable) are automatically retried up to 2 times using exponential backoff with jitter, starting at a 3 second delay.</p>
+<h3 id="response-handling">Response handling</h3>
+<p>Every CIN7 API response is logged to the integration log with its HTTP status, the calling method and the response body. If CIN7 returns a body that is not JSON (for example an HTML error page), the method fails with the error <code>CIN7 API returned an invalid response - please check the integration logs for details</code> instead of a raw deserialization error.</p>
+<h3 id="batch-and-serial-numbers">Batch and serial numbers</h3>
+<p>Granite <code>Batch</code> is mapped to CIN7 <code>BatchSN</code> in every method. The Granite <code>Serial</code> field is not sent to CIN7 and is ignored when grouping, matching and validating transactions. Serialised stock must therefore carry its serial number in the transaction <code>Batch</code> field for it to reach CIN7.</p>
 <h3 id="stocktake">STOCKTAKE</h3>
-<p>An important thing to note about this process is that it will set the total qty of the stock in the specific warehouse for the items being counted (see <a href="../cin7-overview/#stocktakeadjustment">Stocktake</a>). As such, all of the tracking entities for the given Masteritem in the ERPLocation should be counted so that the total count of that item is submitted on post.</p>
+<p>A stock take creates a CIN7 Stocktake for the counted location and then updates it with the Granite counts. The quantities submitted are the total quantities counted in Granite per item, batch and expiry date (see <a href="../cin7-overview/#stocktakeadjustment">Stocktake</a>). As such, all of the tracking entities for the given Masteritem in the ERPLocation should be counted so that the total count of that item is submitted on post. Use <a href="#partialstocktake">PARTIALSTOCKTAKE</a> when only some of the stock in a location is counted.</p>
 <ul>
 <li>Granite Transaction: <strong>STOCKTAKE</strong></li>
-<li>CIN7: <strong>STOCK ADJUSTMENT</strong></li>
+<li>CIN7: <strong>STOCKTAKE</strong> (POST to create, PUT to update)</li>
 <li>Supports:<ul>
 <li>Batch</li>
-<li>Serial</li>
 <li>Expiration Date</li>
 </ul>
 </li>
 <li>Behavior:<ul>
-<li>Groups transactions by item, tracking fields, and destination location, then sums quantity from Granite <code>ToQty</code>.</li>
-<li>Uses Granite <code>Code</code> to resolve CIN7 <code>ProductID</code> (Master Item ERP ID).</li>
-<li>Uses the first transaction <code>TransactionDocumentReference</code> in the request reference (<code>Granite Stock Take {sessionName}</code>).</li>
+<li>Requires all transactions to belong to a single session (<code>TransactionDocumentReference</code>) and a single location (<code>FromLocation</code> and <code>ToLocation</code> must be the same for every transaction).</li>
+<li>Creates a CIN7 Stocktake for that location with <code>UseRelativeQuantity</code> enabled (so zero-stock products are included), the system setting <code>StockTakeExpenseAccount</code> as the account, and the reference <code>Granite Session: {sessionName}</code>.</li>
+<li>Groups the Granite transactions by item, batch, expiry date and location, summing <code>ToQty</code> to get the counted quantity.</li>
+<li>For each product CIN7 returns with stock on hand (<code>NonZeroStockOnHandProducts</code>), matched by SKU, batch and expiry date, sets the CIN7 <code>Adjustment</code> to the Granite counted quantity. CIN7 products that were not counted in Granite are sent back unchanged.</li>
+<li>Counted items that CIN7 holds no stock for are added as <code>ZeroStockOnHandProducts</code> with the counted quantity; counts of zero are left out.</li>
+<li>Updates the Stocktake with the resulting lines, keeping the status CIN7 returned on creation.</li>
+<li>Dry run is not supported for this method - the post fails with an error when <code>DryRun</code> is enabled.</li>
+</ul>
+</li>
+<li>Integration Post<ul>
+<li>Not used by the current implementation for this method.</li>
+</ul>
+</li>
+<li>Returns:
+    Stocktake Number</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>CIN7 Entity</th>
+<th>Required</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TransactionDocumentReference</td>
+<td>Reference</td>
+<td>Y</td>
+<td>Stock take session name</td>
+</tr>
+<tr>
+<td>Code</td>
+<td>SKU</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>ToQty</td>
+<td>Adjustment / Quantity</td>
+<td>Y</td>
+<td>Summed per item, batch, expiry date and location. <code>Adjustment</code> on existing stock lines, <code>Quantity</code> on zero-stock lines; both are the new total on hand, not a delta</td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>Location</td>
+<td>Y</td>
+<td>Must match ToLocation</td>
+</tr>
+<tr>
+<td>ToLocation</td>
+<td>Location</td>
+<td>Y</td>
+<td>Must match FromLocation</td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>BatchSN</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
+<td>N</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="stock-adjustments">Stock Adjustments</h3>
+<p>PARTIALSTOCKTAKE, RECLASSIFY, ADJUSTMENT, SCRAP and TAKEON all post a CIN7 Stock Adjustment and share the following behavior:</p>
+<ul>
+<li>Each transaction is turned into one or more stock changes keyed by item code, batch, expiry date (date only) and location. Changes with the same key are netted together; keys whose changes cancel out are skipped, and if every key cancels out nothing is posted (the method returns <code>No stock changes</code>).</li>
+<li>Fetches CIN7 product availability (by SKU) for each item involved and finds the availability record matching the key. If no record exists, CIN7 is treated as holding zero stock for that key.</li>
+<li>The posted line quantity is the CIN7 <code>OnHand</code> quantity plus the net change, and the adjustment is posted with <code>UpdateOnHand</code> set to true so CIN7 applies it to the on-hand quantity rather than the available quantity. If any key would go negative, nothing is posted and the error lists every offending key with its current on-hand quantity, change, location and transaction ids.</li>
+<li>Resolves CIN7 <code>ProductID</code> from the availability record, falling back to the Granite MasterItem ERP ID. Throws if neither is found.</li>
+<li>Sets each line's comment to <code>Granite {Action} by: {net quantity}, transaction Ids: {transaction ids}</code>. The line expiry date is taken from the CIN7 availability record when one exists.</li>
+<li>Posts with CIN7 status <code>DRAFT</code> and a unit cost of 1.</li>
+<li>Posts with <code>UpdateOnHand</code> set to <code>true</code>, so the line quantity is applied to the CIN7 on hand quantity. (CIN7 defaults <code>UpdateOnHand</code> to <code>false</code>, which would apply the quantity to the available quantity instead; the two differ whenever stock is allocated.)</li>
+<li>Serial numbers are ignored (see <a href="#batch-and-serial-numbers">Batch and serial numbers</a>).</li>
+</ul>
+<h3 id="partialstocktake">PARTIALSTOCKTAKE</h3>
+<ul>
+<li>Granite Transaction: <strong>PARTIALSTOCKTAKE</strong></li>
+<li>CIN7: <strong>STOCK ADJUSTMENT</strong></li>
+<li>Supports:<ul>
+<li>Batch</li>
+<li>Expiration Date</li>
+</ul>
+</li>
+<li>Behavior:<ul>
+<li>Requires all transactions to belong to a single session (<code>TransactionDocumentReference</code>) and a single location (<code>FromLocation</code> and <code>ToLocation</code> must be the same for every transaction).</li>
+<li>The stock change per transaction is <code>ToQty - FromQty</code> for the item in <code>Code</code>, so only the items counted are adjusted and uncounted stock in the location is left as is.</li>
 <li>Uses system setting <code>StockTakeExpenseAccount</code> for the CIN7 adjustment account.</li>
-<li>Posts with CIN7 status <code>DRAFT</code>.</li>
+<li>Reference is set to <code>Partial Stock Take for session {sessionName}</code>.</li>
+<li>See <a href="#stock-adjustments">Stock Adjustments</a> for the shared posting behavior.</li>
 </ul>
 </li>
 <li>Integration Post<ul>
@@ -4259,22 +4479,40 @@
 </thead>
 <tbody>
 <tr>
+<td>TransactionDocumentReference</td>
+<td>Reference</td>
+<td>Y</td>
+<td>Stock take session name</td>
+</tr>
+<tr>
 <td>Code</td>
-<td>ProductID (via Master Item ERP ID)</td>
+<td>ProductID (via availability or Master Item ERP ID)</td>
 <td>Y</td>
 <td></td>
 </tr>
 <tr>
+<td>FromQty</td>
+<td>-</td>
+<td>Y</td>
+<td>Used with ToQty to calculate the change</td>
+</tr>
+<tr>
 <td>ToQty</td>
-<td>Quantity</td>
+<td>Quantity (change = ToQty - FromQty)</td>
 <td>Y</td>
 <td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>Location</td>
+<td>Y</td>
+<td>Must match ToLocation</td>
 </tr>
 <tr>
 <td>ToLocation</td>
 <td>Location</td>
 <td>Y</td>
-<td></td>
+<td>Must match FromLocation</td>
 </tr>
 <tr>
 <td>Batch</td>
@@ -4283,20 +4521,8 @@
 <td></td>
 </tr>
 <tr>
-<td>Serial</td>
-<td>BatchSN</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
 <td>ExpirationDate</td>
 <td>ExpiryDate</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
-<td>Comment</td>
-<td>Comments</td>
 <td>N</td>
 <td></td>
 </tr>
@@ -4312,16 +4538,11 @@
 </ul>
 </li>
 <li>Behavior:<ul>
-<li>Not supported for serialized items - throws an exception if any transaction has a <code>Serial</code>.</li>
-<li>Fetches CIN7 product availability (by SKU) for both the <code>FromCode</code> and <code>ToCode</code> items involved.</li>
-<li>Groups transactions by code, location, and whichever of batch/expiry the item tracks (determined from the availability data).</li>
-<li>For the "from" side, reduces the matching availability <code>OnHand</code> quantity by the transaction <code>ActionQty</code>. Throws if no matching availability record is found, or if the resulting quantity would be negative.</li>
-<li>For the "to" side, increases the matching availability <code>OnHand</code> quantity by the transaction <code>ActionQty</code> (or uses <code>ActionQty</code> directly if no existing availability record is found for that batch/expiry/location).</li>
-<li>Uses Granite <code>Code</code> to resolve CIN7 <code>ProductID</code> (Master Item ERP ID). Throws if the code is empty or if the corresponding Granite MasterItem has no <code>ERPIdentification</code>.</li>
-<li>Sets each line's comment to <code>Granite Reclassify by: {quantity}</code>.</li>
+<li>Requires a single location: <code>FromLocation</code> and <code>ToLocation</code> must be the same for every transaction.</li>
+<li>Reduces the <code>FromCode</code> item by <code>ActionQty</code> and increases the <code>ToCode</code> item by <code>ActionQty</code> at that location.</li>
 <li>Uses system setting <code>StockAdjustmentExpenseAccount</code> for the CIN7 adjustment account.</li>
 <li>Reference is set to <code>Granite Reclassify. Transaction ids: {transaction ids}</code>.</li>
-<li>Posts with CIN7 status <code>DRAFT</code>.</li>
+<li>See <a href="#stock-adjustments">Stock Adjustments</a> for the shared posting behavior.</li>
 </ul>
 </li>
 <li>Integration Post<ul>
@@ -4343,13 +4564,13 @@
 <tbody>
 <tr>
 <td>FromCode</td>
-<td>ProductID (via Master Item ERP ID)</td>
+<td>ProductID (via availability or Master Item ERP ID)</td>
 <td>Y</td>
 <td>Source item, quantity reduced by ActionQty</td>
 </tr>
 <tr>
 <td>ToCode</td>
-<td>ProductID (via Master Item ERP ID)</td>
+<td>ProductID (via availability or Master Item ERP ID)</td>
 <td>Y</td>
 <td>Destination item, quantity increased by ActionQty</td>
 </tr>
@@ -4363,13 +4584,13 @@
 <td>FromLocation</td>
 <td>Location</td>
 <td>Y</td>
-<td>Used for the source line</td>
+<td>Must match ToLocation</td>
 </tr>
 <tr>
 <td>ToLocation</td>
 <td>Location</td>
 <td>Y</td>
-<td>Used for the destination line</td>
+<td>Must match FromLocation</td>
 </tr>
 <tr>
 <td>Batch</td>
@@ -4395,16 +4616,11 @@
 </ul>
 </li>
 <li>Behavior:<ul>
-<li>Not supported for serialized items - throws an exception if any transaction has a <code>Serial</code>.</li>
-<li>Fetches CIN7 product availability (by SKU) for the <code>FromCode</code> items involved.</li>
-<li>Groups transactions by code, location, and whichever of batch/expiry the item tracks (determined from the availability data).</li>
-<li>Calculates the adjustment quantity per line as <code>ToQty - FromQty</code>.</li>
-<li>Adds the adjustment quantity to the matching availability <code>OnHand</code> quantity (or uses the adjustment quantity directly if no existing availability record is found). Throws if no matching availability record is found and the adjustment is negative, or if the resulting quantity would be negative.</li>
-<li>Uses Granite <code>Code</code> to resolve CIN7 <code>ProductID</code> (Master Item ERP ID). Throws if the code is empty or if the corresponding Granite MasterItem has no <code>ERPIdentification</code>.</li>
-<li>Sets each line's comment to <code>Granite Adjustment by: {quantity}</code>.</li>
+<li>Requires a single <code>FromLocation</code> across all transactions.</li>
+<li>The stock change per transaction is <code>ToQty - FromQty</code> for the <code>FromCode</code> item.</li>
 <li>Uses system setting <code>StockAdjustmentExpenseAccount</code> for the CIN7 adjustment account.</li>
 <li>Reference is set to <code>Granite Adjustment. Transaction ids: {transaction ids}</code>.</li>
-<li>Posts with CIN7 status <code>DRAFT</code>.</li>
+<li>See <a href="#stock-adjustments">Stock Adjustments</a> for the shared posting behavior.</li>
 </ul>
 </li>
 <li>Integration Post<ul>
@@ -4426,7 +4642,7 @@
 <tbody>
 <tr>
 <td>FromCode</td>
-<td>ProductID (via Master Item ERP ID)</td>
+<td>ProductID (via availability or Master Item ERP ID)</td>
 <td>Y</td>
 <td></td>
 </tr>
@@ -4434,11 +4650,143 @@
 <td>FromQty</td>
 <td>-</td>
 <td>Y</td>
-<td>Used with ToQty to calculate the adjustment quantity</td>
+<td>Used with ToQty to calculate the change</td>
 </tr>
 <tr>
 <td>ToQty</td>
-<td>Quantity (adjustment = ToQty - FromQty)</td>
+<td>Quantity (change = ToQty - FromQty)</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>Location</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>BatchSN</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
+<td>N</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="scrap">SCRAP</h3>
+<ul>
+<li>Granite Transaction: <strong>SCRAP</strong></li>
+<li>CIN7: <strong>STOCK ADJUSTMENT</strong></li>
+<li>Supports:<ul>
+<li>Batch</li>
+<li>Expiration Date</li>
+</ul>
+</li>
+<li>Behavior:<ul>
+<li>Requires a single <code>FromLocation</code> across all transactions.</li>
+<li>Reduces the <code>FromCode</code> item by <code>ActionQty</code> at that location.</li>
+<li>Uses system setting <code>StockAdjustmentExpenseAccount</code> for the CIN7 adjustment account.</li>
+<li>Reference is set to <code>Granite Scrap. Transaction ids: {transaction ids}</code>.</li>
+<li>See <a href="#stock-adjustments">Stock Adjustments</a> for the shared posting behavior.</li>
+</ul>
+</li>
+<li>Integration Post<ul>
+<li>Not used by the current implementation for this method.</li>
+</ul>
+</li>
+<li>Returns:
+    Stock Adjustment Task ID</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>CIN7 Entity</th>
+<th>Required</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FromCode</td>
+<td>ProductID (via availability or Master Item ERP ID)</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>Quantity (reduced by ActionQty)</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>FromLocation</td>
+<td>Location</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>BatchSN</td>
+<td>N</td>
+<td></td>
+</tr>
+<tr>
+<td>ExpirationDate</td>
+<td>ExpiryDate</td>
+<td>N</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="takeon">TAKEON</h3>
+<ul>
+<li>Granite Transaction: <strong>TAKEON</strong></li>
+<li>CIN7: <strong>STOCK ADJUSTMENT</strong></li>
+<li>Supports:<ul>
+<li>Batch</li>
+<li>Expiration Date</li>
+</ul>
+</li>
+<li>Behavior:<ul>
+<li>Requires a single <code>FromLocation</code> across all transactions.</li>
+<li>Increases the <code>FromCode</code> item by <code>ActionQty</code> at that location.</li>
+<li>Uses system setting <code>StockAdjustmentExpenseAccount</code> for the CIN7 adjustment account.</li>
+<li>Reference is set to <code>Granite Take On. Transaction ids: {transaction ids}</code>.</li>
+<li>See <a href="#stock-adjustments">Stock Adjustments</a> for the shared posting behavior.</li>
+</ul>
+</li>
+<li>Integration Post<ul>
+<li>Not used by the current implementation for this method.</li>
+</ul>
+</li>
+<li>Returns:
+    Stock Adjustment Task ID</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Granite</th>
+<th>CIN7 Entity</th>
+<th>Required</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FromCode</td>
+<td>ProductID (via availability or Master Item ERP ID)</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>ActionQty</td>
+<td>Quantity (increased by ActionQty)</td>
 <td>Y</td>
 <td></td>
 </tr>
@@ -4468,13 +4816,12 @@
 <li>CIN7: <strong>STOCK Transfer</strong></li>
 <li>Supports:<ul>
 <li>Batch</li>
-<li>Serial</li>
 <li>Expiration Date</li>
 </ul>
 </li>
 <li>Integration Post<ul>
 <li>False - Creates a new Stock Transfer with the status Draft</li>
-<li>True - Creates a new Stock Transfer with the status Completed.</li>
+<li>True - Creates a new Stock Transfer with the status Completed and the completion date set to the posting time.</li>
 </ul>
 </li>
 <li>Returns:
@@ -4498,7 +4845,7 @@
 </tr>
 <tr>
 <td>Qty</td>
-<td>Qty</td>
+<td>TransferQuantity</td>
 <td>Y</td>
 <td></td>
 </tr>
@@ -4521,12 +4868,6 @@
 <td></td>
 </tr>
 <tr>
-<td>Serial</td>
-<td>BatchSN</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
 <td>ExpirationDate</td>
 <td>ExpiryDate</td>
 <td>N</td>
@@ -4534,6 +4875,22 @@
 </tr>
 </tbody>
 </table>
+<h3 id="replenish">REPLENISH</h3>
+<ul>
+<li>Granite Transaction: <strong>REPLENISH</strong></li>
+<li>CIN7: <strong>STOCK Transfer</strong></li>
+<li>Behavior:<ul>
+<li>Identical to <a href="#move">MOVE</a>: a replenishment is posted as a new Stock Transfer between the single from and to location of the transactions.</li>
+</ul>
+</li>
+<li>Integration Post<ul>
+<li>False - Creates a new Stock Transfer with the status Draft</li>
+<li>True - Creates a new Stock Transfer with the status Completed and the completion date set to the posting time.</li>
+</ul>
+</li>
+<li>Returns:
+    Stock Transfer Task ID</li>
+</ul>
 <h3 id="transfer">TRANSFER</h3>
 <p>Standard TRANSFER posting and transfer status updates are implemented.</p>
 <ul>
@@ -4541,13 +4898,12 @@
 <li>CIN7: <strong>STOCK Transfer</strong></li>
 <li>Supports:<ul>
 <li>Batch</li>
-<li>Serial</li>
 <li>Expiration Date</li>
 </ul>
 </li>
 <li>Integration Post<ul>
 <li>False - Creates a new Stock Transfer with the status Draft</li>
-<li>True - Creates a new Stock Transfer with the status Completed.</li>
+<li>True - Creates a new Stock Transfer with the status Completed and the completion date set to the posting time.</li>
 </ul>
 </li>
 <li>Returns:
@@ -4565,9 +4921,9 @@
 <tbody>
 <tr>
 <td>Document</td>
-<td>OrderNumber</td>
+<td>Reference</td>
 <td>Y</td>
-<td></td>
+<td>A CIN7 stock transfer has no order number field; its <code>Number</code> is auto-generated by CIN7</td>
 </tr>
 <tr>
 <td>Code</td>
@@ -4577,7 +4933,7 @@
 </tr>
 <tr>
 <td>Qty</td>
-<td>Qty</td>
+<td>TransferQuantity</td>
 <td>Y</td>
 <td></td>
 </tr>
@@ -4595,12 +4951,6 @@
 </tr>
 <tr>
 <td>Batch</td>
-<td>BatchSN</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
-<td>Serial</td>
 <td>BatchSN</td>
 <td>N</td>
 <td></td>
@@ -4619,16 +4969,21 @@
 <li>CIN7: <strong>STOCK Transfer (PUT update to IN TRANSIT)</strong></li>
 <li>Behavior:<ul>
 <li>Uses Granite <code>Document</code> to resolve CIN7 <code>TaskID</code> from Granite <code>ERPIdentification</code>.</li>
-<li>Matches transfer lines to Granite transactions by SKU and whichever of batch/serial/expiry the line specifies, flagging lines with no matching transaction, transactions claimed by more than one line, and quantity mismatches.</li>
-<li>Sets transfer status to <code>IN TRANSIT</code>.</li>
+<li>Throws if the CIN7 transfer is already <code>IN TRANSIT</code>.</li>
+<li>Requires a single <code>FromLocation</code> and a single <code>ToLocation</code> across the transactions, and checks them against the CIN7 transfer. Because either pick or receive transactions may be used, the update only fails when both the from and the to location differ from CIN7.</li>
+<li>Matches transfer lines to Granite transactions by SKU and whichever of batch/expiry the line specifies, flagging lines with no matching transaction, transactions claimed by more than one line, and quantity mismatches.</li>
+<li>Sets transfer status to <code>IN TRANSIT</code>. CIN7 requires <code>InTransitAccount</code> and <code>DepartureDate</code> on a transfer in this status.</li>
 </ul>
 </li>
 <li>Integration Post<ul>
-<li>False - Verifies CIN7 transfer quantities match Granite quantities before update; throws if any line discrepancies are found.</li>
+<li>False - Validates only; throws if any line discrepancies are found:<ul>
+<li>If the transfer is a skip-order transfer or already has lines in CIN7, those lines are validated against the Granite transactions and sent back unchanged.</li>
+<li>If the transfer is order-driven and has no lines yet, the order lines are validated against the Granite transactions by SKU (quantities must match, and every Granite transaction must be matched), and the transfer lines are then built from the Granite transactions (grouped by item, batch and expiry, CIN7 <code>ProductID</code> resolved via Granite MasterItem ERP ID).</li>
+</ul>
+</li>
 <li>True - Behavior depends on whether CIN7 has already returned transfer lines:<ul>
-<li>If the transfer already has lines in CIN7 (skip-order transfers), updates those line quantities to match Granite quantities. A line with no matching Granite transaction now causes the update to fail with a line discrepancy error, instead of having its quantity silently set to 0.</li>
-<li>If the transfer is order-driven and CIN7 has not yet returned any transfer lines, builds the transfer lines from the order lines instead. Order lines with no matching Granite transaction are omitted from the request rather than failing the update.</li>
-<li>In both cases, Granite transactions not claimed by any line are grouped and appended as new lines (CIN7 <code>ProductID</code> resolved via Granite MasterItem ERP ID), tagged with a <code>Comments</code> note.</li>
+<li>If the transfer is a skip-order transfer or already has lines in CIN7, updates those line quantities to match Granite quantities. A line with no matching Granite transaction causes the update to fail with a line discrepancy error. Granite transactions not claimed by any line are grouped and appended as new lines (CIN7 <code>ProductID</code> resolved via Granite MasterItem ERP ID), tagged with a <code>Comments</code> note.</li>
+<li>If the transfer is order-driven and has no lines yet, the transfer lines are built directly from the Granite transactions without being matched against the order lines.</li>
 </ul>
 </li>
 </ul>
@@ -4642,16 +4997,22 @@
 <li>CIN7: <strong>STOCK Transfer (PUT update to COMPLETED)</strong></li>
 <li>Behavior:<ul>
 <li>Uses Granite <code>Document</code> to resolve CIN7 <code>TaskID</code> from Granite <code>ERPIdentification</code>.</li>
-<li>Matches transfer lines to Granite transactions by SKU and whichever of batch/serial/expiry the line specifies, flagging lines with no matching transaction, transactions claimed by more than one line, and quantity mismatches.</li>
-<li>Sets transfer status to <code>COMPLETED</code>.</li>
+<li>Throws if the CIN7 transfer is already <code>COMPLETED</code>.</li>
+<li>Requires a single <code>FromLocation</code> and a single <code>ToLocation</code> across the transactions, and checks them against the CIN7 transfer. Because either pick or receive transactions may be used, the update only fails when both the from and the to location differ from CIN7.</li>
+<li>Matches transfer lines to Granite transactions by SKU and whichever of batch/expiry the line specifies, flagging lines with no matching transaction, transactions claimed by more than one line, and quantity mismatches.</li>
+<li>Sets transfer status to <code>COMPLETED</code> with the completion date set to the posting time.</li>
 </ul>
 </li>
 <li>Integration Post<ul>
-<li>False - Verifies CIN7 transfer quantities match Granite quantities before update; throws if any line discrepancies are found.</li>
-<li>True - Behavior depends on whether CIN7 has already returned transfer lines:<ul>
-<li>If the transfer already has lines in CIN7 (skip-order transfers, or the transfer is already <code>IN TRANSIT</code>), updates those line quantities to match Granite quantities. A line with no matching Granite transaction now causes the update to fail with a line discrepancy error, instead of having its quantity silently set to 0.</li>
-<li>If the transfer is order-driven and CIN7 has not yet returned any transfer lines, builds the transfer lines from the order lines instead. Order lines with no matching Granite transaction are omitted from the request rather than failing the update.</li>
-<li>In both cases, Granite transactions not claimed by any line are grouped and appended as new lines (CIN7 <code>ProductID</code> resolved via Granite MasterItem ERP ID), tagged with a <code>Comments</code> note.</li>
+<li>False - Validates only; throws if any line discrepancies are found:<ul>
+<li>If the transfer is a skip-order transfer, is <code>IN TRANSIT</code>, or already has lines in CIN7, those lines are validated against the Granite transactions and sent back unchanged.</li>
+<li>If the transfer is order-driven and has no lines yet, the order lines are validated against the Granite transactions by SKU (quantities must match, and every Granite transaction must be matched), and the transfer lines are then built from the Granite transactions (grouped by item, batch and expiry, CIN7 <code>ProductID</code> resolved via Granite MasterItem ERP ID).</li>
+</ul>
+</li>
+<li>True - Behavior depends on the state of the CIN7 transfer:<ul>
+<li>If the transfer is <code>IN TRANSIT</code>, its quantities can no longer be changed: the lines are validated against the Granite transactions (as for the non-posting case) and sent back unchanged.</li>
+<li>If the transfer is a skip-order transfer or already has lines in CIN7, updates those line quantities to match Granite quantities. A line with no matching Granite transaction causes the update to fail with a line discrepancy error. Granite transactions not claimed by any line are grouped and appended as new lines (CIN7 <code>ProductID</code> resolved via Granite MasterItem ERP ID), tagged with a <code>Comments</code> note.</li>
+<li>If the transfer is order-driven and has no lines yet, the transfer lines are built directly from the Granite transactions without being matched against the order lines.</li>
 </ul>
 </li>
 </ul>
@@ -4665,15 +5026,15 @@
 <li>CIN7: <strong>Purchase Stock Receive</strong></li>
 <li>Supports:<ul>
 <li>Batch</li>
-<li>Serial</li>
 <li>Expiration Date</li>
 </ul>
 </li>
 <li>Behavior:<ul>
 <li>Uses Granite <code>Document</code> to resolve CIN7 <code>PurchaseID</code> from Granite <code>ERPIdentification</code>.</li>
-<li>Reads <code>advanced-purchase</code> and reuses the first existing stock receiving task that has zero lines.</li>
-<li>If no existing zero-line stock receiving task is found, uses <code>00000000-0000-0000-0000-000000000000</code> to create a new stock receiving task.</li>
+<li>Reads <code>advanced-purchase</code> and reuses the first existing stock receiving task that has zero lines and is still open (status <code>DRAFT</code> or <code>NOT AVAILABLE</code>). Receiving tasks in any other status are never reused.</li>
+<li>If no existing open zero-line stock receiving task is found, uses <code>00000000-0000-0000-0000-000000000000</code> to create a new stock receiving task.</li>
 <li>Summarizes transactions by item/location/tracking fields before building CIN7 lines.</li>
+<li>CIN7 preconditions: the purchase order must be <code>AUTHORISED</code>, the stock received task must be <code>DRAFT</code>, <code>NOT AVAILABLE</code> or <code>PARTIALLY RECEIVED</code>, and when the purchase <code>Approach</code> is <code>INVOICE</code> the invoice must be <code>AUTHORISED</code> first. Posting a Simple Purchase to this endpoint converts it to an Advanced Purchase.</li>
 </ul>
 </li>
 <li>Integration Post<ul>
@@ -4702,7 +5063,7 @@
 </tr>
 <tr>
 <td>Code</td>
-<td>ProductID / ProductCode</td>
+<td>ProductID / SKU</td>
 <td>Y</td>
 <td></td>
 </tr>
@@ -4725,12 +5086,6 @@
 <td></td>
 </tr>
 <tr>
-<td>Serial</td>
-<td>BatchSN</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
 <td>ExpirationDate</td>
 <td>ExpiryDate</td>
 <td>N</td>
@@ -4744,7 +5099,6 @@
 <li>CIN7: <strong>Purchase Stock Put Away</strong></li>
 <li>Supports:<ul>
 <li>Batch</li>
-<li>Serial</li>
 <li>Expiration Date</li>
 </ul>
 </li>
@@ -4752,10 +5106,11 @@
 <li>Uses Granite <code>Document</code> to resolve CIN7 <code>PurchaseID</code> from Granite <code>ERPIdentification</code>.</li>
 <li>When <code>SetPurchaseOrderPutawayGroup</code> is <code>false</code> (default), reads <code>advanced-purchase</code> and attempts to reuse an open put-away task (<code>DRAFT</code> or <code>NOT AVAILABLE</code>).</li>
 <li>In default mode, skips reusing a put-away task when the linked invoice is not open and the put-away already has lines.</li>
-<li>When <code>SetPurchaseOrderPutawayGroup</code> is <code>true</code>, requires a single <code>TransactionDocumentReference</code>, extracts the trailing numeric suffix (for example <code>ABC-123</code> -&gt; <code>123</code>), and matches that value to CIN7 <code>InvoicingAndReceivingNumber</code>.</li>
+<li>When <code>SetPurchaseOrderPutawayGroup</code> is <code>true</code>, requires a single <code>TransactionDocumentReference</code>, extracts the numeric suffix that follows the last underscore (for example <code>ABC_123</code> -&gt; <code>123</code>), and matches that value to CIN7 <code>InvoicingAndReceivingNumber</code>.</li>
 <li>With put-away grouping enabled, reuses the matching put-away task's <code>TaskID</code> when it is open (<code>DRAFT</code> or <code>NOT AVAILABLE</code>); otherwise uses <code>00000000-0000-0000-0000-000000000000</code> to create a new put-away task.</li>
 <li>With put-away grouping enabled, if no put-away task matches the <code>InvoicingAndReceivingNumber</code>, falls back to the matching invoice's <code>TaskID</code> if one exists; if neither a matching put-away task nor a matching invoice is found, throws an exception.</li>
 <li>In default (non-grouping) mode, if no suitable open put-away task is found, uses <code>00000000-0000-0000-0000-000000000000</code> to create a new put-away task.</li>
+<li>CIN7 preconditions: the purchase order must be <code>AUTHORISED</code>, the put-away task must be <code>DRAFT</code> or <code>NOT AVAILABLE</code>, and when the purchase <code>Approach</code> is <code>INVOICE</code> the invoice must be <code>AUTHORISED</code> first. If the invoice lines already match the receiving, CIN7 only accepts the status <code>AUTHORISED</code> on the put-away.</li>
 </ul>
 </li>
 <li>Integration Post<ul>
@@ -4783,7 +5138,7 @@
 </tr>
 <tr>
 <td>Code</td>
-<td>ProductID / ProductCode</td>
+<td>ProductID / SKU</td>
 <td>Y</td>
 <td></td>
 </tr>
@@ -4806,12 +5161,6 @@
 <td></td>
 </tr>
 <tr>
-<td>Serial</td>
-<td>BatchSN</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
 <td>ExpirationDate</td>
 <td>ExpiryDate</td>
 <td>N</td>
@@ -4825,13 +5174,16 @@
 <li>CIN7: <strong>Sale Fulfilment Pick</strong></li>
 <li>Supports:<ul>
 <li>Batch</li>
-<li>Serial</li>
 <li>Expiration Date</li>
 </ul>
 </li>
+<li>Behavior:<ul>
+<li>CIN7 preconditions: the sale order must be <code>AUTHORISED</code> and the pick status must be <code>DRAFT</code> or <code>NOT AVAILABLE</code>.</li>
+</ul>
+</li>
 <li>Integration Post<ul>
-<li>False - Creates a new Sale Fulfilment Pick with the status Draft</li>
-<li>True - Creates a new Sale Fulfilment Pick with the status Authorized.</li>
+<li>False - Creates a new Sale Fulfilment Pick with the status <code>DRAFT</code></li>
+<li>True - Creates a new Sale Fulfilment Pick with the status <code>AUTHORISED</code>.</li>
 </ul>
 </li>
 <li>Returns:
@@ -4849,7 +5201,7 @@
 <tbody>
 <tr>
 <td>Document</td>
-<td>OrderNumber</td>
+<td>TaskID (via ERPIdentification)</td>
 <td>Y</td>
 <td></td>
 </tr>
@@ -4861,7 +5213,7 @@
 </tr>
 <tr>
 <td>Qty</td>
-<td>Qty</td>
+<td>Quantity</td>
 <td>Y</td>
 <td></td>
 </tr>
@@ -4873,12 +5225,6 @@
 </tr>
 <tr>
 <td>Batch</td>
-<td>BatchSN</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
-<td>Serial</td>
 <td>BatchSN</td>
 <td>N</td>
 <td></td>
@@ -4897,13 +5243,16 @@
 <li>CIN7: <strong>Sale Fulfilment Pack</strong></li>
 <li>Supports:<ul>
 <li>Batch</li>
-<li>Serial</li>
 <li>Expiration Date</li>
 </ul>
 </li>
+<li>Behavior:<ul>
+<li>CIN7 preconditions: the pick must already be <code>AUTHORISED</code> (CIN7 rejects a pack while the pick is <code>DRAFT</code> or <code>NOT AVAILABLE</code>) and the pack status must be <code>DRAFT</code> or <code>NOT AVAILABLE</code>.</li>
+</ul>
+</li>
 <li>Integration Post<ul>
-<li>False - Creates a new Sale Fulfilment Pack with the status Draft</li>
-<li>True - Creates a new Sale Fulfilment Pack with the status Authorized.</li>
+<li>False - Creates a new Sale Fulfilment Pack with the status <code>DRAFT</code></li>
+<li>True - Creates a new Sale Fulfilment Pack with the status <code>AUTHORISED</code>.</li>
 </ul>
 </li>
 <li>Returns:
@@ -4921,7 +5270,7 @@
 <tbody>
 <tr>
 <td>Document</td>
-<td>OrderNumber</td>
+<td>TaskID (via ERPIdentification)</td>
 <td>Y</td>
 <td></td>
 </tr>
@@ -4933,7 +5282,7 @@
 </tr>
 <tr>
 <td>Qty</td>
-<td>Qty</td>
+<td>Quantity</td>
 <td>Y</td>
 <td></td>
 </tr>
@@ -4945,12 +5294,6 @@
 </tr>
 <tr>
 <td>Batch</td>
-<td>BatchSN</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
-<td>Serial</td>
 <td>BatchSN</td>
 <td>N</td>
 <td></td>
@@ -4969,7 +5312,6 @@
 <li>CIN7: <strong>Sale Fulfilment Pack and Ship</strong></li>
 <li>Supports:<ul>
 <li>Batch</li>
-<li>Serial</li>
 <li>Expiration Date</li>
 </ul>
 </li>
@@ -4977,7 +5319,7 @@
 <li>Uses Granite <code>Document</code> to resolve CIN7 <code>TaskID</code> from Granite <code>ERPIdentification</code>.</li>
 <li>Posts pack lines to <code>sale/fulfilment/pack</code> with status <code>AUTHORISED</code>.</li>
 <li>Resolves carrying entities and maps carrying entity barcodes to CIN7 <code>Box</code>.</li>
-<li>Posts shipment lines to <code>sale/fulfilment/ship</code> using system setting <code>Carrier</code>.</li>
+<li>Posts shipment lines to <code>sale/fulfilment/ship</code> using system setting <code>Carrier</code>. CIN7 requires a <code>ShipmentDate</code> on every ship line and marks the sale's shipment <code>AUTHORISED</code> automatically once every packed box has been shipped.</li>
 <li>Uses a default box barcode of <code>1</code> when no carrying-entity barcodes are found.</li>
 </ul>
 </li>
@@ -5025,12 +5367,6 @@
 </tr>
 <tr>
 <td>Batch</td>
-<td>BatchSN</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
-<td>Serial</td>
 <td>BatchSN</td>
 <td>N</td>
 <td></td>
@@ -5136,14 +5472,14 @@ You will also need to call integration through clr on a custom process. </p>
 <li>CIN7: <strong>Sale Credit Note</strong></li>
 <li>Supports:<ul>
 <li>Batch</li>
-<li>Serial</li>
 <li>Expiration Date</li>
 </ul>
 </li>
 <li>Behavior:<ul>
-<li>Uses Granite <code>Document</code> to resolve the CIN7 credit note <code>TaskID</code> from Granite <code>ERPIdentification</code>.</li>
+<li>Uses Granite <code>Document</code> to resolve the document's <code>ERPIdentification</code>. Throws if no ERP ID is found.</li>
+<li>The <code>ERPIdentification</code> written by the Sale Credit Note job is the composite <code>{saleId}:{creditNoteNumber}</code> (because a credit note on a simple sale shares its ID with the sale). Only the sale ID part is sent to CIN7; a value that is not in this composite form fails with a clear error.</li>
 <li>Fetches the credit note from <code>sale/creditnote</code> and matches it by <code>TaskID</code>.</li>
-<li>Validates each CIN7 restock line against Granite transactions by SKU and whichever of batch/serial/expiry the line specifies, flagging lines with no matching transaction, transactions claimed by more than one line, quantity mismatches, and Granite transactions with no matching restock line.</li>
+<li>Validates each CIN7 restock line against Granite transactions by SKU and whichever of batch/expiry the line specifies, flagging lines with no matching transaction, transactions claimed by more than one line, quantity mismatches, and Granite transactions with no matching restock line.</li>
 <li>Does not post anything to CIN7 - throws (and logs) an exception listing all validation errors found.</li>
 </ul>
 </li>
@@ -5189,12 +5525,6 @@ You will also need to call integration through clr on a custom process. </p>
 <td></td>
 </tr>
 <tr>
-<td>Serial</td>
-<td>BatchSN</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
 <td>ExpirationDate</td>
 <td>ExpiryDate</td>
 <td>N</td>
@@ -5208,14 +5538,14 @@ You will also need to call integration through clr on a custom process. </p>
 <li>CIN7: <strong>Purchase Credit Note</strong></li>
 <li>Supports:<ul>
 <li>Batch</li>
-<li>Serial</li>
 <li>Expiration Date</li>
 </ul>
 </li>
 <li>Behavior:<ul>
-<li>Uses Granite <code>Document</code> to resolve the CIN7 credit note <code>PurchaseID</code>/<code>TaskID</code> from Granite <code>ERPIdentification</code>. Throws if no matching ERP ID is found.</li>
+<li>Uses Granite <code>Document</code> to resolve the document's <code>ERPIdentification</code>. Throws if no matching ERP ID is found.</li>
+<li>The <code>ERPIdentification</code> written by the Purchase Credit Note job is the composite <code>{purchaseId}:{creditNoteNumber}</code> (because a credit note on a simple purchase shares its ID with the purchase). Only the purchase ID part is sent to CIN7; a value that is not in this composite form fails with a clear error.</li>
 <li>Fetches the credit note from <code>advanced-purchase/creditnote</code> and matches it by <code>TaskID</code>.</li>
-<li>Validates each CIN7 unstock line against Granite transactions by SKU and whichever of batch/serial/expiry the line specifies (expiry compared by date only, ignoring time-of-day), flagging lines with no matching transaction, transactions claimed by more than one line, quantity mismatches, and Granite transactions with no matching unstock line.</li>
+<li>Validates each CIN7 unstock line against Granite transactions by SKU and whichever of batch/expiry the line specifies (expiry compared by date only, ignoring time-of-day), flagging lines with no matching transaction, transactions claimed by more than one line, quantity mismatches, and Granite transactions with no matching unstock line.</li>
 <li>Does not post anything to CIN7 - throws (and logs) an exception listing all validation errors found.</li>
 </ul>
 </li>
@@ -5261,12 +5591,6 @@ You will also need to call integration through clr on a custom process. </p>
 <td></td>
 </tr>
 <tr>
-<td>Serial</td>
-<td>BatchSN</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
 <td>ExpirationDate</td>
 <td>ExpiryDate</td>
 <td>N</td>
@@ -5280,14 +5604,12 @@ You will also need to call integration through clr on a custom process. </p>
 <li>CIN7: <strong>Finished Goods Pick Lines</strong></li>
 <li>Supports:<ul>
 <li>Batch</li>
-<li>Serial</li>
 <li>Expiration Date</li>
-<li>UOM</li>
 </ul>
 </li>
 <li>Behavior:<ul>
 <li>Uses a single Granite <code>Document</code> mapped to a CIN7 finished goods <code>TaskID</code>.</li>
-<li>Groups transactions by item/batch/serial/expiry/UOM and posts pick lines.</li>
+<li>Groups transactions by item/batch/expiry and posts one pick line per group, summing the quantity. Quantities are posted as-is in the CIN7 product unit; the Granite UOM is not sent (the CIN7 pick line <code>Unit</code> is read-only) and no unit conversion is applied.</li>
 <li>Sets finished goods status to <code>IN PROGRESS</code>.</li>
 </ul>
 </li>
@@ -5324,7 +5646,7 @@ You will also need to call integration through clr on a custom process. </p>
 <td>Qty</td>
 <td>Quantity</td>
 <td>Y</td>
-<td></td>
+<td>Summed per item, batch and expiry date; no UOM conversion</td>
 </tr>
 <tr>
 <td>Batch</td>
@@ -5333,20 +5655,8 @@ You will also need to call integration through clr on a custom process. </p>
 <td></td>
 </tr>
 <tr>
-<td>Serial</td>
-<td>BatchSN</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
 <td>ExpirationDate</td>
 <td>ExpiryDate</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
-<td>UOM</td>
-<td>Unit</td>
 <td>N</td>
 <td></td>
 </tr>
@@ -5358,14 +5668,13 @@ You will also need to call integration through clr on a custom process. </p>
 <li>CIN7: <strong>Finished Goods (PUT update)</strong></li>
 <li>Supports:<ul>
 <li>Batch</li>
-<li>Serial</li>
 <li>Expiration Date</li>
 </ul>
 </li>
 <li>Behavior:<ul>
 <li>Uses a single Granite <code>Document</code> mapped to a CIN7 finished goods <code>TaskID</code>.</li>
 <li>Requires a single finished goods item per document.</li>
-<li>Validates batch/serial and expiry against existing CIN7 finished goods data.</li>
+<li>Validates batch and expiry against existing CIN7 finished goods data. A missing batch on either side is treated as an empty batch, so an unbatched Granite finished good matches an unbatched CIN7 finished good.</li>
 <li>Updates CIN7 finished goods quantity to Granite quantity.</li>
 <li>When posting with integration post enabled, follows the quantity update by posting <code>finishedGoods/pick</code> with status <code>COMPLETED</code> and a completion datetime.</li>
 <li>On API errors, attempts to deserialize and surface CIN7 error details in the returned exception message.</li>
@@ -5403,12 +5712,6 @@ You will also need to call integration through clr on a custom process. </p>
 </tr>
 <tr>
 <td>Batch</td>
-<td>BatchSN validation</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
-<td>Serial</td>
 <td>BatchSN validation</td>
 <td>N</td>
 <td></td>
