@@ -1,4 +1,7 @@
-# Omni
+# Omni (discontinued)
+
+!!! note 
+    We do not sell OMNI to new customers. OMNI support, documentation, and functionality are available exclusively to existing customers.
 
 ![maturity](https://img.shields.io/badge/maturity-low-cd242c)
 
@@ -10,9 +13,6 @@
 
 ![note](https://img.shields.io/badge/product_support-low-cd242c)
 
-!!! note 
-    Requirements for Omni integration need to be assessed carefully before it is offered to any potential clients.
-    The Omni API is limited in the functionality that it offers, and it usually does not behave in the same way that the Omni Desktop application does.
 
 ## Setup
 
