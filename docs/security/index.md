@@ -1,65 +1,46 @@
 # Security and Permissions
 
-## Granite WMS Security Policies and Measures
-The following security measures should be considered within the context of on-premises hosting, which
-provides several inherent benefits that enhance overall security, control, and data protection:
+Granite WMS runs in your own environment, so you keep control of your data, infrastructure and network access. Security is a shared responsibility between Granite and your IT team. This page sets out how we approach it and who looks after what.
 
-- Complete Control Over Security: On-premises hosting allows organizations to fully manage their security infrastructure, with the ability to implement and adjust tailored configurations as needed.
+## How Granite protects your system
 
-- Physical Security: With servers located on-site, organizations benefit from direct physical security measures, such as secure access and surveillance, which add an extra layer of protection against unauthorized access.
+### Access control
+Every user has their own account, and permissions assigned through user groups determine which features are available to them. Deactivating a user stops that user from logging in, and integrations authenticate with their own API keys rather than user passwords.
 
-- Data Privacy and Compliance: On-premises environments allow organizations to keep sensitive data under their direct control, making it easier to comply with privacy regulations and reducing the risk of third-party access.
+### Passwords
+Passwords are never stored in plaintext. Each one is hashed using PBKDF2 with SHA-256 and a unique salt. Password strength, password expiry and account lockout policies are available, so you can align Granite with your own security policy.
 
-- Custom Security Measures: On-premises hosting enables organizations to implement custom security solutions tailored to their specific requirements, offering flexibility beyond what’s typically available with cloud-based services.
+### Sessions
+User sessions are time-limited and require users to log in again once they expire. Session cookies cannot be read by client-side scripts, and are marked Secure when used over HTTPS.
 
-- Reduced Dependency on Internet Connectivity: Systems hosted on-premises can continue to function during internet outages, providing increased reliability and security in the event of connectivity issues.
+### Encryption in transit
+Granite supports encrypted HTTPS connections for its web applications, and our installer configures new sites to use HTTPS. We recommend HTTPS for every Granite site, using a certificate from a trusted certificate authority.
 
-- Controlled Access: Access to on-premises systems is tightly controlled and can be secured through internal policies and technologies like VPNs, adding further protection from external threats.
+### Software maintenance
+We monitor our main application repositories for known vulnerabilities in third-party libraries. Fixes are delivered through versioned releases, and changes are recorded in our [release notes](../updates/release-notes.md).
 
-## Application Security
-### Authentication and Authorization
-- Custom Application Authentication: We use our own custom authentication mechanisms tailored
-specifically to our application's requirements, ensuring secure user access control.
-- Access to application features is managed through permission-based authorization, ensuring users can
-only perform actions that align with their assigned roles.
-### Password Encryption
-- Salt and Hashing: Passwords are securely hashed with a unique salt for each user, making it harder for
-attackers to crack passwords.
-### Session Management
-- UseSecureCookies: Cookies are only sent over HTTPS connections, preventing them from being
-transmitted in plaintext over insecure networks.
-- UseHttpOnlyCookies: Cookies cannot be accessed by client-side scripts, which mitigates Cross-Site
-Scripting (XSS) attacks.
-- UseSameSiteCookies: Cross-Site Request Forgery (CSRF) attacks are prevented by restricting cookies
-from being sent with cross-site requests.
-- Session Timeout: Sessions are time-limited, with automatic logouts occurring after periods of inactivity.
-### Allowed Origins and Cross-Origin Resource Sharing (CORS)
-- CORS Implementation: Strict CORS policies are enforced to control which domains can interact with our
-.NET applications, preventing unauthorized cross-origin requests.
-- Allowed Origins: Only explicitly allowed origins are permitted to interact with the APIs and web services,
-ensuring that only trusted sources can access sensitive resources.
+## Shared responsibility
 
-### Application Patching and Updates
-- We use the GitHub Dependencies Bot to monitor and manage updates to .NET Framework, libraries,
-and dependencies. This ensures that any vulnerabilities in third-party libraries are addressed promptly
-and efficiently.
-### Application Configurations
-- DebugMode: Debug mode is set to false by default, ensuring that sensitive information, such as stack
-traces and error messages, is not exposed to users in production. This prevents attackers from gaining
-insights into the internal workings of the application.
-## Web Server Security
-### IIS Hardening
-- Disable Unnecessary Features: All unnecessary IIS modules (e.g., WebDAV, FTP) are disabled to minimize
-the attack surface.
-- Application Pool Isolation: Each application is hosted in its own dedicated application pool. This ensures
-that if one application is compromised, others remain unaffected.
-### Secure Communication
-- SSL/TLS Encryption: All communication with the IIS-hosted applications is encrypted via SSL/TLS to
-ensure data integrity and confidentiality.
+Security is everyone's responsibility. Good software and careful configuration only go so far. The table below shows who is responsible for each area.
+Granite consultants work through the [Hardening Checklist](hardening-checklist.md) alongside the customer's IT team before go-live.
+
+| Area | Granite | Your IT team |
+|------|:-------:|:------------:|
+| Application software and security fixes | **Responsible** | |
+| Installation and upgrades | **Responsible** | Assists |
+| HTTPS configuration | **Responsible** | Assists |
+| Certificates | Assists | **Responsible** |
+| Users and permissions | Assists | **Responsible** |
+| Password and lockout policies | Assists | **Responsible** |
+| Servers, operating systems and databases | Assists | **Responsible** |
+| Backups | | **Responsible** |
+| Network, firewall and remote access | Assists | **Responsible** |
+| Physical security | | **Responsible** |
+
 
 ---
 
-Learn how to secure your system with API keys, manage user permissions, and implement best practices for system security. This section covers everything you need to control access, authenticate users, and protect sensitive data. Explore the guides below to ensure your setup is both secure and efficient.
+The guides below cover the settings and controls in more detail.
 
 <div class="grid cards" markdown>
 
@@ -80,5 +61,11 @@ Learn how to secure your system with API keys, manage user permissions, and impl
     ---
 
     A guide on using API Keys to authenticate with our APIs.
+
+ -	[__Hardening Checklist__](hardening-checklist.md)
+
+    ---
+
+    The steps to take when installing and maintaining Granite, for Granite consultants and your IT team.
 
 </div>

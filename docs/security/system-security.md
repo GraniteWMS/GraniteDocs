@@ -11,12 +11,15 @@ Important Notes:
 
 - Description: Defines the maximum number of failed login attempts allowed before a user account is locked.
 - Configuration: Specify the number of failed attempts as the Value.
+- Scope: Failed attempts are counted when logging in through the Process App, the Business API and the Scheduler. The Custodian API refuses a locked account, but does not count failed attempts.
+- Unlocking: If PasswordRecoveryMinutes is not active, a locked account stays locked until an administrator resets the user's password.
 
 ### PasswordRecoveryMinutes
 
-- Description: Resets the failed login attempt counter after a specified duration (in minutes).
+- Description: Sets how long a locked account stays locked (in minutes). The failed attempt counter is only reset by a successful login or a password reset.
 - Dependency: This setting only takes effect if PasswordFailedAttempts is active.
 - Configuration: Specify the recovery duration (in minutes) as the Value.
+- Limitation: The lock period is only set once. Further failed attempts after it has passed do not start a new lock period.
 
 ### EnablePasswordStrength
 
@@ -36,6 +39,7 @@ Important Notes:
 
 - Description: Activates password expiration, requiring users to update their passwords after a set period.
 - Configuration: Specify the expiration period (in days) as the Value.
+- Existing passwords: The expiry date is set when a password is saved. Passwords saved before this setting was activated do not expire until they are next saved.
 
 ----
 
