@@ -2,9 +2,6 @@
 
 #
 
-!!! warning
-    This is V6 functionality, not yet released
-
 ## What are API Keys
 
 API Keys are an authentication mechanism used to identify and authorize users or applications accessing an API, without using a user name and password. 
@@ -19,7 +16,7 @@ API keys also provider a better experience for third parties using our APIs by p
 
 ## Which APIs support API keys
 
-At the moment it is just the Business API that supports API keys. 
+The Business API and the Custodian API support API keys.
 
 ## How do I get an API key
 

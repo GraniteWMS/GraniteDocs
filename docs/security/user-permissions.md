@@ -75,6 +75,9 @@ Process permissions to allow access to certain processes
 | Process  | ReclassifyProcess              | Allow user to perform Reclassify transactions    |
 | Process  | ManufactureProcess             | Allow user to perform Manufacture transactions   |
 | Process  | ConsumeProcess                 | Allow user to perform Consume transactions       |
+| Process  | CorrectionProcess              | Allow user to perform Correction transactions    |
+| Process  | PackReversalProcess            | Allow user to perform PackReversal transactions  |
+| Process  | RepalletizeProcess             | Allow user to perform Repalletize transactions   |
 
 
 ### Inbound Permissions 
