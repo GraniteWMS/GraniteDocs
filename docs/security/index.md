@@ -17,7 +17,7 @@ User sessions are time-limited and require users to log in again once they expir
 Granite supports encrypted HTTPS connections for its web applications, and our installer configures new sites to use HTTPS. We recommend HTTPS for every Granite site, using a certificate from a trusted certificate authority.
 
 ### Software maintenance
-We monitor our main application repositories for known vulnerabilities in third-party libraries. Fixes are delivered through versioned releases, and changes are recorded in our [release notes](../updates/release-notes.md).
+We monitor our main application repositories for known vulnerabilities in third-party libraries, and we do not release our software unless it has passed our automated tests. Fixes are delivered through versioned releases, and changes are recorded in our [release notes](https://granitewms.canny.io/changelog).
 
 ## Shared responsibility
 
