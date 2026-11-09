@@ -45,17 +45,23 @@ The Parcel Perfect service lets Granite request courier quotes and convert them 
 | `BaseUrl` | `SystemSettings` (`Application` = `Granite.Integration.ParcelPerfect`) | Base URL of Parcel Perfect's `ecomService v32` JSON API | `https://adpdemo.pperfect.com/ecomService/v32/Json/` (sandbox) | Yes |
 | `TokenId` | `SystemSettings` (`Application` = `Granite.Integration.ParcelPerfect`) | Parcel Perfect API token (`token_id`) | *(blank)* | Yes |
 | `AccountNumber` | `SystemSettings` (`Application` = `Granite.Integration.ParcelPerfect`) | Parcel Perfect account number (`accnum`), sent on every quote request | `WMS001` | No |
-| `ParcelPerfectIntegrationServiceUrl` | `SystemSettings` (`Application` = `SQLCLR`) | Base URL of this service itself, used by the [SQL CLR](#sql-clr) procedures (no trailing slash — `/quotes` and `/quotes/{id}/accept` are appended by the CLR procedures) | *(blank)* | Yes, for SQL CLR callers |
+| `ParcelPerfectIntegrationServiceUrl` | `SystemSettings` (`Application` = `SQLCLR`) | Base URL of this service itself, used by the [SQL CLR](#sql-clr) procedures (no trailing slash — `/quotes`, `/quotes/by-place`, `/quotes/{id}/accept` and `/places` are appended by the CLR procedures) | *(blank)* | Yes, for SQL CLR callers |
 
 !!! note
     Unlike the connection string, all of these `SystemSettings` rows — including `ParcelPerfectIntegrationServiceUrl`, which is consumed by the SQL CLR procedures rather than this service — are seeded automatically by the service on first startup and are loaded once at startup, so restart the IIS site after changing them.
 
 ## SQL CLR
 
-Unlike every other integration in this section, Parcel Perfect is not called by the Integration Service through an SDK Provider. Granite calls the [Parcel Perfect service](service.md)'s `/quotes` endpoints directly from SQL Server using two SQL CLR procedures:
+Unlike every other integration in this section, Parcel Perfect is not called by the Integration Service through an SDK Provider. Granite calls the [Parcel Perfect service](service.md)'s `/quotes` and `/places` endpoints directly from SQL Server using these SQL CLR procedures:
 
 - `dbo.clr_ParcelPerfect_CreateQuote` → `POST /quotes`
+- `dbo.clr_ParcelPerfect_CreateQuoteByPlace` → `POST /quotes/by-place`
 - `dbo.clr_ParcelPerfect_AcceptQuote` → `POST /quotes/{QuoteId}/accept`
+- `dbo.clr_ParcelPerfect_GetPlacesByName` → `GET /places?Name=...`
+- `dbo.clr_ParcelPerfect_GetPlacesByPostalCode` → `GET /places?PostalCode=...`
+
+!!! note "Place ids"
+    Some Parcel Perfect environments reject a quote unless it carries Parcel Perfect's own origin and destination **place ids**. They fail with `Origplace and Destplace fields mandatory for requesting quotes`. For those environments, look the place ids up with `clr_ParcelPerfect_GetPlacesByName` / `clr_ParcelPerfect_GetPlacesByPostalCode`, then create the quote with `clr_ParcelPerfect_CreateQuoteByPlace` instead of `clr_ParcelPerfect_CreateQuote`. A postal code often matches many places (one per suburb), so pick the row that matches the street address. Don't just take the first row.
 
 Two CLR functions build the JSON array parameters those procedures need:
 
@@ -105,6 +111,56 @@ Requests a quote and returns Parcel Perfect's rate options. Build `@parcels` (an
 | `@message` (OUTPUT) | | On success, the raw `CreateQuoteResponse` JSON — parse `Rates[]` from it to get the `ServiceCode` options for `clr_ParcelPerfect_AcceptQuote`. On failure, an error message. |
 | `@quoteId` (OUTPUT) | | `bigint` — the new quote's ID, needed for `clr_ParcelPerfect_AcceptQuote`. `0` if the call failed or the response couldn't be parsed. |
 | `@quoteNumber` (OUTPUT) | | Parcel Perfect's own quote number (`PpQuoteNumber`). `NULL` if the call failed or the response couldn't be parsed. |
+
+#### dbo.clr_ParcelPerfect_CreateQuoteByPlace
+
+Same as [`clr_ParcelPerfect_CreateQuote`](#dboclr_parcelperfect_createquote), but it also sends Parcel Perfect's origin and destination place ids on the quote. Use it for Parcel Perfect environments that require place ids. Get the ids from [`clr_ParcelPerfect_GetPlacesByName`](#dboclr_parcelperfect_getplacesbyname) or [`clr_ParcelPerfect_GetPlacesByPostalCode`](#dboclr_parcelperfect_getplacesbypostalcode).
+
+It takes every `clr_ParcelPerfect_CreateQuote` parameter, plus:
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `@originPlaceId` | Yes | `int` — the `PlaceId` of the origin place |
+| `@originTown` | No | The `Town` of the chosen origin place |
+| `@destinationPlaceId` | Yes | `int` — the `PlaceId` of the destination place |
+| `@destinationTown` | No | The `Town` of the chosen destination place |
+
+The output parameters are the same as `clr_ParcelPerfect_CreateQuote`. If either place id is missing or not positive, the procedure returns `@success = 0` without calling the service.
+
+#### dbo.clr_ParcelPerfect_GetPlacesByName
+
+Looks up Parcel Perfect places by town name. A partial name matches too: for example, `Wynberg` returns both Wynberg, Johannesburg and Wynberg, Cape Town.
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `@userName` | Yes | Granite username — used to resolve the API key for calling the service |
+| `@name` | Yes | Town name, or part of it |
+| `@success` (OUTPUT) | | `bit` — whether the call succeeded |
+| `@message` (OUTPUT) | | On success, e.g. `3 place(s) found`. On failure, an error message. |
+
+On success, it returns one result set, which can be captured with `INSERT ... EXEC`:
+
+| Column | Type | Description |
+|--------|------|-------------|
+| `PlaceId` | `int` | Parcel Perfect place id — pass this to `clr_ParcelPerfect_CreateQuoteByPlace` |
+| `Town` | `nvarchar(200)` | Place name, e.g. `WYNBERG, Johannesburg` |
+| `PostalCode` | `nvarchar(20)` | |
+| `Hub` | `nvarchar(20)` | Parcel Perfect routing hub, e.g. `JNB` |
+
+A lookup with no matches still succeeds and returns an empty result set. If the call fails, no result set is returned.
+
+#### dbo.clr_ParcelPerfect_GetPlacesByPostalCode
+
+Looks up every Parcel Perfect place that shares a postal code. There are often several. For example, `4126` returns a separate place for each Amanzimtoti suburb.
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `@userName` | Yes | |
+| `@postalCode` | Yes | |
+| `@success` (OUTPUT) | | |
+| `@message` (OUTPUT) | | |
+
+It returns the same result set as [`clr_ParcelPerfect_GetPlacesByName`](#dboclr_parcelperfect_getplacesbyname).
 
 #### dbo.clr_ParcelPerfect_AcceptQuote
 
@@ -213,6 +269,131 @@ END CATCH
 SELECT @success, @message, @quoteId, @quoteNumber
 -- @quoteId is what you pass to clr_ParcelPerfect_AcceptQuote. On success, @message is
 -- also the raw CreateQuoteResponse JSON — parse Rates[].ServiceCode from it.
+```
+
+#### Look up places
+
+```sql
+DECLARE @success bit
+DECLARE @message nvarchar(max)
+
+EXEC [dbo].[clr_ParcelPerfect_GetPlacesByPostalCode]
+    @userName = 'jsmith',
+    @postalCode = '4126',
+    @success = @success OUTPUT,
+    @message = @message OUTPUT
+
+SELECT @success, @message
+```
+
+Returns a result set like this:
+
+| PlaceId | Town | PostalCode | Hub |
+|---------|------|------------|-----|
+| 3306 | AMANZIMTOTI  Streets | 4126 | DUR |
+| 3307 | ATHLONE PARK, Amanzimtoti | 4126 | DUR |
+| 3310 | DOONSIDE, Amanzimtoti | 4126 | DUR |
+| ... | | | |
+
+#### Create a quote using place ids
+
+Capture the lookup results with `INSERT ... EXEC`, pick the rows that match the addresses, then create the quote:
+
+```sql
+DECLARE @success bit
+DECLARE @message nvarchar(max)
+DECLARE @parcels nvarchar(max)
+DECLARE @quoteId bigint
+DECLARE @quoteNumber nvarchar(200)
+DECLARE @originPlaceId int
+DECLARE @originTown nvarchar(200)
+DECLARE @destinationPlaceId int
+DECLARE @destinationTown nvarchar(200)
+
+DECLARE @originPlaces TABLE (PlaceId int, Town nvarchar(200), PostalCode nvarchar(20), Hub nvarchar(20))
+DECLARE @destinationPlaces TABLE (PlaceId int, Town nvarchar(200), PostalCode nvarchar(20), Hub nvarchar(20))
+
+-- Origin: look up by town name
+INSERT INTO @originPlaces
+EXEC [dbo].[clr_ParcelPerfect_GetPlacesByName]
+    @userName = 'jsmith',
+    @name = 'Wynberg',
+    @success = @success OUTPUT,
+    @message = @message OUTPUT
+
+IF @success = 0
+BEGIN
+    SELECT @success, @message
+    RETURN
+END
+
+-- Destination: look up by postal code
+INSERT INTO @destinationPlaces
+EXEC [dbo].[clr_ParcelPerfect_GetPlacesByPostalCode]
+    @userName = 'jsmith',
+    @postalCode = '4126',
+    @success = @success OUTPUT,
+    @message = @message OUTPUT
+
+IF @success = 0
+BEGIN
+    SELECT @success, @message
+    RETURN
+END
+
+-- Pick the places that match the street addresses. "Wynberg" also matches
+-- Wynberg, Cape Town, and 4126 covers every Amanzimtoti suburb.
+SELECT TOP 1 @originPlaceId = PlaceId, @originTown = Town
+FROM @originPlaces
+WHERE Town LIKE '%Johannesburg%'
+
+SELECT TOP 1 @destinationPlaceId = PlaceId, @destinationTown = Town
+FROM @destinationPlaces
+WHERE Town LIKE 'AMANZIMTOTI%'
+
+SELECT @parcels = dbo.parcelPerfect_AddParcel(@parcels, '1', 'Carton of widgets', 1, 23, 15, 15, 1)
+
+BEGIN TRY
+    EXEC [dbo].[clr_ParcelPerfect_CreateQuoteByPlace]
+        @userName = 'jsmith',
+        @reference = 'SO-100235',
+        @specialInstructions = NULL,
+        @originPlaceId = @originPlaceId,
+        @originTown = @originTown,
+        @originPersonName = 'Granite Warehouse',
+        @originContactName = NULL,
+        @originAddressLine1 = '17 Carey Street',
+        @originAddressLine2 = NULL,
+        @originAddressLine3 = 'Wynberg',
+        @originAddressLine4 = 'Johannesburg',
+        @originPostalCode = '2090',
+        @originPhone = NULL,
+        @originCell = NULL,
+        @destinationPlaceId = @destinationPlaceId,
+        @destinationTown = @destinationTown,
+        @destinationPersonName = 'John Customer',
+        @destinationContactName = NULL,
+        @destinationAddressLine1 = '92 Dan Pienaar Street',
+        @destinationAddressLine2 = NULL,
+        @destinationAddressLine3 = 'Amanzimtoti',
+        @destinationAddressLine4 = 'KZN',
+        @destinationPostalCode = '4126',
+        @destinationPhone = NULL,
+        @destinationCell = NULL,
+        @parcels = @parcels,
+        @waybillReferences = NULL,
+        @success = @success OUTPUT,
+        @message = @message OUTPUT,
+        @quoteId = @quoteId OUTPUT,
+        @quoteNumber = @quoteNumber OUTPUT
+END TRY
+BEGIN CATCH
+    SELECT @message = ERROR_MESSAGE()
+    SELECT @success = 0
+END CATCH
+
+SELECT @success, @message, @quoteId, @quoteNumber
+-- Accept the quote with clr_ParcelPerfect_AcceptQuote exactly as for clr_ParcelPerfect_CreateQuote.
 ```
 
 #### Accept a quote as a waybill
