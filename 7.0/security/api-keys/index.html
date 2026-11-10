@@ -14,7 +14,7 @@
         <link rel="prev" href="../user-permissions/">
       
       
-        <link rel="next" href="../../tools/">
+        <link rel="next" href="../hardening-checklist/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -2907,6 +2907,8 @@
       
         
       
+        
+      
     
     
     
@@ -3101,6 +3103,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardening-checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hardening Checklist
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -4102,10 +4127,6 @@
 
 <p><img alt="" src="../api-key.png" /></p>
 <h1 id="_1"></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This is V6 functionality, not yet released</p>
-</div>
 <h2 id="what-are-api-keys">What are API Keys</h2>
 <p>API Keys are an authentication mechanism used to identify and authorize users or applications accessing an API, without using a user name and password. 
 The key itself is simply a long string of characters and each one is unique to each Granite user. 
@@ -4115,7 +4136,7 @@ Here is an example of what a Granite API Key can look like: <code>TsIPsMSGzqYDjw
 API Keys allow V6 SQLCLR procedures to connect securely to our APIs without needing the user's password.
 API keys also provider a better experience for third parties using our APIs by providing a straightforward way to authenticate and authorize their requests.</p>
 <h2 id="which-apis-support-api-keys">Which APIs support API keys</h2>
-<p>At the moment it is just the Business API that supports API keys. </p>
+<p>The Business API and the Custodian API support API keys.</p>
 <h2 id="how-do-i-get-an-api-key">How do I get an API key</h2>
 <p>API keys are automatically generated for Granite users whenever their password is saved. 
 There is no way currently to view these API keys from the front end - you will need to fetch the API key out of the <code>UsersCredential</code> table in the Granite database.</p>

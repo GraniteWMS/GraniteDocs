@@ -2907,6 +2907,8 @@
       
         
       
+        
+      
     
     
     
@@ -3087,6 +3089,29 @@
   
   <span class="md-ellipsis">
     API Keys
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardening-checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hardening Checklist
     
   </span>
   
@@ -4092,12 +4117,15 @@
 <ul>
 <li>Description: Defines the maximum number of failed login attempts allowed before a user account is locked.</li>
 <li>Configuration: Specify the number of failed attempts as the Value.</li>
+<li>Scope: Failed attempts are counted when logging in through the Process App, the Business API and the Scheduler. The Custodian API refuses a locked account, but does not count failed attempts.</li>
+<li>Unlocking: If PasswordRecoveryMinutes is not active, a locked account stays locked until an administrator resets the user's password.</li>
 </ul>
 <h3 id="passwordrecoveryminutes">PasswordRecoveryMinutes</h3>
 <ul>
-<li>Description: Resets the failed login attempt counter after a specified duration (in minutes).</li>
+<li>Description: Sets how long a locked account stays locked (in minutes). The failed attempt counter is only reset by a successful login or a password reset.</li>
 <li>Dependency: This setting only takes effect if PasswordFailedAttempts is active.</li>
 <li>Configuration: Specify the recovery duration (in minutes) as the Value.</li>
+<li>Limitation: The lock period is only set once. Further failed attempts after it has passed do not start a new lock period.</li>
 </ul>
 <h3 id="enablepasswordstrength">EnablePasswordStrength</h3>
 <ul>
@@ -4144,6 +4172,7 @@
 <ul>
 <li>Description: Activates password expiration, requiring users to update their passwords after a set period.</li>
 <li>Configuration: Specify the expiration period (in days) as the Value.</li>
+<li>Existing passwords: The expiry date is set when a password is saved. Passwords saved before this setting was activated do not expire until they are next saved.</li>
 </ul>
 <hr />
 <p><code>Examples of application handling security breaches</code></p>

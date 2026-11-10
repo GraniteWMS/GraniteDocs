@@ -2907,6 +2907,8 @@
       
         
       
+        
+      
     
     
     
@@ -3009,6 +3011,29 @@
   
   <span class="md-ellipsis">
     API Keys
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="hardening-checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hardening Checklist
     
   </span>
   
@@ -3953,73 +3978,55 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#granite-wms-security-policies-and-measures" class="md-nav__link">
+  <a href="#how-granite-protects-your-system" class="md-nav__link">
     <span class="md-ellipsis">
-      Granite WMS Security Policies and Measures
+      How Granite protects your system
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#application-security" class="md-nav__link">
-    <span class="md-ellipsis">
-      Application Security
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Application Security">
+    <nav class="md-nav" aria-label="How Granite protects your system">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#authentication-and-authorization" class="md-nav__link">
+  <a href="#access-control" class="md-nav__link">
     <span class="md-ellipsis">
-      Authentication and Authorization
+      Access control
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#password-encryption" class="md-nav__link">
+  <a href="#passwords" class="md-nav__link">
     <span class="md-ellipsis">
-      Password Encryption
+      Passwords
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#session-management" class="md-nav__link">
+  <a href="#sessions" class="md-nav__link">
     <span class="md-ellipsis">
-      Session Management
+      Sessions
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#allowed-origins-and-cross-origin-resource-sharing-cors" class="md-nav__link">
+  <a href="#encryption-in-transit" class="md-nav__link">
     <span class="md-ellipsis">
-      Allowed Origins and Cross-Origin Resource Sharing (CORS)
+      Encryption in transit
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#application-patching-and-updates" class="md-nav__link">
+  <a href="#software-maintenance" class="md-nav__link">
     <span class="md-ellipsis">
-      Application Patching and Updates
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#application-configurations" class="md-nav__link">
-    <span class="md-ellipsis">
-      Application Configurations
+      Software maintenance
     </span>
   </a>
   
@@ -4031,35 +4038,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#web-server-security" class="md-nav__link">
+  <a href="#shared-responsibility" class="md-nav__link">
     <span class="md-ellipsis">
-      Web Server Security
+      Shared responsibility
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Web Server Security">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iis-hardening" class="md-nav__link">
-    <span class="md-ellipsis">
-      IIS Hardening
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#secure-communication" class="md-nav__link">
-    <span class="md-ellipsis">
-      Secure Communication
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -4080,86 +4063,84 @@
 
 
 <h1 id="security-and-permissions">Security and Permissions</h1>
-<h2 id="granite-wms-security-policies-and-measures">Granite WMS Security Policies and Measures</h2>
-<p>The following security measures should be considered within the context of on-premises hosting, which
-provides several inherent benefits that enhance overall security, control, and data protection:</p>
-<ul>
-<li>
-<p>Complete Control Over Security: On-premises hosting allows organizations to fully manage their security infrastructure, with the ability to implement and adjust tailored configurations as needed.</p>
-</li>
-<li>
-<p>Physical Security: With servers located on-site, organizations benefit from direct physical security measures, such as secure access and surveillance, which add an extra layer of protection against unauthorized access.</p>
-</li>
-<li>
-<p>Data Privacy and Compliance: On-premises environments allow organizations to keep sensitive data under their direct control, making it easier to comply with privacy regulations and reducing the risk of third-party access.</p>
-</li>
-<li>
-<p>Custom Security Measures: On-premises hosting enables organizations to implement custom security solutions tailored to their specific requirements, offering flexibility beyond what’s typically available with cloud-based services.</p>
-</li>
-<li>
-<p>Reduced Dependency on Internet Connectivity: Systems hosted on-premises can continue to function during internet outages, providing increased reliability and security in the event of connectivity issues.</p>
-</li>
-<li>
-<p>Controlled Access: Access to on-premises systems is tightly controlled and can be secured through internal policies and technologies like VPNs, adding further protection from external threats.</p>
-</li>
-</ul>
-<h2 id="application-security">Application Security</h2>
-<h3 id="authentication-and-authorization">Authentication and Authorization</h3>
-<ul>
-<li>Custom Application Authentication: We use our own custom authentication mechanisms tailored
-specifically to our application's requirements, ensuring secure user access control.</li>
-<li>Access to application features is managed through permission-based authorization, ensuring users can
-only perform actions that align with their assigned roles.</li>
-</ul>
-<h3 id="password-encryption">Password Encryption</h3>
-<ul>
-<li>Salt and Hashing: Passwords are securely hashed with a unique salt for each user, making it harder for
-attackers to crack passwords.</li>
-</ul>
-<h3 id="session-management">Session Management</h3>
-<ul>
-<li>UseSecureCookies: Cookies are only sent over HTTPS connections, preventing them from being
-transmitted in plaintext over insecure networks.</li>
-<li>UseHttpOnlyCookies: Cookies cannot be accessed by client-side scripts, which mitigates Cross-Site
-Scripting (XSS) attacks.</li>
-<li>UseSameSiteCookies: Cross-Site Request Forgery (CSRF) attacks are prevented by restricting cookies
-from being sent with cross-site requests.</li>
-<li>Session Timeout: Sessions are time-limited, with automatic logouts occurring after periods of inactivity.</li>
-</ul>
-<h3 id="allowed-origins-and-cross-origin-resource-sharing-cors">Allowed Origins and Cross-Origin Resource Sharing (CORS)</h3>
-<ul>
-<li>CORS Implementation: Strict CORS policies are enforced to control which domains can interact with our
-.NET applications, preventing unauthorized cross-origin requests.</li>
-<li>Allowed Origins: Only explicitly allowed origins are permitted to interact with the APIs and web services,
-ensuring that only trusted sources can access sensitive resources.</li>
-</ul>
-<h3 id="application-patching-and-updates">Application Patching and Updates</h3>
-<ul>
-<li>We use the GitHub Dependencies Bot to monitor and manage updates to .NET Framework, libraries,
-and dependencies. This ensures that any vulnerabilities in third-party libraries are addressed promptly
-and efficiently.</li>
-</ul>
-<h3 id="application-configurations">Application Configurations</h3>
-<ul>
-<li>DebugMode: Debug mode is set to false by default, ensuring that sensitive information, such as stack
-traces and error messages, is not exposed to users in production. This prevents attackers from gaining
-insights into the internal workings of the application.</li>
-</ul>
-<h2 id="web-server-security">Web Server Security</h2>
-<h3 id="iis-hardening">IIS Hardening</h3>
-<ul>
-<li>Disable Unnecessary Features: All unnecessary IIS modules (e.g., WebDAV, FTP) are disabled to minimize
-the attack surface.</li>
-<li>Application Pool Isolation: Each application is hosted in its own dedicated application pool. This ensures
-that if one application is compromised, others remain unaffected.</li>
-</ul>
-<h3 id="secure-communication">Secure Communication</h3>
-<ul>
-<li>SSL/TLS Encryption: All communication with the IIS-hosted applications is encrypted via SSL/TLS to
-ensure data integrity and confidentiality.</li>
-</ul>
+<p>Granite WMS runs in your own environment, so you keep control of your data, infrastructure and network access. Security is a shared responsibility between Granite and your IT team. This page sets out how we approach it and who looks after what.</p>
+<h2 id="how-granite-protects-your-system">How Granite protects your system</h2>
+<h3 id="access-control">Access control</h3>
+<p>Every user has their own account, and permissions assigned through user groups determine which features are available to them. Deactivating a user stops that user from logging in, and integrations authenticate with their own API keys rather than user passwords.</p>
+<h3 id="passwords">Passwords</h3>
+<p>Passwords are never stored in plaintext. Each one is hashed using PBKDF2 with SHA-256 and a unique salt. Password strength, password expiry and account lockout policies are available, so you can align Granite with your own security policy.</p>
+<h3 id="sessions">Sessions</h3>
+<p>User sessions are time-limited and require users to log in again once they expire. Session cookies cannot be read by client-side scripts, and are marked Secure when used over HTTPS.</p>
+<h3 id="encryption-in-transit">Encryption in transit</h3>
+<p>Granite supports encrypted HTTPS connections for its web applications, and our installer configures new sites to use HTTPS. We recommend HTTPS for every Granite site, using a certificate from a trusted certificate authority.</p>
+<h3 id="software-maintenance">Software maintenance</h3>
+<p>We monitor our main application repositories for known vulnerabilities in third-party libraries, and we do not release our software unless it has passed our automated tests. Fixes are delivered through versioned releases, and changes are recorded in our <a href="https://granitewms.canny.io/changelog">release notes</a>.</p>
+<h2 id="shared-responsibility">Shared responsibility</h2>
+<p>Security is everyone's responsibility. Good software and careful configuration only go so far. The table below shows who is responsible for each area.
+Granite consultants work through the <a href="hardening-checklist/">Hardening Checklist</a> alongside the customer's IT team before go-live.</p>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th style="text-align: center;">Granite</th>
+<th style="text-align: center;">Your IT team</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application software and security fixes</td>
+<td style="text-align: center;"><strong>Responsible</strong></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td>Installation and upgrades</td>
+<td style="text-align: center;"><strong>Responsible</strong></td>
+<td style="text-align: center;">Assists</td>
+</tr>
+<tr>
+<td>HTTPS configuration</td>
+<td style="text-align: center;"><strong>Responsible</strong></td>
+<td style="text-align: center;">Assists</td>
+</tr>
+<tr>
+<td>Certificates</td>
+<td style="text-align: center;">Assists</td>
+<td style="text-align: center;"><strong>Responsible</strong></td>
+</tr>
+<tr>
+<td>Users and permissions</td>
+<td style="text-align: center;">Assists</td>
+<td style="text-align: center;"><strong>Responsible</strong></td>
+</tr>
+<tr>
+<td>Password and lockout policies</td>
+<td style="text-align: center;">Assists</td>
+<td style="text-align: center;"><strong>Responsible</strong></td>
+</tr>
+<tr>
+<td>Servers, operating systems and databases</td>
+<td style="text-align: center;">Assists</td>
+<td style="text-align: center;"><strong>Responsible</strong></td>
+</tr>
+<tr>
+<td>Backups</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Responsible</strong></td>
+</tr>
+<tr>
+<td>Network, firewall and remote access</td>
+<td style="text-align: center;">Assists</td>
+<td style="text-align: center;"><strong>Responsible</strong></td>
+</tr>
+<tr>
+<td>Physical security</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>Responsible</strong></td>
+</tr>
+</tbody>
+</table>
 <hr />
-<p>Learn how to secure your system with API keys, manage user permissions, and implement best practices for system security. This section covers everything you need to control access, authenticate users, and protect sensitive data. Explore the guides below to ensure your setup is both secure and efficient.</p>
+<p>The guides below cover the settings and controls in more detail.</p>
 <div class="grid cards">
 <ul>
 <li>
@@ -4176,6 +4157,11 @@ ensure data integrity and confidentiality.</li>
 <p><a href="api-keys/"><strong>API Keys</strong></a> </p>
 <hr />
 <p>A guide on using API Keys to authenticate with our APIs.</p>
+</li>
+<li>
+<p><a href="hardening-checklist/"><strong>Hardening Checklist</strong></a></p>
+<hr />
+<p>The steps to take when installing and maintaining Granite, for Granite consultants and your IT team.</p>
 </li>
 </ul>
 </div>
