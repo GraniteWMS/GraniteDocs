@@ -97,6 +97,7 @@ nav:
           - System Security: security/system-security.md
           - Permissions: security/user-permissions.md
           - API Keys: security/api-keys.md
+          - Hardening Checklist: security/hardening-checklist.md
   - Tools & Technology:
       - tools/index.md
       - IIS: iis/getting-started.md
