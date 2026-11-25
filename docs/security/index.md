@@ -62,6 +62,12 @@ The guides below cover the settings and controls in more detail.
 
     A guide on using API Keys to authenticate with our APIs.
 
+ -	[__Certificates for Windows Services__](service-certificates.md)
+
+    ---
+
+    How to manually bind a certificate to the Integration Service and Bartender Label Print Service.
+
  -	[__Hardening Checklist__](hardening-checklist.md)
 
     ---

@@ -32,6 +32,11 @@
 		
 
 2. Add the site to IIS, be sure to run as https and select a valid certificate
+
+	!!! note "Version 7"
+		- Requests made over http are always redirected to https. Make sure that everything that calls the Custodian API uses the `https://` address - the `Custodian_API_Endpoint` (SQLCLR) and `CustodianApiUrl` (Scheduler) settings in the `SystemSettings` table, and the WebDesktop.
+		- [API keys](../security/api-keys.md) must be sent in the `X-Api-Key` header. An API key sent as an `Authorization: Bearer` token is no longer accepted. This affects any scripts that call the Custodian API directly.
+		- The Custodian API also accepts the login token that the Business API issues, so it must be connected to the **same Granite database as the Business API** (see [JwtAuthKey](../security/system-security.md#jwtauthkey)).
 3. Configure the settings for each service that you are going to make use of
 	- [Process Template Service Configuration](process-template-service.md#configuration)
 	- [Email Service Configuration](email-service.md#configuration)

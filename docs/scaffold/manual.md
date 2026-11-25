@@ -71,4 +71,26 @@ As you progress through the installation process, you will be prompted for SQL c
 
 Scaffold will configure the connection strings for all of the applications being installed, as well configuring the endpoints in each of the configuration files and SystemSettings table.
 
+#### Https and certificates
+
+As of version 7 every Granite application runs as https, and Scaffold sets this up using the certificate that you select (or create) during the install:
+
+- **IIS sites** are given an https binding with the certificate.
+- **Windows services** (the Integration Service and the Bartender Label Print Service) have the certificate bound to their port. Enter an https address when prompted for the service's endpoint, e.g. `https://+:40091/`. Scaffold will warn you if you enter an http address.
+- The addresses that are written to the configuration files and the SystemSettings table use `https://<server IP address>:<port>/`.
+- The firewall rule that Scaffold creates includes the ports of the Windows services.
+
+Scaffold does not add a self-signed certificate to the server's trusted root store. The Granite applications accept the certificate when calling each other, but a browser will show a certificate warning until the certificate is trusted on the device.
+
+!!! note
+    If Scaffold reports that it could not bind the certificate to a service's port, the service will not be able to start.
+    Follow the steps in [Certificates for Windows Services](../security/service-certificates.md) to bind the certificate manually.
+
+#### Label printing
+
+A site uses either the ZPL Label Print site or the Bartender Label Print Service. If both are in the install folder, Scaffold will ask which one you want to install and skip the other. The label print addresses in the SystemSettings table and the ProcessApp will point to the one that was installed.
+
+!!! note
+    The Integration Service and the ZPL Label Print site both default to port `40091`. Choose a different port for one of them when installing both.
+
 Any out of the ordinary settings in IIS that are required for specific applications (e.g. the Scheduler app pool settings) will also be configured.

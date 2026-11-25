@@ -161,14 +161,25 @@ The procedure will check if tracking entity exists. If it does exist, then the q
 | NumberOfLabels  | No        | Number of copies of the label to print. Defaults to 1 if not set |
 | PrinterName     | No        | Name of the printer that you are printing to |
 | Type            | Yes        | The type of label that you want to print. Valid values are TRACKINGENTITY, MASTERITEM, LOCATION, USER, PALLET or BOX |	
-| UserID	        | Yes        | ID of the user that is printing the label |
+| UserID	        | Yes        | ID of the user that is printing the label. As of version 7 this user must have an [API key](../security/api-keys.md) |
 
-## Integration 
+!!! note
+    As of version 7 the `LabelPrintService` address in `SystemSettings` must be an `https://` address, and the call is authenticated using the API key of the user specified in `UserID`.
+
+## Integration
+
+!!! warning "Changed in version 7"
+    All three of the integration procedures have a new **first** parameter, `userName`. The call to the Integration Service is authenticated using the [API key](../security/api-keys.md) of this user.
+
+    Any existing prescripts, triggers, stored procedures or scheduled jobs that call these procedures must be changed to pass the user name. See the [Authentication & HTTPS Upgrade Guide](../updates/V7/auth-https-upgrade.md#5-update-calls-to-the-sqlclr-integration-procedures).
+
+    The address of the Integration Service in `SystemSettings` must be an `https://` address.
 
 <h4>dbo.clr_IntegrationPost</h4>
 
 | Parameter name  | Required  | Description |
 |-----------------|-----------|-------------|
+| userName        | Yes       | Name of the Granite user that is posting. This user must have an API key |
 | transactionID   | No        | Comma separated list of transaction IDs to post |
 | document        | No        | Document number to post |
 | documents       | No        | Comma separated list of documents to post |
@@ -183,12 +194,13 @@ you will need to add them with a unique name in the Key column:
 
 | Application	| Key							| Value						| Description						| ValueDataType	| isEncrypted	| isActive	|
 |---------------|-------------------------------|---------------------------|-----------------------------------|---------------|---------------|-----------|
-| SQLCLR		| MySecondIntegrationService	| http://10.0.0.1:50006	| ERP Company 2 Integration Service	| string		| False			| True		|
+| SQLCLR		| MySecondIntegrationService	| https://10.0.0.1:50006	| ERP Company 2 Integration Service	| string		| False			| True		|
 
 The Key "MySecondIntegrationService" can now be used when executing the CLR_IntegrationPostToEndpoint procedure  
 
 | Parameter name        | Required  | Description |
 |-----------------------|-----------|-------------|
+| userName              | Yes       | Name of the Granite user that is posting. This user must have an API key. The same API key is sent to whichever address the systemSettingsURLKey points to |
 | transactionID         | No        | Comma separated list of transaction IDs to post |
 | document              | No        | Document number to post |
 | documents             | No        | Comma separated list of documents to post |
@@ -201,6 +213,7 @@ The Key "MySecondIntegrationService" can now be used when executing the CLR_Inte
 
 | Parameter name  | Required  | Description |
 |-----------------|-----------|-------------|
+| userName        | Yes       | Name of the Granite user that is posting. This user must have an API key |
 | transactionID   | No        | Comma separated list of transaction IDs to post |
 | document        | No        | Document number to post |
 | documents       | No        | Comma separated list of documents to post |

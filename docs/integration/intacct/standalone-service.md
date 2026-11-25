@@ -64,9 +64,13 @@ Before installing the service, ensure the following are in place:
 
     Add the service as a new site in IIS following the [Adding a site to IIS](../../iis/getting-started.md#adding-a-site-to-iis) guide.
 
+    The site must have an `https` binding. Requests made over http are redirected to https, and the ProcessApp's token is only accepted over https.
+
 4. **Verify Installation**
 
-    Browse to the `/config` to verify the service is running.
+    Browse to `/up` to verify the service is running. This health check does not require you to log in.
+
+    Then call `/config` to check the configuration. As of version 7 this page requires authentication, so it must be called with a tool that can send your [API key](../../security/api-keys.md) in the `X-Api-Key` header.
     
     The config page shows:
     - **Connection String** - Censored connection string to Granite database
@@ -77,7 +81,21 @@ Before installing the service, ensure the following are in place:
 
 5. **Update ProcessApp appsettings**
 
-    Point the ProcessApp's IntegrationService setting to the endpoint that you have configured.
+    Point the ProcessApp's IntegrationService setting to the endpoint that you have configured. This must be the `https://` address.
+
+### Authentication
+
+As of version 7, all of the service's endpoints except `/up` and the metadata pages require authentication. Callers that do not authenticate receive a `401 Unauthorized`.
+
+| Caller | How it authenticates |
+|--------|----------------------|
+| ProcessApp | Sends the token of the user that is logged in (`Authorization: Bearer`). The token is issued by the Business API |
+| SQLCLR | Sends the [API key](../../security/api-keys.md) of the user that is passed to the procedure (`X-Api-Key`) |
+
+!!! note
+    The service must be connected to the **same Granite database as the Business API**. The key that is used to validate the ProcessApp's token is stored in the `SystemSettings` table (see [JwtAuthKey](../../security/system-security.md#jwtauthkey)).
+
+    This only applies to the Integration Service. The [Webhook Listener API](webhook-listener-api.md) still uses its own API keys, configured in its `appsettings.json`.
 
 
 ## Settings

@@ -26,10 +26,21 @@ Once the necessary assemblies and procedures have been created, you will need to
 | Application	| Key					| Value						| Description					| ValueDataType	| isEncrypted	| isActive	|
 |---------------|-----------------------|---------------------------|-------------------------------|---------------|---------------|-----------|
 | SQLCLR		| Business_API_Endpoint			| https://10.0.0.1:50006		| Granite BusinessAPI Address	| string		| False			| 
-| SQLCLR		| Webservice			| http://10.0.0.1:50002		| Granite Webservice Address	| string		| False			| True		|
-| SQLCLR		| LabelPrintService		| http://10.0.0.1:50004		| Label Print Service Address	| string		| False			| True		|
-| SQLCLR		| IntegrationService	| http://10.0.0.1:50003		| Integration Service Address	| string		| False			| True		|
+| SQLCLR		| Webservice			| http://10.0.0.1:50002		| Granite Webservice Address (before version 6 only)	| string		| False			| True		|
+| SQLCLR		| LabelPrintService		| https://10.0.0.1:50004		| Label Print Service Address	| string		| False			| True		|
+| SQLCLR		| IntegrationService	| https://10.0.0.1:50003		| Integration Service Address	| string		| False			| True		|
 | SQLCLR		| Custodian_API_Endpoint | https://10.0.0.1:50001	| CustodianAPI Address	    | string		| False			| True		|
+
+!!! warning "Version 7: https and API keys"
+	As of version 7, SQLCLR will only call addresses that start with `https://`. If an address in the table above is still `http://`, every call to that service will fail with a message saying that it is not an `https://` URL.
+
+	Upgrading the database does not change existing addresses - you will need to update them yourself.
+
+	SQLCLR accepts self-signed certificates on the Granite services.
+
+	SQLCLR authenticates every call with the [API key](../security/api-keys.md) of the user that is passed to the procedure. This now includes label printing and integration. The user must have an API key, or the call will fail with `ApiKey not found for user`.
+
+	See the [Authentication & HTTPS Upgrade Guide](../updates/V7/auth-https-upgrade.md) for the full list of changes.
 
 ## Using the CLR Procedures
 
