@@ -12,10 +12,31 @@
 
 - Add GraniteLabelPrintingZPL to IIS
 
-!!! note 
-    Take note of the new `IsPublic` setting in the `appsettings.json` file below. This is used to configure security settings for the site. If set to false you can run GraniteLabelPrintingZPL as http instead of https
+- GraniteLabelPrintingZPL must run as `https`. You can use the same certificate as the WebDesktop
 
-If you are running GraniteLabelPrintingZPL as https, you can use the same certificate as the WebDesktop
+!!! note
+    As of version 7, requests made over http are always redirected to https, regardless of the `IsPublic` setting. Before version 7, setting `IsPublic` to false allowed GraniteLabelPrintingZPL to run as http.
+
+    Point the applications that print labels to the https address:
+
+    - SQLCLR: the `LabelPrintService` setting in the `SystemSettings` table
+    - ProcessApp: the `LabelPrintingEndPoint` setting in `appsettings.json`
+
+### Authentication
+
+As of version 7 the label print service requires authentication. Calls to `/print`, `/preview`, `/printers` and `/config` that do not authenticate receive a `401 Unauthorized`.
+
+| Caller | How it authenticates |
+|--------|----------------------|
+| ProcessApp | Sends the token of the user that is logged in (`Authorization: Bearer`). The token is issued by the Business API, and is only accepted over https |
+| SQLCLR (`clr_PrintLabel`) | Sends the [API key](../../security/api-keys.md) of the user that is printing (`X-Api-Key`). Every user that prints from SQL must have an API key |
+
+!!! note
+    - The `CONNECTION` connection string must point to the **same Granite database as the Business API**. The key that is used to validate the ProcessApp's token is stored in the `SystemSettings` table (see [JwtAuthKey](../../security/system-security.md#jwtauthkey)).
+    - The site will not start if the `CONNECTION` connection string is missing.
+    - The `/config` page can no longer be opened without credentials. Call it with a tool that can send your API key in the `X-Api-Key` header. The `/metadata` page is still public, and can be used to check that the site is running.
+
+See the [Authentication & HTTPS Upgrade Guide](../../updates/V7/auth-https-upgrade.md) when upgrading an existing site.
 
 ### AppSettings
 
@@ -23,7 +44,7 @@ The appsettings.json file is where you configure the application.
 
 **The Width and Height for each label do not affect the size that the label prints at.** These parameters actually set the size that label previews render at
 
-If you are running GraniteLabelPrintingZPL as https, AllowedOrigins must specify all addresses that can print to the LabelPrintService. You should include WebApp, Webservice, WebDesktop, and RepoAPI as needed.
+AllowedOrigins must specify all addresses that can print to the LabelPrintService. You should include the ProcessApp, WebDesktop and Business API as needed.
 
 
 ```json
@@ -32,7 +53,7 @@ If you are running GraniteLabelPrintingZPL as https, AllowedOrigins must specify
     "CONNECTION": "Data Source=.\\SQL2019;Initial Catalog=Granite;Persist Security Info=True;User ID=username;Password=password"
   },
   "IsPublic":  false,
-  "AllowedOrigins": [ "https://my-pcname:40099", "http://my-pcname:40081", "http://my-pcname:40086" ],
+  "AllowedOrigins": [ "https://my-pcname:40099", "https://my-pcname:40081", "https://my-pcname:40086" ],
   "DefaultLabelPath": "C:\\Program Files (x86)\\Granite WMS\\Labels\\",
   "PrinterName": "REC",
   "DefaultTrackingEntityLabel": {

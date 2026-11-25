@@ -29,7 +29,10 @@ The Parcel Perfect service lets Granite request courier quotes and convert them 
     }
     ```
 
-2. **Create an IIS site** for the service, following the [Adding a site to IIS](../../iis/getting-started.md#adding-a-site-to-iis) guide, pointed at the published service files.
+2. **Create an IIS site** for the service, following the [Adding a site to IIS](../../iis/getting-started.md#adding-a-site-to-iis) guide, pointed at the published service files. The site must have an `https` binding - requests made over http are redirected to https, with the exception of the [webhook](#receiving-webhooks) endpoint.
+
+    !!! note
+        The service needs a ServiceStack license key to start. Set it in the `SERVICESTACK_LICENSE` environment variable on the server, or in the `servicestack:license` setting.
 
 3. **Start the site once** — on first startup the service seeds any missing rows from [Configuration Reference](#configuration-reference) into `SystemSettings` with blank/default values. No manual `INSERT` is needed.
 
@@ -74,7 +77,11 @@ Two CLR functions build the JSON array parameters those procedures need:
 The procedures resolve the Parcel Perfect service's own base URL from the `ParcelPerfectIntegrationServiceUrl` `SystemSettings` row at call time — see [Configuration Reference](#configuration-reference) for that setting (it's seeded automatically, along with the service's own settings).
 
 !!! note
-    Both procedures authenticate the call with `@userName`'s own Granite API key (`Authorization: Bearer ...`), the same way as other CLR-called services — the user executing the procedure must have an API key configured in Granite.
+    Both procedures authenticate the call with `@userName`'s own Granite API key (sent in the `X-Api-Key` header), the same way as other CLR-called services — the user executing the procedure must have an API key configured in Granite.
+
+!!! warning "Version 7"
+    - `ParcelPerfectIntegrationServiceUrl` must be an `https://` address. SQLCLR will not call an `http://` address.
+    - The version 7 database upgrade removes the `clr_ParcelPerfect_*` procedures when it reinstalls SQLCLR. Run `ParcelPerfect_CLR.sql` again after upgrading the database.
 
 ### CLR Procedures
 
@@ -485,5 +492,10 @@ Webhook delivery is configured on **Parcel Perfect's side**, not ours — there'
 
 - This service's public URL for `POST /webhooks/parcelperfect`
 - The dedicated Granite API key from step 1, for them to send as the `Authorization: Bearer` header on every webhook call
+
+!!! note
+    The webhook endpoint is the only place where a Granite API key is still accepted in the `Authorization: Bearer` header. This is so that the configuration on Parcel Perfect's side does not need to change when Granite is upgraded. The `X-Api-Key` header is accepted here as well. Every other endpoint on this service only accepts `X-Api-Key`.
+
+    The webhook endpoint is also not redirected from http to https, so an existing `http://` webhook URL keeps working. Moving the webhook to `https://` is recommended, but Parcel Perfect is unlikely to trust a self-signed certificate - use a publicly trusted certificate if you do.
 
 Once Parcel Perfect has both, they'll start pushing events as they occur — no further setup is needed on the Granite side, and this can be enabled independently of whether the service is also being used to create quotes.

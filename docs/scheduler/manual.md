@@ -20,12 +20,17 @@ The Granite Scheduler is an IIS application that can be used to schedule executi
     ```sql
 	INSERT [dbo].[SystemSettings] ([Application], [Key], [Value], [Description], [ValueDataType], [isEncrypted], [isActive], [AuditDate], [AuditUser])
 	VALUES	('GraniteScheduler', 'TimeZone', '', 'The time zone that will be used when scheduling CRON jobs', 'string', 0, 1, GETDATE(), 'AUTOMATION'),
-			('GraniteScheduler', 'UtilityApiUrl', '', 'The UtilityAPI URL', 'string', 0, 1, GETDATE(), 'AUTOMATION')
+			('GraniteScheduler', 'CustodianApiUrl', '', 'The Custodian API URL', 'string', 0, 1, GETDATE(), 'AUTOMATION')
 	```
 		
 - Ensure that the folder that you have installed GraniteScheduler to has full access enabled for all users. This will ensure that the application log files can be created
 
 - Add GraniteScheduler to IIS running as `https`
+
+!!! note "Version 7"
+    - Requests made to the Scheduler over http are redirected to https. Make sure that the Scheduler's address in the WebDesktop configuration is the `https://` address.
+    - The Scheduler accepts the login token that the Business API issues, so it must be connected to the **same Granite database as the Business API** (see [JwtAuthKey](../security/system-security.md#jwtauthkey)).
+    - The Scheduler does not accept API keys.
 
 ### Appsettings
 Configure your database connection in appsettings.json:
@@ -384,6 +389,18 @@ CREATE OR ALTER PROCEDURE [MyProcedure]
 	SELECT @Location = [Value] FROM @input WHERE [Name] = 'Location'
 ```
 ### Email Jobs
+
+!!! note "Version 7: email jobs use the AUTOMATION user"
+    The Custodian API requires authentication to send emails. As of version 7 the Scheduler authenticates using the [API key](../security/api-keys.md) of the `AUTOMATION` user.
+
+    Each time the Scheduler starts up it will:
+
+    - create the `AUTOMATION` user if it does not exist
+    - generate an API key for the `AUTOMATION` user if it does not have one
+
+    An existing user, password or API key is left as is. If the `AUTOMATION` user has no API key when an email job runs, the job fails and the error is logged.
+
+    The `CustodianApiUrl` must be an `https://` address.
 
 Email jobs make use of the [Custodian API](../custodian-api/index.md) to send emails. Ensure that the `CustodianApiUrl` entry in `SystemSettings` is configured correctly before you try to schedule any emails.
 

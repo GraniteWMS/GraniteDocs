@@ -51,7 +51,17 @@ The first call is /auth to authenticate for all following calls. The security us
 The format for the examples use json but xml, jsv, and csv are also supported 
 If any other call is made without calling authorisation first it will return: 401 Unauthorized
 
-Authentication works on a rolling window of 30min. As long as a call is made within that time the session will remain active. Most clients will keep the context of the session, but some clients may require you to pass the cookies from the authenticated client to the one that you use to make subsequent calls. 
+On a successful login the response contains a token, which is also set as a cookie. The token is valid for 8 hours by default (the Business API's `Auth:JwtExpiryMinutes` setting), after which /auth must be called again. Most clients will keep the cookies from the login, but some clients may require you to pass the cookies from the authenticated client to the one that you use to make subsequent calls.
+
+All calls must be made over https. The token is not issued when logging in over http.
+
+Alternatively, you can skip the /auth call entirely by sending a Granite [API key](../security/api-keys.md) in the `X-Api-Key` header of every call. This is the simplest option for integrations:
+
+```http
+GET https://{server-address}:{port}/Locations/{Barcode}?Barcode=DIS HTTP/1.1
+Accept: application/json
+X-Api-Key: {api-key}
+```
 
 </br></br></br></br>
 

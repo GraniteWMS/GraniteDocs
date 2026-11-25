@@ -552,6 +552,7 @@ SELECT @stepInput = Value FROM @input WHERE Name = 'StepInput'
 
 
 EXEC	[dbo].[clr_IntegrationPost]
+		@userName = N'IntegrationUser', -- Version 7 and up: a Granite user that has an API key
 		@transactionID = null,
 		@document = @stepInput,
 		@documents = null,

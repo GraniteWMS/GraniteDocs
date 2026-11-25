@@ -65,6 +65,31 @@ Configure the below in the `appsettings.json` file
       "UseSameSiteCookies": false,
     ```
 
+5. Auth
+
+    These settings control how long a login stays valid.
+
+    ```json
+      "Auth": {
+        "SessionExpiryMinutes": 30,
+        "JwtExpiryMinutes": 480
+      }
+    ```
+
+    - `SessionExpiryMinutes` - how many idle minutes before a login session expires. Defaults to 30.
+    - `JwtExpiryMinutes` - how many minutes the token that is issued at login stays valid. Defaults to 480 (8 hours).
+
+    See [Session Timeout Configuration](../process-app/session-timeout.md) for how these work together with the ProcessApp's settings.
+
+### Add to IIS
+
+Add the Business API to IIS with an `https` binding and a certificate. See [Adding a site to IIS](../iis/getting-started.md#adding-a-site-to-iis).
+
+!!! note
+    The Business API must run as `https`. The login token that the ProcessApp, Integration Service and Label Print service depend on is only issued over https.
+
+    Every application that calls the Business API must use the `https://` address - the ProcessApp, WebDesktop, SQLCLR (`Business_API_Endpoint` in `SystemSettings`) and integrations.
+
 ## Getting started
 
 The Business API is fully documented in Swagger and ServiceStack's Metadata. You can find these at the following addresses:
@@ -72,23 +97,32 @@ The Business API is fully documented in Swagger and ServiceStack's Metadata. You
 - https://[Your_Address]:[Port_Number]/metadata
 - https://[Your_Address]:[Port_Number]/swagger-ui/
 
-Most of the operations require you to first authenticate. To authenticate for testing, you can either use the `/auth` operation to validate using your Granite user credentials, or you can use your API Key via Swagger's built in Authorize functionality.
+Most of the operations require you to first authenticate. To authenticate for testing, you can either use the `/auth` operation to validate using your Granite user credentials, or you can use your API Key.
 
 ### Credentials
 To use credentials to authenticate, browse to `/swagger-ui/#!/auth/Authenticate_Post` and enter your UserName and Password. Click `Try it out!` to send the request.
 
-On a successful authentication you will receive a 200 OK response.
+On a successful authentication you will receive a 200 OK response. The response contains the details of the user, as well as a token (`BearerToken`) that identifies the user to the other Granite services.
+The token is also returned as a cookie, so a client that keeps cookies does not need to do anything further.
+
+!!! note
+    The token is only issued over `https`. Logging in using an `http` address will not work.
 
 ### API Key
-To use your api key to authenticate, browse to the swagger ui, and click the Authorize button on the top right. In the value field, type the word 'Bearer' followed by a space and then your api key and then click Authorize. 
+To use your api key to authenticate, send it in the `X-Api-Key` header of each request. See [API Keys](../security/api-keys.md) for more detail.
 
 Example:
 
-```
-Bearer wM3laTJT99rOnnjjYejl6nZ-vvn6hCMNJGpwvMrksxp5eBnwCpEKchO9Q_NyLBun
+```http
+GET https://{server-address}:{port}/Locations?Barcode=DIS HTTP/1.1
+Accept: application/json
+X-Api-Key: wM3laTJT99rOnnjjYejl6nZ-vvn6hCMNJGpwvMrksxp5eBnwCpEKchO9Q_NyLBun
 ```
 
-You will then need to make a request that requires authentication to ensure that your api key was entered correctly. If it is not working you will receive a 401 response with a body like this:
+!!! warning "Changed in version 7"
+    The API key is no longer accepted as an `Authorization: Bearer` token.
+
+If your api key is not working you will receive a 401 response with a body like this:
 
 ```json
 {

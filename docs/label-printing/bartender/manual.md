@@ -33,7 +33,9 @@ After that, the application will map the data returned by the SQL view to the ma
 ### Prerequisites
 
 - Bartender
-- .NET Framework 4.5
+- .NET Framework 4.7.2 or later
+- A ServiceStack license key (version 7 and up)
+- A certificate for the server (version 7 and up). The same certificate that is used for the Granite IIS sites can be used, see [Creating Certificates](../../iis/getting-started.md#creating-certificates)
 
 ### Installation 
 1. Check the version of Bartender that is currently installed. You can check by opening Bartender Designer, and selecting Help -> About. Take note of the release number ant the bitness as shown here:
@@ -50,17 +52,30 @@ After that, the application will map the data returned by the SQL view to the ma
     </connectionStrings>
     ```
 
-4. In the `Granite.LabelPrinting.exe.config` file, configure your `EndPoint` setting. This is the address that the LabelPrintService will run on.
+4. In the `Granite.LabelPrinting.exe.config` file, configure your `EndPoint` setting. This is the address that the LabelPrintService will run on. As of version 7 this must be an https address.
     ```xml
-    <add key="EndPoint" value="http://localhost:2077/"/>
+    <add key="EndPoint" value="https://+:40092/"/>
     ```
 
-5. In the `Granite.LabelPrinting.exe.config` file, ensure that the `Provider` setting is set to `Bartender`
+    A certificate must be bound to the port before the service will start on https. [Scaffold](../../scaffold/manual.md) does this for you during the install.
+    If Scaffold was unable to bind the certificate, or you are installing without Scaffold, follow the steps in [Certificates for Windows Services](../../security/service-certificates.md).
+
+5. In the `Granite.LabelPrinting.exe.config` file, set your ServiceStack license key. The service will not start without it.
     ```xml
-    <add key="Provider" value="Bartender"/> 
+    <add key="servicestack:license" value="your license key"/>
+    ```
+    Alternatively, set the license key in the `SERVICESTACK_LICENSE` environment variable on the server.
+
+6. In the `Granite.LabelPrinting.exe.config` file, ensure that the `Provider` setting is set to `Bartender`
+    ```xml
+    <add key="Provider" value="Bartender"/>
     ```
 
-6. Run `Granite.LabelPrinting.exe` and follow the instructions to complete the install. 
+7. Run `Granite.LabelPrinting.exe` and follow the instructions to complete the install.
+
+8. Point the applications that print labels to the https address of the service, using a host name or IP address that is on the certificate:
+    - SQLCLR: the `LabelPrintService` setting in the `SystemSettings` table
+    - ProcessApp: the `LabelPrintingEndPoint` setting in `appsettings.json`
 
 !!! note 
     It is advisable to run the service from the console and test print before installing as a service.
@@ -72,7 +87,14 @@ After that, the application will map the data returned by the SQL view to the ma
 #### EndPoint
 The endpoint address of the printing service. Hosted via windows service.
 ``` xml
-<add key="EndPoint" value="http://localhost:2077/"/>
+<add key="EndPoint" value="https://+:40092/"/>
+```
+As of version 7 this must be an https address, and a certificate must be bound to the port. See [Certificates for Windows Services](../../security/service-certificates.md).
+
+#### servicestack:license
+The ServiceStack license key. Required as of version 7 - the service will not start without it. Can also be set in the `SERVICESTACK_LICENSE` environment variable on the server.
+``` xml
+<add key="servicestack:license" value=""/>
 ```
 
 #### Provider
@@ -103,6 +125,22 @@ Path to the default labels location
 ``` xml
 <add key="DefaultLabelPath" value="C:\Program Files\Common Files\Cradle Technology Services\Granite\Labels\"/>
 ```
+
+### Authentication
+
+As of version 7 the label print service requires authentication. Calls to `/print`, `/printers`, `/config` and `/printerror` that do not authenticate receive a `401 Unauthorized`.
+
+| Caller | How it authenticates |
+|--------|----------------------|
+| ProcessApp | Sends the token of the user that is logged in (`Authorization: Bearer`). The token is issued by the Business API, and is only accepted over https |
+| SQLCLR (`clr_PrintLabel`) | Sends the [API key](../../security/api-keys.md) of the user that is printing (`X-Api-Key`). Every user that prints from SQL must have an API key |
+
+!!! note
+    - The service must be connected to the **same Granite database as the Business API**. The key that is used to validate the ProcessApp's token is stored in the `SystemSettings` table (see [JwtAuthKey](../../security/system-security.md#jwtauthkey)).
+    - The service now needs to be able to connect to the database in order to start.
+    - The `/config` page can no longer be opened without credentials. Call it with a tool that can send your API key in the `X-Api-Key` header. The `/metadata` page is still public, and can be used to check that the service is running.
+
+See the [Authentication & HTTPS Upgrade Guide](../../updates/V7/auth-https-upgrade.md) when upgrading an existing site.
 
 ### Settings Label configuration
 The tables below documents all the appsettings related to changing the label format and data. 
