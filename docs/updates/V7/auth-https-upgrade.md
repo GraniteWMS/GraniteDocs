@@ -7,7 +7,7 @@ This guide lists what changes and what you need to do when upgrading an existing
 
 - **Every service runs over https.** This now includes the Integration Service and the Bartender Label Print Service, which previously ran as http.
 - **API keys are sent in the `X-Api-Key` header.** Sending an API key as `Authorization: Bearer <api key>` no longer works. See [API Keys](../../security/api-keys.md).
-- **More services require authentication.** The Integration Service, both Label Print services and the Sage Intacct Integration Service now reject calls that do not include an API key or a token. This includes their `/config` pages.
+- **More services require authentication.** The Integration Service, both Label Print services and the Sage Intacct Integration Service now reject calls that are not authenticated. This includes their `/config` pages, as well as the `/config` page of the Parcel Perfect service. A person can log in to any of the services with their Granite user name and password.
 - **The Business API issues a token when a user logs in.** The ProcessApp passes this token on to the Integration Service and Label Print service, so that they know which user is making the call. Tokens are only accepted over https.
 - **SQLCLR only calls https addresses**, and sends the API key of the user to every service that it calls.
 - **The SQLCLR integration procedures take a user name.** `clr_IntegrationPost`, `clr_IntegrationPostToEndpoint` and `clr_IntegrationUpdate` have a new first parameter, `@userName`.
@@ -27,13 +27,15 @@ This guide lists what changes and what you need to do when upgrading an existing
 
 ### 1. Upgrade the database
 
-Run the database upgrade script. Amongst other things this will:
+Run the `7.4.sql` upgrade script against the Granite database, after `7.3.sql`. The script will:
 
 - add the `JwtAuthKey` setting, if it does not exist yet
 - install the new version of SQLCLR
 
 !!! note
-    The upgrade drops the `clr_ParcelPerfect_*` procedures and does not recreate them. If the site uses the [Parcel Perfect service](../../integration/parcel-perfect/service.md), run `ParcelPerfect_CLR.sql` after the upgrade.
+    - The script must be run by a user with the SQL `sysadmin` role, in SQLCMD mode.
+    - The script starts with `:setvar DatabaseName "GraniteDatabase"`. Change this to the name of the database that you are upgrading.
+    - The script drops the `clr_ParcelPerfect_*` procedures and does not recreate them. If the site uses the [Parcel Perfect service](../../integration/parcel-perfect/service.md), run `ParcelPerfect_CLR.sql` after the upgrade.
 
 ### 2. Install the applications
 
@@ -103,7 +105,7 @@ See the [CLR Procedure Reference](../../sqlclr/reference.md#integration) for the
 
 Any script, Python job or third party that calls a Granite API with an API key must change from the `Authorization: Bearer` header to the `X-Api-Key` header.
 
-The one exception is the Parcel Perfect webhook, which still accepts the key in the `Authorization` header so that the configuration on Parcel Perfect's side does not need to change.
+This includes the [Parcel Perfect webhook](../../integration/parcel-perfect/service.md#receiving-webhooks): if Parcel Perfect has been given a webhook URL, ask them to send the API key in the `X-Api-Key` header and to use the `https://` address.
 
 ### 7. Check session timeouts
 
@@ -126,4 +128,5 @@ The length of time that a ProcessApp user stays logged in is now also limited by
 | A service returns `401 Unauthorized` | No API key or token was sent, the API key was sent in the `Authorization` header instead of `X-Api-Key`, or the service is connected to a different database than the Business API |
 | Procedure or function `clr_IntegrationPost` expects parameter `@userName` | The call has not been updated. See [step 5](#5-update-calls-to-the-sqlclr-integration-procedures) |
 | The Integration Service or Bartender Label Print Service does not start | No certificate bound to the port, or no ServiceStack license. See [Certificates for Windows Services](../../security/service-certificates.md) |
+| The upgrade script fails with a syntax error near `:` | The script is not being run in SQLCMD mode |
 | The ProcessApp logs users out earlier than expected | The token lifetime on the Business API is shorter than the ProcessApp's timeouts. See [Session Timeout Configuration](../../process-app/session-timeout.md) |

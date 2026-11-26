@@ -57,7 +57,7 @@ You can locate the database script to create these records in the following path
     Once the settings are captured please test the SAP connection by browsing to the `/config` page on the integration service.
 
 !!! warning "Version 7: https and authentication"
-    As of version 7 the Integration Service runs as https, needs a ServiceStack license key, and requires authentication - including on the `/config` page, which must be called with your [API key](../../security/api-keys.md) in the `X-Api-Key` header.
+    As of version 7 the Integration Service runs as https, needs a ServiceStack license key, and requires authentication - including on the `/config` page, which must be called with your [API key](../../security/api-keys.md) in the `X-Api-Key` header, or after logging in by posting your Granite user name and password to `/auth/credentials`.
     A certificate must be bound to the service's port before it will start. [Scaffold](../../scaffold/manual.md) does this for you, otherwise see [Certificates for Windows Services](../../security/service-certificates.md).
 
     See the [Authentication & HTTPS Upgrade Guide](../../updates/V7/auth-https-upgrade.md) when upgrading an existing site.

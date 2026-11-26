@@ -138,7 +138,7 @@ As of version 7 the label print service requires authentication. Calls to `/prin
 !!! note
     - The service must be connected to the **same Granite database as the Business API**. The key that is used to validate the ProcessApp's token is stored in the `SystemSettings` table (see [JwtAuthKey](../../security/system-security.md#jwtauthkey)).
     - The service now needs to be able to connect to the database in order to start.
-    - The `/config` page can no longer be opened without credentials. Call it with a tool that can send your API key in the `X-Api-Key` header. The `/metadata` page is still public, and can be used to check that the service is running.
+    - The `/config` page can no longer be opened without credentials, and the service does not have a login page. Call it with a tool that can send your API key in the `X-Api-Key` header, or log in first by posting your Granite user name and password to `/auth/credentials`. The `/metadata` page is still public, and can be used to check that the service is running.
 
 See the [Authentication & HTTPS Upgrade Guide](../../updates/V7/auth-https-upgrade.md) when upgrading an existing site.
 
