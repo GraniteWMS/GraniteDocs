@@ -20,14 +20,6 @@ ___
 
 - **Inventory Correction Transaction Type** - New transaction type for adhoc inventory adjustments
 
-<h3> Security (version 7.4)</h3>
-
-- **Https everywhere** - All Granite services now run over https, including the Integration Service and Bartender Label Print Service
-- **Shared authentication** - The Integration Service and Label Print services now require authentication. The ProcessApp passes the logged in user's token to them, and SQLCLR sends the user's API key
-- **API keys on all services** - API keys are now sent in the `X-Api-Key` header
-
-See the [Authentication & HTTPS Upgrade Guide](../../security/auth-https-upgrade.md) for what needs to change when upgrading an existing site.
-
 ___
 
 ## Process App
