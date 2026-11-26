@@ -24,19 +24,19 @@ The ProcessApp calls the Business API, Integration Service and Label Print servi
     "LabelPrintingEndPoint": "https://{server-address}:{port}/",
 ```
 
-!!! warning "Version 7: https and login tokens"
-    As of version 7 all three addresses must be `https://` addresses.
+!!! warning "Version 7.4: https and login tokens"
+    As of version 7.4 all three addresses must be `https://` addresses.
 
     When a user logs in, the Business API issues a token that the ProcessApp then sends with every call to the Business API, Integration Service and Label Print service. The token is only issued and accepted over https.
 
     - If `BusinessApiEndPoint` is an `http://` address, users will not be able to log in. The logon page will show a message asking you to check that the endpoint uses https.
-    - The Integration Service and Label Print service must be on version 7, and must be connected to the same Granite database as the Business API. Otherwise they will reject the token and the user will be sent back to the logon page.
+    - The Integration Service and Label Print service must be on version 7.4, and must be connected to the same Granite database as the Business API. Otherwise they will reject the token and the user will be sent back to the logon page.
     - Self-signed certificates on the Granite services are accepted.
     - The clocks of the servers that the applications are installed on must be in sync, as the token has an expiry time.
 
     You can check that all three endpoints are reachable by browsing to the ProcessApp's `/Config` page.
 
-    See [Session Timeout Configuration](session-timeout.md) for how long a user stays logged in, and the [Authentication & HTTPS Upgrade Guide](../updates/V7/auth-https-upgrade.md) when upgrading an existing site.
+    See [Session Timeout Configuration](session-timeout.md) for how long a user stays logged in, and the [Authentication & HTTPS Upgrade Guide](../security/auth-https-upgrade.md) when upgrading an existing site.
 
 ### Menu Layout
 

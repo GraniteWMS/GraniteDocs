@@ -119,7 +119,7 @@ Accept: application/json
 X-Api-Key: wM3laTJT99rOnnjjYejl6nZ-vvn6hCMNJGpwvMrksxp5eBnwCpEKchO9Q_NyLBun
 ```
 
-!!! warning "Changed in version 7"
+!!! warning "Changed in version 7.4"
     The API key is no longer accepted as an `Authorization: Bearer` token.
 
 If your api key is not working you will receive a 401 response with a body like this:

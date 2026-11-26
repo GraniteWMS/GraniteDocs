@@ -81,9 +81,9 @@ The procedures resolve the Parcel Perfect service's own base URL from the `Parce
 !!! note
     Both procedures authenticate the call with `@userName`'s own Granite API key (sent in the `X-Api-Key` header), the same way as other CLR-called services — the user executing the procedure must have an API key configured in Granite.
 
-!!! warning "Version 7"
+!!! warning "Version 7.4"
     - `ParcelPerfectIntegrationServiceUrl` must be an `https://` address. SQLCLR will not call an `http://` address.
-    - The version 7 database upgrade removes the `clr_ParcelPerfect_*` procedures when it reinstalls SQLCLR. Run `ParcelPerfect_CLR.sql` again after upgrading the database.
+    - The version 7.4 database upgrade removes the `clr_ParcelPerfect_*` procedures when it reinstalls SQLCLR. Run `ParcelPerfect_CLR.sql` again after upgrading the database.
 
 ### CLR Procedures
 

@@ -161,17 +161,17 @@ The procedure will check if tracking entity exists. If it does exist, then the q
 | NumberOfLabels  | No        | Number of copies of the label to print. Defaults to 1 if not set |
 | PrinterName     | No        | Name of the printer that you are printing to |
 | Type            | Yes        | The type of label that you want to print. Valid values are TRACKINGENTITY, MASTERITEM, LOCATION, USER, PALLET or BOX |	
-| UserID	        | Yes        | ID of the user that is printing the label. As of version 7 this user must have an [API key](../security/api-keys.md) |
+| UserID	        | Yes        | ID of the user that is printing the label. As of version 7.4 this user must have an [API key](../security/api-keys.md) |
 
 !!! note
-    As of version 7 the `LabelPrintService` address in `SystemSettings` must be an `https://` address, and the call is authenticated using the API key of the user specified in `UserID`.
+    As of version 7.4 the `LabelPrintService` address in `SystemSettings` must be an `https://` address, and the call is authenticated using the API key of the user specified in `UserID`.
 
 ## Integration
 
-!!! warning "Changed in version 7"
+!!! warning "Changed in version 7.4"
     All three of the integration procedures have a new **first** parameter, `userName`. The call to the Integration Service is authenticated using the [API key](../security/api-keys.md) of this user.
 
-    Any existing prescripts, triggers, stored procedures or scheduled jobs that call these procedures must be changed to pass the user name. See the [Authentication & HTTPS Upgrade Guide](../updates/V7/auth-https-upgrade.md#5-update-calls-to-the-sqlclr-integration-procedures).
+    Any existing prescripts, triggers, stored procedures or scheduled jobs that call these procedures must be changed to pass the user name. See the [Authentication & HTTPS Upgrade Guide](../security/auth-https-upgrade.md#5-update-calls-to-the-sqlclr-integration-procedures).
 
     The address of the Integration Service in `SystemSettings` must be an `https://` address.
 

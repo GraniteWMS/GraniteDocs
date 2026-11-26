@@ -1,12 +1,15 @@
-# Authentication & HTTPS Upgrade Guide
+# Version 7.4 Authentication & HTTPS Upgrade Guide
 
-Granite version 7 moves all of the Granite services onto a single, shared authentication mechanism and requires every service to run over **https**. 
+Granite version 7.4 moves all of the Granite services onto a single, shared authentication mechanism and requires every service to run over **https**. 
 This guide lists what changes and what you need to do when upgrading an existing site.
+
+!!! note "This applies from version 7.4"
+    These changes are part of version 7.4, not earlier releases of version 7. A site on version 7.0 to 7.3 keeps working the way it did until it is upgraded to 7.4, at which point everything in this guide applies.
 
 ## What has changed
 
 - **Every service runs over https.** This now includes the Integration Service and the Bartender Label Print Service, which previously ran as http.
-- **API keys are sent in the `X-Api-Key` header.** Sending an API key as `Authorization: Bearer <api key>` no longer works. See [API Keys](../../security/api-keys.md).
+- **API keys are sent in the `X-Api-Key` header.** Sending an API key as `Authorization: Bearer <api key>` no longer works. See [API Keys](api-keys.md).
 - **More services require authentication.** The Integration Service, both Label Print services and the Sage Intacct Integration Service now reject calls that are not authenticated. This includes their `/config` pages, as well as the `/config` page of the Parcel Perfect service. A person can log in to any of the services with their Granite user name and password.
 - **The Business API issues a token when a user logs in.** The ProcessApp passes this token on to the Integration Service and Label Print service, so that they know which user is making the call. Tokens are only accepted over https.
 - **SQLCLR only calls https addresses**, and sends the API key of the user to every service that it calls.
@@ -19,8 +22,8 @@ This guide lists what changes and what you need to do when upgrading an existing
     Older versions of the applications cannot authenticate against the upgraded services.
 
 - Have the ServiceStack license key at hand. The Integration Service and the Bartender Label Print Service will not start without it.
-- Make sure there is a certificate on the server. All services can use the same certificate. See [Creating Certificates](../../iis/getting-started.md#creating-certificates).
-- All services must connect to the **same Granite database**. They share the token signing key that is stored in it (see [JwtAuthKey](../../security/system-security.md#jwtauthkey)).
+- Make sure there is a certificate on the server. All services can use the same certificate. See [Creating Certificates](../iis/getting-started.md#creating-certificates).
+- All services must connect to the **same Granite database**. They share the token signing key that is stored in it (see [JwtAuthKey](system-security.md#jwtauthkey)).
 - Users that are logged in to the ProcessApp when the upgrade is deployed will be sent back to the logon page once.
 
 ## Upgrade steps
@@ -35,16 +38,16 @@ Run the `7.4.sql` upgrade script against the Granite database, after `7.3.sql`. 
 !!! note
     - The script must be run by a user with the SQL `sysadmin` role, in SQLCMD mode.
     - The script starts with `:setvar DatabaseName "GraniteDatabase"`. Change this to the name of the database that you are upgrading.
-    - The script drops the `clr_ParcelPerfect_*` procedures and does not recreate them. If the site uses the [Parcel Perfect service](../../integration/parcel-perfect/service.md), run `ParcelPerfect_CLR.sql` after the upgrade.
+    - The script drops the `clr_ParcelPerfect_*` procedures and does not recreate them. If the site uses the [Parcel Perfect service](../integration/parcel-perfect/service.md), run `ParcelPerfect_CLR.sql` after the upgrade.
 
 ### 2. Install the applications
 
-[Scaffold](../../scaffold/manual.md) is the recommended way to install the new versions. It will add the https bindings for the IIS sites, bind the certificate to the ports of the Windows services, and write the https addresses to the configuration files and `SystemSettings` table.
+[Scaffold](../scaffold/manual.md) is the recommended way to install the new versions. It will add the https bindings for the IIS sites, bind the certificate to the ports of the Windows services, and write the https addresses to the configuration files and `SystemSettings` table.
 
 If you are not using Scaffold:
 
-- **IIS sites** - make sure each site has an `https` binding with a certificate selected. See [Adding a site to IIS](../../iis/getting-started.md#adding-a-site-to-iis).
-- **Windows services** (Integration Service, Bartender Label Print Service) - set the `EndPoint` setting to `https://+:<port>/`, add the `servicestack:license` setting, and bind a certificate to the port. See [Certificates for Windows Services](../../security/service-certificates.md).
+- **IIS sites** - make sure each site has an `https` binding with a certificate selected. See [Adding a site to IIS](../iis/getting-started.md#adding-a-site-to-iis).
+- **Windows services** (Integration Service, Bartender Label Print Service) - set the `EndPoint` setting to `https://+:<port>/`, add the `servicestack:license` setting, and bind a certificate to the port. See [Certificates for Windows Services](service-certificates.md).
 
 ### 3. Change the service addresses to https
 
@@ -72,7 +75,7 @@ SQLCLR looks up the API key of the user that is passed to the procedure. If the 
 - Every user that prints labels using `clr_PrintLabel` needs an API key.
 - The user that is passed as `@userName` to the integration procedures needs an API key.
 
-API keys are generated when a user's password is saved. See [How do I get an API key](../../security/api-keys.md#how-do-i-get-an-api-key).
+API keys are generated when a user's password is saved. See [How do I get an API key](api-keys.md#how-do-i-get-an-api-key).
 
 ### 5. Update calls to the SQLCLR integration procedures
 
@@ -99,17 +102,17 @@ FROM sys.sql_modules
 WHERE definition LIKE '%clr_Integration%'
 ```
 
-See the [CLR Procedure Reference](../../sqlclr/reference.md#integration) for the parameters of each procedure.
+See the [CLR Procedure Reference](../sqlclr/reference.md#integration) for the parameters of each procedure.
 
 ### 6. Update anything else that uses an API key
 
 Any script, Python job or third party that calls a Granite API with an API key must change from the `Authorization: Bearer` header to the `X-Api-Key` header.
 
-This includes the [Parcel Perfect webhook](../../integration/parcel-perfect/service.md#receiving-webhooks): if Parcel Perfect has been given a webhook URL, ask them to send the API key in the `X-Api-Key` header and to use the `https://` address.
+This includes the [Parcel Perfect webhook](../integration/parcel-perfect/service.md#receiving-webhooks): if Parcel Perfect has been given a webhook URL, ask them to send the API key in the `X-Api-Key` header and to use the `https://` address.
 
 ### 7. Check session timeouts
 
-The length of time that a ProcessApp user stays logged in is now also limited by the lifetime of the token that the Business API issues. See [Session Timeout Configuration](../../process-app/session-timeout.md).
+The length of time that a ProcessApp user stays logged in is now also limited by the lifetime of the token that the Business API issues. See [Session Timeout Configuration](../process-app/session-timeout.md).
 
 ## Verifying the upgrade
 
@@ -127,6 +130,6 @@ The length of time that a ProcessApp user stays logged in is now also limited by
 | SQLCLR returns `ApiKey not found for user` | The user passed to the procedure has no API key. See [step 4](#4-check-that-users-have-api-keys) |
 | A service returns `401 Unauthorized` | No API key or token was sent, the API key was sent in the `Authorization` header instead of `X-Api-Key`, or the service is connected to a different database than the Business API |
 | Procedure or function `clr_IntegrationPost` expects parameter `@userName` | The call has not been updated. See [step 5](#5-update-calls-to-the-sqlclr-integration-procedures) |
-| The Integration Service or Bartender Label Print Service does not start | No certificate bound to the port, or no ServiceStack license. See [Certificates for Windows Services](../../security/service-certificates.md) |
+| The Integration Service or Bartender Label Print Service does not start | No certificate bound to the port, or no ServiceStack license. See [Certificates for Windows Services](service-certificates.md) |
 | The upgrade script fails with a syntax error near `:` | The script is not being run in SQLCMD mode |
-| The ProcessApp logs users out earlier than expected | The token lifetime on the Business API is shorter than the ProcessApp's timeouts. See [Session Timeout Configuration](../../process-app/session-timeout.md) |
+| The ProcessApp logs users out earlier than expected | The token lifetime on the Business API is shorter than the ProcessApp's timeouts. See [Session Timeout Configuration](../process-app/session-timeout.md) |

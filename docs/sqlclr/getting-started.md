@@ -31,8 +31,8 @@ Once the necessary assemblies and procedures have been created, you will need to
 | SQLCLR		| IntegrationService	| https://10.0.0.1:50003		| Integration Service Address	| string		| False			| True		|
 | SQLCLR		| Custodian_API_Endpoint | https://10.0.0.1:50001	| CustodianAPI Address	    | string		| False			| True		|
 
-!!! warning "Version 7: https and API keys"
-	As of version 7, SQLCLR will only call addresses that start with `https://`. If an address in the table above is still `http://`, every call to that service will fail with a message saying that it is not an `https://` URL.
+!!! warning "Version 7.4: https and API keys"
+	As of version 7.4, SQLCLR will only call addresses that start with `https://`. If an address in the table above is still `http://`, every call to that service will fail with a message saying that it is not an `https://` URL.
 
 	Upgrading the database does not change existing addresses - you will need to update them yourself.
 
@@ -40,7 +40,7 @@ Once the necessary assemblies and procedures have been created, you will need to
 
 	SQLCLR authenticates every call with the [API key](../security/api-keys.md) of the user that is passed to the procedure. This now includes label printing and integration. The user must have an API key, or the call will fail with `ApiKey not found for user`.
 
-	See the [Authentication & HTTPS Upgrade Guide](../updates/V7/auth-https-upgrade.md) for the full list of changes.
+	See the [Authentication & HTTPS Upgrade Guide](../security/auth-https-upgrade.md) for the full list of changes.
 
 ## Using the CLR Procedures
 

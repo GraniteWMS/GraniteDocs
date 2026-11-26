@@ -16,7 +16,7 @@ API keys also provider a better experience for third parties using our APIs by p
 
 ## Which APIs support API keys
 
-As of Granite version 7, the following APIs and services accept API keys:
+As of Granite version 7.4, the following APIs and services accept API keys:
 
 - Business API
 - Custodian API
@@ -56,9 +56,9 @@ X-Api-Key: TsIPsMSGzqYDjwTc-bd2CtrGU7FHwydPeuZ7ruA1DpPnzr7R3Swk8o_Nlkwd5Bty
 
 API keys must always be sent over `https`.
 
-!!! warning "Changed in version 7"
-    Before version 7 the API key was passed as an `Authorization: Bearer` token. This is no longer accepted - the API key is only read from the `X-Api-Key` header.
-    Any scripts or third party applications that use an API key need to be changed when upgrading. See the [Authentication & HTTPS Upgrade Guide](../updates/V7/auth-https-upgrade.md).
+!!! warning "Changed in version 7.4"
+    Before version 7.4 the API key was passed as an `Authorization: Bearer` token. This is no longer accepted - the API key is only read from the `X-Api-Key` header.
+    Any scripts or third party applications that use an API key need to be changed when upgrading. See the [Authentication & HTTPS Upgrade Guide](auth-https-upgrade.md).
 
     The `Authorization: Bearer` header is now reserved for the login token that the Business API issues to the ProcessApp.
 

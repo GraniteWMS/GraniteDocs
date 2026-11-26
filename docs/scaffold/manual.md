@@ -73,7 +73,7 @@ Scaffold will configure the connection strings for all of the applications being
 
 #### Https and certificates
 
-As of version 7 every Granite application runs as https, and Scaffold sets this up using the certificate that you select (or create) during the install:
+As of version 7.4 every Granite application runs as https, and Scaffold sets this up using the certificate that you select (or create) during the install:
 
 - **IIS sites** are given an https binding with the certificate.
 - **Windows services** (the Integration Service and the Bartender Label Print Service) have the certificate bound to their port. Enter an https address when prompted for the service's endpoint, e.g. `https://+:40091/`. Scaffold will warn you if you enter an http address.
