@@ -70,7 +70,7 @@ Before installing the service, ensure the following are in place:
 
     Browse to `/up` to verify the service is running. This health check does not require you to log in.
 
-    Then call `/config` to check the configuration. As of version 7 this page requires authentication, so it must be called with a tool that can send your [API key](../../security/api-keys.md) in the `X-Api-Key` header.
+    Then call `/config` to check the configuration. As of version 7.4 this page requires authentication, so it must be called with a tool that can send your [API key](../../security/api-keys.md) in the `X-Api-Key` header.
     
     The config page shows:
     - **Connection String** - Censored connection string to Granite database
@@ -85,7 +85,7 @@ Before installing the service, ensure the following are in place:
 
 ### Authentication
 
-As of version 7, all of the service's endpoints except `/up` and the metadata pages require authentication. Callers that do not authenticate receive a `401 Unauthorized`.
+As of version 7.4, all of the service's endpoints except `/up` and the metadata pages require authentication. Callers that do not authenticate receive a `401 Unauthorized`.
 
 | Caller | How it authenticates |
 |--------|----------------------|

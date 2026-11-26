@@ -43,15 +43,15 @@ The settings for Sage 11 are configures in the SystemSettings table. The Integra
 IF the setting is missing from the config file or left empty, the IntegrationService will default to using `IntegrationSage100` as the SystemSettingsApplicationName.
 You can browse to the IntegrationService's `/config` page to have the IntegrationService create the default setting in the SystemSettings table for you.
 
-!!! warning "Version 7: https and authentication"
-    As of version 7 the Integration Service:
+!!! warning "Version 7.4: https and authentication"
+    As of version 7.4 the Integration Service:
 
     - **Runs as https.** Set the `EndPoint` setting in the `.config` file to an https address, e.g. `https://+:40091/`. A certificate must be bound to the port before the service will start. [Scaffold](../../scaffold/manual.md) does this for you - if it fails, or you are not using Scaffold, see [Certificates for Windows Services](../../security/service-certificates.md).
     - **Needs a ServiceStack license key**, set in the `servicestack:license` setting in the `.config` file or in the `SERVICESTACK_LICENSE` environment variable on the server. The service will not start without it.
     - **Requires authentication.** SQLCLR sends the [API key](../../security/api-keys.md) of the user that is passed to the `clr_Integration...` procedures, and the ProcessApp sends the token of the user that is logged in. The `/config` page can no longer be opened without credentials, and the service does not have a login page - call it with a tool that can send your API key in the `X-Api-Key` header, or log in first by posting your Granite user name and password to `/auth/credentials`.
     - **Must use the same Granite database as the Business API**, so that it can validate the ProcessApp's token.
 
-    See the [Authentication & HTTPS Upgrade Guide](../../updates/V7/auth-https-upgrade.md) when upgrading an existing site.
+    See the [Authentication & HTTPS Upgrade Guide](../../security/auth-https-upgrade.md) when upgrading an existing site.
 
 ### Config File Settings
 

@@ -15,7 +15,7 @@
 - GraniteLabelPrintingZPL must run as `https`. You can use the same certificate as the WebDesktop
 
 !!! note
-    As of version 7, requests made over http are always redirected to https, regardless of the `IsPublic` setting. Before version 7, setting `IsPublic` to false allowed GraniteLabelPrintingZPL to run as http.
+    As of version 7.4, requests made over http are always redirected to https, regardless of the `IsPublic` setting. Before version 7.4, setting `IsPublic` to false allowed GraniteLabelPrintingZPL to run as http.
 
     Point the applications that print labels to the https address:
 
@@ -24,7 +24,7 @@
 
 ### Authentication
 
-As of version 7 the label print service requires authentication. Calls to `/print`, `/preview`, `/printers` and `/config` that do not authenticate receive a `401 Unauthorized`.
+As of version 7.4 the label print service requires authentication. Calls to `/print`, `/preview`, `/printers` and `/config` that do not authenticate receive a `401 Unauthorized`.
 
 | Caller | How it authenticates |
 |--------|----------------------|
@@ -37,7 +37,7 @@ As of version 7 the label print service requires authentication. Calls to `/prin
     - The site will not start if the `CONNECTION` connection string is missing.
     - The `/config` and `/printers` pages can no longer be opened without logging in. When you open them in a browser you are sent to a login page, where you sign in with your Granite user name and password. The `/metadata` page is still public, and can be used to check that the site is running.
 
-See the [Authentication & HTTPS Upgrade Guide](../../updates/V7/auth-https-upgrade.md) when upgrading an existing site.
+See the [Authentication & HTTPS Upgrade Guide](../../security/auth-https-upgrade.md) when upgrading an existing site.
 
 ### AppSettings
 

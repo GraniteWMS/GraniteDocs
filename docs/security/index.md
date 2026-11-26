@@ -68,6 +68,12 @@ The guides below cover the settings and controls in more detail.
 
     How to manually bind a certificate to the Integration Service and Bartender Label Print Service.
 
+ -	[__Version 7.4 Authentication & HTTPS Upgrade__](auth-https-upgrade.md)
+
+    ---
+
+    What changes in version 7.4, and the steps to upgrade an existing site.
+
  -	[__Hardening Checklist__](hardening-checklist.md)
 
     ---

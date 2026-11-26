@@ -27,7 +27,7 @@ The Granite Scheduler is an IIS application that can be used to schedule executi
 
 - Add GraniteScheduler to IIS running as `https`
 
-!!! note "Version 7"
+!!! note "Version 7.4"
     - Requests made to the Scheduler over http are redirected to https. Make sure that the Scheduler's address in the WebDesktop configuration is the `https://` address.
     - The Scheduler accepts the login token that the Business API issues, so it must be connected to the **same Granite database as the Business API** (see [JwtAuthKey](../security/system-security.md#jwtauthkey)).
     - The Scheduler does not accept API keys.
@@ -390,8 +390,8 @@ CREATE OR ALTER PROCEDURE [MyProcedure]
 ```
 ### Email Jobs
 
-!!! note "Version 7: email jobs use the AUTOMATION user"
-    The Custodian API requires authentication to send emails. As of version 7 the Scheduler authenticates using the [API key](../security/api-keys.md) of the `AUTOMATION` user.
+!!! note "Version 7.4: email jobs use the AUTOMATION user"
+    The Custodian API requires authentication to send emails. As of version 7.4 the Scheduler authenticates using the [API key](../security/api-keys.md) of the `AUTOMATION` user.
 
     Each time the Scheduler starts up it will:
 

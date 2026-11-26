@@ -40,10 +40,10 @@ Edit the Business API's `appsettings.json` and set:
 ```
 
 - `Auth:SessionExpiryMinutes` — how many idle minutes before that login stops working.
-- `Auth:JwtExpiryMinutes` — (version 7 and up) how many minutes the token that the Business API issues at login stays valid. Defaults to 480 if it is not set.
+- `Auth:JwtExpiryMinutes` — (version 7.4 and up) how many minutes the token that the Business API issues at login stays valid. Defaults to 480 if it is not set.
 
 !!! warning "The token lifetime is a hard limit"
-    As of version 7, the Process App uses the token from the Business API for every call it makes to the Business API, Integration Service and Label Print service. When the token expires the user is sent back to the logon page, **even if they have been active the whole time**.
+    As of version 7.4, the Process App uses the token from the Business API for every call it makes to the Business API, Integration Service and Label Print service. When the token expires the user is sent back to the logon page, **even if they have been active the whole time**.
 
     Unlike the idle timeouts, the token's lifetime is counted from the moment the user logs in and is not extended by activity. Keep the Process App's `SessionIdleTimeoutMinutes` and `AuthCookieExpireMinutes` at or below `Auth:JwtExpiryMinutes`, and set `Auth:JwtExpiryMinutes` to at least the length of a shift.
 
