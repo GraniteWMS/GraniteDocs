@@ -30,11 +30,12 @@ As of version 7 the label print service requires authentication. Calls to `/prin
 |--------|----------------------|
 | ProcessApp | Sends the token of the user that is logged in (`Authorization: Bearer`). The token is issued by the Business API, and is only accepted over https |
 | SQLCLR (`clr_PrintLabel`) | Sends the [API key](../../security/api-keys.md) of the user that is printing (`X-Api-Key`). Every user that prints from SQL must have an API key |
+| A person using a browser | Signs in on the login page with their Granite user name and password |
 
 !!! note
     - The `CONNECTION` connection string must point to the **same Granite database as the Business API**. The key that is used to validate the ProcessApp's token is stored in the `SystemSettings` table (see [JwtAuthKey](../../security/system-security.md#jwtauthkey)).
     - The site will not start if the `CONNECTION` connection string is missing.
-    - The `/config` page can no longer be opened without credentials. Call it with a tool that can send your API key in the `X-Api-Key` header. The `/metadata` page is still public, and can be used to check that the site is running.
+    - The `/config` and `/printers` pages can no longer be opened without logging in. When you open them in a browser you are sent to a login page, where you sign in with your Granite user name and password. The `/metadata` page is still public, and can be used to check that the site is running.
 
 See the [Authentication & HTTPS Upgrade Guide](../../updates/V7/auth-https-upgrade.md) when upgrading an existing site.
 

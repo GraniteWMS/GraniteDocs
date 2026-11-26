@@ -91,6 +91,7 @@ As of version 7, all of the service's endpoints except `/up` and the metadata pa
 |--------|----------------------|
 | ProcessApp | Sends the token of the user that is logged in (`Authorization: Bearer`). The token is issued by the Business API |
 | SQLCLR | Sends the [API key](../../security/api-keys.md) of the user that is passed to the procedure (`X-Api-Key`) |
+| Other tools and scripts | Send an API key in the `X-Api-Key` header, or log in by posting a Granite user name and password to `/auth/credentials` |
 
 !!! note
     The service must be connected to the **same Granite database as the Business API**. The key that is used to validate the ProcessApp's token is stored in the `SystemSettings` table (see [JwtAuthKey](../../security/system-security.md#jwtauthkey)).

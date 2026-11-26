@@ -29,7 +29,7 @@ The Parcel Perfect service lets Granite request courier quotes and convert them 
     }
     ```
 
-2. **Create an IIS site** for the service, following the [Adding a site to IIS](../../iis/getting-started.md#adding-a-site-to-iis) guide, pointed at the published service files. The site must have an `https` binding - requests made over http are redirected to https, with the exception of the [webhook](#receiving-webhooks) endpoint.
+2. **Create an IIS site** for the service, following the [Adding a site to IIS](../../iis/getting-started.md#adding-a-site-to-iis) guide, pointed at the published service files. The site must have an `https` binding - requests made over http are redirected to https.
 
     !!! note
         The service needs a ServiceStack license key to start. Set it in the `SERVICESTACK_LICENSE` environment variable on the server, or in the `servicestack:license` setting.
@@ -39,6 +39,8 @@ The Parcel Perfect service lets Granite request courier quotes and convert them 
 4. **Update the seeded `SystemSettings` rows** with the real values, then restart the IIS site.
 
 5. **Verify installation** — `GET /up` should return a healthy status.
+
+    The `/config` page shows the service's configuration. It requires you to log in - when you open it in a browser you are sent to a login page, where you sign in with your Granite user name and password.
 
 ## Configuration Reference
 
@@ -491,11 +493,11 @@ For Parcel Perfect's servers to reach this service, they need inbound network ac
 Webhook delivery is configured on **Parcel Perfect's side**, not ours — there's no API in this service to register a callback URL. Provide Parcel Perfect (via their support/account team) with:
 
 - This service's public URL for `POST /webhooks/parcelperfect`
-- The dedicated Granite API key from step 1, for them to send as the `Authorization: Bearer` header on every webhook call
+- The dedicated Granite API key from step 1, for them to send in the `X-Api-Key` header on every webhook call
 
 !!! note
-    The webhook endpoint is the only place where a Granite API key is still accepted in the `Authorization: Bearer` header. This is so that the configuration on Parcel Perfect's side does not need to change when Granite is upgraded. The `X-Api-Key` header is accepted here as well. Every other endpoint on this service only accepts `X-Api-Key`.
-
-    The webhook endpoint is also not redirected from http to https, so an existing `http://` webhook URL keeps working. Moving the webhook to `https://` is recommended, but Parcel Perfect is unlikely to trust a self-signed certificate - use a publicly trusted certificate if you do.
+    - The URL must be an `https://` address. A webhook call made to an `http://` address is redirected to https, and Parcel Perfect may not follow the redirect.
+    - Parcel Perfect calls the webhook from the internet and is unlikely to trust a self-signed certificate, so the service needs a certificate from a public certificate authority when webhooks are used.
+    - The API key is only read from the `X-Api-Key` header. A key sent in the `Authorization` header is rejected.
 
 Once Parcel Perfect has both, they'll start pushing events as they occur — no further setup is needed on the Granite side, and this can be enabled independently of whether the service is also being used to create quotes.
